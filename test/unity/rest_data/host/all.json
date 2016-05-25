@@ -1,358 +1,279 @@
 {
   "@base": "https://10.244.223.66/api/types/host/instances?fields=autoManageType,description,health,hostPolledUUID,hostPushedUUID,hostUUID,id,instanceId,isInitializationComplete,lastPollTime,name,operationalStatus,osType,registrationType,type,hostContainer.id,hostLUNs.id,hostIPPorts.id,fcHostInitiators.id,iscsiHostInitiators.id,vms.id,storageResources.id,datastores.id,nfsShareAccesses.id,hostVVolDatastore.id&per_page=2000&compact=true",
   "updated": "2016-03-21T03:15:44.356Z",
-  "links": [
-    {
-      "rel": "self",
-      "href": "&page=1"
+  "links": [{
+    "rel": "self",
+    "href": "&page=1"
+  }],
+  "entries": [{
+    "content": {
+      "id": "Host_1",
+      "operationalStatus": [
+      2],
+      "type": 5,
+      "autoManageType": 1,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_1",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "10.244.209.90",
+      "description": "",
+      "osType": "VMware ESXi 6.0.0",
+      "hostPushedUUID": "5322a3d1-2901-08c3-c39f-f80f41fafe2e",
+      "hostPolledUUID": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e",
+      "lastPollTime": "2016-03-03T04:40:13.000Z",
+      "hostContainer": {
+        "id": "mss_1"
+      },
+      "iscsiHostInitiators": [{
+        "id": "HostInitiator_1"
+      }],
+      "hostIPPorts": [{
+        "id": "HostNetworkAddress_1"
+      }],
+      "datastores": [{
+        "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/75df1b51-9c9b37af/"
+      }, {
+        "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/5322a4d4-728ccd94-8dc2-f80f41fafe2e/"
+      }, {
+        "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/564cf41c-fc332453-32a8-f80f41fafe2e/"
+      }],
+      "vms": [{
+        "id": "503e0a21-67c3-11c6-4100-eca1a1b3dca3"
+      }, {
+        "id": "503e33de-3748-ef18-ce4f-5a75cf5c56fc"
+      }, {
+        "id": "503e37d0-aaab-05e2-5658-2b601b9ed545"
+      }, {
+        "id": "503e4dae-89e3-ac14-d15e-27cec81b5edd"
+      }, {
+        "id": "503e5625-1dcb-5a86-163c-6c44c9f7a613"
+      }, {
+        "id": "503e729d-5fd5-307a-015d-33dcc3ddd353"
+      }, {
+        "id": "503e7b9e-a998-adc3-d1f2-ef7572a9282e"
+      }, {
+        "id": "503e9236-35e5-a29c-2484-19a6b7a591ce"
+      }, {
+        "id": "503e9d4b-dcd2-58e4-39cf-4952a03aba04"
+      }, {
+        "id": "503ee342-17e6-c873-c8b2-3855f8f12f9a"
+      }, {
+        "id": "503ee745-0f3e-bd7a-a07a-0a680febbdbb"
+      }, {
+        "id": "5271b28c-d0f7-856e-af81-77d42c88d67a"
+      }, {
+        "id": "503efcd0-58d0-b635-86bf-402226a30eec"
+      }, {
+        "id": "503e12de-cc11-2281-e225-d03a002754bc"
+      }]
     }
-  ],
-  "entries": [
-    {
-      "content": {
-        "id": "Host_1",
-        "operationalStatus": [
-          2
-        ],
-        "type": 5,
-        "autoManageType": 1,
-        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_1",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "name": "10.244.209.90",
-        "description": "",
-        "osType": "VMware ESXi 6.0.0",
-        "hostPushedUUID": "5322a3d1-2901-08c3-c39f-f80f41fafe2e",
-        "hostPolledUUID": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e",
-        "lastPollTime": "2016-03-03T04:40:13.000Z",
-        "hostContainer": {
-          "id": "mss_1"
-        },
-        "iscsiHostInitiators": [
-          {
-            "id": "HostInitiator_1"
-          }
-        ],
-        "hostIPPorts": [
-          {
-            "id": "HostNetworkAddress_1"
-          }
-        ],
-        "datastores": [
-          {
-            "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/75df1b51-9c9b37af/"
-          },
-          {
-            "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/5322a4d4-728ccd94-8dc2-f80f41fafe2e/"
-          },
-          {
-            "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/564cf41c-fc332453-32a8-f80f41fafe2e/"
-          }
-        ],
-        "vms": [
-          {
-            "id": "503e0a21-67c3-11c6-4100-eca1a1b3dca3"
-          },
-          {
-            "id": "503e33de-3748-ef18-ce4f-5a75cf5c56fc"
-          },
-          {
-            "id": "503e37d0-aaab-05e2-5658-2b601b9ed545"
-          },
-          {
-            "id": "503e4dae-89e3-ac14-d15e-27cec81b5edd"
-          },
-          {
-            "id": "503e5625-1dcb-5a86-163c-6c44c9f7a613"
-          },
-          {
-            "id": "503e729d-5fd5-307a-015d-33dcc3ddd353"
-          },
-          {
-            "id": "503e7b9e-a998-adc3-d1f2-ef7572a9282e"
-          },
-          {
-            "id": "503e9236-35e5-a29c-2484-19a6b7a591ce"
-          },
-          {
-            "id": "503e9d4b-dcd2-58e4-39cf-4952a03aba04"
-          },
-          {
-            "id": "503ee342-17e6-c873-c8b2-3855f8f12f9a"
-          },
-          {
-            "id": "503ee745-0f3e-bd7a-a07a-0a680febbdbb"
-          },
-          {
-            "id": "5271b28c-d0f7-856e-af81-77d42c88d67a"
-          },
-          {
-            "id": "503efcd0-58d0-b635-86bf-402226a30eec"
-          },
-          {
-            "id": "503e12de-cc11-2281-e225-d03a002754bc"
-          }
-        ]
-      }
-    },
-    {
-      "content": {
-        "id": "Host_2",
-        "operationalStatus": [
-          2
-        ],
-        "type": 5,
-        "autoManageType": 1,
-        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_2",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "name": "10.245.239.209",
-        "description": "",
-        "osType": "VMware ESXi 6.0.0",
-        "hostPolledUUID": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e",
-        "lastPollTime": "2016-03-03T04:40:13.000Z",
-        "hostContainer": {
-          "id": "mss_1"
-        },
-        "fcHostInitiators": [
-          {
-            "id": "HostInitiator_3"
-          },
-          {
-            "id": "HostInitiator_2"
-          }
-        ],
-        "iscsiHostInitiators": [
-          {
-            "id": "HostInitiator_4"
-          }
-        ],
-        "hostIPPorts": [
-          {
-            "id": "HostNetworkAddress_4"
-          },
-          {
-            "id": "HostNetworkAddress_3"
-          },
-          {
-            "id": "HostNetworkAddress_2"
-          }
-        ],
-        "datastores": [
-          {
-            "id": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e_ds:///vmfs/volumes/53181768-bc980168-6e34-a44c11a10b6a/"
-          },
-          {
-            "id": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e_ds:///vmfs/volumes/75df1b51-9c9b37af/"
-          },
-          {
-            "id": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e_ds:///vmfs/volumes/vvol:80b7309e64a843c8-955dafdd98b189a2/"
-          }
-        ],
-        "vms": [
-          {
-            "id": "503e3432-4a42-eb59-c25d-20bc04e6b069"
-          },
-          {
-            "id": "503e7da9-6759-9f15-233b-be36871d9bef"
-          }
-        ]
-      }
-    },
-    {
-      "content": {
-        "id": "Host_3",
-        "operationalStatus": [
-          2
-        ],
-        "type": 5,
-        "autoManageType": 1,
-        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_3",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "name": "10.245.54.151",
-        "description": "",
-        "osType": "VMware ESXi 6.0.0",
-        "hostPushedUUID": "56333d12-1a07-4f97-af04-a0369f668960",
-        "hostPolledUUID": "rfc4122.03000200-0400-0500-0006-000700080009",
-        "lastPollTime": "2016-03-03T04:40:13.000Z",
-        "hostContainer": {
-          "id": "mss_1"
-        },
-        "iscsiHostInitiators": [
-          {
-            "id": "HostInitiator_5"
-          }
-        ],
-        "hostIPPorts": [
-          {
-            "id": "HostNetworkAddress_7"
-          },
-          {
-            "id": "HostNetworkAddress_6"
-          },
-          {
-            "id": "HostNetworkAddress_5"
-          }
-        ],
-        "storageResources": [
-          {
-            "id": "res_11"
-          }
-        ],
-        "datastores": [
-          {
-            "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/vvol:719af123bbb34e45-acfe1b6d99755ba8/"
-          },
-          {
-            "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/75df1b51-9c9b37af/"
-          },
-          {
-            "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/56333e25-c2f1ab18-6982-a0369f668960/"
-          },
-          {
-            "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/564cf41c-fc332453-32a8-f80f41fafe2e/"
-          }
-        ],
-        "hostVVolDatastore": [
-          {
-            "id": "aha_10"
-          }
-        ],
-        "vms": [
-          {
-            "id": "503e15b8-15a2-4ca9-c0d9-ba893d9d5a32"
-          },
-          {
-            "id": "503e3594-25b6-9649-7809-0dd725f1141a"
-          },
-          {
-            "id": "503e8aae-99c4-09b4-cc34-f6bdc215aa24"
-          },
-          {
-            "id": "503ea1ca-0565-41e3-8af1-34ab7f11c95d"
-          },
-          {
-            "id": "503e830a-f96d-7667-b21e-3a01c22b2f37"
-          },
-          {
-            "id": "503e7fea-03d7-4755-40ec-fe48f86fc01d"
-          },
-          {
-            "id": "503eee83-e4f8-8c48-28d7-fb43e090bf0e"
-          },
-          {
-            "id": "503ea8d7-29de-ef69-066a-91491424a3dd"
-          },
-          {
-            "id": "503e59dc-0690-53ed-faa9-e62a87e73375"
-          },
-          {
-            "id": "503ef02a-3b2c-342f-bc64-c10e0dfd0c79"
-          },
-          {
-            "id": "503efe28-ae0a-5dd5-e277-13a577ca4f78"
-          },
-          {
-            "id": "503e70fc-827f-01a2-9ae0-3c766a5dbf2c"
-          }
-        ]
-      }
-    },
-    {
-      "content": {
-        "id": "Host_4",
-        "operationalStatus": [
-          2
-        ],
-        "type": 1,
-        "autoManageType": 0,
-        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_4",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "name": "CTP_TEST_HOST_01",
-        "description": "",
-        "osType": "Linux"
-      }
-    },
-    {
-      "content": {
-        "id": "Host_6",
-        "operationalStatus": [
-          2
-        ],
-        "type": 1,
-        "autoManageType": 0,
-        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_6",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "name": "EMC-SMIS-SPC-03db3f83-21bb-4a02-b9dd-3383d111f39d",
-        "description": "EMC-SMIS-SPC-03db3f83-21bb-4a02-b9dd-3383d111f39d",
-        "osType": ""
-      }
-    },
-    {
-      "content": {
-        "id": "Host_7",
-        "operationalStatus": [
-          2
-        ],
-        "type": 1,
-        "autoManageType": 0,
-        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_7",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "name": "sles12dev",
-        "description": "",
-        "osType": "Linux",
-        "hostIPPorts": [
-          {
-            "id": "HostNetworkAddress_8"
-          }
-        ]
-      }
+  }, {
+    "content": {
+      "id": "Host_2",
+      "operationalStatus": [
+      2],
+      "type": 5,
+      "autoManageType": 1,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_2",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "10.245.239.209",
+      "description": "",
+      "osType": "VMware ESXi 6.0.0",
+      "hostPolledUUID": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e",
+      "lastPollTime": "2016-03-03T04:40:13.000Z",
+      "hostContainer": {
+        "id": "mss_1"
+      },
+      "fcHostInitiators": [{
+        "id": "HostInitiator_3"
+      }, {
+        "id": "HostInitiator_2"
+      }],
+      "iscsiHostInitiators": [{
+        "id": "HostInitiator_4"
+      }],
+      "hostIPPorts": [{
+        "id": "HostNetworkAddress_4"
+      }, {
+        "id": "HostNetworkAddress_3"
+      }, {
+        "id": "HostNetworkAddress_2"
+      }],
+      "datastores": [{
+        "id": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e_ds:///vmfs/volumes/53181768-bc980168-6e34-a44c11a10b6a/"
+      }, {
+        "id": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e_ds:///vmfs/volumes/75df1b51-9c9b37af/"
+      }, {
+        "id": "rfc4122.5be66846-978a-ec41-8e05-4b1a806bd34e_ds:///vmfs/volumes/vvol:80b7309e64a843c8-955dafdd98b189a2/"
+      }],
+      "vms": [{
+        "id": "503e3432-4a42-eb59-c25d-20bc04e6b069"
+      }, {
+        "id": "503e7da9-6759-9f15-233b-be36871d9bef"
+      }]
     }
+  }, {
+    "content": {
+      "id": "Host_3",
+      "operationalStatus": [
+      2],
+      "type": 5,
+      "autoManageType": 1,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_3",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "10.245.54.151",
+      "description": "",
+      "osType": "VMware ESXi 6.0.0",
+      "hostPushedUUID": "56333d12-1a07-4f97-af04-a0369f668960",
+      "hostPolledUUID": "rfc4122.03000200-0400-0500-0006-000700080009",
+      "lastPollTime": "2016-03-03T04:40:13.000Z",
+      "hostContainer": {
+        "id": "mss_1"
+      },
+      "iscsiHostInitiators": [{
+        "id": "HostInitiator_5"
+      }],
+      "hostIPPorts": [{
+        "id": "HostNetworkAddress_7"
+      }, {
+        "id": "HostNetworkAddress_6"
+      }, {
+        "id": "HostNetworkAddress_5"
+      }],
+      "storageResources": [{
+        "id": "res_11"
+      }],
+      "datastores": [{
+        "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/vvol:719af123bbb34e45-acfe1b6d99755ba8/"
+      }, {
+        "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/75df1b51-9c9b37af/"
+      }, {
+        "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/56333e25-c2f1ab18-6982-a0369f668960/"
+      }, {
+        "id": "rfc4122.03000200-0400-0500-0006-000700080009_ds:///vmfs/volumes/564cf41c-fc332453-32a8-f80f41fafe2e/"
+      }],
+      "hostVVolDatastore": [{
+        "id": "aha_10"
+      }],
+      "vms": [{
+        "id": "503e15b8-15a2-4ca9-c0d9-ba893d9d5a32"
+      }, {
+        "id": "503e3594-25b6-9649-7809-0dd725f1141a"
+      }, {
+        "id": "503e8aae-99c4-09b4-cc34-f6bdc215aa24"
+      }, {
+        "id": "503ea1ca-0565-41e3-8af1-34ab7f11c95d"
+      }, {
+        "id": "503e830a-f96d-7667-b21e-3a01c22b2f37"
+      }, {
+        "id": "503e7fea-03d7-4755-40ec-fe48f86fc01d"
+      }, {
+        "id": "503eee83-e4f8-8c48-28d7-fb43e090bf0e"
+      }, {
+        "id": "503ea8d7-29de-ef69-066a-91491424a3dd"
+      }, {
+        "id": "503e59dc-0690-53ed-faa9-e62a87e73375"
+      }, {
+        "id": "503ef02a-3b2c-342f-bc64-c10e0dfd0c79"
+      }, {
+        "id": "503efe28-ae0a-5dd5-e277-13a577ca4f78"
+      }, {
+        "id": "503e70fc-827f-01a2-9ae0-3c766a5dbf2c"
+      }]
+    }
+  }, {
+    "content": {
+      "id": "Host_4",
+      "operationalStatus": [
+      2],
+      "type": 1,
+      "autoManageType": 0,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_4",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "CTP_TEST_HOST_01",
+      "description": "",
+      "osType": "Linux"
+    }
+  }, {
+    "content": {
+      "id": "Host_6",
+      "operationalStatus": [
+      2],
+      "type": 1,
+      "autoManageType": 0,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_6",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "EMC-SMIS-SPC-03db3f83-21bb-4a02-b9dd-3383d111f39d",
+      "description": "EMC-SMIS-SPC-03db3f83-21bb-4a02-b9dd-3383d111f39d",
+      "osType": ""
+    }
+  }, {
+    "content": {
+      "id": "Host_7",
+      "operationalStatus": [
+      2],
+      "type": 1,
+      "autoManageType": 0,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_7",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "sles12dev",
+      "description": "",
+      "osType": "Linux",
+      "hostIPPorts": [{
+        "id": "HostNetworkAddress_8"
+      }]
+    }
+  },
+  {
+    "content": {
+      "id": "Host_10",
+      "operationalStatus": [
+      2],
+      "type": 1,
+      "autoManageType": 0,
+      "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_10",
+      "health": {
+        "value": 5,
+        "descriptionIds": ["ALRT_COMPONENT_OK"],
+        "descriptions": ["The component is operating normally. No action is required."]
+      },
+      "name": "flocker-3",
+      "description": "",
+      "osType": "",
+      "iscsiHostInitiators": [{
+        "id": "HostInitiator_2"
+      }],
+      "hostLUNs": [{
+        "id": "Host_10_sv_2_prod"
+      }, {
+        "id": "Host_10_sv_3_prod"
+      }]
+    }
+  }
+
+
   ]
 }

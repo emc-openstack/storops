@@ -21,7 +21,8 @@ from hamcrest import assert_that, equal_to, instance_of, only_contains, \
     raises, contains_string
 
 from storops.exception import UnityResourceNotFoundError
-from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum
+from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
+    TieringPolicyEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -30,11 +31,14 @@ from storops.unity.resource.filesystem import UnityFileSystemList
 from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.lun import UnityLunList
+from storops.unity.resource.host import UnityHostInitiator, \
+    UnityHostInitiatorList
 from storops.unity.resource.nas_server import UnityNasServer, \
     UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
+from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.port import UnityIpPortList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor, \
@@ -101,6 +105,67 @@ class UnitySystemTest(TestCase):
         lun_list = unity.get_lun()
         assert_that(lun_list, instance_of(UnityLunList))
         assert_that(len(lun_list), equal_to(5))
+
+    @patch_rest()
+    def test_create_lun(self):
+        unity = t_unity()
+        pool = unity.get_pool(_id='pool_1')
+        lun = unity.create_lun("openstack_lun", pool, 100)
+        assert_that(lun, instance_of(UnityLun))
+        assert_that(lun.existed, equal_to(True))
+        assert_that(lun.size_total, equal_to(100*1024**3))
+
+    @patch_rest()
+    def test_create_lun_on_spb(self):
+        unity = t_unity()
+        pool = unity.get_pool(_id='pool_1')
+        sp = unity.get_sp(_id='spb')
+        lun = unity.create_lun("openstack_lun", pool, 100, sp=sp)
+        assert_that(lun, instance_of(UnityLun))
+        assert_that(lun.existed, equal_to(True))
+        assert_that(lun.size_total, equal_to(100*1024**3))
+        assert_that(lun.default_node, equal_to(sp.to_node_enum()))
+
+    @patch_rest()
+    def test_create_lun_with_muitl_property(self):
+        unity = t_unity()
+        pool = unity.get_pool(_id='pool_1')
+        lun = unity.create_lun("openstack_lun", pool, 100,
+                               description="Hello World", is_thin=True,
+                               is_repl_dst=True,
+                               tiering_policy=TieringPolicyEnum.AUTOTIER_HIGH)
+        assert_that(lun, instance_of(UnityLun))
+        assert_that(lun.existed, equal_to(True))
+        assert_that(lun.is_thin_enabled, equal_to(True))
+        assert_that(lun.size_total, equal_to(100*1024**3))
+        assert_that(lun.tiering_policy,
+                    equal_to(TieringPolicyEnum.AUTOTIER_HIGH))
+
+    @patch_rest()
+    def test_get_initiators(self):
+        unity = t_unity()
+        initiators = unity.get_initiator()
+        assert_that(initiators, instance_of(UnityHostInitiatorList))
+        assert_that(len(initiators), equal_to(4))
+
+    @patch_rest()
+    def test_get_initiator_by_id(self):
+        unity = t_unity()
+        initiator = unity.get_initiator(_id="HostInitiator_2")
+        assert_that(initiator, instance_of(UnityHostInitiator))
+        assert_that(initiator.id, equal_to("HostInitiator_2"))
+
+    @patch_rest()
+    def test_get_initiator_by_name(self):
+        unity = t_unity()
+        wwn = "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"
+        filtered = unity.get_initiator(initiator_id=wwn)
+        assert_that(len(filtered), equal_to(1))
+        assert_that(filtered, instance_of(UnityHostInitiatorList))
+        initiator = filtered.first_item
+        assert_that(initiator, instance_of(UnityHostInitiator))
+        assert_that(initiator.existed, equal_to(True))
+        assert_that(initiator.initiator_id, equal_to(wwn))
 
     @patch_rest()
     def test_get_pools(self):

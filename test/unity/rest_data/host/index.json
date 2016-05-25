@@ -17,6 +17,10 @@
       "response": "host_9.json"
     },
     {
+      "url": "/api/instances/host/Host_10?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_10.json"
+    },
+    {
       "url": "/api/instances/host/Host_11?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "host_11.json"
     },

@@ -23,6 +23,7 @@ from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.sp import UnityStorageProcessor, \
     UnityStorageProcessorList
 from storops.unity.resource.system import UnityDpe
+from storops.unity.enums import NodeEnum
 from test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
@@ -50,6 +51,11 @@ class UnityStorageProcessorTest(TestCase):
         assert_that(sp.post_firmware_revision, equal_to('21.2'))
         assert_that(sp.memory_size, equal_to(65536))
         assert_that(sp.parent_dpe, instance_of(UnityDpe))
+
+    @patch_rest()
+    def test_sp_to_node_enum(self):
+        sp = UnityStorageProcessor(_id='spa', cli=t_rest())
+        assert_that(sp.to_node_enum(), equal_to(NodeEnum.SPA))
 
     @patch_rest()
     def test_get_all_and_property_query(self):

@@ -8,3 +8,4 @@ requests!=2.9.0,>=2.8.1
 retryz>=0.1.5
 six>=1.9.0
 pywbemReq>=0.0.1
+bitmath

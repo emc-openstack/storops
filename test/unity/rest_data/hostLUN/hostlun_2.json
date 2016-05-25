@@ -1,0 +1,15 @@
+{
+    "content": {
+        "id": "Host_10_sv_3_prod",
+        "type": 2,
+        "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%Antecedent=root/emc:EMC_UEM_HostLeaf\\%InstanceID\\=Host_10%Dependent=root/emc:EMC_UEM_StorageVolumeLeaf\\%InstanceID\\=sv_3_prod",
+        "hlu": 2,
+        "isReadOnly": false,
+        "host": {
+            "id": "Host_10"
+        },
+        "lun": {
+            "id": "sv_3"
+        }
+    }
+}

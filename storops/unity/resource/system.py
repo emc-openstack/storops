@@ -16,6 +16,7 @@
 from __future__ import unicode_literals
 
 import logging
+import bitmath
 
 from storops.lib.common import instance_cache
 from storops.unity.client import UnityClient
@@ -27,7 +28,7 @@ from storops.unity.resource.cifs_share import UnityCifsShareList
 from storops.unity.resource.dns_server import UnityFileDnsServerList
 from storops.unity.resource.filesystem import UnityFileSystemList
 from storops.unity.resource.interface import UnityFileInterfaceList
-from storops.unity.resource.lun import UnityLunList
+from storops.unity.resource.lun import UnityLunList, UnityLun
 from storops.unity.resource.nas_server import UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
@@ -35,6 +36,9 @@ from storops.unity.resource.pool import UnityPoolList
 from storops.unity.resource.port import UnityIpPortList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
+from storops.unity.resource.host import UnityHostList, UnityHostInitiatorList
+from storops.unity.resource.port import UnityEthernetPortList, \
+    UnityIscsiPortalList
 
 __author__ = 'Jay Xu'
 
@@ -54,8 +58,39 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityStorageProcessorList, _id=_id,
                                    name=name, **filters)
 
+    def get_iscsi_portal(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityIscsiPortalList, _id=_id,
+                                   name=name, **filters)
+
+    def get_ethernet_port(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityEthernetPortList, _id=_id,
+                                   name=name, **filters)
+
+    def get_host(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityHostList, _id=_id,
+                                   name=name, **filters)
+
+    def get_initiator(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityHostInitiatorList, _id=_id, **filters)
+
     def get_lun(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityLunList, _id=_id, name=name, **filters)
+
+    def create_lun(self, name, pool, size_gb, sp=None, host_access=None,
+                   is_thin=None, description=None, tiering_policy=None,
+                   is_repl_dst=None, snap_schedule=None, iolimit_policy=None):
+
+        if sp is None:
+            sp = self.get_sp().first_item
+
+        size = int(bitmath.GiB(size_gb).to_Byte().value)
+        return UnityLun.create(self._cli, name, pool, size, sp=sp,
+                               host_access=host_access, is_thin=is_thin,
+                               description=description,
+                               is_repl_dst=is_repl_dst,
+                               tiering_policy=tiering_policy,
+                               snap_schedule=snap_schedule,
+                               iolimit_policy=iolimit_policy)
 
     def get_pool(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityPoolList, _id=_id, name=name,

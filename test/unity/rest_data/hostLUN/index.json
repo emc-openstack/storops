@@ -1,0 +1,28 @@
+{
+    "indices": [
+        {
+            "url": "/api/types/hostLUN?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+            "response": "type.json"
+        },
+        {
+            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
+            "response": "all.json"
+        },
+        {
+            "url": "/api/instances/hostLUN/Host_10_sv_2_prod?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
+            "response": "hostlun_1.json"
+        },
+        {
+            "url": "/api/instances/hostLUN/Host_10_sv_3_prod?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
+            "response": "hostlun_2.json"
+        },
+        {
+            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=id eq \"Host_10_sv_2_prod\"",
+            "response": "filter_hostlun_1.json"
+        },
+        {
+            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=id eq \"Host_10_sv_3_prod\"",
+            "response": "filter_hostlun_2.json"
+        }
+    ]
+}

@@ -1,0 +1,111 @@
+{
+    "content": {
+        "name": "hostInitiator",
+        "description": "Information about host initiators in the storage system. <br/> <br/> After you create a host configuration for controlling host access to storage on the system, you need to create a host initiator for each host configuration that accesses iSCSI or Fibre Channel (FC) storage. The initiator connects the host to the target iSCSI or FC node on the system. <br/> <br/> Initiator-based registration allows you to register the initiator to a host without having to manage individual paths. By default, when an initiator is registered to a host, all of its paths, including those specified after the registration takes place, are automatically granted access to any storage provisioned for the host. <br/> ",
+        "documentation": "https://10.109.22.101/apidocs/classes/hostInitiator.html",
+        "attributes": [
+            {
+                "name": "instanceId",
+                "type": "String",
+                "description": "Internal identifier of the hostInitiator instance. ",
+                "displayValue": "instanceId"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique identifier of the hostInitiator instance. ",
+                "displayValue": "id"
+            },
+            {
+                "name": "operationalStatus",
+                "type": "List<HostOperationalStatusEnum>",
+                "description": "Operational statuses of the host initiator. ",
+                "displayValue": "operationalStatus"
+            },
+            {
+                "name": "health",
+                "type": "health",
+                "description": "Health information for the host initiator, as defined by the health resource type. ",
+                "displayValue": "health"
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "description": "Alias of the host to which the host initiator belongs. ",
+                "displayValue": "name"
+            },
+            {
+                "name": "type",
+                "type": "HostInitiatorTypeEnum",
+                "description": "Host initiator type. ",
+                "displayValue": "type"
+            },
+            {
+                "name": "initiatorId",
+                "type": "String",
+                "description": "Host initiator name: <ul> <li>For an iSCSI initiator, this is the iSCSI Qualified Name (IQN). </li> <li>For an FC initiator, this is the Worldwide Name (WWN).</li> </ul> ",
+                "displayValue": "initiatorId"
+            },
+            {
+                "name": "parentHost",
+                "type": "host",
+                "description": "Information about the host to which the host initiator is assigned, as defined by the host resource type. ",
+                "displayValue": "parentHost"
+            },
+            {
+                "name": "isIgnored",
+                "type": "Boolean",
+                "description": "Indicates whether the host initiator should be included when storage access is granted to the host. Values are: <ul> <li>true - Do not include the host initiator when storage is granted to the associated host.</li> <li>false - Include the host initiator when storage is granted to the associated host.</li> </ul> ",
+                "displayValue": "isIgnored"
+            },
+            {
+                "name": "nodeWWN",
+                "type": "String",
+                "description": "(Applies to FC initiators only.) Node Worldwide Name (WWN) of the initiator. ",
+                "displayValue": "nodeWWN"
+            },
+            {
+                "name": "portWWN",
+                "type": "String",
+                "description": "(Applies to FC initiators only.) Port Worldwide Name (WWN) of the initiator. ",
+                "displayValue": "portWWN"
+            },
+            {
+                "name": "chapUserName",
+                "type": "String",
+                "description": "(Applies to iSCSI initiators only.) CHAP user name. By default, this is the host initiator's iSCSI Qualified Name (IQN). ",
+                "displayValue": "chapUserName"
+            },
+            {
+                "name": "isChapSecretEnabled",
+                "type": "Boolean",
+                "description": "(Applies to iSCSI initiators only.) Indicates whether CHAP authentication is enabled for the host initiator. Values are: <ul> <li>true - CHAP authentication is enabled.</li> <li>false - CHAP authentication is disabled.</li> </ul> ",
+                "displayValue": "isChapSecretEnabled"
+            },
+            {
+                "name": "paths",
+                "type": "List<hostInitiatorPath>",
+                "description": "Host initiator paths, as defined by the hostInitiatorPath resource type. ",
+                "displayValue": "paths"
+            },
+            {
+                "name": "iscsiType",
+                "type": "HostInitiatorIscsiTypeEnum",
+                "description": "(Applies to iSCSI initiators only.) iSCSI initiator type. ",
+                "displayValue": "iscsiType"
+            },
+            {
+                "name": "isBound",
+                "type": "Boolean",
+                "description": "(Applies to iSCSI initiators only.) Indicates whether the iSCSI initiator is bound to an IP address. This is only applicable to hardware-dependent adapter devices. Values are: <ul> <li>true - iSCSI initiator is bound to an IP address.</li> <li>false - iSCSI initiator is not bound to an IP address.</li> </ul> ",
+                "displayValue": "isBound"
+            },
+            {
+                "name": "sourceType",
+                "type": "HostInitiatorSourceTypeEnum",
+                "description": "Initiator source type. ",
+                "displayValue": "sourceType"
+            }
+        ]
+    }
+}

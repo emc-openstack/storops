@@ -20,6 +20,7 @@ import logging
 from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.nas_server
 import storops.unity.resource.pool
+from storops.unity.enums import NodeEnum
 
 __author__ = 'Jay Xu'
 
@@ -36,6 +37,16 @@ class UnityStorageProcessor(UnityResource):
         return nas_server_clz.create(self._cli, name, self, pool,
                                      is_repl_dst=is_repl_dst,
                                      multi_proto=multi_proto)
+
+    def to_node_enum(self):
+        if self.name in ['SP A']:
+            value = 0
+        elif self.name in ['SP B']:
+            value = 1
+        else:
+            # NodeEnum.Unknown
+            value = 2989
+        return NodeEnum.parse(value)
 
 
 class UnityStorageProcessorList(UnityResourceList):

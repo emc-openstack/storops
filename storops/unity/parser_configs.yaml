@@ -95,6 +95,7 @@ UnityStorageResource:
   name: storageResource
   properties:
     - label: luns
+      converter: UnityLunList
     - label: id
       is_index: True
     - label: health
@@ -843,7 +844,7 @@ UnityBlockHostAccess:
   name: blockHostAccess
   properties:
     - label: host
-      converter: UnityHostList
+      converter: UnityHost
     - label: accessMask
       converter: HostLUNAccessEnum
 

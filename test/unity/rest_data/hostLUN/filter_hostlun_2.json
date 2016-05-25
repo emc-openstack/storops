@@ -1,0 +1,11 @@
+{
+    "@base": "https://10.244.223.66/api/types/hostLUN/instances?filter=id eq \"Host_10_sv_3_prod\"&fields=hlu,id,instanceId,isReadOnly,type,lun.id,host.id,snap.id&per_page=2000&compact=true",
+    "updated": "2016-05-25T13:51:44.519Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": []
+}

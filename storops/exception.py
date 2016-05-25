@@ -271,6 +271,14 @@ class UnityCimResourceNotFoundError(UnityCimException):
     pass
 
 
+class UnityHostInitiatorNotFoundError(UnityException):
+    pass
+
+
+class UnityHostInitiatorUnknownType(UnityException):
+    pass
+
+
 class UnityAddCifsAceError(UnityCimException):
     message = 'failed to add ace for cifs share.'
 

@@ -1,0 +1,42 @@
+{
+    "content": {
+        "id": "HostInitiator_1",
+        "operationalStatus": [
+            2
+        ],
+        "type": 1,
+        "sourceType": 3,
+        "instanceId": "root/emc:EMC_UEM_HostInitiatorLeaf%InstanceID=HostInitiator_1",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ]
+        },
+        "initiatorId": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10",
+        "isIgnored": false,
+        "nodeWWN": "50:00:14:40:47:B0:0C:44",
+        "portWWN": "50:00:14:42:D0:0C:44:10",
+        "isChapSecretEnabled": false,
+        "parentHost": {
+            "id": "Host_1"
+        },
+        "paths": [
+            {
+                "id": "HostInitiator_2_02:00:00:03"
+            },
+            {
+                "id": "HostInitiator_2_02:00:00:02"
+            },
+            {
+                "id": "HostInitiator_2_02:00:01:02"
+            },
+            {
+                "id": "HostInitiator_2_02:00:01:03"
+            }
+        ]
+    }
+}

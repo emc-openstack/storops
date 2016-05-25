@@ -1,0 +1,48 @@
+{
+    "content": {
+        "name": "hostLUN",
+        "description": "Information about the LUNs and LUN snapshots to which a host has access. <br/> <br/> ",
+        "documentation": "https://10.109.22.101/apidocs/classes/hostLUN.html",
+        "attributes": [{
+            "name": "instanceId",
+            "type": "String",
+            "description": "Internal identifier of the hostLUN instance. ",
+            "displayValue": "instanceId"
+        }, {
+            "name": "id",
+            "type": "String",
+            "description": "Unique identifier of the hostLUN instance. ",
+            "displayValue": "id"
+        }, {
+            "name": "host",
+            "type": "host",
+            "description": "Information about the host that has access to the LUN or LUN snapshot, as defined by the host resource type. ",
+            "displayValue": "host"
+        }, {
+            "name": "type",
+            "type": "HostLUNTypeEnum",
+            "description": "Indicates whether this instance of the hostLUN resource type represents a LUN or LUN snapshot. ",
+            "displayValue": "type"
+        }, {
+            "name": "hlu",
+            "type": "Integer",
+            "description": "Host LUN Identifier (HLU) for the host storage group. ",
+            "displayValue": "hlu"
+        }, {
+            "name": "lun",
+            "type": "lun",
+            "description": "(Applies to LUNs only.) LUN, as defined by the lun resource type. ",
+            "displayValue": "lun"
+        }, {
+            "name": "snap",
+            "type": "snap",
+            "description": "(Applies to LUN snapshots only.) LUN snapshot, as defined by the lunSnap resource type. ",
+            "displayValue": "snap"
+        }, {
+            "name": "isReadOnly",
+            "type": "Boolean",
+            "description": "Indicates whether the host access to the LUN or LUN snapshot is read-only. Values are: <ul> <li>true - Host access is read-only.</li> <li>false - Host access is read-write.</li> </ul> ",
+            "displayValue": "isReadOnly"
+        }]
+    }
+}

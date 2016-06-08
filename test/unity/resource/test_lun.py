@@ -19,10 +19,11 @@ from unittest import TestCase
 
 from hamcrest import assert_that, only_contains, instance_of, contains_string
 from hamcrest import equal_to
+from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 
+from storops import UnitySystem
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from storops.unity.resource.pool import UnityPool
-from storops.unity.resource.host import UnityHost
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resource.sp import UnityStorageProcessor
@@ -142,7 +143,7 @@ class UnityLunTest(TestCase):
         assert_that(sr._cli, equal_to(t_rest()))
 
     @patch_rest()
-    def test_get_all(self):
+    def test_get_lun_all_0(self):
         lun_list = UnityLunList.get(cli=t_rest())
         assert_that(len(lun_list), equal_to(5))
 
@@ -154,3 +155,13 @@ class UnityLunTest(TestCase):
                     contains_string('Represents Volume, LUN, Virtual Disk.'))
         assert_that(doc, contains_string('current_node'))
         assert_that(doc, contains_string('Current SP'))
+
+    @patch_rest()
+    def test_get_lun_with_host_access(self):
+        unity = UnitySystem('10.109.22.101', 'admin', 'Password123!')
+        lun = unity.get_lun(_id='sv_567')
+        assert_that(lun.host_access, instance_of(UnityBlockHostAccessList))
+        access = lun.host_access[0]
+        assert_that(access.access_mask, equal_to(HostLUNAccessEnum.PRODUCTION))
+        assert_that(access.host, instance_of(UnityHost))
+        assert_that(access.host.id, equal_to('Host_1'))

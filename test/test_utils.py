@@ -20,6 +20,7 @@ from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, only_contains
 
+from comptest.utils import ResourceManager
 from test.utils import PersistedDict
 
 __author__ = 'Cedric Zhuang'
@@ -68,3 +69,27 @@ class PersistedDictTest(TestCase):
 
     def test_default_value(self):
         assert_that(self.d['d'], equal_to([]))
+
+
+class SampleResource(object):
+    def __init__(self):
+        self.update_count = 0
+
+    def update(self):
+        self.update_count += 1
+
+    @property
+    def existed(self):
+        return self.update_count >= 1
+
+
+class ResourceManagerTest(TestCase):
+    def test_until_existed(self):
+        rsc = SampleResource()
+        ResourceManager.until_existed(rsc)
+        assert_that(rsc.update_count, equal_to(1))
+
+    def test_until_customized(self):
+        rsc = SampleResource()
+        ResourceManager.until(rsc, lambda x: x.update_count >= 1)
+        assert_that(rsc.update_count, equal_to(1))

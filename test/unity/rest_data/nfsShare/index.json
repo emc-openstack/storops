@@ -9,6 +9,10 @@
       "response": "NFSShare_1.json"
     },
     {
+      "url": "/api/instances/nfsShare/NFSShare_2?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
+      "response": "NFSShare_2.json"
+    },
+    {
       "url": "/api/instances/nfsShare/NFSShare_4?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
       "response": "NFSShare_4.json"
     },

@@ -25,6 +25,18 @@
       "response": "host_11.json"
     },
     {
+      "url": "/api/instances/host/Subnet_8?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "subnet_8.json"
+    },
+    {
+      "url": "/api/instances/host/Subnet_9?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "subnet_9.json"
+    },
+    {
+      "url": "/api/types/host/instances?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms&filter=name eq \"not found\"",
+      "response": "not_found.json"
+    },
+    {
       "url": "/api/types/host/instances?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms&filter=name eq \"Hello\"",
       "response": "empty.json"
     },
@@ -64,6 +76,14 @@
         "name": "2.2.2.2"
       },
       "response": "create_host_19.json"
+    },
+    {
+      "url": "/api/types/host/instances?compact=True",
+      "body": {
+        "type": 2,
+        "name": "7.7.7.7_255.0.0.0"
+      },
+      "response": "create_subnet_8.json"
     },
     {
       "url": "/api/instances/host/Host_11?compact=True",

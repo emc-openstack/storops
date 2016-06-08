@@ -63,15 +63,23 @@ class VNXStorageGroup(VNXCliResource):
         ex.raise_if_err(out, msg, default=ex.VNXCreateStorageGroupError)
         return VNXStorageGroup(name, cli)
 
-    def delete(self):
-        self._cli.delete_sg(self._get_name(), poll=self.poll)
+    def delete(self, disconnect_host=False):
+        if disconnect_host:
+            for hba in self.hba_sp_pairs:
+                self.disconnect_host(hba.host_name)
+        out = self._cli.delete_sg(self._get_name(), poll=self.poll)
+        ex.raise_if_err(out, default=ex.VNXDeleteStorageGroupError)
 
     def has_hlu(self, hlu):
         return hlu in self.used_hlu_numbers
 
     def has_alu(self, lun):
-        alu = storops.vnx.resource.lun.VNXLun.get_id(lun)
-        return alu in self.used_alu_numbers
+        try:
+            alu = storops.vnx.resource.lun.VNXLun.get_id(lun)
+        except ValueError:
+            # lun not found, id is None
+            alu = None
+        return alu is not None and alu in self.used_alu_numbers
 
     def get_hlu(self, lun):
         alu = storops.vnx.resource.lun.VNXLun.get_id(lun)

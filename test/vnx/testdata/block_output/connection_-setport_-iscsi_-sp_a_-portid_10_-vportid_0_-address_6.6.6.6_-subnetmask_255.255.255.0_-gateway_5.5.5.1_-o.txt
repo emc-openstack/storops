@@ -1,0 +1,1 @@
+The gateway is not on the subnet defined by the IP address and netmask.

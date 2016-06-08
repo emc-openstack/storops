@@ -26,10 +26,10 @@ import storops.unity.resource.snap
 from storops.exception import UnityCreateCifsUserError, \
     UnityImportCifsUserError, UnityAddCifsAceError, \
     UnityDeleteCifsAceError, UnityAceNotFoundError, \
-    UnityCimResourceNotFoundError
+    UnityCimResourceNotFoundError, UnityCreateSnapError
 from storops.lib.common import instance_cache
 from storops.unity.enums import CIFSTypeEnum, ACEAccessTypeEnum, \
-    ACEAccessLevelEnum
+    ACEAccessLevelEnum, FilesystemSnapAccessTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
 
@@ -315,6 +315,21 @@ class UnityCifsShare(UnityResource):
                 cifs_servers = nas_server.cifs_server
                 if cifs_servers:
                     ret = cifs_servers[0]
+        return ret
+
+    def create_snap(self, name=None, fs_access_type=None):
+        if fs_access_type is None:
+            fs_access_type = FilesystemSnapAccessTypeEnum.PROTOCOL
+
+        if self.type == CIFSTypeEnum.CIFS_SHARE:
+            ret = self.filesystem.create_snap(
+                name=name, fs_access_type=fs_access_type)
+        elif self.type == CIFSTypeEnum.CIFS_SNAPSHOT:
+            ret = self.snap.copy(copy_name=name)
+        else:
+            raise UnityCreateSnapError('do not know how to create snap for '
+                                       'cifs share {}, type {}.'
+                                       .format(self.name, self.type))
         return ret
 
 

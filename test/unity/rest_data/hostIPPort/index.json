@@ -21,6 +21,10 @@
       "response": "HostNetworkAddress_11.json"
     },
     {
+      "url": "/api/instances/hostIPPort/HostNetworkAddress_12?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength",
+      "response": "HostNetworkAddress_12.json"
+    },
+    {
       "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"10.244.209.90\"",
       "response": "filter_10.244.209.90.json"
     },
@@ -35,6 +39,18 @@
     {
       "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"9.9.9.9\"",
       "response": "host_not_found.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"7.7.7.7\"",
+      "response": "host_not_found.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"8.8.8.9\"",
+      "response": "host_not_found.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"8.8.8.8\"",
+      "response": "filter_8.8.8.8.json"
     },
     {
       "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"2.2.2.2\"",
@@ -83,6 +99,17 @@
         "address": "2.2.2.2"
       },
       "response": "create_HostNetworkAddress_18.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True",
+      "body": {
+        "host": {
+          "id": "Subnet_8"
+        },
+        "netmask": "255.0.0.0",
+        "address": "7.7.7.7"
+      },
+      "response": "create_HostNetworkAddress_12.json"
     },
     {
       "url": "/api/instances/hostIPPort/HostNetworkAddress_1?compact=True",

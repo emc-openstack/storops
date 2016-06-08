@@ -19,9 +19,10 @@ from unittest import TestCase
 
 from hamcrest import equal_to, assert_that, only_contains, instance_of, \
     raises, none
+from storops.unity.resource.snap import UnitySnap
 
 from storops.exception import UnityException, UnityNfsShareNameExistedError, \
-    UnityHostNotFoundException
+    UnityHostNotFoundException, UnitySnapNameInUseError
 from storops.unity.enums import NFSTypeEnum, NFSShareRoleEnum, \
     NFSShareDefaultAccessEnum, NFSShareSecurityEnum
 from storops.unity.resource.filesystem import UnityFileSystem
@@ -101,6 +102,14 @@ class UnityNfsShareTest(TestCase):
         share = UnityNfsShare(_id='NFSShare_4', cli=t_rest())
         resp = share.delete()
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest()
+    def test_nfs_share_snap_existed(self):
+        def f():
+            share = UnityNfsShare(_id='NFSShare_31', cli=t_rest())
+            share.create_snap('share_snap')
+
+        assert_that(f, raises(UnitySnapNameInUseError, 'in use'))
 
     @patch_rest()
     def test_delete_nfs_share_async(self):
@@ -192,6 +201,13 @@ class UnityNfsShareTest(TestCase):
         share = UnityNfsShare(cli=t_rest(), _id='NFSShare_31')
         resp = share.delete_access(['1.1.1.1', '1.1.1.3'])
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest()
+    def test_snap_based_share_properties(self):
+        share = UnityNfsShare.get(t_rest(), _id='NFSShare_2')
+        assert_that(share.type, equal_to(NFSTypeEnum.NFS_SNAPSHOT))
+        assert_that(share.filesystem, instance_of(UnityFileSystem))
+        assert_that(share.snap, instance_of(UnitySnap))
 
 
 class UnityNfsHostConfigTest(TestCase):

@@ -1,0 +1,25 @@
+{
+  "@base": "https://10.244.223.66/api/types/hostIPPort/instances?filter=address eq \"8.8.8.8\"&fields=address,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength,host.id&per_page=2000&compact=true",
+  "updated": "2016-05-25T10:04:54.520Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "isIgnored": false,
+        "instanceId": "root/emc:EMC_UEM_HostNetworkAddressLeaf%InstanceID=HostNetworkAddress_13",
+        "host": {
+          "id": "Subnet_9"
+        },
+        "netmask": "255.0.0.0",
+        "address": "8.8.8.8",
+        "type": 0,
+        "id": "HostNetworkAddress_13"
+      }
+    }
+  ]
+}

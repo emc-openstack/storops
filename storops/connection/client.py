@@ -21,6 +21,7 @@ import json
 import logging
 
 import requests
+import six
 from requests.exceptions import RequestException
 from retryz import retry
 
@@ -78,7 +79,7 @@ class HTTPClient(object):
             else:
                 options['data'] = kwargs['body']
 
-        self.log_request(full_url, headers, options.get('data', None))
+        self.log_request(full_url, options.get('data', None))
         resp = self.session.request(method, full_url, headers=headers,
                                     **options)
 
@@ -126,18 +127,31 @@ class HTTPClient(object):
     def delete(self, url, **kwargs):
         return self._cs_request(url, 'DELETE', **kwargs)
 
-    @staticmethod
-    def log_request(url, headers, data=None):
+    @classmethod
+    def log_request(cls, url, data=None):
         log.debug('REQ URL: {}'.format(url))
-        log.debug('REQ HEADER: {}'.format(headers))
-        if data is not None:
-            log.debug('REQ BODY: \n{}'.format(data))
+        cls._debug_print_json(data, 'REQ BODY:')
 
     @staticmethod
-    def log_response(resp):
-        log.debug('RESP: [{}] {}'.format(resp.status_code, resp.headers))
-        if resp.text is not None:
-            log.debug('RESP BODY: \n{}'.format(resp.text))
+    def _debug_print_json(data, prefix=None):
+        if prefix is None:
+            prefix = 'JSON data:'
+
+        if data is not None and log.isEnabledFor(logging.DEBUG):
+            try:
+                if isinstance(data, six.string_types):
+                    obj = json.loads(data, encoding='utf-8')
+                else:
+                    obj = data
+                text = json.dumps(obj, indent=4)
+            except (ValueError, TypeError):
+                text = data
+            log.debug('{}\n{}'.format(prefix, text))
+
+    @classmethod
+    def log_response(cls, resp):
+        log.debug('RESP CODE: {}'.format(resp.status_code))
+        cls._debug_print_json(resp.text, 'RESP BODY:')
 
     def update_headers(self, headers):
         self.headers.update(headers)

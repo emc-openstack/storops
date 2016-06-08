@@ -325,6 +325,11 @@ class UnityNasServerNameUsedError(UnityException):
 
 
 @rest_exception
+class UnityNasServerHasFsError(UnityException):
+    error_code = 108011564
+
+
+@rest_exception
 class UnitySmbNameInUseError(UnityException):
     error_code = 108011873
 
@@ -369,6 +374,10 @@ class UnityFileSystemNameAlreadyExisted(UnityException):
     error_code = 108008464
 
 
+class UnityCreateSnapError(UnityException):
+    pass
+
+
 @rest_exception
 class UnitySnapNameInUseError(UnityException):
     error_code = (1903001605, 1903132675)
@@ -385,8 +394,18 @@ class UnityHostIpInUseError(UnityException):
 
 
 @rest_exception
+class UnitySmbServerLockedError(UnityException):
+    error_code = 108011909
+
+
+@rest_exception
 class UnityAclUserNotFoundError(UnityException):
     error_code = 100663499
+
+
+@rest_exception
+class UnityFileSystemSizeTooSmallError(UnityException):
+    error_code = 108008449
 
 
 class UnityImportCifsUserError(UnityException):
@@ -512,6 +531,16 @@ class VNXCreateStorageGroupError(VNXStorageGroupError):
 @cli_exception
 class VNXStorageGroupNameInUseError(VNXCreateStorageGroupError):
     error_message = 'Storage Group name already in use'
+
+
+class VNXDeleteStorageGroupError(VNXStorageGroupError):
+    pass
+
+
+@cli_exception
+class VNXStorageGroupNotFoundError(VNXStorageGroupError):
+    error_message = ('The group name or UID does not match any '
+                     'storage groups for this array')
 
 
 class VNXNoHluAvailableError(VNXStorageGroupError):
@@ -852,6 +881,21 @@ class VNXMirrorNotFoundError(VNXMirrorException):
 @cli_exception
 class VNXDeleteMirrorWithSecondaryError(VNXMirrorException):
     error_code = 0x71058243
+
+
+class VNXPortError(VNXException):
+    pass
+
+
+@cli_exception
+class VNXGateWayError(VNXException):
+    error_message = ('The gateway is not on the subnet defined '
+                     'by the IP address and netmask.')
+
+
+@cli_exception
+class VNXVirtualPortNotFoundError(VNXPortError):
+    error_message = 'Request failed. Specified virtual port not found.'
 
 
 @xmlapi_exception

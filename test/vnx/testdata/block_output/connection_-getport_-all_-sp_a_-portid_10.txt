@@ -1,0 +1,16 @@
+SP:  A
+Port ID:  10
+Port WWN:  iqn.1992-04.com.emc:cx.apm00153042305.a10
+iSCSI Alias:  305.a10
+Enode MAC Address:  00-60-16-58-B3-E8
+Port Speed:  N/A
+Auto-Negotiate:  Yes
+Available Speeds:  1000 Mb
+-               :  10000 Mb
+-               :  Auto
+Current MTU:  1500
+Available MTU Sizes:  "1260","1448","1500","1548","2000","2450","3000","4000","4080","4470","5000","6000","7000","8000","9000"
+Flow Control:  Auto
+Host Window:  256K
+Replication Window:  256K
+Available Window Sizes:  64K,128K,256K,512K,1MB

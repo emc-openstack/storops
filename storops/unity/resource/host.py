@@ -17,6 +17,8 @@ from __future__ import unicode_literals
 
 import logging
 import re
+from itertools import chain
+
 import six
 
 from storops import exception as ex
@@ -59,6 +61,7 @@ class UnityHost(UnityResource):
         if isinstance(_id, six.string_types) and ('.' in _id or ':' in _id):
             # it looks like an ip address, find or create the host
             address = converter.url_to_host(_id)
+            netmask = converter.url_to_mask(_id)
             ports = UnityHostIpPortList(cli=cli, address=address)
             if len(ports) == 1:
                 ret = ports[0].host
@@ -66,8 +69,12 @@ class UnityHost(UnityResource):
                 log.info('cannot find an existing host with ip {}.  '
                          'create a new host "{}" to attach it.'
                          .format(address, address))
-                host = cls.create(cli, address)
-                host.add_ip_port(address)
+                host_type = (HostTypeEnum.SUBNET if netmask
+                             else HostTypeEnum.HOST_MANUAL)
+                host_name = ('{}_{}'.format(address, netmask) if netmask
+                             else address)
+                host = cls.create(cli, host_name, host_type=host_type)
+                host.add_ip_port(address, netmask=netmask)
                 ret = host
             else:
                 ret = None
@@ -204,6 +211,10 @@ class UnityHostList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnityHost
+
+    @property
+    def ip_list(self):
+        return list(chain.from_iterable([host.ip_list for host in self]))
 
 
 class UnityHostContainer(UnityResource):

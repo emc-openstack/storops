@@ -206,3 +206,23 @@ class ConverterTest(TestCase):
         url = '10.0.0.1/32'
         ret = converter.url_to_host(url)
         assert_that(ret, equal_to('10.0.0.1'))
+
+    def test_url_to_mask_normal(self):
+        url = 'https://10.244.211.30/24'
+        ret = converter.url_to_mask(url)
+        assert_that(ret, equal_to('255.255.255.0'))
+
+    def test_url_to_mask_29_bit(self):
+        url = 'https://10.244.211.30/30'
+        ret = converter.url_to_mask(url)
+        assert_that(ret, equal_to('255.255.255.252'))
+
+    def test_url_to_mask_7_bit(self):
+        url = 'https://10.244.211.30/7'
+        ret = converter.url_to_mask(url)
+        assert_that(ret, equal_to('254.0.0.0'))
+
+    def test_url_to_mask_not_found(self):
+        url = 'https://10.244.211.30/router'
+        ret = converter.url_to_mask(url)
+        assert_that(ret, none())

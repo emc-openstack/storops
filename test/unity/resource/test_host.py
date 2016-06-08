@@ -17,7 +17,9 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import equal_to, assert_that, instance_of, raises, only_contains
+from hamcrest import equal_to, assert_that, instance_of, raises, none, \
+    only_contains
+from storops.unity.resource.nfs_share import UnityNfsShare
 
 from storops.exception import UnityHostIpInUseError, \
     UnityResourceNotFoundError, UnityHostInitiatorNotFoundError, \
@@ -78,6 +80,13 @@ class UnityHotTest(TestCase):
         assert_that(host.ip_list, only_contains('10.244.209.90'))
 
     @patch_rest()
+    def test_ip_list_of_host_list(self):
+        share = UnityNfsShare(cli=t_rest(), _id='NFSShare_31')
+        assert_that(share.read_write_hosts.ip_list, only_contains('1.1.1.1'))
+        assert_that(share.read_only_hosts.ip_list, equal_to([]))
+        assert_that(share.root_access_hosts, none())
+
+    @patch_rest()
     def test_create_simple_host(self):
         host = UnityHost.create(t_rest(), name='host1',
                                 host_type=HostTypeEnum.HOST_MANUAL,
@@ -112,6 +121,12 @@ class UnityHotTest(TestCase):
         resp = host.delete()
         assert_that(resp.is_ok(), equal_to(True))
         assert_that(ip_port.delete, raises(UnityResourceNotFoundError))
+
+    @patch_rest()
+    def test_create_subset_host(self):
+        host = UnityHost.get_host(t_rest(), '7.7.7.7/8', force_create=True)
+        assert_that(host.ip_list, only_contains('7.7.7.7'))
+        assert_that(host.type, equal_to(HostTypeEnum.SUBNET))
 
     @patch_rest()
     def test_add_initiator(self):
@@ -167,6 +182,7 @@ class UnityHotTest(TestCase):
 
         def f():
             host.delete_initiator(wwn)
+
         assert_that(f, raises(UnityHostInitiatorNotFoundError))
 
     @patch_rest()
@@ -232,6 +248,7 @@ class UnityHotTest(TestCase):
 
         def f():
             host.attach_alu(lun)
+
         assert_that(f, raises(UnityAluAlreadyAttachedError))
 
     @patch_rest()
@@ -358,6 +375,7 @@ class UnityHostInitiatorTest(TestCase):
 
         def f():
             UnityHostInitiator.create(t_rest(), iqn, host, type)
+
         assert_that(f, raises(UnityHostInitiatorUnknownType))
 
     @patch_rest()

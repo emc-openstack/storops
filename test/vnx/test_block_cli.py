@@ -747,3 +747,17 @@ class CliClientTest(TestCase):
     def test_delete_user(self):
         cmd = self.client.delete_user('s')
         assert_that(cmd, equal_to('security -rmuser -user s -scope global -o'))
+
+    @extract_command
+    def test_config_iscsi_ip(self):
+        cmd = self.client.config_iscsi_ip(
+            VNXSPEnum.SP_A, 10, '5.5.5.5', '255.255.255.0', '5.5.5.1')
+        assert_that(cmd, equal_to(
+            'connection -setport -iscsi -sp a -portid 10 -vportid 0 '
+            '-address 5.5.5.5 -subnetmask 255.255.255.0 -gateway 5.5.5.1 -o'))
+
+    @extract_command
+    def test_delete_iscsi_ip(self):
+        cmd = self.client.delete_iscsi_ip(VNXSPEnum.SP_A, 10)
+        assert_that(cmd, equal_to(
+            'connection -delport -sp a -portid 10 -vportid 0 -o'))

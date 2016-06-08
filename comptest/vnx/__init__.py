@@ -16,66 +16,34 @@
 from __future__ import unicode_literals
 
 import logging
-import threading
-from time import sleep
 
-import filelock
 from retryz import retry
 
-from collections import defaultdict
-
 from comptest import t_vnx
+from comptest.utils import ResourceManager
 from storops import exception as ex
-from test.utils import PersistedDict
 
 __author__ = 'Cedric Zhuang'
 
 log = logging.getLogger(__name__)
 
 
-class VNXTestResourceManager(object):
+class VNXTestResourceManager(ResourceManager):
     def __init__(self, name):
-        self._names = self._init_names()
-        self._name = name
-        self._add_worker()
+        super(VNXTestResourceManager, self).__init__(name)
         self.vnx = None
 
-    def _init_names(self):
-        return defaultdict(list)
-
-    def _add_worker(self):
-        workers = self._names['worker']
-        _id = threading.current_thread().ident
-        if _id not in workers:
-            workers.append(_id)
-        self._names['worker'] = workers
-
-    def _remove_worker(self):
-        workers = self._names['worker']
-        _id = threading.current_thread().ident
-        if _id in workers:
-            workers.remove(_id)
-        self._names['worker'] = workers
-        return len(workers)
-
     def clean_up(self):
-        while self._remove_worker():
-            # wait for all test cases to complete
-            sleep(5)
+        super(VNXTestResourceManager, self).clean_up()
 
-        while self.has_snap_name():
-            self._pop_name('snap')
+        self._clean_up_snap()
+        self._clean_up_cg()
+        self._clean_up_sg()
+        self._clean_up_lun()
+        self._clean_up_pool()
+        self._names.destroy()
 
-        while self.has_name('lun'):
-            name = None
-            try:
-                name = self._pop_name('lun')
-                lun = self.vnx.get_lun(name=name)
-                if lun.existed:
-                    lun.delete(force=True)
-            except (ex.VNXLunNotFoundError, ex.VNXDeleteLunError, IndexError):
-                log.exception('remove lun {} failed.'.format(name))
-
+    def _clean_up_pool(self):
         while self.has_name('pool'):
             name = None
             try:
@@ -85,77 +53,95 @@ class VNXTestResourceManager(object):
                     pool.delete(force=True)
             except (ex.VNXPoolNotFoundError, ex.VNXPoolDestroyingError,
                     IndexError):
-                log.exception('remove pool {} failed.'.format(name))
+                log.exception('delete pool {} failed.'.format(name))
 
-        self._names.destroy()
+    def _clean_up_lun(self):
+        while self.has_name('lun'):
+            name = None
+            try:
+                name = self._pop_name('lun')
+                lun = self.vnx.get_lun(name=name)
+                if lun.existed:
+                    lun.delete(force=True)
+            except (ex.VNXLunNotFoundError, ex.VNXDeleteLunError, IndexError):
+                log.exception('delete lun {} failed.'.format(name))
 
-    def has_snap_name(self, name=None):
-        return self.has_name('snap', name)
+    def _clean_up_sg(self):
+        while self.has_name('sg'):
+            name = None
+            try:
+                name = self._pop_name('sg')
+                sg = self.vnx.get_sg(name=name)
+                if sg.existed:
+                    sg.delete(disconnect_host=True)
+            except (ex.VNXStorageGroupNotFoundError, IndexError):
+                log.exception('delete sg {} failed.'.format(name))
 
-    def has_lun_name(self, name=None):
-        return self.has_name('lun', name)
+    def _clean_up_cg(self):
+        while self.has_name('cg'):
+            name = None
+            try:
+                name = self._pop_name('cg')
+                cg = self.vnx.get_cg(name=name)
+                if cg.existed:
+                    cg.delete()
+            except (ex.VNXConsistencyGroupNotFoundError, IndexError):
+                log.exception('delete cg {} failed.'.format(name))
 
-    def has_pool_name(self, name=None):
-        return self.has_name('pool', name)
-
-    def add_snap_name(self, name=None):
-        return self.add_name('snap', name)
-
-    def add_lun_name(self, name=None):
-        return self.add_name('lun', name)
-
-    def add_pool_name(self, name=None):
-        return self.add_name('pool', name)
-
-    def has_name(self, rsc_type, key=None):
-        names = self._names[rsc_type]
-        if names:
-            if key is None:
-                ret = True
-            else:
-                ret = key in names
-        else:
-            ret = False
-        return ret
-
-    def _pop_name(self, rsc_type):
-        names = self._names[rsc_type]
-        ret = names.pop()
-        self._names[rsc_type] = names
-        return ret
-
-    def add_name(self, rsc_type, name=None):
-        names = self._names[rsc_type]
-        n = len(names)
-
-        if name is None:
-            name = '{}_{}_{}'.format(self._name, rsc_type, n)
-        names.append(name)
-        self._names[rsc_type] = names
-        return name
+    def _clean_up_snap(self):
+        while self.has_snap_name():
+            self._pop_name('snap')
 
 
 class VNXGeneralFixtureManager(VNXTestResourceManager):
     def __init__(self):
         clz_name = self.__class__.__name__
-        file_lock_name = '{}.lck'.format(clz_name)
-        self.lock = filelock.FileLock(file_lock_name)
-        with self.lock.acquire():
-            log.debug('start {} setup.'.format(clz_name))
-            # noinspection PyBroadException
-            try:
-                super(VNXGeneralFixtureManager, self).__init__('general')
-                self.vnx = t_vnx()
-                self.pool = self._create_pool()
-                self.lun = self._create_lun()
-                self.snap = self._create_snap()
-            except Exception:
-                log.exception(
-                    'failed to initialize {}'.format(clz_name))
+        log.debug('start {} setup.'.format(clz_name))
+        try:
+            super(VNXGeneralFixtureManager, self).__init__('vg')
+            self.vnx = t_vnx()
+            self.cg = self._create_cg()
+            self.pool = self._create_pool()
+            self.lun = self._create_lun()
+            self.snap = self._create_snap()
+            self.sg = self._create_sg()
+        except ex.StoropsException:
+            log.exception('failed to initialize {}'.format(clz_name))
+            raise
 
-    def _init_names(self):
-        data_file = '{}_names'.format(self.__class__.__name__)
-        return PersistedDict(data_file, list)
+    def select_port(self):
+        ports = self.vnx.get_iscsi_port()
+        for port in ports:
+            if port.ip_address is None:
+                break
+        else:
+            raise ValueError('no available iSCSI port found.')
+        return port.sp, port.port_id
+
+    def _create_cg(self):
+        name = 'general_cg'
+        if not self.has_cg_name(name):
+            try:
+                ret = self.vnx.create_cg(name)
+            except ex.VNXConsistencyGroupNameInUseError:
+                ret = self.vnx.get_cg(name)
+            self.add_cg_name(name)
+        else:
+            ret = self.vnx.get_cg(name)
+        return ret
+
+    def _create_sg(self):
+        name = 'general_sg'
+        if not self.has_sg_name(name):
+            try:
+                ret = self.vnx.create_sg(name)
+            except ex.VNXStorageGroupNameInUseError:
+                ret = self.vnx.get_sg(name=name)
+            self.add_sg_name(name)
+        else:
+            ret = self.vnx.get_sg(name=name)
+        ret.shuffle_hlu = False
+        return ret
 
     def _create_snap(self):
         name = 'general_snap'

@@ -15,14 +15,18 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import logging
+
 from storops.lib.common import instance_cache
-from storops.unity.enums import FilesystemSnapAccessTypeEnum
+from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.cifs_share
 import storops.unity.resource.nfs_share
 from storops.unity.resource.storage_resource import UnityStorageResource
 
 __author__ = 'Cedric Zhuang'
+
+log = logging.getLogger(__name__)
 
 
 class UnitySnap(UnityResource):
@@ -71,6 +75,17 @@ class UnitySnap(UnityResource):
                            is_read_only=is_read_only,
                            fs_access_type=fs_access_type)
 
+    def copy(self, copy_name=None):
+        resp = self.action('copy', copyName=copy_name)
+        resp.raise_if_err()
+        try:
+            snap_copy_id = resp.contents[0]['copies'][0]['id']
+            ret = self.get(self._cli, snap_copy_id)
+        except (IndexError, KeyError, TypeError):
+            log.exception('failed to get snap id from resp: {}'.format(resp))
+            raise
+        return ret
+
     @property
     @instance_cache
     def filesystem(self):
@@ -80,6 +95,11 @@ class UnitySnap(UnityResource):
         else:
             ret = None
         return ret
+
+    @property
+    def existed(self):
+        return (super(UnitySnap, self).existed and
+                self.state != SnapStateEnum.DESTROYING)
 
 
 class UnitySnapList(UnityResourceList):

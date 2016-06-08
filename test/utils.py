@@ -22,9 +22,9 @@ import os
 
 from os.path import dirname, abspath, join, exists, basename
 
-import filelock
+import fasteners
 
-from storops.lib.common import instance_cache
+from storops.lib.common import instance_cache, get_lock_file
 
 __author__ = 'Cedric Zhuang'
 
@@ -100,21 +100,21 @@ class PersistedDict(object):
 
     @property
     def lock_file_name(self):
-        return '{}.lck'.format(self._name)
+        return get_lock_file('{}.lck'.format(self._name))
 
     @property
     @instance_cache
     def data_file_name(self):
-        return '{}.json'.format(self._name)
+        return abspath('{}.json'.format(self._name))
 
     @property
     @instance_cache
     def lock(self):
-        return filelock.FileLock(self.lock_file_name)
+        return fasteners.InterProcessLock(self.lock_file_name)
 
     @property
     def dict(self):
-        if os.path.exists(self.data_file_name):
+        if exists(self.data_file_name):
             with open(self.data_file_name) as f:
                 try:
                     ret = json.load(f)
@@ -125,7 +125,7 @@ class PersistedDict(object):
         return ret
 
     def __setitem__(self, key, value):
-        with self.lock.acquire():
+        with self.lock:
             data = self.dict
             data[key] = value
             with open(self.data_file_name, 'w') as f:
@@ -136,7 +136,7 @@ class PersistedDict(object):
                 json.dump(data, f, indent=4, sort_keys=True)
 
     def __getitem__(self, item):
-        with self.lock.acquire():
+        with self.lock:
             d = self.dict
             if item in d:
                 ret = d[item]
@@ -153,12 +153,12 @@ class PersistedDict(object):
         return len(self.dict)
 
     def clear(self):
-        with self.lock.acquire():
+        with self.lock:
             with open(self.data_file_name, 'w') as f:
                 json.dump({}, f)
 
     def destroy(self):
         s = json.dumps(self.dict, indent=4, sort_keys=True)
         log.debug('destroy dict {}: \n{}'.format(self.data_file_name, s))
-        if os.path.exists(self.data_file_name):
+        if exists(self.data_file_name):
             os.remove(self.data_file_name)

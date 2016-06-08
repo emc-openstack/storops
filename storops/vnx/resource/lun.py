@@ -117,6 +117,7 @@ class VNXLun(VNXCliResource):
 
     @tier.setter
     def tier(self, new_tier):
+        new_tier = VNXTieringEnum.parse(new_tier)
         out = self._cli.modify_lun(lun_id=self._lun_id,
                                    lun_name=self._name,
                                    new_tier=new_tier,

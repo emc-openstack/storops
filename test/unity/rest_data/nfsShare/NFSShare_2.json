@@ -1,0 +1,24 @@
+{
+    "content": {
+        "minSecurity": 0,
+        "instanceId": "root/emc:EMC_UEM_NFSShareLeaf%InstanceID=NFSShare_2",
+        "creationTime": "2016-05-20T07:53:35.904Z",
+        "description": "",
+        "defaultAccess": 2,
+        "modificationTime": "2016-05-20T07:53:35.904Z",
+        "role": 0,
+        "exportPaths": [
+            "10.244.220.120:/share2"
+        ],
+        "filesystem": {
+            "id": "fs_1"
+        },
+        "snap": {
+            "id": "38654705785"
+        },
+        "path": "/",
+        "type": 3,
+        "id": "NFSShare_2",
+        "name": "share2"
+    }
+}

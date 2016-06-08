@@ -149,10 +149,13 @@ class NaviCommand(object):
     @classmethod
     def _log_output(cls, output, start):
         if log.isEnabledFor(logging.DEBUG):
-            output = output.replace('\r\n', '\n')
+            output = output.replace('\r\n', '\n').strip()
             dt = time.time() - start
-            log.debug('time consumed (s): {}\n'
-                      'output:\n{}'.format(dt, output))
+            if output:
+                log.debug(
+                    'time consumed (s): {}, output:\n{}'.format(dt, output))
+            else:
+                log.debug('time consumed (s): {}, output: empty.'.format(dt))
 
     @classmethod
     def get_security_level(cls, binary):

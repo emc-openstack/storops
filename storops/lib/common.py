@@ -17,9 +17,11 @@ from __future__ import unicode_literals
 
 import json
 import logging
+from os import path, makedirs
 import types
+
+import errno
 from enum import Enum as _Enum
-from collections import defaultdict
 from functools import partial
 
 import functools
@@ -27,8 +29,11 @@ import six
 import time
 
 import sys
+
+from fasteners import process_lock
 from retryz import retry
-from threading import Lock, Thread
+import cachez
+import threading
 
 import storops.exception
 
@@ -233,170 +238,9 @@ def get_config_prop(conf, prop, default=None):
     return value
 
 
-def _cache_holder():
-    return defaultdict(lambda: {})
-
-
-def _cache_lock_holder():
-    return defaultdict(lambda: Lock())
-
-
-class Cache(object):
-    _cache = _cache_holder()
-    _lock_map = _cache_lock_holder()
-
-    def __init__(self):
-        pass
-
-    @staticmethod
-    def get_key(func):
-        return func.__hash__()
-
-    @classmethod
-    def get_cache(cls, key):
-        return cls._cache[key]
-
-    @classmethod
-    def clear_cache(cls, func=None):
-        if func is not None:
-            cls._cache[cls.get_key(func)] = {}
-        else:
-            cls._cache = _cache_holder()
-            cls._lock_map = _cache_lock_holder()
-
-    @classmethod
-    def get_cache_lock(cls, key):
-        return cls._lock_map[key]
-
-    @staticmethod
-    def _clear_cache(val_cache=None, key=None):
-        if key in val_cache:
-            del (val_cache[key])
-
-    @staticmethod
-    def _hash(li):
-        return hash(frozenset(li))
-
-    @classmethod
-    def result_cache_key_gen(cls, *args, **kwargs):
-        return cls._hash(args), cls._hash(kwargs.items())
-
-    @classmethod
-    def _get_value_from_cache(cls, func, val_cache, lock, *args, **kwargs):
-        key = cls.result_cache_key_gen(*args, **kwargs)
-        if key in val_cache:
-            ret = val_cache[key]
-        else:
-            with lock:
-                if key in val_cache:
-                    ret = val_cache[key]
-                else:
-                    ret = func(*args, **kwargs)
-                    val_cache[key] = ret
-        return ret
-
-    @classmethod
-    def cache(cls, func):
-        """ Global cache decorator
-
-        :param func: the function to be decorated
-        :return: the decorator
-        """
-
-        @functools.wraps(func)
-        def func_wrapper(*args, **kwargs):
-            func_key = cls.get_key(func)
-            val_cache = cls.get_cache(func_key)
-            lock = cls.get_cache_lock(func_key)
-
-            return cls._get_value_from_cache(
-                func, val_cache, lock, *args, **kwargs)
-
-        return func_wrapper
-
-    @staticmethod
-    def get_self_root_cache(the_self):
-        prop_name = '_self_cache_'
-        if not hasattr(the_self, prop_name):
-            setattr(the_self, prop_name, _cache_holder())
-        return getattr(the_self, prop_name)
-
-    @classmethod
-    def get_self_cache(cls, the_self, key):
-        self_root_cache = cls.get_self_root_cache(the_self)
-        return self_root_cache[key]
-
-    @staticmethod
-    def get_self_cache_lock_map(the_self):
-        prop_name = '_self_cache_lock_'
-        if not hasattr(the_self, prop_name):
-            setattr(the_self, prop_name, _cache_lock_holder())
-        return getattr(the_self, prop_name)
-
-    @classmethod
-    def get_self_cache_lock(cls, the_self, key):
-        lock_map = cls.get_self_cache_lock_map(the_self)
-        return lock_map[key]
-
-    @classmethod
-    def clear_self_cache(cls, the_self):
-        lock_map = cls.get_self_cache_lock_map(the_self)
-        lock_map.clear()
-        self_root_cache = cls.get_self_root_cache(the_self)
-        self_root_cache.clear()
-
-    @classmethod
-    def instance_cache(cls, func):
-        """ Save the cache to `self`
-
-        This decorator take it for granted that the decorated function
-        is a method.  The first argument of the function is `self`.
-
-        :param func: function to decorate
-        :return: the decorator
-        """
-
-        @functools.wraps(func)
-        def func_wrapper(*args, **kwargs):
-            if not args:
-                raise ValueError('`self` is not available.')
-            else:
-                the_self = args[0]
-            func_key = cls.get_key(func)
-            val_cache = cls.get_self_cache(the_self, func_key)
-            lock = cls.get_self_cache_lock(the_self, func_key)
-
-            return cls._get_value_from_cache(
-                func, val_cache, lock, *args, **kwargs)
-
-        return func_wrapper
-
-    @classmethod
-    def clear_instance_cache(cls, func):
-        """ clear the instance cache
-
-        Decorate a method of a class, the first parameter is
-        supposed to be `self`.
-        It clear all items cached by the `instance_cache` decorator.
-        :param func: function to decorate
-        """
-
-        @functools.wraps(func)
-        def func_wrapper(*args, **kwargs):
-            if not args:
-                raise ValueError('`self` is not available.')
-            else:
-                the_self = args[0]
-
-            cls.clear_self_cache(the_self)
-            return func(*args, **kwargs)
-
-        return func_wrapper
-
-
-cache = Cache.cache
-instance_cache = Cache.instance_cache
-clear_instance_cache = Cache.clear_instance_cache
+cache = cachez.cache
+instance_cache = cachez.instance_cache
+clear_instance_cache = cachez.clear_instance_cache
 
 
 def check_int(value, allow_none=False):
@@ -443,7 +287,7 @@ def check_text(value):
 def daemon(func_ref, *args, **kwargs):
     if not callable(func_ref):
         raise ValueError('background only accept callable inputs.')
-    t = Thread(target=func_ref, args=args, kwargs=kwargs)
+    t = threading.Thread(target=func_ref, args=args, kwargs=kwargs)
     t.setDaemon(True)
     t.start()
     return t
@@ -500,8 +344,12 @@ def log_enter_exit(func):
     return inner
 
 
+def _init_lock():
+    return threading.Lock()
+
+
 class SynchronizedDecorator(object):
-    lock_map_lock = Lock()
+    lock_map_lock = _init_lock()
     lock_map = {}
 
     @classmethod
@@ -524,7 +372,7 @@ class SynchronizedDecorator(object):
             if key not in cls.lock_map:
                 with cls.lock_map_lock:
                     if key not in cls.lock_map:
-                        cls.lock_map[key] = Lock()
+                        cls.lock_map[key] = _init_lock()
             return cls.lock_map[key]
 
         def wrap(f):
@@ -598,3 +446,23 @@ def get_clz_from_module(module_name, clz_name):
 
 def is_valid(value):
     return value is not None and value != 'N/A' and len(value) > 0
+
+
+def get_local_folder():
+    return path.join(path.expanduser('~'), '.storops')
+
+
+def get_lock_file(name):
+    lock_folder = path.join(get_local_folder(), 'file_lock')
+    if not path.exists(lock_folder):
+        try:
+            makedirs(lock_folder)
+        except OSError as e:
+            # ignore existed error
+            if e.errno != errno.EEXIST:
+                raise
+    return path.join(lock_folder, name)
+
+
+def inter_process_locked(name):
+    return process_lock.interprocess_locked(get_lock_file(name))

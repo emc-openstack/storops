@@ -36,6 +36,13 @@ class VNXConsistencyGroupListTest(TestCase):
     def test_parse(self):
         assert_that(len(VNXConsistencyGroupList(t_cli())), equal_to(2))
 
+    @patch_cli()
+    def test_delete_not_existed_member(self):
+        lun = VNXLun(name='y', cli=t_cli())
+        cg_list = VNXConsistencyGroupList(t_cli())
+        # no error raised
+        cg_list.delete_member(lun)
+
 
 class VNXConsistencyGroupTest(TestCase):
     @patch_cli()

@@ -16,7 +16,7 @@
 from __future__ import unicode_literals
 
 from storops.exception import raise_if_err, VNXPingNodeError, \
-    VNXPingNodeSuccess
+    VNXPingNodeSuccess, VNXPortError
 from storops.lib.common import check_int
 from storops.vnx.enums import VNXSPEnum, VNXPortType
 from storops.vnx.resource import VNXCliResourceList, VNXCliResource
@@ -45,6 +45,35 @@ class VNXPort(VNXCliResource):
     @property
     def wwn(self):
         return self._get_property('_wwn')
+
+    def config_ip(self, ip, mask, gateway, vport_id=None, vlan_id=None):
+        if self.type != VNXPortType.ISCSI:
+            raise TypeError('configure IP only works for iSCSI ports.')
+        if vport_id is None:
+            vport_id = self.vport_id
+
+        out = self._cli.config_iscsi_ip(
+            self.sp, self.port_id, ip, mask, gateway, vport_id=vport_id,
+            vlan_id=vlan_id)
+        raise_if_err(out, default=VNXPortError)
+
+        if vport_id is None:
+            vport_id = 0
+        return VNXConnectionPort(self.sp, self.port_id, vport_id, self._cli)
+
+    def delete_ip(self, vport_id=None):
+        if self.type != VNXPortType.ISCSI:
+            raise TypeError('delete IP only works for iSCSI ports.')
+        if vport_id is None:
+            vport_id = self.vport_id
+
+        out = self._cli.delete_iscsi_ip(self.sp, self.port_id, vport_id)
+        raise_if_err(out, default=VNXPortError)
+
+    @classmethod
+    def delete_hba(cls, cli, hba_uid):
+        out = cli.delete_hba(hba_uid)
+        raise_if_err(out)
 
     def _get_property(self, prop_name):
         ret = None
@@ -137,11 +166,6 @@ class VNXSPPort(VNXPort):
         ret = super(VNXSPPort, self).property_names()
         ret.append('type')
         return ret
-
-    @classmethod
-    def delete_hba(cls, cli, hba_uid):
-        out = cli.delete_hba(hba_uid)
-        raise_if_err(out)
 
 
 class VNXHbaPort(VNXPort):
@@ -271,6 +295,10 @@ class VNXConnectionPort(VNXPort):
         if ret == VNXPortType.FC and self.virtual_port_id is not None:
             ret = VNXPortType.FCOE
         return ret
+
+    @property
+    def existed(self):
+        return self.wwn is not None
 
     def _get_raw_resource(self):
         return self._cli.get_connection_port(

@@ -450,6 +450,35 @@ class CliClient(object):
         return self._sg_host_op(sg_name, host_name, '-disconnecthost')
 
     @command
+    def config_iscsi_ip(self, sp, port_id, ip, netmask, gateway,
+                        vport_id=None, vlan_id=None):
+        if vport_id is None:
+            vport_id = 0
+
+        cmd = ['connection', '-setport', '-iscsi']
+        cmd += ['-sp', VNXSPEnum.get_sp_index(sp)]
+        cmd += int_var('-portid', port_id)
+        cmd += int_var('-vportid', vport_id)
+        cmd += int_var('-vlanid', vlan_id)
+        cmd += text_var('-address', ip)
+        cmd += text_var('-subnetmask', netmask)
+        cmd += text_var('-gateway', gateway)
+        cmd.append('-o')
+        return cmd
+
+    @command
+    def delete_iscsi_ip(self, sp, port_id, vport_id=None):
+        if vport_id is None:
+            vport_id = 0
+
+        cmd = ['connection', '-delport']
+        cmd += ['-sp', VNXSPEnum.get_sp_index(sp)]
+        cmd += int_var('-portid', port_id)
+        cmd += int_var('-vportid', vport_id)
+        cmd.append('-o')
+        return cmd
+
+    @command
     def set_path(self, sg_name, hba_uid, sp, port_id,
                  ip, host, vport_id=None):
 

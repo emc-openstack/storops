@@ -37,6 +37,13 @@ class VNXStorageGroupListTest(TestCase):
     def test_get_sg_list(self):
         assert_that(len(VNXStorageGroupList(t_cli())), equal_to(4))
 
+    @patch_cli()
+    def test_detach_not_existed_lun(self):
+        lun = VNXLun(name='y', cli=t_cli())
+        sg_list = VNXStorageGroupList(t_cli())
+        # raise no error
+        sg_list.detach_alu(lun)
+
 
 class VNXStorageGroupTest(TestCase):
     def test_sg(self, name='server7'):

@@ -233,7 +233,7 @@ def url_to_host(url):
     :returns: host
     """
 
-    m = re.match(r"^https?://(.*)$", url, re.IGNORECASE)
+    m = re.match(r'^https?://(.*)$', url, re.IGNORECASE)
     if m:
         url = m.group(1)
 
@@ -247,4 +247,19 @@ def url_to_host(url):
     else:
         ret = url
 
+    return ret
+
+
+def url_to_mask(url):
+    host = url_to_host(url)
+    remains = url[url.find(host) + len(host):]
+    m = re.match(r'^/(\d+).*', remains)
+    if m:
+        binary_len = int(m.group(1))
+        bin_mask_str = binary_len * '1' + (32 - binary_len) * '0'
+        grouped = [str(int(bin_mask_str[i:i + 8], base=2))
+                   for i in range(0, len(bin_mask_str), 8)]
+        ret = '.'.join(grouped)
+    else:
+        ret = None
     return ret

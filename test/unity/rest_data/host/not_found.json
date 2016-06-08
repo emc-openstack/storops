@@ -1,0 +1,11 @@
+{
+  "@base": "https://10.244.223.66/api/types/host/instances?filter=name eq \"not found\"&fields=autoManageType,description,health,hostPolledUUID,hostPushedUUID,hostUUID,id,instanceId,isInitializationComplete,lastPollTime,name,operationalStatus,osType,registrationType,type,hostContainer.id,hostLUNs.id,hostIPPorts.id,fcHostInitiators.id,iscsiHostInitiators.id,vms.id,storageResources.id,datastores.id,nfsShareAccesses.id,hostVVolDatastore.id&per_page=2000&compact=true",
+  "updated": "2016-05-25T10:25:25.646Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "entries": []
+}

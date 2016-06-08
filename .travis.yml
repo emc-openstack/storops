@@ -2,13 +2,14 @@ language: python
 python:
     - "2.7"
     - "3.4"
+    - "3.5"
 install:
-    - "pip install tox"
-    - "pip install coveralls"
+    - pip install coveralls
+    - pip install -r requirements.txt
+    - pip install -r test-requirements.txt
 script:
-    - "tox -e pep8"
-    - "tox -e py27"
-    - "tox -e py34"
+    - flake8 storops test comptest
+    - "py.test -n2 --cov=storops --cov-config coverage.ini  --cov-report=xml --cov-report term --junit-xml=junit-result.xml test"
 after_success:
     - coveralls
 notifications:

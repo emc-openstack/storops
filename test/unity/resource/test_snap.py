@@ -109,3 +109,20 @@ class UnitySnapTest(TestCase):
         lun = snap.lun
         assert_that(lun, instance_of(UnityLun))
         assert_that(snap.filesystem, none())
+
+    @patch_rest()
+    def test_copy_snap_success(self):
+        snap = UnitySnap(cli=t_rest(), _id='38654705785')
+        snap = snap.copy('s3')
+        assert_that(snap.existed, equal_to(True))
+        assert_that(snap, instance_of(UnitySnap))
+
+    @patch_rest()
+    def test_destroying_snap_existed(self):
+        snap = UnitySnap(cli=t_rest(), _id='171798691953')
+        assert_that(snap.existed, equal_to(False))
+
+    @patch_rest()
+    def test_not_found_snap_existed(self):
+        snap = UnitySnap(cli=t_rest(), _id='12345')
+        assert_that(snap.existed, equal_to(False))

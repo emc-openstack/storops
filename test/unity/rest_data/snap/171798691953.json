@@ -1,0 +1,27 @@
+{
+    "content": {
+        "creatorUser": {
+            "id": "user_admin"
+        },
+        "name": "Destroying_20160520094638.301+00-000",
+        "creationTime": "2016-05-20T09:46:28.244Z",
+        "isModified": false,
+        "creatorType": 2,
+        "state": 9,
+        "size": 3221225472,
+        "storageResource": {
+            "id": "res_55"
+        },
+        "isReadOnly": false,
+        "description": "",
+        "accessType": 2,
+        "isModifiable": false,
+        "operationalStatus": [
+            9
+        ],
+        "instanceId": "root/emc:EMC_UEM_FilesystemSnapLeaf%InstanceID=171798691953",
+        "id": "171798691953",
+        "isSystemSnap": false,
+        "isAutoDelete": true
+    }
+}

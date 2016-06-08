@@ -29,7 +29,7 @@ from storops.exception import VNXModifyLunError, VNXCompressionError, \
     VNXLunNameInUseError, VNXTargetNotReadyError, \
     VNXCreateSnapResourceNotFoundError, VNXLunInStorageGroupError, \
     VNXAttachSnapLunTypeError, VNXLunInConsistencyGroupError, \
-    VNXDetachSnapLunTypeError, VNXDedupAlreadyEnabled
+    VNXDetachSnapLunTypeError, VNXDedupAlreadyEnabled, EnumValueNotFoundError
 from storops.vnx.enums import VNXProvisionEnum, VNXTieringEnum, \
     VNXCompressionRate, VNXSPEnum
 from storops.vnx.resource.lun import VNXLun, VNXLunList
@@ -163,7 +163,7 @@ class VNXLunTest(TestCase):
             lun = VNXLun()
             lun.tier = 'invalid'
 
-        assert_that(f, raises(AttributeError))
+        assert_that(f, raises(EnumValueNotFoundError))
 
     def test_lun_tier_highest_available(self):
         lun = VNXLun()
@@ -595,6 +595,14 @@ class VNXLunTest(TestCase):
         assert_that(len(l.get_mirror_view(as_src=True, as_tgt=True)),
                     equal_to(3))
         assert_that(len(l.get_mirror_view()), equal_to(3))
+
+    @patch_cli()
+    def test_force_delete_lun_not_found(self):
+        def f():
+            lun = VNXLun(name='y', cli=t_cli())
+            lun.delete(force=True)
+
+        assert_that(f, raises(VNXLunNotFoundError, 'may not exist'))
 
 
 class VNXLunListTest(TestCase):

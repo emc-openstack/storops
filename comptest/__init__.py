@@ -17,28 +17,29 @@ from __future__ import unicode_literals
 
 import logging
 
-import filelock
-
 from comptest.utils import setup_log
 from storops import VNXSystem, UnitySystem, cache
+from storops.lib.common import inter_process_locked
 
 __author__ = 'Cedric Zhuang'
 
 log = logging.getLogger(__name__)
 
 
+@inter_process_locked('t_vnx.lck')
 @cache
 def t_vnx():
-    _lock = filelock.FileLock('init_t_vnx.lck')
-    with _lock.acquire():
-        vnx = VNXSystem('10.244.211.30', 'sysadmin', 'sysadmin')
-        log.debug('initialize vnx system: {}'.format(vnx.existed))
+    vnx = VNXSystem('10.244.211.30', 'sysadmin', 'sysadmin')
+    log.debug('initialize vnx system: {}'.format(vnx))
     return vnx
 
 
+@inter_process_locked('t_unity.lck')
 @cache
 def t_unity():
-    return UnitySystem('10.244.223.66', 'admin', 'Password123!')
+    unity = UnitySystem('10.244.223.61', 'admin', 'Password123!')
+    log.debug('initialize unity system: {}'.format(unity))
+    return unity
 
 
 setup_log()

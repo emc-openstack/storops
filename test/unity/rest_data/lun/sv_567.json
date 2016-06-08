@@ -1,0 +1,72 @@
+{
+  "@base": "https://10.109.22.101/api/types/lun/instances?filter=name eq \"RestLun101\"&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapWwn,snapsSize,snapsSizeAllocated,tieringPolicy,type,wwn,snapSchedule.id,storageResource.id,pool.id,ioLimitPolicy.id&per_page=2000&compact=true",
+  "updated": "2016-05-16T07:58:28.009Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "sv_567",
+        "operationalStatus": [
+          2
+        ],
+        "type": 2,
+        "tieringPolicy": 1,
+        "defaultNode": 1,
+        "currentNode": 1,
+        "auSize": 8192,
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_567",
+        "creationTime": "2016-05-16T06:28:42.000Z",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_VOL_OK"
+          ],
+          "descriptions": [
+            "The LUN is operating normally. No action is required."
+          ]
+        },
+        "name": "RestLun101",
+        "description": "Please specify Lun description",
+        "modificationTime": "2016-05-16T06:29:40.803Z",
+        "sizeTotal": 1073741824,
+        "sizeAllocated": 1073741824,
+        "perTierSizeUsed": [
+          0,
+          0,
+          4294967296
+        ],
+        "isThinEnabled": false,
+        "wwn": "60:06:01:60:24:10:3E:00:9A:68:39:57:0D:65:04:B0",
+        "isReplicationDestination": false,
+        "isSnapSchedulePaused": false,
+        "objectId": 42949674097,
+        "metadataSize": 3489660928,
+        "metadataSizeAllocated": 3221225472,
+        "snapWwn": "60:06:01:60:24:10:3E:00:CE:68:39:57:00:33:8B:B4",
+        "snapsSize": 0,
+        "snapsSizeAllocated": 0,
+        "hostAccess": [
+          {
+            "accessMask": 1,
+            "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=532",
+            "host": {
+              "id": "Host_1"
+            }
+          }
+        ],
+        "snapCount": 0,
+        "storageResource": {
+          "id": "sv_567"
+        },
+        "pool": {
+          "id": "pool_1"
+        }
+      }
+    }
+  ]
+}

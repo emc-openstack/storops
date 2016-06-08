@@ -20,8 +20,9 @@ from unittest import TestCase
 
 from hamcrest import equal_to, assert_that, instance_of, none, raises
 
-from storops.exception import UnityResourceNotFoundError, UnityException, \
-    UnityFileSystemNameAlreadyExisted, UnitySnapNameInUseError
+from storops.exception import UnityResourceNotFoundError, \
+    UnityFileSystemNameAlreadyExisted, UnitySnapNameInUseError, \
+    UnityFileSystemSizeTooSmallError
 from storops.unity.enums import FilesystemTypeEnum, TieringPolicyEnum, \
     FSSupportedProtocolEnum, AccessPolicyEnum, FSFormatEnum, \
     ResourcePoolFullPolicyEnum, HostIOSizeEnum, NFSShareDefaultAccessEnum, \
@@ -112,7 +113,8 @@ class UnityFileSystemTest(TestCase):
             fs = UnityFileSystem(_id='fs_8', cli=t_rest())
             fs.extend(1024 ** 3 * 2)
 
-        assert_that(f, raises(UnityException, 'size is too small'))
+        assert_that(f, raises(UnityFileSystemSizeTooSmallError,
+                              'size is too small'))
 
     @patch_rest()
     def test_create_success(self):

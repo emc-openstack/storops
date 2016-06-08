@@ -25,6 +25,14 @@
       "response": "171798691899.json"
     },
     {
+      "url": "/api/instances/snap/171798691953?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "171798691953.json"
+    },
+    {
+      "url": "/api/instances/snap/12345?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "not_found.json"
+    },
+    {
       "url": "/api/instances/snap/171798691885?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
       "response": "snap_over_snap.json"
     },
@@ -68,6 +76,17 @@
     {
       "url": "/api/types/snap/instances?compact=True",
       "body": {
+        "filesystemAccessType": 2,
+        "storageResource": {
+          "id": "res_25"
+        },
+        "name": "share_snap"
+      },
+      "response": "name_existed.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
         "storageResource": {
           "id": "res_23"
         },
@@ -78,6 +97,16 @@
     {
       "url": "/api/instances/snap/171798691885?compact=True",
       "response": "success.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705785/action/copy?compact=True",
+      "body": {"copyName": "s3"},
+      "response": "copy_38654705785.json"
+    },
+    {
+      "url": "/api/instances/snap/171798691969/action/copy?compact=True",
+      "body": {"copyName": "share_snap"},
+      "response": "name_existed.json"
     }
   ]
 }

@@ -196,7 +196,12 @@ class UnityResourceList(UnityResource, ResourceList):
         the_filter = {}
         _parser = self._get_parser()
         for k, v in self._rsc_filter.items():
-            the_filter[_parser.get_property_label(k)] = v
+            label = _parser.get_property_label(k)
+            if not label:
+                raise ValueError(
+                    '"{}" is not a valid property of {}.'.format(
+                        k, self.get_resource_class().__name__))
+            the_filter[label] = v
         return self._cli.get_all(self.resource_class, the_filter=the_filter)
 
     def set_cli(self, cli):

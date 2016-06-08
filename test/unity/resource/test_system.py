@@ -23,7 +23,7 @@ from hamcrest import assert_that, equal_to, instance_of, only_contains, \
 from storops.exception import UnityResourceNotFoundError, \
     UnityHostNameInUseError
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
-    ServiceLevelEnum, ServiceLevelEnumList
+    HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -315,6 +315,18 @@ class UnitySystemTest(TestCase):
         shares = unity.get_nfs_share()
         assert_that(shares, instance_of(UnityNfsShareList))
         assert_that(len(shares), equal_to(2))
+
+    @patch_rest()
+    def test_get_host_by_address_found(self):
+        unity = t_unity()
+        host = unity.get_host(address='8.8.8.8')
+        assert_that(host.type, equal_to(HostTypeEnum.SUBNET))
+
+    @patch_rest()
+    def test_get_host_by_address_not_found(self):
+        unity = t_unity()
+        hosts = unity.get_host(address='8.8.8.9')
+        assert_that(len(hosts), equal_to(0))
 
     @patch_rest()
     def test_system_info(self):

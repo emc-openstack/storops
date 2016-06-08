@@ -23,7 +23,7 @@ from hamcrest import assert_that, equal_to, only_contains, raises, none
 from storops.exception import UnityException, UnitySmbShareNameExistedError, \
     UnityAclUserNotFoundError, UnityCreateCifsUserError, \
     UnityAddCifsAceError, \
-    UnityAceNotFoundError
+    UnityAceNotFoundError, UnitySnapNameInUseError
 from storops.unity.enums import CIFSTypeEnum, ACEAccessLevelEnum, \
     CifsShareOfflineAvailabilityEnum
 from storops.unity.resource.cifs_share import UnityCifsShare, \
@@ -106,6 +106,14 @@ class UnityCifsShareTest(TestCase):
         assert_that(len(shares), equal_to(1))
         share = shares[0]
         assert_that(share.name, equal_to('cs1'))
+
+    @patch_rest()
+    def test_create_snap_existed(self):
+        def f():
+            share = UnityCifsShare(cli=t_rest(), _id='SMBShare_8')
+            share.create_snap('share_snap')
+
+        assert_that(f, raises(UnitySnapNameInUseError, 'in use'))
 
     @patch_rest()
     def test_delete_snap_based_share(self):

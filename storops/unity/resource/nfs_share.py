@@ -18,10 +18,10 @@ from __future__ import unicode_literals
 import logging
 
 from storops.exception import UnityShareTypeNotSupportAccessControlError, \
-    UnityHostNotFoundException
+    UnityHostNotFoundException, UnityCreateSnapError
 from storops.lib.common import instance_cache
 from storops.unity.enums import NFSShareDefaultAccessEnum, NFSTypeEnum, \
-    NFSShareSecurityEnum
+    NFSShareSecurityEnum, FilesystemSnapAccessTypeEnum
 import storops.unity.resource.filesystem
 import storops.unity.resource.snap
 from storops.unity.resource import UnityResource, UnityResourceList
@@ -281,6 +281,21 @@ class UnityNfsShare(UnityResource):
             ret = fs.storage_resource
         else:
             ret = None
+        return ret
+
+    def create_snap(self, name=None, fs_access_type=None):
+        if fs_access_type is None:
+            fs_access_type = FilesystemSnapAccessTypeEnum.PROTOCOL
+
+        if self.type == NFSTypeEnum.NFS_SHARE:
+            ret = self.filesystem.create_snap(
+                name=name, fs_access_type=fs_access_type)
+        elif self.type == NFSTypeEnum.NFS_SNAPSHOT:
+            ret = self.snap.copy(copy_name=name)
+        else:
+            raise UnityCreateSnapError('do not know how to create snap for '
+                                       'nfs share {}, type {}.'
+                                       .format(self.name, self.type))
         return ret
 
 

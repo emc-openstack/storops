@@ -22,7 +22,8 @@ from hamcrest import assert_that, raises, equal_to, has_item, none, is_not, \
 
 from storops.exception import VNXInvalidCliParamError, \
     VNXPortNotInitializedError, VNXInitiatorExistedError, \
-    VNXDeleteHbaNotFoundError, VNXPingNodeTimeOutError
+    VNXDeleteHbaNotFoundError, VNXPingNodeTimeOutError, VNXGateWayError, \
+    VNXVirtualPortNotFoundError
 from test.vnx.cli_mock import patch_cli, t_cli
 from test.vnx.resource.fakes import STORAGE_GROUP_HBA
 from storops.vnx.enums import VNXSPEnum, VNXPortType
@@ -209,6 +210,11 @@ class VNXConnectionPortTest(TestCase):
         assert_that(len(ports), equal_to(0))
 
     @patch_cli()
+    def test_get_port_with_vport_not_found(self):
+        port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_B, 10, 0)
+        assert_that(port.existed, equal_to(False))
+
+    @patch_cli()
     def test_delete_fc_hba_success(self):
         uid = '00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00'
         # no error raised
@@ -241,6 +247,22 @@ class VNXConnectionPortTest(TestCase):
         port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 8)[0]
         # success, no error raised
         port.ping_node('10.244.211.5')
+
+    @patch_cli()
+    def test_config_ip_gateway_error(self):
+        def f():
+            port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 10)[0]
+            port.config_ip('6.6.6.6', '255.255.255.0', '5.5.5.1')
+
+        assert_that(f, raises(VNXGateWayError, 'netmask'))
+
+    @patch_cli()
+    def test_delete_ip_not_found(self):
+        def f():
+            port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 10)[0]
+            port.delete_ip()
+
+        assert_that(f, raises(VNXVirtualPortNotFoundError, 'not found'))
 
 
 def test_hba():

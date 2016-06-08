@@ -1,0 +1,113 @@
+{
+    "content": {
+        "name": "capabilityProfile",
+        "description": "An object representing VASA 2.0 SPBM capability profile. Capability profiles can be queried, created, modified and deleted via the REST API. Capability profiles can then be queried via VASA 2.0 API by vSphere environment and leveraged for policy based provisioning of virtual volumes. ",
+        "documentation": "https://10.244.223.66/apidocs/classes/capabilityProfile.html",
+        "attributes": [{
+            "name": "id",
+            "type": "String",
+            "description": "Unique identifier of the capability profile. ",
+            "displayValue": "id"
+        }, {
+            "name": "vmwareUUID",
+            "type": "String",
+            "description": "Automatically generated unique identifier of the capability profile exposed via VASA 2.0 protocol. It will conform to RFC 3151 section 1.1. ",
+            "displayValue": "vmwareUUID"
+        }, {
+            "name": "name",
+            "type": "String",
+            "description": "The name of the capability profile. ",
+            "displayValue": "name"
+        }, {
+            "name": "description",
+            "type": "String",
+            "description": "Capability profile description. ",
+            "displayValue": "description"
+        }, {
+            "name": "pool",
+            "type": "pool",
+            "description": "The storage pool the capability profile is associated with. ",
+            "displayValue": "pool"
+        }, {
+            "name": "createdBy",
+            "type": "String",
+            "description": "User identifier for the original author of the capability profile. ",
+            "displayValue": "createdBy"
+        }, {
+            "name": "creationTime",
+            "type": "DateTime",
+            "description": "Creation time of the capability profile. ",
+            "displayValue": "creationTime"
+        }, {
+            "name": "modifiedBy",
+            "type": "String",
+            "description": "User identifier for the most recent editor of the capability profile. ",
+            "displayValue": "modifiedBy"
+        }, {
+            "name": "modificationTime",
+            "type": "DateTime",
+            "description": "Most recent edit time of the capability profile. ",
+            "displayValue": "modificationTime"
+        }, {
+            "name": "generationId",
+            "type": "Integer",
+            "description": "Revision number incremented with every change to the capability profile. ",
+            "displayValue": "generationId"
+        }, {
+            "name": "constraints",
+            "type": "List<constraint>",
+            "description": "Constrained values for capabilities included in the profile. ",
+            "displayValue": "constraints"
+        }, {
+            "name": "driveTypes",
+            "type": "List<DiskTierEnum>",
+            "description": "Supported drive types for the capability profile. ",
+            "displayValue": "driveTypes"
+        }, {
+            "name": "fastCacheStates",
+            "type": "List<FastCacheStateEnum>",
+            "description": "Supported fast cache states for the capability profile. ",
+            "displayValue": "fastCacheStates"
+        }, {
+            "name": "raidTypes",
+            "type": "List<RaidTypeEnum>",
+            "description": "Supported RAID types for the capability profile. ",
+            "displayValue": "raidTypes"
+        }, {
+            "name": "spaceEfficiencies",
+            "type": "List<SpaceEfficiencyEnum>",
+            "description": "Supported space efficiency choices for the capability profile. ",
+            "displayValue": "spaceEfficiencies"
+        }, {
+            "name": "tieringPolicies",
+            "type": "List<TieringPolicyEnum>",
+            "description": "Supported tiering policies for the capability profile. ",
+            "displayValue": "tieringPolicies"
+        }, {
+            "name": "serviceLevels",
+            "type": "List<ServiceLevelEnum>",
+            "description": "Supported service level for the capability profile. ",
+            "displayValue": "serviceLevels"
+        }, {
+            "name": "usageTags",
+            "type": "List<String>",
+            "description": "Associated usage tags for the capability profile. ",
+            "displayValue": "usageTags"
+        }, {
+            "name": "inUse",
+            "type": "Boolean",
+            "description": "Whether any virtual volumes have been created using this capability profile. ",
+            "displayValue": "inUse"
+        }, {
+            "name": "health",
+            "type": "health",
+            "description": "Health information for the capability profile, as defined by the health resource type. ",
+            "displayValue": "health"
+        }, {
+            "name": "virtualVolumes",
+            "type": "List<virtualVolume>",
+            "description": "The virtualVolumes associated with the current capabilityProfile",
+            "displayValue": "virtualVolumes"
+        }]
+    }
+}

@@ -18,11 +18,12 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, only_contains, \
-    raises, contains_string
+    raises, contains_string, is_in
 
 from storops.exception import UnityResourceNotFoundError, \
     UnityHostNameInUseError
-from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum
+from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
+    ServiceLevelEnum, ServiceLevelEnumList
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -44,6 +45,7 @@ from storops.unity.resource.sp import UnityStorageProcessor, \
     UnityStorageProcessorList
 from storops.unity.resource.port import UnityEthernetPortList, \
     UnityIscsiPortalList
+from storops.unity.resource.vmware import UnityCapabilityProfileList
 from storops.unity.resource.system import UnitySystemList, UnitySystem, \
     UnityDpeList, UnityDpe, UnityVirusChecker, UnityVirusCheckerList, \
     UnityBasicSystemInfo, UnityBasicSystemInfoList
@@ -87,11 +89,65 @@ class UnitySystemTest(TestCase):
         assert_that(sps, instance_of(UnityStorageProcessorList))
         assert_that(len(sps), equal_to(2))
 
+    @patch_rest()
     def test_get_spa(self):
         unity = t_unity()
         sp = unity.get_sp('spa')
         assert_that(sp, instance_of(UnityStorageProcessor))
         assert_that(sp.get_id(), equal_to('spa'))
+
+    @patch_rest()
+    def test_get_capability_profile_service_levels(self):
+        unity = t_unity()
+        level_s = ServiceLevelEnum.SILVER
+        level_p = ServiceLevelEnum.PLATINUM
+        cp = unity.get_capability_profile(service_levels=[level_s, level_p])
+        assert_that(cp, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp), 2)
+
+        # use Enum or EnumList are both ok
+        cp2 = unity.get_capability_profile(service_levels=level_s)
+        assert_that(cp2, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp2), 1)
+        assert_that(cp2[0].existed, equal_to(True))
+
+        level_enum_list = ServiceLevelEnumList.parse([level_s, level_p])
+        assert_that(level_enum_list, instance_of(ServiceLevelEnumList))
+        cp3 = unity.get_capability_profile(service_levels=level_enum_list)
+        assert_that(cp3, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp3), 2)
+        assert_that(cp3[0].existed, equal_to(True))
+
+    @patch_rest()
+    def test_get_capability_profile_usage_tags(self):
+        unity = t_unity()
+        tag = "capacity"
+        cp = unity.get_capability_profile(usage_tags=tag)
+        assert_that(cp, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp), 1)
+        assert_that(cp[0].existed, equal_to(True))
+        assert_that(tag, is_in(cp[0].usage_tags))
+
+        cp2 = unity.get_capability_profile(usage_tags=[tag])
+        assert_that(cp2, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp2), 1)
+        assert_that(cp2[0].existed, equal_to(True))
+        assert_that(tag, is_in(cp2[0].usage_tags))
+
+        # None tags will not pass to rest url
+        # it's same with get_capability_profile()
+        cp3 = unity.get_capability_profile(usage_tags=None)
+        assert_that(cp3, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp3), 2)
+        assert_that(cp3[0].existed, equal_to(True))
+
+    @patch_rest()
+    def test_get_capability_profile_not_found(self):
+        unity = t_unity()
+        cp = unity.get_capability_profile(service_levels=[5])
+        assert_that(cp, instance_of(UnityCapabilityProfileList))
+        assert_that(len(cp), 1)
+        assert_that(cp[0].existed, equal_to(False))
 
     @patch_rest()
     def test_get_sp_by_name(self):

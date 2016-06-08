@@ -22,7 +22,8 @@ from hamcrest import assert_that, equal_to, only_contains, none, any_of, \
     contains_string
 
 from storops.unity.client import UnityClient, UnityDoc
-from storops.unity.enums import RaidTypeEnum, HealthEnum, RaidTypeEnumList
+from storops.unity.enums import RaidTypeEnum, HealthEnum, RaidTypeEnumList, \
+    ServiceLevelEnum, ServiceLevelEnumList
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from test.unity.rest_mock import patch_rest, t_rest
 
@@ -48,6 +49,7 @@ class UnityClientTest(unittest.TestCase):
 
     @patch_rest()
     def test_make_body_complex(self):
+        service_levels = [ServiceLevelEnum.BASIC, ServiceLevelEnum.BRONZE]
         param = {
             'a': 1,
             'b': UnityLun(_id='lun1'),
@@ -55,7 +57,9 @@ class UnityClientTest(unittest.TestCase):
             'd': [UnityLun(_id='lun10'), UnityLun(_id='lun11'), 0.1],
             'e': {'f': UnityLun(_id='lun12')},
             'g': 'string',
-            'h': 0.2
+            'h': 0.2,
+            'i': service_levels,
+            'j': ServiceLevelEnumList.parse(service_levels)
         }
         ret = UnityClient.make_body(param)
         expected = {'a': 1,
@@ -65,7 +69,7 @@ class UnityClientTest(unittest.TestCase):
                           {'id': 'sv_7'}],
                     'd': [{'id': 'lun10'}, {'id': 'lun11'}, 0.1],
                     'e': {'f': {'id': 'lun12'}},
-                    'g': 'string', 'h': 0.2}
+                    'g': 'string', 'h': 0.2, 'i': [0, 1], 'j': [0, 1]}
         assert_that(ret, equal_to(expected))
 
     @patch_rest()
@@ -131,6 +135,18 @@ class UnityClientTest(unittest.TestCase):
     def test_dict_to_filter_string_normal(self):
         ret = UnityClient.dict_to_filter_string({'a': 1, 'b': 'c'})
         assert_that(ret, any_of('a eq 1 and b eq "c"', 'b eq "c" and a eq 1'))
+
+    def test_dict_to_filter_list(self):
+        ret = UnityClient.dict_to_filter_string({'a': [2, 4]})
+        assert_that(ret, any_of('a eq 2 or a eq 4', 'a eq 4 or a eq 2'))
+        ret = UnityClient.dict_to_filter_string({'a': ["m", "n"]})
+        assert_that(ret, any_of('a eq "m" or a eq "n"',
+                                'a eq "n" or a eq "m"'))
+
+    def test_dict_to_filter_string_enum_list(self):
+        levels = [ServiceLevelEnum.SILVER, ServiceLevelEnum.PLATINUM]
+        ret = UnityClient.dict_to_filter_string({'a': levels})
+        assert_that(ret, any_of('a eq 2 or a eq 4', 'a eq 4 or a eq 2'))
 
     def test_dict_to_filter_string_value_none(self):
         ret = UnityClient.dict_to_filter_string({'a': None, 'b': 'c'})

@@ -19,10 +19,8 @@ import logging
 import re
 import six
 
-from retryz import retry
 from storops import exception as ex
 from storops.lib import converter
-from storops.lib.common import instance_cache
 from storops.unity.enums import HostTypeEnum, HostInitiatorTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
@@ -77,56 +75,44 @@ class UnityHost(UnityResource):
             ret = cls.get(cli=cli, _id=_id)
         return ret
 
-    @property
-    @instance_cache
-    def lun_ids(self):
-        if not self.host_luns:
-            return []
-        host_luns = filter(lambda x: x.lun, self.host_luns)
-        return map(lambda x: x.lun.id, host_luns)
+    def _get_host_lun(self, lun=None):
+        host_lun_list = UnityHostLunList.get(self._cli)
+        host_luns = [item for item in host_lun_list if item.host.id == self.id]
+        # Skip null UnityLun
+        host_luns = [item for item in host_luns if item.lun]
+        # If Lun parameter is specified, only return the wanted id
+        if lun:
+            ret = [item for item in host_luns if item.lun.id == lun.id]
+        else:
+            ret = map(lambda x: x.lun.id, host_luns)
+        return ret
 
     def detach_alu(self, lun):
         return lun.detach_from(self)
 
-    def attach_alu(self, lun, max_retires=3):
-        def _update():
-            self.update()
-            # if found attach, just exit the retry
-            if self.has_alu(lun):
-                raise ex.UnityAluAlreadyAttachedError()
-
-        @retry(on_error=lambda e: not isinstance(
-            e, ex.UnityAluAlreadyAttachedError),
-               on_retry=_update, limit=max_retires)
-        def _do(lun):
-            try:
-                lun.attach_to(self)
-                self.update()
-                alu = self.get_hlu(lun)
-            except ex.UnityAttachAluExceedLimitError:
-                # The number of luns exceeds system limit
-                raise
-            except ex.UnityException:
-                # other attach error, remove this lun if already attached
-                self.detach_alu(lun)
-                raise ex.UnityAttachAluError()
-            return alu
-
+    def attach_alu(self, lun):
         if self.has_alu(lun):
             raise ex.UnityAluAlreadyAttachedError()
-        else:
-            ret = _do(lun)
 
-        return ret
+        try:
+            lun.attach_to(self)
+            self.update()
+            hlu = self.get_hlu(lun)
+        except ex.UnityAttachAluExceedLimitError:
+            # The number of luns exceeds system limit
+            raise
+        except ex.UnityException:
+            # other attach error, remove this lun if already attached
+            self.detach_alu(lun)
+            raise ex.UnityAttachAluError()
+
+        return hlu
 
     def has_alu(self, lun):
-        return lun.id in self.lun_ids
+        return lun.id in self._get_host_lun()
 
     def get_hlu(self, lun):
-        if not self.host_luns:
-            return None
-        host_luns = [item for item in self.host_luns if item.lun]
-        which = [item for item in host_luns if item.lun.id == lun.id]
+        which = self._get_host_lun(lun=lun)
         if not which:
             log.debug('lun {} is not attached to host {}'
                       .format(lun.name, self.name))

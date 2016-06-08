@@ -1,0 +1,42 @@
+{
+    "content": {
+        "id": "cp_2",
+        "driveTypes": [0],
+        "fastCacheStates": [0],
+        "raidTypes": [7],
+        "spaceEfficiencies": [1, 0],
+        "tieringPolicies": [],
+        "serviceLevels": [4],
+        "vmwareUUID": "rfc4122.5956d5ac-b889-4c71-9378-1f53e18e6dbf",
+        "name": "Gold_Profile",
+        "description": "Gold Profile to select flash disk",
+        "createdBy": "admin",
+        "creationTime": "2016-05-30T02:38:09.000Z",
+        "modifiedBy": "admin",
+        "modificationTime": "2016-06-07T11:42:37.000Z",
+        "generationId": 3,
+        "usageTags": ["flocker"],
+        "inUse": false,
+        "health": {
+            "value": 5,
+            "descriptionIds": ["ALRT_COMPONENT_OK"],
+            "descriptions": ["The component is operating normally. No action is required."]
+        },
+        "pool": {
+            "id": "pool_2"
+        },
+        "constraints": [{
+            "id": "con_7"
+        }, {
+            "id": "con_8"
+        }, {
+            "id": "con_9"
+        }, {
+            "id": "con_10"
+        }, {
+            "id": "con_11"
+        }, {
+            "id": "con_12"
+        }]
+    }
+}

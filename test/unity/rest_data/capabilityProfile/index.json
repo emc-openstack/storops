@@ -1,0 +1,27 @@
+{
+    "indices": [{
+        "url": "/api/types/capabilityProfile?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+        "response": "type.json"
+    }, {
+        "url": "/api/types/capabilityProfile/instances?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID",
+        "response": "all.json"
+    }, {
+        "url": "/api/instances/capabilityProfile/cp_1?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID",
+        "response": "profile_1.json"
+    }, {
+        "url": "/api/instances/capabilityProfile/cp_2?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID",
+        "response": "profile_2.json"
+    }, {
+        "url": "/api/types/capabilityProfile/instances?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID&filter=serviceLevels eq 2",
+        "response": "filter_profile_1.json"
+    }, {
+        "url": "/api/types/capabilityProfile/instances?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID&filter=serviceLevels eq 2 or serviceLevels eq 4",
+        "response": "all.json"
+    }, {
+        "url": "/api/types/capabilityProfile/instances?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID&filter=usageTags eq \"capacity\"",
+        "response": "filter_profile_1.json"
+    }, {
+        "url": "/api/types/capabilityProfile/instances?compact=True&fields=constraints,createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,pool,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,virtualVolumes,vmwareUUID&filter=serviceLevels eq 5",
+        "response": "not_found.json"
+    }]
+}

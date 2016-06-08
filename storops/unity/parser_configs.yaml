@@ -1243,7 +1243,7 @@ UnityCapabilityProfile:
     - label: health
       converter: UnityHealth
     - label: virtualVolumes
-      converter: VirtualVolumeList
+      converter: UnityVirtualVolumeList
 
 
 UnityHostVvolDatastore:

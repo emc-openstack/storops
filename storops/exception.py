@@ -287,8 +287,9 @@ class UnityHostNameInUseError(UnityException):
     pass
 
 
+@rest_exception
 class UnityLunNameInUseError(UnityException):
-    pass
+    error_code = 108007744
 
 
 @rest_exception

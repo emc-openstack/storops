@@ -185,7 +185,7 @@ class UnityHotTest(TestCase):
     @patch_rest()
     def test_has_alu_false(self):
         host = UnityHost(cli=t_rest(), _id='Host_10')
-        lun2 = UnityLun(cli=t_rest(), _id="sv_3")
+        lun2 = UnityLun(cli=t_rest(), _id="sv_4")
         has = host.has_alu(lun2)
         assert_that(has, equal_to(False))
 
@@ -200,7 +200,7 @@ class UnityHotTest(TestCase):
     @patch_rest()
     def test_get_hlu_not_found(self):
         host = UnityHost(cli=t_rest(), _id='Host_10')
-        lun = UnityLun(cli=t_rest(), _id="sv_3")
+        lun = UnityLun(cli=t_rest(), _id="sv_4")
         hlu = host.get_hlu(lun)
         assert_that(hlu, equal_to(None))
 
@@ -247,7 +247,7 @@ class UnityHotTest(TestCase):
         lun = UnityLun(cli=t_rest(), _id="sv_2")
 
         def f():
-            host.attach_alu(lun, max_retires=2)
+            host.attach_alu(lun)
         assert_that(f, raises(UnityAttachAluExceedLimitError))
 
 

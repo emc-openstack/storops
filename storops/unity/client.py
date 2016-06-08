@@ -23,7 +23,7 @@ from storops.connection.connector import UnityRESTConnector, UnityWbemConnector
 import storops.unity.resource.type_resource
 from storops.exception import UnityException
 from storops.lib.common import instance_cache, EnumList
-from storops.unity.enums import UnityEnum, SmisReturnValueEnum
+from storops.unity.enums import UnityEnum, UnityEnumList, SmisReturnValueEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resp import RestResponse
 
@@ -55,15 +55,26 @@ class UnityClient(object):
 
     @classmethod
     def dict_to_filter_string(cls, the_filter):
+        def _get_non_list_value(k, v):
+            if isinstance(v, six.string_types):
+                ret = '{} eq "{}"'.format(k, v)
+            elif isinstance(v, UnityEnum):
+                ret = '{} eq {}'.format(k, v.value[0])
+            else:
+                ret = '{} eq {}'.format(k, v)
+            return ret
+
         if the_filter:
             items = []
             for k, v in the_filter.items():
                 if v is None:
                     continue
-                if isinstance(v, six.string_types):
-                    items.append('{} eq "{}"'.format(k, v))
+                if isinstance(v, (list, tuple, UnityEnumList)):
+                    list_ret = ' or '.join([_get_non_list_value(k, item)
+                                           for item in v])
+                    items.append(list_ret)
                 else:
-                    items.append('{} eq {}'.format(k, v))
+                    items.append(_get_non_list_value(k, v))
             if items:
                 ret = ' and '.join(items)
             else:
@@ -186,7 +197,8 @@ class UnityClient(object):
                 v = cls.make_body(v, allow_empty=allow_empty)
                 if v is not None and (allow_empty or not cls._is_empty(v)):
                     ret[k] = v
-        elif isinstance(value, (list, tuple, UnityResourceList)):
+        elif isinstance(value, (list, tuple, UnityResourceList,
+                                UnityEnumList)):
             ret = [cls.make_body(v, allow_empty=allow_empty) for v in value]
         elif isinstance(value, UnityEnum):
             ret = value.index

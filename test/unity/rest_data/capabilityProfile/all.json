@@ -1,0 +1,125 @@
+{
+    "@base": "https://10.244.223.66/api/types/capabilityProfile/instances?fields=createdBy,creationTime,description,driveTypes,fastCacheStates,generationId,health,id,inUse,modificationTime,modifiedBy,name,raidTypes,serviceLevels,spaceEfficiencies,tieringPolicies,usageTags,vmwareUUID,pool.id,constraints.id,virtualVolumes.id&per_page=2000&compact=true",
+    "updated": "2016-06-07T14:50:45.371Z",
+    "links": [{
+        "rel": "self",
+        "href": "&page=1"
+    }],
+    "entries": [{
+        "content": {
+            "id": "cp_1",
+            "driveTypes": [1],
+            "fastCacheStates": [0],
+            "raidTypes": [1],
+            "spaceEfficiencies": [1, 0],
+            "tieringPolicies": [],
+            "serviceLevels": [2],
+            "vmwareUUID": "rfc4122.9d660bef-9d2e-4f65-a653-3f18f019d0c2",
+            "name": "vvol_performance",
+            "createdBy": "admin",
+            "creationTime": "2016-05-10T03:44:55.000Z",
+            "modifiedBy": "admin",
+            "modificationTime": "2016-05-10T03:44:55.000Z",
+            "generationId": 1,
+            "usageTags": ["performance", "capacity"],
+            "inUse": true,
+            "health": {
+                "value": 5,
+                "descriptionIds": ["ALRT_COMPONENT_OK"],
+                "descriptions": ["The component is operating normally. No action is required."]
+            },
+            "pool": {
+                "id": "pool_1"
+            },
+            "constraints": [{
+                "id": "con_1"
+            }, {
+                "id": "con_2"
+            }, {
+                "id": "con_3"
+            }, {
+                "id": "con_4"
+            }, {
+                "id": "con_5"
+            }, {
+                "id": "con_6"
+            }],
+            "virtualVolumes": [{
+                "id": "naa.6006016001303c00a16f192bc798f630"
+            }, {
+                "id": "naa.6006016001303c008251145663d005a5"
+            }, {
+                "id": "naa.6006016001303c008f49aead8776d77e"
+            }, {
+                "id": "naa.6006016001303c00958a8dbde4758752"
+            }, {
+                "id": "naa.6006016001303c009ed3dc40617d5626"
+            }, {
+                "id": "naa.6006016001303c00b8921a3affd4e3c9"
+            }, {
+                "id": "naa.6006016001303c00b5cf923318729a8b"
+            }, {
+                "id": "naa.6006016001303c00b94d3fefb26b9af0"
+            }, {
+                "id": "naa.6006016001303c00b776dbbb8c167bd5"
+            }, {
+                "id": "naa.6006016001303c0099dc1b6b552b668c"
+            }, {
+                "id": "naa.6006016001303c00aa6c7264a02baf3d"
+            }, {
+                "id": "naa.6006016001303c00971e6ce610b6aa77"
+            }, {
+                "id": "naa.6006016001303c00a4fc83189d08c945"
+            }, {
+                "id": "naa.6006016001303c00ae5ace696027d297"
+            }, {
+                "id": "naa.6006016001303c009c9db53006da91b1"
+            }, {
+                "id": "naa.6006016001303c0094ffd2f1b915ca84"
+            }, {
+                "id": "naa.6006016001303c009541680e47ed8682"
+            }]
+        }
+    }, {
+        "content": {
+            "id": "cp_2",
+            "driveTypes": [0],
+            "fastCacheStates": [0],
+            "raidTypes": [7],
+            "spaceEfficiencies": [1, 0],
+            "tieringPolicies": [],
+            "serviceLevels": [4],
+            "vmwareUUID": "rfc4122.5956d5ac-b889-4c71-9378-1f53e18e6dbf",
+            "name": "Gold_Profile",
+            "description": "Gold Profile to select flash disk",
+            "createdBy": "admin",
+            "creationTime": "2016-05-30T02:38:09.000Z",
+            "modifiedBy": "admin",
+            "modificationTime": "2016-06-07T11:42:37.000Z",
+            "generationId": 3,
+            "usageTags": ["flocker"],
+            "inUse": false,
+            "health": {
+                "value": 5,
+                "descriptionIds": ["ALRT_COMPONENT_OK"],
+                "descriptions": ["The component is operating normally. No action is required."]
+            },
+            "pool": {
+                "id": "pool_2"
+            },
+            "constraints": [{
+                "id": "con_7"
+            }, {
+                "id": "con_8"
+            }, {
+                "id": "con_9"
+            }, {
+                "id": "con_10"
+            }, {
+                "id": "con_11"
+            }, {
+                "id": "con_12"
+            }]
+        }
+    }]
+}

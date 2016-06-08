@@ -18,11 +18,10 @@ from __future__ import unicode_literals
 import logging
 import bitmath
 
-from storops import exception as ex
 from storops.unity.resource import UnityResource, \
     UnityAttributeResource, UnityResourceList
 import storops.unity.resource.filesystem
-from storops.unity.resource.lun import UnityLun, UnityLunList
+from storops.unity.resource.lun import UnityLun
 
 __author__ = 'Jay Xu'
 
@@ -45,18 +44,13 @@ class UnityPool(UnityResource):
                    is_thin=None, description=None, tiering_policy=None,
                    is_repl_dst=None, snap_schedule=None, iolimit_policy=None):
         size = int(bitmath.GiB(size_gb).to_Byte().value)
-        lun = UnityLunList.get(self._cli, name=lun_name).first_item
-        if lun and lun.existed:
-            raise ex.UnityLunNameInUseError()
-        else:
-            lun = UnityLun.create(self._cli, lun_name, self, size, sp=sp,
-                                  host_access=host_access, is_thin=is_thin,
-                                  description=description,
-                                  is_repl_dst=is_repl_dst,
-                                  tiering_policy=tiering_policy,
-                                  snap_schedule=snap_schedule,
-                                  iolimit_policy=iolimit_policy)
-        return lun
+        return UnityLun.create(self._cli, lun_name, self, size, sp=sp,
+                               host_access=host_access, is_thin=is_thin,
+                               description=description,
+                               is_repl_dst=is_repl_dst,
+                               tiering_policy=tiering_policy,
+                               snap_schedule=snap_schedule,
+                               iolimit_policy=iolimit_policy)
 
 
 class UnityPoolList(UnityResourceList):

@@ -562,6 +562,19 @@
     "response":"create_lun_sv2.json"
   },
     {
+    "url": "/api/types/storageResource/action/createLun?compact=True",
+    "body": {
+      "lunParameters": {
+          "pool": {
+              "id": "pool_1"
+          },
+          "size": 1073741824
+      },
+      "name": "openstack_lun"
+    },
+    "response":"lun_name_in_use.json"
+  },
+    {
       "url": "/api/instances/storageResource/sv_4?compact=True",
       "body": {
         "forceSnapDeletion": true,

@@ -110,7 +110,9 @@ class UnityResource(Resource):
                     '{}:{} not found.'.format(clz_name, name))
             elif len(ret) > 1:
                 raise UnityNameNotUniqueError(
-                    'multiple {} with name {} found.'.format(clz_name, name))
+                    'multiple {} with name {} found.'.format(clz_name, name),
+                    # throw out the found multiple objects for later analysis
+                    objects=ret)
             else:
                 ret = ret[0]
         return ret

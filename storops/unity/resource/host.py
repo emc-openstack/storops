@@ -130,11 +130,7 @@ class UnityHost(UnityResource):
         initiators = UnityHostInitiatorList.get(cli=self._cli,
                                                 initiator_id=uid)
 
-        # Even if no initiators are found, the initiators object still contain
-        # one fake initiator.
-        initiator = initiators.first_item
-        if not initiator.existed:
-
+        if not initiators:
             # Set the ISCSI or FC type
             if re.match("(\w{2}:){15}\w{2}", uid, re.I):
                 uid_type = HostInitiatorTypeEnum.FC
@@ -152,6 +148,7 @@ class UnityHost(UnityResource):
                     'name {} not found under host {}.'
                     .format(uid, self.name))
         else:
+            initiator = initiators.first_item
             log.debug('initiator {} is existed in unity system.'.format(uid))
 
         initiator.modify(self)

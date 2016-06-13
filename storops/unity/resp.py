@@ -46,8 +46,10 @@ class RestResponse(object):
         if 'entries' in self.body:
             ret = [entry.get('content', {})
                    for entry in self.body['entries']]
+        elif 'content' in self.body:
+            ret = [self.body.get('content')]
         else:
-            ret = [self.body.get('content', {})]
+            ret = []
         return ret
 
     @property

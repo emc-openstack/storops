@@ -20,7 +20,8 @@ from unittest import TestCase
 from hamcrest import assert_that, equal_to, raises
 
 from storops.exception import StoropsException, check_error, \
-    VNXSpNotAvailableError, VNXNotSupportedError
+    VNXSpNotAvailableError, VNXNotSupportedError, UnityNameNotUniqueError
+from storops.unity.resource.host import UnityHost
 
 __author__ = 'Cedric Zhuang'
 
@@ -78,3 +79,13 @@ class ExceptionTest(TestCase):
         out = 'The specified source LUN is not currently migrating.'
         # no exception, not checking a `VNXLunNotMigratingError`
         check_error(out, VNXNotSupportedError, VNXSpNotAvailableError)
+
+    def test_unity_name_not_unique_error(self):
+        ex = UnityNameNotUniqueError(objects=None)
+        assert_that(str(ex), equal_to('multiple objects found'))
+        assert_that(ex.objects, equal_to(None))
+
+        host = UnityHost(_id=9999)
+        ex = UnityNameNotUniqueError("Multipath hosts found.", objects=host)
+        assert_that(str(ex), equal_to('Multipath hosts found.'))
+        assert_that(ex.objects, equal_to(host))

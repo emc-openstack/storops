@@ -146,8 +146,7 @@ class UnitySystemTest(TestCase):
         unity = t_unity()
         cp = unity.get_capability_profile(service_levels=[5])
         assert_that(cp, instance_of(UnityCapabilityProfileList))
-        assert_that(len(cp), 1)
-        assert_that(cp[0].existed, equal_to(False))
+        assert_that(len(cp), equal_to(0))
 
     @patch_rest()
     def test_get_sp_by_name(self):

@@ -64,17 +64,16 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityStorageProcessorList, _id=_id,
                                    name=name, **filters)
 
-    def get_iscsi_portal(self, _id=None, name=None, **filters):
-        return self._get_unity_rsc(UnityIscsiPortalList, _id=_id,
-                                   name=name, **filters)
+    def get_iscsi_portal(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityIscsiPortalList, _id=_id, **filters)
 
     def get_ethernet_port(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityEthernetPortList, _id=_id,
                                    name=name, **filters)
 
     def create_host(self, name, host_type=None, desc=None, os=None):
-        host = UnityHostList.get(self._cli, name=name).first_item
-        if host and host.existed:
+        host = UnityHostList.get(self._cli, name=name)
+        if host:
             raise ex.UnityHostNameInUseError()
         else:
             host = UnityHost.create(self._cli, name, host_type=host_type,

@@ -198,11 +198,18 @@ class UnityResourceList(UnityResource, ResourceList):
         the_filter = {}
         _parser = self._get_parser()
         for k, v in self._rsc_filter.items():
-            label = _parser.get_property_label(k)
+            # if k is like host.id for "host.id eq XXX" rest filter
+            keys = k.split('.')
+            # ingore the left string after '.' since both are ok
+            # 'host=<host_id> or {'host.id': <host_id>}'
+            label = _parser.get_property_label(keys[0])
             if not label:
                 raise ValueError(
                     '"{}" is not a valid property of {}.'.format(
                         k, self.get_resource_class().__name__))
+            # support {'host.id': <host_id>}
+            if len(keys) == 2:
+                label = k
             the_filter[label] = v
         return self._cli.get_all(self.resource_class, the_filter=the_filter)
 

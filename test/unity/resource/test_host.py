@@ -33,7 +33,7 @@ from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.host import UnityHost, UnityHostContainer, \
     UnityHostInitiator, UnityHostInitiatorList, UnityHostIpPortList, \
     UnityHostList, UnityHostIpPort, UnityHostInitiatorPathList, \
-    UnityHostLunList
+    UnityHostLun, UnityHostLunList
 from storops.unity.resource.vmware import UnityDataStoreList, UnityVmList
 from test.unity.rest_mock import t_rest, patch_rest
 
@@ -189,7 +189,21 @@ class UnityHotTest(TestCase):
     def test_host_lun(self):
         host = UnityHost(cli=t_rest(), _id='Host_10')
         assert_that(host.host_luns, instance_of(UnityHostLunList))
-        assert_that(len(host.host_luns), equal_to(1))
+        assert_that(len(host.host_luns), equal_to(2))
+
+    @patch_rest()
+    def test_get_all_host_lun_all(self):
+        host = UnityHost(cli=t_rest(), _id='Host_10')
+        all_luns = host._get_host_lun()
+        assert_that(len(all_luns), equal_to(2))
+
+    @patch_rest()
+    def test_get_one_host_lun(self):
+        host = UnityHost(cli=t_rest(), _id='Host_10')
+        lun1 = UnityLun(cli=t_rest(), _id="sv_2")
+        which = host._get_host_lun(lun1)
+        assert_that(len(which), equal_to(1))
+        assert_that(which[0].lun.id, equal_to(lun1.id))
 
     @patch_rest()
     def test_has_alu_true(self):
@@ -209,9 +223,29 @@ class UnityHotTest(TestCase):
     def test_get_hlu(self):
         host = UnityHost(cli=t_rest(), _id='Host_10')
         lun = UnityLun(cli=t_rest(), _id="sv_2")
-        host_lun = UnityHostLunList.get(_id="Host_10_sv_2_prod", cli=t_rest())
+        # UnityResourceList will return the found UnityResource
+        # When '_id' as filter.
+        host_lun = UnityHostLunList.get(cli=t_rest(), _id="Host_10_sv_2_prod")
+        assert_that(host_lun, instance_of(UnityHostLun))
         hlu = host.get_hlu(lun)
         assert_that(hlu, equal_to(host_lun.hlu))
+
+        # Be caureful, this will return UnityResourceList when 'id' as filter
+        host_lun2 = UnityHostLunList.get(cli=t_rest(), id="Host_10_sv_2_prod")
+        assert_that(host_lun2, instance_of(UnityHostLunList))
+        assert_that(len(host_lun2), equal_to(1))
+        assert_that(host_lun, equal_to(host_lun2[0]))
+
+    @patch_rest()
+    def test_get_hlu_using_object_id_filter(self):
+        host = UnityHost(cli=t_rest(), _id='Host_10')
+        lun = UnityLun(cli=t_rest(), _id="sv_2")
+        filters = {'host.id': host.id, 'lun.id': lun.id}
+        host_lun = UnityHostLunList.get(cli=t_rest(), **filters)
+        assert_that(host_lun, instance_of(UnityHostLunList))
+        assert_that(len(host_lun), equal_to(1))
+        hlu = host.get_hlu(lun)
+        assert_that(hlu, equal_to(host_lun[0].hlu))
 
     @patch_rest()
     def test_get_hlu_not_found(self):
@@ -248,7 +282,6 @@ class UnityHotTest(TestCase):
 
         def f():
             host.attach_alu(lun)
-
         assert_that(f, raises(UnityAluAlreadyAttachedError))
 
     @patch_rest()

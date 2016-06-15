@@ -1,0 +1,23 @@
+{
+    "@base": "https://10.109.22.101/api/types/hostLUN/instances?filter=lun eq \"sv_2\"&fields=hlu,id,instanceId,isReadOnly,type,lun.id,host.id,snap.id&per_page=2000&compact=true",
+    "updated": "2016-06-14T10:44:30.767Z",
+    "links": [{
+        "href": "&page=1",
+        "rel": "self"
+    }],
+    "entries": [{
+        "content": {
+            "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%Antecedent=root/emc:EMC_UEM_HostLeaf\\%InstanceID\\=Host_10%Dependent=root/emc:EMC_UEM_StorageVolumeLeaf\\%InstanceID\\=sv_2_prod",
+            "hlu": 0,
+            "isReadOnly": false,
+            "host": {
+                "id": "Host_10"
+            },
+            "type": 1,
+            "id": "Host_10_sv_2_prod",
+            "lun": {
+                "id": "sv_2"
+            }
+        }
+    }]
+}

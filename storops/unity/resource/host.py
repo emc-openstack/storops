@@ -83,15 +83,12 @@ class UnityHost(UnityResource):
         return ret
 
     def _get_host_lun(self, lun=None):
-        host_lun_list = UnityHostLunList.get(self._cli)
-        host_luns = [item for item in host_lun_list if item.host.id == self.id]
-        # Skip null UnityLun
-        host_luns = [item for item in host_luns if item.lun]
-        # If Lun parameter is specified, only return the wanted id
         if lun:
-            ret = [item for item in host_luns if item.lun.id == lun.id]
+            ret = UnityHostLunList.get(self._cli, host=self.id, lun=lun.id)
         else:
-            ret = map(lambda x: x.lun.id, host_luns)
+            ret = UnityHostLunList.get(self._cli, host=self.id)
+            log.debug('Found {} host luns attached to this host'
+                      .format(len(ret)))
         return ret
 
     def detach_alu(self, lun):
@@ -116,7 +113,11 @@ class UnityHost(UnityResource):
         return hlu
 
     def has_alu(self, lun):
-        return lun.id in self._get_host_lun()
+        alu = self.get_hlu(lun=lun)
+        if alu is None:
+            return False
+        else:
+            return True
 
     def get_hlu(self, lun):
         which = self._get_host_lun(lun=lun)

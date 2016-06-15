@@ -19,6 +19,8 @@
     }],
     "hostLUNs": [{
       "id": "Host_10_sv_2_prod"
+    }, {
+      "id": "Host_10_sv_3_prod"
     }]
   }
 }

@@ -21,6 +21,7 @@ from logging.handlers import RotatingFileHandler
 import sys
 import os
 from os.path import join, dirname, abspath
+from fasteners import process_lock
 
 import errno
 from time import sleep
@@ -28,7 +29,7 @@ from time import sleep
 from retryz import retry
 
 from storops.exception import StoropsException
-from storops.lib.common import inter_process_locked
+from storops.lib.common import get_lock_file
 from test.utils import PersistedDict
 
 __author__ = 'Cedric Zhuang'
@@ -253,3 +254,7 @@ def setup_fixture(request, fixture_clz):
     request.addfinalizer(_clean_up)
     _setup()
     return fixture
+
+
+def inter_process_locked(name):
+    return process_lock.interprocess_locked(get_lock_file(name))

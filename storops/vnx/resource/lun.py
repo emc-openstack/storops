@@ -195,12 +195,16 @@ class VNXLun(VNXCliResource):
         tgt_id = self.get_id(tgt)
         src_id = self.get_id(self)
         out = self._cli.migrate_lun(src_id, tgt_id, rate, poll=self.poll)
-        if on_complete or on_error:
-            daemon(self._wait_for_migration_complete, on_complete, on_error)
         ex.raise_if_err(out, default=ex.VNXMigrationError)
 
+        if on_complete or on_error:
+            ret = daemon(self._wait_for_migration_done, on_complete, on_error)
+        else:
+            ret = None
+        return ret
+
     @retry(on_error=_IsMigratingError, wait=15, timeout=60 * 60 * 24 * 7)
-    def _wait_for_migration_complete(self, on_complete=None, on_error=None):
+    def _wait_for_migration_done(self, on_complete=None, on_error=None):
         migration = VNXMigrationSession(source=self, cli=self._cli)
         if migration.is_migrating:
             raise _IsMigratingError()

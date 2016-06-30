@@ -17,7 +17,6 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-import time
 from hamcrest import assert_that, equal_to, contains_string, has_item, \
     only_contains, raises, instance_of, none, is_not, not_none
 
@@ -616,8 +615,7 @@ class VNXLunMigrationCallbackTest(TestCase):
 
         l0 = VNXLun(name='lun0', cli=t_cli())
         l1 = VNXLun(name='lun1', cli=t_cli())
-        l0.migrate(l1, on_complete=on_complete)
-        time.sleep(0.5)
+        l0.migrate(l1, on_complete=on_complete).join()
         assert_that(c.x, equal_to(1))
 
     @patch_cli()
@@ -629,8 +627,7 @@ class VNXLunMigrationCallbackTest(TestCase):
 
         l0 = VNXLun(name='lun0', cli=t_cli())
         l2 = VNXLun(name='lun2', cli=t_cli())
-        l2.migrate(l0, on_error=on_error)
-        time.sleep(0.5)
+        l2.migrate(l0, on_error=on_error).join()
         assert_that(c.x, equal_to(-1))
 
 

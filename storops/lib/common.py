@@ -15,25 +15,19 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from enum import Enum as _Enum
+import errno
+from functools import partial
+import functools
 import json
 import logging
 from os import path, makedirs
-import types
-
-import errno
-from enum import Enum as _Enum
-from functools import partial
-
-import functools
 import six
-import time
-
 import sys
+import threading
 
-from fasteners import process_lock
 from retryz import retry
 import cachez
-import threading
 
 import storops.exception
 
@@ -105,7 +99,7 @@ class EnumList(JsonPrinter):
         return self.list[item]
 
 
-class Enum(_Enum):
+class Enum(JsonPrinter, _Enum):
     @classmethod
     def verify(cls, value, allow_none=True):
         if value is None and not allow_none:
@@ -147,9 +141,14 @@ class Enum(_Enum):
                 'not supported value type: {}.'.format(type(value)))
         return ret
 
+    def _get_properties(self, dec=0):
+        return {'value': self.value}
+
     def is_equal(self, value):
-        if isinstance(value, six.string_types):
+        if isinstance(self.value, six.string_types):
             ret = self.value.lower() == value.lower()
+        elif isinstance(self.value, six.integer_types):
+            ret = self.value == int(value)
         else:
             ret = self.value == value
         return ret
@@ -206,6 +205,19 @@ class Enum(_Enum):
     def enum_name(cls):
         return cls.__name__
 
+    def __str__(self):
+        return JsonPrinter.__str__(self)
+
+    def __repr__(self):
+        return JsonPrinter.__repr__(self)
+
+    def get_dict_repr(self, dec=0):
+        if dec < 0:
+            ret = '{}.{}'.format(self.__class__.__name__, self.name)
+        else:
+            ret = super(Enum, self).get_dict_repr(dec)
+        return ret
+
 
 class Dict(dict):
     def __getattr__(self, item):
@@ -221,21 +233,6 @@ class Dict(dict):
                         __name__, item))
             ret = value
         return ret
-
-
-def get_config_prop(conf, prop, default=None):
-    value = default
-    if conf is not None:
-        if hasattr(conf, prop):
-            value = getattr(conf, prop)
-        elif hasattr(conf, '__getitem__'):
-            try:
-                value = conf[prop]
-            except (TypeError, KeyError):
-                pass
-        else:
-            raise ValueError('cannot get property from the config.')
-    return value
 
 
 cache = cachez.cache
@@ -321,29 +318,6 @@ class WeightedAverage(object):
         return ret
 
 
-def log_enter_exit(func):
-    @functools.wraps(func)
-    def inner(self, *args, **kwargs):
-        cls_name = self.__class__.__name__
-        func_name = func.__name__
-        log.debug("entering %(cls)s.%(method)s.",
-                  {'cls': cls_name,
-                   'method': func_name})
-        start = time.time()
-        ret = func(self, *args, **kwargs)
-        end = time.time()
-        log.debug("exiting %(cls)s.%(method)s.  "
-                  "spent %(duration)s sec. "
-                  "return %(return)s.",
-                  {'cls': cls_name,
-                   'duration': end - start,
-                   'method': func_name,
-                   'return': ret})
-        return ret
-
-    return inner
-
-
 def _init_lock():
     return threading.Lock()
 
@@ -387,17 +361,6 @@ class SynchronizedDecorator(object):
 
 
 synchronized = SynchronizedDecorator.synchronized
-
-
-def decorate_all_methods(decorator):
-    def _decorate_all_methods(cls):
-        for attr_name, attr_val in cls.__dict__.items():
-            if (isinstance(attr_val, types.FunctionType) and
-                    not attr_name.startswith("_")):
-                setattr(cls, attr_name, decorator(attr_val))
-        return cls
-
-    return _decorate_all_methods
 
 
 def const_seconds(value):
@@ -462,10 +425,6 @@ def get_lock_file(name):
             if e.errno != errno.EEXIST:
                 raise
     return path.join(lock_folder, name)
-
-
-def inter_process_locked(name):
-    return process_lock.interprocess_locked(get_lock_file(name))
 
 
 def round_it(ndigits=3):

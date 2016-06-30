@@ -173,14 +173,15 @@ class CliClientTest(TestCase):
 
     @extract_command
     def test_get_sg(self):
-        cmd = self.client.get_sg()
-        assert_that(cmd, equal_to('storagegroup -list -host -iscsiAttributes'))
+        cmd = self.client.get_sg(engineering=True)
+        assert_that(cmd, equal_to('storagegroup -messner -list -host '
+                                  '-iscsiAttributes'))
 
     @extract_command
     def test_get_sg_by_name(self):
         cmd = self.client.get_sg(name='test_sg')
-        assert_that(cmd, equal_to('storagegroup -list -host -iscsiAttributes '
-                                  '-gname test_sg'))
+        assert_that(cmd, equal_to('storagegroup -list -host '
+                                  '-iscsiAttributes -gname test_sg'))
 
     @extract_command
     def test_get_pool_feature(self):

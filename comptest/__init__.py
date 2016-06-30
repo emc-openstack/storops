@@ -17,9 +17,8 @@ from __future__ import unicode_literals
 
 import logging
 
-from comptest.utils import setup_log
+from comptest.utils import setup_log, inter_process_locked
 from storops import VNXSystem, UnitySystem, cache
-from storops.lib.common import inter_process_locked
 
 __author__ = 'Cedric Zhuang'
 

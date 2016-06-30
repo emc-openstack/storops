@@ -37,7 +37,6 @@ class UnityTestResourceManager(ResourceManager):
         self.unity = None
         self.pool = None
         self.nas_server = None
-        self.name = name
 
     def setup(self):
         super(UnityTestResourceManager, self).setup()

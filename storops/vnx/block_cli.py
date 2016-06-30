@@ -187,8 +187,11 @@ class CliClient(object):
         return cmd
 
     @command
-    def get_sg(self, name=None):
-        cmd = 'storagegroup -list -host -iscsiAttributes'.split()
+    def get_sg(self, name=None, engineering=False):
+        cmd = ['storagegroup']
+        if engineering:
+            cmd.append('-messner')
+        cmd += '-list -host -iscsiAttributes'.split()
         cmd += text_var('-gname', name)
         return cmd
 

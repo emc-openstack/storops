@@ -1,12 +1,12 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from storops.lib.common import Enum, JsonPrinter, EnumList
+from storops.lib.common import Enum, EnumList
 
 __author__ = 'Cedric Zhuang'
 
 
-class UnityEnum(JsonPrinter, Enum):
+class UnityEnum(Enum):
     @property
     def description(self):
         return self.value[1]
@@ -31,13 +31,6 @@ class UnityEnum(JsonPrinter, Enum):
                      'value': self.index}
         return props
 
-    def get_dict_repr(self, dec=0):
-        if dec < 0:
-            ret = '{}.{}'.format(self.__class__.__name__, self.name)
-        else:
-            ret = super(UnityEnum, self).get_dict_repr(dec)
-        return ret
-
     @classmethod
     def from_int(cls, value):
         for item in cls.get_all():
@@ -48,12 +41,6 @@ class UnityEnum(JsonPrinter, Enum):
         else:
             ret = super(UnityEnum, cls).from_int(value)
         return ret
-
-    def __str__(self):
-        return JsonPrinter.__str__(self)
-
-    def __repr__(self):
-        return JsonPrinter.__repr__(self)
 
 
 class UnityEnumList(EnumList):

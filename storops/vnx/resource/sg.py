@@ -330,9 +330,10 @@ class VNXStorageGroupList(VNXCliResourceList):
     def get_resource_class(cls):
         return VNXStorageGroup
 
-    def __init__(self, cli=None):
+    def __init__(self, cli=None, engineering=False):
         super(VNXStorageGroupList, self).__init__(cli)
         self._sg_map = {}
+        self._engineering = engineering
 
     def add_sg(self, sg):
         self._sg_map[sg.name] = sg
@@ -343,4 +344,4 @@ class VNXStorageGroupList(VNXCliResourceList):
                 sg.detach_alu(lun)
 
     def _get_raw_resource(self):
-        return self._cli.get_sg(poll=self.poll)
+        return self._cli.get_sg(poll=self.poll, engineering=self._engineering)

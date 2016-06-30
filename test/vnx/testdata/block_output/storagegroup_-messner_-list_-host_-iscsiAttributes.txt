@@ -1,0 +1,288 @@
+Storage Group Name:    ~physical
+Storage Group UID:     60:06:01:60:00:00:00:00:00:00:00:00:00:00:00:01
+
+HLU/ALU Pairs:
+
+  HLU Number     ALU Number
+  ----------     ----------
+    17              17
+    18              18
+    19              19
+    20              20
+    21              21
+    22              22
+    23              23
+    24              24
+    25              25
+    114             114
+    115             115
+    116             116
+    117             117
+    118             118
+    1               1
+    2               2
+    3               3
+Special:               YES
+Shareable:             YES
+
+Storage Group Name:    ~management
+Storage Group UID:     60:06:01:60:00:00:00:00:00:00:00:00:00:00:00:02
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  50:06:01:60:B6:E0:15:26:50:06:01:69:36:E0:15:26   SP B         1
+Host name:             APM00152312055-spB
+SPPort:                B-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  50:06:01:60:B6:E0:15:26:50:06:01:61:36:E0:15:26   SP A         1
+Host name:             APM00152312055-spA
+SPPort:                A-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+Special:               YES
+Default:               YES
+Shareable:             YES
+
+Storage Group Name:    ~filestorage
+Storage Group UID:     60:06:01:60:00:00:00:00:00:00:00:00:00:00:00:04
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  50:06:01:60:C7:A0:02:45:50:06:01:68:47:A0:02:45   SP A         13
+Host name:             Celerra_CS0_21132
+SPPort:                A-13v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  50:06:01:60:C7:A0:02:45:50:06:01:61:47:A0:02:45   SP B         12
+Host name:             Celerra_CS0_21132
+SPPort:                B-12v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  50:06:01:60:C7:A0:02:45:50:06:01:69:47:A0:02:45   SP B         13
+Host name:             Celerra_CS0_21132
+SPPort:                B-13v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  50:06:01:60:C7:A0:02:45:50:06:01:60:47:A0:02:45   SP A         12
+Host name:             Celerra_CS0_21132
+SPPort:                A-12v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+
+HLU/ALU Pairs:
+
+  HLU Number     ALU Number
+  ----------     ----------
+    5               63994
+    3               63995
+    2               63996
+    4               63997
+    1               63998
+    0               63999
+    21              22
+    22              23
+    23              24
+    24              25
+    17              17
+    16              18
+    18              21
+    19              19
+    20              20
+    114             114
+    115             115
+    116             116
+    117             117
+    118             118
+    9               2
+    8               1
+Special:               YES
+Shareable:             YES
+
+Storage Group Name:    ubuntu-server11
+Storage Group UID:     7B:5B:06:97:81:8B:E5:11:85:E1:AE:04:FD:64:DC:17
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  iqn.1993-08.org.debian:01:b46252bc4cfd            SP A         4
+Host name:             ubuntu-server11
+SPPort:                A-4v0
+Initiator IP:          N/A
+TPGT:                  1
+ISID:                  N/A
+
+Shareable:             YES
+
+Storage Group Name:    VNX9495
+Storage Group UID:     2C:0D:8D:6A:41:88:E5:11:85:E1:AE:04:FD:64:DC:17
+Shareable:             YES
+
+Storage Group Name:    ubuntu14
+Storage Group UID:     46:69:09:11:20:89:E5:11:85:E1:AE:04:FD:64:DC:17
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  iqn.1993-08.org.debian:01:e57138cd5b4             SP A         4
+Host name:             ubuntu14
+SPPort:                A-4v0
+Initiator IP:          192.168.4.30
+TPGT:                  1
+ISID:                  23D0200
+
+  iqn.1993-08.org.debian:01:e57138cd5b4             SP B         4
+Host name:             ubuntu14
+SPPort:                B-4v0
+Initiator IP:          192.168.4.30
+TPGT:                  3
+ISID:                  33D0200
+
+  iqn.1993-08.org.debian:01:e57138cd5b4             SP A         5
+Host name:             ubuntu14
+SPPort:                A-5v0
+Initiator IP:          192.168.3.30
+TPGT:                  2
+ISID:                  83D0200
+
+  iqn.1993-08.org.debian:01:e57138cd5b4             SP B         5
+Host name:             ubuntu14
+SPPort:                B-5v0
+Initiator IP:          192.168.3.30
+TPGT:                  4
+ISID:                  73D0200
+
+
+HLU/ALU Pairs:
+
+  HLU Number     ALU Number
+  ----------     ----------
+    154             15
+Shareable:             YES
+
+Storage Group Name:    ubuntu-server7
+Storage Group UID:     F6:F1:04:29:91:97:E5:11:85:E1:AE:04:FD:64:DC:17
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  00:80:6E:00:01:10:FF:FF:FF:FF:FF:FF:FF:FF:FF:FF   SP A         7
+Host name:             ubuntu-server7
+SPPort:                A-7v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0   SP A         0
+Host name:             ubuntu-server7
+SPPort:                A-0v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D1:10:00:00:90:FA:53:4C:D1   SP A         0
+Host name:             ubuntu-server7
+SPPort:                A-0v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0   SP B         0
+Host name:             ubuntu-server7
+SPPort:                B-0v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D1:10:00:00:90:FA:53:4C:D1   SP B         0
+Host name:             ubuntu-server7
+SPPort:                B-0v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  iqn.1993-08.org.debian:01:816ce05feaa6            SP A         4
+Host name:             ubuntu-server7
+SPPort:                A-4v0
+Initiator IP:          192.168.4.7
+TPGT:                  1
+ISID:                  33D0200
+
+  20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0   SP A         1
+Host name:             ubuntu-server7
+SPPort:                A-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D1:10:00:00:90:FA:53:4C:D1   SP A         1
+Host name:             ubuntu-server7
+SPPort:                A-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0   SP B         1
+Host name:             ubuntu-server7
+SPPort:                B-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D1:10:00:00:90:FA:53:4C:D1   SP B         1
+Host name:             ubuntu-server7
+SPPort:                B-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0   SP A         2
+Host name:             ubuntu-server7
+SPPort:                A-2v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D1:10:00:00:90:FA:53:4C:D1   SP A         2
+Host name:             ubuntu-server7
+SPPort:                A-2v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0   SP B         2
+Host name:             ubuntu-server7
+SPPort:                B-2v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  20:00:00:90:FA:53:4C:D1:10:00:00:90:FA:53:4C:D1   SP B         2
+Host name:             ubuntu-server7
+SPPort:                B-2v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00   SP A         7
+Host name:             ubuntu-server7
+SPPort:                A-7v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+Shareable:             YES

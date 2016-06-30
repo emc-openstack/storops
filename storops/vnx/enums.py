@@ -18,27 +18,13 @@ from __future__ import unicode_literals
 import logging
 import re
 
-from storops.lib.common import Enum, cache, JsonPrinter
+from storops.lib.common import Enum, cache
 
 log = logging.getLogger(__name__)
 
 
-class VNXEnum(JsonPrinter, Enum):
-    def _get_properties(self, dec=0):
-        return {'value': self.value}
-
-    def get_dict_repr(self, dec=0):
-        if dec < 0:
-            ret = '{}.{}'.format(self.__class__.__name__, self.name)
-        else:
-            ret = super(VNXEnum, self).get_dict_repr(dec)
-        return ret
-
-    def __str__(self):
-        return JsonPrinter.__str__(self)
-
-    def __repr__(self):
-        return JsonPrinter.__repr__(self)
+class VNXEnum(Enum):
+    pass
 
 
 class VNXSPEnum(VNXEnum):

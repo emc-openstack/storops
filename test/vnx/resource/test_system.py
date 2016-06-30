@@ -365,3 +365,10 @@ class VNXSystemTest(TestCase):
         pool = self.vnx.create_pool('Pool4File')
         assert_that(pool.existed, equal_to(True))
         assert_that(pool.name, equal_to('Pool4File'))
+
+    @patch_cli()
+    def test_get_host(self):
+        host = self.vnx.get_host('ubuntu14')
+        assert_that(host.name, equal_to('ubuntu14'))
+        assert_that(host.existed, equal_to(True))
+        assert_that(len(host.connections), equal_to(4))

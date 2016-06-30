@@ -21,11 +21,12 @@ from time import sleep
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
-    contains_string
+    contains_string, has_items
 
 from storops.exception import EnumValueNotFoundError
 from storops.lib.common import Dict, Enum, WeightedAverage, synchronized, \
-    text_var, int_var, enum_var, yes_no_var, JsonPrinter, get_lock_file
+    text_var, int_var, enum_var, yes_no_var, JsonPrinter, get_lock_file, \
+    EnumList
 from storops.vnx.enums import VNXRaidType
 
 log = logging.getLogger(__name__)
@@ -67,6 +68,12 @@ class SampleIntEnum(Enum):
     OK = 0
     NOT_FOUND = 1
     ERROR = 2
+
+
+class SampleIntEnumList(EnumList):
+    @classmethod
+    def get_enum_class(cls):
+        return SampleIntEnum
 
 
 class EnumTest(TestCase):
@@ -140,6 +147,15 @@ class EnumTest(TestCase):
 
     def test_values(self):
         assert_that(SampleEnum.values(), only_contains('type a', 'type b'))
+
+    def test_enum_list_parsing(self):
+        assert_that(SampleIntEnumList.parse([1, 2]),
+                    has_items(SampleIntEnum.NOT_FOUND, SampleIntEnum.ERROR))
+
+    def test_enum_list_to_str(self):
+        assert_that(str(SampleIntEnumList.parse([0, 1])),
+                    equal_to('{"SampleIntEnumList": ["SampleIntEnum.OK", '
+                             '"SampleIntEnum.NOT_FOUND"]}'))
 
 
 class WeightedAverageTest(TestCase):

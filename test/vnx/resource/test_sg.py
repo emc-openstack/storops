@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, has_item, raises, instance_of, \
-    none, is_not
+    none, is_not, has_items
 
 from storops.vnx.resource.port import VNXStorageGroupHBAList
 from test.vnx.cli_mock import patch_cli, t_cli
@@ -35,7 +35,11 @@ __author__ = 'Cedric Zhuang'
 class VNXStorageGroupListTest(TestCase):
     @patch_cli()
     def test_get_sg_list(self):
-        assert_that(len(VNXStorageGroupList(t_cli())), equal_to(4))
+        sg_list = VNXStorageGroupList(t_cli())
+        assert_that(sg_list.name,
+                    has_items('VNX9495', 'ubuntu-server11', 'ubuntu-server7',
+                              'ubuntu14'))
+        assert_that(len(sg_list), equal_to(4))
 
     @patch_cli()
     def test_detach_not_existed_lun(self):

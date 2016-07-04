@@ -46,6 +46,13 @@ class VNXPort(VNXCliResource):
     def wwn(self):
         return self._get_property('_wwn')
 
+    @property
+    def display_name(self):
+        items = [self.sp.display_name, str(self.port_id)]
+        if self.vport_id is not None:
+            items.append(str(self.vport_id))
+        return '-'.join(items)
+
     def config_ip(self, ip, mask, gateway, vport_id=None, vlan_id=None):
         if self.type != VNXPortType.ISCSI:
             raise TypeError('configure IP only works for iSCSI ports.')

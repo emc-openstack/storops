@@ -83,6 +83,10 @@ class VNXSPEnum(VNXEnum):
     def index(self):
         return self.value.lower()[-1]
 
+    @property
+    def display_name(self):
+        return self.index.upper()
+
 
 class VNXProvisionEnum(VNXEnum):
     # value of spec "provisioning:type"

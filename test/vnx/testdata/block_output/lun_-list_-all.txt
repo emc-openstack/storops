@@ -10332,8 +10332,8 @@ Attached Snapshot:  N/A
 Allow Inband Snap Attach:  N/A
 Allocation Policy:  Automatic
 
-LOGICAL UNIT NUMBER 85
-Name:  lun_cl_32
+LOGICAL UNIT NUMBER 456
+Name:  lun456
 UID:  60:06:01:60:10:B0:34:00:6D:D5:00:7D:46:F0:E2:11
 Current Owner:  SP B
 Default Owner:  SP B
@@ -15349,7 +15349,7 @@ Allow Inband Snap Attach:  N/A
 Allocation Policy:  Automatic
 
 LOGICAL UNIT NUMBER 4
-Name:  lunc_5
+Name:  lun4
 UID:  60:06:01:60:10:B0:34:00:DF:54:D7:91:15:EE:E2:11
 Current Owner:  SP B
 Default Owner:  SP B

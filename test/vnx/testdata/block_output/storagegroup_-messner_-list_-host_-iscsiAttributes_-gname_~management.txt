@@ -1,0 +1,23 @@
+Storage Group Name:    ~management
+Storage Group UID:     60:06:01:60:00:00:00:00:00:00:00:00:00:00:00:02
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  50:06:01:60:B6:E0:15:26:50:06:01:69:36:E0:15:26   SP B         1
+Host name:             APM00152312055-spB
+SPPort:                B-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+  50:06:01:60:B6:E0:15:26:50:06:01:61:36:E0:15:26   SP A         1
+Host name:             APM00152312055-spA
+SPPort:                A-1v0
+Initiator IP:          N/A
+TPGT:                  0
+ISID:                  N/A
+
+Special:               YES
+Default:               YES
+Shareable:             YES

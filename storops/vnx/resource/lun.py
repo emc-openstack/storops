@@ -50,9 +50,9 @@ class VNXLunList(VNXCliResourceList):
             self._pool_name = pool
 
     def _filter(self, lun):
-        if self._lun_ids:
+        if self._lun_ids is not None:
             ret = VNXLun.get_id(lun) in self._lun_ids
-        elif self._pool_name:
+        elif self._pool_name is not None:
             ret = lun.pool_name == self._pool_name
         else:
             ret = True

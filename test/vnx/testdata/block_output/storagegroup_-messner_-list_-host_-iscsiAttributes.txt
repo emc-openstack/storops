@@ -172,6 +172,7 @@ HLU/ALU Pairs:
   HLU Number     ALU Number
   ----------     ----------
     154             15
+    14              4
 Shareable:             YES
 
 Storage Group Name:    ubuntu-server7

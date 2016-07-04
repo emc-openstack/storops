@@ -23,6 +23,7 @@ from retryz import retry
 
 from storops.vnx.enums import VNXPortType
 import storops.vnx.resource.lun
+import storops.vnx.resource.host
 from storops.vnx.resource.port import VNXHbaPort
 from storops.vnx.resource import VNXCliResource, VNXCliResourceList
 from storops import exception as ex
@@ -46,7 +47,8 @@ class VNXStorageGroup(VNXCliResource):
         self.shuffle_hlu = shuffle_hlu
 
     def _get_raw_resource(self):
-        return self._cli.get_sg(name=self._name, poll=self.poll)
+        return self._cli.get_sg(name=self._name, poll=self.poll,
+                                engineering=True)
 
     @classmethod
     def get(cls, cli, name=None):
@@ -87,6 +89,17 @@ class VNXStorageGroup(VNXCliResource):
 
     def is_valid(self):
         return len(self.name) > 0 and len(self.uid) > 0
+
+    @property
+    def hosts(self):
+        host_names = [pair.host_name for pair in self.hba_sp_pairs]
+        clz = storops.vnx.resource.host.VNXHostList
+        return clz(cli=self._cli, names=host_names)
+
+    @property
+    def lun_list(self):
+        clz = storops.vnx.resource.lun.VNXLunList
+        return clz(cli=self._cli, lun_ids=self.get_alu_hlu_map().keys())
 
     @property
     def hba_port_list(self):

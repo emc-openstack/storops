@@ -204,8 +204,8 @@ class VNXStorageGroupHBAParserTest(TestCase):
 class VNXStorageGroupParserTest(TestCase):
     def test_parse(self):
         parser = get_vnx_parser('VNXStorageGroup')
-        output = MockCli.read_file('storagegroup_-list_-host_-iscsiAttributes_'
-                                   '-gname_microsoft.txt')
+        output = MockCli.read_file('storagegroup_-messner_-list_-host_'
+                                   '-iscsiAttributes_-gname_microsoft.txt')
         sg = parser.parse(output)
         assert_that(sg.shareable, equal_to(True))
         assert_that(sg.name, equal_to('microsoft'))

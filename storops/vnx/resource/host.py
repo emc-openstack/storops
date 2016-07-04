@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from storops.lib.common import instance_cache, clear_instance_cache
 from storops.vnx.resource import VNXCliResource, VNXCliResourceList
 from storops.vnx.resource.sg import VNXStorageGroupList
 
@@ -29,14 +30,42 @@ class VNXHost(VNXCliResource):
 
         self.name = self._name
         self.connections = None
+        self.storage_group = None
         self._existed = False
 
     def property_names(self):
-        return ['name', 'connections']
+        return ['name', 'connections', 'lun_list', 'alu_hlu_map']
 
     def get_index(self):
         return 'name'
 
+    @property
+    @instance_cache
+    def lun_list(self):
+        return self.storage_group.lun_list
+
+    @property
+    @instance_cache
+    def alu_hlu_map(self):
+        return self.storage_group.get_alu_hlu_map()
+
+    @property
+    def alu_ids(self):
+        if self.alu_hlu_map is not None:
+            ret = self.alu_hlu_map.keys()
+        else:
+            ret = tuple()
+        return ret
+
+    @property
+    def hlu_ids(self):
+        if self.alu_hlu_map is not None:
+            ret = self.alu_hlu_map.values()
+        else:
+            ret = tuple()
+        return ret
+
+    @clear_instance_cache
     def update(self, data=None):
         host_list = VNXHostList(cli=self._cli)
         for host in host_list:
@@ -44,6 +73,7 @@ class VNXHost(VNXCliResource):
                 self._existed = True
                 self.name = host.name
                 self.connections = host.connections
+                self.storage_group = host.storage_group
         return self
 
     @property
@@ -60,6 +90,11 @@ class VNXHost(VNXCliResource):
 
 
 class VNXHostList(VNXCliResourceList):
+    def __init__(self, cli=None, names=None):
+        super(VNXCliResourceList, self).__init__()
+        self._cli = cli
+        self._names = names
+
     @classmethod
     def get_resource_class(cls):
         return VNXHost
@@ -72,11 +107,15 @@ class VNXHostList(VNXCliResourceList):
             if sg.hba_sp_pairs:
                 for pair in sg.hba_sp_pairs:
                     name = pair.host_name
+                    if self._names is not None and name not in self._names:
+                        continue
+
                     if name in host_names:
                         host = hosts[host_names.index(name)]
                     else:
                         host = VNXHost(name=name, cli=self._cli)
                         host.connections = []
+                        host.storage_group = sg
                         hosts.append(host)
                         host_names.append(name)
 

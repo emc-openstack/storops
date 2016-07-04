@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, has_item, raises, instance_of, \
-    none, is_not, has_items
+    none, is_not, has_items, only_contains
 
 from storops.vnx.resource.port import VNXStorageGroupHBAList
 from test.vnx.cli_mock import patch_cli, t_cli
@@ -72,6 +72,24 @@ class VNXStorageGroupTest(TestCase):
         assert_that(sg.has_hlu(153), equal_to(True))
         assert_that(sg.has_hlu(11), equal_to(False))
         assert_that(sg.existed, equal_to(True))
+
+    @patch_cli()
+    def test_property_hosts(self):
+        hosts = self.test_sg('~management').hosts
+        assert_that(len(hosts), equal_to(2))
+        assert_that(hosts.name,
+                    has_items('APM00152312055-spB', 'APM00152312055-spA'))
+        assert_that(hosts[0].storage_group.name, equal_to('~management'))
+
+    @patch_cli()
+    def test_property_lun_list(self):
+        lun_list = self.test_sg('microsoft').lun_list
+        assert_that(lun_list.name, only_contains('lun4', 'lun456'))
+
+    @patch_cli()
+    def test_property_zero_lun_list(self):
+        lun_list = self.test_sg('os01').lun_list
+        assert_that(len(lun_list), equal_to(0))
 
     @patch_cli()
     def test_get_sg_os01(self):

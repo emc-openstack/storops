@@ -73,6 +73,7 @@ class VNXSPPortTest(TestCase):
         assert_that(port.logged_in_initiators, equal_to(1))
         assert_that(port.not_logged_in_initiators, equal_to(2))
         assert_that(port.type, equal_to(VNXPortType.FC))
+        assert_that(port.display_name, equal_to('A-0'))
 
     @patch_cli()
     def test_get_port_by_type(self):
@@ -173,6 +174,7 @@ class VNXConnectionPortTest(TestCase):
         assert_that(port.gateway_address, equal_to('0.0.0.0'))
         assert_that(port.type, equal_to(VNXPortType.ISCSI))
         assert_that(port.existed, equal_to(True))
+        assert_that(port.display_name, equal_to('A-4-0'))
 
     @patch_cli()
     def test_get_all(self):

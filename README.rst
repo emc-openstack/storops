@@ -57,6 +57,7 @@ Feature List
         - list/create/delete NFS share
         - show system domain information
         - list hosts
+        - show system capacity
     - supported feature/operations
         - list/start/cancel migration sessions
         - enable/disable LUN deduplication

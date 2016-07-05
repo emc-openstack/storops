@@ -17,7 +17,7 @@ from __future__ import unicode_literals
 
 from storops.vnx.resource import VNXCliResource, VNXCliResourceList
 from storops import exception as ex
-from storops.lib.common import round_it
+from storops.lib.common import round_3
 from storops.lib.converter import block_to_gb
 
 __author__ = 'Cedric Zhuang'
@@ -58,7 +58,7 @@ class VNXRaidGroup(VNXCliResource):
         return ret
 
     @property
-    @round_it()
+    @round_3
     def available_capacity_gbs(self):
         return block_to_gb(self.free_capacity_blocks_non_contiguous)
 

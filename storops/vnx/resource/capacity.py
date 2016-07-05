@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 from storops.vnx.resource.disk import VNXDisk
 from storops.vnx.resource.block_pool import VNXPool
 from storops.vnx.resource.rg import VNXRaidGroup
-from storops.lib.common import JsonPrinter, round_it
+from storops.lib.common import JsonPrinter, round_3
 from storops.lib.converter import mb_to_gb
 
 __author__ = 'Tina Tang'
@@ -41,7 +41,7 @@ class VNXCapacity(JsonPrinter):
         return VNXCapacity(cli)
 
     @property
-    @round_it()
+    @round_3
     def total(self):
         """Total disk capacity in GB"""
         if self._total is None:
@@ -49,7 +49,7 @@ class VNXCapacity(JsonPrinter):
         return self._total
 
     @property
-    @round_it()
+    @round_3
     def free_raw_disk(self):
         """Free raw disk capacity in GB
 
@@ -61,7 +61,7 @@ class VNXCapacity(JsonPrinter):
         return self._free_raw_disk
 
     @property
-    @round_it()
+    @round_3
     def free_storage_pool(self):
         """Free storage pool capacity in GB
 
@@ -73,7 +73,7 @@ class VNXCapacity(JsonPrinter):
         return self._free_storage_pool
 
     @property
-    @round_it()
+    @round_3
     def used(self):
         """Total used capacity in GB
 

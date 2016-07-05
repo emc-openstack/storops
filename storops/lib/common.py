@@ -435,3 +435,5 @@ def round_it(ndigits=3):
             return round(value, ndigits)
         return _inner
     return inner
+
+round_3 = round_it(3)

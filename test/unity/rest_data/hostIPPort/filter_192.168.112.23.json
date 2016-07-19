@@ -1,0 +1,48 @@
+{
+  "@base": "https://10.244.223.61/api/types/hostIPPort/instances?filter=address eq \"192.168.112.23\"&fields=address,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength,host.id&per_page=2000&compact=true",
+    "updated": "2016-07-28T09:44:45.744Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "isIgnored": false,
+                "instanceId": "root/emc:EMC_UEM_HostNetworkAddressLeaf%InstanceID=HostNetworkAddress_6",
+                "host": {
+                    "id": "Host_16"
+                },
+                "address": "192.168.112.23",
+                "type": 0,
+                "id": "HostNetworkAddress_6"
+            }
+        },
+        {
+            "content": {
+                "isIgnored": false,
+                "instanceId": "root/emc:EMC_UEM_HostNetworkAddressLeaf%InstanceID=HostNetworkAddress_7",
+                "host": {
+                    "id": "Host_9"
+                },
+                "address": "192.168.112.23",
+                "type": 0,
+                "id": "HostNetworkAddress_7"
+            }
+        },
+        {
+            "content": {
+                "isIgnored": false,
+                "instanceId": "root/emc:EMC_UEM_HostNetworkAddressLeaf%InstanceID=HostNetworkAddress_8",
+                "host": {
+                    "id": "Host_13"
+                },
+                "address": "192.168.112.23",
+                "type": 0,
+                "id": "HostNetworkAddress_8"
+            }
+        }
+    ]
+}

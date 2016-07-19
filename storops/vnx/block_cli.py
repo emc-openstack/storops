@@ -15,14 +15,14 @@
 #    under the License.
 from __future__ import unicode_literals
 
-import logging
-
 import functools
+import logging
 from multiprocessing.pool import ThreadPool
 
 import six
 from retryz import retry
 
+import storops.vnx.resource.system
 from storops import exception as ex
 from storops.exception import OptionMissingError
 from storops.lib.common import check_int, text_var, int_var, enum_var, \
@@ -102,6 +102,7 @@ class CliClient(object):
             timeout=timeout,
             naviseccli=naviseccli)
         self._heart_beat.add(VNXSPEnum.SP_A, ip)
+        self._system_version = None
 
     def set_binary(self, binary):
         if binary is not None:
@@ -868,3 +869,13 @@ class CliClient(object):
             pool = ThreadPool(len(ip_list))
             output = pool.map(lambda ip: self.do(ip, params), ip_list)
         return tuple(output)
+
+    def set_system_version(self, version):
+        self._system_version = version
+
+    @property
+    def system_version(self):
+        clz = storops.vnx.resource.system.VNXAgent
+        if self._system_version is None:
+            self._system_version = clz(self).revision
+        return self._system_version

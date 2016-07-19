@@ -90,6 +90,17 @@
       "response": "create_subnet_8.json"
     },
     {
+      "url": "/api/types/host/instances?compact=True",
+      "body": {
+        "type": 1,
+        "name": "192.168.112.24",
+        "tenant": {
+          "id": "tenant_1"
+        }
+      },
+      "response": "create_host_15.json"
+    },
+    {
       "url": "/api/instances/host/Host_11?compact=True",
       "response": "empty.json"
     },
@@ -100,6 +111,18 @@
     {
       "url": "/api/instances/host/Host_12?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "host_12.json"
+    },
+    {
+      "url":  "/api/instances/host/Host_13?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_13.json"
+    },
+    {
+      "url": "/api/instances/host/Host_15?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_15.json"
+    },
+    {
+      "url":  "/api/instances/host/Host_16?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_16.json"
     }
   ]
 }

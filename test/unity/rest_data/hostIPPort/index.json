@@ -122,6 +122,24 @@
     {
       "url": "/api/instances/hostIPPort/HostNetworkAddress_11?compact=True",
       "response": "empty.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"192.168.112.23\"",
+      "response": "filter_192.168.112.23.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True&fields=address,host,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength&filter=address eq \"192.168.112.24\"",
+      "response": "not_found.json"
+    },
+    {
+      "url": "/api/types/hostIPPort/instances?compact=True",
+      "body": {
+        "host": {
+          "id": "Host_15"
+        },
+        "address": "192.168.112.24"
+      },
+      "response": "create_HostNetworkAddress_18.json"
     }
   ]
 }

@@ -36,7 +36,7 @@ class TestPQueue(TestCase):
         self.q.stop()
         self.q = None
         time.sleep(0.1)
-        shutil.rmtree(self.path)
+        shutil.rmtree(self.path, ignore_errors=True)
 
     def test_queue_path(self):
         assert_that(self.q.path, equal_to(self.path))

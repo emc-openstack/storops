@@ -2,9 +2,9 @@
   "content": {
     "id": "0",
     "model": "Unity 500",
-    "apiVersion": "4.0",
+    "apiVersion": "5.0",
     "earliestApiVersion": "4.0",
-    "softwareVersion": "4.0.0",
+    "softwareVersion": "4.1.0",
     "name": "FNM00151200215"
   }
 }

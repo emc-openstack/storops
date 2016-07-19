@@ -479,6 +479,26 @@ class UnityEthernetPortSpeedNotSupportError(UnityException):
     message = "Specified Speed is not supported."
 
 
+@rest_exception
+class UnityVLANUsedByOtherTenantError(UnityException):
+    error_code = 118939688
+
+
+@rest_exception
+class UnityTenantUUIDInUse(UnityException):
+    error_code = 118939686
+
+
+@rest_exception
+class UnityTenantNameInUseError(UnityException):
+    error_code = 118939685
+
+
+@rest_exception
+class UnityVLANAlreadyHasInterfaceError(UnityException):
+    error_code = 118939689
+
+
 class UnityShareTypeNotSupportAccessControlError(UnityException):
     message = 'share type does not support access control.'
 
@@ -517,6 +537,15 @@ class UnityMetricException(UnityException):
 @rest_exception
 class UnityMetricQueryNotFoundError(UnityMetricException):
     error_code = 131153932
+
+
+class SystemAPINotSupported(StoropsException):
+    message = "System in version {version} doesn't support this API"
+
+
+@rest_exception
+class UnityHostNotInSameTenantError(StoropsException):
+    error_code = 151036194
 
 
 class NaviseccliNotAvailableError(VNXException):

@@ -14,6 +14,8 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import ddt
+
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, none, raises, \
@@ -39,6 +41,7 @@ from test.unity.rest_mock import t_rest, patch_rest
 __author__ = 'Cedric Zhuang'
 
 
+@ddt.ddt
 class UnityNasServerTest(TestCase):
     @patch_rest
     def test_properties(self):
@@ -88,9 +91,12 @@ class UnityNasServerTest(TestCase):
 
         assert_that(f, raises(UnityCifsServiceNotEnabledError, 'not enabled'))
 
+    @ddt.data({'version': '3.0.1'},
+              {'version': '4.1.0,3'})
+    @ddt.unpack
     @patch_rest
-    def test_create_nas3_success(self):
-        ret = UnityNasServer.create(t_rest(), 'nas3', 'spa', 'pool_1')
+    def test_create_nas3_success(self, version):
+        ret = UnityNasServer.create(t_rest(version), 'nas3', 'spa', 'pool_1')
         assert_that(ret.name, equal_to('nas3'))
         assert_that(ret.existed, equal_to(True))
 
@@ -100,6 +106,11 @@ class UnityNasServerTest(TestCase):
             UnityNasServer.create(t_rest(), 'nas4', 'spa', 'pool_1')
 
         assert_that(f, raises(UnityNasServerNameUsedError, 'in use'))
+
+    @patch_rest
+    def test_create_nas_server_in_tenant(self):
+        UnityNasServer.create(t_rest('4.1.0'), 'nas5', 'spa',
+                              'pool_1', tenant='tenant_1')
 
     @patch_rest
     def test_delete_not_found(self):

@@ -439,6 +439,12 @@ def get_lock_file(name):
     return path.join(lock_folder, name)
 
 
+def get_data_file(name):
+    data_folder = get_local_folder()
+    assure_folder(data_folder)
+    return path.join(data_folder, name)
+
+
 def round_it(n_digits=3):
     def inner(func):
         @six.wraps(func)

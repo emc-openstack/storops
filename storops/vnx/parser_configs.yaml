@@ -13,7 +13,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-VNXSystem:
+VNXSystem: &VNXSystem
   data_src: cli
   properties:
     - label: "Model:"
@@ -23,6 +23,10 @@ VNXSystem:
     - label: "Model Type:"
     - label: "Agent Rev:"
     - label: "Name:"
+
+
+VNXAgent:
+  <<: *VNXSystem
 
 
 VNXArrayName:

@@ -96,12 +96,13 @@ Feature List
         - list/create/delete NFS servers
         - list/create/delete NFS shares
         - list/create/delete DNS servers
-        - list ip ports.
+        - list ip ports
         - list/create/delete link aggregations
         - list/create/delete Consistency Groups
         - list/create/delete metric real time query
         - list metrics query result
         - list disks
+        - list/create/delete tenants
     - supported feature/operations
         - CIFS share access control
         - NFS share access control

@@ -38,7 +38,6 @@ from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.host import UnityHostInitiator, \
     UnityHostInitiatorList, UnityHost, UnityHostList
 from storops.unity.resource.interface import UnityFileInterfaceList
-from storops.unity.resource.lun import UnityLunList, UnityLun
 from storops.unity.resource.metric import UnityMetricQueryResultList, \
     UnityMetricRealTimeQueryList
 from storops.unity.resource.nas_server import UnityNasServer, \
@@ -46,10 +45,12 @@ from storops.unity.resource.nas_server import UnityNasServer, \
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
-from storops.unity.resource.port import UnityEthernetPortList, \
-    UnityIscsiPortalList
 from storops.unity.resource.port import UnityFcPortList
-from storops.unity.resource.port import UnityIpPortList
+
+from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.lun import UnityLunList
+from storops.unity.resource.port import UnityIpPortList, \
+    UnityEthernetPortList, UnityIscsiPortalList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor, \
     UnityStorageProcessorList
@@ -547,6 +548,31 @@ class UnitySystemTest(TestCase):
         clz_list = t_unity()._default_rsc_clz_list_with_perf_stats()
         assert_that(clz_list, has_items(UnityDisk, UnityLun, UnityFileSystem))
 
+    @patch_rest
+    def test_get_tenant(self):
+        unity = t_unity()
+        tenant = unity.get_tenant()
+        assert_that(len(tenant), equal_to(3))
+
+    @patch_rest
+    def test_get_tenant_use_vlan(self):
+        unity = t_unity()
+        tenant = unity.get_tenant_use_vlan(4)
+        assert_that(tenant.id, equal_to('tenant_4'))
+
+    @patch_rest
+    def test_get_tenant_use_vlan_not_found(self):
+        unity = t_unity()
+        tenant = unity.get_tenant_use_vlan(5)
+        assert_that(tenant, equal_to(None))
+
+    @patch_rest
+    def test_create_tenant(self):
+        unity = t_unity()
+        unity.create_tenant(
+            'test', uuid='173ca6c3-5952-427d-82a6-df88f49e3926',
+            vlans=[3])
+
 
 class UnityDpeTest(TestCase):
     @patch_rest
@@ -605,10 +631,10 @@ class UnityBasicSystemInfoTest(TestCase):
         assert_that(info.id, equal_to('0'))
         assert_that(info.existed, equal_to(True))
         assert_that(info.name, equal_to('FNM00151200215'))
-        assert_that(info.software_version, equal_to('4.0.0'))
+        assert_that(info.software_version, equal_to('4.1.0'))
         assert_that(info.earliest_api_version, equal_to('4.0'))
         assert_that(info.model, equal_to('Unity 500'))
-        assert_that(info.api_version, equal_to("4.0"))
+        assert_that(info.api_version, equal_to("5.0"))
 
     @patch_rest
     def test_get_all(self):

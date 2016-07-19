@@ -34,12 +34,15 @@ log = logging.getLogger(__name__)
 
 
 @cache
-def t_rest():
+def t_rest(version=None):
     """ get the test unity client
 
     :return: unity client singleton
     """
-    return UnityClient('10.244.223.61', 'admin', 'Password123!', verify=False)
+    client = UnityClient('10.244.223.61', 'admin', 'Password123!',
+                         verify=False)
+    client.set_system_version(version)
+    return client
 
 
 @cache

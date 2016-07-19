@@ -24,7 +24,7 @@ from os.path import dirname, abspath, join, exists, basename
 
 import fasteners
 
-from storops.lib.common import instance_cache, get_lock_file
+from storops.lib.common import instance_cache, get_lock_file, get_data_file
 
 __author__ = 'Cedric Zhuang'
 
@@ -92,7 +92,7 @@ class ConnectorMock(object):
 
 
 class PersistedDict(object):
-    def __init__(self, name=None, default=None):
+    def __init__(self, name=None, default=None, folder=None):
         if name is None:
             name = self.__hash__()
         self._name = name
@@ -105,7 +105,7 @@ class PersistedDict(object):
     @property
     @instance_cache
     def data_file_name(self):
-        return abspath('{}.json'.format(self._name))
+        return get_data_file('{}.json'.format(self._name))
 
     @property
     @instance_cache

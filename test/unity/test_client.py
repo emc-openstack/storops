@@ -176,6 +176,10 @@ class UnityClientTest(unittest.TestCase):
         ret = UnityClient.dict_to_filter_string(None)
         assert_that(ret, none())
 
+    @patch_rest
+    def test_system_version(self):
+        assert_that(t_rest().system_version, equal_to('4.1.0'))
+
 
 class UnityPerfManagerTest(unittest.TestCase):
     def perf_mon(self):
@@ -197,8 +201,8 @@ class UnityPerfManagerTest(unittest.TestCase):
         assert_that(len(c), greater_than(1))
         assert_that(len(c), less_than(8))
         cli.enable_perf_metric(10, lambda: c.append(1))
-        sleep(0.5)
-        assert_that(len(c), less_than(10))
+        sleep(1)
+        assert_that(len(c), less_than(15))
         cli.disable_perf_metric()
         assert_that(cli.prev_counter, none())
         assert_that(cli.curr_counter, none())

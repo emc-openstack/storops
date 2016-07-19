@@ -29,14 +29,15 @@ LOG = logging.getLogger(__name__)
 
 class UnityStorageProcessor(UnityResource):
     def create_nas_server(self, name, pool=None, is_repl_dst=None,
-                          multi_proto=None):
+                          multi_proto=None, tenant=None):
         if pool is None:
             pool_list_clz = storops.unity.resource.pool.UnityPoolList
             pool = self._get_unity_rsc(pool_list_clz).first_item
         nas_server_clz = storops.unity.resource.nas_server.UnityNasServer
         return nas_server_clz.create(self._cli, name, self, pool,
                                      is_repl_dst=is_repl_dst,
-                                     multi_proto=multi_proto)
+                                     multi_proto=multi_proto,
+                                     tenant=tenant)
 
     def to_node_enum(self):
         if self.name in ['SP A']:

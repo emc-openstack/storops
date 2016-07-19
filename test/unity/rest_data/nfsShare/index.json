@@ -41,6 +41,10 @@
       "response": "NFSShare_31.json"
     },
     {
+      "url": "/api/instances/nfsShare/NFSShare_32?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
+      "response": "NFSShare_32.json"
+    },
+    {
       "url": "/api/types/nfsShare/instances?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
       "response": "all.json"
     },

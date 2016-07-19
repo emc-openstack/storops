@@ -1,0 +1,26 @@
+{
+  "content": {
+    "id": "Host_13",
+    "operationalStatus": [
+      2
+    ],
+    "type": 1,
+    "autoManageType": 0,
+    "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_11",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "tenant": {
+      "id": "tenant_3"
+    },
+    "name": "host1",
+    "description": "",
+    "osType": "customized os"
+  }
+}

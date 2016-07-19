@@ -24,6 +24,7 @@ from storops.connection.connector import UnityRESTConnector
 from storops.lib.common import instance_cache, EnumList, RepeatedTimer
 from storops.unity.enums import UnityEnum, UnityEnumList
 from storops.unity.resource import UnityResource, UnityResourceList
+import storops.unity.resource.system
 from storops.unity.resp import RestResponse
 
 __author__ = 'Cedric Zhuang'
@@ -161,6 +162,7 @@ class UnityClient(UnityPerfManager):
         self._rest = UnityRESTConnector(ip, port=port, user=username,
                                         password=password,
                                         verify=verify)
+        self._system_version = None
 
     def get_all(self, type_name, base_fields=None, the_filter=None,
                 nested_fields=None):
@@ -344,6 +346,16 @@ class UnityClient(UnityPerfManager):
         else:
             ret = value
         return ret
+
+    def set_system_version(self, version):
+        self._system_version = version
+
+    @property
+    def system_version(self):
+        if self._system_version is None:
+            clz = storops.unity.resource.system.UnityBasicSystemInfo
+            self._system_version = clz.get(cli=self).software_version
+        return self._system_version
 
 
 class UnityDoc(object):

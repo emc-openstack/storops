@@ -38,15 +38,18 @@ from storops.unity.resource.nas_server import UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
-from storops.unity.resource.port import UnityEthernetPortList, \
-    UnityIscsiPortalList, UnityFcPortList
 from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
     UnityIoLimitPolicyList, UnityLinkAggregationList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
+
+from storops.unity.resource.tenant import UnityTenant, UnityTenantList
+from storops.unity.resource.port import UnityEthernetPortList, \
+    UnityIscsiPortalList, UnityFcPortList
 from storops.unity.resource.storage_resource import UnityConsistencyGroup, \
     UnityConsistencyGroupList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
+from storops.lib.version import version
 
 __author__ = 'Jay Xu, Cedric Zhuang'
 
@@ -81,13 +84,14 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityEthernetPortList, _id=_id,
                                    name=name, **filters)
 
-    def create_host(self, name, host_type=None, desc=None, os=None):
+    def create_host(self, name, host_type=None, desc=None, os=None,
+                    tenant=None):
         host = UnityHostList.get(self._cli, name=name)
         if host:
             raise ex.UnityHostNameInUseError()
         else:
             host = UnityHost.create(self._cli, name, host_type=host_type,
-                                    desc=desc, os=os)
+                                    desc=desc, os=os, tenant=tenant)
 
         return host
 
@@ -117,13 +121,13 @@ class UnitySystem(UnitySingletonResource):
                                    **filters)
 
     def create_nas_server(self, name, sp=None, pool=None, is_repl_dst=None,
-                          multi_proto=None):
+                          multi_proto=None, tenant=None):
         if sp is None:
             sp = self.get_sp().first_item
 
         return sp.create_nas_server(name, pool,
                                     is_repl_dst=is_repl_dst,
-                                    multi_proto=multi_proto)
+                                    multi_proto=multi_proto, tenant=tenant)
 
     def get_ip_port(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityIpPortList, _id=_id, name=name,
@@ -186,6 +190,22 @@ class UnitySystem(UnitySingletonResource):
         else:
             clz = resource
         return self._cli.get_doc(clz)
+
+    @version('>=4.1')
+    def create_tenant(self, name, uuid=None, vlans=None):
+        return UnityTenant.create(self._cli, name, uuid=uuid, vlans=vlans)
+
+    @version('>=4.1')
+    def get_tenant(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityTenantList, _id=_id, **filters)
+
+    @version('>=4.1')
+    def get_tenant_use_vlan(self, vlan):
+        tenant = self.get_tenant(vlans=[vlan])
+        if len(tenant) == 0:
+            return None
+        else:
+            return tenant[0]
 
     @property
     @instance_cache

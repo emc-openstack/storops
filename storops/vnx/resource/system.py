@@ -461,3 +461,12 @@ class VNXArrayName(VNXCliResource):
     def set_name(self, new_name):
         out = self._cli.set_array_name(new_name)
         raise_if_err(out, default=VNXSetArrayNameError)
+
+
+class VNXAgent(VNXCliResource):
+    def __init__(self, cli=None):
+        super(VNXAgent, self).__init__()
+        self._cli = cli
+
+    def _get_raw_resource(self):
+        return self._cli.get_agent(poll=self.poll)

@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import ddt
 from unittest import TestCase
 
 from hamcrest import equal_to, assert_that, instance_of, raises, none, \
@@ -24,7 +25,8 @@ from storops.unity.resource.nfs_share import UnityNfsShare
 from storops.exception import UnityHostIpInUseError, \
     UnityResourceNotFoundError, UnityHostInitiatorNotFoundError, \
     UnityHostInitiatorUnknownType, UnityAluAlreadyAttachedError, \
-    UnityAttachAluExceedLimitError, UnitySnapAlreadyPromotedException
+    UnityAttachAluExceedLimitError, UnitySnapAlreadyPromotedException, \
+    SystemAPINotSupported
 from storops.unity.enums import HostTypeEnum, HostManageEnum, \
     HostPortTypeEnum, HealthEnum, HostInitiatorTypeEnum, \
     HostInitiatorSourceTypeEnum, HostInitiatorIscsiTypeEnum
@@ -35,13 +37,15 @@ from storops.unity.resource.host import UnityHost, UnityHostContainer, \
     UnityHostList, UnityHostIpPort, UnityHostInitiatorPathList, \
     UnityHostLun, UnityHostLunList
 from storops.unity.resource.snap import UnitySnap
+from storops.unity.resource.tenant import UnityTenant
 from storops.unity.resource.vmware import UnityDataStoreList, UnityVmList
 from test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
 
 
-class UnityHostTest(TestCase):
+@ddt.ddt
+class UnityHotTest(TestCase):
     @patch_rest
     def test_properties(self):
         host = UnityHost(_id='Host_1', cli=t_rest())
@@ -81,18 +85,51 @@ class UnityHostTest(TestCase):
             equal_to('50:06:01:60:C7:E0:01:DA:50:06:01:6C:47:E0:01:DA'))
 
     @patch_rest
+    def test_properties_in_tenant(self):
+        host = UnityHost(_id='Host_16', cli=t_rest())
+        assert_that(host.id, equal_to('Host_16'))
+        assert_that(host.tenant, instance_of(UnityTenant))
+        assert_that(host.tenant.id, equal_to('tenant_1'))
+        assert_that(host.tenant.vlans, only_contains(1, 3))
+
+    @patch_rest
     def test_get_all(self):
         hosts = UnityHostList(cli=t_rest())
         assert_that(len(hosts), equal_to(7))
 
     @patch_rest
-    def test_get_host_with_ip(self):
-        host = UnityHost.get_host(t_rest(), '10.244.209.90')
+    def test_get_host_ip_with_mask(self):
+        host = UnityHost.get_host(t_rest(), '10.244.209.90/32')
         assert_that(host.ip_list, only_contains('10.244.209.90'))
 
     @patch_rest
-    def test_get_host_ip_with_mask(self):
-        host = UnityHost.get_host(t_rest(), '10.244.209.90/32')
+    def test_get_host_in_tenant_with_ip(self):
+        host = UnityHost.get_host(t_rest(), '192.168.112.23',
+                                  tenant='tenant_1')
+        assert_that(host.tenant.id, equal_to('tenant_1'))
+        host = UnityHost.get_host(t_rest(), '192.168.112.23')
+        assert_that(host.tenant, equal_to(None))
+
+    @patch_rest
+    def test_get_host_in_tenant_when_tenant_not_supported(self):
+        def do():
+            UnityHost.get_host(t_rest('3.1.0'), '192.168.112.23',
+                               tenant='tenant_1')
+        assert_that(do, raises(SystemAPINotSupported))
+
+    @patch_rest
+    def test_get_host_with_force_create(self):
+        host = UnityHost.get_host(t_rest(), '192.168.112.24',
+                                  tenant='tenant_1',
+                                  force_create=True)
+        assert_that(host._id, equal_to('Host_15'))
+
+    @ddt.data({'version': '3.3.0'},
+              {'version': '4.0.1'})
+    @ddt.unpack
+    @patch_rest
+    def test_get_host_with_ip(self, version):
+        host = UnityHost.get_host(t_rest(version), '10.244.209.90')
         assert_that(host.ip_list, only_contains('10.244.209.90'))
 
     @patch_rest

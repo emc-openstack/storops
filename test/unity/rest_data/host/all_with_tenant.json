@@ -1,0 +1,327 @@
+{
+    "@base": "https://10.244.223.61/api/types/host/instances?fields=autoManageType,description,health,hostPolledUUID,hostPushedUUID,hostUUID,id,instanceId,isInitializationComplete,lastPollTime,name,operationalStatus,osType,registrationType,type,hostContainer.id,hostLUNs.id,hostIPPorts.id,fcHostInitiators.id,iscsiHostInitiators.id,vms.id,tenant.id,storageResources.id,datastores.id,nfsShareAccesses.id,hostVVolDatastore.id&per_page=2000&compact=true",
+    "updated": "2016-07-28T09:31:30.867Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "fcHostInitiators": [
+                    {
+                        "id": "HostInitiator_2"
+                    },
+                    {
+                        "id": "HostInitiator_3"
+                    }
+                ],
+                "name": "ESD-HOST198232.meng.lab.emc.com",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_1",
+                "hostPushedUUID": "345119f3-d49a-456a-948b-829e81dfdd9e",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "Other",
+                "type": 5,
+                "id": "Host_1",
+                "autoManageType": 2,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "fcHostInitiators": [
+                    {
+                        "id": "HostInitiator_1"
+                    },
+                    {
+                        "id": "HostInitiator_4"
+                    }
+                ],
+                "name": "ESD-HOST193221.meng.lab.emc.com",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_2",
+                "hostPushedUUID": "ef78e03c-b57b-4c82-96b0-da9a991fe6d9",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "Other",
+                "type": 5,
+                "id": "Host_2",
+                "autoManageType": 2,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "hostLUNs": [
+                    {
+                        "id": "Host_3_sv_6_snap"
+                    },
+                    {
+                        "id": "Host_3_sv_6_prod"
+                    }
+                ],
+                "hostIPPorts": [
+                    {
+                        "id": "HostNetworkAddress_1"
+                    }
+                ],
+                "name": "nlpc20982",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_3",
+                "iscsiHostInitiators": [
+                    {
+                        "id": "HostInitiator_9"
+                    }
+                ],
+                "hostPushedUUID": "4cb71b44-96e7-4c9b-93bc-3a8a9a8a9770",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "Other",
+                "type": 1,
+                "id": "Host_3",
+                "autoManageType": 0,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "hostIPPorts": [
+                    {
+                        "id": "HostNetworkAddress_2"
+                    }
+                ],
+                "name": "l1pfc209208",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_4",
+                "iscsiHostInitiators": [
+                    {
+                        "id": "HostInitiator_10"
+                    }
+                ],
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "Windows Server",
+                "type": 1,
+                "id": "Host_4",
+                "autoManageType": 0,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "name": "umsg.lab.emc.com",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_5",
+                "iscsiHostInitiators": [
+                    {
+                        "id": "HostInitiator_28"
+                    }
+                ],
+                "hostPushedUUID": "5322a3d1-2901-08c3-c39f-f80f41fafe2e",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "VMware ESXi 6.0.0",
+                "type": 5,
+                "id": "Host_5",
+                "autoManageType": 2,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "name": "ESX239209",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_6",
+                "iscsiHostInitiators": [
+                    {
+                        "id": "HostInitiator_29"
+                    }
+                ],
+                "hostPushedUUID": "53181249-9747-97f0-9feb-a44c11a10b6a",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "VMware ESXi 6.0.0",
+                "type": 5,
+                "id": "Host_6",
+                "autoManageType": 2,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "hostIPPorts": [
+                    {
+                        "id": "HostNetworkAddress_7"
+                    }
+                ],
+                "name": "host_in_tenant",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_9",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "Linux",
+                "type": 1,
+                "id": "Host_9",
+                "autoManageType": 0,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "hostIPPorts": [
+                    {
+                        "id": "HostNetworkAddress_8"
+                    }
+                ],
+                "name": "192.168.112.23",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_15",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "tenant": {
+                    "id": "tenant_1"
+                },
+                "osType": "",
+                "type": 1,
+                "id": "Host_15",
+                "autoManageType": 0,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "hostIPPorts": [
+                    {
+                        "id": "HostNetworkAddress_9"
+                    }
+                ],
+                "name": "192.168.1.23",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_16",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "tenant": {
+                    "id": "tenant_1"
+                },
+                "osType": "",
+                "type": 1,
+                "id": "Host_16",
+                "autoManageType": 0,
+                "description": ""
+            }
+        },
+        {
+            "content": {
+                "hostIPPorts": [
+                    {
+                        "id": "HostNetworkAddress_8"
+                    }
+                ],
+                "name": "192.168.112.23",
+                "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_15",
+                "operationalStatus": [
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "osType": "",
+                "type": 1,
+                "id": "Host_15",
+                "autoManageType": 0,
+                "description": ""
+            }
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "content": {
+        "attributes": [
+            {
+                "displayValue": "instanceId",
+                "type": "String",
+                "name": "instanceId",
+                "description": "Internal instance identifier.  "
+            },
+            {
+                "displayValue": "id",
+                "type": "String",
+                "name": "id",
+                "description": "Unique identifier of the tenant instance.  "
+            },
+            {
+                "displayValue": "name",
+                "type": "String",
+                "name": "name",
+                "description": "User-specified name of the tenant.  "
+            },
+            {
+                "displayValue": "uuid",
+                "type": "String",
+                "name": "uuid",
+                "description": "UUID of the tenant.  "
+            },
+            {
+                "displayValue": "vlans",
+                "type": "List<Integer>",
+                "name": "vlans",
+                "description": "VLAN IDs assigned to the tenant.  "
+            },
+            {
+                "displayValue": "hosts",
+                "type": "List<host>",
+                "name": "hosts",
+                "description": "The hosts associated with the current tenant"
+            }
+        ],
+        "documentation": "https://10.244.223.61/apidocs/classes/tenant.html",
+        "name": "tenant",
+        "description": "A tenant is a representation of a datacenter client, who uses an independent network structure and gets the independent and exclusive access to certain storage resources. On the storage array, it corresponds to a NAS server group with an independent IP addressing. At the moment, iSCSI and management resources do not support multi-tenant access. For each tenant a corresponding Linux network namespace is created. In the current design, traffic separation between the tenants is done by the VLANs. Each tenant reserves a group of VLANs, and each VLAN can belong to one tenant maximum. Every tenant gets a name and the Universally Unique Identifier (UUID). The UUID cannot be changed during the tenant life cycle. The asynchronous replication of the NAS servers is allowed only between the servers belonging to the tenants with the same UUID. The NAS servers and VLANs can still belong to no tenant. Such NAS servers and VLANs operate in the Linux base network namespace, together with management and iSCSI interfaces. The control stack of the system does not allow user to log in in the tenant administrator role. All the tenants, NAS servers and VLANs are managed from the single system administrator account. To allow this, the corresponding GUI and CLI modifications are made.  "
+    }
+}

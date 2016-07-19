@@ -35,12 +35,14 @@ log = logging.getLogger(__name__)
 
 
 @cache
-def t_cli():
+def t_cli(version=None):
     """ get the test cli client
 
     :return: test cli client
     """
-    return CliClient("10.244.211.30", heartbeat_interval=0)
+    cli = CliClient("10.244.211.30", heartbeat_interval=0)
+    cli.set_system_version(version)
+    return cli
 
 
 @cache

@@ -21,6 +21,10 @@
       "response": "nas_5.json"
     },
     {
+      "url": "/api/instances/nasServer/nas_6?compact=True&fields=allowUnmappedUser,cifsServer,credentialsCacheTTL,currentSP,currentUnixDirectoryService,defaultUnixUser,defaultWindowsUser,fileDNSServer,fileInterface,health,homeSP,id,instanceId,isExtendedUnixCredentialEnabled,isMultiProtocolEnabled,isReplicationDestination,isReplicationEnabled,isSystem,isWindowsToUnixUsernameMappingEnabled,name,objectId,pool,preferredInterfaceSettings,replicationType,sizeAllocated,type,virusChecker",
+      "response": "nas_6.json"
+    },
+    {
       "url": "/api/instances/nasServer/nas_7?compact=True&fields=allowUnmappedUser,cifsServer,credentialsCacheTTL,currentSP,currentUnixDirectoryService,defaultUnixUser,defaultWindowsUser,fileDNSServer,fileInterface,health,homeSP,id,instanceId,isExtendedUnixCredentialEnabled,isMultiProtocolEnabled,isReplicationDestination,isReplicationEnabled,isSystem,isWindowsToUnixUsernameMappingEnabled,name,objectId,pool,preferredInterfaceSettings,replicationType,sizeAllocated,type,virusChecker",
       "response": "nas_7.json"
     },
@@ -35,6 +39,22 @@
           "id": "spa"
         },
         "name": "nas3",
+        "pool": {
+          "id": "pool_1"
+        }
+      },
+      "response": "create_nas_3_success.json"
+    },
+    {
+      "url": "/api/types/nasServer/instances?compact=True",
+      "body": {
+        "tenant": {
+          "id": "tenant_1"
+        },
+        "homeSP": {
+          "id": "spa"
+        },
+        "name": "nas5",
         "pool": {
           "id": "pool_1"
         }

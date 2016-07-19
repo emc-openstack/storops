@@ -25,6 +25,7 @@ import storops.unity.resource.pool
 from storops.exception import UnityCifsServiceNotEnabledError
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.sp import UnityStorageProcessor
+from storops.unity.resource.tenant import UnityTenant
 
 __author__ = 'Jay Xu'
 
@@ -34,17 +35,21 @@ log = logging.getLogger(__name__)
 class UnityNasServer(UnityResource):
     @classmethod
     def create(cls, cli, name, sp, pool, is_repl_dst=None,
-               multi_proto=None):
+               multi_proto=None,
+               tenant=None):
         sp = UnityStorageProcessor.get(cli, sp)
         pool_clz = storops.unity.resource.pool.UnityPool
         pool = pool_clz.get(cli, pool)
+        if tenant is not None:
+            tenant = UnityTenant.get(cli, tenant)
 
         resp = cli.post(cls().resource_class,
                         name=name,
                         homeSP=sp,
                         pool=pool,
                         isReplicationDestination=is_repl_dst,
-                        isMultiProtocolEnabled=multi_proto)
+                        isMultiProtocolEnabled=multi_proto,
+                        tenant=tenant)
         resp.raise_if_err()
         return cls(_id=resp.resource_id, cli=cli)
 

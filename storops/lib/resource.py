@@ -146,6 +146,11 @@ class Resource(JsonPrinter):
             ret = None
         return ret
 
+    @property
+    def system_version(self):
+        # Return the version of backing system
+        return None
+
     def _get_properties(self, dec=0):
         props = {'hash': self.__hash__()}
 

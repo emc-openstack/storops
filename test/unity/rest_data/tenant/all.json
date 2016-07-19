@@ -1,0 +1,47 @@
+{
+    "@base": "https://10.244.223.61/api/types/tenant/instances?fields=id,instanceId,name,uuid,vlans&per_page=2000&compact=true",
+    "updated": "2016-07-18T02:43:07.884Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "instanceId": "root/emc:EMC_UEM_TenantLeaf%InstanceID=tenant_1",
+                "uuid": "173ca6c3-5952-427d-82a6-df88f49e3926",
+                "vlans": [
+                    1,
+                    3
+                ],
+                "id": "tenant_1",
+                "name": "T1"
+            }
+        },
+        {
+            "content": {
+                "instanceId": "root/emc:EMC_UEM_TenantLeaf%InstanceID=tenant_2",
+                "uuid": "d483de32-8dff-4ea3-b16e-4063efc25414",
+                "vlans": [
+                    2
+                ],
+                "id": "tenant_2",
+                "name": "T2"
+            }
+        },
+        {
+            "content": {
+                "instanceId": "root/emc:EMC_UEM_TenantLeaf%InstanceID=tenant_3",
+                "uuid": "4222f00c-f2b7-410a-8c3c-73db15c657fb",
+                "vlans": [
+                    5,
+                    6
+                ],
+                "id": "tenant_3",
+                "name": "test_from_storops"
+            }
+        }
+    ]
+}

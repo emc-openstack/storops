@@ -1,0 +1,21 @@
+{
+    "content": {
+        "minSecurity": 0,
+        "instanceId": "root/emc:EMC_UEM_NFSShareLeaf%InstanceID=NFSShare_1",
+        "creationTime": "2016-07-27T05:48:54.988Z",
+        "description": "",
+        "defaultAccess": 1,
+        "modificationTime": "2016-07-27T06:48:13.837Z",
+        "role": 0,
+        "exportPaths": [
+            "192.168.1.3:/fs_in_tenant"
+        ],
+        "filesystem": {
+            "id": "fs_17"
+        },
+        "path": "/",
+        "type": 1,
+        "id": "NFSShare_32",
+        "name": "fs_in_tenant"
+    }
+}

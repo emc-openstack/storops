@@ -208,6 +208,9 @@ class UnityResource(Resource):
             ret = False
         return ret
 
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __hash__(self):
         return super(UnityResource, self).__hash__()
 
@@ -226,6 +229,12 @@ class UnityResource(Resource):
                                 self.get_id(),
                                 action,
                                 **kwargs)
+
+    @property
+    def system_version(self):
+        if self._cli is None:
+            return None
+        return self._cli.system_version
 
 
 class UnitySingletonResource(UnityResource):

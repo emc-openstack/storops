@@ -20,7 +20,7 @@ from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, none, instance_of, raises
 from storops.vnx.resource.mover import VNXMoverList
-from storops.vnx.resource.system import VNXArrayName
+from storops.vnx.resource.system import VNXArrayName, VNXAgent
 
 from storops.vnx.resource.vdm import VNXVdmList
 
@@ -50,6 +50,7 @@ log = logging.getLogger(__name__)
 
 
 class VNXSystemTest(TestCase):
+    @patch_cli()
     def setUp(self):
         self.vnx = t_vnx()
 
@@ -395,3 +396,10 @@ class VNXArrayNameTest(TestCase):
                 '_123456789_123456789_123456789')
 
         assert_that(f, raises(VNXSetArrayNameError, 'is 64'))
+
+
+class VNXAgentTest(TestCase):
+    @patch_cli
+    def test_get(self):
+        agent = VNXAgent(t_cli())
+        assert_that(agent.revision, equal_to('05.33.008.3.297'))

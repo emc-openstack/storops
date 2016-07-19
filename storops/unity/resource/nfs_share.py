@@ -171,7 +171,8 @@ class UnityNfsShare(UnityResource):
         host_clz = storops.unity.resource.host.UnityHost
         ret = []
         for item in hosts:
-            host = host_clz.get_host(self._cli, item, force_create_host)
+            host = host_clz.get_host(self._cli, item, force_create_host,
+                                     tenant=self.tenant)
             if host is not None:
                 ret.append(host)
         if hosts and len(ret) == 0:
@@ -293,6 +294,15 @@ class UnityNfsShare(UnityResource):
         else:
             ret = None
         return ret
+
+    @property
+    @instance_cache
+    def tenant(self):
+        if self.filesystem is not None:
+            server = self.filesystem.nas_server
+            if server is not None:
+                return server.tenant
+        return None
 
     def create_snap(self, name=None, fs_access_type=None):
         if fs_access_type is None:

@@ -1,0 +1,11 @@
+{
+    "content": {
+        "instanceId": "root/emc:EMC_UEM_TenantLeaf%InstanceID=tenant_1",
+        "uuid": "173ca6c3-5952-427d-82a6-df88f49e3926",
+        "vlans": [
+            4
+        ],
+        "id": "tenant_3",
+        "name": "T1"
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "content": {
+        "isMigrationDestination": false,
+        "isExtendedUnixCredentialEnabled": false,
+        "instanceId": "root/emc:EMC_UEM_FileServerContainerLeaf%InstanceID=nas_6",
+        "credentialsCacheTTL": "00:15:00.000",
+        "homeSP": {
+            "id": "spa"
+        },
+        "id": "nas_6",
+        "objectId": 103079215111,
+        "currentUnixDirectoryService": 0,
+        "health": {
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ],
+            "value": 5
+        },
+        "pool": {
+            "id": "pool_1"
+        },
+        "sizeAllocated": 2952790016,
+        "type": 64,
+        "nfsServer": {
+            "id": "nfs_4"
+        },
+        "fileInterface": [
+            {
+                "id": "if_14"
+            }
+        ],
+        "replicationType": 0,
+        "virusChecker": {
+            "id": "cava_6"
+        },
+        "isSystem": false,
+        "tenant": {
+            "id": "tenant_1"
+        },
+        "isReplicationEnabled": false,
+        "name": "test_from_stor_ops",
+        "isPacketReflectEnabled": true,
+        "eventPublisher": {
+            "id": "cepa_6"
+        },
+        "isMultiProtocolEnabled": false,
+        "isReplicationDestination": false,
+        "currentSP": {
+            "id": "spa"
+        },
+        "preferredInterfaceSettings": {
+            "id": "preferred_if_5"
+        }
+    }
+}

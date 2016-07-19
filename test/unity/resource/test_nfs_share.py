@@ -59,6 +59,12 @@ class UnityNfsShareTest(TestCase):
                     equal_to('2016-03-02 02:39:22.856000+00:00'))
         assert_that(nfs.filesystem.get_id(), equal_to('fs_1'))
         assert_that(nfs.filesystem, instance_of(UnityFileSystem))
+        assert_that(nfs.tenant, equal_to(None))
+
+    @patch_rest
+    def test_tenant_properties(self):
+        nfs = UnityNfsShare('NFSShare_32', cli=t_rest())
+        assert_that(nfs.tenant.id, equal_to('tenant_1'))
 
     @patch_rest
     def test_host_access_properties(self):
@@ -156,6 +162,12 @@ class UnityNfsShareTest(TestCase):
         h1 = UnityHost(_id='Host_1', cli=t_rest())
         resp = share.allow_read_only_access([h1, '1.1.1.1'],
                                             force_create_host=True)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_share_in_tenant_allow_access_to_ip(self):
+        share = UnityNfsShare(_id='NFSShare_32', cli=t_rest())
+        resp = share.allow_read_only_access('192.168.112.23')
         assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest

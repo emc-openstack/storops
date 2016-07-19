@@ -273,6 +273,8 @@ UnityNasServer:
     - label: pool
       converter: UnityPool
     - label: sizeAllocated
+    - label: tenant
+      converter: UnityTenant
     - label: isReplicationEnabled
     - label: isReplicationDestination
     - label: replicationType
@@ -930,6 +932,8 @@ UnityHost:
       converter: UnityStorageResourceList
     - label: hostLUNs
       converter: UnityHostLunList
+    - label: tenant
+      converter: UnityTenant
     - label: datastores
       converter: UnityDataStoreList
     - label: hostVVolDatastore
@@ -1526,3 +1530,13 @@ UnityMetricQueryResult:
     - label: values
 
 
+UnityTenant:
+  data_src: rest
+  name: tenant
+  properties:
+    - label: id
+    - label: name
+    - label: uuid
+    - label: vlans
+    - label: hosts
+      converter: UnityHostList

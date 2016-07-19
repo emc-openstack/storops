@@ -1,0 +1,49 @@
+{
+  "content": {
+    "id": "Host_15",
+    "operationalStatus": [
+      32769
+    ],
+    "type": 1,
+    "autoManageType": 0,
+    "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_9",
+    "health": {
+      "value": 10,
+      "descriptionIds": [
+        "ALRT_HOST_NO_LOGGED_IN_INITIATORS"
+      ],
+      "descriptions": [
+        "The host does not have any initiators logged into the storage system. Register one or more initiators on the host to the storage system. This may also require zoning changes on the switches."
+      ],
+      "resolutionIds": [
+        "host_connect_initiators"
+      ]
+    },
+    "name": "ubuntu-server7",
+    "description": "",
+    "osType": "",
+    "fcHostInitiators": [
+      {
+        "id": "HostInitiator_19"
+      },
+      {
+        "id": "HostInitiator_20"
+      }
+    ],
+    "iscsiHostInitiators": [
+      {
+        "id": "HostInitiator_21"
+      }
+    ],
+    "hostIPPorts": [
+      {
+        "id": "HostNetworkAddress_11"
+      }
+    ],
+    "hostLUNs": [
+      {
+        "id": "Host_9_sv_34_prod"
+      }
+    ]
+  }
+}

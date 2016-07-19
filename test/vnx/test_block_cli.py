@@ -798,3 +798,7 @@ class CliClientTest(TestCase):
     def test_set_array_name(self):
         cmd = self.client.set_array_name('new_name')
         assert_that(cmd, equal_to('arrayname new_name -o'))
+
+    @patch_cli
+    def test_system_version(self):
+        assert_that(self.client.system_version, equal_to('05.33.008.3.297'))

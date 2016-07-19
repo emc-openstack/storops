@@ -35,6 +35,12 @@ class VNXResource(Resource):
                 ret = tuple()
         return ret
 
+    @property
+    def system_version(self):
+        if self._cli is None:
+            return None
+        return self._cli.system_version
+
 
 class _WithPoll(object):
     def __init__(self, r):

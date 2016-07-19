@@ -1,0 +1,63 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/tenant?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/instances/tenant/tenant_1?compact=True&fields=hosts,id,instanceId,name,uuid,vlans",
+      "response": "tenant_1.json"
+    },
+    {
+      "url": "/api/types/tenant/instances?compact=True&fields=hosts,id,instanceId,name,uuid,vlans",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/types/tenant/instances?compact=True&fields=hosts,id,instanceId,name,uuid,vlans&filter=vlans eq 1 or vlans eq 3",
+      "response": "vlan1_3.json"
+    },
+    {
+      "url": "/api/instances/tenant/tenant_1/action/modify?compact=True",
+      "body": {
+        "name": "new_name"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/tenant/tenant_1/action/modify?compact=True",
+      "body": {
+        "vlans": [4]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/tenant/instances?compact=True",
+      "body": {
+        "vlans": [3],
+        "name": "test",
+        "uuid": "173ca6c3-5952-427d-82a6-df88f49e3926"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/tenant/instances?compact=True",
+      "body": {
+        "vlans": [3],
+        "name": "dup"
+      },
+      "response": "name_inuse.json"
+    },
+    {
+      "url": "/api/instances/tenant/tenant_3?compact=True&fields=hosts,id,instanceId,name,uuid,vlans",
+      "response": "tenant_3.json"
+    },
+    {
+      "url": "/api/types/tenant/instances?compact=True&fields=hosts,id,instanceId,name,uuid,vlans&filter=vlans eq 4",
+      "response": "vlan4.json"
+    },
+    {
+      "url": "/api/types/tenant/instances?compact=True&fields=hosts,id,instanceId,name,uuid,vlans&filter=vlans eq 5",
+      "response": "vlan_not_found.json"
+    }
+  ]
+}

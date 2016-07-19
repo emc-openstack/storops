@@ -1,0 +1,93 @@
+{
+    "content": {
+        "isMigrationDestination": false,
+        "dedupProgress": 100,
+        "dedupState": 2,
+        "instanceId": "root/emc:EMC_UEM_FileSystemLeaf%InstanceID=fs_4",
+        "snapsSize": 0,
+        "poolFullPolicy": 1,
+        "cifsNotifyOnChangeDirDepth": 512,
+        "metadataSizeAllocated": 3221225472,
+        "dedupNumFilesScanned": 0,
+        "id": "fs_17",
+        "snapCount": 0,
+        "sizeUsed": 1620303872,
+        "minSizeAllocated": 3221225472,
+        "isReadOnly": false,
+        "dedupSizeUsed": 0,
+        "dedupNumFilesTotal": 0,
+        "backendId": "171798691856",
+        "supportedProtocols": 0,
+        "accessPolicy": 1,
+        "cifsNumUsedFiles": 0,
+        "dedupNumFileRecalled": 0,
+        "exportedFSID": "57984b44-e9b0-656c-c1ec-0060166fabfe",
+        "health": {
+            "descriptionIds": [
+                "ALRT_APP_FS_OK"
+            ],
+            "descriptions": [
+                "This storage resource is operating normally. No action is required."
+            ],
+            "value": 5
+        },
+        "dedupExcludeExtensions": [
+            ""
+        ],
+        "metadataSize": 3489660928,
+        "isCIFSNotifyOnAccessEnabled": false,
+        "folderRenamePolicy": 0,
+        "isDedupRunning": false,
+        "type": 1,
+        "isThinEnabled": true,
+        "storageResource": {
+            "id": "res_8"
+        },
+        "nfsShare": [
+            {
+                "id": "NFSShare_32"
+            }
+        ],
+        "nasServer": {
+            "id": "nas_6"
+        },
+        "description": "",
+        "format": 2,
+        "oid": 8589934611,
+        "snapsSizeAllocated": 0,
+        "modificationTime": "2016-07-27T05:48:54.775Z",
+        "perTierSizeUsed": [
+            6442450944,
+            0,
+            0
+        ],
+        "operationalStatus": [
+            2
+        ],
+        "lockingPolicy": 0,
+        "tieringPolicy": 0,
+        "pool": {
+            "id": "pool_1"
+        },
+        "sizeAllocated": 3221225472,
+        "name": "fs_in_tenant",
+        "dedupOriginalSizeUsed": 1351819264,
+        "creationTime": "2016-07-27T05:48:54.774Z",
+        "isCIFSNotifyOnWriteEnabled": false,
+        "sizeTotal": 5368709120,
+        "dedupExcludePaths": [
+            ""
+        ],
+        "isCIFSSyncWritesEnabled": false,
+        "isSMBCA": false,
+        "dedupSizeSaved": 0,
+        "isCIFSOpLocksEnabled": true,
+        "dedupNumFilesDeduped": 0,
+        "dedupPercentSaved": 0,
+        "hostIOSize": 8192,
+        "fileEventSettings": {
+            "isCIFSEnabled": false,
+            "isNFSEnabled": false
+        }
+    }
+}

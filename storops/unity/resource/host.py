@@ -26,6 +26,7 @@ from storops.lib import converter
 from storops.unity.enums import HostTypeEnum, HostInitiatorTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
+from storops.unity.resource.tenant import UnityTenant
 
 __author__ = 'Cedric Zhuang'
 
@@ -66,25 +67,35 @@ class UnityHost(UnityResource):
         )
 
     @classmethod
-    def create(cls, cli, name, host_type=None, desc=None, os=None):
+    def create(cls, cli, name, host_type=None, desc=None, os=None,
+               tenant=None):
         if host_type is None:
             host_type = HostTypeEnum.HOST_MANUAL
+
+        if tenant is not None:
+            tenant = UnityTenant.get(cli, tenant)
 
         resp = cli.post(cls().resource_class,
                         type=host_type,
                         name=name,
                         description=desc,
-                        osType=os)
+                        osType=os,
+                        tenant=tenant)
         resp.raise_if_err()
         return cls(_id=resp.resource_id, cli=cli)
 
     @classmethod
-    def get_host(cls, cli, _id, force_create=False):
+    def get_host(cls, cli, _id, force_create=False, tenant=None):
         if isinstance(_id, six.string_types) and ('.' in _id or ':' in _id):
             # it looks like an ip address, find or create the host
             address = converter.url_to_host(_id)
             netmask = converter.url_to_mask(_id)
             ports = UnityHostIpPortList(cli=cli, address=address)
+            # since tenant is not supported by all kinds of system. So we
+            # should avoid send the tenant request if tenant is None
+            tenant = None if tenant is None else UnityTenant.get(cli, tenant)
+            ports = [port for port in ports if port.host.tenant == tenant]
+
             if len(ports) == 1:
                 ret = ports[0].host
             elif force_create:
@@ -95,7 +106,8 @@ class UnityHost(UnityResource):
                              else HostTypeEnum.HOST_MANUAL)
                 host_name = ('{}_{}'.format(address, netmask) if netmask
                              else address)
-                host = cls.create(cli, host_name, host_type=host_type)
+                host = cls.create(cli, host_name, host_type=host_type,
+                                  tenant=tenant)
                 host.add_ip_port(address, netmask=netmask)
                 ret = host
             else:

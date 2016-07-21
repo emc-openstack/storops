@@ -20,7 +20,6 @@ import re
 
 from past.builtins import filter
 
-from storops.exception import VNXObjectNotFound
 from storops.lib.converter import to_datetime
 from storops.vnx.enums import VNXSPEnum
 from storops.vnx.resource import VNXCliResourceList, VNXCliResource
@@ -72,8 +71,8 @@ class VNXDomainNodeList(VNXCliResourceList):
                 ret = node
                 break
         else:
-            raise VNXObjectNotFound(
-                'domain node "{}" not found'.format(node_id))
+            log.info('node "{}" not found in the vnx domain.')
+            ret = None
         return ret
 
     @staticmethod
@@ -81,7 +80,7 @@ class VNXDomainNodeList(VNXCliResourceList):
         dnl = VNXDomainNodeList(cli)
         dnl.with_no_poll()
         node = dnl.get_node(serial)
-        if node.control_station is None:
+        if node is None or node.control_station is None:
             log.info('system {} does not has control station.'.format(serial))
             ret = None
         else:

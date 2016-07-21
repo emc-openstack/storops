@@ -17,11 +17,9 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, contains_string, is_not, raises, \
-    none
+from hamcrest import assert_that, equal_to, contains_string, is_not, none
 
 from test.vnx.cli_mock import t_cli, patch_cli
-from storops.exception import VNXObjectNotFound
 from storops.vnx.enums import VNXSPEnum
 from storops.vnx.resource.vnx_domain import VNXDomainNodeList, \
     VNXNetworkAdmin, VNXStorageProcessor
@@ -90,11 +88,7 @@ class VNXDomainNodeListTest(TestCase):
 
     @patch_cli
     def test_get_node_not_found(self):
-        def f():
-            node = self.dnl.get_node('abcde')
-            assert_that(len(node.members), equal_to(2))
-
-        assert_that(f, raises(VNXObjectNotFound, 'abcde'))
+        assert_that(self.dnl.get_node('abcde'), none())
 
     @patch_cli
     def test_get_spa_check_ip(self):

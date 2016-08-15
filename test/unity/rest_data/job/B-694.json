@@ -1,0 +1,78 @@
+{
+    "content": {
+        "isJobCancelable": false,
+        "progressPct": 100,
+        "tasks": [
+            {
+                "parametersIn": {
+                    "nfsShareCreate": [
+                        {
+                            "path": "/",
+                            "name": "613dd8b0-2c22-4da0-888e-494d320303b7"
+                        }
+                    ],
+                    "description": "",
+                    "name": "613dd8b0-2c22-4da0-888e-494d320303b7",
+                    "fsParameters": {
+                        "nasServer": {
+                            "id": "nas_6"
+                        },
+                        "size": 4294967296,
+                        "pool": {
+                            "id": "pool_5"
+                        },
+                        "supportedProtocols": 0
+                    }
+                },
+                "name": "CreateNewFilesystem",
+                "parametersOut": {
+                    "storageResource": {
+                        "id": "res_449"
+                    }
+                },
+                "object": "storageResource",
+                "messages": [
+                    {
+                        "errorCode": 0,
+                        "messages": [
+                            {
+                                "locale": "en_US",
+                                "message": "Success"
+                            }
+                        ]
+                    }
+                ],
+                "submitTime": "2016-07-28T10:11:18.514Z",
+                "state": 2,
+                "startTime": "2016-07-28T10:11:18.526Z",
+                "action": "createFilesystem",
+                "description": "Create File System"
+            }
+        ],
+        "methodName": "job.create",
+        "description": "Creating Filesystem and share",
+        "isJobCancelled": false,
+        "clientData": "",
+        "instanceId": "",
+        "messageOut": {
+            "errorCode": 0,
+            "messages": [
+                {
+                    "locale": "en_US",
+                    "message": "Success"
+                }
+            ]
+        },
+        "stateChangeTime": "2016-07-28T10:12:08.525Z",
+        "statusCodeOut": 0,
+        "elapsedTime": "00:00:50.000",
+        "submitTime": "2016-07-28T10:11:18.514Z",
+        "state": 5,
+        "startTime": "2016-07-28T10:11:18.521Z",
+        "endTime": "2016-07-28T10:12:08.525Z",
+        "id": "B-694",
+        "parametersOut": {
+            "id": "B-694"
+        }
+    }
+}

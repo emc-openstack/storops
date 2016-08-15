@@ -53,6 +53,13 @@ class UnityPool(UnityResource):
                                snap_schedule=snap_schedule,
                                iolimit_policy=iolimit_policy)
 
+    def create_nfs_share(self, nas_server, name, size, is_thin=None,
+                         tiering_policy=None):
+        clz = storops.unity.resource.job.UnityJob
+        return clz.create_nfs_share(
+            self._cli, self, nas_server, name, size,
+            is_thin, tiering_policy, False)
+
 
 class UnityPoolList(UnityResourceList):
     @classmethod

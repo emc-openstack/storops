@@ -23,10 +23,12 @@ from storops.exception import UnityLunNameInUseError
 from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     FastVPRelocationRateEnum, PoolDataRelocationTypeEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
-    FSSupportedProtocolEnum, TieringPolicyEnum
+    FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum
 from storops.unity.resource.pool import UnityPool, UnityPoolList
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.sp import UnityStorageProcessor
+from storops.unity.resource.nas_server import UnityNasServer
+
 from test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
@@ -176,3 +178,13 @@ class UnityPoolTest(TestCase):
                               is_repl_dst=True,
                               tiering_policy=TieringPolicyEnum.AUTOTIER_HIGH)
         assert_that(lun, instance_of(UnityLun))
+
+    @patch_rest
+    def test_create_nfs_share(self):
+        pool = UnityPool(_id='pool_5', cli=t_rest())
+        nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+        job = pool.create_nfs_share(
+            nas_server,
+            name='513dd8b0-2c22-4da0-888e-494d320303b6',
+            size=4294967296)
+        assert_that(JobStateEnum.COMPLETED, equal_to(job.state))

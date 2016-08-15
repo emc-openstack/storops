@@ -23,6 +23,10 @@ from storops.unity.enums import JobStateEnum, JobTaskStateEnum
 from storops.unity.resource.job import UnityJob, UnityJobList, \
     UnityJobTaskList, \
     UnityMessageList, UnityLocalizedMessageList
+from storops.unity.resource.pool import UnityPool
+from storops.unity.resource.nas_server import UnityNasServer
+from storops import exception as ex
+
 from test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
@@ -90,3 +94,26 @@ class UnityJobTest(TestCase):
     def test_get_all(self):
         jobs = UnityJobList(cli=t_rest())
         assert_that(len(jobs), equal_to(3))
+
+    @patch_rest
+    def test_create_nfs_share_async(self):
+        pool = UnityPool.get(cli=t_rest(), _id='pool_5')
+        nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+        job = UnityJob.create_nfs_share(
+            cli=t_rest(), pool=pool, nas_server=nas_server,
+            name='513dd8b0-2c22-4da0-888e-494d320303b6',
+            size=4294967296)
+        assert_that(JobStateEnum.COMPLETED, equal_to(job.state))
+
+    @patch_rest
+    def test_create_nfs_share_failed(self):
+        pool = UnityPool.get(cli=t_rest(), _id='pool_5')
+        nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+        self.assertRaisesRegexp(
+            ex.JobStateError,
+            "Job failed in {}.".format(JobStateEnum.FAILED.name),
+            UnityJob.create_nfs_share,
+            cli=t_rest(), pool=pool, nas_server=nas_server,
+            name='613dd8b0-2c22-4da0-888e-494d320303b7',
+            size=4294967296,
+            async=False)

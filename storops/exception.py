@@ -970,3 +970,22 @@ class VNXNasCommandNoError(VNXException):
 @cli_exception
 class VNXMoverInterfaceNotExistsError(VNXMoverInterfaceError):
     error_regex = 'network interface .* does not exist'
+
+
+class UnityJobException(UnityException):
+    """Unity Job exception.
+
+    Any job related exception should inherit this exception."""
+    pass
+
+
+class JobTimeoutException(UnityJobException):
+    message = "Timeout when waiting for job completion."
+
+
+class JobStateError(UnityJobException):
+    message = "Job failed in {state}."
+
+    def __init__(self, **kwargs):
+        self.message = JobStateError.message.format(**kwargs)
+        super(JobStateError, self).__init__(self.message)

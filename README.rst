@@ -10,7 +10,7 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://img.shields.io/pypi/v/storops.svg
     :target: https://pypi.python.org/pypi/storops
     
-VERSION: 0.2.18
+VERSION: 0.2.19
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
@@ -311,6 +311,8 @@ EMC Contributors
 
 Community Contributors
 ``````````````````````
+
+- Paulo Matias <matias@ufscar.br>
 
 Patches and Suggestions
 ```````````````````````

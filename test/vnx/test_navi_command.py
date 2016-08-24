@@ -45,6 +45,13 @@ class NaviCommandTest(TestCase):
                     equal_to('-secfilepath /a/b/c.key'))
 
     @patch_cli
+    def test_security_file_precedence(self):
+        cmd = NaviCommand(sec_file=r'/a/b/c.key',
+                          username='admin', password='')
+        assert_that(' '.join(cmd.get_credentials()),
+                    equal_to('-secfilepath /a/b/c.key'))
+
+    @patch_cli
     def test_username_password_timeout(self):
         cmd = NaviCommand('a', 'a', 1, timeout=20)
         assert_that(' '.join(map(str, cmd.get_credentials())),

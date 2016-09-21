@@ -158,7 +158,9 @@ class Resource(JsonPrinter):
                     elif isinstance(value, (datetime, timedelta)):
                         value = str(value)
                     elif isinstance(value, (tuple, list, set)):
-                        value = [v.get_dict_repr(dec - 1) for v in value]
+                        value = [v.get_dict_repr(dec - 1)
+                                 if isinstance(v, JsonPrinter) else v
+                                 for v in value]
                     props[name] = value
                 except AttributeError:
                     # skip not available attributes

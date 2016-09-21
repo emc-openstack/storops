@@ -391,6 +391,14 @@ class UnityFileSystemSizeTooSmallError(UnityException):
     error_code = 108008449
 
 
+class UnityEthernetPortMtuSizeNotSupportError(UnityException):
+    message = "Specified MTU size is not supported."
+
+
+class UnityEthernetPortSpeedNotSupportError(UnityException):
+    message = "Specified Speed is not supported."
+
+
 class UnityShareTypeNotSupportAccessControlError(UnityException):
     message = 'share type does not support access control.'
 

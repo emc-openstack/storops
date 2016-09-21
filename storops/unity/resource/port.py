@@ -18,6 +18,9 @@ from __future__ import unicode_literals
 import logging
 
 from storops.unity.resource import UnityResource, UnityResourceList
+from storops.exception import UnityEthernetPortMtuSizeNotSupportError
+from storops.exception import UnityEthernetPortSpeedNotSupportError
+from storops.unity.enums import EPSpeedValuesEnum
 
 __author__ = 'Jay Xu'
 
@@ -85,7 +88,42 @@ class UnityIscsiPortalList(UnityResourceList):
 
 
 class UnityEthernetPort(UnityResource):
-    pass
+    def modify(self, speed=None, mtu=None):
+        speed = EPSpeedValuesEnum.parse(speed)
+        peer = self.get_peer()
+        self._modify(self, speed, mtu)
+        self._modify(peer, speed, mtu)
+
+    def get_peer(self):
+        _peer_id = self._get_peer_id(self.get_id())
+        return UnityEthernetPort(cli=self._cli, _id=_peer_id)
+
+    def _modify(self, port, speed, mtu):
+        if speed is not None:
+            if speed not in self.supported_speeds:
+                raise UnityEthernetPortSpeedNotSupportError
+            if speed == port.requested_speed:
+                speed = None
+
+        if mtu is not None:
+            if mtu not in self.supported_mtus:
+                raise UnityEthernetPortMtuSizeNotSupportError
+            if mtu == port.requested_mtu:
+                mtu = None
+
+        if speed is None and mtu is None:
+            return
+
+        resp = self._cli.modify(self.resource_class,
+                                port.get_id(),
+                                speed=speed, mtuSize=mtu)
+        resp.raise_if_err()
+
+    @staticmethod
+    def _get_peer_id(_id):
+        if _id.startswith('spa'):
+            return _id.replace('spa', 'spb')
+        return _id.replace('spb', 'spa')
 
 
 class UnityEthernetPortList(UnityResourceList):

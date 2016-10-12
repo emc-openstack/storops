@@ -32,9 +32,25 @@
       "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn&filter=name eq \"openstack_lun\"",
       "response": "sv_2.json"
     },
-        {
+    {
       "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn&filter=name eq \"LunName\"",
       "response": "search_fail.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_8?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_8.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_9?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_9.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_2019?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_2019.json"
+    },
+    {
+      "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn&filter=name eq \"storops_dummy_lun\"",
+      "response": "not_found.json"
     }
   ]
 }

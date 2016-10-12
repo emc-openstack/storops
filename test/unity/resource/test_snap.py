@@ -19,10 +19,13 @@ from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, raises, none
 
-from storops.exception import UnityShareOnCkptSnapError
+from storops.exception import UnityShareOnCkptSnapError, \
+    UnityDeleteAttachedSnapError, UnityResourceNotFoundError, \
+    UnitySnapAlreadyPromotedException
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, \
     SnapCreatorTypeEnum, SnapStateEnum, NFSTypeEnum, CIFSTypeEnum
 from storops.unity.resource.filesystem import UnityFileSystem
+from storops.unity.resource.host import UnityHost
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.storage_resource import UnityStorageResource
@@ -126,3 +129,37 @@ class UnitySnapTest(TestCase):
     def test_not_found_snap_existed(self):
         snap = UnitySnap(cli=t_rest(), _id='12345')
         assert_that(snap.existed, equal_to(False))
+
+    @patch_rest
+    def test_delete_not_exist_snap(self):
+        snap = UnitySnap(_id='38654705844', cli=t_rest())
+        assert_that(lambda: snap.delete(), raises(UnityResourceNotFoundError))
+
+    @patch_rest
+    def test_delete_attached_snap(self):
+        snap = UnitySnap(_id='38654705845', cli=t_rest())
+        assert_that(lambda: snap.delete(),
+                    raises(UnityDeleteAttachedSnapError))
+
+    @patch_rest
+    def test_attach_snap_success(self):
+        snap = UnitySnap(_id='38654705676', cli=t_rest())
+        host = UnityHost(_id="Host_12", cli=t_rest())
+        resp = snap.attach_to(host)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_detach_snap_success(self):
+        snap = UnitySnap(_id='38654705676', cli=t_rest())
+        host = UnityHost(_id="Host_12", cli=t_rest())
+        resp = snap.detach_from(host)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_attach_snap_already_attached(self):
+        def f():
+            snap = UnitySnap(_id='38654705676', cli=t_rest())
+            host = UnityHost(_id="Host_13", cli=t_rest())
+            snap.attach_to(host)
+
+        assert_that(f, raises(UnitySnapAlreadyPromotedException, "promoted"))

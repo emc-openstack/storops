@@ -1,64 +1,73 @@
 {
-    "indices": [
-        {
-            "url": "/api/types/hostLUN?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
-            "response": "type.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
-            "response": "all.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_10\"",
-            "response": "all.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_11\" and lun eq \"sv_2\"",
-            "response": "null_host11_luns.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun eq \"sv_2\" and host eq \"Host_11\"",
-            "response": "null_host11_luns.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_10\" and lun eq \"sv_2\"",
-            "response": "filter_sv2.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun eq \"sv_2\" and host eq \"Host_10\"",
-            "response": "filter_sv2.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host.id eq \"Host_10\" and lun.id eq \"sv_2\"",
-            "response": "filter_sv2.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun.id eq \"sv_2\" and host.id eq \"Host_10\"",
-            "response": "filter_sv2.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_10\" and lun eq \"sv_4\"",
-            "response": "filter_sv4.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun eq \"sv_4\" and host eq \"Host_10\"",
-            "response": "filter_sv4.json"
-        },
-        {
-            "url": "/api/instances/hostLUN/Host_10_sv_2_prod?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
-            "response": "hostlun_1.json"
-        },
-        {
-            "url": "/api/instances/hostLUN/Host_10_sv_3_prod?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
-            "response": "hostlun_2.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=id eq \"Host_10_sv_2_prod\"",
-            "response": "filter_hostlun_1.json"
-        },
-        {
-            "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=id eq \"Host_10_sv_3_prod\"",
-            "response": "filter_hostlun_2.json"
-        }
-    ]
+  "indices": [
+    {
+      "url": "/api/types/hostLUN?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_10\"",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_11\" and lun eq \"sv_2\"",
+      "response": "null_host11_luns.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun eq \"sv_2\" and host eq \"Host_11\"",
+      "response": "null_host11_luns.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_10\" and lun eq \"sv_2\"",
+      "response": "filter_sv2.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun eq \"sv_2\" and host eq \"Host_10\"",
+      "response": "filter_sv2.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host.id eq \"Host_10\" and lun.id eq \"sv_2\"",
+      "response": "filter_sv2.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun.id eq \"sv_2\" and host.id eq \"Host_10\"",
+      "response": "filter_sv2.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_10\" and lun eq \"sv_4\"",
+      "response": "filter_sv4.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=lun eq \"sv_4\" and host eq \"Host_10\"",
+      "response": "filter_sv4.json"
+    },
+    {
+      "url": "/api/instances/hostLUN/Host_10_sv_2_prod?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
+      "response": "hostlun_1.json"
+    },
+    {
+      "url": "/api/instances/hostLUN/Host_10_sv_3_prod?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type",
+      "response": "hostlun_2.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=id eq \"Host_10_sv_2_prod\"",
+      "response": "filter_hostlun_1.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=id eq \"Host_10_sv_3_prod\"",
+      "response": "filter_hostlun_2.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_11\" and snap eq \"38654705676\"",
+      "response": "not_found.json"
+    }
+    ,
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=hlu eq 0 and host eq \"Host_11\"",
+      "response": "not_found.json"
+    }
+  ]
 }

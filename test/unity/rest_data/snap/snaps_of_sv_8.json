@@ -1,0 +1,87 @@
+{
+  "@base": "https://10.141.45.128/api/types/snap/instances?filter=storageResource eq \"sv_8\"&fields=accessType,attachedWWN,creationTime,creatorType,description,expirationTime,id,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,name,size,state,lun.id,ioLimitPolicy.id,snapGroup.id,creatorSchedule.id,creatorUser.id,storageResource.id,parentSnap.id&per_page=2000&compact=true",
+  "updated": "2016-10-10T09:33:56.490Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "38654705845",
+        "creatorType": 2,
+        "state": 2,
+        "name": "lun_snap_1",
+        "description": "",
+        "creationTime": "2016-10-10T07:03:19.609Z",
+        "isSystemSnap": false,
+        "isModifiable": false,
+        "isReadOnly": false,
+        "isModified": false,
+        "isAutoDelete": true,
+        "size": 1073741824,
+        "storageResource": {
+          "id": "sv_8"
+        },
+        "lun": {
+          "id": "sv_8"
+        },
+        "creatorUser": {
+          "id": "user_admin"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "38654705846",
+        "creatorType": 2,
+        "state": 2,
+        "name": "lun_snap_2",
+        "description": "",
+        "creationTime": "2016-10-10T08:25:38.361Z",
+        "isSystemSnap": false,
+        "isModifiable": false,
+        "isReadOnly": false,
+        "isModified": false,
+        "isAutoDelete": true,
+        "size": 1073741824,
+        "storageResource": {
+          "id": "sv_8"
+        },
+        "lun": {
+          "id": "sv_8"
+        },
+        "creatorUser": {
+          "id": "user_admin"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "38654705847",
+        "creatorType": 2,
+        "state": 2,
+        "name": "lun_snap_3",
+        "description": "",
+        "creationTime": "2016-10-10T08:55:12.839Z",
+        "isSystemSnap": false,
+        "isModifiable": false,
+        "isReadOnly": false,
+        "isModified": false,
+        "isAutoDelete": true,
+        "size": 1073741824,
+        "storageResource": {
+          "id": "sv_8"
+        },
+        "lun": {
+          "id": "sv_8"
+        },
+        "creatorUser": {
+          "id": "user_admin"
+        }
+      }
+    }
+  ]
+}

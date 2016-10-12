@@ -1,0 +1,11 @@
+{
+  "@base": "https://10.244.223.61/api/types/lun/instances?filter=name eq \"storops_dummy_lun\"&fields=auSize,compressionPercent,compressionRatio,compressionSizeSaved,creationTime,currentNode,defaultNode,description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,health,hostAccess,id,instanceId,isCompressionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapWwn,snapsSize,snapsSizeAllocated,tieringPolicy,type,wwn,snapSchedule.id,storageResource.id,moveSession.id,pool.id,ioLimitPolicy.id&per_page=2000&compact=true",
+  "updated": "2016-10-24T04:08:00.957Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "entries": []
+}

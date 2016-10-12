@@ -1,0 +1,13 @@
+{
+    "error": {
+        "errorCode": 1903001605,
+        "httpStatusCode": 409,
+        "messages": [
+            {
+                "en-US": "Specified snapshot name is already in use. (Error Code:0x716d8005)"
+            }
+        ],
+        "created": "2016-10-11T14:42:10.839Z"
+    }
+}
+

@@ -67,7 +67,8 @@ class UnityClient(object):
 
         if the_filter:
             items = []
-            for key, value in the_filter.items():
+            for key in sorted(the_filter.keys()):
+                value = the_filter[key]
                 if value is None:
                     continue
                 if isinstance(value, (list, tuple, UnityEnumList)):

@@ -39,7 +39,7 @@ def t_rest():
 
     :return: unity client singleton
     """
-    return UnityClient('10.244.223.66', 'admin', 'Password123!')
+    return UnityClient('10.244.223.61', 'admin', 'Password123!')
 
 
 @cache

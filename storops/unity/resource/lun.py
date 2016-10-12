@@ -22,6 +22,7 @@ import storops.unity.resource.pool
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, HostLUNAccessEnum
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.exception import UnityResourceNotFoundError
+from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor
 
 __author__ = 'Jay Xu'
@@ -47,6 +48,18 @@ class UnityLun(UnityResource):
         resp.raise_if_err()
         sr = UnityStorageResource(_id=resp.resource_id, cli=cli)
         return sr.luns[0]
+
+    @property
+    def name(self):
+        if hasattr(self, '_name') and self._name is not None:
+            name = self._name
+        else:
+            name = self._get_value_by_key('name')
+        return name
+
+    @name.setter
+    def name(self, new_name):
+        self.modify(name=new_name)
 
     @staticmethod
     def _compose_lun_parameter(cli, **kwargs):
@@ -77,10 +90,13 @@ class UnityLun(UnityResource):
         )
 
         # Empty host access can be used to wipe the host_access
-        if 'lunParameters' not in req_body:
-            req_body['lunParameters'] = {}
-        req_body['lunParameters']['hostAccess'] = cli.make_body(
+        host_access_value = cli.make_body(
             kwargs.get('host_access'), allow_empty=True)
+
+        if host_access_value is not None:
+            if 'lunParameters' not in req_body:
+                req_body['lunParameters'] = {}
+            req_body['lunParameters']['hostAccess'] = host_access_value
 
         return req_body
 
@@ -89,7 +105,7 @@ class UnityLun(UnityResource):
                is_repl_dst=None, tiering_policy=None, snap_schedule=None):
 
         req_body = self._compose_lun_parameter(
-            self._cli, name=None, pool=None, size=size, sp=sp,
+            self._cli, name=name, pool=None, size=size, sp=sp,
             host_access=host_access, is_thin=is_thin, description=description,
             iolimit_policy=iolimit_policy, is_repl_dst=is_repl_dst,
             tiering_policy=tiering_policy, snap_schedule=snap_schedule
@@ -117,7 +133,7 @@ class UnityLun(UnityResource):
         # If this lun has been attached to other host, don't overwrite it.
         if self.host_access:
             host_access += [{'host': item.host,
-                            'accessMask': item.access_mask} for item
+                             'accessMask': item.access_mask} for item
                             in self.host_access if host.id != item.host.id]
 
         resp = self.modify(host_access=host_access)
@@ -128,13 +144,25 @@ class UnityLun(UnityResource):
         if self.host_access is None or not host:
             return None
 
-        new_access = [{
-            'host': item.host,
-            'accessMask': item.access_mask} for item
-                in self.host_access if host.id != item.host.id]
+        new_access = [{'host': item.host,
+                       'accessMask': item.access_mask} for item
+                      in self.host_access if host.id != item.host.id]
         resp = self.modify(host_access=new_access)
         resp.raise_if_err()
         return resp
+
+    def create_snap(self, name=None, description=None, is_auto_delete=None,
+                    retention_duration=None):
+        return UnitySnap.create(self._cli, self.storage_resource,
+                                name=name, description=description,
+                                is_auto_delete=is_auto_delete,
+                                retention_duration=retention_duration,
+                                is_read_only=None, fs_access_type=None)
+
+    @property
+    def snapshots(self):
+        return UnitySnapList(cli=self._cli,
+                             storage_resource=self.storage_resource)
 
 
 class UnityLunList(UnityResourceList):

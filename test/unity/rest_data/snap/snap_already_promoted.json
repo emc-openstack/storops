@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 100666332,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "The system was not able to promote a snapshot because it is already promoted. (Error Code:0x6000bdc)"
+      }
+    ],
+    "created": "2016-10-24T03:33:33.570Z"
+  }
+}

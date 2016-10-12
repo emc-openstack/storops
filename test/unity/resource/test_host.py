@@ -24,7 +24,7 @@ from storops.unity.resource.nfs_share import UnityNfsShare
 from storops.exception import UnityHostIpInUseError, \
     UnityResourceNotFoundError, UnityHostInitiatorNotFoundError, \
     UnityHostInitiatorUnknownType, UnityAluAlreadyAttachedError, \
-    UnityAttachAluExceedLimitError
+    UnityAttachAluExceedLimitError, UnitySnapAlreadyPromotedException
 from storops.unity.enums import HostTypeEnum, HostManageEnum, \
     HostPortTypeEnum, HealthEnum, HostInitiatorTypeEnum, \
     HostInitiatorSourceTypeEnum, HostInitiatorIscsiTypeEnum
@@ -34,6 +34,7 @@ from storops.unity.resource.host import UnityHost, UnityHostContainer, \
     UnityHostInitiator, UnityHostInitiatorList, UnityHostIpPortList, \
     UnityHostList, UnityHostIpPort, UnityHostInitiatorPathList, \
     UnityHostLun, UnityHostLunList
+from storops.unity.resource.snap import UnitySnap
 from storops.unity.resource.vmware import UnityDataStoreList, UnityVmList
 from test.unity.rest_mock import t_rest, patch_rest
 
@@ -297,6 +298,7 @@ class UnityHostTest(TestCase):
 
         def f():
             host.attach_alu(lun)
+
         assert_that(f, raises(UnityAluAlreadyAttachedError))
 
     @patch_rest
@@ -307,13 +309,23 @@ class UnityHostTest(TestCase):
         assert_that(hlu, equal_to(None))
 
     @patch_rest
-    def test_attach_alu_excced_limit(self):
+    def test_attach_alu_exceed_limit(self):
         host = UnityHost(cli=t_rest(), _id='Host_11')
         lun = UnityLun(cli=t_rest(), _id="sv_2")
 
         def f():
             host.attach_alu(lun)
+
         assert_that(f, raises(UnityAttachAluExceedLimitError))
+
+    @patch_rest
+    def test_attach_snap_skip_first_hlu(self):
+        def f():
+            host = UnityHost(cli=t_rest(), _id='Host_11')
+            snap = UnitySnap(_id='38654705676', cli=t_rest())
+            host.attach(snap, skip_hlu_0=True)
+
+        assert_that(f, raises(UnitySnapAlreadyPromotedException))
 
 
 class UnityHostIpPortTest(TestCase):

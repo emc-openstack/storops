@@ -17,13 +17,16 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, only_contains, instance_of, contains_string
+from hamcrest import assert_that, only_contains, instance_of, \
+    contains_string, raises
 from hamcrest import equal_to
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 
 from storops import UnitySystem
+from storops.exception import UnitySnapNameInUseError, UnityLunNameInUseError
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from storops.unity.resource.pool import UnityPool
+from storops.unity.resource.snap import UnitySnap
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resource.sp import UnityStorageProcessor
@@ -165,3 +168,28 @@ class UnityLunTest(TestCase):
         assert_that(access.access_mask, equal_to(HostLUNAccessEnum.PRODUCTION))
         assert_that(access.host, instance_of(UnityHost))
         assert_that(access.host.id, equal_to('Host_1'))
+
+    @patch_rest
+    def test_lun_snap_create(self):
+        lun = UnityLun(_id='sv_8', cli=t_rest())
+        snap = lun.create_snap(name='lun_snap_1')
+        assert_that(snap, instance_of(UnitySnap))
+
+    @patch_rest
+    def test_lun_snapshots(self):
+        lun = UnityLun(_id='sv_8', cli=t_rest())
+        assert_that(len(lun.snapshots), equal_to(3))
+
+    @patch_rest
+    def test_lun_snap_create_existing(self):
+        lun = UnityLun(_id='sv_9', cli=t_rest())
+        assert_that(lambda: lun.create_snap(name='lun_snap_1'),
+                    raises(UnitySnapNameInUseError))
+
+    @patch_rest
+    def test_lun_rename(self):
+        def f():
+            lun = UnityLun(_id='sv_2', cli=t_rest())
+            lun.name = 'Europa'
+
+        assert_that(f, raises(UnityLunNameInUseError, 'already exists'))

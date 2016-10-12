@@ -18,7 +18,8 @@ from __future__ import unicode_literals
 import logging
 
 from storops.lib.common import instance_cache
-from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum
+from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum, \
+    SnapAccessLevelEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.cifs_share
 import storops.unity.resource.nfs_share
@@ -100,6 +101,29 @@ class UnitySnap(UnityResource):
     def existed(self):
         return (super(UnitySnap, self).existed and
                 self.state != SnapStateEnum.DESTROYING)
+
+    def attach_to(self, host, access_mask=SnapAccessLevelEnum.READ_WRITE):
+        host_access = [{'host': host, 'allowedAccess': access_mask}]
+        # If this lun has been attached to other host, don't overwrite it.
+        if self.host_access:
+            host_access += [{'host': item.host,
+                             'allowedAccess': item.allowed_access}
+                            for item in filter(lambda x: x.host.id == host.id,
+                                               self.host_access)]
+
+        resp = self._cli.action(self.resource_class,
+                                self.get_id(), 'attach',
+                                hostAccess=self._cli.make_body(host_access))
+        resp.raise_if_err()
+        return resp
+
+    def detach_from(self, host):
+        # No need to pass host in to detach action of snap.
+        # Snap host access will all be detached.
+        resp = self._cli.action(self.resource_class,
+                                self.get_id(), 'detach')
+        resp.raise_if_err()
+        return resp
 
 
 class UnitySnapList(UnityResourceList):

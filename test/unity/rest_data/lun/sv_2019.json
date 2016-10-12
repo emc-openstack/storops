@@ -1,0 +1,54 @@
+{
+  "content": {
+    "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_2019",
+    "defaultNode": 0,
+    "compressionPercent": 0,
+    "snapsSize": 0,
+    "isCompressionEnabled": false,
+    "metadataSizeAllocated": 2684354560,
+    "wwn": "60:06:01:60:15:E0:3A:00:25:89:0D:58:DC:A7:00:AF",
+    "id": "sv_2019",
+    "currentNode": 0,
+    "objectId": 42949675082,
+    "snapCount": 0,
+    "isSnapSchedulePaused": false,
+    "snapWwn": "60:06:01:60:15:E0:3A:00:ED:57:79:8D:B7:A7:48:AD",
+    "health": {
+      "descriptionIds": [
+        "ALRT_VOL_OK"
+      ],
+      "descriptions": [
+        "The LUN is operating normally. No action is required."
+      ],
+      "value": 5
+    },
+    "metadataSize": 3489660928,
+    "type": 2,
+    "isThinEnabled": true,
+    "compressionSizeSaved": 0,
+    "snapsSizeAllocated": 0,
+    "modificationTime": "2016-10-24T04:08:07.564Z",
+    "perTierSizeUsed": [
+      0,
+      2952790016,
+      0
+    ],
+    "operationalStatus": [
+      2
+    ],
+    "storageResource": {
+      "id": "sv_2019"
+    },
+    "tieringPolicy": 0,
+    "pool": {
+      "id": "pool_1"
+    },
+    "sizeAllocated": 0,
+    "name": "storops_dummy_lun",
+    "creationTime": "2016-10-24T04:08:05.000Z",
+    "sizeTotal": 1073741824,
+    "compressionRatio": 1.0,
+    "isReplicationDestination": false,
+    "auSize": 8192
+  }
+}

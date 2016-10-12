@@ -1,0 +1,54 @@
+{
+    "content": {
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_9",
+        "defaultNode": 1,
+        "compressionPercent": 0,
+        "snapsSize": 0,
+        "isCompressionEnabled": false,
+        "metadataSizeAllocated": 2684354560,
+        "wwn": "60:06:01:60:8F:D0:0A:00:A9:3C:FB:57:F3:64:1A:91",
+        "id": "sv_9",
+        "currentNode": 1,
+        "objectId": 42949673061,
+        "snapCount": 3,
+        "isSnapSchedulePaused": false,
+        "snapWwn": "60:06:01:60:8F:D0:0A:00:03:BD:B0:B3:7F:21:4E:0D",
+        "health": {
+            "descriptionIds": [
+                "ALRT_VOL_OK"
+            ],
+            "descriptions": [
+                "The LUN is operating normally. No action is required."
+            ],
+            "value": 5
+        },
+        "metadataSize": 3489660928,
+        "type": 2,
+        "isThinEnabled": true,
+        "compressionSizeSaved": 0,
+        "snapsSizeAllocated": 0,
+        "modificationTime": "2016-10-10T07:01:07.661Z",
+        "perTierSizeUsed": [
+            2684354560,
+            268435456,
+            0
+        ],
+        "operationalStatus": [
+            2
+        ],
+        "storageResource": {
+            "id": "sv_9"
+        },
+        "tieringPolicy": 0,
+        "pool": {
+            "id": "pool_2"
+        },
+        "sizeAllocated": 0,
+        "name": "lun_to_snap",
+        "creationTime": "2016-10-10T07:00:57.000Z",
+        "sizeTotal": 1073741824,
+        "compressionRatio": 1.0,
+        "isReplicationDestination": false,
+        "auSize": 8192
+    }
+}

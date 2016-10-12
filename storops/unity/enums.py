@@ -217,6 +217,11 @@ class SnapStateEnum(UnityEnum):
     DESTROYING = (9, 'Destroying')
 
 
+class SnapAccessLevelEnum(UnityEnum):
+    READ_ONLY = (0, 'Read Only')
+    READ_WRITE = (1, 'Read Write')
+
+
 class FilesystemSnapAccessTypeEnum(UnityEnum):
     CHECKPOINT = (1, 'Checkpoint')
     PROTOCOL = (2, 'Protocol')

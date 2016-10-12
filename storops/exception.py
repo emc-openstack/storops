@@ -278,6 +278,10 @@ class UnityAttachAluError(UnityException):
     pass
 
 
+class UnityAttachError(UnityException):
+    pass
+
+
 class UnityHostNameInUseError(UnityException):
     pass
 
@@ -293,8 +297,18 @@ class UnityAttachAluExceedLimitError(UnityAttachAluError):
     message = "Numbers of LUNs exceeds system limit"
 
 
+@rest_exception
+class UnityAttachExceedLimitError(UnityAttachError):
+    error_code = 108008750
+    message = "Numbers of LUNs or Snaps exceeds system limit"
+
+
 class UnityAluAlreadyAttachedError(UnityAttachAluError):
     message = 'Requested LUN has already been added to this host'
+
+
+class UnityResourceAlreadyAttachedError(UnityAttachError):
+    message = 'Requested LUN or Snap has already been attached to this host'
 
 
 @rest_exception
@@ -361,9 +375,23 @@ class UnityCreateSnapError(UnityException):
     pass
 
 
+class UnitySnapException(UnityException):
+    pass
+
+
 @rest_exception
-class UnitySnapNameInUseError(UnityException):
+class UnitySnapNameInUseError(UnitySnapException):
     error_code = (1903001605, 1903132675)
+
+
+@rest_exception
+class UnitySnapAlreadyPromotedException(UnitySnapException):
+    error_code = 100666332
+
+
+@rest_exception
+class UnityDeleteAttachedSnapError(UnityException):
+    error_code = 1903001603
 
 
 @rest_exception

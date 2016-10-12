@@ -1,0 +1,12 @@
+{
+    "error": {
+        "httpStatusCode": 409,
+        "created": "2016-10-11T09:55:41.238Z",
+        "messages": [
+            {
+                "en-US": "The snapshot cannot be destroyed because it is attached. (Error Code:0x716d8003)"
+            }
+        ],
+        "errorCode": 1903001603
+    }
+}

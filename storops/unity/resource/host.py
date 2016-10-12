@@ -42,8 +42,20 @@ class UnityBlockHostAccessList(UnityResourceList):
         return UnityBlockHostAccess
 
 
-class UnityHost(UnityResource):
+class UnitySnapHostAccess(UnityAttributeResource):
+    pass
 
+
+class UnitySnapHostAccessList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnitySnapHostAccess
+
+
+DUMMY_LUN_NAME = 'storops_dummy_lun'
+
+
+class UnityHost(UnityResource):
     @classmethod
     def get_nested_properties(cls):
         return (
@@ -92,19 +104,84 @@ class UnityHost(UnityResource):
             ret = cls.get(cli=cli, _id=_id)
         return ret
 
-    def _get_host_lun(self, lun=None):
-        if lun:
-            ret = UnityHostLunList.get(self._cli, host=self.id, lun=lun.id)
-        else:
-            ret = UnityHostLunList.get(self._cli, host=self.id)
-            log.debug('Found {} host luns attached to this host'
-                      .format(len(ret)))
+    def _get_host_lun(self, lun=None, snap=None, hlu=None):
+        lun_id = lun.id if lun is not None else None
+        snap_id = snap.id if snap is not None else None
+        hlu_no = hlu if hlu is not None else None
+
+        ret = UnityHostLunList.get(self._cli, host=self.id,
+                                   lun=lun_id, snap=snap_id, hlu=hlu_no)
+
+        if len(ret) != 1:
+            msg = ('Found {num} host luns attached to this host. '
+                   'Filter: lun={lun_id}, snap={snap_id}, '
+                   'hlu={hlu_no}.').format(num=len(ret), lun_id=lun_id,
+                                           snap_id=snap_id, hlu_no=hlu_no)
+            log.debug(msg)
+
+        # Need filter again for the hlu of LUN, excluding the hlu of snap.
+        if lun_id and snap_id is None:
+            ret = list(filter(lambda x: x.snap is None, ret))
+
         return ret
 
+    def detach(self, lun_or_snap):
+        return lun_or_snap.detach_from(self)
+
     def detach_alu(self, lun):
+        log.warn('Method detach_alu is deprecated. Use detach instead.')
         return lun.detach_from(self)
 
+    def _create_attach_dummy_lun(self):
+        import storops.unity.resource.lun as lun_module
+        import storops.unity.resource.pool as pool_module
+        lun_list = lun_module.UnityLunList.get(self._cli, name=DUMMY_LUN_NAME)
+        if not lun_list:
+            try:
+                pool_list = pool_module.UnityPoolList.get(self._cli)
+                dummy_lun = pool_list[0].create_lun(lun_name=DUMMY_LUN_NAME)
+            except Exception as err:
+                # Ignore all errors of creating dummy lun.
+                log.warn('Failed to create dummy lun. Message: {}'.format(err))
+                dummy_lun = None
+        else:
+            dummy_lun = lun_list[0]
+
+        if dummy_lun:
+            try:
+                dummy_lun.attach_to(self)
+            except ex.UnityResourceAlreadyAttachedError:
+                pass
+            except Exception as err:
+                # Ignore all errors of attaching dummy lun.
+                log.warn('Failed to attach dummy lun. Message: {}'.format(err))
+
+    def attach(self, lun_or_snap, skip_hlu_0=False):
+        if self.has_hlu(lun_or_snap):
+            raise ex.UnityResourceAlreadyAttachedError()
+
+        if skip_hlu_0:
+            log.debug('Try to skip the hlu number 0 by attaching a dummy lun.')
+            hlu_0 = self._get_host_lun(hlu=0)
+            if not hlu_0:
+                self._create_attach_dummy_lun()
+
+        try:
+            lun_or_snap.attach_to(self)
+            self.update()
+            hlu = self.get_hlu(lun_or_snap)
+        except ex.UnityAttachExceedLimitError:
+            # The number of luns exceeds system limit
+            raise
+        except:
+            # other attach error, remove this lun if already attached
+            self.detach(lun_or_snap)
+            raise
+
+        return hlu
+
     def attach_alu(self, lun):
+        log.warn('Method attach_alu is deprecated. Use attach instead.')
         if self.has_alu(lun):
             raise ex.UnityAluAlreadyAttachedError()
 
@@ -115,25 +192,36 @@ class UnityHost(UnityResource):
         except ex.UnityAttachAluExceedLimitError:
             # The number of luns exceeds system limit
             raise
-        except ex.UnityException:
+        except:
             # other attach error, remove this lun if already attached
             self.detach_alu(lun)
-            raise ex.UnityAttachAluError()
+            raise
 
         return hlu
 
+    def has_hlu(self, lun_or_snap):
+        hlu = self.get_hlu(lun_or_snap)
+        return hlu is not None
+
     def has_alu(self, lun):
-        alu = self.get_hlu(lun=lun)
+        log.warn('Method has_alu is deprecated. Use has_hlu instead.')
+        alu = self.get_hlu(lun)
         if alu is None:
             return False
         else:
             return True
 
-    def get_hlu(self, lun):
-        which = self._get_host_lun(lun=lun)
+    def get_hlu(self, resource):
+        import storops.unity.resource.lun as lun_module
+        import storops.unity.resource.snap as snap_module
+        which = None
+        if isinstance(resource, lun_module.UnityLun):
+            which = self._get_host_lun(lun=resource)
+        elif isinstance(resource, snap_module.UnitySnap):
+            which = self._get_host_lun(snap=resource)
         if not which:
-            log.debug('lun {} is not attached to host {}'
-                      .format(lun.name, self.name))
+            log.debug('Resource(LUN or Snap) {} is not attached to host {}'
+                      .format(resource.name, self.name))
             return None
         return which[0].hlu
 
@@ -156,8 +244,7 @@ class UnityHost(UnityResource):
                                                       self, uid_type, **kwargs)
             else:
                 raise ex.UnityHostInitiatorNotFoundError(
-                    'name {} not found under host {}.'
-                    .format(uid, self.name))
+                    'name {} not found under host {}.'.format(uid, self.name))
         else:
             initiator = initiators.first_item
             log.debug('initiator {} is existed in unity system.'.format(uid))

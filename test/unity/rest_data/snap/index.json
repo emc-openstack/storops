@@ -53,6 +53,10 @@
       "response": "snaps_of_res_23.json"
     },
     {
+      "url": "/api/instances/snap/38654705676?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "38654705676.json"
+    },
+    {
       "url": "/api/types/snap/instances?compact=True",
       "body": {
         "storageResource": {
@@ -108,13 +112,95 @@
     },
     {
       "url": "/api/instances/snap/38654705785/action/copy?compact=True",
-      "body": {"copyName": "s3"},
+      "body": {
+        "copyName": "s3"
+      },
       "response": "copy_38654705785.json"
     },
     {
       "url": "/api/instances/snap/171798691969/action/copy?compact=True",
-      "body": {"copyName": "share_snap"},
+      "body": {
+        "copyName": "share_snap"
+      },
       "response": "name_existed.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "sv_8"
+        },
+        "name": "lun_snap_1"
+      },
+      "response": "create_38654705847.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource&filter=storageResource eq \"sv_8\"",
+      "response": "snaps_of_sv_8.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "sv_9"
+        },
+        "name": "lun_snap_1"
+      },
+      "response": "create_existing_snap.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705844?compact=True",
+      "response": "snap_not_exist.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705845?compact=True",
+      "response": "snap_attached.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705676/action/attach?compact=True",
+      "body": {
+        "hostAccess": [
+          {
+            "host": {
+              "id": "Host_11"
+            },
+            "allowedAccess": 1
+          }
+        ]
+      },
+      "response": "snap_already_promoted.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705676/action/attach?compact=True",
+      "body": {
+        "hostAccess": [
+          {
+            "host": {
+              "id": "Host_12"
+            },
+            "allowedAccess": 1
+          }
+        ]
+      },
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705676/action/detach?compact=True",
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705676/action/attach?compact=True",
+      "body": {
+        "hostAccess": [
+          {
+            "host": {
+              "id": "Host_13"
+            },
+            "allowedAccess": 1
+          }
+        ]
+      },
+      "response": "snap_already_promoted.json"
     }
   ]
 }

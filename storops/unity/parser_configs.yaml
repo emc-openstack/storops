@@ -487,6 +487,8 @@ UnitySnap:
     - label: size
     - label: ioLimitPolicy
       converter: UnityIoLimitPolicy
+    - label: hostAccess
+      converter: UnitySnapHostAccessList
 
 
 UnitySnapSchedule:
@@ -848,6 +850,16 @@ UnityBlockHostAccess:
       converter: UnityHost
     - label: accessMask
       converter: HostLUNAccessEnum
+
+
+UnitySnapHostAccess:
+  data_src: rest
+  name: snapHostAccess
+  properties:
+    - label: host
+      converter: UnityHost
+    - label: allowedAccess
+      converter: SnapAccessLevelEnum
 
 
 UnityHost:

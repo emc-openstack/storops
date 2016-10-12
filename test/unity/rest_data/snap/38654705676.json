@@ -1,0 +1,29 @@
+{
+  "content": {
+    "name": "Agnes",
+    "operationalStatus": [
+      2
+    ],
+    "isModified": false,
+    "instanceId": "root/emc:EMC_UEM_VolumeSnapLeaf%InstanceID=38654705676",
+    "creationTime": "2016-09-20T06:40:53.809Z",
+    "isModifiable": false,
+    "isSystemSnap": false,
+    "isReadOnly": false,
+    "state": 2,
+    "creatorType": 2,
+    "storageResource": {
+      "id": "sv_2"
+    },
+    "isAutoDelete": true,
+    "creatorUser": {
+      "id": "user_admin"
+    },
+    "size": 2147483648,
+    "id": "38654705676",
+    "lun": {
+      "id": "sv_2"
+    },
+    "description": "Mountain on the moon.  Greek feminine name."
+  }
+}

@@ -24,15 +24,8 @@
     "osType": "",
     "fcHostInitiators": [
       {
-        "id": "HostInitiator_19"
-      },
-      {
-        "id": "HostInitiator_20"
-      }
-    ],
-    "iscsiHostInitiators": [
-      {
-        "id": "HostInitiator_21"
+        "id": "HostInitiator_2",
+        "initiatorId": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"
       }
     ],
     "hostIPPorts": [

@@ -19,15 +19,18 @@ from storops.exception import NoIndexException, UnityResourceNotFoundError, \
     UnityNameNotUniqueError
 from storops.lib.resource import Resource, ResourceList
 from storops.unity import parser
+from storops.unity.parser import NestedProperties
 
 __author__ = 'Cedric Zhuang'
 
 
 class UnityResource(Resource):
+
     def __init__(self, _id=None, cli=None):
         super(UnityResource, self).__init__()
         self._id = _id
         self._cli = cli
+        self._preloaded_properties = None
 
     @classmethod
     def _get_parser(cls):
@@ -63,15 +66,44 @@ class UnityResource(Resource):
     def resource_class(self):
         return self._get_parser().name
 
+    @classmethod
+    def _build_nested_properties_obj(cls):
+        return NestedProperties.build(cls.get_nested_properties())
+
+    @classmethod
+    def get_nested_properties(cls):
+        return None
+
     def _get_raw_resource(self):
         _id = self.get_id()
-        return self._cli.get(self.resource_class, _id)
+        nested_obj = self._build_nested_properties_obj()
+        nested_fields = nested_obj.query_fields if nested_obj else None
+
+        res = self._cli.get(self.resource_class, _id,
+                            nested_fields=nested_fields)
+        # Rest the preloaded the properties to the nested_properties after
+        # fetching data from backend
+        self.set_preloaded_properties(nested_obj)
+        return res
 
     def _is_updated(self):
         ret = super(UnityResource, self)._is_updated()
         if ret:
-            ret &= not (len(self._parsed_resource) == 1 and
-                        len(self.property_names()) > 1)
+            if self.get_preloaded_prop_keys():
+                # Return False when only id is parsed besides the
+                # preloaded properties
+                other = (
+                    set(self.parsed_resource.keys()) -
+                    set(self.get_preloaded_prop_keys())
+                )
+                ret = not (
+                    len(other) == 1 and
+                    len(self.property_names()) -
+                    len(self.get_preloaded_prop_keys()) > 1)
+            else:
+                # Return False when only id is parsed
+                ret = not (len(self._parsed_resource) == 1 and
+                           len(self.property_names()) > 1)
         return ret
 
     def _get_properties(self, dec=0):
@@ -81,6 +113,17 @@ class UnityResource(Resource):
         else:
             props = super(UnityResource, self)._get_properties(dec)
         return props
+
+    def _parse_raw(self, data):
+        return self._get_parser().parse(data, self._preloaded_properties)
+
+    def get_preloaded_prop_keys(self):
+        # Returns the preloaded property keys of this object
+        # the properties of child object should be skipped
+
+        if not self._preloaded_properties:
+            return []
+        return self._preloaded_properties.get_properties()
 
     def _get_property_from_raw(self, item):
         value = super(UnityResource, self)._get_property_from_raw(item)
@@ -99,6 +142,9 @@ class UnityResource(Resource):
         else:
             ret = _id
         return ret
+
+    def set_preloaded_properties(self, props):
+        self._preloaded_properties = props
 
     def _get_unity_rsc(self, clz, _id=None, **filters):
         ret = clz.get(cli=self._cli, _id=_id, **filters)
@@ -211,7 +257,13 @@ class UnityResourceList(UnityResource, ResourceList):
             if len(keys) == 2:
                 label = k
             the_filter[label] = v
-        return self._cli.get_all(self.resource_class, the_filter=the_filter)
+        nested_obj = self.get_resource_class()._build_nested_properties_obj()
+        nested_fields = nested_obj.query_fields if nested_obj else None
+        res = self._cli.get_all(
+            self.resource_class, the_filter=the_filter,
+            nested_fields=nested_fields)
+        self.set_preloaded_properties(nested_obj)
+        return res
 
     def set_cli(self, cli):
         super(UnityResourceList, self).set_cli(cli)
@@ -247,3 +299,10 @@ class UnityResourceList(UnityResource, ResourceList):
             raise ValueError('no instance available for "{}".'.format(
                 self.get_resource_class().resource_class))
         return ret
+
+    def _parse_raw(self, data):
+        return self._get_parser().parse_all(data)
+
+    def set_preloaded_properties(self, props):
+        for i in self:
+            i.set_preloaded_properties(props)

@@ -15,7 +15,8 @@
     "description": "",
     "osType": "",
     "iscsiHostInitiators": [{
-      "id": "HostInitiator_2"
+      "id": "HostInitiator_3",
+      "initiatorId": "iqn.1993-08.org.debian:01:a4f95ed14d65"
     }],
     "hostLUNs": [{
       "id": "Host_10_sv_2_prod"

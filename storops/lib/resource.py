@@ -194,9 +194,14 @@ class Resource(JsonPrinter):
     def _is_updated(self):
         return self._parsed_resource is not None
 
+    def get_preloaded_prop_keys(self):
+        return []
+
     def _get_property_from_raw(self, item):
-        if not self._is_updated():
+        if (not self._is_updated() and item not in
+                self.get_preloaded_prop_keys()):
             self.update()
+
         if item in self.property_names():
             ret = self._get_value_by_key(item)
         else:
@@ -263,6 +268,9 @@ class ResourceList(Resource):
     def get_dict_repr(self, dec=1):
         items = [item.get_dict_repr(dec - 1) for item in self.list]
         return {self.__class__.__name__: items}
+
+    def get_preloaded_prop_keys(self):
+        return []
 
     def __len__(self):
         return len(self.list)

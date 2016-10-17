@@ -23,7 +23,7 @@ from storops.exception import UnityEthernetPortSpeedNotSupportError, \
     UnityEthernetPortMtuSizeNotSupportError
 from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum
 from storops.unity.resource.port import UnityEthernetPort, UnityIpPort, \
-    UnityIpPortList
+    UnityIpPortList, UnityIscsiPortal, UnityIscsiNode
 from storops.unity.resource.sp import UnityStorageProcessor
 from test.unity.rest_mock import t_rest, patch_rest
 
@@ -113,3 +113,15 @@ class UnityEthernetPortTest(TestCase):
         port = UnityEthernetPort(cli=t_rest(), _id=port_id)
         peer = port.get_peer()
         assert_that(peer.get_id(), equal_to(peer_id))
+
+
+class UnityIscsiPortalTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        portal = UnityIscsiPortal(cli=t_rest(), _id='if_4')
+        assert_that(portal.ip_address, equal_to('10.244.213.177'))
+        assert_that(portal.iscsi_node, instance_of(UnityIscsiNode))
+        assert_that(portal.iscsi_node.name,
+                    equal_to('iqn.1992-04.com.emc:cx.fnm00150600267.a0'))
+        assert_that(portal.netmask, equal_to('255.255.255.0'))
+        assert_that(portal.gateway, equal_to('10.244.213.1'))

@@ -43,6 +43,16 @@ class UnityBlockHostAccessList(UnityResourceList):
 
 
 class UnityHost(UnityResource):
+
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'fc_host_initiators.initiator_id',
+            'fc_host_initiators.paths.is_logged_in',
+            'fc_host_initiators.paths.fc_port.wwn',
+            'iscsi_host_initiators.initiator_id',
+        )
+
     @classmethod
     def create(cls, cli, name, host_type=None, desc=None, os=None):
         if host_type is None:

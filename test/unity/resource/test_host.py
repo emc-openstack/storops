@@ -40,7 +40,7 @@ from test.unity.rest_mock import t_rest, patch_rest
 __author__ = 'Cedric Zhuang'
 
 
-class UnityHotTest(TestCase):
+class UnityHostTest(TestCase):
     @patch_rest
     def test_properties(self):
         host = UnityHost(_id='Host_1', cli=t_rest())
@@ -63,6 +63,21 @@ class UnityHotTest(TestCase):
         assert_that(host.host_ip_ports, instance_of(UnityHostIpPortList))
         assert_that(host.datastores, instance_of(UnityDataStoreList))
         assert_that(host.vms, instance_of(UnityVmList))
+
+    @patch_rest
+    def test_nested_properties(self):
+        host = UnityHost(_id='Host_12', cli=t_rest())
+        assert_that(
+            host.fc_host_initiators.initiator_id,
+            only_contains('20:00:00:00:C9:F3:AB:0C:10:00:00:00:C9:F3:AB:0C',
+                          '20:00:00:00:C9:F3:AB:0D:10:00:00:00:C9:F3:AB:0D'))
+        assert_that(host.iscsi_host_initiators.initiator_id, only_contains(
+            'iqn.1998-01.com.vmware:esx239209-7e7a57a4'))
+        assert_that(host.fc_host_initiators[0].paths[0].is_logged_in,
+                    equal_to(True))
+        assert_that(
+            host.fc_host_initiators[1].paths[0].fc_port.wwn,
+            equal_to('50:06:01:60:C7:E0:01:DA:50:06:01:6C:47:E0:01:DA'))
 
     @patch_rest
     def test_get_all(self):

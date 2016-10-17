@@ -1,0 +1,75 @@
+{
+    "content": {
+        "attributes": [
+            {
+                "displayValue": "instanceId",
+                "type": "String",
+                "name": "instanceId",
+                "description": "Internal identifier of the iscsiPortal instance.  "
+            },
+            {
+                "displayValue": "id",
+                "type": "String",
+                "name": "id",
+                "description": "Unique identifier of the iscsiPortal instance.  "
+            },
+            {
+                "displayValue": "ethernetPort",
+                "type": "ethernetPort",
+                "name": "ethernetPort",
+                "description": "Ethernet port used by the iSCSI portal.  "
+            },
+            {
+                "displayValue": "iscsiNode",
+                "type": "iscsiNode",
+                "name": "iscsiNode",
+                "description": "iSCSI node used by the iSCSI portal.  "
+            },
+            {
+                "displayValue": "ipAddress",
+                "type": "IPAddress",
+                "name": "ipAddress",
+                "description": "IP address of the iSCSI portal.  "
+            },
+            {
+                "displayValue": "netmask",
+                "type": "IPAddress",
+                "name": "netmask",
+                "description": "IPv4 netmask for the network interface, if it uses an IPv4 address.  "
+            },
+            {
+                "displayValue": "v6PrefixLength",
+                "type": "Integer",
+                "name": "v6PrefixLength",
+                "description": "IPv6 prefix length for the interface, if it uses an IPv6 address.  "
+            },
+            {
+                "displayValue": "gateway",
+                "type": "IPAddress",
+                "name": "gateway",
+                "description": "IPv4 or IPv6 gateway address for the network interface.  "
+            },
+            {
+                "displayValue": "vlanId",
+                "type": "Integer",
+                "name": "vlanId",
+                "description": "Virtual Local Area Network (VLAN) identifier for the interface. The interface uses the identifier to accept packets that have matching VLAN tags. <p/> Values are 1 - 4094.  "
+            },
+            {
+                "displayValue": "portalGroupTag",
+                "type": "Integer",
+                "name": "portalGroupTag",
+                "description": "Reserved for future use. <p/>  "
+            },
+            {
+                "displayValue": "ipProtocolVersion",
+                "type": "IpProtocolVersionEnum",
+                "name": "ipProtocolVersion",
+                "description": "Indicates whether the iSCSI portal is over IPv4 or IPv6.  "
+            }
+        ],
+        "documentation": "https://10.244.223.61/apidocs/classes/iscsiPortal.html",
+        "name": "iscsiPortal",
+        "description": "Information about the iSCSI portals in the storage system.  "
+    }
+}

@@ -36,7 +36,8 @@ class UnityClient(object):
         self._rest = UnityRESTConnector(ip, port=port, user=username,
                                         password=password)
 
-    def get_all(self, type_name, fields=None, the_filter=None):
+    def get_all(self, type_name, base_fields=None, the_filter=None,
+                nested_fields=None):
         """Get the resource by resource id.
 
         :param the_filter: dictionary of filter like `{'name': 'abc'}`
@@ -44,7 +45,7 @@ class UnityClient(object):
         :param fields: Resource fields to return
         :return: List of resource class objects
         """
-        fields = self.get_fields(type_name, fields)
+        fields = self.get_fields(type_name, base_fields, nested_fields)
         the_filter = self.dict_to_filter_string(the_filter)
 
         url = '/api/types/{}/instances'.format(type_name)
@@ -117,31 +118,35 @@ class UnityClient(object):
         type_clz = storops.unity.resource.type_resource.UnityType
         return type_clz(type_name, self)
 
-    def get_fields(self, type_name, fields=None):
-        if fields is not None:
-            ret = fields
+    def get_fields(self, type_name, base_fields=None, nested_fields=None):
+        if base_fields is not None:
+            ret = base_fields
         else:
             unity_type = self._get_type_resource(type_name)
             ret = unity_type.fields
+        if nested_fields is not None:
+            if isinstance(nested_fields, six.text_type):
+                nested_fields = tuple([nested_fields])
+            ret = ret + nested_fields
         return ret
 
     def get_doc(self, clz):
         return UnityDoc.get_doc(self, clz)
 
-    def get(self, type_name, obj_id, fields=None):
+    def get(self, type_name, obj_id, base_fields=None, nested_fields=None):
         """Get the resource by resource id.
 
         :param type_name: Resource type. For example, pool, lun, nasServer.
         :param obj_id: Resource id
-        :param fields: Resource fields to return
+        :param base_fields: Resource fields to return
         :return: List of tuple [(name, res_inst)]
         """
-        fields = self.get_fields(type_name, fields)
+        base_fields = self.get_fields(type_name, base_fields, nested_fields)
 
         url = '/api/instances/{}/{}'.format(
-            type_name, obj_id, ','.join(fields))
+            type_name, obj_id, ','.join(base_fields))
 
-        return self.rest_get(url, fields=fields)
+        return self.rest_get(url, fields=base_fields)
 
     def post(self, type_name, **kwargs):
         url = '/api/types/{}/instances'.format(type_name)

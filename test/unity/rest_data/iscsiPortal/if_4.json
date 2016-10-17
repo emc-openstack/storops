@@ -1,0 +1,18 @@
+{
+    "content": {
+        "instanceId": "root/emc:EMC_UEM_IPInterfaceLeaf%InstanceID=if_4",
+        "portalGroupTag": 1,
+        "iscsiNode": {
+            "id": "iscsinode_spa_eth2",
+            "name": "iqn.1992-04.com.emc:cx.fnm00150600267.a0"
+        },
+        "gateway": "10.244.213.1",
+        "ipProtocolVersion": 4,
+        "netmask": "255.255.255.0",
+        "ethernetPort": {
+            "id": "spa_eth2"
+        },
+        "ipAddress": "10.244.213.177",
+        "id": "if_4"
+    }
+}

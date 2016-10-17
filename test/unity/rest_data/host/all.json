@@ -28,7 +28,8 @@
         "id": "mss_1"
       },
       "iscsiHostInitiators": [{
-        "id": "HostInitiator_1"
+        "id": "HostInitiator_1",
+        "initiatorId": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"
       }],
       "hostIPPorts": [{
         "id": "HostNetworkAddress_1"

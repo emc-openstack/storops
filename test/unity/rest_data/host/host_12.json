@@ -1,0 +1,76 @@
+{
+    "content": {
+        "fcHostInitiators": [
+            {
+                "paths": [
+                    {
+                        "isLoggedIn": true,
+                        "fcPort": {
+                            "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:65:47:E0:01:DA",
+                            "id": "spa_iom_1_fc1"
+                        },
+                        "id": "HostInitiator_1_02:00:00:05"
+                    },
+                    {
+                        "isLoggedIn": true,
+                        "fcPort": {
+                            "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:64:47:E0:01:DA",
+                            "id": "spa_iom_1_fc0"
+                        },
+                        "id": "HostInitiator_1_02:00:00:04"
+                    }
+                ],
+                "id": "HostInitiator_1",
+                "initiatorId": "20:00:00:00:C9:F3:AB:0C:10:00:00:00:C9:F3:AB:0C"
+            },
+            {
+                "paths": [
+                    {
+                        "isLoggedIn": true,
+                        "fcPort": {
+                            "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6C:47:E0:01:DA",
+                            "id": "spb_iom_1_fc0"
+                        },
+                        "id": "HostInitiator_2_02:00:01:04"
+                    },
+                    {
+                        "isLoggedIn": true,
+                        "fcPort": {
+                            "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6D:47:E0:01:DA",
+                            "id": "spb_iom_1_fc1"
+                        },
+                        "id": "HostInitiator_2_02:00:01:05"
+                    }
+                ],
+                "id": "HostInitiator_2",
+                "initiatorId": "20:00:00:00:C9:F3:AB:0D:10:00:00:00:C9:F3:AB:0D"
+            }
+        ],
+        "name": "ESD-HOST193221.meng.lab.emc.com",
+        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_12",
+        "iscsiHostInitiators": [
+            {
+                "id": "HostInitiator_7",
+                "initiatorId": "iqn.1998-01.com.vmware:esx239209-7e7a57a4"
+            }
+        ],
+        "hostPushedUUID": "ef78e03c-b57b-4c82-96b0-da9a991fe6d9",
+        "operationalStatus": [
+            2
+        ],
+        "health": {
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ],
+            "value": 5
+        },
+        "osType": "Other",
+        "type": 5,
+        "id": "Host_12",
+        "autoManageType": 2,
+        "description": ""
+    }
+}

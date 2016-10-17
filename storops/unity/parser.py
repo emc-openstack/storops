@@ -16,6 +16,8 @@
 from __future__ import unicode_literals
 
 import logging
+import re
+import six
 
 from storops.lib.common import cache
 from storops.lib.parser import ParserConfigFactory, OutputParser
@@ -62,9 +64,10 @@ class UnityRestParser(OutputParser):
             output = output.first_content
         except AttributeError:
             pass
-        return self._parse_object(output)
+        return self._parse_object(output, properties=None,
+                                  preloaded_props=properties)
 
-    def _parse_object(self, obj, properties=None):
+    def _parse_object(self, obj, properties=None, preloaded_props=None):
         if properties is None:
             properties = self.properties
 
@@ -76,8 +79,89 @@ class UnityRestParser(OutputParser):
                 continue
             if p.label in obj.keys():
                 value = p.convert(obj[p.label])
+                if preloaded_props is not None and isinstance(
+                        preloaded_props, NestedProperties):
+                    subtree = preloaded_props.get_child_subtree(p.key)
+                    if (subtree is not None and
+                            hasattr(value, 'set_preloaded_properties')):
+                        value.set_preloaded_properties(subtree)
                 ret[p.key] = value
         return ret
 
     def init_from_config(self, config):
         self.name = config.name
+
+
+class NestedProperty(object):
+    def __init__(self, key):
+        self.key = key
+
+    @property
+    def label(self):
+        return self.under_score_to_camel_case(self.key)
+
+    @classmethod
+    def under_score_to_camel_case(cls, value):
+        ret = re.sub(r'_([a-z])', lambda a: a.group(1).upper(), value)
+        return ret
+
+    def get_first_level_key(self):
+        return self.key.split('.')[0]
+
+    def remove_first_level_key(self):
+        pos = self.key.find('.')
+        if pos >= 0:
+            return self.key[pos + 1:]
+        else:
+            return None
+
+
+class NestedProperties(object):
+    def __init__(self, *keys):
+        self._props = map(NestedProperty, keys)
+        self._map = None
+        self._query_fields = None
+
+    @classmethod
+    def build(cls, properties):
+        ret = None
+        if not properties:
+            ret = None
+        elif isinstance(properties, six.text_type):
+            ret = NestedProperties(properties)
+        elif isinstance(properties, (list, tuple, set)):
+            ret = NestedProperties(*properties)
+        else:
+            log.error('invalid properties {} to build NestedProperties '
+                      'object.'.format(properties))
+        return ret
+
+    @property
+    def _prop_map(self):
+        if not self._map:
+            map = {}
+            for p in self._props:
+                key = p.get_first_level_key()
+                child_prop = p.remove_first_level_key()
+                if child_prop is not None:
+                    map.setdefault(key, []).append(child_prop)
+                else:
+                    map.setdefault(key, [])
+            self._map = map
+        return self._map
+
+    def get_properties(self):
+        return self._prop_map.keys()
+
+    def get_child_subtree(self, prop):
+        if prop not in self._prop_map:
+            return None
+        if len(self._prop_map[prop]) == 0:
+            return None
+        return NestedProperties.build(self._prop_map[prop])
+
+    @property
+    def query_fields(self):
+        if self._query_fields is None:
+            self._query_fields = [a.label for a in self._props]
+        return tuple(self._query_fields)

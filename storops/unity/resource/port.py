@@ -78,7 +78,9 @@ class UnityIoLimitRuleList(UnityResourceList):
 
 
 class UnityIscsiPortal(UnityResource):
-    pass
+    @classmethod
+    def get_nested_properties(cls):
+        return 'iscsi_node.name'
 
 
 class UnityIscsiPortalList(UnityResourceList):

@@ -21,9 +21,10 @@ import ddt
 from hamcrest import assert_that, equal_to, instance_of, only_contains, raises
 from storops.exception import UnityEthernetPortSpeedNotSupportError, \
     UnityEthernetPortMtuSizeNotSupportError
-from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum
+from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum, \
+    FcSpeedEnum
 from storops.unity.resource.port import UnityEthernetPort, UnityIpPort, \
-    UnityIpPortList, UnityIscsiPortal, UnityIscsiNode
+    UnityIpPortList, UnityIscsiPortal, UnityIscsiNode, UnityFcPort
 from storops.unity.resource.sp import UnityStorageProcessor
 from test.unity.rest_mock import t_rest, patch_rest
 
@@ -125,3 +126,25 @@ class UnityIscsiPortalTest(TestCase):
                     equal_to('iqn.1992-04.com.emc:cx.fnm00150600267.a0'))
         assert_that(portal.netmask, equal_to('255.255.255.0'))
         assert_that(portal.gateway, equal_to('10.244.213.1'))
+
+
+class UnityFcPortTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        port = UnityFcPort('spa_fc4', cli=t_rest())
+        assert_that(port.existed, equal_to(True))
+        assert_that(port.slot_number, equal_to(4))
+        assert_that(
+            port.wwn,
+            equal_to("50:06:01:60:C7:E0:01:DA:50:06:01:62:47:E0:01:DA"))
+        assert_that(port.available_speeds,
+                    only_contains(FcSpeedEnum._4GbPS,
+                                  FcSpeedEnum._8GbPS,
+                                  FcSpeedEnum._16GbPS,
+                                  FcSpeedEnum.AUTO))
+        assert_that(port.connector_type,
+                    equal_to(ConnectorTypeEnum.LC))
+        assert_that(port.name,
+                    equal_to("SP A FC Port 4"))
+        assert_that(port.storage_processor,
+                    equal_to(UnityStorageProcessor('spa', cli=t_rest())))

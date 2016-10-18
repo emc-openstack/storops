@@ -1,0 +1,135 @@
+{
+    "content": {
+        "attributes": [
+            {
+                "displayValue": "id",
+                "type": "String",
+                "name": "id",
+                "description": "Unique identifier of the fcPort instance.  "
+            },
+            {
+                "displayValue": "health",
+                "type": "health",
+                "name": "health",
+                "description": "Health information for the FC port, as defined by the health resource type.  "
+            },
+            {
+                "displayValue": "operationalStatus",
+                "type": "List<FcStatusEnum>",
+                "name": "operationalStatus",
+                "description": "Current operational status information for the FC port.  "
+            },
+            {
+                "displayValue": "parent",
+                "type": "resourceRef",
+                "name": "parent",
+                "description": "Resource type and unique identifier of the FC port's enclosure, as defined by the resourceRef resource type.  "
+            },
+            {
+                "displayValue": "slotNumber",
+                "type": "Integer",
+                "name": "slotNumber",
+                "description": "Physical location of the FC port.  "
+            },
+            {
+                "displayValue": "wwn",
+                "type": "String",
+                "name": "wwn",
+                "description": "World Wide Name (WWN) of the FC port.  "
+            },
+            {
+                "displayValue": "availableSpeeds",
+                "type": "List<FcSpeedEnum>",
+                "name": "availableSpeeds",
+                "description": "Available data transmission speed values for the FC port.  "
+            },
+            {
+                "displayValue": "currentSpeed",
+                "type": "FcSpeedEnum",
+                "name": "currentSpeed",
+                "description": "Current data transmission speed of the FC port.  "
+            },
+            {
+                "displayValue": "requestedSpeed",
+                "type": "FcSpeedEnum",
+                "name": "requestedSpeed",
+                "description": "Data transmission speed requested by the user.  "
+            },
+            {
+                "displayValue": "sfpSupportedSpeeds",
+                "type": "List<SFPSpeedValuesEnum>",
+                "name": "sfpSupportedSpeeds",
+                "description": "SFP (the small form-factor pluggable) supported speeds of the FC port.  "
+            },
+            {
+                "displayValue": "sfpSupportedProtocols",
+                "type": "List<SFPProtocolValuesEnum>",
+                "name": "sfpSupportedProtocols",
+                "description": "SFP (the small form-factor pluggable) supported protocols of the FC port.  "
+            },
+            {
+                "displayValue": "connectorType",
+                "type": "ConnectorTypeEnum",
+                "name": "connectorType",
+                "description": "Physical connector type.  "
+            },
+            {
+                "displayValue": "storageProcessor",
+                "type": "storageProcessor",
+                "name": "storageProcessor",
+                "description": "SP on which the FC port directly or indirectly resides, as defined by the storageProcessor resource type.  "
+            },
+            {
+                "displayValue": "needsReplacement",
+                "type": "Boolean",
+                "name": "needsReplacement",
+                "description": "Indicates whether the FC port needs replacement. Values are: <ul> <li>true - FC port needs replacement.</li> <li>false - FC port does not need replacement.</li> </ul>  "
+            },
+            {
+                "displayValue": "nPortId",
+                "type": "Integer",
+                "name": "nPortId",
+                "description": "Port on the node host or storage device used with FC point-to-point or FC switched fabric topologies.  "
+            },
+            {
+                "displayValue": "name",
+                "type": "String",
+                "name": "name",
+                "description": "FC port name.  "
+            },
+            {
+                "displayValue": "shortName",
+                "type": "String",
+                "name": "shortName",
+                "description": "FC port short name.  "
+            },
+            {
+                "displayValue": "cascadeNames",
+                "type": "List<String>",
+                "name": "cascadeNames",
+                "description": "Hierarchical port name, which consists of the following components: I/O module name (if an I/O module is present) Port name Associated SP  "
+            },
+            {
+                "displayValue": "parentIOModule",
+                "type": "ioModule",
+                "name": "parentIOModule",
+                "description": "(Applies if the FC port resides on an I/O module.) Parent I/O module of the FC port, as defined by the ioModule resource type.  "
+            },
+            {
+                "displayValue": "parentStorageProcessor",
+                "type": "storageProcessor",
+                "name": "parentStorageProcessor",
+                "description": "(Applies if the FC port resides directly on an SP.) Parent SP of the FC port, as defined by the storageProcessor resource type.  "
+            },
+            {
+                "displayValue": "portRepCapabilities",
+                "type": "List<PortRepCapabilityEnum>",
+                "name": "portRepCapabilities",
+                "description": "FC port replication capability.  "
+            }
+        ],
+        "documentation": "https://10.244.223.61/apidocs/classes/fcPort.html",
+        "name": "fcPort",
+        "description": "Fibre Channel (FC) front end port settings. Applies if the FC protocol is supported on the system and the corresponding license is installed.  "
+    }
+}

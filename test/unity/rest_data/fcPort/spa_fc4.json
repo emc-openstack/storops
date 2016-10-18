@@ -1,0 +1,56 @@
+{
+    "content": {
+        "storageProcessor": {
+            "id": "spa"
+        },
+        "parent": {
+            "resource": "storageProcessor",
+            "id": "spa"
+        },
+        "portRepCapabilities": [
+            0
+        ],
+        "parentStorageProcessor": {
+            "id": "spa"
+        },
+        "name": "SP A FC Port 4",
+        "availableSpeeds": [
+            4,
+            8,
+            16,
+            0
+        ],
+        "needsReplacement": false,
+        "sfpSupportedSpeeds": [
+            4000,
+            8000,
+            16000
+        ],
+        "sfpSupportedProtocols": [
+            1
+        ],
+        "operationalStatus": [
+            2,
+            32785
+        ],
+        "health": {
+            "descriptionIds": [
+                "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+            ],
+            "descriptions": [
+                "The port link is down, but not in use. No action is required."
+            ],
+            "value": 5
+        },
+        "cascadeNames": [
+            "FC Port 4",
+            "SP A"
+        ],
+        "nPortId": 4294967295,
+        "shortName": "FC Port 4",
+        "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:62:47:E0:01:DA",
+        "connectorType": 2,
+        "id": "spa_fc4",
+        "slotNumber": 4
+    }
+}

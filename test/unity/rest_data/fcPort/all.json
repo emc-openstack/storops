@@ -1,0 +1,696 @@
+{
+    "@base": "https://10.244.223.61/api/types/fcPort/instances?fields=availableSpeeds,cascadeNames,connectorType,currentSpeed,health,id,nPortId,name,needsReplacement,operationalStatus,parent,portRepCapabilities,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,slotNumber,wwn,parentStorageProcessor.id,storageProcessor.id,parentIOModule.id&per_page=2000&compact=true",
+    "updated": "2016-10-18T01:56:10.923Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spa"
+                },
+                "portRepCapabilities": [
+                    0
+                ],
+                "parentStorageProcessor": {
+                    "id": "spa"
+                },
+                "name": "SP A FC Port 4",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    2,
+                    32785
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 4",
+                    "SP A"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "FC Port 4",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:62:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spa_fc4",
+                "slotNumber": 4
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spa"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "parentStorageProcessor": {
+                    "id": "spa"
+                },
+                "name": "SP A FC Port 5",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    2,
+                    32785
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 5",
+                    "SP A"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "FC Port 5",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:63:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spa_fc5",
+                "slotNumber": 5
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "name": "SP A I/O Module 1 FC Port 0",
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spa_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "connectorType": 2,
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32784,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 0",
+                    "I/O Module 1",
+                    "SP A"
+                ],
+                "nPortId": 10554112,
+                "parentIOModule": {
+                    "id": "spa_iom_1"
+                },
+                "shortName": "I/O Module 1 FC Port 0",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:64:47:E0:01:DA",
+                "currentSpeed": 8,
+                "id": "spa_iom_1_fc0",
+                "slotNumber": 0
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "name": "SP A I/O Module 1 FC Port 1",
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spa_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "connectorType": 2,
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    2,
+                    32784
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 1",
+                    "I/O Module 1",
+                    "SP A"
+                ],
+                "nPortId": 10558208,
+                "parentIOModule": {
+                    "id": "spa_iom_1"
+                },
+                "shortName": "I/O Module 1 FC Port 1",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:65:47:E0:01:DA",
+                "currentSpeed": 8,
+                "id": "spa_iom_1_fc1",
+                "slotNumber": 1
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "parentIOModule": {
+                    "id": "spa_iom_1"
+                },
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spa_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "name": "SP A I/O Module 1 FC Port 2",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32785,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 2",
+                    "I/O Module 1",
+                    "SP A"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "I/O Module 1 FC Port 2",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:66:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spa_iom_1_fc2",
+                "slotNumber": 2
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "parentIOModule": {
+                    "id": "spa_iom_1"
+                },
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spa_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "name": "SP A I/O Module 1 FC Port 3",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    2,
+                    32785
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 3",
+                    "I/O Module 1",
+                    "SP A"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "I/O Module 1 FC Port 3",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:67:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spa_iom_1_fc3",
+                "slotNumber": 3
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spb"
+                },
+                "portRepCapabilities": [
+                    0
+                ],
+                "parentStorageProcessor": {
+                    "id": "spb"
+                },
+                "name": "SP B FC Port 4",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32785,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 4",
+                    "SP B"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "FC Port 4",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6A:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spb_fc4",
+                "slotNumber": 4
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spb"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "parentStorageProcessor": {
+                    "id": "spb"
+                },
+                "name": "SP B FC Port 5",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    2,
+                    32785
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 5",
+                    "SP B"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "FC Port 5",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6B:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spb_fc5",
+                "slotNumber": 5
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "name": "SP B I/O Module 1 FC Port 0",
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spb_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "connectorType": 2,
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32784,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 0",
+                    "I/O Module 1",
+                    "SP B"
+                ],
+                "nPortId": 10553856,
+                "parentIOModule": {
+                    "id": "spb_iom_1"
+                },
+                "shortName": "I/O Module 1 FC Port 0",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6C:47:E0:01:DA",
+                "currentSpeed": 8,
+                "id": "spb_iom_1_fc0",
+                "slotNumber": 0
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "name": "SP B I/O Module 1 FC Port 1",
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spb_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "connectorType": 2,
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32784,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 1",
+                    "I/O Module 1",
+                    "SP B"
+                ],
+                "nPortId": 10557952,
+                "parentIOModule": {
+                    "id": "spb_iom_1"
+                },
+                "shortName": "I/O Module 1 FC Port 1",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6D:47:E0:01:DA",
+                "currentSpeed": 8,
+                "id": "spb_iom_1_fc1",
+                "slotNumber": 1
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "parentIOModule": {
+                    "id": "spb_iom_1"
+                },
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spb_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "name": "SP B I/O Module 1 FC Port 2",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32785,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 2",
+                    "I/O Module 1",
+                    "SP B"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "I/O Module 1 FC Port 2",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6E:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spb_iom_1_fc2",
+                "slotNumber": 2
+            }
+        },
+        {
+            "content": {
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "parentIOModule": {
+                    "id": "spb_iom_1"
+                },
+                "parent": {
+                    "resource": "ioModule",
+                    "id": "spb_iom_1"
+                },
+                "portRepCapabilities": [
+                    1
+                ],
+                "name": "SP B I/O Module 1 FC Port 3",
+                "availableSpeeds": [
+                    4,
+                    8,
+                    16,
+                    0
+                ],
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [
+                    4000,
+                    8000,
+                    16000
+                ],
+                "sfpSupportedProtocols": [
+                    1
+                ],
+                "operationalStatus": [
+                    32785,
+                    2
+                ],
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "cascadeNames": [
+                    "FC Port 3",
+                    "I/O Module 1",
+                    "SP B"
+                ],
+                "nPortId": 4294967295,
+                "shortName": "I/O Module 1 FC Port 3",
+                "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6F:47:E0:01:DA",
+                "connectorType": 2,
+                "id": "spb_iom_1_fc3",
+                "slotNumber": 3
+            }
+        }
+    ]
+}

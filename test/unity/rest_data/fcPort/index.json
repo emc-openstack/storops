@@ -1,0 +1,16 @@
+{
+   "indices": [
+      {
+        "url": "/api/types/fcPort?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+        "response": "type.json"
+      },
+      {
+        "url": "/api/types/fcPort/instances?compact=True&fields=availableSpeeds,cascadeNames,connectorType,currentSpeed,health,id,nPortId,name,needsReplacement,operationalStatus,parent,parentIOModule,parentStorageProcessor,portRepCapabilities,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,slotNumber,storageProcessor,wwn",
+        "response": "all.json"
+      },
+      {
+        "url": "/api/instances/fcPort/spa_fc4?compact=True&fields=availableSpeeds,cascadeNames,connectorType,currentSpeed,health,id,nPortId,name,needsReplacement,operationalStatus,parent,parentIOModule,parentStorageProcessor,portRepCapabilities,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,slotNumber,storageProcessor,wwn",
+        "response": "spa_fc4.json"
+      }
+    ]
+  }

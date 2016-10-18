@@ -38,6 +38,7 @@ from storops.unity.resource.nas_server import UnityNasServer, \
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
+from storops.unity.resource.port import UnityFcPortList
 from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.port import UnityIpPortList
 from storops.unity.resource.snap import UnitySnapList
@@ -366,6 +367,13 @@ class UnitySystemTest(TestCase):
         doc = unity.get_doc(unity.get_snap())
         assert_that(doc, contains_string(
             'For a file system or VMware NFS datastore'))
+
+    @patch_rest
+    def test_get_fc_port(self):
+        unity = t_unity()
+        fi_list = unity.get_fc_port()
+        assert_that(fi_list, instance_of(UnityFcPortList))
+        assert_that(len(fi_list), equal_to(12))
 
 
 class UnityDpeTest(TestCase):

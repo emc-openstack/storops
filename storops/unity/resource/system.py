@@ -39,7 +39,7 @@ from storops.unity.resource.port import UnityIpPortList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
 from storops.unity.resource.port import UnityEthernetPortList, \
-    UnityIscsiPortalList
+    UnityIscsiPortalList, UnityFcPortList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
 
 __author__ = 'Jay Xu'
@@ -66,6 +66,9 @@ class UnitySystem(UnitySingletonResource):
 
     def get_iscsi_portal(self, _id=None, **filters):
         return self._get_unity_rsc(UnityIscsiPortalList, _id=_id, **filters)
+
+    def get_fc_port(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityFcPortList, _id=_id, **filters)
 
     def get_ethernet_port(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityEthernetPortList, _id=_id,

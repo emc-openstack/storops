@@ -544,6 +544,10 @@ class ConnectorTypeEnum(UnityEnum):
     RJ45 = (1, 'RJ45')
     LC = (2, 'LC')
     MINI_SAS_HD = (3, 'MiniSAS HD')
+    COPPER_PIGTAIL = (4, "Copper pigtail")
+    NO_SEPARABLE_CONNECTOR = (5, "No separable connector")
+    NAS_COPPER = (6, "NAS copper")
+    NOT_PRESENT = (7, "Not present")
 
 
 class EPSpeedValuesEnum(UnityEnum):

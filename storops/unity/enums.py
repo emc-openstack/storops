@@ -679,3 +679,14 @@ class ACEAccessLevelEnum(UnityEnum):
     READ = (1, 'Read')
     WRITE = (2, 'Write')
     FULL = (4, 'Full')
+
+
+class IOLimitPolicyStateEnum(UnityEnum):
+    GLOBAL_PAUSED = (1, 'Global Paused')
+    PAUSED = (2, 'Paused')
+    ACTIVE = (3, 'Active')
+
+
+class IOLimitPolicyTypeEnum(UnityEnum):
+    ABSOLUTE = (1, 'Absolute Value')
+    DENSITY_BASED = (2, 'Density-based Value')

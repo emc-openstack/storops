@@ -29,6 +29,10 @@
       "response": "sv_2019.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_2026?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_2026.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
       "body": {
         "cifsShareCreate": [
@@ -640,6 +644,24 @@
         }
       },
       "response": "empty.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "ioLimitParameters": {
+            "ioLimitPolicy": {
+              "id": "qp_4"
+            }
+          },
+          "pool": {
+            "id": "pool_1"
+          },
+          "size": 1073741824
+        },
+        "name": "Himalia"
+      },
+      "response": "create_lun_sv_2026.json"
     }
   ]
 }

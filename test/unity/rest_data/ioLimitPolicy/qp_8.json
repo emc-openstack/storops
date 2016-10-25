@@ -1,0 +1,25 @@
+{
+  "content": {
+    "description": "storops",
+    "ioLimitRuleSettings": [
+      {
+        "instanceId": "qr_8",
+        "maxKBPS": 1234,
+        "id": "qr_8",
+        "name": "max_kbps_1234_rule"
+      }
+    ],
+    "instanceId": "qp_8",
+    "ioLimitRules": [
+      {
+        "id": "qr_8"
+      }
+    ],
+    "state": 3,
+    "isPaused": false,
+    "isShared": false,
+    "type": 1,
+    "id": "qp_8",
+    "name": "max_kbps_1234"
+  }
+}

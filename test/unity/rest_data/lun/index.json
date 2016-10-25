@@ -45,8 +45,20 @@
       "response": "sv_9.json"
     },
     {
+      "url": "/api/instances/lun/sv_10?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_10.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_11?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_11.json"
+    },
+    {
       "url": "/api/instances/lun/sv_2019?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
       "response": "sv_2019.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_2026?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_2026.json"
     },
     {
       "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn&filter=name eq \"storops_dummy_lun\"",

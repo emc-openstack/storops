@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 151032071,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "The specified policy name has already been reserved or a policy with this name already exists. (Error Code:0x9009107)"
+      }
+    ],
+    "created": "2016-10-25T08:28:27.264Z"
+  }
+}

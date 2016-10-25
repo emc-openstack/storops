@@ -1,0 +1,33 @@
+{
+  "content": {
+    "luns": [
+      {
+        "id": "sv_2"
+      }
+    ],
+    "description": "Absolute bandwidth limit at 2 MB/s",
+    "ioLimitRuleSettings": [
+      {
+        "maxKBPS": 2048,
+        "burstRate": 5,
+        "burstFrequency": "01:00:00.000",
+        "instanceId": "qr_2",
+        "burstTime": "00:05:00.000",
+        "id": "qr_2",
+        "name": "Limit_2_MBPS_rule"
+      }
+    ],
+    "instanceId": "qp_2",
+    "ioLimitRules": [
+      {
+        "id": "qr_2"
+      }
+    ],
+    "state": 3,
+    "isPaused": false,
+    "isShared": false,
+    "type": 1,
+    "id": "qp_2",
+    "name": "Limit_2_MBPS"
+  }
+}

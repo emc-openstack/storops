@@ -17,10 +17,11 @@ from __future__ import unicode_literals
 
 import logging
 
-from storops.unity.resource import UnityResource, UnityResourceList
+from storops.unity.resource import UnityResource, UnityResourceList, \
+    UnityAttributeResource
 from storops.exception import UnityEthernetPortMtuSizeNotSupportError
 from storops.exception import UnityEthernetPortSpeedNotSupportError
-from storops.unity.enums import EPSpeedValuesEnum
+from storops.unity.enums import EPSpeedValuesEnum, IOLimitPolicyTypeEnum
 
 __author__ = 'Jay Xu'
 
@@ -58,7 +59,29 @@ class UnityIoModuleList(UnityResourceList):
 
 
 class UnityIoLimitPolicy(UnityResource):
-    pass
+    @classmethod
+    def create(cls, cli, name, max_iops=None, max_kbps=None,
+               policy_type=IOLimitPolicyTypeEnum.ABSOLUTE,
+               is_shared=False, description=None):
+        rule = cli.make_body(name='{}_rule'.format(name),
+                             maxIOPS=max_iops,
+                             maxKBPS=max_kbps)
+        resp = cli.post(cls().resource_class,
+                        name=name,
+                        description=description,
+                        isShared=is_shared,
+                        type=policy_type,
+                        ioLimitRules=[rule])
+        resp.raise_if_err()
+        return cls(_id=resp.resource_id, cli=cli)
+
+    def apply_to_storage(self, *lun_list):
+        return self._cli.action(self.resource_class, self.get_id(),
+                                'applyToStorage', luns=lun_list)
+
+    def remove_from_storage(self, *lun_list):
+        return self._cli.action(self.resource_class, self.get_id(),
+                                'removeFromStorage', luns=lun_list)
 
 
 class UnityIoLimitPolicyList(UnityResourceList):
@@ -75,6 +98,16 @@ class UnityIoLimitRuleList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnityIoLimitRule
+
+
+class UnityIoLimitRuleSetting(UnityAttributeResource):
+    pass
+
+
+class UnityIoLimitRuleSettingList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityIoLimitRuleSetting
 
 
 class UnityIscsiPortal(UnityResource):

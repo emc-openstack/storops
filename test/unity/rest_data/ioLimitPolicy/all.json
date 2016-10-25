@@ -1,0 +1,206 @@
+{
+  "@base": "https://10.244.223.61/api/types/ioLimitPolicy/instances?fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,isPaused,isShared,name,state,type,snaps.id,ioLimitRules.id,luns.id&per_page=2000&compact=true",
+  "updated": "2016-10-25T05:38:11.535Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_1"
+          }
+        ],
+        "description": "Hard limit to 1000 IO/s.",
+        "ioLimitRuleSettings": [
+          {
+            "instanceId": "qr_1",
+            "id": "qr_1",
+            "maxIOPS": 1000,
+            "name": "Limit_1000_IOPS_rule"
+          }
+        ],
+        "instanceId": "qp_1",
+        "ioLimitRules": [
+          {
+            "id": "qr_1"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 1,
+        "id": "qp_1",
+        "name": "Limit_1000_IOPS"
+      }
+    },
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_2"
+          }
+        ],
+        "description": "Absolute bandwidth limit at 2 MB/s",
+        "ioLimitRuleSettings": [
+          {
+            "maxKBPS": 2048,
+            "burstRate": 5,
+            "burstFrequency": "01:00:00.000",
+            "instanceId": "qr_2",
+            "burstTime": "00:05:00.000",
+            "id": "qr_2",
+            "name": "Limit_2_MBPS_rule"
+          }
+        ],
+        "instanceId": "qp_2",
+        "ioLimitRules": [
+          {
+            "id": "qr_2"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 1,
+        "id": "qp_2",
+        "name": "Limit_2_MBPS"
+      }
+    },
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_4"
+          }
+        ],
+        "description": "Density limit 900 IO/s per GB.",
+        "ioLimitRuleSettings": [
+          {
+            "burstRate": 10,
+            "burstFrequency": "02:00:00.000",
+            "instanceId": "qr_3",
+            "maxIOPSDensity": 900,
+            "burstTime": "00:03:00.000",
+            "id": "qr_3",
+            "name": "Density_900_IOPS_rule"
+          }
+        ],
+        "instanceId": "qp_3",
+        "ioLimitRules": [
+          {
+            "id": "qr_3"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 2,
+        "id": "qp_3",
+        "name": "Density_900_IOPS"
+      }
+    },
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_3"
+          }
+        ],
+        "description": "Density limit at 1100 KB/s per GB.",
+        "ioLimitRuleSettings": [
+          {
+            "instanceId": "qr_4",
+            "maxKBPSDensity": 1100,
+            "id": "qr_4",
+            "name": "Density_1100_KBPS_rule"
+          }
+        ],
+        "instanceId": "qp_4",
+        "ioLimitRules": [
+          {
+            "id": "qr_4"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 2,
+        "id": "qp_4",
+        "name": "Density_1100_KBPS"
+      }
+    },
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_2018"
+          }
+        ],
+        "description": "",
+        "ioLimitRuleSettings": [
+          {
+            "maxKBPS": 2048,
+            "burstRate": 50,
+            "burstFrequency": "09:00:00.000",
+            "instanceId": "qr_5",
+            "burstTime": "01:00:00.000",
+            "id": "qr_5",
+            "maxIOPS": 1000,
+            "name": "test1_rule"
+          }
+        ],
+        "instanceId": "qp_5",
+        "ioLimitRules": [
+          {
+            "id": "qr_5"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 1,
+        "id": "qp_5",
+        "name": "test1"
+      }
+    },
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_2020"
+          }
+        ],
+        "description": "",
+        "ioLimitRuleSettings": [
+          {
+            "maxKBPS": 2048,
+            "burstRate": 10,
+            "burstFrequency": "01:00:00.000",
+            "instanceId": "qr_6",
+            "burstTime": "00:10:00.000",
+            "id": "qr_6",
+            "maxIOPS": 2000,
+            "name": "test2_rule"
+          }
+        ],
+        "instanceId": "qp_6",
+        "ioLimitRules": [
+          {
+            "id": "qr_6"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 1,
+        "id": "qp_6",
+        "name": "test2"
+      }
+    }
+  ]
+}

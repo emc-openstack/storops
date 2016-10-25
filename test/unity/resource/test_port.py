@@ -18,13 +18,17 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 import ddt
-from hamcrest import assert_that, equal_to, instance_of, only_contains, raises
+from hamcrest import assert_that, equal_to, instance_of, only_contains, \
+    raises, contains_string
 from storops.exception import UnityEthernetPortSpeedNotSupportError, \
-    UnityEthernetPortMtuSizeNotSupportError
+    UnityEthernetPortMtuSizeNotSupportError, UnityResourceNotFoundError, \
+    UnityPolicyNameInUseError
 from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum, \
-    FcSpeedEnum
+    FcSpeedEnum, IOLimitPolicyStateEnum
+from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.port import UnityEthernetPort, UnityIpPort, \
-    UnityIpPortList, UnityIscsiPortal, UnityIscsiNode, UnityFcPort
+    UnityIpPortList, UnityIscsiPortal, UnityIscsiNode, UnityFcPort, \
+    UnityIoLimitRule, UnityIoLimitPolicy, UnityIoLimitPolicyList
 from storops.unity.resource.sp import UnityStorageProcessor
 from test.unity.rest_mock import t_rest, patch_rest
 
@@ -103,6 +107,7 @@ class UnityEthernetPortTest(TestCase):
         def do():
             port = UnityEthernetPort(cli=t_rest(), _id='spb_eth3')
             port.modify(speed=40000)
+
         assert_that(do, raises(UnityEthernetPortSpeedNotSupportError))
 
     @ddt.data({'port_id': 'spa_eth2',
@@ -148,3 +153,93 @@ class UnityFcPortTest(TestCase):
                     equal_to("SP A FC Port 4"))
         assert_that(port.storage_processor,
                     equal_to(UnityStorageProcessor('spa', cli=t_rest())))
+
+
+class UnityIoLimitRuleTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        rule = UnityIoLimitRule('qr_1', cli=t_rest())
+        assert_that(rule.get_id(), equal_to('qr_1'))
+        assert_that(rule.max_iops, equal_to(1000))
+        assert_that(rule.io_limit_policy.get_id(), equal_to('qp_1'))
+        assert_that(rule.name, equal_to('Limit_1000_IOPS_rule'))
+
+
+class UnityIoLimitPolicyTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        rule = UnityIoLimitPolicy('qp_2', cli=t_rest())
+        assert_that(rule.description, contains_string('Absolute bandwidth'))
+        assert_that(rule.existed, equal_to(True))
+        assert_that(rule.get_id(), equal_to('qp_2'))
+        assert_that(rule.is_shared, equal_to(False))
+        lun_list = rule.luns
+        assert_that(len(lun_list), equal_to(1))
+        assert_that(rule.name, equal_to('Limit_2_MBPS'))
+        assert_that(rule.state, equal_to(IOLimitPolicyStateEnum.ACTIVE))
+
+        settings = rule.io_limit_rule_settings
+        assert_that(len(settings), equal_to(1))
+
+        setting = settings[0]
+        assert_that(setting.burst_frequency, equal_to('01:00:00.000'))
+        assert_that(setting.burst_time, equal_to('00:05:00.000'))
+        assert_that(setting.get_id(), equal_to('qr_2'))
+        assert_that(setting.max_kbps, equal_to(2048))
+        assert_that(setting.name, equal_to('Limit_2_MBPS_rule'))
+
+    @patch_rest
+    def test_get_list(self):
+        rule_list = UnityIoLimitPolicyList.get(cli=t_rest())
+        assert_that(len(rule_list), equal_to(6))
+
+    @patch_rest
+    def test_create_kbps_policy(self):
+        policy = UnityIoLimitPolicy.create(
+            t_rest(), 'max_kbps_1234', max_kbps=1234, description='storops')
+        assert_that(policy.name, equal_to('max_kbps_1234'))
+        assert_that(policy.is_paused, equal_to(False))
+        setting = policy.io_limit_rule_settings[0]
+        assert_that(setting.max_kbps, equal_to(1234))
+        assert_that(setting.name, equal_to('max_kbps_1234_rule'))
+
+    @patch_rest
+    def test_create_policy_existed(self):
+        def f():
+            UnityIoLimitPolicy.create(t_rest(), 'test1', max_kbps=1)
+
+        assert_that(f, raises(UnityPolicyNameInUseError, 'been reserved'))
+
+    @patch_rest
+    def test_create_iops_policy(self):
+        policy = UnityIoLimitPolicy.create(
+            t_rest(), 'max_iops_4321', max_iops=4321, description='storops')
+        assert_that(policy.name, equal_to('max_iops_4321'))
+        assert_that(policy.is_paused, equal_to(False))
+        setting = policy.io_limit_rule_settings[0]
+        assert_that(setting.max_iops, equal_to(4321))
+        assert_that(setting.name, equal_to('max_iops_4321_rule'))
+
+    @patch_rest
+    def test_delete_policy_not_found(self):
+        def f():
+            policy = UnityIoLimitPolicy('qp_8', t_rest())
+            policy.delete()
+
+        assert_that(f, raises(UnityResourceNotFoundError))
+
+    @patch_rest
+    def test_apply_to_storage(self):
+        policy = UnityIoLimitPolicy('qp_5', t_rest())
+        lun1 = UnityLun('sv_2024', t_rest())
+        lun2 = UnityLun('sv_2025', t_rest())
+        resp = policy.apply_to_storage(lun1, lun2)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_remove_from_storage(self):
+        policy = UnityIoLimitPolicy('qp_5', t_rest())
+        lun1 = UnityLun('sv_2024', t_rest())
+        lun2 = UnityLun('sv_2025', t_rest())
+        resp = policy.remove_from_storage(lun1, lun2)
+        assert_that(resp.is_ok(), equal_to(True))

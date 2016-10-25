@@ -65,6 +65,8 @@ UnityLun:
     - label: hostAccess
       converter: UnityBlockHostAccessList
     - label: snapCount
+    - label: effectiveIoLimitMaxIOPS
+    - label: effectiveIoLimitMaxKBPS
 
 
 UnityHealth:
@@ -788,12 +790,18 @@ UnityIoLimitPolicy:
     - label: isShared
     - label: ioLimitRules
       converter: UnityIoLimitRuleList
+    - label: ioLimitRuleSettings
+      converter: UnityIoLimitRuleSettingList
     - label: luns
       converter: UnityLunList
     - label: snaps
       converter: UnitySnapList
+    - label: state
+      converter: IOLimitPolicyStateEnum
+    - label: isPaused
 
 
+# deprecated
 UnityIoLimitRule:
   data_src: rest
   name: ioLimitRule
@@ -804,8 +812,30 @@ UnityIoLimitRule:
     - label: description
     - label: maxIOPS
     - label: maxKBPS
-    - label: ioLimitPolicy
+    - label: maxIOPSDensity
+    - label: maxKBPSDensity
+    - label: burstRate
+    - label: burstTime
+    - label: burstFrequency
+    - label: ioLimitpolicy
+      key: io_limit_policy
       converter: UnityIoLimitPolicy
+
+
+UnityIoLimitRuleSetting:
+  data_src: rest
+  name: ioLimitRuleSetting
+  properties:
+    - label: id
+      is_index: True
+    - label: name
+    - label: description
+    - label: maxIOPS
+    - label: maxKBPS
+    - label: maxIOPSDensity
+    - label: maxKBPSDensity
+    - label: burstTime
+    - label: burstFrequency
 
 
 UnityFileDnsServer:

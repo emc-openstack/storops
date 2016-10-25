@@ -1,0 +1,107 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/ioLimitPolicy?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_2?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "qp_2.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_4?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "qp_4.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_8?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "qp_8.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_9?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "qp_9.json"
+    },
+    {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True",
+      "body": {
+        "isShared": false,
+        "type": 1,
+        "description": "storops",
+        "ioLimitRules": [
+          {
+            "maxKBPS": 1234,
+            "name": "max_kbps_1234_rule"
+          }
+        ],
+        "name": "max_kbps_1234"
+      },
+      "response": "create_qp_8.json"
+    },
+    {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True",
+      "body": {
+        "isShared": false,
+        "type": 1,
+        "description": "storops",
+        "ioLimitRules": [
+          {
+            "name": "max_iops_4321_rule",
+            "maxIOPS": 4321
+          }
+        ],
+        "name": "max_iops_4321"
+      },
+      "response": "create_qp_9.json"
+    },
+    {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True",
+      "body": {
+        "type": 1,
+        "name": "test1",
+        "ioLimitRules": [
+          {
+            "maxKBPS": 1,
+            "name": "test1_rule"
+          }
+        ],
+        "isShared": false
+      },
+      "response": "policy_name_used.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_8?compact=True",
+      "response": "not_exist.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_5/action/applyToStorage?compact=True",
+      "body": {
+        "luns": [
+          {
+            "id": "sv_2024"
+          },
+          {
+            "id": "sv_2025"
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_5/action/removeFromStorage?compact=True",
+      "body": {
+        "luns": [
+          {
+            "id": "sv_2024"
+          },
+          {
+            "id": "sv_2025"
+          }
+        ]
+      },
+      "response": "empty.json"
+    }
+  ]
+}

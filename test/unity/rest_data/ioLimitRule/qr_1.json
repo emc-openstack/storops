@@ -1,0 +1,11 @@
+{
+  "content": {
+    "instanceId": "qr_1",
+    "ioLimitpolicy": {
+      "id": "qp_1"
+    },
+    "id": "qr_1",
+    "maxIOPS": 1000,
+    "name": "Limit_1000_IOPS_rule"
+  }
+}

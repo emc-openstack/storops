@@ -1,0 +1,59 @@
+{
+  "content": {
+    "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_3",
+    "defaultNode": 0,
+    "compressionPercent": 0,
+    "snapsSize": 0,
+    "isCompressionEnabled": false,
+    "effectiveIoLimitMaxKBPS": 11000,
+    "metadataSizeAllocated": 3758096384,
+    "wwn": "60:06:01:60:15:E0:3A:00:6A:A2:E0:57:83:E7:0D:E2",
+    "id": "sv_11",
+    "currentNode": 0,
+    "objectId": 42949672970,
+    "snapCount": 0,
+    "isSnapSchedulePaused": false,
+    "snapWwn": "60:06:01:60:15:E0:3A:00:80:3E:15:91:5B:BC:4F:E9",
+    "health": {
+      "descriptionIds": [
+        "ALRT_VOL_OK"
+      ],
+      "descriptions": [
+        "The LUN is operating normally. No action is required."
+      ],
+      "value": 5
+    },
+    "metadataSize": 3489660928,
+    "type": 2,
+    "isThinEnabled": true,
+    "compressionSizeSaved": 0,
+    "description": "The third and largest moon of Jupiter.",
+    "snapsSizeAllocated": 0,
+    "modificationTime": "2016-09-20T02:43:56.065Z",
+    "perTierSizeUsed": [
+      0,
+      6174015488,
+      0
+    ],
+    "operationalStatus": [
+      2
+    ],
+    "storageResource": {
+      "id": "sv_11"
+    },
+    "ioLimitPolicy": {
+      "id": "qp_4"
+    },
+    "tieringPolicy": 0,
+    "pool": {
+      "id": "pool_1"
+    },
+    "sizeAllocated": 137084928,
+    "name": "Ganymede",
+    "creationTime": "2016-09-20T02:43:54.000Z",
+    "sizeTotal": 10737418240,
+    "compressionRatio": 1.0,
+    "isReplicationDestination": false,
+    "auSize": 8192
+  }
+}

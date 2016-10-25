@@ -1,0 +1,93 @@
+{
+    "content": {
+        "attributes": [
+            {
+                "displayValue": "instanceId",
+                "type": "String",
+                "name": "instanceId",
+                "description": "Internal identifier of the ioLimitPolicy instance.  "
+            },
+            {
+                "displayValue": "id",
+                "type": "String",
+                "name": "id",
+                "description": "Unique identifier of the ioLimitPolicy instance.  "
+            },
+            {
+                "displayValue": "name",
+                "type": "String",
+                "name": "name",
+                "description": "I/O limit policy name.  "
+            },
+            {
+                "displayValue": "description",
+                "type": "String",
+                "name": "description",
+                "description": "I/O limit policy description.  "
+            },
+            {
+                "displayValue": "isShared",
+                "type": "Boolean",
+                "name": "isShared",
+                "description": "Indicates whether the I/O limits defined in the I/O limit policy are shared among all assigned storage resources. Values are: <ul> <li>true - I/O limits are shared. The total I/O of the set of storage resources with this policy is limited.</li> <li>false - (Default) I/O limits are not shared. The I/O limit applies to each storage resource individually.</li> </ul>  "
+            },
+            {
+                "displayValue": "isPaused",
+                "type": "Boolean",
+                "name": "isPaused",
+                "description": "Indicates whether I/O limit policy is paused. Values are: <ul> <li>true - I/O limit policy is paused.</li> <li>false - (Default) I/O limit policy is not paused.</li> </ul>  "
+            },
+            {
+                "displayValue": "type",
+                "type": "IOLimitPolicyTypeEnum",
+                "name": "type",
+                "description": "IO limit policy type.  "
+            },
+            {
+                "displayValue": "ioLimitRules",
+                "type": "List<ioLimitRule>",
+                "name": "ioLimitRules",
+                "description": "(DEPRECATED)The references of the rules associated with the I/O limit policy, as defined by the ioLimitRule resource type. Currently, only one rule is supported per policy.  "
+            },
+            {
+                "displayValue": "ioLimitRuleSettings",
+                "type": "List<ioLimitRuleSetting>",
+                "name": "ioLimitRuleSettings",
+                "description": "IO limit rules associated with the I/O limit policy, as defined by the ioLimitRuleSetting resource type. Currently, only one rule is supported per policy.  "
+            },
+            {
+                "displayValue": "luns",
+                "type": "List<lun>",
+                "name": "luns",
+                "description": "LUNs to which the I/O limit policy applies, as defined by the LUN resource type.  "
+            },
+            {
+                "displayValue": "snaps",
+                "type": "List<snap>",
+                "name": "snaps",
+                "description": "Snaps to which the I/O limit policy applies, as defined by the snap resource type.  "
+            },
+            {
+                "displayValue": "effectiveIoLimitMaxIOPS",
+                "type": "Integer",
+                "name": "effectiveIoLimitMaxIOPS",
+                "description": "Effective Read/Write IOPS limit for a shared policy.  "
+            },
+            {
+                "displayValue": "effectiveIoLimitMaxKBPS",
+                "type": "Integer",
+                "name": "effectiveIoLimitMaxKBPS",
+                "description": "Effective Read/write KB/s limit for a shared policy.  "
+            },
+            {
+                "displayValue": "state",
+                "type": "IOLimitPolicyStateEnum",
+                "name": "state",
+                "description": "IO limit policy state.  "
+            }
+        ],
+        "documentation": "https://10.244.223.61/apidocs/classes/ioLimitPolicy.html",
+        "name": "ioLimitPolicy",
+        "description": "Set of I/O limit rules that you can apply to a storage resource. On GUI and CLI, ioLimitPolicy and ioLimitRule are combined for now since we only support one I/O limit rule per I/O limit policy.  "
+    }
+}

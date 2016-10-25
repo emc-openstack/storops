@@ -1,0 +1,25 @@
+{
+  "content": {
+    "description": "storops",
+    "ioLimitRuleSettings": [
+      {
+        "instanceId": "qr_9",
+        "id": "qr_9",
+        "maxIOPS": 4321,
+        "name": "max_iops_4321_rule"
+      }
+    ],
+    "instanceId": "qp_9",
+    "ioLimitRules": [
+      {
+        "id": "qr_9"
+      }
+    ],
+    "state": 3,
+    "isPaused": false,
+    "isShared": false,
+    "type": 1,
+    "id": "qp_9",
+    "name": "max_iops_4321"
+  }
+}

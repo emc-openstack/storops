@@ -1,0 +1,34 @@
+{
+  "content": {
+    "id": "qp_4",
+    "type": 2,
+    "state": 3,
+    "instanceId": "qp_4",
+    "name": "Density_1100_KBPS",
+    "description": "Density limit at 1100 KB/s per GB.",
+    "isShared": false,
+    "isPaused": false,
+    "ioLimitRuleSettings": [
+      {
+        "instanceId": "qr_4",
+        "id": "qr_4",
+        "name": "Density_1100_KBPS_rule",
+        "maxKBPSDensity": 1100
+      }
+    ],
+    "ioLimitRules": [
+      {
+        "id": "qr_4"
+      }
+    ],
+    "luns": [
+      {
+        "id": "sv_3"
+      },
+      {
+        "id": "sv_2026"
+      }
+    ]
+  }
+}
+

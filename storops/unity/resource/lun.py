@@ -33,7 +33,7 @@ log = logging.getLogger(__name__)
 class UnityLun(UnityResource):
     @classmethod
     def create(cls, cli, name, pool, size, sp=None, host_access=None,
-               is_thin=None, description=None, iolimit_policy=None,
+               is_thin=None, description=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None):
         pool_clz = storops.unity.resource.pool.UnityPool
         pool = pool_clz.get(cli, pool)
@@ -41,7 +41,7 @@ class UnityLun(UnityResource):
         req_body = cls._compose_lun_parameter(
             cli, name=name, pool=pool, size=size, sp=sp, is_thin=is_thin,
             host_access=host_access, description=description,
-            iolimit_policy=iolimit_policy, is_repl_dst=is_repl_dst,
+            io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
             tiering_policy=tiering_policy, snap_schedule=snap_schedule)
         resp = cli.type_action(UnityStorageResource().resource_class,
                                'createLun', **req_body)
@@ -54,12 +54,42 @@ class UnityLun(UnityResource):
         if hasattr(self, '_name') and self._name is not None:
             name = self._name
         else:
+            if not self._is_updated():
+                self.update()
             name = self._get_value_by_key('name')
         return name
 
     @name.setter
     def name(self, new_name):
         self.modify(name=new_name)
+
+    @property
+    def io_limit_rule(self):
+        rule = None
+        if self.io_limit_policy:
+            policy = self.io_limit_policy
+            if policy.io_limit_rule_settings:
+                rules = policy.io_limit_rule_settings
+            elif policy.io_limit_rules:
+                rules = policy.io_limit_rules
+            else:
+                rules = None
+
+            if rules:
+                rule = rules[0]
+        return rule
+
+    @property
+    def total_size_gb(self):
+        return self.size_total / (1024 ** 3)
+
+    @property
+    def max_iops(self):
+        return self.effective_io_limit_max_iops
+
+    @property
+    def max_kbps(self):
+        return self.effective_io_limit_max_kbps
 
     @staticmethod
     def _compose_lun_parameter(cli, **kwargs):
@@ -72,7 +102,7 @@ class UnityLun(UnityResource):
         TieringPolicyEnum.verify(kwargs.get('tiering_policy'))
         NodeEnum.verify(sp_node)
 
-        # TODO:iolimit_policy and snap_schedule
+        # TODO: snap_schedule
         req_body = cli.make_body(
             name=kwargs.get('name'),
             description=kwargs.get('description'),
@@ -86,6 +116,8 @@ class UnityLun(UnityResource):
                 defaultNode=sp_node,
                 fastVPParameters=cli.make_body(
                     tieringPolicy=kwargs.get('tiering_policy')),
+                ioLimitParameters=cli.make_body(
+                    ioLimitPolicy=kwargs.get('io_limit_policy'))
             )
         )
 
@@ -101,14 +133,14 @@ class UnityLun(UnityResource):
         return req_body
 
     def modify(self, name=None, size=None, host_access=None,
-               description=None, is_thin=None, sp=None, iolimit_policy=None,
+               description=None, is_thin=None, sp=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None):
 
         req_body = self._compose_lun_parameter(
             self._cli, name=name, pool=None, size=size, sp=sp,
             host_access=host_access, is_thin=is_thin, description=description,
-            iolimit_policy=iolimit_policy, is_repl_dst=is_repl_dst,
-            tiering_policy=tiering_policy, snap_schedule=snap_schedule
+            io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
+            tiering_policy=tiering_policy, snap_schedule=snap_schedule,
         )
         resp = self._cli.action(UnityStorageResource().resource_class,
                                 self.get_id(), 'modifyLun', **req_body)

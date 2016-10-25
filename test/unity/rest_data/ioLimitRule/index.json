@@ -1,0 +1,13 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/ioLimitRule?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/instances/ioLimitRule/qr_1?compact=True&fields=burstFrequency,burstRate,burstTime,description,id,instanceId,ioLimitpolicy,maxIOPS,maxIOPSDensity,maxKBPS,maxKBPSDensity,name",
+      "response": "qr_1.json"
+    }
+
+  ]
+}

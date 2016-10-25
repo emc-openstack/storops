@@ -419,6 +419,15 @@ class UnityFileSystemSizeTooSmallError(UnityException):
     error_code = 108008449
 
 
+class UnityQosException(UnityException):
+    pass
+
+
+@rest_exception
+class UnityPolicyNameInUseError(UnityQosException):
+    error_code = 151032071
+
+
 class UnityEthernetPortMtuSizeNotSupportError(UnityException):
     message = "Specified MTU size is not supported."
 

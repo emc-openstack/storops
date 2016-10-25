@@ -1,0 +1,81 @@
+{
+  "content": {
+    "attributes": [
+      {
+        "displayValue": "instanceId",
+        "type": "String",
+        "name": "instanceId",
+        "description": "Internal identifier of the ioLimitRule instance.  "
+      },
+      {
+        "displayValue": "id",
+        "type": "String",
+        "name": "id",
+        "description": "Unique identifier of the ioLimitRule instance.  "
+      },
+      {
+        "displayValue": "name",
+        "type": "String",
+        "name": "name",
+        "description": "I/O limit rule name.  "
+      },
+      {
+        "displayValue": "description",
+        "type": "String",
+        "name": "description",
+        "description": "I/O limit rule description.  "
+      },
+      {
+        "displayValue": "maxIOPS",
+        "type": "Integer",
+        "name": "maxIOPS",
+        "description": "Read/write IOPS limit.  "
+      },
+      {
+        "displayValue": "maxKBPS",
+        "type": "Integer",
+        "name": "maxKBPS",
+        "description": "Read/write KB/s limit.  "
+      },
+      {
+        "displayValue": "maxIOPSDensity",
+        "type": "Integer",
+        "name": "maxIOPSDensity",
+        "description": "Read/write density-based IOPS limit.  "
+      },
+      {
+        "displayValue": "maxKBPSDensity",
+        "type": "Integer",
+        "name": "maxKBPSDensity",
+        "description": "Read/write density-based KB/s limit.  "
+      },
+      {
+        "displayValue": "burstRate",
+        "type": "Integer",
+        "name": "burstRate",
+        "description": "The percentage of read/write IOPS and/or KBPS over the limits a storage object is allowed to process during a spike in demand.  "
+      },
+      {
+        "displayValue": "burstTime",
+        "type": "DateTime",
+        "name": "burstTime",
+        "description": "How long a storage object is allowed to process burst traffic.  "
+      },
+      {
+        "displayValue": "burstFrequency",
+        "type": "DateTime",
+        "name": "burstFrequency",
+        "description": "How often a storage object is allowed to process burst traffic for the duration of burst time  "
+      },
+      {
+        "displayValue": "ioLimitpolicy",
+        "type": "ioLimitPolicy",
+        "name": "ioLimitpolicy",
+        "description": "Information about the I/O limit policy to which the I/O limit rule is assigned, as defined by the ioLimitPolicy resource type.  "
+      }
+    ],
+    "documentation": "https://10.244.223.61/apidocs/classes/ioLimitRule.html",
+    "name": "ioLimitRule",
+    "description": "(DEPRECATED)Conditions under which the storage system applies I/O limits. On GUI and CLI, ioLimitPolicy and ioLimitRule are combined for now since we only support one I/O limit rule per I/O limit policy.  "
+  }
+}

@@ -177,6 +177,7 @@ class UnitySystemTest(TestCase):
         def f():
             # the 'flocker-3' is the Host_10 name
             unity.create_host("flocker-3")
+
         assert_that(f, raises(UnityHostNameInUseError))
 
     @patch_rest
@@ -374,6 +375,28 @@ class UnitySystemTest(TestCase):
         fi_list = unity.get_fc_port()
         assert_that(fi_list, instance_of(UnityFcPortList))
         assert_that(len(fi_list), equal_to(12))
+
+    @patch_rest
+    def test_get_io_limit_policy_by_name(self):
+        unity = t_unity()
+        name = 'Density_1100_KBPS'
+        policy = unity.get_io_limit_policy(name=name)
+        assert_that(policy.name, equal_to(name))
+
+    @patch_rest
+    def test_get_io_limit_policy_all(self):
+        unity = t_unity()
+        policies = unity.get_io_limit_policy()
+        assert_that(len(policies), equal_to(6))
+
+    @patch_rest
+    def test_create_kbps_policy(self):
+        unity = t_unity()
+        policy = unity.create_io_limit_policy(
+            'max_kbps_1234', max_kbps=1234, description='storops')
+        assert_that(policy.name, equal_to('max_kbps_1234'))
+        setting = policy.io_limit_rule_settings[0]
+        assert_that(setting.max_kbps, equal_to(1234))
 
 
 class UnityDpeTest(TestCase):

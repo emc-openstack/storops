@@ -35,7 +35,8 @@ from storops.unity.resource.nas_server import UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
-from storops.unity.resource.port import UnityIpPortList
+from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
+    UnityIoLimitPolicyList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
 from storops.unity.resource.port import UnityEthernetPortList, \
@@ -151,6 +152,18 @@ class UnitySystem(UnitySingletonResource):
             ret = self._get_unity_rsc(UnityHostList, _id=_id, name=name,
                                       **filters)
         return ret
+
+    def get_io_limit_policy(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityIoLimitPolicyList, _id=_id, name=name,
+                                   **filters)
+
+    def create_io_limit_policy(self, name, max_iops=None, max_kbps=None,
+                               policy_type=None, is_shared=None,
+                               description=None):
+        return UnityIoLimitPolicy.create(
+            self._cli, name, max_iops=max_iops, max_kbps=max_kbps,
+            policy_type=policy_type, is_shared=is_shared,
+            description=description)
 
     def get_doc(self, resource):
         if isinstance(resource, (UnityResource, UnityEnum)):

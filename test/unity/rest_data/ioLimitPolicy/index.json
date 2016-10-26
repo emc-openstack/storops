@@ -21,6 +21,10 @@
       "response": "qp_9.json"
     },
     {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type&filter=name eq \"Density_1100_KBPS\"",
+      "response": "qp_4.json"
+    },
+    {
       "url": "/api/types/ioLimitPolicy/instances?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
       "response": "all.json"
     },

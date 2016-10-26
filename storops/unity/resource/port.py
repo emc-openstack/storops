@@ -61,8 +61,12 @@ class UnityIoModuleList(UnityResourceList):
 class UnityIoLimitPolicy(UnityResource):
     @classmethod
     def create(cls, cli, name, max_iops=None, max_kbps=None,
-               policy_type=IOLimitPolicyTypeEnum.ABSOLUTE,
-               is_shared=False, description=None):
+               policy_type=None, is_shared=None, description=None):
+        if policy_type is None:
+            policy_type = IOLimitPolicyTypeEnum.ABSOLUTE
+        if is_shared is None:
+            is_shared = False
+
         rule = cli.make_body(name='{}_rule'.format(name),
                              maxIOPS=max_iops,
                              maxKBPS=max_kbps)

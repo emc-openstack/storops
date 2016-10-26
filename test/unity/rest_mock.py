@@ -44,7 +44,7 @@ def t_rest():
 
 @cache
 def t_unity():
-    return UnitySystem('10.244.223.66', 'admin', 'Password123!')
+    return UnitySystem('10.244.223.61', 'admin', 'Password123!')
 
 
 class MockRestClient(ConnectorMock):

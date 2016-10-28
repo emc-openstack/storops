@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108007456,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "The user requested modification of the storage resource but the system found that there is nothing to modify. (Error Code:0x6701020)"
+      }
+    ],
+    "created": "2016-10-28T07:20:00.489Z"
+  }
+}

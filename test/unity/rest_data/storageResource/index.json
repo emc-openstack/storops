@@ -662,6 +662,33 @@
         "name": "Himalia"
       },
       "response": "create_lun_sv_2026.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/modifyLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "size": 108447924224
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/modifyLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "size": 1073741824
+        }
+      },
+      "response": "does_not_support_shrink.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/modifyLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "size": 107374182400
+        }
+      },
+      "response": "nothing_to_modify.json"
     }
   ]
 }

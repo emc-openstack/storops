@@ -83,6 +83,10 @@ class UnityLun(UnityResource):
     def total_size_gb(self):
         return self.size_total / (1024 ** 3)
 
+    @total_size_gb.setter
+    def total_size_gb(self, value):
+        self.expand(value * 1024 ** 3)
+
     @property
     def max_iops(self):
         return self.effective_io_limit_max_iops
@@ -90,6 +94,17 @@ class UnityLun(UnityResource):
     @property
     def max_kbps(self):
         return self.effective_io_limit_max_kbps
+
+    def expand(self, new_size):
+        """ expand the LUN to a new size
+
+        :param new_size: new size in bytes.
+        :return: the old size
+        """
+        ret = self.size_total
+        resp = self.modify(size=new_size)
+        resp.raise_if_err()
+        return ret
 
     @staticmethod
     def _compose_lun_parameter(cli, **kwargs):

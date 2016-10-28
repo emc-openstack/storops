@@ -286,9 +286,23 @@ class UnityHostNameInUseError(UnityException):
     pass
 
 
+class UnityLunException(UnityException):
+    pass
+
+
 @rest_exception
-class UnityLunNameInUseError(UnityException):
+class UnityLunNameInUseError(UnityLunException):
     error_code = 108007744
+
+
+@rest_exception
+class UnityLunShrinkNotSupportedError(UnityLunException):
+    error_code = 108007728
+
+
+@rest_exception
+class UnityNothingToModifyError(UnityException):
+    error_code = 108007456
 
 
 @rest_exception

@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108007728,
+    "httpStatusCode": 422,
+    "messages": [
+      {
+        "en-US": "The system does not support shrink operation for LUNs of this type. (Error Code:0x6701130)"
+      }
+    ],
+    "created": "2016-10-28T07:00:33.186Z"
+  }
+}

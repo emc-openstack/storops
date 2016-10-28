@@ -23,7 +23,9 @@ from hamcrest import equal_to
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 
 from storops import UnitySystem
-from storops.exception import UnitySnapNameInUseError, UnityLunNameInUseError
+from storops.exception import UnitySnapNameInUseError, \
+    UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
+    UnityNothingToModifyError
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from storops.unity.resource.pool import UnityPool
 from storops.unity.resource.port import UnityIoLimitPolicy, \
@@ -222,3 +224,25 @@ class UnityLunTest(TestCase):
         assert_that(rule, instance_of(UnityIoLimitRuleSetting))
         assert_that(rule.max_kbps_density, equal_to(1100))
         assert_that(rule.name, equal_to('Density_1100_KBPS_rule'))
+
+    @patch_rest
+    def test_expand_lun_success(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        original_size = lun.expand(101 * 1024 ** 3)
+        assert_that(original_size / 1024 ** 3, equal_to(100))
+
+    @patch_rest
+    def test_expand_lun_too_small(self):
+        def f():
+            lun = UnityLun('sv_2', cli=t_rest())
+            lun.total_size_gb = 1
+
+        assert_that(f, raises(UnityLunShrinkNotSupportedError, 'shrink'))
+
+    @patch_rest
+    def test_expand_lun_equal_size(self):
+        def f():
+            lun = UnityLun('sv_2', cli=t_rest())
+            lun.total_size_gb = 100
+
+        assert_that(f, raises(UnityNothingToModifyError, 'nothing to modify'))

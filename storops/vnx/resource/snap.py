@@ -44,8 +44,9 @@ class VNXSnap(VNXCliResource):
         self._name = name
 
     @classmethod
-    def create(cls, cli, res, name, allow_rw=None, auto_delete=None):
-        out = cli.create_snap(res, name, allow_rw, auto_delete)
+    def create(cls, cli, res, name, allow_rw=None, auto_delete=None,
+               keep_for=None):
+        out = cli.create_snap(res, name, allow_rw, auto_delete, keep_for)
         msg = 'failed to create snap "{}" for {}'.format(name, res)
         ex.raise_if_err(out, msg, default=ex.VNXCreateSnapError)
         return VNXSnap(name, cli=cli)

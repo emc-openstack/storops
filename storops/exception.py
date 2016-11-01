@@ -737,6 +737,12 @@ class VNXLunHasSnapMountPointError(VNXDeleteLunError):
 
 
 @cli_exception
+class VNXLunHasSnapError(VNXDeleteLunError):
+    error_message = ("The LUN cannot be destroyed because it still"
+                     " has snapshots")
+
+
+@cli_exception
 class VNXLunUsedByFeatureError(VNXDeleteLunError):
     error_message = ("Cannot unbind LUN because it's being used by a"
                      " feature of the Storage System")

@@ -163,9 +163,10 @@ class VNXLun(VNXCliResource):
         ret.poll = poll
         return ret
 
-    def create_snap(self, name, allow_rw=None, auto_delete=None):
+    def create_snap(self, name, allow_rw=None, auto_delete=None,
+                    keep_for=None):
         return VNXSnap.create(self._cli, self.get_id(self), name, allow_rw,
-                              auto_delete)
+                              auto_delete, keep_for)
 
     def attach_snap(self, snap):
         snap_name = VNXSnap.get_name(snap)

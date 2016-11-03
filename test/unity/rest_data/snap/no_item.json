@@ -1,0 +1,11 @@
+{
+  "@base": "https://10.244.223.61/api/types/snap/instances?filter=lun eq \"sv_3342\" and snapGroup eq \"85899345930\"&fields=accessType,attachedWWN,creationTime,creatorType,description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,expirationTime,hostAccess,id,instanceId,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastRefreshTime,lastWritableTime,name,operationalStatus,size,state,lun.id,storageResource.id,ioLimitPolicy.id,snapGroup.id,creatorSchedule.id,creatorUser.id,parentSnap.id&per_page=2000&compact=true",
+  "updated": "2016-11-03T09:30:30.173Z",
+  "entries": [],
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ]
+}

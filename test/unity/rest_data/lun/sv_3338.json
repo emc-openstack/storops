@@ -1,0 +1,94 @@
+{
+  "content": {
+    "defaultNode": 1,
+    "isSnapSchedulePaused": false,
+    "currentNode": 1,
+    "id": "sv_3338",
+    "sizeAllocated": 0,
+    "snapsSize": 1073741824,
+    "isThinEnabled": true,
+    "snapsSizeAllocated": 0,
+    "isCompressionEnabled": false,
+    "metadataSize": 6979321856,
+    "objectId": 42949676405,
+    "compressionSizeSaved": 0,
+    "snapWwn": "60:06:01:60:15:E0:3A:00:5A:88:98:9D:C5:FA:46:2E",
+    "snapCount": 4,
+    "wwn": "60:06:01:60:15:E0:3A:00:E1:B9:19:58:F8:9C:1D:B5",
+    "perTierSizeUsed": [
+      0,
+      2952790016,
+      0
+    ],
+    "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_3338",
+    "auSize": 8192,
+    "storageResource": {
+      "id": "res_19"
+    },
+    "operationalStatus": [
+      2
+    ],
+    "tieringPolicy": 0,
+    "compressionPercent": 0,
+    "hostAccess": [
+      {
+        "accessMask": 1,
+        "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=56",
+        "snapshotAccess": 0,
+        "host": {
+          "id": "Host_22"
+        },
+        "productionAccess": 1
+      },
+      {
+        "accessMask": 3,
+        "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=54",
+        "snapshotAccess": 1,
+        "host": {
+          "id": "Host_15"
+        },
+        "productionAccess": 1
+      },
+      {
+        "accessMask": 3,
+        "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=52",
+        "snapshotAccess": 1,
+        "host": {
+          "id": "Host_12"
+        },
+        "productionAccess": 1
+      },
+      {
+        "accessMask": 3,
+        "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=50",
+        "snapshotAccess": 1,
+        "host": {
+          "id": "Host_14"
+        },
+        "productionAccess": 1
+      }
+    ],
+    "compressionRatio": 1.0,
+    "name": "Erato",
+    "creationTime": "2016-11-02T10:03:13.000Z",
+    "sizeTotal": 1073741824,
+    "metadataSizeAllocated": 2684354560,
+    "health": {
+      "descriptionIds": [
+        "ALRT_VOL_OK"
+      ],
+      "descriptions": [
+        "The LUN is operating normally. No action is required."
+      ],
+      "value": 5
+    },
+    "pool": {
+      "id": "pool_1"
+    },
+    "type": 1,
+    "modificationTime": "2016-11-03T02:52:16.611Z",
+    "isReplicationDestination": false,
+    "lunGroupObjectId": 81604378650,
+    "description": "Muse.  Love poetry.  Cithara (an ancient Greek musical instrument in the lyre family)."
+  }
+}

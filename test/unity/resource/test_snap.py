@@ -54,6 +54,7 @@ class UnitySnapTest(TestCase):
                     equal_to(SnapCreatorTypeEnum.USER_CUSTOM))
         assert_that(snap.access_type,
                     equal_to(FilesystemSnapAccessTypeEnum.CHECKPOINT))
+        assert_that(snap.is_cg_snap(), equal_to(False))
 
     @patch_rest
     def test_get_all(self):
@@ -163,3 +164,26 @@ class UnitySnapTest(TestCase):
             snap.attach_to(host)
 
         assert_that(f, raises(UnitySnapAlreadyPromotedException, "promoted"))
+
+    @patch_rest
+    def test_is_cg_snap(self):
+        snap = UnitySnap(_id='85899345930', cli=t_rest())
+        assert_that(snap.is_cg_snap(), equal_to(True))
+
+    @patch_rest
+    def test_get_member_snap_not_found(self):
+        def f():
+            snap = UnitySnap(_id='85899345930', cli=t_rest())
+            lun = UnityLun(cli=t_rest(), _id='sv_3342')
+            snap.get_member_snap(lun)
+
+        assert_that(f, raises(ValueError, 'no instance'))
+
+    @patch_rest
+    def test_get_member_snap_found(self):
+        snap_group = UnitySnap(_id='85899345930', cli=t_rest())
+        lun = UnityLun(cli=t_rest(), _id='sv_3338')
+        snap = snap_group.get_member_snap(lun)
+        assert_that(snap.snap_group.get_id(), equal_to(snap_group.get_id()))
+        assert_that(snap.storage_resource.get_id(), equal_to('res_19'))
+        assert_that(snap.lun.get_id(), equal_to(lun.get_id()))

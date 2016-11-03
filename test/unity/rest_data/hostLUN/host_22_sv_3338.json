@@ -1,0 +1,47 @@
+{
+  "updated": "2016-11-03T09:45:55.574Z",
+  "@base": "https://10.244.223.61/api/types/hostLUN/instances?filter=host eq \"Host_22\" and lun eq \"sv_3338\"&fields=hlu,id,instanceId,isDefaultSnap,isReadOnly,type,lun.id,host.id,snap.id&per_page=2000&compact=true",
+  "entries": [
+    {
+      "content": {
+        "instanceId": "Host_22_sv_3338_prod",
+        "type": 1,
+        "host": {
+          "id": "Host_22"
+        },
+        "lun": {
+          "id": "sv_3338"
+        },
+        "hlu": 3,
+        "id": "Host_22_sv_3338_prod",
+        "isReadOnly": false,
+        "isDefaultSnap": false
+      }
+    },
+    {
+      "content": {
+        "snap": {
+          "id": "38654709071"
+        },
+        "instanceId": "Host_22_sv_3338_snap_60:06:01:60:15:E0:3A:00:81:74:05:AF:8D:F0:4F:41",
+        "type": 2,
+        "host": {
+          "id": "Host_22"
+        },
+        "lun": {
+          "id": "sv_3338"
+        },
+        "hlu": 2,
+        "id": "Host_22_sv_3338_snap_60:06:01:60:15:E0:3A:00:81:74:05:AF:8D:F0:4F:41",
+        "isReadOnly": true,
+        "isDefaultSnap": false
+      }
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ]
+}

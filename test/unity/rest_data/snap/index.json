@@ -57,6 +57,30 @@
       "response": "38654705676.json"
     },
     {
+      "url": "/api/instances/snap/85899345927?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "85899345927.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345930?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "85899345930.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345931?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "85899345931.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource&filter=storageResource eq \"res_19\"",
+      "response": "snaps_of_res_19.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource&filter=lun eq \"sv_3342\" and snapGroup eq \"85899345930\"",
+      "response": "no_item.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource&filter=lun eq \"sv_3338\" and snapGroup eq \"85899345930\"",
+      "response": "38654709077.json"
+    },
+    {
       "url": "/api/types/snap/instances?compact=True",
       "body": {
         "storageResource": {
@@ -201,6 +225,45 @@
         ]
       },
       "response": "snap_already_promoted.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "res_19"
+        },
+        "name": "song"
+      },
+      "response": "create_85899345927.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345927/action/attach?compact=True",
+      "body": {
+        "hostAccess": [
+          {
+            "allowedAccess": 1,
+            "host": {
+              "id": "Host_22"
+            }
+          }
+        ]
+      },
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345927/action/detach?compact=True",
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345927/action/restore?compact=True",
+      "response": "restore_without_backup.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345927/action/restore?compact=True",
+      "body": {
+        "copyName": "paint"
+      },
+      "response": "restore_with_backup.json"
     }
   ]
 }

@@ -92,7 +92,7 @@ UnityError:
       converter: to_datetime
 
 
-UnityStorageResource:
+UnityStorageResource: &UnityStorageResource
   data_src: rest
   name: storageResource
   properties:
@@ -144,6 +144,10 @@ UnityStorageResource:
       converter: UnityHostVvolDatastoreList
     - label: virtualVolumes
       converter: UnityVirtualVolumeList
+
+
+UnityConsistencyGroup:
+  <<: *UnityStorageResource
 
 
 UnityPool:

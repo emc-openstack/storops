@@ -21,6 +21,22 @@
       "response": "res_4.json"
     },
     {
+      "url": "/api/instances/storageResource/res_13?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_13.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_17?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_17.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_18?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_18.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_19.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_27?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "res_27.json"
     },
@@ -689,6 +705,199 @@
         }
       },
       "response": "nothing_to_modify.json"
+    },
+    {
+      "url": "/api/types/storageResource/instances?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID&filter=type eq 2",
+      "response": "cg_list.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createConsistencyGroup?compact=True",
+      "body": {
+        "name": "Goddess"
+      },
+      "response": "create_empty_cg.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createConsistencyGroup?compact=True",
+      "body": {
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_3339"
+            }
+          },
+          {
+            "lun": {
+              "id": "sv_3340"
+            }
+          }
+        ],
+        "name": "Muse"
+      },
+      "response": "create_cg_with_member.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_18?compact=True",
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createConsistencyGroup?compact=True",
+      "body": {
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_3338"
+            }
+          }
+        ],
+        "blockHostAccess": [
+          {
+            "host": {
+              "id": "Host_14"
+            },
+            "accessMask": 3
+          },
+          {
+            "host": {
+              "id": "Host_15"
+            },
+            "accessMask": 3
+          }
+        ],
+        "name": "Muse"
+      },
+      "response": "create_cg_with_host_access.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "name": "iscsi-test"
+      },
+      "response": "name_in_use.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createConsistencyGroup?compact=True",
+      "body": {
+        "name": "in_use"
+      },
+      "response": "name_in_use.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_119?compact=True",
+      "response": "not_exist.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_3341"
+            }
+          },
+          {
+            "lun": {
+              "id": "sv_3342"
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_3341"
+            }
+          }
+        ]
+      },
+      "response": "nothing_to_modify.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "lunRemove": [
+          {
+            "lun": {
+              "id": "sv_3342"
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "removeBlockHostAccess": [
+          {
+            "id": "Host_14"
+          },
+          {
+            "id": "Host_15"
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "blockHostAccess": [
+          {
+            "host": {
+              "id": "Host_14"
+            },
+            "accessMask": 3
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "addBlockHostAccess": [
+          {
+            "host": {
+              "id": "Host_14"
+            },
+            "accessMask": 3
+          },
+          {
+            "host": {
+              "id": "Host_15"
+            },
+            "accessMask": 3
+          }
+        ]
+      },
+      "response": "host_access_exists.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_19/action/modifyConsistencyGroup?compact=True",
+      "body": {
+        "addBlockHostAccess": [
+          {
+            "host": {
+              "id": "Host_12"
+            },
+            "accessMask": 3
+          },
+          {
+            "host": {
+              "id": "Host_15"
+            },
+            "accessMask": 3
+          }
+        ]
+      },
+      "response": "empty.json"
     }
   ]
 }
+

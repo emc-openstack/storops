@@ -1,0 +1,24 @@
+{
+  "content": {
+    "name": "song",
+    "operationalStatus": [
+      2
+    ],
+    "isModified": false,
+    "instanceId": "root/emc:EMC_UEM_SnapGroupLeaf%InstanceID=85899345927",
+    "creationTime": "2016-11-03T07:20:43.322Z",
+    "isModifiable": false,
+    "isSystemSnap": false,
+    "state": 2,
+    "creatorType": 2,
+    "storageResource": {
+      "id": "res_19"
+    },
+    "isAutoDelete": true,
+    "creatorUser": {
+      "id": "user_admin"
+    },
+    "id": "85899345927",
+    "description": ""
+  }
+}

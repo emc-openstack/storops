@@ -327,6 +327,19 @@ class UnityHostTest(TestCase):
 
         assert_that(f, raises(UnitySnapAlreadyPromotedException))
 
+    @patch_rest
+    def test_get_attached_cg_snap_hlu(self):
+        host = UnityHost(cli=t_rest(), _id='Host_22')
+        snap = UnitySnap(cli=t_rest(), _id='85899345930')
+        lun = UnityLun(cli=t_rest(), _id='sv_3338')
+        assert_that(host.get_hlu(snap, lun), equal_to(2))
+
+    @patch_rest
+    def test_get_hlu_of_cg_member(self):
+        host = UnityHost(cli=t_rest(), _id='Host_22')
+        lun = UnityLun(cli=t_rest(), _id='sv_3338')
+        assert_that(host.get_hlu(lun), equal_to(3))
+
 
 class UnityHostIpPortTest(TestCase):
     @patch_rest

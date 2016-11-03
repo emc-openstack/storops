@@ -25,6 +25,10 @@
       "response": "host_11.json"
     },
     {
+      "url": "/api/instances/host/Host_22?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_22.json"
+    },
+    {
       "url": "/api/instances/host/Subnet_8?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "subnet_8.json"
     },

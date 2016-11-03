@@ -296,8 +296,7 @@ class UnityResourceList(UnityResource, ResourceList):
         if len(self) > 0:
             ret = self[0]
         else:
-            raise ValueError('no instance available for "{}".'.format(
-                self.get_resource_class().resource_class))
+            raise ValueError('no instance available for found.')
         return ret
 
     def _parse_raw(self, data):

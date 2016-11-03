@@ -1,0 +1,41 @@
+{
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "38654709077",
+        "size": 1073741824,
+        "instanceId": "root/emc:EMC_UEM_VolumeSnapLeaf%InstanceID=38654709077",
+        "creationTime": "2016-11-03T08:28:58.713Z",
+        "state": 2,
+        "name": "20161103082858.713+00-002",
+        "description": "",
+        "isModifiable": false,
+        "isReadOnly": false,
+        "creatorType": 6,
+        "isAutoDelete": true,
+        "lun": {
+          "id": "sv_3338"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "isSystemSnap": false,
+        "isModified": false,
+        "storageResource": {
+          "id": "res_19"
+        },
+        "snapGroup": {
+          "id": "85899345930"
+        }
+      }
+    }
+  ],
+  "@base": "https://10.244.223.61/api/types/snap/instances?filter=lun eq \"sv_3338\" and snapGroup eq \"85899345930\"&fields=accessType,attachedWWN,creationTime,creatorType,description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,expirationTime,hostAccess,id,instanceId,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastRefreshTime,lastWritableTime,name,operationalStatus,size,state,lun.id,storageResource.id,ioLimitPolicy.id,snapGroup.id,creatorSchedule.id,creatorUser.id,parentSnap.id&per_page=2000&compact=true",
+  "updated": "2016-11-03T09:32:23.104Z"
+}

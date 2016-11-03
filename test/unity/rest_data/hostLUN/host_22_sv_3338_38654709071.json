@@ -1,0 +1,31 @@
+{
+  "entries": [
+    {
+      "content": {
+        "instanceId": "Host_22_sv_3338_snap_60:06:01:60:15:E0:3A:00:81:74:05:AF:8D:F0:4F:41",
+        "type": 2,
+        "snap": {
+          "id": "38654709071"
+        },
+        "hlu": 2,
+        "isReadOnly": true,
+        "id": "Host_22_sv_3338_snap_60:06:01:60:15:E0:3A:00:81:74:05:AF:8D:F0:4F:41",
+        "isDefaultSnap": false,
+        "lun": {
+          "id": "sv_3338"
+        },
+        "host": {
+          "id": "Host_22"
+        }
+      }
+    }
+  ],
+  "@base": "https://10.244.223.61/api/types/hostLUN/instances?filter=host eq \"Host_22\" and lun eq \"sv_3338\" and snap eq \"38654709071\"&fields=hlu,id,instanceId,isDefaultSnap,isReadOnly,type,lun.id,host.id,snap.id&per_page=2000&compact=true",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "updated": "2016-11-03T09:37:01.081Z"
+}

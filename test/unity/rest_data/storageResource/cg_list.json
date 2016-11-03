@@ -1,0 +1,143 @@
+{
+  "@base": "https://10.244.223.61/api/types/storageResource/instances?filter=type eq 2&fields=blockHostAccess,compressionPercent,compressionRatio,compressionSizeSaved,compressionStatus,creationTime,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,health,id,instanceId,isReplicationDestination,isSnapSchedulePaused,logicalSizeUsed,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,relocationPolicy,replicationType,sharableSnapCount,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,vmwareUUID,pools.id,virtualVolumes.id,snapSchedule.id,datastores.id,filesystem.id,moves.id,hostVVolDatastore.id,luns.id&per_page=2000&compact=true",
+  "updated": "2016-11-02T09:51:45.234Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_7"
+          },
+          {
+            "id": "sv_6"
+          }
+        ],
+        "snapsSizeTotal": 4294967296,
+        "instanceId": "root/emc:EMC_UEM_ApplicationLeaf%InstanceID=res_3",
+        "compressionPercent": 0,
+        "thinStatus": 1,
+        "metadataSizeAllocated": 5368709120,
+        "id": "res_3",
+        "objectId": 81604378625,
+        "compressionStatus": 0,
+        "snapCount": 1,
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ],
+          "value": 5
+        },
+        "metadataSize": 13958643712,
+        "type": 2,
+        "compressionSizeSaved": 0,
+        "description": "",
+        "snapsSizeAllocated": 0,
+        "modificationTime": "2016-09-29T03:39:54.541Z",
+        "perTierSizeUsed": [
+          0,
+          5905580032,
+          0
+        ],
+        "operationalStatus": [
+          2
+        ],
+        "replicationType": 0,
+        "sizeAllocated": 0,
+        "name": "smis-test-cg",
+        "creationTime": "2016-09-29T03:39:54.541Z",
+        "sizeTotal": 4294967296,
+        "compressionRatio": 1.0,
+        "isReplicationDestination": false,
+        "pools": [
+          {
+            "id": "pool_1"
+          }
+        ],
+        "relocationPolicy": 0
+      }
+    },
+    {
+      "content": {
+        "luns": [
+          {
+            "id": "sv_2027"
+          },
+          {
+            "id": "sv_2022"
+          },
+          {
+            "id": "sv_2021"
+          },
+          {
+            "id": "sv_2023"
+          }
+        ],
+        "blockHostAccess": [
+          {
+            "instanceId": "root/emc:EMC_UIS_UEM_BlockHostAccessLeaf%InstanceID=1",
+            "snapshotAccess": 0,
+            "host": {
+              "id": "Host_19"
+            },
+            "productionAccess": 1,
+            "accessMask": 1
+          }
+        ],
+        "instanceId": "root/emc:EMC_UEM_ApplicationLeaf%InstanceID=res_13",
+        "compressionPercent": 0,
+        "thinStatus": 1,
+        "snapsSizeTotal": 0,
+        "metadataSizeAllocated": 11811160064,
+        "id": "res_13",
+        "objectId": 81604378638,
+        "compressionStatus": 0,
+        "snapCount": 0,
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ],
+          "value": 5
+        },
+        "metadataSize": 15300820992,
+        "type": 2,
+        "compressionSizeSaved": 0,
+        "description": "",
+        "snapsSizeAllocated": 0,
+        "modificationTime": "2016-10-26T03:04:52.218Z",
+        "perTierSizeUsed": [
+          0,
+          19058917376,
+          0
+        ],
+        "operationalStatus": [
+          2
+        ],
+        "replicationType": 0,
+        "sizeAllocated": 136798208,
+        "name": "iscsi-test",
+        "creationTime": "2016-10-25T07:08:10.339Z",
+        "sizeTotal": 98784247808,
+        "compressionRatio": 1.0,
+        "isReplicationDestination": false,
+        "pools": [
+          {
+            "id": "pool_1"
+          }
+        ],
+        "relocationPolicy": 0
+      }
+    }
+  ]
+}

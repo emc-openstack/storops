@@ -458,6 +458,24 @@ class UnityHostNotFoundException(UnityException):
     message = 'specified host not found.'
 
 
+class UnityConsistencyGroupError(UnityException):
+    pass
+
+
+class UnityConsistencyGroupNameInUseError(UnityConsistencyGroupError):
+    message = 'name of the consistency group is already used.'
+
+
+@rest_exception
+class UnityHostAccessAlreadyExistsError(UnityConsistencyGroupError):
+    error_code = 108009000
+
+
+@rest_exception
+class UnityStorageResourceNameInUseError(UnityException):
+    error_code = 108007952
+
+
 class NaviseccliNotAvailableError(VNXException):
     message = ("naviseccli not found.  please make sure it's installed"
                " and available in path.")

@@ -63,11 +63,18 @@
     {
       "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_11\" and snap eq \"38654705676\"",
       "response": "not_found.json"
-    }
-    ,
+    },
     {
       "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=hlu eq 0 and host eq \"Host_11\"",
       "response": "not_found.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_22\" and lun eq \"sv_3338\" and snap eq \"38654709077\"",
+      "response": "host_22_sv_3338_38654709071.json"
+    },
+    {
+      "url": "/api/types/hostLUN/instances?compact=True&fields=hlu,host,id,instanceId,isReadOnly,lun,snap,type&filter=host eq \"Host_22\" and lun eq \"sv_3338\"",
+      "response": "host_22_sv_3338.json"
     }
   ]
 }

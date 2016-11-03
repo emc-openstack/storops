@@ -161,9 +161,10 @@ class UnityHost(UnityResource):
             raise ex.UnityResourceAlreadyAttachedError()
 
         if skip_hlu_0:
-            log.debug('Try to skip the hlu number 0 by attaching a dummy lun.')
             hlu_0 = self._get_host_lun(hlu=0)
             if not hlu_0:
+                log.debug(
+                    'Try to skip the hlu number 0 by attaching a dummy lun.')
                 self._create_attach_dummy_lun()
 
         try:
@@ -211,14 +212,18 @@ class UnityHost(UnityResource):
         else:
             return True
 
-    def get_hlu(self, resource):
+    def get_hlu(self, resource, cg_member=None):
         import storops.unity.resource.lun as lun_module
         import storops.unity.resource.snap as snap_module
         which = None
         if isinstance(resource, lun_module.UnityLun):
             which = self._get_host_lun(lun=resource)
         elif isinstance(resource, snap_module.UnitySnap):
-            which = self._get_host_lun(snap=resource)
+            if cg_member is not None:
+                resource = resource.get_member_snap(cg_member)
+                which = self._get_host_lun(lun=cg_member, snap=resource)
+            else:
+                which = self._get_host_lun(snap=resource)
         if not which:
             log.debug('Resource(LUN or Snap) {} is not attached to host {}'
                       .format(resource.name, self.name))
@@ -267,7 +272,6 @@ class UnityHost(UnityResource):
                 resp.raise_if_err()
                 break
         else:
-            resp = None
             raise ex.UnityHostInitiatorNotFoundError(
                 'name {} not found under host {}.'.format(uid, self.name))
 
@@ -351,8 +355,7 @@ class UnityHostInitiator(UnityResource):
 
     def modify(self, host, is_ignored=None, chap_user=None,
                chap_secret=None, chap_secret_type=None):
-        req_body = {'host': host}
-        req_body['isIgnored'] = is_ignored
+        req_body = {'host': host, 'isIgnored': is_ignored}
 
         if self.type == HostInitiatorTypeEnum.ISCSI:
             req_body['chapUser'] = chap_user

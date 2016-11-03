@@ -18,12 +18,13 @@ from __future__ import unicode_literals
 import logging
 
 from storops.lib.common import instance_cache
+from storops.unity import enums
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum, \
     SnapAccessLevelEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.cifs_share
 import storops.unity.resource.nfs_share
-from storops.unity.resource.storage_resource import UnityStorageResource
+import storops.unity.resource.storage_resource
 
 __author__ = 'Cedric Zhuang'
 
@@ -37,7 +38,8 @@ class UnitySnap(UnityResource):
                retention_duration=None, is_read_only=None,
                fs_access_type=None):
         FilesystemSnapAccessTypeEnum.verify(fs_access_type)
-        sr = UnityStorageResource.get(cli, storage_resource)
+        sr_clz = storops.unity.resource.storage_resource.UnityStorageResource
+        sr = sr_clz.get(cli, storage_resource)
 
         resp = cli.post(cls().resource_class,
                         storageResource=sr,
@@ -124,6 +126,21 @@ class UnitySnap(UnityResource):
                                 self.get_id(), 'detach')
         resp.raise_if_err()
         return resp
+
+    def restore(self, backup=None):
+        resp = self._cli.action(self.resource_class, self.get_id(),
+                                'restore', copyName=backup)
+        resp.raise_if_err()
+        backup = resp.first_content['backup']
+        return UnitySnap(_id=backup['id'], cli=self._cli)
+
+    def is_cg_snap(self):
+        cg_type = enums.StorageResourceTypeEnum.CONSISTENCY_GROUP
+        return self.storage_resource.type == cg_type
+
+    def get_member_snap(self, lun):
+        members = UnitySnapList(cli=self._cli, snap_group=self, lun=lun)
+        return members.first_item
 
 
 class UnitySnapList(UnityResourceList):

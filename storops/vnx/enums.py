@@ -268,15 +268,16 @@ class VNXPoolRaidType(VNXEnum):
 
     @property
     def min_disk_requirement(self):
-        if self is self.RAID0:
+        clz = VNXPoolRaidType
+        if self is clz.RAID0:
             ret = 2
-        elif self is self.RAID1:
+        elif self is clz.RAID1:
             ret = 2
-        elif self is self.RAID5:
+        elif self is clz.RAID5:
             ret = 3
-        elif self is self.RAID6:
+        elif self is clz.RAID6:
             ret = 4
-        elif self is self.RAID10:
+        elif self is clz.RAID10:
             ret = 4
         else:
             raise ValueError('invalid VNXPoolRaidType supplied.')

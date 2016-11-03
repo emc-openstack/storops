@@ -1,0 +1,21 @@
+{
+  "content": {
+    "id": "85899345931",
+    "creatorType": 6,
+    "state": 2,
+    "operationalStatus": [
+      2
+    ],
+    "instanceId": "root/emc:EMC_UEM_SnapGroupLeaf%InstanceID=85899345931",
+    "name": "2016-11-03_08.35.00",
+    "description": "",
+    "creationTime": "2016-11-03T08:35:00.521Z",
+    "isSystemSnap": false,
+    "isModifiable": false,
+    "isModified": false,
+    "isAutoDelete": true,
+    "storageResource": {
+      "id": "res_19"
+    }
+  }
+}

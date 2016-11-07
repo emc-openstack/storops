@@ -26,7 +26,7 @@ import time
 from requests.exceptions import RequestException
 from retryz import retry
 
-from storops.connection.exceptions import from_response
+from storops.connection import exceptions
 
 log = logging.getLogger(__name__)
 
@@ -41,13 +41,13 @@ def _wait_callback(tried):
 
 class HTTPClient(object):
     def __init__(self, base_url, headers, insecure=False, auth=None,
-                 timeout=None, retries=None):
+                 timeout=None, retries=None, ca_cert_path=None):
         self.base_url = base_url
         if retries is None:
             retries = 2
         self.retries = retries
         self.request_options = self._set_request_options(
-            insecure, auth, timeout)
+            insecure, auth, timeout, ca_cert_path)
         self.headers = headers
         self.session = requests.session()
 
@@ -55,8 +55,12 @@ class HTTPClient(object):
         self.session.close()
 
     @staticmethod
-    def _set_request_options(insecure=None, auth=None, timeout=None):
+    def _set_request_options(insecure=None, auth=None, timeout=None,
+                             ca_cert_path=None):
         options = {'verify': True}
+
+        if ca_cert_path is not None:
+            options['verify'] = ca_cert_path
 
         if insecure:
             options['verify'] = False
@@ -74,8 +78,9 @@ class HTTPClient(object):
 
         options = copy.deepcopy(self.request_options)
 
+        content_type = headers.get('Content-Type', None)
         if 'body' in kwargs:
-            if headers['Content-Type'] == 'application/json':
+            if content_type == 'application/json':
                 options['data'] = json.dumps(kwargs['body'])
             else:
                 options['data'] = kwargs['body']
@@ -90,7 +95,7 @@ class HTTPClient(object):
         body = None
         if resp.text:
             try:
-                if headers['Content-Type'] == 'application/json':
+                if content_type == 'application/json':
                     body = json.loads(resp.text)
                 else:
                     body = resp.text
@@ -99,7 +104,7 @@ class HTTPClient(object):
                 pass
 
         if resp.status_code == 401:
-            raise from_response(resp, method, full_url)
+            raise exceptions.from_response(resp, method, full_url)
 
         return resp, body
 

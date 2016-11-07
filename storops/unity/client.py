@@ -32,9 +32,10 @@ log = logging.getLogger(__name__)
 
 
 class UnityClient(object):
-    def __init__(self, ip, username, password, port=443):
+    def __init__(self, ip, username, password, port=443, verify=True):
         self._rest = UnityRESTConnector(ip, port=port, user=username,
-                                        password=password)
+                                        password=password,
+                                        verify=verify)
 
     def get_all(self, type_name, base_fields=None, the_filter=None,
                 nested_fields=None):

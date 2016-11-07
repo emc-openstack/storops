@@ -50,10 +50,11 @@ LOG = logging.getLogger(__name__)
 
 class UnitySystem(UnitySingletonResource):
     def __init__(self, host=None, username=None, password=None,
-                 port=443, cli=None):
+                 port=443, cli=None, verify=True):
         super(UnitySystem, self).__init__(cli=cli)
         if cli is None:
-            self._cli = UnityClient(host, username, password, port)
+            self._cli = UnityClient(host, username, password, port,
+                                    verify=verify)
         else:
             self._cli = cli
 

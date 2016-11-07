@@ -51,13 +51,21 @@ class UnityRESTConnector(object):
         'User-agent': 'EMC-OpenStack',
     }
 
-    def __init__(self, host, port=443, user='admin', password=''):
+    def __init__(self, host, port=443, user='admin', password='',
+                 verify=True):
         base_url = 'https://{host}:{port}'.format(host=host, port=port)
 
+        insecure = False
+        ca_cert_path = None
+        if isinstance(verify, bool):
+            insecure = not verify
+        else:
+            ca_cert_path = verify
         self.http_client = client.HTTPClient(base_url=base_url,
                                              headers=self.HEADERS,
                                              auth=(user, password),
-                                             insecure=True)
+                                             insecure=insecure,
+                                             ca_cert_path=ca_cert_path)
 
     def get(self, url, **kwargs):
         return self.http_client.get(url, **kwargs)

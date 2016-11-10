@@ -25,6 +25,7 @@ __author__ = 'Cedric Zhuang'
 
 
 class Resource(JsonPrinter):
+
     def __init__(self):
         self._property_cache = {}
         self._parsed_resource = None
@@ -180,6 +181,9 @@ class Resource(JsonPrinter):
         return ''
 
     def __getattr__(self, item):
+        # To avoid infinite loop of accessing the nonexistent property
+        if '_property_cache' not in self.__dict__:
+            raise AttributeError(item)
         if item in self._property_cache:
             ret = self._property_cache[item]
         elif not item.startswith('_'):

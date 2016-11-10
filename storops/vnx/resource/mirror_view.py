@@ -15,7 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
-from storops.exception import VNXObjectNotFound, raise_if_err, \
+from storops.exception import raise_if_err, \
     VNXMirrorException, VNXMirrorImageNotFoundError
 from storops.lib.common import check_text, instance_cache
 from storops.vnx.enums import VNXMirrorViewRecoveryPolicy
@@ -93,8 +93,9 @@ class VNXMirrorView(VNXCliResource):
                 ret = image
                 break
         else:
-            raise VNXObjectNotFound('image {} not found in mirror view {}.'
-                                    .format(image_id, self._get_name()))
+            raise VNXMirrorImageNotFoundError(
+                'image {} not found in mirror view {}.'.format(
+                    image_id, self._get_name()))
         return ret
 
     @staticmethod

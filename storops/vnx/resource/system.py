@@ -116,6 +116,20 @@ class VNXSystem(VNXCliResource):
                             self._file_username,
                             self._file_password)
 
+    def __getstate__(self):
+        d = {'ip': self._ip, 'username': self._username,
+             'password': self._password, 'scope': self._scope,
+             'sec_file': self._sec_file, 'naviseccli': self._naviseccli}
+        return d
+
+    def __setstate__(self, state):
+        self.__init__(heartbeat_interval=0, **state)
+
+    def __getinitargs__(self):
+        # Seems not used by pickle
+        return (self._ip, self._username, self._password, self._scope,
+                self._sec_file, None, None, self._naviseccli)
+
     @property
     @instance_cache
     def _file_cli(self):
@@ -283,6 +297,9 @@ class VNXSystem(VNXCliResource):
 
     def delete_cg(self, name):
         self._delete_resource(VNXConsistencyGroup(name, self._cli))
+
+    def delete_lun(self, name):
+        self._delete_resource(VNXLun(name=name, cli=self._cli))
 
     def get_disk(self, disk_index=None):
         return VNXDisk.get(self._cli, disk_index)

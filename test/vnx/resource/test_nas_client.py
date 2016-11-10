@@ -20,7 +20,7 @@ from unittest import TestCase
 from hamcrest import assert_that, equal_to, raises, contains_string, \
     only_contains
 
-from storops.exception import VNXObjectNotFound, \
+from storops.exception import VNXNasObjectNotFound, \
     VNXInvalidMoverID, VNXFileCredentialError
 from storops.vnx.nas_client import NasXmlResponse, XmlStatus
 from test.vnx.nas_mock import MockXmlPost
@@ -85,7 +85,7 @@ class NasXmlResponseTest(TestCase):
             resp = self.fs_not_found
             resp.raise_if_no_object('no fs here')
 
-        assert_that(f, raises(VNXObjectNotFound, 'no fs here'))
+        assert_that(f, raises(VNXNasObjectNotFound, 'no fs here'))
 
     def test_get_problem_string(self):
         resp = self.fs_not_found

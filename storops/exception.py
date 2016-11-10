@@ -145,6 +145,10 @@ class UnityException(StoropsException):
         return ret
 
 
+class VNXObjectNotFoundError(object):
+    pass
+
+
 class VNXBackendError(VNXException):
     message_template = "vnx backend error.  {err}"
 
@@ -503,8 +507,8 @@ class NaviseccliNotAvailableError(VNXException):
                " and available in path.")
 
 
-class VNXObjectNotFound(VNXException):
-    message_template = "object is not found.  {err}"
+class VNXNasObjectNotFound(VNXException, VNXObjectNotFoundError):
+    message_template = "NAS object is not found.  {err}"
 
 
 class VNXSetArrayNameError(VNXException):
@@ -588,7 +592,7 @@ class VNXAluAlreadyAttachedError(VNXAttachAluError):
 
 
 @cli_exception
-class VNXAluNotFoundError(VNXAttachAluError):
+class VNXAluNotFoundError(VNXAttachAluError, VNXObjectNotFoundError):
     error_message = 'The ALU number specified by user is not a bound'
 
 
@@ -602,7 +606,7 @@ class VNXDetachAluError(VNXStorageGroupError):
 
 
 @cli_exception
-class VNXDetachAluNotFoundError(VNXDetachAluError):
+class VNXDetachAluNotFoundError(VNXDetachAluError, VNXObjectNotFoundError):
     error_message = 'No such Host LUN in this Storage Group'
 
 
@@ -620,7 +624,8 @@ class VNXDeleteStorageGroupError(VNXStorageGroupError):
 
 
 @cli_exception
-class VNXStorageGroupNotFoundError(VNXStorageGroupError):
+class VNXStorageGroupNotFoundError(VNXStorageGroupError,
+                                   VNXObjectNotFoundError):
     error_message = ('The group name or UID does not match any '
                      'storage groups for this array')
 
@@ -698,7 +703,7 @@ class VNXSnapNameInUseError(VNXSnapError):
 
 
 @cli_exception
-class VNXCreateSnapResourceNotFoundError(VNXSnapError):
+class VNXCreateSnapResourceNotFoundError(VNXSnapError, VNXObjectNotFoundError):
     error_message = 'The specified resource does not exist.'
 
 
@@ -752,7 +757,7 @@ class VNXLunPreparingError(VNXLunError):
 
 
 @cli_exception
-class VNXLunNotFoundError(VNXLunError):
+class VNXLunNotFoundError(VNXLunError, VNXObjectNotFoundError):
     error_message = 'Could not retrieve the specified (pool lun).'
 
 
@@ -821,7 +826,8 @@ class VNXConsistencyGroupNameInUseError(VNXCreateConsistencyGroupError):
 
 
 @cli_exception
-class VNXConsistencyGroupNotFoundError(VNXConsistencyGroupError):
+class VNXConsistencyGroupNotFoundError(VNXConsistencyGroupError,
+                                       VNXObjectNotFoundError):
     error_message = 'Cannot find the consistency group'
 
 
@@ -835,7 +841,7 @@ class VNXDeleteHbaError(VNXException):
 
 
 @cli_exception
-class VNXDeleteHbaNotFoundError(VNXException):
+class VNXDeleteHbaNotFoundError(VNXException, VNXObjectNotFoundError):
     error_message = 'The HBA UID specified is not known by the array'
 
 
@@ -869,7 +875,7 @@ class VNXUserNameInUseError(VNXSecurityException):
 
 
 @cli_exception
-class VNXUserNotFoundError(VNXSecurityException):
+class VNXUserNotFoundError(VNXSecurityException, VNXObjectNotFoundError):
     error_message = 'User does not exist'
 
 
@@ -917,7 +923,7 @@ class VNXPoolDestroyingError(VNXDeletePoolError):
 
 
 @cli_exception
-class VNXPoolNotFoundError(VNXPoolError):
+class VNXPoolNotFoundError(VNXPoolError, VNXObjectNotFoundError):
     error_message = ['The (Storagepool) may not exist',
                      'was not found in any provider']
 
@@ -947,7 +953,7 @@ class VNXMirrorAlreadyMirroredError(VNXMirrorException):
 
 
 @cli_exception
-class VNXMirrorImageNotFoundError(VNXMirrorException):
+class VNXMirrorImageNotFoundError(VNXMirrorException, VNXObjectNotFoundError):
     error_message = 'Image not found'
 
 
@@ -982,7 +988,7 @@ class VNXMirrorFeatureNotAvailableError(VNXMirrorException):
 
 
 @cli_exception
-class VNXMirrorNotFoundError(VNXMirrorException):
+class VNXMirrorNotFoundError(VNXMirrorException, VNXObjectNotFoundError):
     error_message = 'Mirror not found'
 
 
@@ -1002,7 +1008,7 @@ class VNXGateWayError(VNXException):
 
 
 @cli_exception
-class VNXVirtualPortNotFoundError(VNXPortError):
+class VNXVirtualPortNotFoundError(VNXPortError, VNXObjectNotFoundError):
     error_message = 'Request failed. Specified virtual port not found.'
 
 
@@ -1035,7 +1041,7 @@ class VNXFsExistedError(VNXFsError):
 
 
 @xmlapi_exception
-class VNXFsNotFoundError(VNXFsError):
+class VNXFsNotFoundError(VNXFsError, VNXObjectNotFoundError):
     error_code = 18522112101
 
 
@@ -1053,7 +1059,8 @@ class VNXMoverInterfaceError(VNXException):
 
 
 @xmlapi_exception
-class VNXMoverInterfaceNotFoundError(VNXMoverInterfaceError):
+class VNXMoverInterfaceNotFoundError(VNXMoverInterfaceError,
+                                     VNXObjectNotFoundError):
     error_code = 13691781134
 
 

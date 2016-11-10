@@ -25,8 +25,8 @@ from retryz import retry
 
 from storops.connection import connector
 from storops.exception import VNXBackendError, VNXLockRequiredException, \
-    VNXObjectNotFound, VNXInvalidMoverID, VNXException, get_xmlapi_exception, \
-    VNXFileCredentialError
+    VNXNasObjectNotFound, VNXInvalidMoverID, VNXException, \
+    get_xmlapi_exception, VNXFileCredentialError
 from storops.lib.common import Enum, check_int
 from storops.lib.converter import to_int, to_hex
 from storops.vnx.nas_cmd import NasCommand
@@ -471,7 +471,7 @@ class NasXmlResponse(object):
     def raise_if_no_object(self, desc=None):
         if not self.objects:
             msg = self.get_status_msg(desc)
-            raise VNXObjectNotFound(err=msg)
+            raise VNXNasObjectNotFound(err=msg)
 
     def is_ok(self):
         return self.status in (XmlStatus.DEBUG, XmlStatus.INFO, XmlStatus.OK)

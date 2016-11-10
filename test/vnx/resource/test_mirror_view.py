@@ -26,7 +26,7 @@ from storops.exception import VNXMirrorLunNotAvailableError, \
     VNXMirrorSyncImageError, VNXMirrorPromoteNonLocalImageError, \
     VNXMirrorPromotePrimaryError, VNXMirrorFeatureNotAvailableError, \
     VNXMirrorNotFoundError, VNXDeleteMirrorWithSecondaryError, \
-    VNXObjectNotFound, VNXMirrorRemoveSynchronizingError
+    VNXMirrorRemoveSynchronizingError
 from test.vnx.cli_mock import patch_cli
 from test.vnx.cli_mock import t_cli
 from storops.vnx.enums import VNXMirrorViewRecoveryPolicy, \
@@ -132,7 +132,7 @@ class VNXMirrorViewTest(TestCase):
             mv = VNXMirrorView.get(t_cli(), 'mv0')
             mv.get_image('50:06:01:60:88:60:05:FF')
 
-        assert_that(f, raises(VNXObjectNotFound, 'not found'))
+        assert_that(f, raises(VNXMirrorImageNotFoundError, 'not found'))
 
     @patch_cli
     def test_remove_image_not_found(self):

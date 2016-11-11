@@ -14,6 +14,7 @@ storops-*/
 
 # IDE related
 .idea/
+.swp
 
 # tests
 junit-result.xml

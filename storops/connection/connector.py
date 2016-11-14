@@ -52,7 +52,7 @@ class UnityRESTConnector(object):
     }
 
     def __init__(self, host, port=443, user='admin', password='',
-                 verify=True):
+                 verify=False):
         base_url = 'https://{host}:{port}'.format(host=host, port=port)
 
         insecure = False

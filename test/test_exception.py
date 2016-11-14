@@ -27,7 +27,7 @@ __author__ = 'Cedric Zhuang'
 
 
 class DemoException(StoropsException):
-    message = 'hello, {name}.'
+    message_template = 'hello, {name}.'
 
 
 class StrangeException(Exception):

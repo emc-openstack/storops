@@ -23,7 +23,8 @@ from hamcrest import assert_that, equal_to, instance_of, only_contains, \
 from storops.exception import UnityResourceNotFoundError, \
     UnityHostNameInUseError
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
-    HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList
+    HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
+    StorageResourceTypeEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -39,7 +40,7 @@ from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
 from storops.unity.resource.port import UnityFcPortList
-from storops.unity.resource.lun import UnityLunList
+from storops.unity.resource.lun import UnityLunList, UnityLun
 from storops.unity.resource.port import UnityIpPortList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor, \
@@ -397,6 +398,32 @@ class UnitySystemTest(TestCase):
         assert_that(policy.name, equal_to('max_kbps_1234'))
         setting = policy.io_limit_rule_settings[0]
         assert_that(setting.max_kbps, equal_to(1234))
+
+    @patch_rest
+    def test_create_cg(self):
+        lun1 = UnityLun(cli=t_rest(), _id='sv_3339')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_3340')
+        unity = t_unity()
+        cg = unity.create_cg('Muse', lun_list=[lun1, lun2])
+        assert_that(cg.name, equal_to('Muse'))
+        assert_that(len(cg.luns), equal_to(2))
+
+    @patch_rest
+    def test_get_cg_list(self):
+        cg_list = t_unity().get_cg()
+        assert_that(len(cg_list), equal_to(2))
+
+    @patch_rest
+    def test_get_cg_by_name(self):
+        cg = t_unity().get_cg(name='Nike')
+        assert_that(cg.name, equal_to('Nike'))
+
+    @patch_rest
+    def test_get_cg_by_id(self):
+        cg = t_unity().get_cg(_id='res_13')
+        assert_that(cg.id, equal_to('res_13'))
+        cg_type = StorageResourceTypeEnum.CONSISTENCY_GROUP
+        assert_that(cg.type, equal_to(cg_type))
 
 
 class UnityDpeTest(TestCase):

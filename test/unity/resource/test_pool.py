@@ -19,7 +19,7 @@ from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, raises
 
-from storops.exception import UnityLunNameInUseError
+from storops.exception import UnityLunNameInUseError, JobStateError
 from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     FastVPRelocationRateEnum, PoolDataRelocationTypeEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
@@ -161,6 +161,7 @@ class UnityPoolTest(TestCase):
 
         def f():
             pool.create_lun("openstack_lun")
+
         assert_that(f, raises(UnityLunNameInUseError))
 
     @patch_rest
@@ -180,7 +181,7 @@ class UnityPoolTest(TestCase):
         assert_that(lun, instance_of(UnityLun))
 
     @patch_rest
-    def test_create_nfs_share(self):
+    def test_create_nfs_share_success(self):
         pool = UnityPool(_id='pool_5', cli=t_rest())
         nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
         job = pool.create_nfs_share(
@@ -188,3 +189,15 @@ class UnityPoolTest(TestCase):
             name='513dd8b0-2c22-4da0-888e-494d320303b6',
             size=4294967296)
         assert_that(JobStateEnum.COMPLETED, equal_to(job.state))
+
+    @patch_rest
+    def test_create_nfs_share_failed(self):
+        def f():
+            pool = UnityPool(_id='pool_1', cli=t_rest())
+            nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_1')
+            pool.create_nfs_share(
+                nas_server,
+                name='job_share_failed',
+                size=1)
+
+        assert_that(f, raises(JobStateError, 'too small'))

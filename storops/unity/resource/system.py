@@ -41,6 +41,8 @@ from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
 from storops.unity.resource.port import UnityEthernetPortList, \
     UnityIscsiPortalList, UnityFcPortList
+from storops.unity.resource.storage_resource import UnityConsistencyGroup, \
+    UnityConsistencyGroupList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
 
 __author__ = 'Jay Xu'
@@ -165,6 +167,15 @@ class UnitySystem(UnitySingletonResource):
             self._cli, name, max_iops=max_iops, max_kbps=max_kbps,
             policy_type=policy_type, is_shared=is_shared,
             description=description)
+
+    def get_cg(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityConsistencyGroupList, _id=_id,
+                                   name=name, **filters)
+
+    def create_cg(self, name, description=None, lun_list=None, hosts=None):
+        return UnityConsistencyGroup.create(
+            self._cli, name, description=description, lun_list=lun_list,
+            hosts=hosts)
 
     def get_doc(self, resource):
         if isinstance(resource, (UnityResource, UnityEnum)):

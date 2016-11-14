@@ -39,12 +39,12 @@ def t_rest():
 
     :return: unity client singleton
     """
-    return UnityClient('10.244.223.61', 'admin', 'Password123!')
+    return UnityClient('10.244.223.61', 'admin', 'Password123!', verify=False)
 
 
 @cache
 def t_unity():
-    return UnitySystem('10.244.223.61', 'admin', 'Password123!')
+    return UnitySystem('10.244.223.61', 'admin', 'Password123!', verify=False)
 
 
 class MockRestClient(ConnectorMock):

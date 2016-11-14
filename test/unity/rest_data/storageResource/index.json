@@ -9,6 +9,10 @@
       "response": "all.json"
     },
     {
+      "url": "/api/types/storageResource/instances?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID&filter=name eq \"Nike\" and type eq 2",
+      "response": "nike.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_2?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "sv_2.json"
     },

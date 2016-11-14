@@ -1,0 +1,65 @@
+{
+  "content": {
+    "progressPct": 0,
+    "startTime": "2016-11-14T03:14:17.601Z",
+    "affectedResource": {},
+    "instanceId": "",
+    "clientData": "",
+    "methodName": "job.create",
+    "elapsedTime": "00:00:05.000",
+    "state": 5,
+    "parametersOut": {
+      "id": "B-3"
+    },
+    "submitTime": "2016-11-14T03:14:17.595Z",
+    "id": "B-3",
+    "tasks": [
+      {
+        "name": "CreateNewFilesystem",
+        "object": "storageResource",
+        "parametersIn": {
+          "name": "job_share_failed",
+          "nfsShareCreate": [
+            {
+              "name": "job_share_failed",
+              "path": "/"
+            }
+          ],
+          "fsParameters": {
+            "nasServer": {
+              "id": "nas_1"
+            },
+            "pool": {
+              "id": "pool_1"
+            },
+            "size": 1,
+            "supportedProtocols": 0
+          },
+          "description": ""
+        },
+        "submitTime": "2016-11-14T03:14:17.595Z",
+        "action": "createFilesystem",
+        "messages": [
+          {
+            "errorCode": 108008449,
+            "messages": [
+              {
+                "message": "The specified file system size is too small. (Error Code:0x6701401)",
+                "locale": "en_US"
+              }
+            ]
+          }
+        ],
+        "state": 3,
+        "description": "Create File System",
+        "startTime": "2016-11-14T03:14:17.608Z"
+      }
+    ],
+    "statusCodeOut": 0,
+    "endTime": "2016-11-14T03:14:22.604Z",
+    "isJobCancelled": false,
+    "stateChangeTime": "2016-11-14T03:14:22.604Z",
+    "description": "Creating Filesystem and share",
+    "isJobCancelable": false
+  }
+}

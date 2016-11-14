@@ -13,6 +13,10 @@
       "response": "N-345.json"
     },
     {
+      "url": "/api/instances/job/B-3?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks",
+      "response": "B-3.json"
+    },
+    {
       "url": "/api/types/job/instances?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks&filter=id eq \"B-693\"",
       "response": "B-693.json"
     },
@@ -92,6 +96,41 @@
                 "supportedProtocols": 0
               }
             },
+            "name": "CreateNewFilesystem"
+          }
+        ],
+        "description": "Creating Filesystem and share"
+      }
+    },
+    {
+      "url": "/api/types/job/instances?compact=True",
+      "response": "B-3-id.json",
+      "body": {
+        "tasks": [
+          {
+            "action": "createFilesystem",
+            "object": "storageResource",
+            "parametersIn": {
+              "name": "job_share_failed",
+              "nfsShareCreate": [
+                {
+                  "name": "job_share_failed",
+                  "path": "/"
+                }
+              ],
+              "fsParameters": {
+                "nasServer": {
+                  "id": "nas_1"
+                },
+                "pool": {
+                  "id": "pool_1"
+                },
+                "size": 1,
+                "supportedProtocols": 0
+              },
+              "description": ""
+            },
+            "description": "Create File System",
             "name": "CreateNewFilesystem"
           }
         ],

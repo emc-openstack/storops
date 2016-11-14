@@ -17,12 +17,15 @@ from __future__ import unicode_literals
 
 import retryz
 from storops import exception as ex
+from storops.exception import get_rest_exception
+from storops.lib.common import instance_cache
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
 from storops.unity.enums import FSSupportedProtocolEnum
 
 import storops
 from storops.unity import enums
+
 __author__ = 'Cedric Zhuang'
 
 
@@ -75,8 +78,7 @@ class UnityJob(UnityResource):
             cli.make_body(nfs_share_create))
         job_req_body['tasks'].append(task_body)
 
-        resp = cli.post(cls().resource_class,
-                        **job_req_body)
+        resp = cli.post(cls().resource_class, **job_req_body)
         resp.raise_if_err()
         job = cls(_id=resp.resource_id, cli=cli)
         if not async:
@@ -89,7 +91,7 @@ class UnityJob(UnityResource):
         elif self.state in (enums.JobStateEnum.FAILED,
                             enums.JobStateEnum.ROLLING_BACK,
                             enums.JobStateEnum.COMPLETED_WITH_ERROR):
-            raise ex.JobStateError(state=self.state.name)
+            raise ex.JobStateError(self)
         return False
 
     def wait_job_completion(self, **kwargs):
@@ -105,6 +107,35 @@ class UnityJob(UnityResource):
             _do_update()
         except retryz.RetryTimeoutError:
             raise ex.JobTimeoutException()
+
+    @property
+    @instance_cache
+    def _task_messages(self):
+        return [task_message
+                for task in self.tasks
+                for task_message in task.messages]
+
+    @property
+    @instance_cache
+    def _localized_messages(self):
+        return [message
+                for messages in self._task_messages
+                for message in messages.messages]
+
+    @property
+    @instance_cache
+    def messages(self):
+        return [message.message
+                for message in self._localized_messages]
+
+    @property
+    @instance_cache
+    def exceptions(self):
+        return list(filter(lambda e: e is not None,
+                           (m.to_exception() for m in self._task_messages)))
+
+    def has_exception(self):
+        return len(self.exceptions) > 0
 
 
 class UnityJobList(UnityResourceList):
@@ -124,7 +155,16 @@ class UnityJobTaskList(UnityResourceList):
 
 
 class UnityMessage(UnityAttributeResource):
-    pass
+    def to_exception(self):
+        if self.error_code != 0:
+            clz = get_rest_exception(self.error_code)
+            ret = clz(self)
+        else:
+            ret = None
+        return ret
+
+    def get_messages(self):
+        return [m.message for m in self.messages]
 
 
 class UnityMessageList(UnityResourceList):
@@ -155,7 +195,7 @@ def wait_job_completion(job, **kwargs):
         elif job.state in (enums.JobStateEnum.FAILED,
                            enums.JobStateEnum.ROLLING_BACK,
                            enums.JobStateEnum.COMPLETED_WITH_ERROR):
-            raise ex.JobStateError(state=job.state.name)
+            raise ex.JobStateError(job)
         return False
 
     try:

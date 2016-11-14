@@ -36,49 +36,60 @@ class StoropsException(Exception):
     with the keyword arguments provided to the constructor.
 
     """
-    message = "An unknown exception occurred."
-    code = 500
-    headers = {}
+    unknown_message = "An unknown exception occurred."
+
+    # class level error message.
+    message = None
+
+    # class level error message template.
+    message_template = None
+
+    # default error code used in message template.
+    default_code = 500
 
     def __init__(self, message=None, **kwargs):
         if message is None:
-            message = self.message
+            if self.message_template is not None:
+                message = self.message_template
+            elif self.__class__.message is not None:
+                message = self.__class__.message
+            else:
+                message = self.unknown_message
 
-        self.kwargs = self._insert_default_code(kwargs)
-        self.message = self._update_message(message, kwargs)
+        self._message = message
+        self._kwargs = kwargs
 
-        super(StoropsException, self).__init__(self.message)
+        super(StoropsException, self).__init__()
 
-    @staticmethod
-    def _update_message(message, kwargs):
-        if isinstance(message, six.string_types):
+    @property
+    def message(self):
+        ret = self._message
+        if isinstance(self._message, six.string_types):
             try:
-                message = message.format(**kwargs)
+                if 'code' not in self._kwargs:
+                    self._kwargs['code'] = self.default_code
+
+                ret = self._message.format(**self._kwargs)
 
             except KeyError:
                 # kwargs doesn't match a variable in the message
                 # log the issue and the kwargs
                 log.error(
-                    'missing param in format string: "{}"'.format(message))
+                    'missing param in format string: "{}"'.format(
+                        self._message))
             except IndexError:
                 # format error, use original message
                 pass
-        elif isinstance(message, Exception):
-            message = six.text_type(message)
+        elif isinstance(self._message, Exception):
+            ret = six.text_type(self._message)
+        return ret
 
-        return message
+    @message.setter
+    def message(self, value):
+        self._message = value
 
-    @classmethod
-    def _insert_default_code(cls, kwargs):
-        if 'code' not in kwargs:
-            try:
-                kwargs['code'] = cls.code
-            except AttributeError:
-                pass
-        for k, v in six.iteritems(kwargs):
-            if isinstance(v, Exception):
-                kwargs[k] = six.text_type(v)
-        return kwargs
+    def __str__(self):
+        return self.message
 
 
 def to_hex(number):
@@ -135,7 +146,7 @@ class UnityException(StoropsException):
 
 
 class VNXBackendError(VNXException):
-    message = "vnx backend error.  {err}"
+    message_template = "vnx backend error.  {err}"
 
 
 _rest_exception_factory = MappedErrorCodeDecoratorFactory(
@@ -482,7 +493,7 @@ class NaviseccliNotAvailableError(VNXException):
 
 
 class VNXObjectNotFound(VNXException):
-    message = "object is not found.  {err}"
+    message_template = "object is not found.  {err}"
 
 
 class VNXSetArrayNameError(VNXException):
@@ -496,7 +507,7 @@ class OptionMissingError(VNXException):
 @xmlapi_exception
 class VNXInvalidMoverID(VNXException):
     error_code = 14227341323
-    message = "invalid mover or vdm.  {id}"
+    message_template = "invalid mover or vdm.  {id}"
 
 
 class VNXLockRequiredException(VNXException):
@@ -1079,8 +1090,11 @@ class JobTimeoutException(UnityJobException):
 
 
 class JobStateError(UnityJobException):
-    message = "Job failed in {state}."
-
-    def __init__(self, **kwargs):
-        self.message = JobStateError.message.format(**kwargs)
+    def __init__(self, job):
+        self.job = job
         super(JobStateError, self).__init__(self.message)
+
+    @property
+    def message(self):
+        return 'Job State: {}.  Error Detail: {}'.format(
+            self.job.state.name, '.  '.join(self.job.messages))

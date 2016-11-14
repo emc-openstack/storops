@@ -1,0 +1,43 @@
+{
+  "updated": "2016-11-14T06:19:13.865Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "@base": "https://10.244.223.61/api/types/storageResource/instances?filter=name eq \"Nike\" and type eq 2&fields=blockHostAccess,compressionPercent,compressionRatio,compressionSizeSaved,compressionStatus,creationTime,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,health,id,instanceId,isReplicationDestination,isSnapSchedulePaused,logicalSizeUsed,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,relocationPolicy,replicationType,sharableSnapCount,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,vmwareUUID,pools.id,virtualVolumes.id,snapSchedule.id,datastores.id,filesystem.id,moves.id,hostVVolDatastore.id,luns.id&per_page=2000&compact=true",
+  "entries": [
+    {
+      "content": {
+        "type": 2,
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "creationTime": "2016-11-14T06:18:30.634Z",
+        "instanceId": "root/emc:EMC_UEM_ApplicationLeaf%InstanceID=res_1",
+        "objectId": 81604378625,
+        "isReplicationDestination": false,
+        "replicationType": 0,
+        "relocationPolicy": 65535,
+        "compressionPercent": 0,
+        "thinStatus": 65535,
+        "id": "res_1",
+        "operationalStatus": [
+          2
+        ],
+        "modificationTime": "2016-11-14T06:18:30.634Z",
+        "name": "Nike",
+        "description": "",
+        "compressionRatio": 1.0,
+        "compressionStatus": 65535
+      }
+    }
+  ]
+}

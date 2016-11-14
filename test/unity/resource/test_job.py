@@ -17,8 +17,10 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, instance_of
+from hamcrest import assert_that, equal_to, instance_of, contains_string, \
+    has_item
 
+from storops.exception import UnityFileSystemSizeTooSmallError
 from storops.unity.enums import JobStateEnum, JobTaskStateEnum
 from storops.unity.resource.job import UnityJob, UnityJobList, \
     UnityJobTaskList, \
@@ -111,9 +113,38 @@ class UnityJobTest(TestCase):
         nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
         self.assertRaisesRegexp(
             ex.JobStateError,
-            "Job failed in {}.".format(JobStateEnum.FAILED.name),
+            'Job State: FAILED.  Error Detail: ',
             UnityJob.create_nfs_share,
             cli=t_rest(), pool=pool, nas_server=nas_server,
             name='613dd8b0-2c22-4da0-888e-494d320303b7',
             size=4294967296,
             async=False)
+
+    @patch_rest
+    def test_messages(self):
+        job = UnityJob(_id='B-3', cli=t_rest())
+        assert_that(len(job.messages), equal_to(1))
+        assert_that(job.messages[0], contains_string('too small'))
+
+    @patch_rest
+    def test_has_exceptions(self):
+        job = UnityJob(_id='B-3', cli=t_rest())
+        assert_that(len(job.exceptions), equal_to(1))
+        exception = job.exceptions[0]
+        assert_that(exception,
+                    instance_of(UnityFileSystemSizeTooSmallError))
+        assert_that(str(exception), contains_string('too small'))
+        assert_that(job.has_exception(), equal_to(True))
+
+    @patch_rest
+    def test_batch_without_error(self):
+        job = UnityJob(_id='B-693', cli=t_rest())
+        assert_that(job.messages, has_item('Success'))
+        assert_that(len(job.exceptions), equal_to(0))
+        assert_that(job.has_exception(), equal_to(False))
+
+    @patch_rest
+    def test_normal_without_error(self):
+        job = UnityJob(_id='N-345', cli=t_rest())
+        assert_that(job.messages, has_item('Success'))
+        assert_that(len(job.exceptions), equal_to(0))

@@ -17,12 +17,12 @@ from __future__ import unicode_literals
 
 import logging
 
-from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.nas_server
 import storops.unity.resource.pool
 from storops.unity.enums import NodeEnum
+from storops.unity.resource import UnityResource, UnityResourceList
 
-__author__ = 'Jay Xu'
+__author__ = 'Jay Xu, Cedric Zhuang'
 
 LOG = logging.getLogger(__name__)
 

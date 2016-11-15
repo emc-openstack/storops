@@ -91,7 +91,7 @@ class VNXHost(VNXCliResource):
 
 class VNXHostList(VNXCliResourceList):
     def __init__(self, cli=None, names=None):
-        super(VNXCliResourceList, self).__init__()
+        super(VNXHostList, self).__init__()
         self._cli = cli
         self._names = names
 

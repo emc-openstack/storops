@@ -15,10 +15,15 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import os
+
 from storops.exception import NoIndexException, UnityResourceNotFoundError, \
-    UnityNameNotUniqueError, UnityActionNotAllowedError
+    UnityNameNotUniqueError, UnityActionNotAllowedError, \
+    UnityPerfMonNotEnabledError
+from storops.lib.common import get_local_folder, clear_instance_cache
 from storops.lib.resource import Resource, ResourceList
 from storops.unity import parser
+from storops.unity.calculator import calculators
 from storops.unity.parser import NestedProperties
 
 __author__ = 'Cedric Zhuang'
@@ -70,7 +75,7 @@ class UnityResource(Resource):
         return self._get_parser().name
 
     @classmethod
-    def _build_nested_properties_obj(cls):
+    def build_nested_properties_obj(cls):
         return NestedProperties.build(cls.get_nested_properties())
 
     @classmethod
@@ -79,7 +84,7 @@ class UnityResource(Resource):
 
     def _get_raw_resource(self):
         _id = self.get_id()
-        nested_obj = self._build_nested_properties_obj()
+        nested_obj = self.build_nested_properties_obj()
         nested_fields = nested_obj.query_fields if nested_obj else None
 
         res = self._cli.get(self.resource_class, _id,
@@ -129,10 +134,40 @@ class UnityResource(Resource):
         return self._preloaded_properties.get_properties()
 
     def _get_property_from_raw(self, item):
-        value = super(UnityResource, self)._get_property_from_raw(item)
-        if isinstance(value, UnityResource):
-            value.set_cli(self._cli)
+        if item in self.metric_names():
+            value = self.get_metric_value(item)
+        else:
+            value = super(UnityResource, self)._get_property_from_raw(item)
+            if isinstance(value, UnityResource):
+                value.set_cli(self._cli)
         return value
+
+    def property_names(self):
+        names = super(UnityResource, self).property_names()
+        if self._cli is not None and self._cli.is_perf_metric_enabled(self):
+            names.extend(self.metric_names())
+        return names
+
+    @property
+    def clz_name(self):
+        return self._get_parser().resource_class_name
+
+    def metric_names(self):
+        return calculators.get_metric_names(self.clz_name)
+
+    def get_metric_value(self, item):
+        if not self._cli.is_perf_metric_enabled(self):
+            raise UnityPerfMonNotEnabledError()
+        return calculators.get_metric_value(
+            self.clz_name, item, self._cli, self.get_id())
+
+    def get_metric_timestamp(self):
+        curr = self._cli.curr_counter
+        if curr is None or len(curr) == 0:
+            ret = None
+        else:
+            ret = curr[0].timestamp
+        return ret
 
     def set_cli(self, cli):
         if cli is not None:
@@ -240,6 +275,7 @@ class UnityResourceList(UnityResource, ResourceList):
     def _get_parser(cls):
         return parser.get_unity_parser(cls.get_resource_class().__name__)
 
+    @clear_instance_cache
     def update(self, data=None):
         ret = super(UnityResourceList, self).update(data)
         for item in self._list:
@@ -263,7 +299,7 @@ class UnityResourceList(UnityResource, ResourceList):
             if len(keys) == 2:
                 label = k
             the_filter[label] = v
-        nested_obj = self.get_resource_class()._build_nested_properties_obj()
+        nested_obj = self.get_resource_class().build_nested_properties_obj()
         nested_fields = nested_obj.query_fields if nested_obj else None
         res = self._cli.get_all(
             self.resource_class, the_filter=the_filter,
@@ -311,3 +347,55 @@ class UnityResourceList(UnityResource, ResourceList):
     def set_preloaded_properties(self, props):
         for i in self:
             i.set_preloaded_properties(props)
+
+    def _get_resource_instance(self):
+        return self.get_resource_class()(cli=self._cli)
+
+    def get_metrics_csv(self, sep=None):
+        if sep is None:
+            sep = ','
+        content = [self.get_metrics_csv_header(sep),
+                   self.get_metrics_csv_data(sep)]
+        return '\n'.join(content)
+
+    @staticmethod
+    def data_line(rsc):
+        # noinspection PyProtectedMember
+        metrics = [str(rsc.get_metric_timestamp()),
+                   rsc.get_id(), rsc._get_name()]
+        metrics += [str(getattr(rsc, name))
+                    for name in rsc.metric_names()]
+        return metrics
+
+    def get_metrics_csv_data(self, sep=None):
+        if sep is None:
+            sep = ','
+        return '\n'.join(sep.join(self.data_line(r)) for r in self)
+
+    def get_metrics_csv_header(self, sep=None):
+        if sep is None:
+            sep = ','
+        return sep.join(['timestamp', 'id', 'name'] + self.metric_names())
+
+    def persist_metric_data(self, filename=None):
+        if filename is None:
+            filename = self.get_default_metric_csv_filename()
+
+        if os.path.exists(filename):
+            to_write = self.get_metrics_csv_data()
+        else:
+            to_write = self.get_metrics_csv()
+
+        with open(filename, 'a+') as f:
+            f.write(to_write)
+            f.write('\n')
+
+    def get_default_metric_csv_filename(self):
+        folder = get_local_folder()
+        name = '{}_{}.csv'.format(self._cli.ip, self.resource_class_name)
+        filename = os.path.join(folder, name)
+        return filename
+
+    @property
+    def resource_class_name(self):
+        return self.get_resource_class()().resource_class

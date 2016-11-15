@@ -26,7 +26,7 @@ from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
 from storops.exception import EnumValueNotFoundError
 from storops.lib.common import Dict, Enum, WeightedAverage, synchronized, \
     text_var, int_var, enum_var, yes_no_var, JsonPrinter, get_lock_file, \
-    EnumList, round_3
+    EnumList, round_3, RepeatedTimer
 from storops.vnx.enums import VNXRaidType
 
 log = logging.getLogger(__name__)
@@ -298,3 +298,30 @@ class RoundItTest(TestCase):
             return 123.45678
 
         assert_that(f(), equal_to(123.457))
+
+
+class RepeatedTimerTest(TestCase):
+    def test_repeated_timer_normal(self):
+        count = [0]
+        results = []
+
+        def f(v):
+            count[0] += 1
+            results.append(v * count[0])
+
+        timer = RepeatedTimer(0.05, f, 2)
+        timer.start()
+        sleep(0.5)
+        timer.stop()
+        assert_that(results, has_items(2, 4, 6))
+
+    def test_repeated_timer_daemon(self):
+        results = [0]
+
+        def f():
+            results[0] += 1
+
+        timer = RepeatedTimer(10, f)
+        timer.start()
+        assert_that(timer.is_daemon(), equal_to(True))
+        assert_that(results[0], equal_to(0))

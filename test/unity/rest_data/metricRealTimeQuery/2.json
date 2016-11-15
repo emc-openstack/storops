@@ -1,0 +1,30 @@
+{
+  "content": {
+    "paths": [
+      "sp.*.physical.disk.*.reads",
+      "sp.*.physical.disk.*.writes",
+      "sp.*.physical.disk.*.readBlocks",
+      "sp.*.physical.disk.*.writeBlocks",
+      "sp.*.physical.disk.*.idleTicks",
+      "sp.*.physical.disk.*.busyTicks",
+      "sp.*.platform.storageProcessorTemperature",
+      "sp.*.memory.summary.freeBytes",
+      "sp.*.memory.summary.totalBytes",
+      "sp.*.memory.summary.totalUsedBytes",
+      "sp.*.storage.filesystem.*.reads",
+      "sp.*.storage.filesystem.*.writes",
+      "sp.*.storage.filesystem.*.readBytes",
+      "sp.*.storage.filesystem.*.writeBytes",
+      "sp.*.storage.lun.*.reads",
+      "sp.*.storage.lun.*.writes",
+      "sp.*.storage.lun.*.readBlocks",
+      "sp.*.storage.lun.*.writeBlocks",
+      "sp.*.storage.lun.*.idleTime",
+      "sp.*.storage.lun.*.busyTime"
+    ],
+    "id": 2,
+    "expiration": "2016-11-15T07:30:00.000Z",
+    "maximumSamples": -1,
+    "interval": 300
+  }
+}

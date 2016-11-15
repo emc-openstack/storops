@@ -1,0 +1,28 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/disk?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/disk/instances?compact=True&fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskGroup,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,parentDae,parentDpe,pool,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/disk/dae_0_1_disk_0?compact=True&fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskGroup,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,parentDae,parentDpe,pool,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn",
+      "response": "dae_0_1_disk_0.json"
+    },
+    {
+      "url": "/api/instances/disk/dae_0_1_disk_2?compact=True&fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskGroup,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,parentDae,parentDpe,pool,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn",
+      "response": "dae_0_1_disk_2.json"
+    },
+    {
+      "url": "/api/instances/disk/dpe_disk_23?compact=True&fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskGroup,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,parentDae,parentDpe,pool,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn",
+      "response": "dpe_disk_23.json"
+    },
+    {
+      "url": "/api/types/disk/instances?compact=True&fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskGroup,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,parentDae,parentDpe,pool,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn&filter=tierType eq 10",
+      "response": "flash_disks.json"
+    }
+  ]
+}

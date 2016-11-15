@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 
 import storops.exception as ex
 import storops.lib.parser
-from storops.lib.common import JsonPrinter
+from storops.lib.common import JsonPrinter, clear_instance_cache
 
 __author__ = 'Cedric Zhuang'
 
@@ -59,6 +59,7 @@ class Resource(JsonPrinter):
     def parsed_resource(self):
         return self._parsed_resource
 
+    @clear_instance_cache
     def update(self, data=None):
         if data is None:
             data = self._get_raw_resource()
@@ -198,8 +199,8 @@ class Resource(JsonPrinter):
         return []
 
     def _get_property_from_raw(self, item):
-        if (not self._is_updated() and item not in
-                self.get_preloaded_prop_keys()):
+        is_preloaded_prop = item in self.get_preloaded_prop_keys()
+        if not self._is_updated() and not is_preloaded_prop:
             self.update()
 
         if item in self.property_names():
@@ -220,6 +221,7 @@ class ResourceList(Resource):
         self._list = None
         self._iter = None
 
+    @clear_instance_cache
     def update(self, data=None):
         self._list = []
         if data is None:
@@ -288,9 +290,11 @@ class ResourceList(Resource):
     def __getitem__(self, item):
         return self.list[item]
 
+    def _get_resource_instance(self):
+        return self.get_resource_class()()
+
     def __getattr__(self, v):
-        clz = self.get_resource_class()
-        s = clz()
+        s = self._get_resource_instance()
         ret = None
         if not v.startswith('_'):
             if v in dir(s):
@@ -300,7 +304,8 @@ class ResourceList(Resource):
 
         if ret is None:
             raise AttributeError(
-                '{} do not has attribute {}.'.format(clz.__name__, v))
+                '{} do not has attribute {}.'.format(
+                    self.get_resource_class().__name__, v))
         return ret
 
     def get_member_attr_list(self, v):

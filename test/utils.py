@@ -162,3 +162,7 @@ class PersistedDict(object):
         log.debug('destroy dict {}: \n{}'.format(self.data_file_name, s))
         if exists(self.data_file_name):
             os.remove(self.data_file_name)
+
+    def clear_lock_file(self):
+        if exists(self.lock_file_name):
+            os.remove(self.lock_file_name)

@@ -1,0 +1,12 @@
+{
+  "content": {
+    "maximumSamples": -1,
+    "paths": [
+      "sp.*.physical.disk.*.reads",
+      "sp.*.physical.disk.*.writes"
+    ],
+    "id": 4,
+    "interval": 30,
+    "expiration": "2016-11-15T07:34:30.000Z"
+  }
+}

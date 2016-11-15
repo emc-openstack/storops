@@ -696,3 +696,23 @@ class DNSServerOriginEnum(UnityEnum):
     UNKNOWN = (0, 'Unknown')
     STATIC = (1, 'Set Manually')
     DHCP = (2, 'Configured by DHCP')
+
+
+class MetricTypeEnum(UnityEnum):
+    UNKNOWN = (1, 'Unknown')
+    COUNTER_32 = (2, '32 bits Counter')
+    COUNTER_64 = (3, '64 bits Counter')
+    RATE = (4, 'Rate')
+    FACT = (5, 'Fact')
+    TEXT = (6, 'Text')
+    VIRTUAL_COUNTER_32 = (7, '32 bits Virtual Counter')
+    VIRTUAL_COUNTER_64 = (8, '64 bits Virtual Counter')
+
+
+class DiskTechnologyEnum(UnityEnum):
+    SAS = (1, 'SAS')
+    NL_SAS = (2, 'NL_SAS')
+    SAS_FLASH_2 = (6, 'SAS_FLASH_2')
+    SAS_FLASH_3 = (7, 'SAS_FLASH_3')
+    MIXED = (50, 'Mixed')
+    VIRTUAL = (99, 'Virtual')

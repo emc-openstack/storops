@@ -42,6 +42,7 @@ class PersistedDictTest(TestCase):
     @classmethod
     def tearDownClass(cls):
         cls.d.destroy()
+        cls.d.clear_lock_file()
 
     def test_get_item(self):
         assert_that(self.d['a'], equal_to('a1'))

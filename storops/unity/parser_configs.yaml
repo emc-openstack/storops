@@ -1450,3 +1450,79 @@ UnityLinkAggregation:
     - label: isLinkUp
     - label: parentStorageProcessor
       converter: UnityStorageProcessor
+
+
+UnityDisk:
+  data_src: rest
+  name: disk
+  properties:
+    - label: id
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: slotNumber
+    - label: busId
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: version
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: tierType
+      converter: TierTypeEnum
+    - label: rpm
+    - label: isSED
+    - label: currentSpeed
+    - label: maxSpeed
+    - label: pool
+      converter: UnityPool
+    - label: isInUse
+    - label: isFastCacheInUse
+    - label: size
+    - label: rawSize
+    - label: vendorSize
+    - label: wwn
+    - label: diskTechnology
+      converter: DiskTechnologyEnum
+    - label: bank
+    - label: bankSlotNumber
+    - label: bankSlot
+
+
+UnityMetric:
+  data_src: rest
+  name: metric
+  properties:
+    - label: id
+    - label: name
+    - label: path
+    - label: type
+      converter: MetricTypeEnum
+    - label: description
+    - label: isHistoricalAvailable
+    - label: isRealtimeAvailable
+    - label: unitDisplayString
+
+
+UnityMetricRealTimeQuery:
+  data_src: rest
+  name: metricRealTimeQuery
+  properties:
+    - label: id
+    - label: paths
+    - label: interval
+    - label: expiration
+      converter: to_datetime
+
+
+UnityMetricQueryResult:
+  data_src: rest
+  name: metricQueryResult
+  properties:
+    - label: queryId
+    - label: path
+    - label: timestamp
+      converter: to_datetime
+    - label: values
+
+

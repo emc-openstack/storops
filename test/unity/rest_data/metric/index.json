@@ -3,6 +3,18 @@
     {
       "url": "/api/types/metric?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
       "response": "type.json"
+    },
+    {
+      "url": "/api/instances/metric/10234?compact=True&fields=description,id,isHistoricalAvailable,isRealtimeAvailable,name,objectType,path,product,type,unitDisplayString",
+      "response": "10234.json"
+    },
+    {
+      "url": "/api/types/metric/instances?compact=True&fields=description,id,isHistoricalAvailable,isRealtimeAvailable,name,objectType,path,product,type,unitDisplayString",
+      "response": "metrics_page_1.json"
+    },
+    {
+      "url": "/api/types/metric/instances?compact=True&fields=description,id,isHistoricalAvailable,isRealtimeAvailable,name,objectType,path,product,type,unitDisplayString&page=2",
+      "response": "metrics_page_2.json"
     }
   ]
 }

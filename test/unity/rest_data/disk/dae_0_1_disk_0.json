@@ -1,0 +1,53 @@
+{
+  "content": {
+    "isInUse": false,
+    "busId": 0,
+    "parent": {
+      "id": "dae_0_1",
+      "resource": "dae"
+    },
+    "vendorPartNumber": "005051284",
+    "isSED": false,
+    "isSystem": false,
+    "parentDae": {
+      "id": "dae_0_1"
+    },
+    "size": 1969590009856,
+    "diskGroup": {
+      "id": "dg_8"
+    },
+    "wwn": "06:00:00:00:05:00:00:00:0C:01:00:00:00:00:00:03",
+    "slotNumber": 0,
+    "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0C:01:00:00:00:00:00:03",
+    "id": "dae_0_1_disk_0",
+    "currentSpeed": 12000000000,
+    "emcPartNumber": "005051284",
+    "emcSerialNumber": "Z4H027TW",
+    "rawSize": 1969623564288,
+    "tierType": 30,
+    "health": {
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ],
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ]
+    },
+    "model": "ST2000NK EMC2000",
+    "isFastCacheInUse": false,
+    "vendorSize": 2199023255552,
+    "name": "DAE 0 1 Disk 0",
+    "vendorSerialNumber": "Z4H027TW",
+    "operationalStatus": [
+      2
+    ],
+    "manufacturer": "SEAGATE",
+    "needsReplacement": false,
+    "maxSpeed": 12000000000,
+    "rpm": 7200,
+    "estimatedEOL": "00:00:00.000",
+    "diskTechnology": 2,
+    "version": "MN16"
+  }
+}

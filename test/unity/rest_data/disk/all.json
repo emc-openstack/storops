@@ -1,0 +1,2024 @@
+{
+  "updated": "2016-11-16T08:14:08.171Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "@base": "https://10.244.223.61/api/types/disk/instances?fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn,diskGroup.id,parentDae.id,pool.id,parentDpe.id&per_page=2000&compact=true",
+  "entries": [
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 0",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_0",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 0,
+        "maxSpeed": 12000000000,
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:0C:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H027TW",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H027TW",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0C:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 1",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_1",
+        "isInUse": true,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 1,
+        "maxSpeed": 12000000000,
+        "pool": {
+          "id": "pool_1"
+        },
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:0D:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H027XS",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H027XS",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0D:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 2",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_2",
+        "isInUse": true,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 2,
+        "maxSpeed": 12000000000,
+        "pool": {
+          "id": "pool_1"
+        },
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:0E:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H027QW",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H027QW",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0E:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 3",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_3",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 3,
+        "maxSpeed": 12000000000,
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:0F:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H02D1P",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H02D1P",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0F:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 4",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_4",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 4,
+        "maxSpeed": 12000000000,
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:10:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H027RE",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H027RE",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:10:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 5",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_5",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 5,
+        "maxSpeed": 12000000000,
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:11:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H02789",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H02789",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:11:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 6",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_6",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 6,
+        "maxSpeed": 12000000000,
+        "rawSize": 1969623564288,
+        "wwn": "06:00:00:00:05:00:00:00:12:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST2000NK EMC2000",
+        "vendorSerialNumber": "Z4H027WQ",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 2199023255552,
+        "tierType": 30,
+        "size": 1969590009856,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051284",
+        "diskGroup": {
+          "id": "dg_8"
+        },
+        "emcSerialNumber": "Z4H027WQ",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051284",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:12:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 7",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_7",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 7,
+        "maxSpeed": 12000000000,
+        "rawSize": 5908849352704,
+        "wwn": "06:00:00:00:05:00:00:00:13:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST6000NK EMC6000",
+        "vendorSerialNumber": "Z4D1BJ2V",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 6597069766656,
+        "tierType": 30,
+        "size": 5908815798272,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051618",
+        "diskGroup": {
+          "id": "dg_23"
+        },
+        "emcSerialNumber": "Z4D1BJ2V",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051618",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:13:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 8",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_8",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 8,
+        "maxSpeed": 12000000000,
+        "rawSize": 5908849352704,
+        "wwn": "06:00:00:00:05:00:00:00:14:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST6000NK EMC6000",
+        "vendorSerialNumber": "Z4D1BJPG",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 6597069766656,
+        "tierType": 30,
+        "size": 5908815798272,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051618",
+        "diskGroup": {
+          "id": "dg_23"
+        },
+        "emcSerialNumber": "Z4D1BJPG",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051618",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:14:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 9",
+        "currentSpeed": 12000000000,
+        "id": "dae_0_1_disk_9",
+        "isInUse": false,
+        "diskTechnology": 2,
+        "isFastCacheInUse": false,
+        "manufacturer": "SEAGATE",
+        "slotNumber": 9,
+        "maxSpeed": 12000000000,
+        "rawSize": 5908849352704,
+        "wwn": "06:00:00:00:05:00:00:00:15:01:00:00:00:00:00:03",
+        "needsReplacement": false,
+        "version": "MN16",
+        "model": "ST6000NK EMC6000",
+        "vendorSerialNumber": "Z4D1BJ8Z",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 6597069766656,
+        "tierType": 30,
+        "size": 5908815798272,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051618",
+        "diskGroup": {
+          "id": "dg_23"
+        },
+        "emcSerialNumber": "Z4D1BJ8Z",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 7200,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051618",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:15:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 10",
+        "isFastCacheInUse": false,
+        "id": "dae_0_1_disk_10",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 10,
+        "wwn": "06:00:00:00:05:00:00:00:0A:00:00:00:0A:01:00:67",
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0A:00:00:00:0A:01:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 11",
+        "isFastCacheInUse": false,
+        "id": "dae_0_1_disk_11",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 11,
+        "wwn": "06:00:00:00:05:00:00:00:0B:00:00:00:0B:01:00:67",
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0B:00:00:00:0B:01:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 12",
+        "isFastCacheInUse": false,
+        "id": "dae_0_1_disk_12",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 12,
+        "wwn": "06:00:00:00:05:00:00:00:0C:00:00:00:0C:01:00:67",
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0C:00:00:00:0C:01:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 13",
+        "isFastCacheInUse": false,
+        "id": "dae_0_1_disk_13",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 13,
+        "wwn": "06:00:00:00:05:00:00:00:0D:00:00:00:0D:01:00:67",
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0D:00:00:00:0D:01:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DAE 0 1 Disk 14",
+        "isFastCacheInUse": false,
+        "id": "dae_0_1_disk_14",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 14,
+        "wwn": "06:00:00:00:05:00:00:00:0E:00:00:00:0E:01:00:67",
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dae",
+          "id": "dae_0_1"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0E:00:00:00:0E:01:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 0",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_0",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 0,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:01:00:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XG507BJ",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 476074418176,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051246",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XG507BJ",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": true,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051246",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:01:00:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 1",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_1",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 1,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:02:00:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XG5E31J",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 476074418176,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051246",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XG5E31J",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": true,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051246",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:02:00:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 2",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_2",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 2,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:03:00:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XG5G9HJ",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 476074418176,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051246",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XG5G9HJ",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": true,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051246",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:03:00:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 3",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_3",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 3,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:04:00:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XG5EJDJ",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 476074418176,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051246",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XG5EJDJ",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": true,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051246",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:04:00:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 4",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_4",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 4,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:00:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJJ0YMP",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJJ0YMP",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:00:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 5",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_5",
+        "isInUse": true,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 5,
+        "maxSpeed": 12000000000,
+        "pool": {
+          "id": "pool_1"
+        },
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:01:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJPPBVP",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJPPBVP",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:01:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 6",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_6",
+        "isInUse": true,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 6,
+        "maxSpeed": 12000000000,
+        "pool": {
+          "id": "pool_1"
+        },
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:02:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJPP4SP",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJPP4SP",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:02:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 7",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_7",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 7,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:03:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJJ0S8P",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJJ0S8P",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:03:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 8",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_8",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 8,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:04:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJKUW5P",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJKUW5P",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:04:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 9",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_9",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 9,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:05:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJK35ZP",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJK35ZP",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:05:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 10",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_10",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 10,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:06:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJKU6WP",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJKU6WP",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:06:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 11",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_11",
+        "isInUse": false,
+        "diskTechnology": 1,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 11,
+        "maxSpeed": 12000000000,
+        "rawSize": 590894538752,
+        "wwn": "06:00:00:00:05:00:00:00:07:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "K7P0",
+        "model": "HU415606 EMC600",
+        "vendorSerialNumber": "0XJKDE3P",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 644245094400,
+        "tierType": 20,
+        "size": 590860984320,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051606",
+        "diskGroup": {
+          "id": "dg_15"
+        },
+        "emcSerialNumber": "0XJKDE3P",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 15000,
+        "estimatedEOL": "00:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051606",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:07:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 12",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_12",
+        "isInUse": false,
+        "diskTechnology": 6,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 12,
+        "maxSpeed": 12000000000,
+        "rawSize": 196971960832,
+        "wwn": "06:00:00:00:05:00:00:00:08:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "C342",
+        "model": "HUSMH842 EMC200",
+        "vendorSerialNumber": "0LV42EBA",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 214748364800,
+        "tierType": 10,
+        "size": 196938406400,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051223",
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "emcSerialNumber": "0LV42EBA",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "estimatedEOL": "43800:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051223",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:08:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 13",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_13",
+        "isInUse": true,
+        "diskTechnology": 6,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 13,
+        "maxSpeed": 12000000000,
+        "pool": {
+          "id": "pool_2"
+        },
+        "rawSize": 196971960832,
+        "wwn": "06:00:00:00:05:00:00:00:09:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "C342",
+        "model": "HUSMH842 EMC200",
+        "vendorSerialNumber": "0LV42T1A",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 214748364800,
+        "tierType": 10,
+        "size": 196938406400,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051223",
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "emcSerialNumber": "0LV42T1A",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "estimatedEOL": "43800:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051223",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:09:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 14",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_14",
+        "isInUse": false,
+        "diskTechnology": 6,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 14,
+        "maxSpeed": 12000000000,
+        "rawSize": 196971960832,
+        "wwn": "06:00:00:00:05:00:00:00:0A:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "C342",
+        "model": "HUSMH842 EMC200",
+        "vendorSerialNumber": "0LV436TA",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 214748364800,
+        "tierType": 10,
+        "size": 196938406400,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051223",
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "emcSerialNumber": "0LV436TA",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "estimatedEOL": "43800:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051223",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0A:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 15",
+        "currentSpeed": 12000000000,
+        "id": "dpe_disk_15",
+        "isInUse": true,
+        "diskTechnology": 6,
+        "isFastCacheInUse": false,
+        "manufacturer": "HITACHI",
+        "slotNumber": 15,
+        "maxSpeed": 12000000000,
+        "pool": {
+          "id": "pool_2"
+        },
+        "rawSize": 196971960832,
+        "wwn": "06:00:00:00:05:00:00:00:0B:01:00:00:00:00:00:03",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "C342",
+        "model": "HUSMH842 EMC200",
+        "vendorSerialNumber": "0LV4320A",
+        "health": {
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5,
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "vendorSize": 214748364800,
+        "tierType": 10,
+        "size": 196938406400,
+        "operationalStatus": [
+          2
+        ],
+        "vendorPartNumber": "005051223",
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "emcSerialNumber": "0LV4320A",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "estimatedEOL": "43800:00:00.000",
+        "busId": 0,
+        "emcPartNumber": "005051223",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0B:01:00:00:00:00:00:03"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 16",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_16",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 16,
+        "wwn": "06:00:00:00:05:00:00:00:10:00:00:00:10:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:10:00:00:00:10:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 17",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_17",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 17,
+        "wwn": "06:00:00:00:05:00:00:00:11:00:00:00:11:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:11:00:00:00:11:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 18",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_18",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 18,
+        "wwn": "06:00:00:00:05:00:00:00:12:00:00:00:12:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:12:00:00:00:12:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 19",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_19",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 19,
+        "wwn": "06:00:00:00:05:00:00:00:13:00:00:00:13:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:13:00:00:00:13:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 20",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_20",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 20,
+        "wwn": "06:00:00:00:05:00:00:00:14:00:00:00:14:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:14:00:00:00:14:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 21",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_21",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 21,
+        "wwn": "06:00:00:00:05:00:00:00:15:00:00:00:15:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:15:00:00:00:15:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 22",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_22",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 22,
+        "wwn": "06:00:00:00:05:00:00:00:16:00:00:00:16:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:16:00:00:00:16:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 23",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_23",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 23,
+        "wwn": "06:00:00:00:05:00:00:00:17:00:00:00:17:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:17:00:00:00:17:00:00:67"
+      }
+    },
+    {
+      "content": {
+        "name": "DPE Disk 24",
+        "isFastCacheInUse": false,
+        "id": "dpe_disk_24",
+        "isInUse": false,
+        "rawSize": 0,
+        "operationalStatus": [
+          32768
+        ],
+        "slotNumber": 24,
+        "wwn": "06:00:00:00:05:00:00:00:18:00:00:00:18:00:00:67",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "needsReplacement": false,
+        "version": "",
+        "model": "",
+        "vendorSerialNumber": "",
+        "health": {
+          "descriptionIds": [
+            "ALRT_DISK_SLOT_EMPTY"
+          ],
+          "value": 5,
+          "descriptions": [
+            "A disk in your system has been removed. The slot is empty."
+          ]
+        },
+        "size": 0,
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "emcSerialNumber": "",
+        "parent": {
+          "resource": "dpe",
+          "id": "dpe"
+        },
+        "isSED": false,
+        "isSystem": false,
+        "rpm": 0,
+        "busId": 0,
+        "emcPartNumber": "",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:18:00:00:00:18:00:00:67"
+      }
+    }
+  ]
+}

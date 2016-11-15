@@ -1,0 +1,44 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/metricQueryResult?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 6",
+      "response": "query_id_6.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 14",
+      "response": "query_id_14.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 3",
+      "response": "query_id_3.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 2",
+      "response": "query_id_2.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 17",
+      "response": "query_id_17.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 18",
+      "response": "query_id_18.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 19",
+      "response": "query_id_19.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 22",
+      "response": "query_id_22.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 34",
+      "response": "query_id_34.json"
+    }
+  ]
+}

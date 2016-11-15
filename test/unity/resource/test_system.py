@@ -16,43 +16,48 @@
 from __future__ import unicode_literals
 
 import datetime
+import time
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, only_contains, \
-    raises, contains_string, is_in, has_items
+    raises, contains_string, is_in, has_items, none
 
 from storops.exception import UnityResourceNotFoundError, \
     UnityHostNameInUseError, UnityActionNotAllowedError
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
-    StorageResourceTypeEnum, DNSServerOriginEnum
+    StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
+from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.dns_server import UnityFileDnsServerList
-from storops.unity.resource.filesystem import UnityFileSystemList
+from storops.unity.resource.filesystem import UnityFileSystemList, \
+    UnityFileSystem
 from storops.unity.resource.health import UnityHealth
-from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.host import UnityHostInitiator, \
     UnityHostInitiatorList, UnityHost, UnityHostList
+from storops.unity.resource.interface import UnityFileInterfaceList
+from storops.unity.resource.lun import UnityLunList, UnityLun
+from storops.unity.resource.metric import UnityMetricQueryResultList, \
+    UnityMetricRealTimeQueryList
 from storops.unity.resource.nas_server import UnityNasServer, \
     UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
+from storops.unity.resource.port import UnityEthernetPortList, \
+    UnityIscsiPortalList
 from storops.unity.resource.port import UnityFcPortList
-from storops.unity.resource.lun import UnityLunList, UnityLun
 from storops.unity.resource.port import UnityIpPortList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor, \
     UnityStorageProcessorList
-from storops.unity.resource.port import UnityEthernetPortList, \
-    UnityIscsiPortalList
-from storops.unity.resource.vmware import UnityCapabilityProfileList
 from storops.unity.resource.system import UnitySystemList, UnitySystem, \
     UnityDpeList, UnityDpe, UnityVirusChecker, UnityVirusCheckerList, \
     UnityBasicSystemInfo, UnityBasicSystemInfoList, UnitySystemTime, \
     UnityNtpServer
+from storops.unity.resource.vmware import UnityCapabilityProfileList
 from test.unity.rest_mock import t_rest, patch_rest, t_unity
 
 __author__ = 'Cedric Zhuang'
@@ -495,6 +500,11 @@ class UnitySystemTest(TestCase):
         assert_that(len(la_list), equal_to(2))
 
     @patch_rest
+    def test_get_disk(self):
+        disks = t_unity().get_disk(tier_type=TierTypeEnum.EXTREME_PERFORMANCE)
+        assert_that(len(disks), equal_to(4))
+
+    @patch_rest
     def test_get_link_aggregation_by_name(self):
         cg = t_unity().get_link_aggregation(name='SP A Link Aggregation 2')
         assert_that(cg.name, equal_to('SP A Link Aggregation 2'))
@@ -503,6 +513,39 @@ class UnitySystemTest(TestCase):
     def test_get_link_aggregation_by_id(self):
         cg = t_unity().get_link_aggregation(_id='spa_la_2')
         assert_that(cg.id, equal_to('spa_la_2'))
+
+    @patch_rest
+    def test_enable_performance_statistics(self):
+        unity = UnitySystem('10.244.223.61')
+        assert_that(unity.is_perf_stats_enabled(), equal_to(False))
+
+        queries = unity.enable_perf_stats(1)
+        assert_that(queries, instance_of(UnityMetricRealTimeQueryList))
+
+        time.sleep(1.5)
+        assert_that(unity.is_perf_stats_enabled(), equal_to(True))
+        assert_that(unity._cli.curr_counter,
+                    instance_of(UnityMetricQueryResultList))
+
+        unity.disable_perf_stats()
+        assert_that(unity.is_perf_stats_enabled(), equal_to(False))
+        assert_that(unity._cli.curr_counter, none())
+        assert_that(unity._cli.prev_counter, none())
+
+    @patch_rest
+    def test_enable_persist_perf_stats(self):
+        unity = UnitySystem('10.244.223.61')
+        assert_that(unity.is_perf_stats_persisted(), equal_to(False))
+
+        unity.enable_persist_perf_stats()
+        assert_that(unity.is_perf_stats_persisted(), equal_to(True))
+
+        unity.disable_persist_perf_stats()
+        assert_that(unity.is_perf_stats_persisted(), equal_to(False))
+
+    def test_default_rsc_clz_list_with_perf_stats(self):
+        clz_list = t_unity()._default_rsc_clz_list_with_perf_stats()
+        assert_that(clz_list, has_items(UnityDisk, UnityLun, UnityFileSystem))
 
 
 class UnityDpeTest(TestCase):

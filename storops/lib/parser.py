@@ -208,7 +208,7 @@ class OutputParser(object):
 
     @property
     def data_src(self):
-        raise NotImplemented('must be implemented by sub-class')
+        raise NotImplementedError('must be implemented by sub-class')
 
     @property
     def properties(self):
@@ -253,10 +253,10 @@ class OutputParser(object):
         return sorted(p.key for p in self.properties)
 
     def parse_all(self, output, properties=None):
-        raise NotImplemented('must be implemented by sub-class')
+        raise NotImplementedError('must be implemented by sub-class')
 
     def parse(self, output, properties=None):
-        raise NotImplemented('must be implemented by sub-class')
+        raise NotImplementedError('must be implemented by sub-class')
 
     @property
     def all_options(self):
@@ -332,7 +332,7 @@ class ParserConfigFactory(object):
         parser.init_from_config(config)
 
         self._get_property_map(parser, config)
-        parser.resource_name = name
+        parser.resource_class_name = name
         return parser
 
     def _get_parser_instance(self, config):

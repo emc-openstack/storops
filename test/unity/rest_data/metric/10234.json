@@ -1,0 +1,15 @@
+{
+  "content": {
+    "isRealtimeAvailable": true,
+    "description": "Number of Clean Pages on SP, based on a logical 64 KB page size",
+    "unitDisplayString": "Count",
+    "name": "Block Cache Clean Pages",
+    "unit": 0,
+    "path": "sp.*.blockCache.global.summary.cleanPages",
+    "isHistoricalAvailable": false,
+    "product": 1,
+    "id": 10234,
+    "visibility": 2,
+    "type": 5
+  }
+}

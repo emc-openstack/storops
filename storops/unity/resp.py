@@ -81,6 +81,32 @@ class RestResponse(object):
         return not self.has_error()
 
     @property
+    def has_next_page(self):
+        return self.next_page is not None
+
+    @property
+    def next_page(self):
+        return self._get_page_number('next')
+
+    @property
+    def current_page(self):
+        return self._get_page_number('self')
+
+    def _get_page_number(self, which_page):
+        links = self.body.get('links')
+        ret = None
+        if links:
+            page_link = list(filter(lambda l: l.get('rel') == which_page,
+                                    links))
+            if page_link:
+                href = page_link[0].get('href')
+                if href:
+                    items = href.split('=')
+                    if len(items) > 1:
+                        ret = int(items[1])
+        return ret
+
+    @property
     @instance_cache
     def error(self):
         clz = health.UnityError

@@ -17,15 +17,18 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
+import math
 from hamcrest import assert_that, only_contains, instance_of, \
-    contains_string, raises, none
+    contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
+
+from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 
 from storops import UnitySystem
 from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
-    UnityNothingToModifyError
+    UnityNothingToModifyError, UnityPerfMonNotEnabledError
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from storops.unity.resource.pool import UnityPool
 from storops.unity.resource.port import UnityIoLimitPolicy, \
@@ -34,7 +37,7 @@ from storops.unity.resource.snap import UnitySnap
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resource.sp import UnityStorageProcessor
-from test.unity.rest_mock import t_rest, patch_rest
+from test.unity.rest_mock import t_rest, patch_rest, t_unity
 
 __author__ = 'Cedric Zhuang'
 
@@ -246,3 +249,51 @@ class UnityLunTest(TestCase):
             lun.total_size_gb = 100
 
         assert_that(f, raises(UnityNothingToModifyError, 'nothing to modify'))
+
+    @patch_rest
+    def test_lun_read_iops(self):
+        lun = t_unity().get_lun(_id='sv_2')
+        assert_that(lun.read_iops, equal_to(1.5))
+
+    @patch_rest
+    def test_lun_write_iops(self):
+        lun = t_unity().get_lun(_id='sv_2')
+        assert_that(lun.write_iops, equal_to(3.0))
+
+    @patch_rest
+    def test_lun_perf_disabled_exception(self):
+        unity = UnitySystem('10.244.223.61', 'a', 'a')
+        unity.disable_perf_stats()
+
+        def f():
+            return unity.get_lun(_id='sv_2').read_iops
+
+        assert_that(f, raises(UnityPerfMonNotEnabledError, 'not enabled'))
+
+
+class UnityLunEnablePerfStatsTest(TestCase):
+    @patch_rest
+    def setUp(self):
+        self.unity = UnitySystem('10.244.223.61', 'a', 'a')
+        self.unity.enable_perf_stats(1, [UnityDisk])
+
+    @patch_rest
+    def tearDown(self):
+        self.unity.disable_perf_stats()
+
+    @patch_rest
+    def test_lun_perf_not_enabled_exception(self):
+        disk = self.unity.get_disk(_id='dae_0_1_disk_0')
+        assert_that(math.isnan(disk.read_iops), equal_to(True))
+
+        def f():
+            return self.unity.get_lun(_id='sv_2').read_iops
+
+        assert_that(f, raises(UnityPerfMonNotEnabledError, 'not enabled'))
+
+    @patch_rest
+    def test_lun_properties_perf_not_enabled(self):
+        lun = self.unity.get_lun(_id='sv_2')
+        assert_that(lun.property_names, is_not(has_item('read_iops')))
+        disk = self.unity.get_disk(_id='dae_0_1_disk_0')
+        assert_that(disk.property_names(), has_item('read_iops'))

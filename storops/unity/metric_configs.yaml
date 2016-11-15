@@ -1,0 +1,130 @@
+# Copyright (c) 2016 EMC Corporation.
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+
+UnityDisk:
+  - name: read_iops
+    paths: sp.*.physical.disk.*.reads
+  - name: write_iops
+    paths: sp.*.physical.disk.*.writes
+  - name: read_mbps
+    paths: sp.*.physical.disk.*.readBlocks
+    calculator: mb_ps_by_block
+  - name: write_mbps
+    paths: sp.*.physical.disk.*.writeBlocks
+    calculator: mb_ps_by_block
+  - name: utilization
+    paths:
+      - sp.*.physical.disk.*.busyTicks
+      - sp.*.physical.disk.*.idleTicks
+    calculator: busy_idle_util
+
+
+UnityLun:
+  - name: read_iops
+    paths: sp.*.storage.lun.*.reads
+  - name: write_iops
+    paths: sp.*.storage.lun.*.writes
+  - name: read_mbps
+    paths: sp.*.storage.lun.*.readBlocks
+    calculator: mb_ps_by_block
+  - name: write_mbps
+    paths: sp.*.storage.lun.*.writeBlocks
+    calculator: mb_ps_by_block
+  - name: utilization
+    paths:
+      - sp.*.storage.lun.*.busyTime
+      - sp.*.storage.lun.*.idleTime
+    calculator: busy_idle_util
+
+
+UnityFileSystem:
+  - name: read_iops
+    paths: sp.*.storage.filesystem.*.reads
+  - name: write_iops
+    paths: sp.*.storage.filesystem.*.writes
+  - name: read_mbps
+    paths: sp.*.storage.filesystem.*.readBytes
+    calculator: mb_ps_by_byte
+  - name: write_mbps
+    paths: sp.*.storage.filesystem.*.writeBytes
+    calculator: mb_ps_by_byte
+
+
+UnityStorageProcessor:
+  - name: net_in_mbps
+    paths: sp.*.net.basic.inBytes
+    calculator: sp_mb_ps_by_byte
+  - name: net_out_mbps
+    paths: sp.*.net.basic.outBytes
+    calculator: sp_mb_ps_by_byte
+  - name: block_read_iops
+    paths: sp.*.storage.summary.reads
+    calculator: sp_delta_ps
+  - name: block_write_iops
+    paths: sp.*.storage.summary.writes
+    calculator: sp_delta_ps
+  - name: block_read_mbps
+    paths: sp.*.storage.summary.readBlocks
+    calculator: sp_mb_ps_by_block
+  - name: block_write_mbps
+    paths: sp.*.storage.summary.writeBlocks
+    calculator: sp_mb_ps_by_block
+  - name: cifs_read_iops
+    paths: sp.*.cifs.global.basic.reads
+    calculator: sp_delta_ps
+  - name: cifs_write_iops
+    paths: sp.*.cifs.global.basic.writes
+    calculator: sp_delta_ps
+  - name: cifs_read_mbps
+    paths: sp.*.cifs.global.basic.readBytes
+    calculator: sp_mb_ps_by_byte
+  - name: cifs_write_mbps
+    paths: sp.*.cifs.global.basic.writeBytes
+    calculator: sp_mb_ps_by_byte
+  - name: nfs_read_iops
+    paths: sp.*.nfs.basic.reads
+    calculator: sp_delta_ps
+  - name: nfs_write_iops
+    paths: sp.*.nfs.basic.writes
+    calculator: sp_delta_ps
+  - name: nfs_read_mbps
+    paths: sp.*.nfs.basic.readBytes
+    calculator: sp_mb_ps_by_byte
+  - name: nfs_write_mbps
+    paths: sp.*.nfs.basic.writeBytes
+    calculator: sp_mb_ps_by_byte
+  - name: utilization
+    paths:
+      - sp.*.cpu.summary.busyTicks
+      - sp.*.cpu.summary.idleTicks
+    calculator: sp_busy_idle_util
+  - name: block_cache_read_hit_ratio
+    paths:
+      - sp.*.blockCache.global.summary.readHits
+      - sp.*.blockCache.global.summary.readMisses
+    calculator: sp_hit_ratio
+  - name: block_cache_write_hit_ratio
+    paths:
+      - sp.*.blockCache.global.summary.writeHits
+      - sp.*.blockCache.global.summary.writeMisses
+    calculator: sp_hit_ratio
+  - name: temperature
+    paths: sp.*.platform.storageProcessorTemperature
+    calculator: sp_fact
+  - name: core_count
+    paths: sp.*.physical.coreCount
+    calculator: sp_fact
+
+

@@ -23,7 +23,7 @@ import logging
 import sys
 import threading
 from functools import partial
-from os import path, makedirs
+from os import path, makedirs, stat
 
 import cachez
 import six
@@ -192,7 +192,7 @@ class Enum(JsonPrinter, _Enum):
 
     @classmethod
     def get_option_map(cls):
-        raise None
+        raise NotImplementedError('should be implemented by child class.')
 
     @classmethod
     def get_int_index(cls):
@@ -413,18 +413,29 @@ def is_valid(value):
 
 
 def get_local_folder():
-    return path.join(path.expanduser('~'), '.storops')
+    ret = path.join(path.expanduser('~'), '.storops')
+    assure_folder(ret)
+    return ret
+
+
+def assure_folder(folder):
+    if not path.exists(folder):
+        try:
+            makedirs(folder)
+        except OSError as e:
+            # ignore existing error
+            if e.errno != errno.EEXIST:
+                raise
+
+
+def get_file_size(full_path):
+    stat_info = stat(full_path)
+    return stat_info.st_size
 
 
 def get_lock_file(name):
     lock_folder = path.join(get_local_folder(), 'file_lock')
-    if not path.exists(lock_folder):
-        try:
-            makedirs(lock_folder)
-        except OSError as e:
-            # ignore existed error
-            if e.errno != errno.EEXIST:
-                raise
+    assure_folder(lock_folder)
     return path.join(lock_folder, name)
 
 
@@ -454,3 +465,43 @@ def allow_omit_parentheses(func):
             return func(*args, **kwargs)
 
     return inner
+
+
+class RepeatedTimer(object):
+    """ Timer that execute tasks repeatedly
+
+    Referenced from MestreLion's answer on stackoverflow:
+    http://stackoverflow.com/questions/2398661/schedule-a-repeating-event-in-python-3
+    """
+
+    def __init__(self, interval, function, *args, **kwargs):
+        self._timer = None
+        self.function = function
+        self.interval = interval
+        self.args = args
+        self.kwargs = kwargs
+        self.is_running = False
+        self.start()
+
+    def _run(self):
+        self.is_running = False
+        self.start()
+        self.function(*self.args, **self.kwargs)
+
+    def start(self, as_daemon=True):
+        if not self.is_running:
+            self.is_running = True
+            self._timer = threading.Timer(self.interval, self._run)
+            self._timer.setDaemon(as_daemon)
+            self._timer.start()
+
+    def stop(self):
+        self._timer.cancel()
+        self.is_running = False
+        log.info('timer stopped for {}.'.format(self.function))
+
+    def is_daemon(self):
+        return self._timer.isDaemon()
+
+    def __del__(self):
+        self.stop()

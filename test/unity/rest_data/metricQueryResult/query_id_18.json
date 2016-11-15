@@ -1,0 +1,148 @@
+{
+  "entries": [
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": "83",
+          "spb": "73"
+        },
+        "queryId": 18,
+        "path": "sp.*.blockCache.global.summary.dirtyBytes"
+      }
+    },
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": "512",
+          "spb": "512"
+        },
+        "queryId": 18,
+        "path": "sp.*.fibreChannel.blockSize"
+      }
+    },
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": {
+            "v2Null": "0",
+            "v2StatFs": "0",
+            "v2Lookup": "0",
+            "v2ReadLink": "0",
+            "v2Link": "0",
+            "v2Create": "0",
+            "v2Root": "0",
+            "v2Remove": "0",
+            "v2ReadDir": "0",
+            "v2Read": "0",
+            "v2GetAttr": "0",
+            "v2Symlink": "0",
+            "v2Rmdir": "0",
+            "v2Rename": "0",
+            "v2Write": "0",
+            "v2SetAttr": "0",
+            "v2WriteCache": "0",
+            "v2Mkdir": "0"
+          },
+          "spb": {
+            "v2Null": "0",
+            "v2StatFs": "0",
+            "v2Lookup": "0",
+            "v2ReadLink": "0",
+            "v2Link": "0",
+            "v2Create": "0",
+            "v2Root": "0",
+            "v2Remove": "0",
+            "v2ReadDir": "0",
+            "v2Read": "0",
+            "v2GetAttr": "0",
+            "v2Symlink": "0",
+            "v2Rmdir": "0",
+            "v2Rename": "0",
+            "v2Write": "0",
+            "v2SetAttr": "0",
+            "v2WriteCache": "0",
+            "v2Mkdir": "0"
+          }
+        },
+        "queryId": 18,
+        "path": "sp.*.nfs.v2.op.*.failures"
+      }
+    },
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": {
+            "dpe_disk_1": "1059104",
+            "dpe_disk_10": "373555",
+            "dpe_disk_2": "1147746",
+            "dae_0_1_disk_8": "446854",
+            "dae_0_1_disk_3": "13",
+            "dpe_disk_8": "373548",
+            "dpe_disk_6": "1896962",
+            "dpe_disk_13": "200986",
+            "dpe_disk_7": "18",
+            "dpe_disk_0": "1307984",
+            "dpe_disk_9": "17",
+            "dae_0_1_disk_9": "11",
+            "dpe_disk_12": "364189",
+            "dae_0_1_disk_1": "1881405",
+            "dpe_disk_14": "364189",
+            "dpe_disk_11": "16",
+            "dpe_disk_4": "373542",
+            "dae_0_1_disk_2": "4246221",
+            "dpe_disk_5": "575839",
+            "dae_0_1_disk_4": "390053",
+            "dae_0_1_disk_6": "390113",
+            "dpe_disk_15": "203743",
+            "dae_0_1_disk_7": "11",
+            "dpe_disk_3": "954877",
+            "dae_0_1_disk_0": "389791",
+            "dae_0_1_disk_5": "13"
+          },
+          "spb": {
+            "dpe_disk_1": "106381",
+            "dpe_disk_10": "0",
+            "dpe_disk_2": "9132",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_3": "390053",
+            "dpe_disk_8": "0",
+            "dpe_disk_6": "5",
+            "dpe_disk_13": "734760",
+            "dpe_disk_7": "373516",
+            "dpe_disk_0": "28076",
+            "dpe_disk_9": "373517",
+            "dae_0_1_disk_9": "447541",
+            "dpe_disk_12": "5",
+            "dae_0_1_disk_1": "2370580",
+            "dpe_disk_14": "5",
+            "dpe_disk_11": "373524",
+            "dpe_disk_4": "0",
+            "dae_0_1_disk_2": "5",
+            "dpe_disk_5": "1325061",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_6": "0",
+            "dpe_disk_15": "734733",
+            "dae_0_1_disk_7": "446387",
+            "dpe_disk_3": "91955",
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_5": "390120"
+          }
+        },
+        "queryId": 18,
+        "path": "sp.*.physical.disk.*.reads"
+      }
+    }
+  ],
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "updated": "2016-11-18T06:20:41.681Z",
+  "@base": "https://10.244.223.61/api/types/metricQueryResult/instances?filter=queryId eq 18&fields=path,queryId,timestamp,values&per_page=2000&compact=true"
+}

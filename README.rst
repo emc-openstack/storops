@@ -9,8 +9,11 @@ StorOps: The Python Library for VNX & Unity
     
 .. image:: https://img.shields.io/pypi/v/storops.svg
     :target: https://pypi.python.org/pypi/storops
-    
-VERSION: 0.2.25
+
+.. image:: https://landscape.io/github/emc-openstack/storops/master/landscape.svg?style=flat
+    :target: https://landscape.io/github/emc-openstack/storops/
+
+VERSION: 0.3.0
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
@@ -94,10 +97,52 @@ Feature List
         - list/create/delete NFS shares
         - list/create/delete DNS servers
         - list ip ports.
+        - list/create/delete link aggregations
+        - list/create/delete Consistency Groups
+        - list/create/delete metric real time query
+        - list metrics query result
+        - list disks
     - supported feature/operations
         - CIFS share access control
         - NFS share access control
         - Remote hosts access
+        - Persist historical metric data to csv files
+    - supported metrics
+        - disk
+            - read IOPS
+            - write IOPS
+            - read bandwidth
+            - write bandwidth
+            - utilization
+        - lun
+            - read IOPS
+            - write IOPS
+            - read bandwidth
+            - write bandwidth
+            - utilization
+        - filesystem
+            - read IOPS
+            - write IOPS
+            - read bandwidth
+            - write bandwidth
+        - storage processor
+            - net in bandwidth
+            - net out bandwidth
+            - block read IOPS
+            - block write IOPS
+            - block read bandwidth
+            - block write bandwidth
+            - CIFS read IOPS
+            - CIFS write IOPS
+            - CIFS read bandwidth
+            - CIFS write bandwidth
+            - NFS read IOPS
+            - NFS write IOPS
+            - NFS read bandwidth
+            - NFS write bandwidth
+            - utilization
+            - block cache read hit ratio
+            - block cache write hit ratio
 
 Tutorial
 --------

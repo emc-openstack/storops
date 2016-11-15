@@ -19,33 +19,36 @@ import logging
 
 from storops import exception as ex
 from storops.lib.common import instance_cache
+from storops.unity.calculator import calculators
 from storops.unity.client import UnityClient
 from storops.unity.enums import UnityEnum, DNSServerOriginEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnitySingletonResource
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList
+from storops.unity.resource.disk import UnityDiskList
 from storops.unity.resource.dns_server import UnityFileDnsServerList
 from storops.unity.resource.filesystem import UnityFileSystemList
-from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.host import UnityHost, UnityHostList, \
     UnityHostIpPortList, UnityHostInitiatorList
+from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.lun import UnityLunList
+from storops.unity.resource.metric import UnityMetricRealTimeQuery
 from storops.unity.resource.nas_server import UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList
+from storops.unity.resource.port import UnityEthernetPortList, \
+    UnityIscsiPortalList, UnityFcPortList
 from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
     UnityIoLimitPolicyList, UnityLinkAggregationList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
-from storops.unity.resource.port import UnityEthernetPortList, \
-    UnityIscsiPortalList, UnityFcPortList
 from storops.unity.resource.storage_resource import UnityConsistencyGroup, \
     UnityConsistencyGroupList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
 
-__author__ = 'Jay Xu'
+__author__ = 'Jay Xu, Cedric Zhuang'
 
 LOG = logging.getLogger(__name__)
 
@@ -234,6 +237,10 @@ class UnitySystem(UnitySingletonResource):
         """
         return self.dns_server.clear(use_dhcp)
 
+    def get_disk(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityDiskList, _id=_id, name=name,
+                                   **filters)
+
     @property
     @instance_cache
     def info(self):
@@ -243,6 +250,63 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityLinkAggregationList, _id=_id,
                                    name=name,
                                    **filters)
+
+    def enable_perf_stats(self, interval=None, rsc_clz_list=None):
+        if interval is None:
+            interval = 60
+        if rsc_clz_list is None:
+            rsc_clz_list = self._default_rsc_clz_list_with_perf_stats()
+
+        def get_real_time_query_list():
+            paths = calculators.get_all_paths(rsc_clz_list)
+            return UnityMetricRealTimeQuery.get_query_list(
+                self._cli, interval, paths=paths)
+
+        def f():
+            query_list = get_real_time_query_list()
+            if query_list:
+                paths = calculators.get_all_paths(rsc_clz_list)
+                ret = query_list.get_query_result(paths)
+            else:
+                ret = None
+            return ret
+
+        queries = get_real_time_query_list()
+        self._cli.enable_perf_metric(interval, f, rsc_clz_list)
+        return queries
+
+    def disable_perf_stats(self):
+        self._cli.disable_perf_metric()
+
+    def is_perf_stats_enabled(self):
+        return self._cli.is_perf_metric_enabled()
+
+    def get_metric_query_result(self, query_id):
+        return UnityMetricRealTimeQuery(
+            cli=self._cli, _id=query_id).get_query_result()
+
+    def add_metric_record(self, record):
+        self._cli.add_metric_record(record)
+
+    def enable_persist_perf_stats(self):
+        rsc_list = self._default_rsc_list_with_perf_stats()
+        self._cli.persist_perf_stats(rsc_list)
+
+    def disable_persist_perf_stats(self):
+        self._cli.persist_perf_stats(None)
+
+    def _default_rsc_list_with_perf_stats(self):
+        return (self.get_sp(),
+                self.get_lun(),
+                self.get_filesystem(),
+                self.get_disk(inserted=True))
+
+    def _default_rsc_clz_list_with_perf_stats(self):
+        return [l.get_resource_class()
+                for l in self._default_rsc_list_with_perf_stats()]
+
+    def is_perf_stats_persisted(self):
+        return self._cli.is_perf_stats_persisted()
 
 
 class UnitySystemList(UnityResourceList):

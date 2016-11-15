@@ -40,7 +40,6 @@ def t_cli():
 
     :return: test cli client
     """
-    # return CliClient("10.110.26.101", heartbeat_interval=0)
     return CliClient("10.244.211.30", heartbeat_interval=0)
 
 

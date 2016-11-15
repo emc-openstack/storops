@@ -28,9 +28,24 @@ from test.utils import read_test_file
 __author__ = 'Cedric Zhuang'
 
 
-def read_error_json(filename):
-    raw = read_test_file(os.path.join('unity', 'rest_data', 'error'), filename)
+def read_json(folder, filename):
+    raw = read_test_file(os.path.join('unity', 'rest_data', folder), filename)
     return json.loads(raw, encoding='utf-8')
+
+
+def read_error_json(filename):
+    return read_json('error', filename)
+
+
+class RestResponseTest(TestCase):
+    def test_has_next_page(self):
+        resp = RestResponse(read_json('metric', 'metrics_page_1.json'))
+        assert_that(resp.next_page, equal_to(2))
+        assert_that(resp.has_next_page, equal_to(True))
+
+    def test_has_current_page(self):
+        resp = RestResponse(read_json('metric', 'metrics_page_1.json'))
+        assert_that(resp.current_page, equal_to(1))
 
 
 class UnityErrorTest(TestCase):

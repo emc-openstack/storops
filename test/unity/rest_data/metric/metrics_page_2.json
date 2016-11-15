@@ -1,0 +1,6211 @@
+{
+  "updated": "2016-11-15T03:50:54.673Z",
+  "@base": "https://10.244.223.61/api/types/metric/instances?fields=description,id,isHistoricalAvailable,isRealtimeAvailable,metricGroupName,name,objectType,path,product,type,unit,unitDisplayString,visibility&per_page=2000&compact=true",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=2"
+    },
+    {
+      "rel": "first",
+      "href": "&page=1"
+    },
+    {
+      "rel": "prev",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.filesystem.*.writes",
+        "unitDisplayString": "Requests",
+        "description": "Number of write requests",
+        "id": 13776,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.filesystem.*.writesRate",
+        "unitDisplayString": "Requests/s",
+        "isRealtimeAvailable": false,
+        "objectType": 27,
+        "description": "Rate for raw metric: Number of write requests",
+        "id": 13777,
+        "isHistoricalAvailable": true,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.filesystemSummary.readBytes",
+        "unitDisplayString": "B",
+        "description": "Total bytes read from all file systems",
+        "id": 13779,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.filesystemSummary.readMisses",
+        "unitDisplayString": "Ops",
+        "description": "Total read cache misses on all file systems",
+        "id": 13781,
+        "product": 1,
+        "name": "Read Miss",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.filesystemSummary.reads",
+        "unitDisplayString": "Requests",
+        "description": "Total number of read requests on all file systems",
+        "id": 13783,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.filesystemSummary.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Total bytes written on all file systems",
+        "id": 13785,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.filesystemSummary.writeMisses",
+        "unitDisplayString": "Ops",
+        "description": "Total write cache misses on all file systems",
+        "id": 13787,
+        "product": 1,
+        "name": "Write Miss",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.filesystemSummary.writes",
+        "unitDisplayString": "Requests",
+        "description": "Total number of write requests on all file systems",
+        "id": 13789,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.cumulativeReadResponseTime",
+        "unitDisplayString": "ms",
+        "description": "This counter increases on every read IO for this LUN by the number of milliseconds the IO spent in SEP. It always rounds up, so IOs taking less than 1 ms will still increment this counter by 1.",
+        "id": 13793,
+        "product": 1,
+        "name": "Cumulative Read Response Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.cumulativeWriteResponseTime",
+        "unitDisplayString": "ms",
+        "description": "This counter increases on every write IO for this LUN by the number of milliseconds the IO spent in SEP. It always rounds up, so IOs taking less than 1 ms will still increment this counter by 1.",
+        "id": 13794,
+        "product": 1,
+        "name": "Cumulative Write Response Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.failReadBlocks",
+        "unitDisplayString": "",
+        "description": "Number of fail blocks read from this LUN",
+        "id": 13795,
+        "product": 1,
+        "name": "Fail blocks read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.failWriteBlocks",
+        "unitDisplayString": "",
+        "description": "Number of fail blocks writen to this LUN",
+        "id": 13799,
+        "product": 1,
+        "name": "Fail blocks written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.nonZeroQueueArrivals",
+        "unitDisplayString": "",
+        "description": "This counter increments every time an IO arrives at this LUN when its queue is not empty.",
+        "id": 13803,
+        "product": 1,
+        "name": "Non-Zero Queue Arrivals",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readBlocks",
+        "unitDisplayString": "",
+        "description": "Number of blocks read from this LUN",
+        "id": 13805,
+        "product": 1,
+        "name": "Blocks read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize1024BlockPlusOverflow",
+        "unitDisplayString": "",
+        "description": "1024+ block reads for this LUN",
+        "id": 13809,
+        "product": 1,
+        "name": ">=1024 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize128Block",
+        "unitDisplayString": "",
+        "description": "128 block reads for this LUN",
+        "id": 13811,
+        "product": 1,
+        "name": "128 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize16Block",
+        "unitDisplayString": "",
+        "description": "16 block reads for this LUN",
+        "id": 13813,
+        "product": 1,
+        "name": "16 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize1Block",
+        "unitDisplayString": "",
+        "description": "1 block reads for this LUN",
+        "id": 13815,
+        "product": 1,
+        "name": "1 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize256Block",
+        "unitDisplayString": "",
+        "description": "256 block reads for this LUN",
+        "id": 13817,
+        "product": 1,
+        "name": "256 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize2Block",
+        "unitDisplayString": "",
+        "description": "2 block reads for this LUN",
+        "id": 13819,
+        "product": 1,
+        "name": "2 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize32Block",
+        "unitDisplayString": "",
+        "description": "32 block reads for this LUN",
+        "id": 13821,
+        "product": 1,
+        "name": "32 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize4Block",
+        "unitDisplayString": "",
+        "description": "4 block reads for this LUN",
+        "id": 13823,
+        "product": 1,
+        "name": "4 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize512Block",
+        "unitDisplayString": "",
+        "description": "512 block reads for this LUN",
+        "id": 13825,
+        "product": 1,
+        "name": "512 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize64Block",
+        "unitDisplayString": "",
+        "description": "64 block reads for this LUN",
+        "id": 13827,
+        "product": 1,
+        "name": "64 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.readSize8Block",
+        "unitDisplayString": "",
+        "description": "8 block reads for this LUN",
+        "id": 13829,
+        "product": 1,
+        "name": "8 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.reads",
+        "unitDisplayString": "",
+        "description": "Reads from this LUN",
+        "id": 13831,
+        "product": 1,
+        "name": "Reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition0",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 13833,
+        "product": 1,
+        "name": "RG Disk Blocks Read Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition1",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 13835,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition10",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 13836,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition11",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 13838,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition12",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 13840,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition13",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 13842,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition14",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 13844,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition15",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 13846,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition2",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 13849,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition3",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 13851,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition4",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 13853,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition5",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 13855,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition6",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 13857,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition7",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 13859,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition8",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 13861,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadBlocksPosition9",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 13863,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition0",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 13897,
+        "product": 1,
+        "name": "RG Disk Reads Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition1",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 13899,
+        "product": 1,
+        "name": "RG Disk Reads Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition10",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 13900,
+        "product": 1,
+        "name": "RG Disk Reads Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition11",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 13902,
+        "product": 1,
+        "name": "RG Disk Reads Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition12",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 13904,
+        "product": 1,
+        "name": "RG Disk Reads Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition13",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 13906,
+        "product": 1,
+        "name": "RG Disk Reads Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition14",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 13908,
+        "product": 1,
+        "name": "RG Disk Reads Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition15",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 13910,
+        "product": 1,
+        "name": "RG Disk Reads Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition2",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 13913,
+        "product": 1,
+        "name": "RG Disk Reads Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition3",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 13915,
+        "product": 1,
+        "name": "RG Disk Reads Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition4",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 13917,
+        "product": 1,
+        "name": "RG Disk Reads Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition5",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 13919,
+        "product": 1,
+        "name": "RG Disk Reads Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition6",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 13921,
+        "product": 1,
+        "name": "RG Disk Reads Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition7",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 13923,
+        "product": 1,
+        "name": "RG Disk Reads Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition8",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 13925,
+        "product": 1,
+        "name": "RG Disk Reads Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgReadsPosition9",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 13927,
+        "product": 1,
+        "name": "RG Disk Reads Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition0",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 13929,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition1",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 13931,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition10",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 13932,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition11",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 13934,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition12",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 13936,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition13",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 13938,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition14",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 13940,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition15",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 13942,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition2",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 13945,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition3",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 13947,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition4",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 13949,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition5",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 13951,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition6",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 13953,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition7",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 13955,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition8",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 13957,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWriteBlocksPosition9",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 13959,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition0",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 13993,
+        "product": 1,
+        "name": "RG Disk Writes Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition1",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 13995,
+        "product": 1,
+        "name": "RG Disk Writes Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition10",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 13996,
+        "product": 1,
+        "name": "RG Disk Writes Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition11",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 13998,
+        "product": 1,
+        "name": "RG Disk Writes Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition12",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 14000,
+        "product": 1,
+        "name": "RG Disk Writes Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition13",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 14002,
+        "product": 1,
+        "name": "RG Disk Writes Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition14",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 14004,
+        "product": 1,
+        "name": "RG Disk Writes Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition15",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 14006,
+        "product": 1,
+        "name": "RG Disk Writes Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition2",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 14009,
+        "product": 1,
+        "name": "RG Disk Writes Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition3",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 14011,
+        "product": 1,
+        "name": "RG Disk Writes Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition4",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 14013,
+        "product": 1,
+        "name": "RG Disk Writes Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition5",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 14015,
+        "product": 1,
+        "name": "RG Disk Writes Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition6",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 14017,
+        "product": 1,
+        "name": "RG Disk Writes Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition7",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 14019,
+        "product": 1,
+        "name": "RG Disk Writes Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition8",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 14021,
+        "product": 1,
+        "name": "RG Disk Writes Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.rgWritesPosition9",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 14023,
+        "product": 1,
+        "name": "RG Disk Writes Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.stripeCrossings",
+        "unitDisplayString": "",
+        "description": "Total number of IOs that cross the RAID stripe boundary for this LUN",
+        "id": 14025,
+        "product": 1,
+        "name": "Stripe Crossings",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.stripeWrites",
+        "unitDisplayString": "",
+        "description": "Total number of IOs that were full stripe writes (also known as MR3 writes) for this LUN",
+        "id": 14027,
+        "product": 1,
+        "name": "Stripe Writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.sumArrivalQueueLength",
+        "unitDisplayString": "",
+        "description": "This counter increases by the number of requests in the LUN queue when an IO arrives, including itself.",
+        "id": 14029,
+        "product": 1,
+        "name": "Sum Arrrival Queue Length",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeBlocks",
+        "unitDisplayString": "",
+        "description": "Number of blocks writen to this LUN",
+        "id": 14031,
+        "product": 1,
+        "name": "Blocks written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize1024BlockPlusOverflow",
+        "unitDisplayString": "",
+        "description": "1024+ block writes for this LUN",
+        "id": 14035,
+        "product": 1,
+        "name": ">=1024 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize128Block",
+        "unitDisplayString": "",
+        "description": "128 block writes for this LUN",
+        "id": 14037,
+        "product": 1,
+        "name": "128 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize16Block",
+        "unitDisplayString": "",
+        "description": "16 block writes for this LUN",
+        "id": 14039,
+        "product": 1,
+        "name": "16 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize1Block",
+        "unitDisplayString": "",
+        "description": "1 block writes for this LUN",
+        "id": 14041,
+        "product": 1,
+        "name": "1 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize256Block",
+        "unitDisplayString": "",
+        "description": "256 block writes for this LUN",
+        "id": 14043,
+        "product": 1,
+        "name": "256 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize2Block",
+        "unitDisplayString": "",
+        "description": "2 block writes for this LUN",
+        "id": 14045,
+        "product": 1,
+        "name": "2 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize32Block",
+        "unitDisplayString": "",
+        "description": "32 block writes for this LUN",
+        "id": 14047,
+        "product": 1,
+        "name": "32 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize4Block",
+        "unitDisplayString": "",
+        "description": "4 block writes for this LUN",
+        "id": 14049,
+        "product": 1,
+        "name": "4 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize512Block",
+        "unitDisplayString": "",
+        "description": "512 block writes for this LUN",
+        "id": 14051,
+        "product": 1,
+        "name": "512 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize64Block",
+        "unitDisplayString": "",
+        "description": "64 block writes for this LUN",
+        "id": 14053,
+        "product": 1,
+        "name": "64 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writeSize8Block",
+        "unitDisplayString": "",
+        "description": "8 block writes for this LUN",
+        "id": 14055,
+        "product": 1,
+        "name": "8 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.core.*.writes",
+        "unitDisplayString": "",
+        "description": "Writes to this LUN",
+        "id": 14057,
+        "product": 1,
+        "name": "Writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.cumulativeReadResponseTime",
+        "unitDisplayString": "",
+        "description": "This counter increases on every read IO for this LUN by the number of milliseconds the IO spent in SEP. It always rounds up, so IOs taking less than 1 ms will still increment this counter by 1.",
+        "id": 14059,
+        "product": 1,
+        "name": "Cumulative Read Response Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.cumulativeWriteResponseTime",
+        "unitDisplayString": "",
+        "description": "This counter increases on every write IO for this LUN by the number of milliseconds the IO spent in SEP. It always rounds up, so IOs taking less than 1 ms will still increment this counter by 1.",
+        "id": 14061,
+        "product": 1,
+        "name": "Cumulative Write Response Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.failReadBlocks",
+        "unitDisplayString": "",
+        "description": "Number of fail blocks read from this LUN",
+        "id": 14063,
+        "product": 1,
+        "name": "Fail blocks read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.failWriteBlocks",
+        "unitDisplayString": "",
+        "description": "Number of fail blocks written to this LUN",
+        "id": 14067,
+        "product": 1,
+        "name": "Fail blocks written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.nonZeroQueueArrivals",
+        "unitDisplayString": "",
+        "description": "This counter increments every time an IO arrives at this LUN when its queue is not empty.",
+        "id": 14071,
+        "product": 1,
+        "name": "Non-Zero Queue Arrivals",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readBlocks",
+        "unitDisplayString": "",
+        "description": "Number of blocks read from this LUN",
+        "id": 14073,
+        "product": 1,
+        "name": "Blocks read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize1024BlockPlusOverflow",
+        "unitDisplayString": "",
+        "description": "1024+ block reads for this LUN",
+        "id": 14077,
+        "product": 1,
+        "name": ">=1024 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize128Block",
+        "unitDisplayString": "",
+        "description": "128 block reads for this LUN",
+        "id": 14079,
+        "product": 1,
+        "name": "128 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize16Block",
+        "unitDisplayString": "",
+        "description": "16 block reads for this LUN",
+        "id": 14081,
+        "product": 1,
+        "name": "16 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize1Block",
+        "unitDisplayString": "",
+        "description": "1 block reads for this LUN",
+        "id": 14083,
+        "product": 1,
+        "name": "1 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize256Block",
+        "unitDisplayString": "",
+        "description": "256 block reads for this LUN",
+        "id": 14085,
+        "product": 1,
+        "name": "256 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize2Block",
+        "unitDisplayString": "",
+        "description": "2 block reads for this LUN",
+        "id": 14087,
+        "product": 1,
+        "name": "2 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize32Block",
+        "unitDisplayString": "",
+        "description": "32 block reads for this LUN",
+        "id": 14089,
+        "product": 1,
+        "name": "32 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize4Block",
+        "unitDisplayString": "",
+        "description": "4 block reads for this LUN",
+        "id": 14091,
+        "product": 1,
+        "name": "4 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize512Block",
+        "unitDisplayString": "",
+        "description": "512 block reads for this LUN",
+        "id": 14093,
+        "product": 1,
+        "name": "512 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize64Block",
+        "unitDisplayString": "",
+        "description": "64 block reads for this LUN",
+        "id": 14095,
+        "product": 1,
+        "name": "64 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.readSize8Block",
+        "unitDisplayString": "",
+        "description": "8 block reads for this LUN",
+        "id": 14097,
+        "product": 1,
+        "name": "8 Block reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.reads",
+        "unitDisplayString": "",
+        "description": "Reads from this LUN",
+        "id": 14099,
+        "product": 1,
+        "name": "Reads",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition0",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 14101,
+        "product": 1,
+        "name": "RG Disk Blocks Read Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition1",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 14103,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition10",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 14104,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition11",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 14106,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition12",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 14108,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition13",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 14110,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition14",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 14112,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition15",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 14114,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition2",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 14117,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition3",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 14119,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition4",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 14121,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition5",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 14123,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition6",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 14125,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition7",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 14127,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition8",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 14129,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadBlocksPosition9",
+        "unitDisplayString": "",
+        "description": "Blocks read from the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 14131,
+        "product": 1,
+        "name": "RG Disk Blocks read Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition0",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 14165,
+        "product": 1,
+        "name": "RG Disk Reads Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition1",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 14167,
+        "product": 1,
+        "name": "RG Disk Reads Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition10",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 14168,
+        "product": 1,
+        "name": "RG Disk Reads Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition11",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 14170,
+        "product": 1,
+        "name": "RG Disk Reads Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition12",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 14172,
+        "product": 1,
+        "name": "RG Disk Reads Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition13",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 14174,
+        "product": 1,
+        "name": "RG Disk Reads Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition14",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 14176,
+        "product": 1,
+        "name": "RG Disk Reads Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition15",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 14178,
+        "product": 1,
+        "name": "RG Disk Reads Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition2",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 14181,
+        "product": 1,
+        "name": "RG Disk Reads Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition3",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 14183,
+        "product": 1,
+        "name": "RG Disk Reads Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition4",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 14185,
+        "product": 1,
+        "name": "RG Disk Reads Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition5",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 14187,
+        "product": 1,
+        "name": "RG Disk Reads Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition6",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 14189,
+        "product": 1,
+        "name": "RG Disk Reads Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition7",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 14191,
+        "product": 1,
+        "name": "RG Disk Reads Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition8",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 14193,
+        "product": 1,
+        "name": "RG Disk Reads Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgReadsPosition9",
+        "unitDisplayString": "",
+        "description": "Reads from the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 14195,
+        "product": 1,
+        "name": "RG Disk Reads Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition0",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 14197,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition1",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 14199,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition10",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 14200,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition11",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 14202,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition12",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 14204,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition13",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 14206,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition14",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 14208,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition15",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 14210,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition2",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 14213,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition3",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 14215,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition4",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 14217,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition5",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 14219,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition6",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 14221,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition7",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 14223,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition8",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 14225,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWriteBlocksPosition9",
+        "unitDisplayString": "",
+        "description": "Blocks written to the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 14227,
+        "product": 1,
+        "name": "RG Disk Blocks Written Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition0",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 0 of the RAID group this LUN is bound to.",
+        "id": 14261,
+        "product": 1,
+        "name": "RG Disk Writes Pos 0",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition1",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 1 of the RAID group this LUN is bound to.",
+        "id": 14263,
+        "product": 1,
+        "name": "RG Disk Writes Pos 1",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition10",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 10 of the RAID group this LUN is bound to.",
+        "id": 14264,
+        "product": 1,
+        "name": "RG Disk Writes Pos 10",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition11",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 11 of the RAID group this LUN is bound to.",
+        "id": 14266,
+        "product": 1,
+        "name": "RG Disk Writes Pos 11",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition12",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 12 of the RAID group this LUN is bound to.",
+        "id": 14268,
+        "product": 1,
+        "name": "RG Disk Writes Pos 12",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition13",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 13 of the RAID group this LUN is bound to.",
+        "id": 14270,
+        "product": 1,
+        "name": "RG Disk Writes Pos 13",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition14",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 14 of the RAID group this LUN is bound to.",
+        "id": 14272,
+        "product": 1,
+        "name": "RG Disk Writes Pos 14",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition15",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 15 of the RAID group this LUN is bound to.",
+        "id": 14274,
+        "product": 1,
+        "name": "RG Disk Writes Pos 15",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition2",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 2 of the RAID group this LUN is bound to.",
+        "id": 14277,
+        "product": 1,
+        "name": "RG Disk Writes Pos 2",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition3",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 3 of the RAID group this LUN is bound to.",
+        "id": 14279,
+        "product": 1,
+        "name": "RG Disk Writes Pos 3",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition4",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 4 of the RAID group this LUN is bound to.",
+        "id": 14281,
+        "product": 1,
+        "name": "RG Disk Writes Pos 4",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition5",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 5 of the RAID group this LUN is bound to.",
+        "id": 14283,
+        "product": 1,
+        "name": "RG Disk Writes Pos 5",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition6",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 6 of the RAID group this LUN is bound to.",
+        "id": 14285,
+        "product": 1,
+        "name": "RG Disk Writes Pos 6",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition7",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 7 of the RAID group this LUN is bound to.",
+        "id": 14287,
+        "product": 1,
+        "name": "RG Disk Writes Pos 7",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition8",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 8 of the RAID group this LUN is bound to.",
+        "id": 14289,
+        "product": 1,
+        "name": "RG Disk Writes Pos 8",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.rgWritesPosition9",
+        "unitDisplayString": "",
+        "description": "Writes to the disk in position 9 of the RAID group this LUN is bound to.",
+        "id": 14291,
+        "product": 1,
+        "name": "RG Disk Writes Pos 9",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.stripeCrossings",
+        "unitDisplayString": "",
+        "description": "Total number of IOs that cross the RAID stripe boundary for this LUN",
+        "id": 14293,
+        "product": 1,
+        "name": "Stripe Crossings",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.stripeWrites",
+        "unitDisplayString": "",
+        "description": "Total number of IOs that were full stripe writes (also known as MR3 writes) for this LUN",
+        "id": 14295,
+        "product": 1,
+        "name": "Stripe Writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.sumArrivalQueueLength",
+        "unitDisplayString": "",
+        "description": "This counter increases by the number of requests in the LUN queue when an IO arrives, including itself.",
+        "id": 14297,
+        "product": 1,
+        "name": "Sum Arrrival Queue Length",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeBlocks",
+        "unitDisplayString": "",
+        "description": "Number of blocks written to this LUN",
+        "id": 14299,
+        "product": 1,
+        "name": "Blocks written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize1024BlockPlusOverflow",
+        "unitDisplayString": "",
+        "description": "1024+ block writes for this LUN",
+        "id": 14303,
+        "product": 1,
+        "name": ">=1024 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize128Block",
+        "unitDisplayString": "",
+        "description": "128 block writes for this LUN",
+        "id": 14305,
+        "product": 1,
+        "name": "128 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize16Block",
+        "unitDisplayString": "",
+        "description": "16 block writes for this LUN",
+        "id": 14307,
+        "product": 1,
+        "name": "16 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize1Block",
+        "unitDisplayString": "",
+        "description": "1 block writes for this LUN",
+        "id": 14309,
+        "product": 1,
+        "name": "1 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize256Block",
+        "unitDisplayString": "",
+        "description": "256 block writes for this LUN",
+        "id": 14311,
+        "product": 1,
+        "name": "256 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize2Block",
+        "unitDisplayString": "",
+        "description": "2 block writes for this LUN",
+        "id": 14313,
+        "product": 1,
+        "name": "2 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize32Block",
+        "unitDisplayString": "",
+        "description": "32 block writes for this LUN",
+        "id": 14315,
+        "product": 1,
+        "name": "32 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize4Block",
+        "unitDisplayString": "",
+        "description": "4 block writes for this LUN",
+        "id": 14317,
+        "product": 1,
+        "name": "4 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize512Block",
+        "unitDisplayString": "",
+        "description": "512 block writes for this LUN",
+        "id": 14319,
+        "product": 1,
+        "name": "512 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize64Block",
+        "unitDisplayString": "",
+        "description": "64 block writes for this LUN",
+        "id": 14321,
+        "product": 1,
+        "name": "64 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writeSize8Block",
+        "unitDisplayString": "",
+        "description": "8 block writes for this LUN",
+        "id": 14323,
+        "product": 1,
+        "name": "8 Block writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.flu.*.writes",
+        "unitDisplayString": "",
+        "description": "Writes to this LUN",
+        "id": 14325,
+        "product": 1,
+        "name": "Writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.avgReadSize",
+        "unitDisplayString": "KB",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Average read size on this LUN",
+        "id": 14329,
+        "isHistoricalAvailable": true,
+        "name": "Average Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.avgWriteSize",
+        "unitDisplayString": "KB",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Average write size on this LUN",
+        "id": 14330,
+        "isHistoricalAvailable": true,
+        "name": "Average Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.busyTime",
+        "unitDisplayString": "uSecs",
+        "description": "Busy time, in microseconds, spent processing I/O for this LUN",
+        "id": 14332,
+        "product": 1,
+        "name": "Busy Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.currentIOCount",
+        "unitDisplayString": "Counts",
+        "description": "Number of I/O requests waiting to be completed on this LUN",
+        "id": 14334,
+        "product": 1,
+        "name": "Current I/O",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.idleTime",
+        "unitDisplayString": "uSecs",
+        "description": "Idle time, in microseconds, where there was not any I/O to process for this LUN",
+        "id": 14335,
+        "product": 1,
+        "name": "Idle Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.queueLength",
+        "unitDisplayString": "Count",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Average I/O queue length for this LUN",
+        "id": 14336,
+        "isHistoricalAvailable": true,
+        "name": "Average Queue Length",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.readBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks read from this LUN",
+        "id": 14337,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.readBytesRate",
+        "unitDisplayString": "KB/s",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Rate for raw metric: Number of bytes read from this LUN",
+        "id": 14340,
+        "isHistoricalAvailable": true,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.reads",
+        "unitDisplayString": "Counts",
+        "description": "Reads from this LUN",
+        "id": 14341,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.readsRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Rate for raw metric: Reads from this LUN",
+        "id": 14342,
+        "isHistoricalAvailable": true,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.responseTime",
+        "unitDisplayString": "uSecs",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Average response time, in microseconds, for requests to this LUN",
+        "id": 14343,
+        "isHistoricalAvailable": true,
+        "name": "Response Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.readBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks read",
+        "id": 14345,
+        "product": 1,
+        "name": "Blocks Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.readBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes read",
+        "id": 14347,
+        "product": 1,
+        "name": "Bytes Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.readBytesRate",
+        "unitDisplayString": "KB/s",
+        "isRealtimeAvailable": false,
+        "objectType": 33,
+        "description": "Rate for raw metric: Number of bytes read",
+        "id": 14348,
+        "isHistoricalAvailable": true,
+        "name": "Bytes Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.reads",
+        "unitDisplayString": "Counts",
+        "description": "Number of read operations",
+        "id": 14349,
+        "product": 1,
+        "name": "Read IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.readsRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 33,
+        "description": "Rate for raw metric: Number of read operations",
+        "id": 14350,
+        "isHistoricalAvailable": true,
+        "name": "Read IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.writeBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks written",
+        "id": 14351,
+        "product": 1,
+        "name": "Blocks Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes written",
+        "id": 14353,
+        "product": 1,
+        "name": "Bytes Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.writeBytesRate",
+        "unitDisplayString": "KB/s",
+        "isRealtimeAvailable": false,
+        "objectType": 33,
+        "description": "Rate for raw metric: Number of bytes written",
+        "id": 14354,
+        "isHistoricalAvailable": true,
+        "name": "Bytes Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.writes",
+        "unitDisplayString": "Counts",
+        "description": "Number of write operations",
+        "id": 14355,
+        "product": 1,
+        "name": "Write IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.snap.*.writesRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 33,
+        "description": "Rate for raw metric: Number of write operations",
+        "id": 14356,
+        "isHistoricalAvailable": true,
+        "name": "Write IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.sumOutstandingRequests",
+        "unitDisplayString": "",
+        "description": "Increases by the number of outstanding requests when an IO arrives to this LUN",
+        "id": 14357,
+        "product": 1,
+        "name": "Sum Outstanding Requests",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.totalCallsRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Rate for raw metric: Total number of read and write requests on this LUN",
+        "id": 14361,
+        "isHistoricalAvailable": true,
+        "name": "Total Call",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.totalIoTime",
+        "unitDisplayString": "uSecs",
+        "description": "Product of difference in time since last change in outstanding IO and the number of outstanding IO during that time",
+        "id": 14362,
+        "product": 1,
+        "name": "Total Io Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.writeBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks written to this LUN",
+        "id": 14364,
+        "product": 1,
+        "name": "Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.writeBytesRate",
+        "unitDisplayString": "KB/s",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Rate for raw metric: Number of bytes written to this LUN",
+        "id": 14367,
+        "isHistoricalAvailable": true,
+        "name": "Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.writes",
+        "unitDisplayString": "Counts",
+        "description": "Writes to this LUN",
+        "id": 14368,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.lun.*.writesRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 26,
+        "description": "Rate for raw metric: Writes to this LUN",
+        "id": 14369,
+        "isHistoricalAvailable": true,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.dataSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "For data only",
+        "id": 14371,
+        "product": 1,
+        "name": "Data Subscribed Space",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.dataSizeUsed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that has been allocated from this Pool for data written to all the Base LUNs and SFs in the Pool. This does not include storage allocated for just snapshots or any storage required for metadata",
+        "id": 14372,
+        "product": 1,
+        "name": "Data Size Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.overheadSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of space (in bytes) the Metadata would require if the SF completely allocates its host facing capacity. This includes metadata for  snapshots.",
+        "id": 14374,
+        "product": 1,
+        "name": "Overhead Size Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.overheadUsed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that has been allocated to store metadata",
+        "id": 14375,
+        "product": 1,
+        "name": "Overhead Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.sizeAllocated",
+        "unitDisplayString": "Bytes",
+        "description": "Total amount of storage allocated (in bytes) to the SF. This is the total data and overhead size allocated",
+        "id": 14376,
+        "product": 1,
+        "name": "Size Allocated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.sizeFree",
+        "unitDisplayString": "Bytes",
+        "description": "The amount of free storage in the SF",
+        "id": 14377,
+        "product": 1,
+        "name": "Size Free",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.sizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that will be consumed if the SF is fully provisioned",
+        "id": 14378,
+        "product": 1,
+        "name": "Size Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.sizeTotal",
+        "unitDisplayString": "Bytes",
+        "description": "Host visible size (in bytes)",
+        "id": 14379,
+        "product": 1,
+        "name": "Size Total",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.sizeUsed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that has been allocated for data written to just the Base SF. This does not include storage allocated for just the VNX snapshots or any storage required for metadata",
+        "id": 14380,
+        "product": 1,
+        "name": "Size Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.snapshotSizeAllocated",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that has been allocated to the SF for all the snapshots created of it. This does not include storage that is shared with the primary or any storage required for metadata. Any additional space used by attached snapshot LUNs associated with this LUN is included in this number",
+        "id": 14381,
+        "product": 1,
+        "name": "Snapshot Size Allocated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.fileSystem.*.snapshotSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of space (in bytes) that a SF's snapshots currently consume as well as what they would consume if all base SF data was overwritten.",
+        "id": 14382,
+        "product": 1,
+        "name": "Snapshot Size Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.dataSizeAllocated",
+        "unitDisplayString": "Bytes",
+        "isRealtimeAvailable": true,
+        "objectType": 29,
+        "description": "This is the total amount of storage (in bytes) that has been allocated to the LUN for data written to just the Base LUN. This does not include storage allocated for just the VNX snapshots or any storage required for metadata",
+        "id": 14384,
+        "isHistoricalAvailable": true,
+        "name": "Data Size Allocated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.dataWithOverheadSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that will be consumed if the LUN is fully provisioned",
+        "id": 14385,
+        "product": 1,
+        "name": "Data With Overhead Space Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.overheadSizeAllocated",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that has been allocated to store metadata",
+        "id": 14386,
+        "product": 1,
+        "name": "Overhead Space Allocated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.overheadSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of space (in bytes) the Metadata would require if the LUN completely allocates its host facing capacity. This includes metadata for snapshots",
+        "id": 14387,
+        "product": 1,
+        "name": "Overhead Size Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.sizeAllocated",
+        "unitDisplayString": "Bytes",
+        "description": "Total amount of storage allocated (in bytes) to the LUN",
+        "id": 14388,
+        "product": 1,
+        "name": "Size Allocated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.sizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of space (in bytes) that would be consumed if the LUN is fully provisioned. This includes snapshots, attached snapshot LUNs and Metadata",
+        "id": 14389,
+        "product": 1,
+        "name": "Space Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.sizeTotal",
+        "unitDisplayString": "Bytes",
+        "description": "Host visible LUN size (in bytes)",
+        "id": 14390,
+        "product": 1,
+        "name": "Size Total",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.snapshotSizeAllocated",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that has been allocated to the LUN for all the snapshots created of it. This does not include storage that is shared with the primary or any storage required for metadata. Any additional space used by attached snapshot LUNs associated with this LUN is included in this number",
+        "id": 14391,
+        "product": 1,
+        "name": "Snapshot Space Allocated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.lun.*.snapshotSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of space (in bytes) that a LUN's snapshots currently consume as well as what they would consume if all base LUN data was overwritten",
+        "id": 14392,
+        "product": 1,
+        "name": "Snapshot Size Subscribed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.overheadSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in bytes) that the Pool would need for metadata for the LUNs, SFs and snapshots in that Pool if they are fully subscribed",
+        "id": 14393,
+        "product": 1,
+        "name": "Overhead Subscribed Space",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.overheadSizeUsed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of storage (in Bytes) that has been allocated from the Pool to store metadata",
+        "id": 14394,
+        "product": 1,
+        "name": "Overhead Space",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.sizeFree",
+        "unitDisplayString": "Bytes",
+        "isRealtimeAvailable": true,
+        "objectType": 28,
+        "description": "Total size - used size",
+        "id": 14395,
+        "isHistoricalAvailable": true,
+        "name": "Size Free",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.sizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "isRealtimeAvailable": true,
+        "objectType": 28,
+        "description": "This is the total amount of space in the Pool that would be consumed if all of the Pools, LUNs, and SFs were fully provisioned. This includes snapshots, attached snapshot LUNs and Metadata",
+        "id": 14396,
+        "isHistoricalAvailable": true,
+        "name": "Subscribed Space",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.sizeTotal",
+        "unitDisplayString": "Bytes",
+        "isRealtimeAvailable": true,
+        "objectType": 28,
+        "description": "User visible size of the pool (in Bytes)",
+        "id": 14397,
+        "isHistoricalAvailable": true,
+        "name": "Capacity",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.sizeUsed",
+        "unitDisplayString": "Bytes",
+        "isRealtimeAvailable": true,
+        "objectType": 28,
+        "description": "This is the total amount of storage (in bytes) that is currently allocated from this Pool. This includes storage required for data, metadata, primary LUNs, SFs, snapshots",
+        "id": 14398,
+        "isHistoricalAvailable": true,
+        "name": "Size Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.sizeUsedBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "This is the total amount of storage (512-byte blocks) that is currently allocated from this Pool. This includes storage required for data, metadata, primary LUNs, SFs, snapshots",
+        "id": 14399,
+        "product": 1,
+        "name": "Total Consumed Capacity",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.snapshotSizeSubscribed",
+        "unitDisplayString": "Bytes",
+        "description": "This is the total amount of space (in bytes) that all snapshots currently consume as well as what they would consume if all of the base LUNs / SFs data was overwritten. Any additional space used by attached snapshot LUNs in this pool is included in this number",
+        "id": 14400,
+        "product": 1,
+        "name": "Snap Subscribed Space",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.pool.*.snapshotSizeUsed",
+        "unitDisplayString": "Bytes",
+        "isRealtimeAvailable": true,
+        "objectType": 28,
+        "description": "This is the total amount of storage (in bytes) that has been allocated from the Pool for all the snapshots created in the Pool. This does not include storage that is shared with the primary, storage required for metadata, or uncommitted storage",
+        "id": 14401,
+        "isHistoricalAvailable": true,
+        "name": "Snapshot Space",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.summary.readBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks read from this SP",
+        "id": 14403,
+        "product": 1,
+        "name": "SP Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.summary.reads",
+        "unitDisplayString": "Counts",
+        "description": "Reads from this SP",
+        "id": 14407,
+        "product": 1,
+        "name": "SP Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.summary.writeBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks written to this SP",
+        "id": 14413,
+        "product": 1,
+        "name": "SP Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.summary.writes",
+        "unitDisplayString": "Counts",
+        "description": "Writes to this SP",
+        "id": 14417,
+        "product": 1,
+        "name": "SP Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.tdxsession.*.trackYNoRemainder",
+        "unitDisplayString": "bytes",
+        "description": "Track Y with no remainder",
+        "id": 14420,
+        "product": 1,
+        "name": "track y with no remainder",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.tdxsession.*.trackYWithRemainder",
+        "unitDisplayString": "bytes",
+        "description": "Track Y with remainder",
+        "id": 14421,
+        "product": 1,
+        "name": "track y with remainder",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.tdxsession.*.yCollisions",
+        "unitDisplayString": "collisions",
+        "description": "Number of collisions in Y region",
+        "id": 14422,
+        "product": 1,
+        "name": "number of y collisions",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.tdxsession.*.yCollisionsInZHandling",
+        "unitDisplayString": "collisions",
+        "description": "Number of Y Collisions in Z Handling",
+        "id": 14423,
+        "product": 1,
+        "name": "number of y collisions in z handling",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.tdxsession.*.zCollisionsInZHandling",
+        "unitDisplayString": "collisions",
+        "description": "Number of Z Collisions in Z Handling",
+        "id": 14424,
+        "product": 1,
+        "name": "number of z collisions in z handling",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.tdxvolume.*.volumeDCAQueryStatus",
+        "unitDisplayString": "Count",
+        "description": "DCA Query status for this volume.",
+        "id": 14426,
+        "product": 1,
+        "name": "DCAQuery Status",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.vvol.block.*.busyTime",
+        "unitDisplayString": "uSecs",
+        "description": "Busy time, in microseconds, spent processing I/O for this VVol",
+        "id": 14433,
+        "product": 1,
+        "name": "Busy Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.vvol.block.*.currentIOCount",
+        "unitDisplayString": "Counts",
+        "description": "Number of I/O requests waiting to be completed on this VVol",
+        "id": 14435,
+        "product": 1,
+        "name": "Current I/O",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.vvol.block.*.idleTime",
+        "unitDisplayString": "uSecs",
+        "description": "Idle time, in microseconds, where there was not any I/O to process for this VVol",
+        "id": 14436,
+        "product": 1,
+        "name": "Idle Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.block.*.readBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks read from this VVol",
+        "id": 14438,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.block.*.reads",
+        "unitDisplayString": "Counts",
+        "description": "Number of read operations on this VVol",
+        "id": 14442,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.storage.vvol.block.*.sumOutstandingRequests",
+        "unitDisplayString": "",
+        "description": "Increases by the number of outstanding requests when an IO arrives to this VVol",
+        "id": 14445,
+        "product": 1,
+        "name": "Sum Outstanding Requests",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.block.*.totalIoTime",
+        "unitDisplayString": "uSecs",
+        "description": "Time consumed by IOs to this VVol",
+        "id": 14450,
+        "product": 1,
+        "name": "Total Io Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.block.*.writeBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Blocks written to this VVol",
+        "id": 14452,
+        "product": 1,
+        "name": "Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.block.*.writes",
+        "unitDisplayString": "Counts",
+        "description": "Number of write operations on this VVol",
+        "id": 14456,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.file.*.readBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes read from this VVol",
+        "id": 14459,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.file.*.readIoTime",
+        "unitDisplayString": "uSecs",
+        "description": "Time consumed by read IOs to this VVol",
+        "id": 14461,
+        "product": 1,
+        "name": "Read IO time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.file.*.reads",
+        "unitDisplayString": "Counts",
+        "description": "Number of read operations on this VVol",
+        "id": 14463,
+        "product": 1,
+        "name": "Read IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.file.*.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes written to this VVol",
+        "id": 14471,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.file.*.writeIoTime",
+        "unitDisplayString": "uSecs",
+        "description": "Time consumed by write IOs to this VVol.",
+        "id": 14473,
+        "product": 1,
+        "name": "Write IO time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.file.*.writes",
+        "unitDisplayString": "Counts",
+        "description": "Number of write operations on this VVol",
+        "id": 14475,
+        "product": 1,
+        "name": "Write IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.readBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes read",
+        "id": 14479,
+        "product": 1,
+        "name": "Bytes Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.readBytesRate",
+        "unitDisplayString": "KB/s",
+        "isRealtimeAvailable": false,
+        "objectType": 31,
+        "description": "Rate for raw metric: Number of bytes read",
+        "id": 14480,
+        "isHistoricalAvailable": true,
+        "name": "Bytes Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.reads",
+        "unitDisplayString": "Counts",
+        "description": "Number of read operations",
+        "id": 14481,
+        "product": 1,
+        "name": "Read IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.readsRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 31,
+        "description": "Rate for raw metric: Number of read operations",
+        "id": 14482,
+        "isHistoricalAvailable": true,
+        "name": "Read IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.responseTime",
+        "unitDisplayString": "uSecs/count",
+        "isRealtimeAvailable": false,
+        "objectType": 31,
+        "description": "Average response time",
+        "id": 14483,
+        "isHistoricalAvailable": true,
+        "name": "Response Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.totalCalls",
+        "unitDisplayString": "Counts",
+        "description": "Total number of operations",
+        "id": 14484,
+        "product": 1,
+        "name": "Total number of operations",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 103,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.totalCallsRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 31,
+        "description": "Rate for raw metric: Total number of operations",
+        "id": 14485,
+        "isHistoricalAvailable": true,
+        "name": "Total number of operations",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.totalIoTime",
+        "unitDisplayString": "uSec",
+        "description": "Total IO Time",
+        "id": 14486,
+        "product": 1,
+        "name": "Total IO Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes written",
+        "id": 14488,
+        "product": 1,
+        "name": "Bytes Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.writeBytesRate",
+        "unitDisplayString": "KB/s",
+        "isRealtimeAvailable": false,
+        "objectType": 31,
+        "description": "Rate for raw metric: Number of bytes written",
+        "id": 14489,
+        "isHistoricalAvailable": true,
+        "name": "Bytes Written",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.writes",
+        "unitDisplayString": "Counts",
+        "description": "Number of write operations",
+        "id": 14490,
+        "product": 1,
+        "name": "Write IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 4,
+        "product": 1,
+        "visibility": 2,
+        "path": "sp.*.storage.vvol.pool.*.datastore.*.writesRate",
+        "unitDisplayString": "Counts/s",
+        "isRealtimeAvailable": false,
+        "objectType": 31,
+        "description": "Rate for raw metric: Number of write operations",
+        "id": 14491,
+        "isHistoricalAvailable": true,
+        "name": "Write IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.bogusTokensCreated",
+        "unitDisplayString": "Count",
+        "description": "Number of bogus tokens created on Lun",
+        "id": 14494,
+        "product": 1,
+        "name": "Bogus Token Created",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutSectorsWritten",
+        "unitDisplayString": "Count",
+        "description": "Number of sectors written to Lun as a result of 'Write Using Token' operations",
+        "id": 14496,
+        "product": 1,
+        "name": "WUT SectorWritten",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsAborted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' aborted using Lun as data destination",
+        "id": 14498,
+        "product": 1,
+        "name": "WUT Dest Aborted",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsCanceled",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' canceled by host using Lun as data destination",
+        "id": 14500,
+        "product": 1,
+        "name": "WUT Dest Canceled",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsCompleted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Uisng Token' successfully completed using Lun as data destination",
+        "id": 14502,
+        "product": 1,
+        "name": "Dest WUT Completed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsDegradedAtBothEnds",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a destination but had to use buffered copying because both the source and destination Lun were degraded by redirection",
+        "id": 14504,
+        "product": 1,
+        "name": "Dest WUT DegradedAtBothEnds",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsDegradedAtDestOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a destination but had to use buffered copying because the destination Lun was degraded by redirection",
+        "id": 14506,
+        "product": 1,
+        "name": "Dest WUT DegradedAtDestination",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsDegradedAtSourceOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a destination but had to use buffered copying because the source Lun was degraded by redirection",
+        "id": 14508,
+        "product": 1,
+        "name": "Dest WUT DegradedAtSource",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.destWutsStarted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Uisng Token' operations initiated using Lun as data destination",
+        "id": 14510,
+        "product": 1,
+        "name": "Dest WUT Initiated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.sourceWutsDegradedAtBothEnds",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a source but had to use buffered copying because both source and destination Lun were degraded by redirection",
+        "id": 14512,
+        "product": 1,
+        "name": "Source WUT DegradedAtBothEnds",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.sourceWutsDegradedAtDestOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a source but had to use buffered copying because the destination Lun was degraded by redirection",
+        "id": 14514,
+        "product": 1,
+        "name": "Source WUT DegradedAtDestination",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.sourceWutsDegradedAtSourceOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a source but had to use buffered copying because the source Lun was degraded by redirection",
+        "id": 14516,
+        "product": 1,
+        "name": "Source WUT DegradedAtSource",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.tokenSGLEntries",
+        "unitDisplayString": "Count",
+        "description": "Number of SGL entries used to create tokens on Lun",
+        "id": 14518,
+        "product": 1,
+        "name": "SGL Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.tokensCreated",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens created on Lun",
+        "id": 14520,
+        "product": 1,
+        "name": "Tokens Created",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.tokensExpired",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens that have expired",
+        "id": 14522,
+        "product": 1,
+        "name": "Token Expired",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.tokensInvalidatedByCollision",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens invalidated due to colliding writes",
+        "id": 14524,
+        "product": 1,
+        "name": "Token Colliding Writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.tokensInvalidatedByDestructiveOp",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens invalidated due to other destruction operations",
+        "id": 14526,
+        "product": 1,
+        "name": "Token Destructive Operations",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.tokensInvalidatedByPeer",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens invalidated due to a peer message",
+        "id": 14528,
+        "product": 1,
+        "name": "Token Peer Message Invalidate",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wellKnownTokenWutsStarted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Well Known Token' used as data source",
+        "id": 14530,
+        "product": 1,
+        "name": "Well Know Token Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wutSectorsRead",
+        "unitDisplayString": "Count",
+        "description": "Number of Sectors read by 'Write Using Token' opeartion using token as data source",
+        "id": 14532,
+        "product": 1,
+        "name": "WUT SectorRead",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wutsAborted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' operation aborted due to colliding writes",
+        "id": 14534,
+        "product": 1,
+        "name": "WUT Aborted",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wutsCanceled",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' canceled by host",
+        "id": 14536,
+        "product": 1,
+        "name": "WUT Canceled",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wutsCompleted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' successfully completed",
+        "id": 14538,
+        "product": 1,
+        "name": "WUT Completed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wutsStarted",
+        "unitDisplayString": "Count",
+        "description": "Number of operations initiated using 'Write Using Token' as data source",
+        "id": 14540,
+        "product": 1,
+        "name": "WUT Started",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.lun.*.wutsTime",
+        "unitDisplayString": "uSecs",
+        "description": "Total time in milliseconds spent on 'Write Using Token' operation using token as data source",
+        "id": 14542,
+        "product": 1,
+        "name": "WUT TimeSpent",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.bogusTokensCreated",
+        "unitDisplayString": "Count",
+        "description": "Number of bogus tokens created on Lun",
+        "id": 14544,
+        "product": 1,
+        "name": "SP Bogus Token Created",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutSectorsWritten",
+        "unitDisplayString": "Count",
+        "description": "Number of sectors written to Lun as a result of 'Write Using Token' operations",
+        "id": 14546,
+        "product": 1,
+        "name": "SP WUT SectorWritten",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsAborted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' aborted using Lun as data destination",
+        "id": 14548,
+        "product": 1,
+        "name": "SP WUT Dest Aborted",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsCanceled",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' canceled by host using Lun as data destination",
+        "id": 14550,
+        "product": 1,
+        "name": "SP WUT Dest Canceled",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsCompleted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Uisng Token' successfully completed using Lun as data destination",
+        "id": 14552,
+        "product": 1,
+        "name": "SP Dest WUT Completed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsDegradedAtBothEnds",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a destination but had to use buffered copying because both the source and destination Lun were degraded by redirection",
+        "id": 14554,
+        "product": 1,
+        "name": "SP Dest WUT DegradedAtBothEnds",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsDegradedAtDestOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a destination but had to use buffered copying because the destination Lun was degraded by redirection",
+        "id": 14556,
+        "product": 1,
+        "name": "SP Dest WUT DegradedAtDestination",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsDegradedAtSourceOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a destination but had to use buffered copying because the source Lun was degraded by redirection",
+        "id": 14558,
+        "product": 1,
+        "name": "SP Dest WUT DegradedAtSource",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.destWutsStarted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Uisng Token' operations initiated using Lun as data destination",
+        "id": 14560,
+        "product": 1,
+        "name": "SP Dest WUT Initiated",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.sourceWutsDegradedAtBothEnds",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a source but had to use buffered copying because both source and destination Lun were degraded by redirection",
+        "id": 14562,
+        "product": 1,
+        "name": "SP Source WUT DegradedAtBothEnds",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.sourceWutsDegradedAtDestOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a source but had to use buffered copying because the destination Lun was degraded by redirection",
+        "id": 14564,
+        "product": 1,
+        "name": "SP Source WUT DegradedAtDestination",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.sourceWutsDegradedAtSourceOnly",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' that used Lun as a source but had to use buffered copying because the source Lun was degraded by redirection",
+        "id": 14566,
+        "product": 1,
+        "name": "SP Source WUT DegradedAtSource",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.tokenSGLEntries",
+        "unitDisplayString": "Count",
+        "description": "Number of SGL entries used to create tokens on Lun",
+        "id": 14568,
+        "product": 1,
+        "name": "SP SGL Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.tokensCreated",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens created on Lun",
+        "id": 14570,
+        "product": 1,
+        "name": "SP Tokens Created",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.tokensExpired",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens that have expired",
+        "id": 14572,
+        "product": 1,
+        "name": "SP Token Expired",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.tokensInvalidatedByCollision",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens invalidated due to colliding writes",
+        "id": 14574,
+        "product": 1,
+        "name": "SP Token Colliding Writes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.tokensInvalidatedByDestructiveOp",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens invalidated due to other destruction operations",
+        "id": 14576,
+        "product": 1,
+        "name": "SP Token Destructive Operations",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.tokensInvalidatedByPeer",
+        "unitDisplayString": "Count",
+        "description": "Number of tokens invalidated due to a peer message",
+        "id": 14578,
+        "product": 1,
+        "name": "SP Token Peer Message Invalidate",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.volumesReceivingPTs",
+        "unitDisplayString": "Count",
+        "description": "Number of Luns that have ever received a POPULATE_TOKEN request",
+        "id": 14580,
+        "product": 1,
+        "name": "SP Luns Received PT",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.volumesReceivingWUTs",
+        "unitDisplayString": "Count",
+        "description": "Number of Luns that have ever received a WRITE_USING_TOKEN request",
+        "id": 14582,
+        "product": 1,
+        "name": "SP Luns Received WUT",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wellKnownTokenWutsStarted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Well Known Token' used as data source",
+        "id": 14584,
+        "product": 1,
+        "name": "SP Well Know Token Used",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wutSectorsRead",
+        "unitDisplayString": "Count",
+        "description": "Number of Sectors read by 'Write Using Token' opeartion using token as data source",
+        "id": 14586,
+        "product": 1,
+        "name": "SP WUT SectorRead",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wutsAborted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' operation aborted due to colliding writes",
+        "id": 14588,
+        "product": 1,
+        "name": "SP WUT Aborted",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wutsCanceled",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' canceled by host",
+        "id": 14590,
+        "product": 1,
+        "name": "SP WUT Canceled",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wutsCompleted",
+        "unitDisplayString": "Count",
+        "description": "Number of 'Write Using Token' successfully completed",
+        "id": 14592,
+        "product": 1,
+        "name": "SP WUT Completed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wutsStarted",
+        "unitDisplayString": "Count",
+        "description": "Number of operations initiated using 'Write Using Token' as data source",
+        "id": 14594,
+        "product": 1,
+        "name": "SP WUT Started",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.storage.xcl.summary.wutsTime",
+        "unitDisplayString": "uSecs",
+        "description": "Total time in milliseconds spent on 'Write Using Token' operation using token as data source",
+        "id": 14596,
+        "product": 1,
+        "name": "SP WUT TimeSpent",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.TotFibre.readBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Total FCP blocks read from all HBAs",
+        "id": 14599,
+        "product": 1,
+        "name": "Total FCP Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.TotFibre.reads",
+        "unitDisplayString": "Ops",
+        "description": "Total FCP read operations on all HBAs",
+        "id": 14601,
+        "product": 1,
+        "name": "Total FCP Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.TotFibre.writeBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Total FCP blocks written from all HBAs",
+        "id": 14605,
+        "product": 1,
+        "name": "Total FCP Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.TotFibre.writes",
+        "unitDisplayString": "Ops",
+        "description": "Total FCP write operations on all HBAs",
+        "id": 14607,
+        "product": 1,
+        "name": "Total FCP Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.SGgrowCalls",
+        "unitDisplayString": "",
+        "description": "Number of times the scatter-gather lists are grown for the IO operations on the disk",
+        "id": 14610,
+        "product": 1,
+        "name": "SG Grown",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.SGpossibleaddCalls",
+        "unitDisplayString": "",
+        "description": "Number of times that elements were possibly added to scatter-gather lists for the IO operations on the disk",
+        "id": 14611,
+        "product": 1,
+        "name": "SG Possibly Added",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.busy",
+        "unitDisplayString": "ms",
+        "description": "Time the disk is busy in milliseconds",
+        "id": 14616,
+        "product": 1,
+        "name": "Busy",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.currentQueueDepth",
+        "unitDisplayString": "Count",
+        "description": "Length of disk queue",
+        "id": 14618,
+        "product": 1,
+        "name": "Queue Depth",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.idle",
+        "unitDisplayString": "ms",
+        "description": "Time the disk is idle in milliseconds",
+        "id": 14619,
+        "product": 1,
+        "name": "Idle",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.mergeCalls",
+        "unitDisplayString": "Ops",
+        "description": "Number of merge IO operations on the disk",
+        "id": 14621,
+        "product": 1,
+        "name": "Merged",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.readBytes",
+        "unitDisplayString": "B",
+        "description": "Bytes read from the disk",
+        "id": 14624,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.reads",
+        "unitDisplayString": "Ops",
+        "description": "Number of read operations on the disk",
+        "id": 14627,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.retries",
+        "unitDisplayString": "Retries",
+        "description": "Number of IO Retries ",
+        "id": 14629,
+        "product": 1,
+        "name": "IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.serviceTime",
+        "unitDisplayString": "uSec",
+        "description": "Total service time without retries and queuing delays",
+        "id": 14630,
+        "product": 1,
+        "name": "Total Service",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.totalIovBytes",
+        "unitDisplayString": "",
+        "description": "Number of bytes in original IO Vector for each IO operation on the disk",
+        "id": 14632,
+        "product": 1,
+        "name": "Total IOVec Bytes",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.totalIovElements",
+        "unitDisplayString": "",
+        "description": "Number of elements in original IO Vector for each IO operation on the disk",
+        "id": 14634,
+        "product": 1,
+        "name": "Total IOVec Elements",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.totalIovs",
+        "unitDisplayString": "",
+        "description": "Number of original IO Vector for IO operations on the disk",
+        "id": 14636,
+        "product": 1,
+        "name": "Total IOVecs",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.totalOperations",
+        "unitDisplayString": "Ops",
+        "description": "Number of operations on the disk",
+        "id": 14638,
+        "product": 1,
+        "name": "Total IO",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.totalTime",
+        "unitDisplayString": "uSec",
+        "description": "Total time taken for all the IOs in microseconds",
+        "id": 14640,
+        "product": 1,
+        "name": "Total Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Bytes written to the disk",
+        "id": 14644,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.diskVolume.*.writes",
+        "unitDisplayString": "Ops",
+        "description": "Number of write operations on the disk",
+        "id": 14647,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.hostBusAdapter.*.currentFreeSGLPages",
+        "unitDisplayString": "Pages",
+        "description": "Current number of scatter-gather list (SGL) Pages on the free queue",
+        "id": 14652,
+        "product": 1,
+        "name": "Current Free SGL",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.hostBusAdapter.*.currentFreeXCBs",
+        "unitDisplayString": "XCBs",
+        "description": "Current number of extended context blocks (XCBs) on the free list",
+        "id": 14653,
+        "product": 1,
+        "name": "Current Free",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.hostBusAdapter.*.currentResourceWaitReqs",
+        "unitDisplayString": "Reqs",
+        "description": "Current number of requests on the resource wait queue",
+        "id": 14654,
+        "product": 1,
+        "name": "Current Resource Wait",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.hostBusAdapter.*.maxResourceWaitReqs",
+        "unitDisplayString": "Reqs",
+        "description": "Maximum number of requests on the resource wait queue",
+        "id": 14655,
+        "product": 1,
+        "name": "Max Resource Wait",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.hostBusAdapter.*.minFreeSGLPages",
+        "unitDisplayString": "Pages",
+        "description": "Minimum number of scatter-gather list (SGL) Pages on the free queue",
+        "id": 14656,
+        "product": 1,
+        "name": "Min Free SGL",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.hostBusAdapter.*.minFreeXCBs",
+        "unitDisplayString": "XCBs",
+        "description": "Minimum number of extended context blocks (XCBs) on the free list",
+        "id": 14657,
+        "product": 1,
+        "name": "Min Free",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.store.hostBusAdapter.*.readBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Number of block reads on HBA",
+        "id": 14658,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.hostBusAdapter.*.reads",
+        "unitDisplayString": "Ops",
+        "description": "Number of read call operations on HBA",
+        "id": 14660,
+        "product": 1,
+        "name": "Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.store.hostBusAdapter.*.writeBlocks",
+        "unitDisplayString": "Blocks",
+        "description": "Number of block writes on HBA",
+        "id": 14663,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.hostBusAdapter.*.writes",
+        "unitDisplayString": "Ops",
+        "description": "Number of write call operations on HBA",
+        "id": 14665,
+        "product": 1,
+        "name": "Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.ioTimeHist.*.counter1",
+        "unitDisplayString": "Count",
+        "description": "The counter1 field receiver",
+        "id": 14668,
+        "product": 1,
+        "name": "SCSI",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.ioTimeHistOver.*.counter",
+        "unitDisplayString": "Count",
+        "description": "The counter field receiver",
+        "id": 14671,
+        "product": 1,
+        "name": "overflown SCSI",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.readBytes",
+        "unitDisplayString": "B",
+        "description": "Total bytes read from disk/network volumes",
+        "id": 14673,
+        "product": 1,
+        "name": "dVol Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.store.scsiBusDevice.*.busy",
+        "unitDisplayString": "ms",
+        "description": "Time the device has been busy in milliseconds",
+        "id": 14676,
+        "product": 1,
+        "name": "Busy",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.scsiBusDevice.*.calls",
+        "unitDisplayString": "Ops",
+        "description": "Number of SCSI call operations on this device",
+        "id": 14678,
+        "product": 1,
+        "name": "SCSI",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.scsiBusDevice.*.currentPendingCalls",
+        "unitDisplayString": "Ops",
+        "description": "Number of SCSI call operations pending on this device",
+        "id": 14680,
+        "product": 1,
+        "name": "SCSI Pending",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.store.scsiBusDevice.*.idle",
+        "unitDisplayString": "ms",
+        "description": "Time the device has been idle in milliseconds",
+        "id": 14681,
+        "product": 1,
+        "name": "Idle",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.scsiBusDevice.*.maxPendingCalls",
+        "unitDisplayString": "Ops",
+        "description": "Maximum number of pending SCSI call operations",
+        "id": 14683,
+        "product": 1,
+        "name": "Max SCSI Pending",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 8,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 103,
+        "path": "sp.*.store.totalCalls",
+        "unitDisplayString": "Ops",
+        "description": "Total FCP call operations of all HBAs",
+        "id": 14687,
+        "product": 1,
+        "name": "Total FCP",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.store.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Total bytes written to disk/network volumes",
+        "id": 14689,
+        "product": 1,
+        "name": "dVol Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.readBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes read",
+        "id": 14695,
+        "product": 1,
+        "name": "VHDX Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.readTotalTime",
+        "unitDisplayString": "uSecs",
+        "description": "Total microseconds the read operations has used",
+        "id": 14697,
+        "product": 1,
+        "name": "VHDX Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.reads",
+        "unitDisplayString": "Ops",
+        "description": "Number of read operations",
+        "id": 14699,
+        "product": 1,
+        "name": "VHDX Read",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.totalCalls",
+        "unitDisplayString": "Ops",
+        "description": "Total number of read, write and unmap operations",
+        "id": 14701,
+        "product": 1,
+        "name": "VHDX Total",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.unmapBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes unmapped",
+        "id": 14705,
+        "product": 1,
+        "name": "VHDX Unmap",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.unmapTotalTime",
+        "unitDisplayString": "uSecs",
+        "description": "Total microseconds the unmap operations has used",
+        "id": 14707,
+        "product": 1,
+        "name": "VHDX Unmap",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.unmaps",
+        "unitDisplayString": "Ops",
+        "description": "Number of unmap operations",
+        "id": 14709,
+        "product": 1,
+        "name": "VHDX Unmap",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.writeBytes",
+        "unitDisplayString": "B",
+        "description": "Number of bytes written",
+        "id": 14713,
+        "product": 1,
+        "name": "VHDX Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.writeTotalTime",
+        "unitDisplayString": "uSecs",
+        "description": "Total microseconds the write operations has used",
+        "id": 14715,
+        "product": 1,
+        "name": "VHDX Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.vhdx.basic.writes",
+        "unitDisplayString": "Ops",
+        "description": "Number of write operations",
+        "id": 14717,
+        "product": 1,
+        "name": "VHDX Write",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 10,
+        "path": "sp.*.virusChecker.error.*.errors",
+        "unitDisplayString": "Count",
+        "description": "total number of CAVA errors",
+        "id": 14721,
+        "product": 1,
+        "name": "CAVA errors",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.file.cleaned",
+        "unitDisplayString": "Files",
+        "description": "Total number of cleaned files after an infection",
+        "id": 14723,
+        "product": 1,
+        "name": "Cleaned",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.file.deleted",
+        "unitDisplayString": "Files",
+        "description": "Total number of deleted files after an infection",
+        "id": 14724,
+        "product": 1,
+        "name": "Deleted",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.file.infected",
+        "unitDisplayString": "Files",
+        "description": "Total number of infected files",
+        "id": 14725,
+        "product": 1,
+        "name": "Infected",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.file.renamed",
+        "unitDisplayString": "Files",
+        "description": "Total number of renamed files after an infection",
+        "id": 14726,
+        "product": 1,
+        "name": "Renamed",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.request.currentRequests",
+        "unitDisplayString": "Requests",
+        "description": "Total number of active requests",
+        "id": 14729,
+        "product": 1,
+        "name": "Active",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.request.maxTime",
+        "unitDisplayString": "uSec",
+        "description": "Maximum time to execute an antivirus request",
+        "id": 14730,
+        "product": 1,
+        "name": "Max Request Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 5,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.request.minTime",
+        "unitDisplayString": "uSec",
+        "description": "Minimum time to execute an antivirus request",
+        "id": 14731,
+        "product": 1,
+        "name": "Min Request Time",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.request.requests",
+        "unitDisplayString": "Requests",
+        "description": "Total number of antivirus requests",
+        "id": 14732,
+        "product": 1,
+        "name": "Total Scan",
+        "unit": 0
+      }
+    },
+    {
+      "content": {
+        "type": 3,
+        "isHistoricalAvailable": false,
+        "isRealtimeAvailable": true,
+        "visibility": 2,
+        "path": "sp.*.virusChecker.request.totalTime",
+        "unitDisplayString": "uSec",
+        "description": "Total time to execute all antivirus requests",
+        "id": 14734,
+        "product": 1,
+        "name": "Total",
+        "unit": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "content": {
+    "interval": 300,
+    "expiration": "2016-11-18T04:00:00.000Z",
+    "id": 15,
+    "paths": [
+      "sp.*.store.scsiBusDevice.*.calls"
+    ],
+    "maximumSamples": -1
+  }
+}

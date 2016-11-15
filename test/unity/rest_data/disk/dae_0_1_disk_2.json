@@ -1,0 +1,56 @@
+{
+  "content": {
+    "id": "dae_0_1_disk_2",
+    "operationalStatus": [
+      2
+    ],
+    "tierType": 30,
+    "diskTechnology": 2,
+    "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0E:01:00:00:00:00:00:03",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "needsReplacement": false,
+    "parent": {
+      "id": "dae_0_1",
+      "resource": "dae"
+    },
+    "slotNumber": 2,
+    "estimatedEOL": "00:00:00.000",
+    "busId": 0,
+    "name": "DAE 0 1 Disk 2",
+    "manufacturer": "SEAGATE",
+    "model": "ST2000NK EMC2000",
+    "version": "MN16",
+    "emcPartNumber": "005051284",
+    "emcSerialNumber": "Z4H027QW",
+    "vendorPartNumber": "005051284",
+    "vendorSerialNumber": "Z4H027QW",
+    "rpm": 7200,
+    "isSED": false,
+    "isSystem": false,
+    "currentSpeed": 12000000000,
+    "maxSpeed": 12000000000,
+    "isInUse": true,
+    "isFastCacheInUse": false,
+    "size": 1969590009856,
+    "rawSize": 1969623564288,
+    "vendorSize": 2199023255552,
+    "wwn": "06:00:00:00:05:00:00:00:0E:01:00:00:00:00:00:03",
+    "diskGroup": {
+      "id": "dg_8"
+    },
+    "pool": {
+      "id": "pool_1"
+    },
+    "parentDae": {
+      "id": "dae_0_1"
+    }
+  }
+}

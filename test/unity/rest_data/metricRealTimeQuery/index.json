@@ -1,0 +1,49 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/metricRealTimeQuery?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/metricRealTimeQuery/instances?compact=True&fields=expiration,id,interval,maximumSamples,paths",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/metricRealTimeQuery/2?compact=True&fields=expiration,id,interval,maximumSamples,paths",
+      "response": "2.json"
+    },
+    {
+      "url": "/api/instances/metricRealTimeQuery/4?compact=True&fields=expiration,id,interval,maximumSamples,paths",
+      "response": "4.json"
+    },
+    {
+      "url": "/api/types/metricRealTimeQuery/instances?compact=True&fields=expiration,id,interval,maximumSamples,paths&filter=interval eq 300",
+      "response": "interval_300.json"
+    },
+    {
+      "url": "/api/types/metricRealTimeQuery/instances?compact=True",
+      "body": {
+        "paths": [
+          "sp.*.physical.disk.*.reads",
+          "sp.*.physical.disk.*.writes"
+        ],
+        "interval": 30
+      },
+      "response": "create_id_4.json"
+    },
+    {
+      "url": "/api/types/metricRealTimeQuery/instances?compact=True",
+      "body": {
+        "interval": 300,
+        "paths": [
+          "sp.*.store.scsiBusDevice.*.calls"
+        ]
+      },
+      "response": "create_id_15.json"
+    },
+    {
+      "url": "/api/instances/metricRealTimeQuery/4?compact=True",
+      "response": "query_id_not_found.json"
+    }
+  ]
+}

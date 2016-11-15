@@ -1,0 +1,33 @@
+{
+  "content": {
+    "description": "A set of values for one or more metrics for a given period of time. Each metricQueryResult resource is associated with a metricRealTimeQuery resource (VNXe or Unisphere Central) or metricHistoricalQuery resource (Unisphere Central only). <p/> After you create a query, the results are available as a set of metricQueryResult resources, where the queryId attribute of each metricQueryResult resource matches the id attribute of the associated metricRealTimeQuery or metricHistoricalQuery resource. <p/> You can optionally delete the metricRealTimeQuery resource when it is no longer needed, or it will be deleted automatically when the expiration reached. This API requires a ?filter= URL parameter that filters on a valid queryId. <p/> An example of a valid filter: <br>https://IP/api/types/metricQueryResult/instances?filter=queryId EQ 1  ",
+    "attributes": [
+      {
+        "type": "Integer",
+        "description": "Identifier of the metricQueryResult instance. This value matches the id attribute of the associated metricRealTimeQuery or metricHistoricalQuery resource.  ",
+        "displayValue": "queryId",
+        "name": "queryId"
+      },
+      {
+        "type": "String",
+        "description": "Path that corresponds to one of the metric paths specified in the associated metricHistoricalQuery or metricRealTimeQuery resource.  ",
+        "displayValue": "path",
+        "name": "path"
+      },
+      {
+        "type": "DateTime",
+        "description": "Date and time when the metrics sample was taken.  ",
+        "displayValue": "timestamp",
+        "name": "timestamp"
+      },
+      {
+        "type": "statValue",
+        "description": "Metric values corresponding to the set of metrics listed in the associated query.  ",
+        "displayValue": "values",
+        "name": "values"
+      }
+    ],
+    "documentation": "https://10.244.223.61/apidocs/classes/metricQueryResult.html",
+    "name": "metricQueryResult"
+  }
+}

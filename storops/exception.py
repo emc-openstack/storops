@@ -266,6 +266,14 @@ class NoIndexException(StoropsException):
     pass
 
 
+class UnityPerfMonNotEnabledError(UnityException):
+    message = ('Performance metric is not available, because performance '
+               'monitoring is not enabled for this unity resource.  '
+               'You could enable performance monitoring by executing: '
+               'UnitySystem.enable_perf_stats('
+               'interval=None, rsc_clz_list=None)')
+
+
 class UnityNameNotUniqueError(UnityException):
     def __init__(self, message="multiple objects found", objects=None):
         super(UnityNameNotUniqueError, self).__init__()
@@ -496,6 +504,15 @@ class UnityStorageResourceNameInUseError(UnityException):
 @rest_exception
 class UnityEthernetPortAlreadyAggregatedError(UnityException):
     error_code = 100665643
+
+
+class UnityMetricException(UnityException):
+    pass
+
+
+@rest_exception
+class UnityMetricQueryNotFoundError(UnityMetricException):
+    error_code = 131153932
 
 
 class NaviseccliNotAvailableError(VNXException):

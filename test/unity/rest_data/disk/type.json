@@ -1,0 +1,231 @@
+{
+  "content": {
+    "name": "disk",
+    "documentation": "https://10.244.223.61/apidocs/classes/disk.html",
+    "description": "Information about the disks's attributes in the storage system. <br/> <br/>  ",
+    "attributes": [
+      {
+        "name": "instanceId",
+        "type": "String",
+        "description": "Internal identifier of the disk instance.  ",
+        "displayValue": "instanceId"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the disk instance.  ",
+        "displayValue": "id"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information of the disk instance as defined by the health resource type.  ",
+        "displayValue": "health"
+      },
+      {
+        "name": "operationalStatus",
+        "type": "List<DiskOpStatusEnum>",
+        "description": "Current operational status of the disk instance.  ",
+        "displayValue": "operationalStatus"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether disk replacement is needed. Values are: <ul> <li> true - Disk replacment is needed.</li> <li>false - No disk replacement is needed.</li> </ul>  ",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and unique identifier for the disk's parent enclosure.  ",
+        "displayValue": "parent"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "Slot where the disk is located in the parent enclosure.  ",
+        "displayValue": "slotNumber"
+      },
+      {
+        "name": "estimatedEOL",
+        "type": "DateTime",
+        "description": "Estimated remaning life of disk, based on past use. Applies only to flash disks.  ",
+        "displayValue": "estimatedEOL"
+      },
+      {
+        "name": "busId",
+        "type": "Integer",
+        "description": "Identifier of the bus used by the disk.  ",
+        "displayValue": "busId"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Disk name. Modifiable for virtual disks only.  ",
+        "displayValue": "name"
+      },
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Disk manufacturer.  ",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer model number.  ",
+        "displayValue": "model"
+      },
+      {
+        "name": "version",
+        "type": "String",
+        "description": "Manufacturer version number.  ",
+        "displayValue": "version"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number.  ",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number.  ",
+        "displayValue": "emcSerialNumber"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number.  ",
+        "displayValue": "vendorPartNumber"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number.  ",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "tierType",
+        "type": "TierTypeEnum",
+        "description": "Disk type.  ",
+        "displayValue": "tierType"
+      },
+      {
+        "name": "diskGroup",
+        "type": "diskGroup",
+        "description": "Disk group is the group that the disk belongs to and as defined by the diskGroup resource type.  ",
+        "displayValue": "diskGroup"
+      },
+      {
+        "name": "rpm",
+        "type": "Integer",
+        "description": "Revolutions Per Minute (RPMs).  ",
+        "displayValue": "rpm"
+      },
+      {
+        "name": "isSED",
+        "type": "Boolean",
+        "description": "Indicates whether the disk is a Self-Encrypting Drive (SED). <ul> <li> true - Disk is a SED. </li> <li>false - Disk is not a SED.</li> </ul>  ",
+        "displayValue": "isSED"
+      },
+      {
+        "name": "isSystem",
+        "type": "Boolean",
+        "description": "Indicates whether the disk contains System data. <ul> <li> true - Disk contains System data. </li> <li>false - Disk does not contain System data. </li> </ul>  ",
+        "displayValue": "isSystem"
+      },
+      {
+        "name": "currentSpeed",
+        "type": "Integer",
+        "description": "Current speed.  ",
+        "displayValue": "currentSpeed"
+      },
+      {
+        "name": "maxSpeed",
+        "type": "Integer",
+        "description": "Maximum speed.  ",
+        "displayValue": "maxSpeed"
+      },
+      {
+        "name": "pool",
+        "type": "pool",
+        "description": "Pool that the disk belongs, as defined by the pool resource type.  ",
+        "displayValue": "pool"
+      },
+      {
+        "name": "isInUse",
+        "type": "Boolean",
+        "description": "Indicates whether the disk contains user-written data. Values are: <ul> <li> true - Disk contains user-written data.</li> <li>false - Disk does not contain user-written data.</li> </ul>  ",
+        "displayValue": "isInUse"
+      },
+      {
+        "name": "isFastCacheInUse",
+        "type": "Boolean",
+        "description": "(Applies if FAST Cache is supported on the system and the corresponding license is installed.) Indicates whether the disk is used by the FAST Cache. Values are: <ul> <li> true - Disk is used by the FAST Cache.</li> <li>false - Disk is not used by the FAST Cache.</li> </ul>  ",
+        "displayValue": "isFastCacheInUse"
+      },
+      {
+        "name": "size",
+        "type": "Integer",
+        "description": "Usable capacity.  ",
+        "displayValue": "size"
+      },
+      {
+        "name": "rawSize",
+        "type": "Integer",
+        "description": "Raw (unformatted) capacity.  ",
+        "displayValue": "rawSize"
+      },
+      {
+        "name": "vendorSize",
+        "type": "Integer",
+        "description": "Vendor capacity of the disk as written on the disk label.  ",
+        "displayValue": "vendorSize"
+      },
+      {
+        "name": "wwn",
+        "type": "String",
+        "description": "World Wide Name (WWN) of the disk.  ",
+        "displayValue": "wwn"
+      },
+      {
+        "name": "diskTechnology",
+        "type": "DiskTechnologyEnum",
+        "description": "Disk technology.  ",
+        "displayValue": "diskTechnology"
+      },
+      {
+        "name": "parentDae",
+        "type": "dae",
+        "description": "Parent Disk Array Enclosure (DAE) of the disk as defined by the dae resource type.  ",
+        "displayValue": "parentDae"
+      },
+      {
+        "name": "parentDpe",
+        "type": "dpe",
+        "description": "Parent Disk Processor Enclosure (DPE) of the disk, as defined by the dpe resource type.  ",
+        "displayValue": "parentDpe"
+      },
+      {
+        "name": "bank",
+        "type": "String",
+        "description": "Bank where the disk is located in the parent enclosure.  ",
+        "displayValue": "bank"
+      },
+      {
+        "name": "bankSlotNumber",
+        "type": "Integer",
+        "description": "Bank slot where the disk is located in the parent enclosure.  ",
+        "displayValue": "bankSlotNumber"
+      },
+      {
+        "name": "bankSlot",
+        "type": "String",
+        "description": "Combination of the bank and slot name where the disk is located in the parent enclosure.  ",
+        "displayValue": "bankSlot"
+      }
+    ]
+  }
+}

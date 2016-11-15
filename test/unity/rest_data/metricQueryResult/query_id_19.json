@@ -1,0 +1,157 @@
+{
+  "entries": [
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": {
+            "dpe_disk_1": "1059104",
+            "dpe_disk_10": "373555",
+            "dpe_disk_2": "1147746",
+            "dae_0_1_disk_8": "446854",
+            "dae_0_1_disk_3": "13",
+            "dpe_disk_8": "373548",
+            "dpe_disk_6": "1896962",
+            "dpe_disk_13": "200986",
+            "dpe_disk_7": "18",
+            "dpe_disk_0": "1307984",
+            "dpe_disk_9": "17",
+            "dae_0_1_disk_9": "11",
+            "dpe_disk_12": "364189",
+            "dae_0_1_disk_1": "1881405",
+            "dpe_disk_14": "364189",
+            "dpe_disk_11": "16",
+            "dpe_disk_4": "373542",
+            "dae_0_1_disk_2": "4246221",
+            "dpe_disk_5": "575839",
+            "dae_0_1_disk_4": "390053",
+            "dae_0_1_disk_6": "390113",
+            "dpe_disk_15": "203743",
+            "dae_0_1_disk_7": "11",
+            "dpe_disk_3": "954877",
+            "dae_0_1_disk_0": "389791",
+            "dae_0_1_disk_5": "13"
+          },
+          "spb": {
+            "dpe_disk_1": "106381",
+            "dpe_disk_10": "0",
+            "dpe_disk_2": "9132",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_3": "390053",
+            "dpe_disk_8": "0",
+            "dpe_disk_6": "5",
+            "dpe_disk_13": "734760",
+            "dpe_disk_7": "373516",
+            "dpe_disk_0": "28076",
+            "dpe_disk_9": "373517",
+            "dae_0_1_disk_9": "447541",
+            "dpe_disk_12": "5",
+            "dae_0_1_disk_1": "2370580",
+            "dpe_disk_14": "5",
+            "dpe_disk_11": "373524",
+            "dpe_disk_4": "0",
+            "dae_0_1_disk_2": "5",
+            "dpe_disk_5": "1325061",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_6": "0",
+            "dpe_disk_15": "734733",
+            "dae_0_1_disk_7": "446387",
+            "dpe_disk_3": "91955",
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_5": "390120"
+          }
+        },
+        "queryId": 19,
+        "path": "sp.*.physical.disk.*.reads"
+      }
+    },
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": {
+            "dpe_disk_1": "1000416",
+            "dpe_disk_10": "8799",
+            "dpe_disk_2": "1129173",
+            "dae_0_1_disk_8": "88048",
+            "dae_0_1_disk_3": "5",
+            "dpe_disk_8": "8799",
+            "dpe_disk_6": "1305732",
+            "dpe_disk_13": "210460",
+            "dpe_disk_7": "7",
+            "dpe_disk_0": "1127483",
+            "dpe_disk_9": "7",
+            "dae_0_1_disk_9": "4",
+            "dpe_disk_12": "1269",
+            "dae_0_1_disk_1": "1879864",
+            "dpe_disk_14": "1269",
+            "dpe_disk_11": "6",
+            "dpe_disk_4": "8799",
+            "dae_0_1_disk_2": "3762381",
+            "dpe_disk_5": "735797",
+            "dae_0_1_disk_4": "29350",
+            "dae_0_1_disk_6": "29350",
+            "dpe_disk_15": "210486",
+            "dae_0_1_disk_7": "4",
+            "dpe_disk_3": "646738",
+            "dae_0_1_disk_0": "29350",
+            "dae_0_1_disk_5": "5"
+          },
+          "spb": {
+            "dpe_disk_1": "132325",
+            "dpe_disk_10": "0",
+            "dpe_disk_2": "16787",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_3": "29344",
+            "dpe_disk_8": "0",
+            "dpe_disk_6": "5",
+            "dpe_disk_13": "188340",
+            "dpe_disk_7": "8789",
+            "dpe_disk_0": "16797",
+            "dpe_disk_9": "8789",
+            "dae_0_1_disk_9": "88044",
+            "dpe_disk_12": "0",
+            "dae_0_1_disk_1": "1882560",
+            "dpe_disk_14": "0",
+            "dpe_disk_11": "8789",
+            "dpe_disk_4": "0",
+            "dae_0_1_disk_2": "5",
+            "dpe_disk_5": "569886",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_6": "0",
+            "dpe_disk_15": "188324",
+            "dae_0_1_disk_7": "88044",
+            "dpe_disk_3": "122776",
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_5": "29344"
+          }
+        },
+        "queryId": 19,
+        "path": "sp.*.physical.disk.*.writes"
+      }
+    },
+    {
+      "content": {
+        "timestamp": "2016-11-18T06:20:30.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "683431"
+          },
+          "spb": {
+            "sv_1": "13"
+          }
+        },
+        "queryId": 19,
+        "path": "sp.*.storage.lun.*.busyTime"
+      }
+    }
+  ],
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "updated": "2016-11-18T06:20:42.042Z",
+  "@base": "https://10.244.223.61/api/types/metricQueryResult/instances?filter=queryId eq 19&fields=path,queryId,timestamp,values&per_page=2000&compact=true"
+}

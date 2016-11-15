@@ -1,0 +1,44 @@
+{
+  "content": {
+    "name": "DPE Disk 23",
+    "isFastCacheInUse": false,
+    "id": "dpe_disk_23",
+    "isInUse": false,
+    "rawSize": 0,
+    "operationalStatus": [
+      32768
+    ],
+    "slotNumber": 23,
+    "wwn": "06:00:00:00:05:00:00:00:17:00:00:00:17:00:00:67",
+    "parentDpe": {
+      "id": "dpe"
+    },
+    "needsReplacement": false,
+    "version": "",
+    "model": "",
+    "vendorSerialNumber": "",
+    "health": {
+      "descriptionIds": [
+        "ALRT_DISK_SLOT_EMPTY"
+      ],
+      "value": 5,
+      "descriptions": [
+        "A disk in your system has been removed. The slot is empty."
+      ]
+    },
+    "size": 0,
+    "manufacturer": "",
+    "vendorPartNumber": "",
+    "emcSerialNumber": "",
+    "parent": {
+      "resource": "dpe",
+      "id": "dpe"
+    },
+    "isSED": false,
+    "isSystem": false,
+    "rpm": 0,
+    "busId": 0,
+    "emcPartNumber": "",
+    "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:17:00:00:00:17:00:00:67"
+  }
+}

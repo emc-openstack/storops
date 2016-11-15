@@ -39,12 +39,15 @@ def t_rest():
 
     :return: unity client singleton
     """
-    return UnityClient('10.244.223.66', 'admin', 'Password123!', verify=False)
+    return UnityClient('10.244.223.61', 'admin', 'Password123!', verify=False)
 
 
 @cache
 def t_unity():
-    return UnitySystem('10.244.223.66', 'admin', 'Password123!', verify=False)
+    unity = UnitySystem('10.244.223.61', 'admin', 'Password123!', verify=False)
+    unity.add_metric_record(unity.get_metric_query_result(17))
+    unity.add_metric_record(unity.get_metric_query_result(34))
+    return unity
 
 
 class MockRestClient(ConnectorMock):
@@ -76,8 +79,7 @@ class MockRestClient(ConnectorMock):
     @classmethod
     def get_filename(cls, inputs):
         url, body = inputs
-        string_indices = cls.read_index(cls.get_folder(inputs))
-        indices = json.loads(string_indices, encoding='utf-8')
+        indices = cls.read_index(cls.get_folder(inputs))
         for index in indices.get('indices', []):
             if url.lower() != index['url'].lower():
                 continue
@@ -93,7 +95,8 @@ class MockRestClient(ConnectorMock):
     @staticmethod
     @cache
     def read_index(folder):
-        return read_test_file(folder, 'index.json')
+        string_indices = read_test_file(folder, 'index.json')
+        return json.loads(string_indices, encoding='utf-8')
 
     def _get_mock_output(self, url, kwargs):
         body = kwargs.get('body', '')

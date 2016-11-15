@@ -15,21 +15,26 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import os
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, instance_of, only_contains, raises
+from hamcrest import assert_that, equal_to, instance_of, only_contains, \
+    raises, contains_string, greater_than, is_not
 
+from storops.lib.common import get_file_size
+from storops.unity.enums import NodeEnum
 from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.sp import UnityStorageProcessor, \
     UnityStorageProcessorList
-from storops.unity.resource.system import UnityDpe
-from storops.unity.enums import NodeEnum
-from test.unity.rest_mock import t_rest, patch_rest
+from storops.unity.resource.system import UnityDpe, UnitySystem
+from test.unity.rest_mock import t_rest, patch_rest, t_unity
 
 __author__ = 'Cedric Zhuang'
 
 
 class UnityStorageProcessorTest(TestCase):
+    sp_list = t_unity().get_sp()
+
     @patch_rest
     def test_properties(self):
         sp = UnityStorageProcessor(_id='spa', cli=t_rest())
@@ -74,3 +79,160 @@ class UnityStorageProcessorTest(TestCase):
             return sp_list.not_found
 
         assert_that(f, raises(AttributeError, 'not_found'))
+
+    @patch_rest
+    def test_metric_utilization(self):
+        spa, spb = self.sp_list
+        assert_that(spa.utilization, equal_to(22))
+        assert_that(spb.utilization, equal_to(33))
+
+    @patch_rest
+    def test_metric_nfs_write_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.nfs_write_mbps, equal_to(3.9))
+        assert_that(spb.nfs_write_mbps, equal_to(4.1))
+
+    @patch_rest
+    def test_metric_nfs_read_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.nfs_read_mbps, equal_to(3.7))
+        assert_that(spb.nfs_read_mbps, equal_to(3.8))
+
+    @patch_rest
+    def test_metric_nfs_write_iops(self):
+        spa, spb = self.sp_list
+        assert_that(spa.nfs_write_iops, equal_to(3.5))
+        assert_that(spb.nfs_write_iops, equal_to(3.6))
+
+    @patch_rest
+    def test_metric_nfs_read_iops(self):
+        spa, spb = self.sp_list
+        assert_that(spa.nfs_read_iops, equal_to(3.3))
+        assert_that(spb.nfs_read_iops, equal_to(3.4))
+
+    @patch_rest
+    def test_metric_cifs_write_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.cifs_write_mbps, equal_to(3.1))
+        assert_that(spb.cifs_write_mbps, equal_to(3.2))
+
+    @patch_rest
+    def test_metric_cifs_read_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.cifs_read_mbps, equal_to(2.8))
+        assert_that(spb.cifs_read_mbps, equal_to(2.9))
+
+    @patch_rest
+    def test_metric_cifs_write_iops(self):
+        spa, spb = self.sp_list
+        assert_that(spa.cifs_write_iops, equal_to(2.6))
+        assert_that(spb.cifs_write_iops, equal_to(2.7))
+
+    @patch_rest
+    def test_metric_cifs_read_iops(self):
+        spa, spb = self.sp_list
+        assert_that(spa.cifs_read_iops, equal_to(2.4))
+        assert_that(spb.cifs_read_iops, equal_to(2.5))
+
+    @patch_rest
+    def test_metric_block_write_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.block_write_mbps, equal_to(30))
+        assert_that(spb.block_write_mbps, equal_to(40))
+
+    @patch_rest
+    def test_metric_block_read_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.block_read_mbps, equal_to(1.9))
+        assert_that(spb.block_read_mbps, equal_to(2.1))
+
+    @patch_rest
+    def test_metric_block_write_iops(self):
+        spa, spb = self.sp_list
+        assert_that(spa.block_write_iops, equal_to(1.7))
+        assert_that(spb.block_write_iops, equal_to(1.8))
+
+    @patch_rest
+    def test_metric_block_read_iops(self):
+        spa, spb = self.sp_list
+        assert_that(spa.block_read_iops, equal_to(1.5))
+        assert_that(spb.block_read_iops, equal_to(1.6))
+
+    @patch_rest
+    def test_metric_temperature(self):
+        spa, spb = self.sp_list
+        assert_that(spa.temperature, equal_to(27))
+        assert_that(spb.temperature, equal_to(28))
+
+    @patch_rest
+    def test_metric_core_count(self):
+        spa, spb = self.sp_list
+        assert_that(spa.core_count, equal_to(10))
+        assert_that(spa.core_count, equal_to(10))
+
+    @patch_rest
+    def test_metric_net_out_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.net_out_mbps, equal_to(1.3))
+        assert_that(spb.net_out_mbps, equal_to(1.4))
+
+    @patch_rest
+    def test_metric_net_in_mbps(self):
+        spa, spb = self.sp_list
+        assert_that(spa.net_in_mbps, equal_to(1.1))
+        assert_that(spb.net_in_mbps, equal_to(1.2))
+
+    @patch_rest
+    def test_metric_block_cache_read_hit_ratio(self):
+        spa, spb = self.sp_list
+        assert_that(spa.block_cache_read_hit_ratio, equal_to(87.0))
+        assert_that(spb.block_cache_read_hit_ratio, equal_to(88.0))
+
+    @patch_rest
+    def test_metric_block_cache_write_hit_ratio(self):
+        spa, spb = self.sp_list
+        assert_that(spa.block_cache_write_hit_ratio, equal_to(89.0))
+        assert_that(spb.block_cache_write_hit_ratio, equal_to(90.0))
+
+    @patch_rest
+    def test_csv(self):
+        csv = self.sp_list.get_metrics_csv()
+        assert_that(csv, contains_string('timestamp,id,name,'))
+        assert_that(csv, contains_string('block_read_iops,block_read_mbps'))
+        assert_that(csv, contains_string('2016-11-21 09:10:00+00:00,spa'))
+        assert_that(csv, contains_string('spa,SP A,87.0,89.0'))
+        assert_that(csv, contains_string('spb,SP B,88.0,90.0'))
+
+    FILENAME = 'unittest_sp_metric_persist_csv_file.csv'
+
+    @classmethod
+    def tearDownClass(cls):
+        if os.path.exists(cls.FILENAME):
+            os.remove(cls.FILENAME)
+
+    @patch_rest
+    def test_persist_csv(self):
+        self.sp_list.persist_metric_data(self.FILENAME)
+        assert_that(os.path.exists(self.FILENAME), equal_to(True))
+        file_size = get_file_size(self.FILENAME)
+
+        self.sp_list.persist_metric_data(self.FILENAME)
+        new_file_size = get_file_size(self.FILENAME)
+        assert_that(new_file_size, greater_than(file_size))
+
+    @patch_rest
+    def test_default_metric_csv_filename(self):
+        filename = self.sp_list.get_default_metric_csv_filename()
+        assert_that(filename, contains_string('.storops'))
+        assert_that(filename,
+                    contains_string('10.244.223.61_storageProcessor.csv'))
+
+    @patch_rest
+    def test_repr_with_metric(self):
+        spa, _ = self.sp_list
+        assert_that(str(spa), contains_string('"nfs_write_mbps":'))
+
+    @patch_rest
+    def test_repr_without_metric(self):
+        spa, _ = UnitySystem('10.244.223.61').get_sp()
+        assert_that(str(spa), is_not(contains_string('"nfs_write_mbps":')))

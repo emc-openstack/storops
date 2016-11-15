@@ -1,0 +1,39 @@
+{
+  "content": {
+    "attributes": [
+      {
+        "displayValue": "id",
+        "description": "Unique identifier of the metricRealTimeQuery instance.  ",
+        "name": "id",
+        "type": "Integer"
+      },
+      {
+        "displayValue": "paths",
+        "description": "Metric stat paths associated with the query. To learn how to obtain stat paths for real-time metrics, see the description of the path attribute for the metric resource type.  ",
+        "name": "paths",
+        "type": "List<String>"
+      },
+      {
+        "displayValue": "interval",
+        "description": "Sampling frequency for the query, in seconds.  ",
+        "name": "interval",
+        "type": "Integer"
+      },
+      {
+        "displayValue": "maximumSamples",
+        "description": "Number of samples users want to get in one session. Once the number is reached, this session will be deleted. The minimum value is 1. <p/> If not specified, users can keep getting samples until they delete the query themselves or session expiration reached.  ",
+        "name": "maximumSamples",
+        "type": "Integer"
+      },
+      {
+        "displayValue": "expiration",
+        "description": "Date and time when the query will expire. Once the expiration date/time has been reached, the query will automatically be deleted, along with the corresponding results. <p/> This is strictly calculated by the server, and cannot be specified by the client. If the user doesn't retrieve a query result through MetricQueryResult for 10 consecutive sample periods, the session will be deleted. This value shows the time(10 periods after the last query) at which the session will be deleted if no queries are received.  ",
+        "name": "expiration",
+        "type": "DateTime"
+      }
+    ],
+    "documentation": "https://10.244.223.61/apidocs/classes/metricRealTimeQuery.html",
+    "name": "metricRealTimeQuery",
+    "description": "Represents a query to obtain real-time information for one or more metrics, including a specified sampling frequency. <p/> After you create this query, the results are available as a set of metricQueryResult resources, where the queryId attribute of each metricQueryResult resource matches the id attribute of the associated metricRealTimeQuery resource (VNXe and Unisphere Central) or metricHistoricalQuery resource (Unisphere Central only). <p/> You can optionally delete the metricRealTimeQuery resource when it is no longer needed, or the resource will be deleted automatically when expiration is reached. <p/> <b>Note:</b> The metricRealTimeQuery resource does not support the filtering of response data.  "
+  }
+}

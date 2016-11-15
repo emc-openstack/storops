@@ -1,0 +1,230 @@
+{
+  "@base": "https://10.244.223.61/api/types/disk/instances?filter=tierType eq 10&fields=bank,bankSlot,bankSlotNumber,busId,currentSpeed,diskTechnology,emcPartNumber,emcSerialNumber,estimatedEOL,health,id,instanceId,isFastCacheInUse,isInUse,isSED,isSystem,manufacturer,maxSpeed,model,name,needsReplacement,operationalStatus,parent,rawSize,rpm,size,slotNumber,tierType,vendorPartNumber,vendorSerialNumber,vendorSize,version,wwn,diskGroup.id,parentDae.id,pool.id,parentDpe.id&per_page=2000&compact=true",
+  "entries": [
+    {
+      "content": {
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "isSystem": false,
+        "busId": 0,
+        "needsReplacement": false,
+        "emcSerialNumber": "0LV42EBA",
+        "health": {
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ],
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5
+        },
+        "id": "dpe_disk_12",
+        "isSED": false,
+        "wwn": "06:00:00:00:05:00:00:00:08:01:00:00:00:00:00:03",
+        "version": "C342",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:08:01:00:00:00:00:00:03",
+        "rawSize": 196971960832,
+        "tierType": 10,
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "name": "DPE Disk 12",
+        "vendorSerialNumber": "0LV42EBA",
+        "estimatedEOL": "43800:00:00.000",
+        "diskTechnology": 6,
+        "vendorSize": 214748364800,
+        "manufacturer": "HITACHI",
+        "isInUse": false,
+        "model": "HUSMH842 EMC200",
+        "rpm": 0,
+        "maxSpeed": 12000000000,
+        "currentSpeed": 12000000000,
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "isFastCacheInUse": false,
+        "operationalStatus": [
+          2
+        ],
+        "size": 196938406400,
+        "slotNumber": 12,
+        "vendorPartNumber": "005051223",
+        "emcPartNumber": "005051223"
+      }
+    },
+    {
+      "content": {
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "isSystem": false,
+        "busId": 0,
+        "needsReplacement": false,
+        "emcSerialNumber": "0LV42T1A",
+        "health": {
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ],
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5
+        },
+        "id": "dpe_disk_13",
+        "isSED": false,
+        "wwn": "06:00:00:00:05:00:00:00:09:01:00:00:00:00:00:03",
+        "version": "C342",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:09:01:00:00:00:00:00:03",
+        "rawSize": 196971960832,
+        "tierType": 10,
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "name": "DPE Disk 13",
+        "vendorSerialNumber": "0LV42T1A",
+        "estimatedEOL": "43800:00:00.000",
+        "diskTechnology": 6,
+        "vendorSize": 214748364800,
+        "pool": {
+          "id": "pool_2"
+        },
+        "manufacturer": "HITACHI",
+        "isInUse": true,
+        "model": "HUSMH842 EMC200",
+        "rpm": 0,
+        "maxSpeed": 12000000000,
+        "currentSpeed": 12000000000,
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "isFastCacheInUse": false,
+        "operationalStatus": [
+          2
+        ],
+        "size": 196938406400,
+        "slotNumber": 13,
+        "vendorPartNumber": "005051223",
+        "emcPartNumber": "005051223"
+      }
+    },
+    {
+      "content": {
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "isSystem": false,
+        "busId": 0,
+        "needsReplacement": false,
+        "emcSerialNumber": "0LV436TA",
+        "health": {
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ],
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5
+        },
+        "id": "dpe_disk_14",
+        "isSED": false,
+        "wwn": "06:00:00:00:05:00:00:00:0A:01:00:00:00:00:00:03",
+        "version": "C342",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0A:01:00:00:00:00:00:03",
+        "rawSize": 196971960832,
+        "tierType": 10,
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "name": "DPE Disk 14",
+        "vendorSerialNumber": "0LV436TA",
+        "estimatedEOL": "43800:00:00.000",
+        "diskTechnology": 6,
+        "vendorSize": 214748364800,
+        "manufacturer": "HITACHI",
+        "isInUse": false,
+        "model": "HUSMH842 EMC200",
+        "rpm": 0,
+        "maxSpeed": 12000000000,
+        "currentSpeed": 12000000000,
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "isFastCacheInUse": false,
+        "operationalStatus": [
+          2
+        ],
+        "size": 196938406400,
+        "slotNumber": 14,
+        "vendorPartNumber": "005051223",
+        "emcPartNumber": "005051223"
+      }
+    },
+    {
+      "content": {
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "isSystem": false,
+        "busId": 0,
+        "needsReplacement": false,
+        "emcSerialNumber": "0LV4320A",
+        "health": {
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ],
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "value": 5
+        },
+        "id": "dpe_disk_15",
+        "isSED": false,
+        "wwn": "06:00:00:00:05:00:00:00:0B:01:00:00:00:00:00:03",
+        "version": "C342",
+        "instanceId": "root/emc:EMC_UEM_DiskLeaf%Tag=06:00:00:00:05:00:00:00:0B:01:00:00:00:00:00:03",
+        "rawSize": 196971960832,
+        "tierType": 10,
+        "diskGroup": {
+          "id": "dg_2"
+        },
+        "name": "DPE Disk 15",
+        "vendorSerialNumber": "0LV4320A",
+        "estimatedEOL": "43800:00:00.000",
+        "diskTechnology": 6,
+        "vendorSize": 214748364800,
+        "pool": {
+          "id": "pool_2"
+        },
+        "manufacturer": "HITACHI",
+        "isInUse": true,
+        "model": "HUSMH842 EMC200",
+        "rpm": 0,
+        "maxSpeed": 12000000000,
+        "currentSpeed": 12000000000,
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "isFastCacheInUse": false,
+        "operationalStatus": [
+          2
+        ],
+        "size": 196938406400,
+        "slotNumber": 15,
+        "vendorPartNumber": "005051223",
+        "emcPartNumber": "005051223"
+      }
+    }
+  ],
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "updated": "2016-11-16T08:34:08.857Z"
+}

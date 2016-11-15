@@ -1,0 +1,3141 @@
+{
+  "@base": "https://10.244.223.61/api/types/metricQueryResult/instances/?filter=queryId eq 17&per_page=2000&compact=true",
+  "updated": "2016-11-21T09:07:57.394Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.platform.storageProcessorTemperature",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "26",
+          "spb": "26"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.dirtyBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "79",
+          "spb": "69"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.fibreChannel.blockSize",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "512",
+          "spb": "512"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v2.op.*.failures",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "v2Create": "0",
+            "v2GetAttr": "0",
+            "v2Link": "0",
+            "v2Lookup": "0",
+            "v2Mkdir": "0",
+            "v2Null": "0",
+            "v2Read": "0",
+            "v2ReadDir": "0",
+            "v2ReadLink": "0",
+            "v2Remove": "0",
+            "v2Rename": "0",
+            "v2Rmdir": "0",
+            "v2Root": "0",
+            "v2SetAttr": "0",
+            "v2StatFs": "0",
+            "v2Symlink": "0",
+            "v2Write": "0",
+            "v2WriteCache": "0"
+          },
+          "spb": {
+            "v2Create": "0",
+            "v2GetAttr": "0",
+            "v2Link": "0",
+            "v2Lookup": "0",
+            "v2Mkdir": "0",
+            "v2Null": "0",
+            "v2Read": "0",
+            "v2ReadDir": "0",
+            "v2ReadLink": "0",
+            "v2Remove": "0",
+            "v2Rename": "0",
+            "v2Rmdir": "0",
+            "v2Root": "0",
+            "v2SetAttr": "0",
+            "v2StatFs": "0",
+            "v2Symlink": "0",
+            "v2Write": "0",
+            "v2WriteCache": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v3.op.*.failures",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "VAAI": "0",
+            "fsTest": "0",
+            "v3Access": "0",
+            "v3Commit": "0",
+            "v3Create": "0",
+            "v3FsInfo": "0",
+            "v3FsStat": "0",
+            "v3GetAttr": "0",
+            "v3Link": "0",
+            "v3Lookup": "0",
+            "v3Mkdir": "0",
+            "v3Mknod": "0",
+            "v3Null": "0",
+            "v3PathConf": "0",
+            "v3Read": "0",
+            "v3ReadDir": "0",
+            "v3ReadDirPlus": "0",
+            "v3ReadLink": "0",
+            "v3Remove": "0",
+            "v3Rename": "0",
+            "v3Rmdir": "0",
+            "v3SetAttr": "0",
+            "v3Symlink": "0",
+            "v3Write": "0"
+          },
+          "spb": {
+            "VAAI": "0",
+            "fsTest": "0",
+            "v3Access": "0",
+            "v3Commit": "0",
+            "v3Create": "0",
+            "v3FsInfo": "0",
+            "v3FsStat": "0",
+            "v3GetAttr": "0",
+            "v3Link": "0",
+            "v3Lookup": "0",
+            "v3Mkdir": "0",
+            "v3Mknod": "0",
+            "v3Null": "0",
+            "v3PathConf": "0",
+            "v3Read": "0",
+            "v3ReadDir": "0",
+            "v3ReadDirPlus": "0",
+            "v3ReadLink": "0",
+            "v3Remove": "0",
+            "v3Rename": "0",
+            "v3Rmdir": "0",
+            "v3SetAttr": "0",
+            "v3Symlink": "0",
+            "v3Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.op.*.minTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          },
+          "spb": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.op.*.maxTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          },
+          "spb": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.op.*.minTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          },
+          "spb": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.op.*.maxTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          },
+          "spb": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.coreCount",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "10",
+          "spb": "10"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v2.op.*.totalTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "v2Create": "0",
+            "v2GetAttr": "0",
+            "v2Link": "0",
+            "v2Lookup": "0",
+            "v2Mkdir": "0",
+            "v2Null": "0",
+            "v2Read": "0",
+            "v2ReadDir": "0",
+            "v2ReadLink": "0",
+            "v2Remove": "0",
+            "v2Rename": "0",
+            "v2Rmdir": "0",
+            "v2Root": "0",
+            "v2SetAttr": "0",
+            "v2StatFs": "0",
+            "v2Symlink": "0",
+            "v2Write": "0",
+            "v2WriteCache": "0"
+          },
+          "spb": {
+            "v2Create": "0",
+            "v2GetAttr": "0",
+            "v2Link": "0",
+            "v2Lookup": "0",
+            "v2Mkdir": "0",
+            "v2Null": "0",
+            "v2Read": "0",
+            "v2ReadDir": "0",
+            "v2ReadLink": "0",
+            "v2Remove": "0",
+            "v2Rename": "0",
+            "v2Rmdir": "0",
+            "v2Root": "0",
+            "v2SetAttr": "0",
+            "v2StatFs": "0",
+            "v2Symlink": "0",
+            "v2Write": "0",
+            "v2WriteCache": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v3.op.*.totalTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "VAAI": "0",
+            "fsTest": "0",
+            "v3Access": "11094",
+            "v3Commit": "127413",
+            "v3Create": "35405",
+            "v3FsInfo": "704",
+            "v3FsStat": "0",
+            "v3GetAttr": "20722",
+            "v3Link": "0",
+            "v3Lookup": "21497",
+            "v3Mkdir": "0",
+            "v3Mknod": "0",
+            "v3Null": "0",
+            "v3PathConf": "844",
+            "v3Read": "0",
+            "v3ReadDir": "0",
+            "v3ReadDirPlus": "913",
+            "v3ReadLink": "0",
+            "v3Remove": "49523",
+            "v3Rename": "331",
+            "v3Rmdir": "0",
+            "v3SetAttr": "13948",
+            "v3Symlink": "0",
+            "v3Write": "34532261"
+          },
+          "spb": {
+            "VAAI": "0",
+            "fsTest": "0",
+            "v3Access": "0",
+            "v3Commit": "0",
+            "v3Create": "0",
+            "v3FsInfo": "0",
+            "v3FsStat": "0",
+            "v3GetAttr": "0",
+            "v3Link": "0",
+            "v3Lookup": "0",
+            "v3Mkdir": "0",
+            "v3Mknod": "0",
+            "v3Null": "0",
+            "v3PathConf": "0",
+            "v3Read": "0",
+            "v3ReadDir": "0",
+            "v3ReadDirPlus": "0",
+            "v3ReadLink": "0",
+            "v3Remove": "0",
+            "v3Rename": "0",
+            "v3Rmdir": "0",
+            "v3SetAttr": "0",
+            "v3Symlink": "0",
+            "v3Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.op.*.totalTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          },
+          "spb": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.op.*.totalTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          },
+          "spb": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.readHits",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "564614",
+          "spb": "6756"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.readMisses",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "28186",
+          "spb": "44"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.flushes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "531221",
+          "spb": "11833"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.flushedBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "983223956",
+          "spb": "850103"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.writeHits",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "44172399",
+          "spb": "706"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.blockCache.global.summary.writeMisses",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "49720908",
+          "spb": "15051"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.summary.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "8"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.summary.readBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "8"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.summary.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.global.basic.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.global.basic.readBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.global.basic.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.global.basic.writeBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.net.basic.inBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "13006806386",
+          "spb": "201176512"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.net.basic.outBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "619145354",
+          "spb": "139925650"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.basic.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.basic.readBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.basic.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "92687",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.basic.writeBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "11968744422",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v2.io.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          },
+          "spb": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v2.io.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          },
+          "spb": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v2.op.*.calls",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "v2Create": "0",
+            "v2GetAttr": "0",
+            "v2Link": "0",
+            "v2Lookup": "0",
+            "v2Mkdir": "0",
+            "v2Null": "5",
+            "v2Read": "0",
+            "v2ReadDir": "0",
+            "v2ReadLink": "0",
+            "v2Remove": "0",
+            "v2Rename": "0",
+            "v2Rmdir": "0",
+            "v2Root": "0",
+            "v2SetAttr": "0",
+            "v2StatFs": "0",
+            "v2Symlink": "0",
+            "v2Write": "0",
+            "v2WriteCache": "0"
+          },
+          "spb": {
+            "v2Create": "0",
+            "v2GetAttr": "0",
+            "v2Link": "0",
+            "v2Lookup": "0",
+            "v2Mkdir": "0",
+            "v2Null": "0",
+            "v2Read": "0",
+            "v2ReadDir": "0",
+            "v2ReadLink": "0",
+            "v2Remove": "0",
+            "v2Rename": "0",
+            "v2Rmdir": "0",
+            "v2Root": "0",
+            "v2SetAttr": "0",
+            "v2StatFs": "0",
+            "v2Symlink": "0",
+            "v2Write": "0",
+            "v2WriteCache": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v3.io.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          },
+          "spb": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v3.io.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "66122",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "195",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "311",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "473",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "511",
+            "67108864-134217727": "0",
+            "8-15": "1",
+            "8192-16383": "112",
+            "8388608-16777215": "0"
+          },
+          "spb": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v3.op.*.calls",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "VAAI": "0",
+            "fsTest": "0",
+            "v3Access": "14",
+            "v3Commit": "404",
+            "v3Create": "14",
+            "v3FsInfo": "6",
+            "v3FsStat": "0",
+            "v3GetAttr": "112",
+            "v3Link": "0",
+            "v3Lookup": "49",
+            "v3Mkdir": "0",
+            "v3Mknod": "0",
+            "v3Null": "0",
+            "v3PathConf": "3",
+            "v3Read": "0",
+            "v3ReadDir": "0",
+            "v3ReadDirPlus": "9",
+            "v3ReadLink": "0",
+            "v3Remove": "14",
+            "v3Rename": "1",
+            "v3Rmdir": "0",
+            "v3SetAttr": "19",
+            "v3Symlink": "0",
+            "v3Write": "92687"
+          },
+          "spb": {
+            "VAAI": "0",
+            "fsTest": "0",
+            "v3Access": "0",
+            "v3Commit": "0",
+            "v3Create": "0",
+            "v3FsInfo": "0",
+            "v3FsStat": "0",
+            "v3GetAttr": "0",
+            "v3Link": "0",
+            "v3Lookup": "0",
+            "v3Mkdir": "0",
+            "v3Mknod": "0",
+            "v3Null": "0",
+            "v3PathConf": "0",
+            "v3Read": "0",
+            "v3ReadDir": "0",
+            "v3ReadDirPlus": "0",
+            "v3ReadLink": "0",
+            "v3Remove": "0",
+            "v3Rename": "0",
+            "v3Rmdir": "0",
+            "v3SetAttr": "0",
+            "v3Symlink": "0",
+            "v3Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v4.io.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          },
+          "spb": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v4.io.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          },
+          "spb": {
+            "0-0": "0",
+            "1-1": "0",
+            "1024-2047": "0",
+            "1048576-2097151": "0",
+            "1073741824-2147483647": "0",
+            "128-255": "0",
+            "131072-262143": "0",
+            "134217728-268435455": "0",
+            "16-31": "0",
+            "16384-32767": "0",
+            "16777216-33554431": "0",
+            "2-3": "0",
+            "2048-4095": "0",
+            "2097152-4194303": "0",
+            "2147483648-4294967295": "0",
+            "256-511": "0",
+            "262144-524287": "0",
+            "268435456-536870911": "0",
+            "32-63": "0",
+            "32768-65535": "0",
+            "33554432-67108863": "0",
+            "4-7": "0",
+            "4096-8191": "0",
+            "4194304-8388607": "0",
+            "512-1023": "0",
+            "524288-1048575": "0",
+            "536870912-1073741823": "0",
+            "64-127": "0",
+            "65536-131071": "0",
+            "67108864-134217727": "0",
+            "8-15": "0",
+            "8192-16383": "0",
+            "8388608-16777215": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v4.op.*.calls",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "v4Access": "0",
+            "v4BackChanCtl": "0",
+            "v4BindConn": "0",
+            "v4Clntid_Conf": "0",
+            "v4Close": "0",
+            "v4Commit": "0",
+            "v4Compound": "0",
+            "v4Create": "0",
+            "v4CreateSess": "0",
+            "v4DelegPrg": "0",
+            "v4DelegRet": "0",
+            "v4DestroyClid": "0",
+            "v4DestroySess": "0",
+            "v4ExchangeId": "0",
+            "v4FreeStateid": "0",
+            "v4GetAttr": "0",
+            "v4GetDevInfo": "0",
+            "v4GetDevList": "0",
+            "v4GetDirDeleg": "0",
+            "v4GetFh": "0",
+            "v4Illegal": "0",
+            "v4LayoutCmmt": "0",
+            "v4LayoutGet": "0",
+            "v4LayoutRet": "0",
+            "v4Link": "0",
+            "v4Lock": "0",
+            "v4LockT": "0",
+            "v4LockU": "0",
+            "v4Lookup": "0",
+            "v4Lookupp": "0",
+            "v4NVerify": "0",
+            "v4Null": "3",
+            "v4Open": "0",
+            "v4OpenAttr": "0",
+            "v4Open_Conf": "0",
+            "v4Open_DG": "0",
+            "v4PutFh": "0",
+            "v4PutpubFh": "0",
+            "v4PutrootFh": "0",
+            "v4Read": "0",
+            "v4ReadDir": "0",
+            "v4ReadLink": "0",
+            "v4ReclaimCmpl": "0",
+            "v4Rel_Lockown": "0",
+            "v4Remove": "0",
+            "v4Rename": "0",
+            "v4Renew": "0",
+            "v4Reserved": "0",
+            "v4RestoreFh": "0",
+            "v4SaveFh": "0",
+            "v4SecInfo": "0",
+            "v4SecinfoNoName": "0",
+            "v4Sequence": "0",
+            "v4SetAttr": "0",
+            "v4SetClntid": "0",
+            "v4SetSsv": "0",
+            "v4TestStateid": "0",
+            "v4Verify": "0",
+            "v4WantDeleg": "0",
+            "v4Write": "0"
+          },
+          "spb": {
+            "v4Access": "0",
+            "v4BackChanCtl": "0",
+            "v4BindConn": "0",
+            "v4Clntid_Conf": "0",
+            "v4Close": "0",
+            "v4Commit": "0",
+            "v4Compound": "0",
+            "v4Create": "0",
+            "v4CreateSess": "0",
+            "v4DelegPrg": "0",
+            "v4DelegRet": "0",
+            "v4DestroyClid": "0",
+            "v4DestroySess": "0",
+            "v4ExchangeId": "0",
+            "v4FreeStateid": "0",
+            "v4GetAttr": "0",
+            "v4GetDevInfo": "0",
+            "v4GetDevList": "0",
+            "v4GetDirDeleg": "0",
+            "v4GetFh": "0",
+            "v4Illegal": "0",
+            "v4LayoutCmmt": "0",
+            "v4LayoutGet": "0",
+            "v4LayoutRet": "0",
+            "v4Link": "0",
+            "v4Lock": "0",
+            "v4LockT": "0",
+            "v4LockU": "0",
+            "v4Lookup": "0",
+            "v4Lookupp": "0",
+            "v4NVerify": "0",
+            "v4Null": "0",
+            "v4Open": "0",
+            "v4OpenAttr": "0",
+            "v4Open_Conf": "0",
+            "v4Open_DG": "0",
+            "v4PutFh": "0",
+            "v4PutpubFh": "0",
+            "v4PutrootFh": "0",
+            "v4Read": "0",
+            "v4ReadDir": "0",
+            "v4ReadLink": "0",
+            "v4ReclaimCmpl": "0",
+            "v4Rel_Lockown": "0",
+            "v4Remove": "0",
+            "v4Rename": "0",
+            "v4Renew": "0",
+            "v4Reserved": "0",
+            "v4RestoreFh": "0",
+            "v4SaveFh": "0",
+            "v4SecInfo": "0",
+            "v4SecinfoNoName": "0",
+            "v4Sequence": "0",
+            "v4SetAttr": "0",
+            "v4SetClntid": "0",
+            "v4SetSsv": "0",
+            "v4TestStateid": "0",
+            "v4Verify": "0",
+            "v4WantDeleg": "0",
+            "v4Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v4.op.*.totalTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "v4Access": "0",
+            "v4BackChanCtl": "0",
+            "v4BindConn": "0",
+            "v4Clntid_Conf": "0",
+            "v4Close": "0",
+            "v4Commit": "0",
+            "v4Compound": "0",
+            "v4Create": "0",
+            "v4CreateSess": "0",
+            "v4DelegPrg": "0",
+            "v4DelegRet": "0",
+            "v4DestroyClid": "0",
+            "v4DestroySess": "0",
+            "v4ExchangeId": "0",
+            "v4FreeStateid": "0",
+            "v4GetAttr": "0",
+            "v4GetDevInfo": "0",
+            "v4GetDevList": "0",
+            "v4GetDirDeleg": "0",
+            "v4GetFh": "0",
+            "v4Illegal": "0",
+            "v4LayoutCmmt": "0",
+            "v4LayoutGet": "0",
+            "v4LayoutRet": "0",
+            "v4Link": "0",
+            "v4Lock": "0",
+            "v4LockT": "0",
+            "v4LockU": "0",
+            "v4Lookup": "0",
+            "v4Lookupp": "0",
+            "v4NVerify": "0",
+            "v4Null": "53",
+            "v4Open": "0",
+            "v4OpenAttr": "0",
+            "v4Open_Conf": "0",
+            "v4Open_DG": "0",
+            "v4PutFh": "0",
+            "v4PutpubFh": "0",
+            "v4PutrootFh": "0",
+            "v4Read": "0",
+            "v4ReadDir": "0",
+            "v4ReadLink": "0",
+            "v4ReclaimCmpl": "0",
+            "v4Rel_Lockown": "0",
+            "v4Remove": "0",
+            "v4Rename": "0",
+            "v4Renew": "0",
+            "v4Reserved": "0",
+            "v4RestoreFh": "0",
+            "v4SaveFh": "0",
+            "v4SecInfo": "0",
+            "v4SecinfoNoName": "0",
+            "v4Sequence": "0",
+            "v4SetAttr": "0",
+            "v4SetClntid": "0",
+            "v4SetSsv": "0",
+            "v4TestStateid": "0",
+            "v4Verify": "0",
+            "v4WantDeleg": "0",
+            "v4Write": "0"
+          },
+          "spb": {
+            "v4Access": "0",
+            "v4BackChanCtl": "0",
+            "v4BindConn": "0",
+            "v4Clntid_Conf": "0",
+            "v4Close": "0",
+            "v4Commit": "0",
+            "v4Compound": "0",
+            "v4Create": "0",
+            "v4CreateSess": "0",
+            "v4DelegPrg": "0",
+            "v4DelegRet": "0",
+            "v4DestroyClid": "0",
+            "v4DestroySess": "0",
+            "v4ExchangeId": "0",
+            "v4FreeStateid": "0",
+            "v4GetAttr": "0",
+            "v4GetDevInfo": "0",
+            "v4GetDevList": "0",
+            "v4GetDirDeleg": "0",
+            "v4GetFh": "0",
+            "v4Illegal": "0",
+            "v4LayoutCmmt": "0",
+            "v4LayoutGet": "0",
+            "v4LayoutRet": "0",
+            "v4Link": "0",
+            "v4Lock": "0",
+            "v4LockT": "0",
+            "v4LockU": "0",
+            "v4Lookup": "0",
+            "v4Lookupp": "0",
+            "v4NVerify": "0",
+            "v4Null": "0",
+            "v4Open": "0",
+            "v4OpenAttr": "0",
+            "v4Open_Conf": "0",
+            "v4Open_DG": "0",
+            "v4PutFh": "0",
+            "v4PutpubFh": "0",
+            "v4PutrootFh": "0",
+            "v4Read": "0",
+            "v4ReadDir": "0",
+            "v4ReadLink": "0",
+            "v4ReclaimCmpl": "0",
+            "v4Rel_Lockown": "0",
+            "v4Remove": "0",
+            "v4Rename": "0",
+            "v4Renew": "0",
+            "v4Reserved": "0",
+            "v4RestoreFh": "0",
+            "v4SaveFh": "0",
+            "v4SecInfo": "0",
+            "v4SecinfoNoName": "0",
+            "v4Sequence": "0",
+            "v4SetAttr": "0",
+            "v4SetClntid": "0",
+            "v4SetSsv": "0",
+            "v4TestStateid": "0",
+            "v4Verify": "0",
+            "v4WantDeleg": "0",
+            "v4Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.nfs.v4.op.*.failures",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "v4Access": "0",
+            "v4BackChanCtl": "0",
+            "v4BindConn": "0",
+            "v4Clntid_Conf": "0",
+            "v4Close": "0",
+            "v4Commit": "0",
+            "v4Compound": "0",
+            "v4Create": "0",
+            "v4CreateSess": "0",
+            "v4DelegPrg": "0",
+            "v4DelegRet": "0",
+            "v4DestroyClid": "0",
+            "v4DestroySess": "0",
+            "v4ExchangeId": "0",
+            "v4FreeStateid": "0",
+            "v4GetAttr": "0",
+            "v4GetDevInfo": "0",
+            "v4GetDevList": "0",
+            "v4GetDirDeleg": "0",
+            "v4GetFh": "0",
+            "v4Illegal": "0",
+            "v4LayoutCmmt": "0",
+            "v4LayoutGet": "0",
+            "v4LayoutRet": "0",
+            "v4Link": "0",
+            "v4Lock": "0",
+            "v4LockT": "0",
+            "v4LockU": "0",
+            "v4Lookup": "0",
+            "v4Lookupp": "0",
+            "v4NVerify": "0",
+            "v4Null": "0",
+            "v4Open": "0",
+            "v4OpenAttr": "0",
+            "v4Open_Conf": "0",
+            "v4Open_DG": "0",
+            "v4PutFh": "0",
+            "v4PutpubFh": "0",
+            "v4PutrootFh": "0",
+            "v4Read": "0",
+            "v4ReadDir": "0",
+            "v4ReadLink": "0",
+            "v4ReclaimCmpl": "0",
+            "v4Rel_Lockown": "0",
+            "v4Remove": "0",
+            "v4Rename": "0",
+            "v4Renew": "0",
+            "v4Reserved": "0",
+            "v4RestoreFh": "0",
+            "v4SaveFh": "0",
+            "v4SecInfo": "0",
+            "v4SecinfoNoName": "0",
+            "v4Sequence": "0",
+            "v4SetAttr": "0",
+            "v4SetClntid": "0",
+            "v4SetSsv": "0",
+            "v4TestStateid": "0",
+            "v4Verify": "0",
+            "v4WantDeleg": "0",
+            "v4Write": "0"
+          },
+          "spb": {
+            "v4Access": "0",
+            "v4BackChanCtl": "0",
+            "v4BindConn": "0",
+            "v4Clntid_Conf": "0",
+            "v4Close": "0",
+            "v4Commit": "0",
+            "v4Compound": "0",
+            "v4Create": "0",
+            "v4CreateSess": "0",
+            "v4DelegPrg": "0",
+            "v4DelegRet": "0",
+            "v4DestroyClid": "0",
+            "v4DestroySess": "0",
+            "v4ExchangeId": "0",
+            "v4FreeStateid": "0",
+            "v4GetAttr": "0",
+            "v4GetDevInfo": "0",
+            "v4GetDevList": "0",
+            "v4GetDirDeleg": "0",
+            "v4GetFh": "0",
+            "v4Illegal": "0",
+            "v4LayoutCmmt": "0",
+            "v4LayoutGet": "0",
+            "v4LayoutRet": "0",
+            "v4Link": "0",
+            "v4Lock": "0",
+            "v4LockT": "0",
+            "v4LockU": "0",
+            "v4Lookup": "0",
+            "v4Lookupp": "0",
+            "v4NVerify": "0",
+            "v4Null": "0",
+            "v4Open": "0",
+            "v4OpenAttr": "0",
+            "v4Open_Conf": "0",
+            "v4Open_DG": "0",
+            "v4PutFh": "0",
+            "v4PutpubFh": "0",
+            "v4PutrootFh": "0",
+            "v4Read": "0",
+            "v4ReadDir": "0",
+            "v4ReadLink": "0",
+            "v4ReclaimCmpl": "0",
+            "v4Rel_Lockown": "0",
+            "v4Remove": "0",
+            "v4Rename": "0",
+            "v4Renew": "0",
+            "v4Reserved": "0",
+            "v4RestoreFh": "0",
+            "v4SaveFh": "0",
+            "v4SecInfo": "0",
+            "v4SecinfoNoName": "0",
+            "v4Sequence": "0",
+            "v4SetAttr": "0",
+            "v4SetClntid": "0",
+            "v4SetSsv": "0",
+            "v4TestStateid": "0",
+            "v4Verify": "0",
+            "v4WantDeleg": "0",
+            "v4Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cpu.summary.busyTicks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "42309095",
+          "spb": "12667646"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cpu.summary.idleTicks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "649675508",
+          "spb": "680502191"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.basic.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.basic.readBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.basic.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.basic.writeBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.summary.writeBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb1.op.*.calls",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          },
+          "spb": {
+            "SMB1_BeginMessage": "0",
+            "SMB1_CancelNT": "0",
+            "SMB1_ChkPath": "0",
+            "SMB1_Close": "0",
+            "SMB1_CloseTreeDisco": "0",
+            "SMB1_Copy": "0",
+            "SMB1_Create": "0",
+            "SMB1_CreateNTX": "0",
+            "SMB1_CreateTmp": "0",
+            "SMB1_DiskAttr": "0",
+            "SMB1_Echo": "0",
+            "SMB1_EndMessage": "0",
+            "SMB1_Exit": "0",
+            "SMB1_FindClose": "0",
+            "SMB1_FindClose2": "0",
+            "SMB1_FindFirst": "0",
+            "SMB1_FindNotifyClose": "0",
+            "SMB1_FindUnique": "0",
+            "SMB1_Flush": "0",
+            "SMB1_GetAttr": "0",
+            "SMB1_GetAttrExp": "0",
+            "SMB1_Lock": "0",
+            "SMB1_LockRead": "0",
+            "SMB1_LockingX": "0",
+            "SMB1_Lseek": "0",
+            "SMB1_MessageText": "0",
+            "SMB1_MkNew": "0",
+            "SMB1_Mkdir": "0",
+            "SMB1_Move": "0",
+            "SMB1_NTRename": "0",
+            "SMB1_NegProt": "0",
+            "SMB1_Open": "0",
+            "SMB1_OpenX": "0",
+            "SMB1_Read": "0",
+            "SMB1_ReadBlockRaw": "0",
+            "SMB1_ReadX": "0",
+            "SMB1_Rename": "0",
+            "SMB1_Rmdir": "0",
+            "SMB1_Search": "0",
+            "SMB1_SendMessage": "0",
+            "SMB1_SessSetupX": "0",
+            "SMB1_SetAttr": "0",
+            "SMB1_SetAttrExp": "0",
+            "SMB1_Trans": "0",
+            "SMB1_Trans2Prim": "0",
+            "SMB1_Trans2Secd": "0",
+            "SMB1_TransNT": "0",
+            "SMB1_TransNTSecd": "0",
+            "SMB1_TransSec": "0",
+            "SMB1_TreeConnect": "0",
+            "SMB1_TreeConnectX": "0",
+            "SMB1_TreeDisco": "0",
+            "SMB1_Unlink": "0",
+            "SMB1_Unlock": "0",
+            "SMB1_UserLogoffX": "0",
+            "SMB1_Write": "0",
+            "SMB1_WriteBlockRaw": "0",
+            "SMB1_WriteClose": "0",
+            "SMB1_WriteUnlock": "0",
+            "SMB1_WriteX": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.basic.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.basic.readBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.basic.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.basic.writeBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "0",
+          "spb": "0"
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.cifs.smb2.op.*.calls",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          },
+          "spb": {
+            "SMB2_Cancel": "0",
+            "SMB2_ChangeNotify": "0",
+            "SMB2_Close": "0",
+            "SMB2_Create": "0",
+            "SMB2_Echo": "0",
+            "SMB2_Flush": "0",
+            "SMB2_Ioctl": "0",
+            "SMB2_Lock": "0",
+            "SMB2_Logoff": "0",
+            "SMB2_Negotiate": "0",
+            "SMB2_OplockBreak": "0",
+            "SMB2_QueryDirectory": "0",
+            "SMB2_QueryInfo": "0",
+            "SMB2_Read": "0",
+            "SMB2_SessionSetup": "0",
+            "SMB2_SetInfo": "0",
+            "SMB2_TreeConnect": "0",
+            "SMB2_TreeDisConnect": "0",
+            "SMB2_Write": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "0",
+            "sv_2": "0"
+          },
+          "spb": {
+            "sv_1": "0",
+            "sv_2": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "0",
+            "sv_2": "0"
+          },
+          "spb": {
+            "sv_1": "0",
+            "sv_2": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.readBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "0",
+            "sv_2": "0"
+          },
+          "spb": {
+            "sv_1": "0",
+            "sv_2": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.writeBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "0",
+            "sv_2": "0"
+          },
+          "spb": {
+            "sv_1": "0",
+            "sv_2": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.currentIOCount",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "0",
+            "sv_2": "0"
+          },
+          "spb": {
+            "sv_1": "0",
+            "sv_2": "0"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.totalIoTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "683477",
+            "sv_2": "38"
+          },
+          "spb": {
+            "sv_1": "39",
+            "sv_2": "327344"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.busyTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "683484",
+            "sv_2": "39"
+          },
+          "spb": {
+            "sv_1": "41",
+            "sv_2": "327347"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.lun.*.idleTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "sv_1": "225678166",
+            "sv_2": "5141427972"
+          },
+          "spb": {
+            "sv_1": "223293881",
+            "sv_2": "5141029891"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "658731",
+            "dae_0_1_disk_1": "1881405",
+            "dae_0_1_disk_2": "4515161",
+            "dae_0_1_disk_3": "13",
+            "dae_0_1_disk_4": "658994",
+            "dae_0_1_disk_5": "13",
+            "dae_0_1_disk_6": "659054",
+            "dae_0_1_disk_7": "11",
+            "dae_0_1_disk_8": "715795",
+            "dae_0_1_disk_9": "11",
+            "dpe_disk_0": "1833088",
+            "dpe_disk_1": "1360633",
+            "dpe_disk_10": "642495",
+            "dpe_disk_11": "16",
+            "dpe_disk_12": "633122",
+            "dpe_disk_13": "202497",
+            "dpe_disk_14": "633122",
+            "dpe_disk_15": "205220",
+            "dpe_disk_2": "1453649",
+            "dpe_disk_3": "1258012",
+            "dpe_disk_4": "642481",
+            "dpe_disk_5": "575873",
+            "dpe_disk_6": "2165909",
+            "dpe_disk_7": "18",
+            "dpe_disk_8": "642488",
+            "dpe_disk_9": "17"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_1": "2639512",
+            "dae_0_1_disk_2": "5",
+            "dae_0_1_disk_3": "658984",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_5": "659051",
+            "dae_0_1_disk_6": "0",
+            "dae_0_1_disk_7": "715318",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_9": "716472",
+            "dpe_disk_0": "54188",
+            "dpe_disk_1": "122265",
+            "dpe_disk_10": "0",
+            "dpe_disk_11": "642455",
+            "dpe_disk_12": "8",
+            "dpe_disk_13": "1003684",
+            "dpe_disk_14": "8",
+            "dpe_disk_15": "1003657",
+            "dpe_disk_2": "18016",
+            "dpe_disk_3": "92760",
+            "dpe_disk_4": "0",
+            "dpe_disk_5": "1593998",
+            "dpe_disk_6": "7",
+            "dpe_disk_7": "642447",
+            "dpe_disk_8": "0",
+            "dpe_disk_9": "642447"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "29350",
+            "dae_0_1_disk_1": "1879864",
+            "dae_0_1_disk_2": "3762381",
+            "dae_0_1_disk_3": "5",
+            "dae_0_1_disk_4": "29350",
+            "dae_0_1_disk_5": "5",
+            "dae_0_1_disk_6": "29350",
+            "dae_0_1_disk_7": "4",
+            "dae_0_1_disk_8": "88048",
+            "dae_0_1_disk_9": "4",
+            "dpe_disk_0": "1434762",
+            "dpe_disk_1": "1272860",
+            "dpe_disk_10": "8799",
+            "dpe_disk_11": "6",
+            "dpe_disk_12": "1269",
+            "dpe_disk_13": "215543",
+            "dpe_disk_14": "1269",
+            "dpe_disk_15": "215557",
+            "dpe_disk_2": "1435284",
+            "dpe_disk_3": "760687",
+            "dpe_disk_4": "8799",
+            "dpe_disk_5": "739244",
+            "dpe_disk_6": "1309179",
+            "dpe_disk_7": "7",
+            "dpe_disk_8": "8799",
+            "dpe_disk_9": "7"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_1": "1882560",
+            "dae_0_1_disk_2": "5",
+            "dae_0_1_disk_3": "29344",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_5": "29344",
+            "dae_0_1_disk_6": "0",
+            "dae_0_1_disk_7": "88044",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_9": "88044",
+            "dpe_disk_0": "31374",
+            "dpe_disk_1": "162770",
+            "dpe_disk_10": "0",
+            "dpe_disk_11": "8789",
+            "dpe_disk_12": "0",
+            "dpe_disk_13": "188340",
+            "dpe_disk_14": "0",
+            "dpe_disk_15": "188324",
+            "dpe_disk_2": "31364",
+            "dpe_disk_3": "143059",
+            "dpe_disk_4": "0",
+            "dpe_disk_5": "569947",
+            "dpe_disk_6": "66",
+            "dpe_disk_7": "8789",
+            "dpe_disk_8": "0",
+            "dpe_disk_9": "8789"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.readBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "1229798608",
+            "dae_0_1_disk_1": "3846866856",
+            "dae_0_1_disk_2": "4835187656",
+            "dae_0_1_disk_3": "192",
+            "dae_0_1_disk_4": "1230337232",
+            "dae_0_1_disk_5": "192",
+            "dae_0_1_disk_6": "1230460112",
+            "dae_0_1_disk_7": "160",
+            "dae_0_1_disk_8": "1108117008",
+            "dae_0_1_disk_9": "160",
+            "dpe_disk_0": "1629136780",
+            "dpe_disk_1": "1420748298",
+            "dpe_disk_10": "1280064512",
+            "dpe_disk_11": "240",
+            "dpe_disk_12": "1291356602",
+            "dpe_disk_13": "3258002",
+            "dpe_disk_14": "1291356602",
+            "dpe_disk_15": "3308322",
+            "dpe_disk_2": "1604148039",
+            "dpe_disk_3": "1344547289",
+            "dpe_disk_4": "1280035840",
+            "dpe_disk_5": "1154477192",
+            "dpe_disk_6": "2408999312",
+            "dpe_disk_7": "272",
+            "dpe_disk_8": "1280050176",
+            "dpe_disk_9": "256"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_1": "989589200",
+            "dae_0_1_disk_2": "80",
+            "dae_0_1_disk_3": "1230343184",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_5": "1230480400",
+            "dae_0_1_disk_6": "0",
+            "dae_0_1_disk_7": "1107158416",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_9": "1109521808",
+            "dpe_disk_0": "26667031",
+            "dpe_disk_1": "198962438",
+            "dpe_disk_10": "0",
+            "dpe_disk_11": "1280027312",
+            "dpe_disk_12": "8",
+            "dpe_disk_13": "1289657496",
+            "dpe_disk_14": "8",
+            "dpe_disk_15": "1289657064",
+            "dpe_disk_2": "14293018",
+            "dpe_disk_3": "186408037",
+            "dpe_disk_4": "0",
+            "dpe_disk_5": "1254494120",
+            "dpe_disk_6": "120",
+            "dpe_disk_7": "1280010928",
+            "dpe_disk_8": "0",
+            "dpe_disk_9": "1280010928"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.writeBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "469600",
+            "dae_0_1_disk_1": "30161832",
+            "dae_0_1_disk_2": "60282104",
+            "dae_0_1_disk_3": "80",
+            "dae_0_1_disk_4": "469600",
+            "dae_0_1_disk_5": "80",
+            "dae_0_1_disk_6": "469600",
+            "dae_0_1_disk_7": "64",
+            "dae_0_1_disk_8": "1408768",
+            "dae_0_1_disk_9": "64",
+            "dpe_disk_0": "299801616",
+            "dpe_disk_1": "296480496",
+            "dpe_disk_10": "140784",
+            "dpe_disk_11": "96",
+            "dpe_disk_12": "20304",
+            "dpe_disk_13": "35080155",
+            "dpe_disk_14": "20304",
+            "dpe_disk_15": "35079627",
+            "dpe_disk_2": "299265288",
+            "dpe_disk_3": "199887056",
+            "dpe_disk_4": "140784",
+            "dpe_disk_5": "296708712",
+            "dpe_disk_6": "305825752",
+            "dpe_disk_7": "112",
+            "dpe_disk_8": "140784",
+            "dpe_disk_9": "112"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_1": "30123456",
+            "dae_0_1_disk_2": "2576",
+            "dae_0_1_disk_3": "469504",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_5": "469504",
+            "dae_0_1_disk_6": "0",
+            "dae_0_1_disk_7": "1408704",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_9": "1408704",
+            "dpe_disk_0": "655928",
+            "dpe_disk_1": "2726736",
+            "dpe_disk_10": "0",
+            "dpe_disk_11": "140624",
+            "dpe_disk_12": "0",
+            "dpe_disk_13": "3015216",
+            "dpe_disk_14": "0",
+            "dpe_disk_15": "3014960",
+            "dpe_disk_2": "654096",
+            "dpe_disk_3": "2455416",
+            "dpe_disk_4": "0",
+            "dpe_disk_5": "9189408",
+            "dpe_disk_6": "71312",
+            "dpe_disk_7": "140624",
+            "dpe_disk_8": "0",
+            "dpe_disk_9": "140624"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.sumArrivalQueueLength",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "2566398",
+            "dae_0_1_disk_1": "3761649",
+            "dae_0_1_disk_2": "10156006",
+            "dae_0_1_disk_3": "296",
+            "dae_0_1_disk_4": "2566661",
+            "dae_0_1_disk_5": "303",
+            "dae_0_1_disk_6": "2566721",
+            "dae_0_1_disk_7": "296",
+            "dae_0_1_disk_8": "6438844",
+            "dae_0_1_disk_9": "302",
+            "dpe_disk_0": "4819472",
+            "dpe_disk_1": "3672166",
+            "dpe_disk_10": "1214420",
+            "dpe_disk_11": "469",
+            "dpe_disk_12": "636929",
+            "dpe_disk_13": "532692",
+            "dpe_disk_14": "636929",
+            "dpe_disk_15": "536683",
+            "dpe_disk_2": "4311539",
+            "dpe_disk_3": "2779266",
+            "dpe_disk_4": "1214406",
+            "dpe_disk_5": "3375487",
+            "dpe_disk_6": "5908103",
+            "dpe_disk_7": "474",
+            "dpe_disk_8": "1214413",
+            "dpe_disk_9": "472"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_1": "6400038",
+            "dae_0_1_disk_2": "18",
+            "dae_0_1_disk_3": "2566293",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_5": "2566360",
+            "dae_0_1_disk_6": "0",
+            "dae_0_1_disk_7": "6438137",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_9": "6439291",
+            "dpe_disk_0": "93578",
+            "dpe_disk_1": "301617",
+            "dpe_disk_10": "0",
+            "dpe_disk_11": "1213730",
+            "dpe_disk_12": "8",
+            "dpe_disk_13": "1193087",
+            "dpe_disk_14": "8",
+            "dpe_disk_15": "1193008",
+            "dpe_disk_2": "51445",
+            "dpe_disk_3": "240722",
+            "dpe_disk_4": "0",
+            "dpe_disk_5": "2726497",
+            "dpe_disk_6": "156",
+            "dpe_disk_7": "1213722",
+            "dpe_disk_8": "0",
+            "dpe_disk_9": "1213658"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.busyTicks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "55243132789",
+            "dae_0_1_disk_1": "485797787248",
+            "dae_0_1_disk_2": "148591838507",
+            "dae_0_1_disk_3": "259335106429",
+            "dae_0_1_disk_4": "54842477984",
+            "dae_0_1_disk_5": "259335149651",
+            "dae_0_1_disk_6": "54928020909",
+            "dae_0_1_disk_7": "259335114505",
+            "dae_0_1_disk_8": "108409473315",
+            "dae_0_1_disk_9": "38296607354",
+            "dpe_disk_0": "32285188719",
+            "dpe_disk_1": "32484894583",
+            "dpe_disk_10": "23762283038",
+            "dpe_disk_11": "259335009851",
+            "dpe_disk_12": "18615540153",
+            "dpe_disk_13": "266206563991",
+            "dpe_disk_14": "18811876583",
+            "dpe_disk_15": "280523602158",
+            "dpe_disk_2": "32860619064",
+            "dpe_disk_3": "30454462795",
+            "dpe_disk_4": "23779680112",
+            "dpe_disk_5": "239795035200",
+            "dpe_disk_6": "32857375002",
+            "dpe_disk_7": "259335089728",
+            "dpe_disk_8": "23858899208",
+            "dpe_disk_9": "38296409578"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "630939312447",
+            "dae_0_1_disk_1": "182573990293",
+            "dae_0_1_disk_2": "4134802103",
+            "dae_0_1_disk_3": "54736495480",
+            "dae_0_1_disk_4": "0",
+            "dae_0_1_disk_5": "54493443788",
+            "dae_0_1_disk_6": "630939313777",
+            "dae_0_1_disk_7": "108731299054",
+            "dae_0_1_disk_8": "0",
+            "dae_0_1_disk_9": "107405554531",
+            "dpe_disk_0": "245579242233",
+            "dpe_disk_1": "213989041196",
+            "dpe_disk_10": "630939333155",
+            "dpe_disk_11": "23576113184",
+            "dpe_disk_12": "198891433382",
+            "dpe_disk_13": "21754966944",
+            "dpe_disk_14": "198896317271",
+            "dpe_disk_15": "21979588466",
+            "dpe_disk_2": "254096100998",
+            "dpe_disk_3": "239214847856",
+            "dpe_disk_4": "0",
+            "dpe_disk_5": "42594672069",
+            "dpe_disk_6": "630890521856",
+            "dpe_disk_7": "23533439654",
+            "dpe_disk_8": "0",
+            "dpe_disk_9": "23738132033"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.physical.disk.*.idleTicks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "dae_0_1_disk_0": "608836882713",
+            "dae_0_1_disk_1": "404982349577",
+            "dae_0_1_disk_2": "508491862675",
+            "dae_0_1_disk_3": "669231320759",
+            "dae_0_1_disk_4": "609190914832",
+            "dae_0_1_disk_5": "669231271188",
+            "dae_0_1_disk_6": "609095769749",
+            "dae_0_1_disk_7": "669231302618",
+            "dae_0_1_disk_8": "552403761344",
+            "dae_0_1_disk_9": "890269996049",
+            "dpe_disk_0": "630010085962",
+            "dpe_disk_1": "630896877058",
+            "dpe_disk_10": "642607334482",
+            "dpe_disk_11": "669231539769",
+            "dpe_disk_12": "648027827784",
+            "dpe_disk_13": "986439633058",
+            "dpe_disk_14": "647833073164",
+            "dpe_disk_15": "972119406502",
+            "dpe_disk_2": "629730486520",
+            "dpe_disk_3": "634383476508",
+            "dpe_disk_4": "642701970094",
+            "dpe_disk_5": "995765677640",
+            "dpe_disk_6": "632540277313",
+            "dpe_disk_7": "669231493407",
+            "dpe_disk_8": "642476171279",
+            "dpe_disk_9": "890270382972"
+          },
+          "spb": {
+            "dae_0_1_disk_0": "0",
+            "dae_0_1_disk_1": "572093567799",
+            "dae_0_1_disk_2": "630939853593",
+            "dae_0_1_disk_3": "608959575232",
+            "dae_0_1_disk_4": "630939948562",
+            "dae_0_1_disk_5": "609266682723",
+            "dae_0_1_disk_6": "0",
+            "dae_0_1_disk_7": "551778140959",
+            "dae_0_1_disk_8": "630939947454",
+            "dae_0_1_disk_9": "553207623107",
+            "dpe_disk_0": "875815384740",
+            "dpe_disk_1": "842530957733",
+            "dpe_disk_10": "0",
+            "dpe_disk_11": "642455353372",
+            "dpe_disk_12": "1036826069961",
+            "dpe_disk_13": "647810658635",
+            "dpe_disk_14": "1036821183704",
+            "dpe_disk_15": "647590880825",
+            "dpe_disk_2": "887269057333",
+            "dpe_disk_3": "870442337502",
+            "dpe_disk_4": "630939969236",
+            "dpe_disk_5": "639170256404",
+            "dpe_disk_6": "620106325320",
+            "dpe_disk_7": "642467448077",
+            "dpe_disk_8": "630939969790",
+            "dpe_disk_9": "642358215052"
+          }
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.filesystem.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "fs_496": "23",
+            "fs_497": "23",
+            "fs_498": "23",
+            "fs_499": "23",
+            "fs_500": "23",
+            "fs_501": "23",
+            "fs_502": "23",
+            "fs_503": "23",
+            "fs_504": "23",
+            "fs_505": "23",
+            "fs_506": "23",
+            "fs_507": "23",
+            "fs_508": "23",
+            "fs_509": "23"
+          },
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.filesystem.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "fs_496": "51",
+            "fs_497": "51",
+            "fs_498": "51",
+            "fs_499": "60",
+            "fs_500": "62",
+            "fs_501": "62",
+            "fs_502": "51",
+            "fs_503": "51",
+            "fs_504": "51",
+            "fs_505": "51",
+            "fs_506": "62",
+            "fs_507": "51",
+            "fs_508": "51",
+            "fs_509": "78"
+          },
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.filesystem.*.readBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "fs_496": "181248",
+            "fs_497": "181248",
+            "fs_498": "181248",
+            "fs_499": "181248",
+            "fs_500": "181248",
+            "fs_501": "181248",
+            "fs_502": "181248",
+            "fs_503": "181248",
+            "fs_504": "181248",
+            "fs_505": "181248",
+            "fs_506": "181248",
+            "fs_507": "181248",
+            "fs_508": "181248",
+            "fs_509": "181248"
+          },
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.filesystem.*.writeBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {
+            "fs_496": "297472",
+            "fs_497": "297472",
+            "fs_498": "297472",
+            "fs_499": "371200",
+            "fs_500": "373248",
+            "fs_501": "373248",
+            "fs_502": "297472",
+            "fs_503": "297472",
+            "fs_504": "297472",
+            "fs_505": "297472",
+            "fs_506": "373248",
+            "fs_507": "297472",
+            "fs_508": "297472",
+            "fs_509": "486912"
+          },
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.block.*.readBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.block.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.block.*.writeBlocks",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.block.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.block.*.totalIoTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.file.*.readBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.file.*.reads",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.file.*.readIoTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.file.*.writeBytes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.file.*.writes",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    },
+    {
+      "content": {
+        "queryId": 17,
+        "path": "sp.*.storage.vvol.file.*.writeIoTime",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": {},
+          "spb": {}
+        }
+      }
+    }
+  ]
+}

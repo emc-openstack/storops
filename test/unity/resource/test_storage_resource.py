@@ -17,7 +17,8 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, instance_of, has_items, raises
+from hamcrest import assert_that, equal_to, instance_of, has_items, raises, \
+    contains_string
 
 from storops.exception import UnityStorageResourceNameInUseError, \
     UnityConsistencyGroupNameInUseError, UnityResourceNotFoundError, \
@@ -238,3 +239,10 @@ class UnityConsistencyGroupTest(TestCase):
         backup_snap = snap.restore()
         assert_that(backup_snap.name, equal_to('2016-11-03_08.35.00'))
         assert_that(backup_snap.storage_resource.get_id(), equal_to('res_19'))
+
+    @patch_rest
+    def test_get_csv(self):
+        cg_list = UnityConsistencyGroupList(cli=t_rest())
+        csv = cg_list.get_metrics_csv()
+        assert_that(csv, contains_string('id,name'))
+        assert_that(csv, contains_string('res_3,smis-test-cg'))

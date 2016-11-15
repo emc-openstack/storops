@@ -308,7 +308,7 @@ class VNXParserConfigFactoryTest(TestCase):
     def test_read_properties(self):
         name = 'VNXConsistencyGroup'
         prop = get_vnx_parser(name)
-        assert_that(prop.resource_name, equal_to(name))
+        assert_that(prop.resource_class_name, equal_to(name))
         assert_that(prop.data_src, equal_to('cli'))
 
     def test_properties_sequence_should_align_with_file(self):

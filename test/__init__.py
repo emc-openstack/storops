@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 import logging
 import unittest
 
-from hamcrest import assert_that, not_none
+from hamcrest import assert_that, not_none, equal_to, instance_of
 
 from test.unity.rest_mock import patch_rest
 from test.vnx.cli_mock import patch_cli
@@ -50,3 +50,25 @@ class StoropsTest(unittest.TestCase):
     def test_unity_enum_availability(self):
         raid5 = storops.RaidTypeEnum.RAID5
         assert_that(raid5, not_none())
+
+    def test_enable_log(self):
+        storops.enable_log()
+        log = logging.getLogger('storops')
+        assert_that(len(log.handlers), equal_to(1))
+        assert_that(log.handlers[0], instance_of(logging.StreamHandler))
+        assert_that(log.getEffectiveLevel(), equal_to(logging.DEBUG))
+
+    def test_enable_log_called_twice(self):
+        storops.enable_log()
+        storops.enable_log(logging.INFO)
+        log = logging.getLogger('storops')
+        assert_that(len(log.handlers), equal_to(1))
+        assert_that(log.handlers[0], instance_of(logging.StreamHandler))
+        assert_that(log.getEffectiveLevel(), equal_to(logging.INFO))
+
+    def test_disable_log(self):
+        storops.enable_log()
+        storops.disable_log()
+        log = logging.getLogger('storops')
+        assert_that(len(log.handlers), equal_to(0))
+        assert_that(log.getEffectiveLevel(), equal_to(logging.NOTSET))

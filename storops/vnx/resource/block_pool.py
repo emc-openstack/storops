@@ -39,6 +39,10 @@ class VNXPoolFeature(VNXCliResource):
 
 
 class VNXPoolList(VNXCliResourceList):
+    def __init__(self, cli=None, system_lun_list=None):
+        super(VNXPoolList, self).__init__(cli)
+        self._system_lun_list = system_lun_list
+
     @classmethod
     def get_resource_class(cls):
         return VNXPool
@@ -46,15 +50,22 @@ class VNXPoolList(VNXCliResourceList):
     def _get_raw_resource(self):
         return self._cli.get_pool(poll=self.poll)
 
+    def _get_resource_instance(self):
+        ret = super(VNXPoolList, self)._get_resource_instance()
+        ret.set_system_lun_list(self._system_lun_list)
+        return ret
+
 
 class VNXPool(VNXCliResource):
-    def __init__(self, pool_id=None, name=None, cli=None):
+    def __init__(self, pool_id=None, name=None, cli=None,
+                 system_lun_list=None):
         super(VNXPool, self).__init__()
         self._cli = cli
         self._pool_id = pool_id
         self._name = name
+        self._system_lun_list = system_lun_list
 
-    def _get_pool_id(self):
+    def get_pool_id(self):
         if self._pool_id is not None:
             ret = self._pool_id
         else:
@@ -112,11 +123,11 @@ class VNXPool(VNXCliResource):
         ex.raise_if_err(ret, default=ex.VNXDeletePoolError)
 
     @classmethod
-    def get(cls, cli, pool_id=None, name=None):
+    def get(cls, cli, pool_id=None, name=None, system_lun_list=None):
         if pool_id is None and name is None:
-            ret = VNXPoolList(cli)
+            ret = VNXPoolList(cli, system_lun_list)
         else:
-            ret = VNXPool(pool_id, name, cli)
+            ret = VNXPool(pool_id, name, cli, system_lun_list)
         return ret
 
     def create_lun(self,
@@ -159,9 +170,16 @@ class VNXPool(VNXCliResource):
 
     @instance_cache
     def get_lun(self):
-        clz = storops.vnx.resource.lun.VNXLunList
-        return clz(self._cli, pool=self)
+        if self._system_lun_list is not None:
+            ret = self._system_lun_list.shadow_copy(pool=self)
+        else:
+            clz = storops.vnx.resource.lun.VNXLunList
+            ret = clz(self._cli, pool=self)
+        return ret
 
     @property
     def lun_list(self):
         return self.get_lun()
+
+    def set_system_lun_list(self, system_lun_list):
+        self._system_lun_list = system_lun_list

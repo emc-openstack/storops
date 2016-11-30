@@ -15,12 +15,19 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import logging
+
+import time
+
+import functools
 from retryz import retry
 
 from storops.exception import VNXDiskUsedError, raise_if_err, \
     VNXSetArrayNameError
 from storops.lib.common import daemon, instance_cache, clear_instance_cache
+from storops.lib.resource import ResourceList, ResourceListCollection
 from storops.vnx.resource.host import VNXHost
+from storops.vnx.resource.metric import VNXStats
 from storops.vnx.resource.nfs_share import VNXNfsShare
 from storops.vnx.resource.fs_snap import VNXFsSnap
 from storops.vnx.resource.mover import VNXMover
@@ -38,7 +45,8 @@ from storops.vnx.resource.cg import VNXConsistencyGroup
 from storops.vnx.resource.disk import VNXDisk, VNXDiskList
 from storops.vnx.resource.security import VNXBlockUser
 from storops.vnx.resource.vnx_domain import VNXDomainMemberList, \
-    VNXNetworkAdmin, VNXDomainNodeList, VNXStorageProcessor
+    VNXNetworkAdmin, VNXDomainNodeList, VNXStorageProcessor, \
+    VNXStorageProcessorList
 from storops.vnx.resource.lun import VNXLun
 from storops.vnx.resource.migration import VNXMigrationSession
 from storops.vnx.resource.ndu import VNXNdu, VNXNduList
@@ -50,6 +58,8 @@ from storops.vnx.resource.snap import VNXSnap
 from storops.vnx.resource.capacity import VNXCapacity
 
 __author__ = 'Cedric Zhuang'
+
+log = logging.getLogger(__name__)
 
 
 class VNXSystem(VNXCliResource):
@@ -191,7 +201,9 @@ class VNXSystem(VNXCliResource):
         return VNXStorageProcessor(self._cli, VNXSPEnum.SP_B, self.spb_ip)
 
     def get_sp(self):
-        return [self.spa, self.spb]
+        return VNXStorageProcessorList(
+            VNXStorageProcessor(self._cli, VNXSPEnum.SP_A, self.spa_ip),
+            VNXStorageProcessor(self._cli, VNXSPEnum.SP_B, self.spb_ip))
 
     @property
     @instance_cache
@@ -221,8 +233,9 @@ class VNXSystem(VNXCliResource):
         feature = VNXPoolFeature(self._cli)
         return self._update_poll(feature, poll)
 
-    def get_pool(self, name=None, pool_id=None):
-        return VNXPool.get(pool_id=pool_id, name=name, cli=self._cli)
+    def get_pool(self, name=None, pool_id=None, system_lun_list=None):
+        return VNXPool.get(pool_id=pool_id, name=name, cli=self._cli,
+                           system_lun_list=system_lun_list)
 
     def get_lun(self, lun_id=None, name=None, lun_type=None):
         return VNXLun.get(self._cli, lun_id=lun_id, name=name,
@@ -231,8 +244,9 @@ class VNXSystem(VNXCliResource):
     def get_cg(self, name=None):
         return VNXConsistencyGroup.get(self._cli, name)
 
-    def get_sg(self, name=None):
-        return VNXStorageGroup.get(self._cli, name)
+    def get_sg(self, name=None, system_lun_list=None):
+        return VNXStorageGroup.get(self._cli, name,
+                                   system_lun_list=system_lun_list)
 
     def get_snap(self, name=None):
         return VNXSnap.get(self._cli, name)
@@ -445,6 +459,71 @@ class VNXSystem(VNXCliResource):
 
     def get_nfs_share(self, mover=None, path=None):
         return VNXNfsShare.get(cli=self._file_cli, mover=mover, path=path)
+
+    def _default_rsc_list_with_perf_stats(self):
+        sps = self.get_sp()
+        lun_list = self.get_lun()
+        disks = self.get_disk()
+        sp_ports = self.get_sp_port()
+        pools = self.get_pool(system_lun_list=lun_list)
+        sgs = self.get_sg(system_lun_list=lun_list)
+        ret = (sps, lun_list, disks, sp_ports, pools, sgs)
+
+        for resource_list in ret:
+            resource_list.with_no_poll()
+        return ret
+
+    def get_rsc_list_2(self, rsc_clz_list=None):
+        """get the list of resource list to collect based on clz list
+
+        :param rsc_clz_list: the list of classes to collect
+        :return: filtered list of resource list,
+                 like [VNXLunList(), VNXDiskList()]
+        """
+        rsc_list_2 = self._default_rsc_list_with_perf_stats()
+        if rsc_clz_list is None:
+            rsc_clz_list = ResourceList.get_rsc_clz_list(rsc_list_2)
+
+        return [rsc_list
+                for rsc_list in rsc_list_2
+                if rsc_list.get_resource_class() in rsc_clz_list]
+
+    def collect_perf_record(self, clz_list):
+        log.info('start collecting counters of vnx {}.'.format(self._ip))
+        start = time.time()
+        rsc_list_2 = self.get_rsc_list_2(clz_list)
+        record = ResourceListCollection(rsc_list_2)
+        record.update()
+        log.info('end collecting counters of vnx {}.  collection took '
+                 '{:.3f} seconds.'.format(self._ip, time.time() - start))
+        return record
+
+    def enable_perf_stats(self, rsc_clz_list=None):
+        VNXStats.get(self._cli).enable_stats()
+        f = functools.partial(self.collect_perf_record, clz_list=rsc_clz_list)
+        self._cli.enable_perf_metric(60, f, rsc_clz_list)
+        return self.get_rsc_list_2(rsc_clz_list)
+
+    def disable_perf_stats(self, disable_counter_collection=False):
+        if disable_counter_collection:
+            VNXStats.get(self._cli).disable_stats()
+        self._cli.disable_perf_metric()
+
+    def is_perf_stats_enabled(self):
+        return self._cli.is_perf_metric_enabled()
+
+    def is_counter_collection_enabled(self):
+        return VNXStats.get(self._cli).is_enabled()
+
+    def enable_persist_perf_stats(self):
+        rsc_list = self._default_rsc_list_with_perf_stats()
+        self._cli.persist_perf_stats(rsc_list)
+
+    def disable_persist_perf_stats(self):
+        self._cli.persist_perf_stats(None)
+
+    def is_perf_stats_persisted(self):
+        return self._cli.is_perf_stats_persisted()
 
     def __del__(self):
         del self._cli

@@ -12,10 +12,10 @@ Prct Idle:                     98.0
 System Date:                   04/26/2016
 Day of the week:               Tuesday
 System Time:                   09:59:16
-Read_requests:                 7978
-Write_requests:                6364257
-Blocks_read:                   262334
-Blocks_written:                198312227
+Read_requests:                 8308
+Write_requests:                6364593
+Blocks_read:                   975038
+Blocks_written:                199037219
 Sum_queue_lengths_by_arrivals: 8059572
 Arrivals_to_non_zero_queue:    1321389
 Hw_flush_on:                   N/A

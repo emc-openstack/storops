@@ -17,7 +17,7 @@ from __future__ import unicode_literals
 
 import logging
 
-from comptest.utils import setup_log, inter_process_locked
+from comptest.utils import inter_process_locked
 from storops import VNXSystem, UnitySystem, cache
 
 __author__ = 'Cedric Zhuang'
@@ -55,6 +55,3 @@ def vnx2():
     vnx = VNXSystem('192.168.1.94', 'sysadmin', 'sysadmin')
     log.debug('initialize vnx system: {}'.format(vnx))
     return vnx
-
-
-setup_log()

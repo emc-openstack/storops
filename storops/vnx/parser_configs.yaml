@@ -415,6 +415,25 @@ VNXSPPort:
       converter: to_int
     - label: "Not Logged-In Initiators:"
       converter: to_int
+    - label: "SFP State:"
+    - label: "Reads:"
+      converter: to_int
+    - label: "Writes:"
+      converter: to_int
+    - label: "Blocks Read:"
+      converter: to_int
+    - label: "Blocks Written:"
+      converter: to_int
+    - label: "Queue Full/Busy:"
+      converter: to_int
+    - label: "I/O Module Slot:"
+    - label: "Physical Port ID:"
+      converter: to_int
+    - label: "Usage:"
+    - label: "SFP/Connector EMC Part Number:"
+    - label: "SFP/Connector EMC Serial Number:"
+    - label: "SFP/Connector Vendor Part Number:"
+    - label: "SFP/Connector Vendor Serial Number:"
 
 
 VNXStorageGroup:

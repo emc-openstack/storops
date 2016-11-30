@@ -17,12 +17,15 @@ from __future__ import unicode_literals
 
 import logging
 import re
+from datetime import datetime
 
 from past.builtins import filter
 
+from storops.lib.common import clear_instance_cache
 from storops.lib.converter import to_datetime
 from storops.vnx.enums import VNXSPEnum
-from storops.vnx.resource import VNXCliResourceList, VNXCliResource
+from storops.vnx.resource import VNXCliResourceList, VNXCliResource, \
+    WithListPoll
 
 __author__ = 'Cedric Zhuang'
 
@@ -30,7 +33,7 @@ log = logging.getLogger(__name__)
 
 
 class VNXStorageProcessor(VNXCliResource):
-    def __init__(self, cli, sp, ip):
+    def __init__(self, cli, sp=None, ip=None):
         super(VNXStorageProcessor, self).__init__()
         self._cli = cli
         self._sp = sp
@@ -41,11 +44,11 @@ class VNXStorageProcessor(VNXCliResource):
         return self._sp
 
     @property
-    def timestamp(self):
+    def system_timestamp(self):
         return to_datetime('{} {}'.format(self.system_date, self.system_time))
 
     def _get_raw_resource(self):
-        sps = self._cli.get_sp().split('SP B')
+        sps = self._cli.get_sp(poll=self.poll).split('SP B')
         out = ''
         if sps:
             if self._sp is VNXSPEnum.SP_A:
@@ -53,8 +56,53 @@ class VNXStorageProcessor(VNXCliResource):
             elif len(sps) > 1:
                 out = sps[1]
 
-        control_out = self._cli.execute(['getcontrol'], ip=self._ip)
+        control_out = self._cli.get_control(ip=self._ip, poll=self.poll)
         return 'SP {}\n{}\n{}'.format(self._sp.index.upper(), control_out, out)
+
+
+class VNXStorageProcessorList(VNXCliResourceList):
+    def __init__(self, *sp_list):
+        if len(sp_list) > 0:
+            cli = sp_list[0]._cli
+        else:
+            raise ValueError('expect at least one sp.')
+        super(VNXStorageProcessorList, self).__init__(cli=cli)
+        self._list = sp_list
+        self._cli = cli
+
+    def with_poll(self):
+        ret = WithListPoll(self)
+        for rsc in self:
+            rsc.poll = True
+        return ret
+
+    def with_no_poll(self):
+        ret = WithListPoll(self)
+        for rsc in self:
+            rsc.poll = False
+        return ret
+
+    @classmethod
+    def get_resource_class(cls):
+        return VNXStorageProcessor
+
+    @clear_instance_cache
+    def update(self, data=None):
+        for sp in self:
+            sp.update()
+        self.timestamp = datetime.now()
+
+    def get(self, sp):
+        if isinstance(sp, VNXStorageProcessor):
+            sp = sp.enum
+
+        for s in self:
+            if s.enum == sp:
+                ret = s
+                break
+        else:
+            ret = None
+        return ret
 
 
 class VNXDomainNodeList(VNXCliResourceList):
@@ -71,7 +119,7 @@ class VNXDomainNodeList(VNXCliResourceList):
                 ret = node
                 break
         else:
-            log.info('node "{}" not found in the vnx domain.')
+            log.info('node "{}" not found in the vnx domain.'.format(node_id))
             ret = None
         return ret
 

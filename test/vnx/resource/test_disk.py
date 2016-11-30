@@ -17,13 +17,20 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, raises, equal_to, has_items
+from hamcrest import assert_that, raises, equal_to, has_items, close_to
 
+from storops.lib.common import instance_cache, cache
 from test.vnx.cli_mock import patch_cli, t_cli
 from test.vnx.resource.verifiers import verify_disk_4_0_e8
 from storops.vnx.resource.disk import VNXDisk, VNXDiskList
 
 __author__ = 'Cedric Zhuang'
+
+
+@patch_cli
+@cache
+def get_disks():
+    return VNXDisk.get(t_cli())
 
 
 class VNXDiskTest(TestCase):
@@ -47,7 +54,7 @@ class VNXDiskTest(TestCase):
 
     @patch_cli
     def test_get_all(self):
-        disks = VNXDisk.get(t_cli())
+        disks = get_disks()
         assert_that(len(disks), equal_to(180))
         for disk in disks:
             if disk.index == '4_0_e8':
@@ -59,33 +66,74 @@ class VNXDiskTest(TestCase):
         disk = VNXDisk.get(t_cli(), '4_0_e8')
         verify_disk_4_0_e8(disk)
 
+    @property
+    @instance_cache
+    def disk_001(self):
+        return VNXDisk('0_0_1', t_cli())
+
     @patch_cli
     def test_delete_disk(self):
-        disk = VNXDisk('0_0_1', t_cli())
-        ret = disk.delete()
+        ret = self.disk_001.delete()
         assert_that(ret, has_items(''))
 
     @patch_cli
     def test_install_disk(self):
-        disk = VNXDisk('0_0_1', t_cli())
-        ret = disk.install()
+        ret = self.disk_001.install()
         assert_that(ret, has_items(''))
+
+    @patch_cli
+    def test_disk_read_iops(self):
+        assert_that(self.disk_001.read_iops, equal_to(4.1))
+
+    @patch_cli
+    def test_disk_write_iops(self):
+        assert_that(self.disk_001.write_iops, equal_to(5.1))
+
+    @patch_cli
+    def test_disk_total_iops(self):
+        assert_that(self.disk_001.total_iops, equal_to(9.2))
+
+    @patch_cli
+    def test_disk_read_mbps(self):
+        assert_that(self.disk_001.read_mbps, equal_to(3.2))
+
+    @patch_cli
+    def test_disk_write_mbps(self):
+        assert_that(self.disk_001.write_mbps, equal_to(4.2))
+
+    @patch_cli
+    def test_disk_total_mbps(self):
+        assert_that(self.disk_001.total_mbps, equal_to(7.4))
+
+    @patch_cli
+    def test_disk_utilization(self):
+        assert_that(self.disk_001.utilization, equal_to(40.0))
+
+    @patch_cli
+    def test_disk_read_size_kb(self):
+        assert_that(self.disk_001.read_size_kb, close_to(799.0, 1))
+
+    @patch_cli
+    def test_disk_write_size_kb(self):
+        assert_that(self.disk_001.write_size_kb, close_to(844.0, 1))
 
 
 class VNXDiskListTest(TestCase):
+    disk_indices = ['0_0_C8', '4_0_D0', '4_0_E8']
+
     @patch_cli
     def test_all(self):
-        disks = VNXDiskList(t_cli())
+        disks = get_disks()
         assert_that(len(disks), equal_to(180))
 
     @patch_cli
     def test_index_filter(self):
-        disks = VNXDiskList(t_cli(), ['0_0_C8', '4_0_D0', '4_0_E8'])
+        disks = get_disks().shadow_copy(disk_indices=self.disk_indices)
         assert_that(len(disks), equal_to(3))
 
     @patch_cli
     def test_multiple_filters(self):
-        disks = VNXDiskList(t_cli())
+        disks = get_disks().shadow_copy()
         disks.set_drive_type('NL SAS')
         assert_that(len(disks), equal_to(42))
         disks.set_capacity(2817564)
@@ -93,12 +141,15 @@ class VNXDiskListTest(TestCase):
 
     @patch_cli
     def test_get_same_disks_available(self):
-        disks = VNXDiskList(t_cli(), ['0_0_C8', '4_0_D0', '4_0_E8'])
+        disks = get_disks().shadow_copy(disk_indices=self.disk_indices)
         disks.same_disks(2)
         assert_that(len(disks), equal_to(2))
 
     @patch_cli
     def test_get_same_disks_not_available(self):
-        disks = VNXDiskList(t_cli(), ['0_0_C8', '4_0_D0', '4_0_E8'])
+        disks = get_disks().shadow_copy(disk_indices=self.disk_indices)
         disks.same_disks(3)
         assert_that(len(disks), equal_to(0))
+
+    def test_resource_class_name(self):
+        assert_that(VNXDiskList.resource_class_name(), equal_to('VNXDisk'))

@@ -1,0 +1,37 @@
+System Fault LED:              OFF
+Statistics Logging:            ON
+SP Read Cache State            Enabled
+SP Write Cache State           Enabled
+Max Requests:                  N/A
+Average Requests:              N/A
+Hard errors:                   N/A
+Total Reads:                   1234
+Total Writes:                  6364257
+Prct Busy:                     1.91
+Prct Idle:                     98.0
+System Date:                   04/26/2016
+Day of the week:               Tuesday
+System Time:                   09:59:16
+Read_requests:                 7978
+Write_requests:                6364257
+Blocks_read:                   262334
+Blocks_written:                198312227
+Sum_queue_lengths_by_arrivals: 8059572
+Arrivals_to_non_zero_queue:    1321389
+Hw_flush_on:                   N/A
+Idle_flush_on:                 N/A
+Lw_flush_off:                  N/A
+Write_cache_flushes:           468636
+Write_cache_blocks_flushed:    477297069
+Internal bus 1 busy ticks:     N/A
+Internal bus 1 idle ticks:     N/A
+Internal bus 2 busy ticks:     N/A
+Internal bus 2 idle ticks:     N/A
+Internal bus 3 busy ticks:     N/A
+Internal bus 3 idle ticks:     N/A
+Internal bus 4 busy ticks:     N/A
+Internal bus 4 idle ticks:     N/A
+Internal bus 5 busy ticks:     N/A
+Internal bus 5 idle ticks:     N/A
+Controller busy ticks:         46703
+Controller idle ticks:         2394689

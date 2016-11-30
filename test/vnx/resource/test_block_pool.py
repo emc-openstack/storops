@@ -18,12 +18,14 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, raises, equal_to, has_items, \
-    only_contains, none
+    only_contains, none, close_to, not_none, greater_than
 
 from test.vnx.cli_mock import t_cli, patch_cli
+from test.vnx.resource.test_lun import get_lun_list
 from test.vnx.resource.verifiers import verify_pool_0
 from storops.exception import VNXCreatePoolError, VNXPoolNotFoundError, \
-    VNXDiskUsedError, VNXPoolNameInUseError, VNXPoolDestroyingError
+    VNXDiskUsedError, VNXPoolNameInUseError, VNXPoolDestroyingError, \
+    VNXNameInUseError
 from storops.vnx.resource.block_pool import VNXPool, VNXPoolList, \
     VNXPoolFeature
 
@@ -46,6 +48,13 @@ class VNXPoolTest(TestCase):
             getattr(pool, '_abc')
 
         assert_that(f, raises(AttributeError))
+
+    def test_get_pool_id_from_self(self):
+        assert_that(self.get_pool_with_id(12).get_pool_id(), equal_to(12))
+
+    @patch_cli
+    def test_get_pool_id_from_cli(self):
+        assert_that(self.get_pool_with_name().get_pool_id(), equal_to(0))
 
     @patch_cli
     def test_pool_by_id(self):
@@ -95,6 +104,14 @@ class VNXPoolTest(TestCase):
         assert_that(len(disks), equal_to(3))
         assert_that(disks.serial_number,
                     only_contains('6XS2EAKG', 'S0PFNECC304969', '6XS2QCG1'))
+
+    @patch_cli
+    def test_rename_name_existed(self):
+        def f():
+            pool = VNXPool(name='p1', cli=t_cli())
+            pool.name = 'p2'
+
+        assert_that(f, raises(VNXNameInUseError, 'Name'))
 
     @patch_cli
     def test_create_pool_success(self):
@@ -174,6 +191,49 @@ class VNXPoolTest(TestCase):
 
         assert_that(f, raises(VNXPoolNotFoundError, 'may not exist'))
 
+    @property
+    @patch_cli
+    def pool(self):
+        lun_list = get_lun_list()
+        return VNXPool(pool_id=0, cli=t_cli(), system_lun_list=lun_list)
+
+    @patch_cli
+    def test_shadow_copy_lun_list(self):
+        lun_list = get_lun_list()
+        assert_that(self.pool.lun_list.timestamp, equal_to(lun_list.timestamp))
+
+    @patch_cli
+    def test_pool_read_iops(self):
+        assert_that(self.pool.read_iops, equal_to(3.5))
+
+    @patch_cli
+    def test_pool_write_iops(self):
+        assert_that(self.pool.write_iops, equal_to(9.0))
+
+    @patch_cli
+    def test_pool_total_iops(self):
+        assert_that(self.pool.total_iops, equal_to(12.5))
+
+    @patch_cli
+    def test_pool_read_mbps(self):
+        assert_that(self.pool.read_mbps, equal_to(2.3 + 4.6))
+
+    @patch_cli
+    def test_pool_write_mbps(self):
+        assert_that(self.pool.write_mbps, equal_to(2.7 + 5.4))
+
+    @patch_cli
+    def test_pool_total_mbps(self):
+        assert_that(self.pool.total_mbps, equal_to(5.0 + 10.0))
+
+    @patch_cli
+    def test_pool_read_size_kb(self):
+        assert_that(self.pool.read_size_kb, close_to(2018, 1))
+
+    @patch_cli
+    def test_sg_write_size_kb(self):
+        assert_that(self.pool.write_size_kb, close_to(921, 1))
+
 
 class VNXPoolListTest(TestCase):
     @staticmethod
@@ -192,6 +252,15 @@ class VNXPoolListTest(TestCase):
         # call twice
         pools.update()
         assert_that(len(pools), equal_to(5))
+
+    @patch_cli
+    def test_get_with_shadow_copy(self):
+        lun_list = get_lun_list()
+        pools = VNXPool.get(t_cli(), system_lun_list=lun_list)
+        assert_that(lun_list.timestamp, not_none())
+        assert_that(len(pools), greater_than(0))
+        for pool in pools:
+            assert_that(pool.lun_list.timestamp, equal_to(lun_list.timestamp))
 
 
 class VNXPoolFeatureTest(TestCase):

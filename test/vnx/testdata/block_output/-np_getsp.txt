@@ -1,0 +1,19 @@
+SP A
+
+Cabinet:             DPE9
+Signature For The SP:          4022290
+Signature For The Peer SP:     4022287
+Revision Number For The SP:    05.33.008.3.297
+Serial Number For The SP:      FCNJT152200018
+Memory Size For The SP:        32768
+SP SCSI ID if Available:       0
+
+SP B
+
+Cabinet:             DPE9
+Signature For The SP:          4022287
+Signature For The Peer SP:     4022290
+Revision Number For The SP:    05.33.008.3.297
+Serial Number For The SP:      FCNJT152200015
+Memory Size For The SP:        32768
+SP SCSI ID if Available:       0

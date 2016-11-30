@@ -15,21 +15,22 @@
 #    under the License.
 from __future__ import unicode_literals
 
-import math
 from unittest import TestCase
 
 from hamcrest import assert_that, has_items, equal_to, raises, has_item, \
     close_to, is_not
 
 from storops.unity import calculator
-from storops.unity.calculator import calculators, IdValues, MetricConfig, \
-    MetricConfigParser, delta_ps, mb_ps_by_block, busy_idle_util, \
+from storops.unity.calculator import calculators, IdValues, \
+    delta_ps, mb_ps_by_block, busy_idle_util, \
     sp_delta_ps, sp_mb_ps_by_byte, sp_mb_ps_by_block, sp_busy_idle_util, \
-    only_one_path, sp_fact, all_not_none
+    only_one_path, sp_fact, all_not_none, UnityMetricConfig, \
+    UnityMetricConfigParser
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.filesystem import UnityFileSystem
-from test import patch_rest
 from test.unity.resource.test_metric import qr_6, qr_14, qr_17, qr_34
+from test.unity.rest_mock import patch_rest
+from test.utils import is_nan
 
 __author__ = 'Cedric Zhuang'
 
@@ -82,7 +83,7 @@ class CalculatorMetaInfoTest(TestCase):
         disk_counters = MockCli(None, qr_6)
         value = calculators.get_metric_value(
             UnityDisk, 'read_iops', disk_counters, 'dae_0_1_disk_2')
-        assert_that(math.isnan(value), equal_to(True))
+        assert_that(value, is_nan())
 
 
 class IdValuesTest(TestCase):
@@ -189,8 +190,8 @@ class IdValuesTest(TestCase):
     def test_div_id_value(self):
         r = self.o1 / self.o2
         assert_that(r['a'], equal_to(2.0 / 7.0))
-        assert_that(math.isnan(r['b']), equal_to(True))
-        assert_that(math.isnan(r['c']), equal_to(True))
+        assert_that(r['b'], is_nan())
+        assert_that(r['c'], is_nan())
 
     def test_div_numeric(self):
         r = self.o1 / 2
@@ -199,13 +200,18 @@ class IdValuesTest(TestCase):
 
     def test_div_by_zero(self):
         r = self.o1 / 0
-        assert_that(math.isnan(r['a']), equal_to(True))
-        assert_that(math.isnan(r['b']), equal_to(True))
+        assert_that(r['a'], is_nan())
+        assert_that(r['b'], is_nan())
+
+    def test_div_zero_dev(self):
+        r = 0.0 / IdValues({'a': 0, 'b': 3})
+        assert_that(r['a'], equal_to(0.0))
+        assert_that(r['b'], equal_to(0.0))
 
     def test_div_by_partial_zero(self):
         r = self.o1 / IdValues({'a': 2, 'b': 0})
         assert_that(r['a'], equal_to(1.0))
-        assert_that(math.isnan(r['b']), equal_to(True))
+        assert_that(r['b'], is_nan())
 
     def test_rdiv_numerical(self):
         r = 12 / self.o1
@@ -214,8 +220,8 @@ class IdValuesTest(TestCase):
 
     def test_rdiv_none(self):
         r = None / self.o1
-        assert_that(math.isnan(r['a']), equal_to(True))
-        assert_that(math.isnan(r['b']), equal_to(True))
+        assert_that(r['a'], is_nan())
+        assert_that(r['b'], is_nan())
 
     def test_mul_none(self):
         r = self.o1 * None
@@ -264,7 +270,7 @@ class CalculatorTest(TestCase):
     def test_disk_read_obj_not_found(self):
         ret = delta_ps('sp.*.physical.disk.*.reads', qr_6, qr_14,
                        'not_found')
-        assert_that(math.isnan(ret), equal_to(True))
+        assert_that(ret, is_nan())
 
     @patch_rest
     def test_disk_write_iops(self):
@@ -275,11 +281,11 @@ class CalculatorTest(TestCase):
     @patch_rest
     def test_path_not_found(self):
         ret = mb_ps_by_block('sp.*.physical.disk.*.writeBlocks', qr_6, qr_14)
-        assert_that(math.isnan(ret['dae_0_1_disk_2']), equal_to(True))
+        assert_that(ret['dae_0_1_disk_2'], is_nan())
 
         ret = mb_ps_by_block(
             'sp.*.physical.disk.*.writeBlocks', qr_6, qr_14, 'dae_0_1_disk_2')
-        assert_that(math.isnan(ret), equal_to(True))
+        assert_that(ret, is_nan())
 
     @patch_rest
     def test_mb_ps_by_block_value(self):
@@ -299,7 +305,7 @@ class CalculatorTest(TestCase):
         ret = busy_idle_util(paths, qr_17, qr_34)
         expected = self.expected_disk_utilization()
         assert_that(ret['dae_0_1_disk_0'], equal_to(expected))
-        assert_that(math.isnan(ret['dpe_disk_24']), equal_to(True))
+        assert_that(ret['dpe_disk_24'], is_nan())
 
     @patch_rest
     def test_disk_utilization_single(self):
@@ -314,7 +320,7 @@ class CalculatorTest(TestCase):
         paths = ['sp.*.physical.disk.*.busyTicks',
                  'sp.*.physical.disk.*.idleTicks']
         ret = busy_idle_util(paths, qr_17, qr_34, 'dpe_disk_24')
-        assert_that(math.isnan(ret), equal_to(True))
+        assert_that(ret, is_nan())
 
     def expected_disk_utilization(self):
         busy = (55249062767 + 631119255518) - (55243132789 + 630939312447)
@@ -333,7 +339,7 @@ class CalculatorTest(TestCase):
         assert_that(ret, close_to(2.77, 0.01))
 
         ret = sp_delta_ps('sp.*.cifs.smb1.basic.writes', qr_17, qr_34, 'spc')
-        assert_that(math.isnan(ret), equal_to(True))
+        assert_that(ret, is_nan())
 
     @patch_rest
     def test_sp_mb_ps_by_byte_all(self):
@@ -377,23 +383,23 @@ class CalculatorTest(TestCase):
         assert_that(all_not_none(1, 'a', None, 2.3), equal_to(False))
 
 
-class MetricConfigTest(TestCase):
+class UnityMetricConfigTest(TestCase):
     def test_default_calculator(self):
-        mc = MetricConfig({'name': 'test'})
+        mc = UnityMetricConfig({'name': 'test'})
         assert_that(mc.calculator, equal_to(calculator.delta_ps))
 
     def test_path_str(self):
-        mc = MetricConfig({'name': 'test', 'paths': 'abc'})
+        mc = UnityMetricConfig({'name': 'test', 'paths': 'abc'})
         assert_that(len(mc.paths), equal_to(1))
         assert_that(mc.paths, has_item('abc'))
 
     def test_path_collection(self):
-        mc = MetricConfig({'name': 'test', 'paths': ['a', 'b']})
+        mc = UnityMetricConfig({'name': 'test', 'paths': ['a', 'b']})
         assert_that(mc.paths, has_items('a', 'b'))
 
 
-class MetricConfigParserTest(TestCase):
-    config = MetricConfigParser()
+class UnityMetricConfigParserTest(TestCase):
+    config = UnityMetricConfigParser()
 
     def test_get_configs(self):
         disk_config = self.config.get_config('UnityDisk')

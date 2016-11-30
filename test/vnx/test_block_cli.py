@@ -17,13 +17,15 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, contains_string, equal_to, calling, raises
+from hamcrest import assert_that, contains_string, equal_to, calling, raises, \
+    greater_than, has_items
 
-from test.vnx.cli_mock import patch_cli, extract_command, MockCli
 from storops.exception import VNXSystemDownError, VNXCredentialError
 from storops.vnx.block_cli import CliClient
 from storops.vnx.enums import VNXTieringEnum, VNXProvisionEnum, \
     VNXSPEnum, VNXMigrationRate, VNXLunType, VNXRaidType, VNXUserRoleEnum
+from storops.vnx.resource.lun import VNXLun
+from test.vnx.cli_mock import patch_cli, extract_command, MockCli, t_cli
 
 __author__ = 'Cedric Zhuang'
 
@@ -83,6 +85,16 @@ class CliClientTest(TestCase):
     def test_get_agent(self):
         out = self.client.get_agent()
         assert_that(out, contains_string('K10'))
+
+    @extract_command
+    def test_get_control_with_ip(self):
+        cmd = self.client.get_control(ip='1.1.1.1')
+        assert_that(cmd, equal_to('[1.1.1.1] getcontrol'))
+
+    @extract_command
+    def test_get_control_without_ip(self):
+        cmd = self.client.get_control()
+        assert_that(cmd, equal_to('getcontrol'))
 
     @extract_command
     def test_get_agent_with_poll_1(self):
@@ -802,3 +814,32 @@ class CliClientTest(TestCase):
     @patch_cli
     def test_system_version(self):
         assert_that(self.client.system_version, equal_to('05.33.008.3.297'))
+
+    @extract_command
+    def test_get_stats_status(self):
+        cmd = self.client.set_stats()
+        assert_that(cmd, equal_to('setstats'))
+
+    @extract_command
+    def test_set_stats_enabled(self):
+        cmd = self.client.set_stats(True)
+        assert_that(cmd, equal_to('setstats -on'))
+
+    @extract_command
+    def test_set_stats_disabled(self):
+        cmd = self.client.set_stats(False)
+        assert_that(cmd, equal_to('setstats -off'))
+
+    @patch_cli
+    def test_get_persist_rsc_list(self):
+        persist_rsc_list_2 = t_cli().get_persist_rsc_list()
+        assert_that(len(persist_rsc_list_2), greater_than(3))
+        assert_that(t_cli().curr_counter.get_rsc_list_collection(),
+                    has_items(*persist_rsc_list_2))
+
+    @patch_cli
+    def test_get_rsc_perf_csv_data(self):
+        lun_list = t_cli().curr_counter.get_rsc_list(VNXLun)
+        csv = lun_list.get_metrics_csv()
+        assert_that(csv, contains_string('LUN 4'))
+        assert_that(csv, contains_string('LUN 5'))

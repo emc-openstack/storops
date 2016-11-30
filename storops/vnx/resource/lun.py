@@ -17,18 +17,17 @@ from __future__ import unicode_literals
 
 from retryz import retry
 
-from storops.lib.converter import to_bool
-
-from storops.lib.common import check_int, daemon
+import storops.vnx.resource.block_pool
+import storops.vnx.resource.cg
+import storops.vnx.resource.mirror_view
+import storops.vnx.resource.sg
 from storops import exception as ex
+from storops.lib.common import check_int, daemon, instance_cache
+from storops.lib.converter import to_bool
 from storops.vnx.enums import VNXLunType, VNXTieringEnum, VNXProvisionEnum, \
     VNXMigrationRate
 from storops.vnx.resource import VNXCliResourceList, VNXCliResource
-import storops.vnx.resource.block_pool
 from storops.vnx.resource.migration import VNXMigrationSession
-import storops.vnx.resource.sg
-import storops.vnx.resource.cg
-import storops.vnx.resource.mirror_view
 from storops.vnx.resource.snap import VNXSnap, VNXSnapList
 
 __author__ = 'Cedric Zhuang'
@@ -41,9 +40,15 @@ class _IsMigratingError(Exception):
 class VNXLunList(VNXCliResourceList):
     def __init__(self, cli=None, lun_type=None, lun_ids=None, pool=None):
         super(VNXLunList, self).__init__(cli)
+        self._lun_type = None
+        self._lun_ids = None
+        self._pool_name = None
+
+        self._set_filter(lun_type, lun_ids, pool)
+
+    def _set_filter(self, lun_type=None, lun_ids=None, pool=None):
         self._lun_type = VNXLunType.parse(lun_type)
         self._lun_ids = lun_ids
-
         if isinstance(pool, VNXCliResource):
             self._pool_name = pool._get_name()
         else:
@@ -62,8 +67,19 @@ class VNXLunList(VNXCliResourceList):
     def get_resource_class(cls):
         return VNXLun
 
+    @property
+    @instance_cache
+    def _lun_id_map(self):
+        return {lun.lun_id: lun for lun in self}
+
     def _get_raw_resource(self):
         return self._cli.get_lun(lun_type=self._lun_type, poll=self.poll)
+
+    def get(self, _id):
+        if isinstance(_id, VNXLun):
+            _id = VNXLun.get_id(_id)
+
+        return self._lun_id_map.get(_id)
 
 
 class VNXLun(VNXCliResource):

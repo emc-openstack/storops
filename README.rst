@@ -13,7 +13,7 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://landscape.io/github/emc-openstack/storops/master/landscape.svg?style=flat
     :target: https://landscape.io/github/emc-openstack/storops/
 
-VERSION: 0.3.0
+VERSION: 0.4.0
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
@@ -36,14 +36,6 @@ You could use "pip" to install "storops".
 Make sure naviseccli is installed if you want to manage VNX.
 
 *PIP Install Failed?*
-
-If you have trouble install the `lxml` dependency.  Please try to set
-environment variable `STATICBUILD` to `true` on your platform.
-
-If you are on windows, you could also download and install the wheel version
-of `lxml` `here
-<http://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python>`_.
-
 
 Feature List
 ------------
@@ -80,7 +72,42 @@ Feature List
         - initiator and connection management
         - create/delete mirror view
         - create/delete DNS
-
+    - supported metrics
+        - VNXStorageProcessor
+            - read/write/total IOPS
+            - read/write/total MBPS
+            - read/write size KB
+        - VNXLun
+            - read/write/total IOPS
+                - read/write IOPS of SPA
+                - read/write IOPS of SPB
+            - read/write/total MBPS
+                - read/write MBPS of SPA
+                - read/write MBPS of SPB
+            - implicit/explicit trespasses per second
+                - implicit/explicit trespasses per second of SPA
+                - implicit/explicit trespasses per second of SPB
+            - utilization
+                - utilization of SPA
+                - utilization of SPB
+            - read/write size KB
+        - VNXDisk
+            - read/write/total IOPS
+            - read/write/total MBPS
+            - utilization
+            - read/write size KB
+        - VNXSPPort
+            - read/write/total IOPS
+            - read/write/total MBPS
+            - read/write size KB
+        - VNXStorageGroup
+            - read/write/total IOPS
+            - read/write/total MBPS
+            - read/write size KB
+        - VNXStoragePool
+            - read/write/total IOPS
+            - read/write/total MBPS
+            - read/write size KB
 - Manage Unity System
     - supported resources
         - show system properties
@@ -110,40 +137,26 @@ Feature List
         - Persist historical metric data to csv files
     - supported metrics
         - disk
-            - read IOPS
-            - write IOPS
-            - read bandwidth
-            - write bandwidth
+            - read/write IOPS
+            - read/write bandwidth
             - utilization
         - lun
-            - read IOPS
-            - write IOPS
-            - read bandwidth
-            - write bandwidth
+            - read/write IOPS
+            - read/write bandwidth
             - utilization
         - filesystem
-            - read IOPS
-            - write IOPS
-            - read bandwidth
-            - write bandwidth
+            - read/write IOPS
+            - read/write bandwidth
         - storage processor
-            - net in bandwidth
-            - net out bandwidth
-            - block read IOPS
-            - block write IOPS
-            - block read bandwidth
-            - block write bandwidth
-            - CIFS read IOPS
-            - CIFS write IOPS
-            - CIFS read bandwidth
-            - CIFS write bandwidth
-            - NFS read IOPS
-            - NFS write IOPS
-            - NFS read bandwidth
-            - NFS write bandwidth
+            - net in/out bandwidth
+            - block read/write IOPS
+            - block read/write bandwidth
+            - CIFS read/write IOPS
+            - CIFS read/write bandwidth
+            - NFS read/write IOPS
+            - NFS read/write bandwidth
             - utilization
-            - block cache read hit ratio
-            - block cache write hit ratio
+            - block cache read/write hit ratio
 
 Tutorial
 --------

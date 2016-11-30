@@ -25,7 +25,7 @@ from mock import patch
 from storops.exception import MockFileNotFoundError
 from storops.lib.common import cache, allow_omit_parentheses
 from storops.unity.client import UnityClient
-from storops.unity.resource.system import UnitySystem
+import storops.unity.resource.system
 from test.utils import ConnectorMock, read_test_file
 
 __author__ = 'Cedric Zhuang'
@@ -47,7 +47,8 @@ def t_rest(version=None):
 
 @cache
 def t_unity():
-    unity = UnitySystem('10.244.223.61', 'admin', 'Password123!', verify=False)
+    clz = storops.unity.resource.system.UnitySystem
+    unity = clz('10.244.223.61', 'admin', 'Password123!', verify=False)
     unity.add_metric_record(unity.get_metric_query_result(17))
     unity.add_metric_record(unity.get_metric_query_result(34))
     return unity

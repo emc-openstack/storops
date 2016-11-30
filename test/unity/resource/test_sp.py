@@ -227,13 +227,6 @@ class UnityStorageProcessorTest(TestCase):
         assert_that(new_file_size, greater_than(file_size))
 
     @patch_rest
-    def test_default_metric_csv_filename(self):
-        filename = self.sp_list.get_default_metric_csv_filename()
-        assert_that(filename, contains_string('.storops'))
-        assert_that(filename,
-                    contains_string('10.244.223.61_storageProcessor.csv'))
-
-    @patch_rest
     def test_repr_with_metric(self):
         spa, _ = self.sp_list
         assert_that(str(spa), contains_string('"nfs_write_mbps":'))
@@ -242,3 +235,11 @@ class UnityStorageProcessorTest(TestCase):
     def test_repr_without_metric(self):
         spa, _ = UnitySystem('10.244.223.61').get_sp()
         assert_that(str(spa), is_not(contains_string('"nfs_write_mbps":')))
+
+    @patch_rest
+    def test_default_metric_csv_filename(self):
+        sp_list = UnitySystem('10.244.223.61').get_sp()
+        filename = sp_list.get_default_metric_csv_filename()
+        assert_that(filename, contains_string('.storops'))
+        assert_that(filename,
+                    contains_string('10.244.223.61_storageProcessor.csv'))

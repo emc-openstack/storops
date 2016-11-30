@@ -27,7 +27,6 @@ import time
 
 
 class TestPQueue(TestCase):
-
     def setUp(self):
         self.path = tempfile.mkdtemp(suffix='storops')
         self.q = tasks.PQueue(self.path)

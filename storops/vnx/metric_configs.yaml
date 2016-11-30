@@ -1,0 +1,279 @@
+# Copyright (c) 2016 EMC Corporation.
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+VNXStorageProcessor:
+  - name: read_iops
+    counters: read_requests
+  - name: write_iops
+    counters: write_requests
+  - name: read_mbps
+    counters: blocks_read
+    calculator: block_to_mbps
+  - name: write_mbps
+    counters: blocks_written
+    calculator: block_to_mbps
+  - name: total_iops
+    counters:
+      - read_iops
+      - write_iops
+    calculator: stats_total
+  - name: total_mbps
+    counters:
+      - read_mbps
+      - write_mbps
+    calculator: stats_total
+  - name: read_size_kb
+    counters:
+      - read_mbps
+      - read_iops
+    calculator: io_size_kb
+  - name: write_size_kb
+    counters:
+      - write_mbps
+      - write_iops
+    calculator: io_size_kb
+  - name: utilization
+    counters:
+      - controller_busy_ticks
+      - controller_idle_ticks
+    calculator: utilization
+
+
+VNXStorageGroup:
+  - name: read_iops
+    aggregated_from: lun_list
+    counters: read_iops
+    calculator: aggregated_sum
+  - name: write_iops
+    aggregated_from: lun_list
+    counters: write_iops
+    calculator: aggregated_sum
+  - name: total_iops
+    aggregated_from: lun_list
+    counters: total_iops
+    calculator: aggregated_sum
+  - name: read_mbps
+    aggregated_from: lun_list
+    counters: read_mbps
+    calculator: aggregated_sum
+  - name: write_mbps
+    aggregated_from: lun_list
+    counters: write_mbps
+    calculator: aggregated_sum
+  - name: total_mbps
+    aggregated_from: lun_list
+    counters: total_mbps
+    calculator: aggregated_sum
+  - name: read_size_kb
+    aggregated_from: self
+    counters:
+      - read_mbps
+      - read_iops
+    calculator: self_io_size_kb
+  - name: write_size_kb
+    aggregated_from: self
+    counters:
+      - write_mbps
+      - write_iops
+    calculator: self_io_size_kb
+
+
+VNXPool:
+  - name: read_iops
+    aggregated_from: lun_list
+    counters: read_iops
+    calculator: aggregated_sum
+  - name: write_iops
+    aggregated_from: lun_list
+    counters: write_iops
+    calculator: aggregated_sum
+  - name: total_iops
+    aggregated_from: lun_list
+    counters: total_iops
+    calculator: aggregated_sum
+  - name: read_mbps
+    aggregated_from: lun_list
+    counters: read_mbps
+    calculator: aggregated_sum
+  - name: write_mbps
+    aggregated_from: lun_list
+    counters: write_mbps
+    calculator: aggregated_sum
+  - name: total_mbps
+    aggregated_from: lun_list
+    counters: total_mbps
+    calculator: aggregated_sum
+  - name: read_size_kb
+    aggregated_from: self
+    counters:
+      - read_mbps
+      - read_iops
+    calculator: self_io_size_kb
+  - name: write_size_kb
+    aggregated_from: self
+    counters:
+      - write_mbps
+      - write_iops
+    calculator: self_io_size_kb
+
+
+VNXLun:
+  - name: read_iops
+    counters: read_requests
+  - name: read_iops_sp_a
+    counters: read_requests_sp_a
+  - name: read_iops_sp_b
+    counters: read_requests_sp_b
+  - name: write_iops
+    counters: write_requests
+  - name: write_iops_sp_a
+    counters: write_requests_sp_a
+  - name: write_iops_sp_b
+    counters: write_requests_sp_b
+  - name: total_iops
+    counters:
+      - read_iops
+      - write_iops
+    calculator: stats_total
+  - name: total_mbps
+    counters:
+      - read_mbps
+      - write_mbps
+    calculator: stats_total
+  - name: read_mbps
+    counters: blocks_read
+    calculator: block_to_mbps
+  - name: read_mbps_sp_a
+    counters: blocks_read_sp_a
+    calculator: block_to_mbps
+  - name: read_mbps_sp_b
+    counters: blocks_read_sp_b
+    calculator: block_to_mbps
+  - name: write_mbps
+    counters: blocks_written
+    calculator: block_to_mbps
+  - name: write_mbps_sp_a
+    counters: blocks_written_sp_a
+    calculator: block_to_mbps
+  - name: write_mbps_sp_b
+    counters: blocks_written_sp_b
+    calculator: block_to_mbps
+  - name: implicit_trespasses_ps
+    counters: implicit_trespasses
+  - name: implicit_trespasses_ps_sp_a
+    counters: implicit_trespasses_sp_a
+  - name: implicit_trespasses_ps_sp_b
+    counters: implicit_trespasses_sp_b
+  - name: explicit_trespasses_ps
+    counters: explicit_trespasses
+  - name: explicit_trespasses_ps_sp_a
+    counters: explicit_trespasses_sp_a
+  - name: explicit_trespasses_ps_sp_b
+    counters: explicit_trespasses_sp_b
+  - name: utilization
+    counters:
+      - busy_ticks
+      - idle_ticks
+    calculator: utilization
+  - name: utilization_sp_a
+    counters:
+      - busy_ticks_sp_a
+      - idle_ticks_sp_a
+    calculator: utilization
+  - name: utilization_sp_b
+    counters:
+      - busy_ticks_sp_b
+      - idle_ticks_sp_b
+    calculator: utilization
+  - name: read_size_kb
+    counters:
+      - read_mbps
+      - read_iops
+    calculator: io_size_kb
+  - name: write_size_kb
+    counters:
+      - write_mbps
+      - write_iops
+    calculator: io_size_kb
+
+
+VNXDisk:
+  - name: read_iops
+    counters: number_of_reads
+  - name: write_iops
+    counters: number_of_writes
+  - name: total_iops
+    counters:
+      - read_iops
+      - write_iops
+    calculator: stats_total
+  - name: read_mbps
+    counters: kbytes_read
+    calculator: kb_to_mbps
+  - name: write_mbps
+    counters: kbytes_written
+    calculator: kb_to_mbps
+  - name: total_mbps
+    counters:
+      - read_mbps
+      - write_mbps
+    calculator: stats_total
+  - name: utilization
+    counters:
+      - busy_ticks
+      - idle_ticks
+    calculator: utilization
+  - name: read_size_kb
+    counters:
+      - read_mbps
+      - read_iops
+    calculator: io_size_kb
+  - name: write_size_kb
+    counters:
+      - write_mbps
+      - write_iops
+    calculator: io_size_kb
+
+
+VNXSPPort:
+  - name: read_iops
+    counters: reads
+  - name: write_iops
+    counters: writes
+  - name: read_mbps
+    counters: blocks_read
+    calculator: block_to_mbps
+  - name: write_mbps
+    counters: blocks_written
+    calculator: block_to_mbps
+  - name: total_iops
+    counters:
+      - read_iops
+      - write_iops
+    calculator: stats_total
+  - name: total_mbps
+    counters:
+      - read_mbps
+      - write_mbps
+    calculator: stats_total
+  - name: read_size_kb
+    counters:
+      - read_mbps
+      - read_iops
+    calculator: io_size_kb
+  - name: write_size_kb
+    counters:
+      - write_mbps
+      - write_iops
+    calculator: io_size_kb

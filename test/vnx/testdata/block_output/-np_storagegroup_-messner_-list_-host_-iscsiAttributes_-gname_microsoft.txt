@@ -1,0 +1,30 @@
+Storage Group Name:    microsoft
+Storage Group UID:     12:34:56:78:9A:BC:DE:F1:23:45:67:89:AB:CD:EF:01
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  iqn.1991-05.com.microsoft:abc.def.dev            SP A         1
+Host name:             abc.def.dev
+SPPort:                A-1v0
+Initiator IP:          10.244.209.72
+TPGT:                  1
+ISID:                  10000000000
+
+  iqn.1991-05.com.microsoft:abc.def.dev            SP B         1
+Host name:             abc.def.dev
+SPPort:                B-1v0
+Initiator IP:          10.244.209.72
+TPGT:                  2
+ISID:                  10000000000
+
+  22:34:56:78:90:12:34:56:12:34:56:78:90:12:34:56  SP B         2
+Host name:             abc.def.dev
+
+HLU/ALU Pairs:
+
+  HLU Number     ALU Number
+  ----------     ----------
+    0               4
+    123             456
+Shareable:             YES

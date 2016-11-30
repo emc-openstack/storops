@@ -20,7 +20,9 @@ import os
 from storops.exception import NoIndexException, UnityResourceNotFoundError, \
     UnityNameNotUniqueError, UnityActionNotAllowedError, \
     UnityPerfMonNotEnabledError
-from storops.lib.common import get_local_folder, clear_instance_cache
+from storops.lib.common import clear_instance_cache, instance_cache, \
+    get_local_folder
+from storops.lib.metric import MetricsDumper
 from storops.lib.resource import Resource, ResourceList
 from storops.unity import parser
 from storops.unity.calculator import calculators
@@ -360,51 +362,30 @@ class UnityResourceList(UnityResource, ResourceList):
     def _get_resource_instance(self):
         return self.get_resource_class()(cli=self._cli)
 
-    def get_metrics_csv(self, sep=None):
-        if sep is None:
-            sep = ','
-        content = [self.get_metrics_csv_header(sep),
-                   self.get_metrics_csv_data(sep)]
-        return '\n'.join(content)
-
-    @staticmethod
-    def data_line(rsc):
-        # noinspection PyProtectedMember
-        metrics = [str(rsc.get_metric_timestamp()),
-                   rsc.get_id(), rsc._get_name()]
-        metrics += [str(getattr(rsc, name))
-                    for name in rsc.metric_names()]
-        return metrics
-
-    def get_metrics_csv_data(self, sep=None):
-        if sep is None:
-            sep = ','
-        return '\n'.join(sep.join(self.data_line(r)) for r in self)
-
-    def get_metrics_csv_header(self, sep=None):
-        if sep is None:
-            sep = ','
-        return sep.join(['timestamp', 'id', 'name'] + self.metric_names())
-
     def persist_metric_data(self, filename=None):
         if filename is None:
             filename = self.get_default_metric_csv_filename()
+        return self._metrics_dumper.persist_metric_data(filename)
 
-        if os.path.exists(filename):
-            to_write = self.get_metrics_csv_data()
-        else:
-            to_write = self.get_metrics_csv()
-
-        with open(filename, 'a+') as f:
-            f.write(to_write)
-            f.write('\n')
+    def get_metrics_csv(self, sep=None):
+        return self._metrics_dumper.get_metrics_csv(sep=sep)
 
     def get_default_metric_csv_filename(self):
         folder = get_local_folder()
         name = '{}_{}.csv'.format(self._cli.ip, self.resource_class_name)
-        filename = os.path.join(folder, name)
-        return filename
+        return os.path.join(folder, name)
+
+    @property
+    @instance_cache
+    def _metrics_dumper(self):
+        def hdr_cb(rsc):
+            return [str(rsc.get_metric_timestamp()),
+                    rsc.get_id(),
+                    rsc._get_name()]
+
+        extra_headers = ['timestamp', 'id', 'name']
+        return MetricsDumper(self, extra_headers, hdr_cb)
 
     @property
     def resource_class_name(self):
-        return self.get_resource_class()().resource_class
+        return self._get_resource_instance().resource_class

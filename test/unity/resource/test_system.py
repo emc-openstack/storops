@@ -24,6 +24,7 @@ from hamcrest import assert_that, equal_to, instance_of, only_contains, \
 
 from storops.exception import UnityResourceNotFoundError, \
     UnityHostNameInUseError, UnityActionNotAllowedError
+from storops.lib.resource import ResourceList
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
     StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum
@@ -545,7 +546,8 @@ class UnitySystemTest(TestCase):
         assert_that(unity.is_perf_stats_persisted(), equal_to(False))
 
     def test_default_rsc_clz_list_with_perf_stats(self):
-        clz_list = t_unity()._default_rsc_clz_list_with_perf_stats()
+        rsc_list_collection = t_unity()._default_rsc_list_with_perf_stats()
+        clz_list = ResourceList.get_rsc_clz_list(rsc_list_collection)
         assert_that(clz_list, has_items(UnityDisk, UnityLun, UnityFileSystem))
 
     @patch_rest

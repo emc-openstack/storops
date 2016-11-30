@@ -20,9 +20,10 @@ import os
 import sys
 
 import six
-import yaml
 
-from storops.lib.common import cache
+from storops.lib.common import cache, all_not_none
+from storops.lib.metric import CalculatorMetaInfo, MetricConfigParser, \
+    MetricConfigList
 
 __author__ = 'Cedric Zhuang'
 
@@ -94,7 +95,9 @@ class IdValues(object):
 
     @classmethod
     def _div(cls, op1, op2):
-        if op1 is None or op2 is None or op2 == 0:
+        if op1 == 0:
+            r = 0
+        elif op1 is None or op2 is None or op2 == 0:
             r = cls.NaN
         else:
             r = op1 / op2
@@ -166,10 +169,6 @@ def metric_calculator(f):
         return ret
 
     return wrapper
-
-
-def all_not_none(*items):
-    return all(map(lambda item: item is not None, items))
 
 
 @metric_calculator
@@ -301,7 +300,7 @@ def _module_functions():
     return dict(inspect.getmembers(sys.modules[__name__]))
 
 
-class MetricConfig(object):
+class UnityMetricConfig(object):
     def __init__(self, config):
         self.name = config.get('name')
         paths = self._get_paths(config)
@@ -325,56 +324,20 @@ class MetricConfig(object):
         return paths
 
 
-class MetricConfigList(object):
-    def __init__(self, inputs):
-        if inputs is None:
-            inputs = []
-        self._metric_configs = {config.get('name'): MetricConfig(config)
-                                for config in inputs}
-
-    def metric_names(self):
-        return sorted(self._metric_configs.keys())
-
-    def get_calculator(self, metric_name):
-        return self.get_metric_config(metric_name).calculator
-
-    def get_metric_config(self, metric_name):
-        if metric_name not in self._metric_configs:
-            raise ValueError('calculator for metric "{}" not found in {}.'
-                             .format(metric_name, self._metric_configs))
-        return self._metric_configs[metric_name]
-
-    def paths(self):
-        return [path
-                for config in self._metric_configs.values()
-                for path in config.paths]
+class UnityMetricConfigList(MetricConfigList):
+    def init_metric_config(self, raw_config):
+        return UnityMetricConfig(raw_config)
 
 
-class MetricConfigParser(object):
-    config_filename = 'metric_configs.yaml'
-
+class UnityMetricConfigParser(MetricConfigParser):
     @classmethod
     def get_folder(cls):
         return os.path.dirname(inspect.getfile(cls))
 
     @classmethod
-    @cache
-    def _read_configs(cls):
-        filename = os.path.join(cls.get_folder(), cls.config_filename)
-        with open(filename, 'r') as stream:
-            ret = yaml.load(stream)
-        return ret
-
-    @classmethod
     def get_config(cls, name):
         name = cls._get_clz_name(name)
-        return MetricConfigList(cls._read_configs().get(name))
-
-    @classmethod
-    def _get_clz_name(cls, name):
-        if isinstance(name, type):
-            name = name.__name__.split('.')[-1]
-        return name
+        return UnityMetricConfigList(cls._read_configs().get(name))
 
     @classmethod
     @cache
@@ -386,27 +349,17 @@ class MetricConfigParser(object):
                 for path in config.paths()]
 
 
-class CalculatorMetaInfo(object):
-    def __init__(self):
-        self._metric_config = MetricConfigParser()
+class UnityCalculatorMetaInfo(CalculatorMetaInfo):
+    def get_config_parser(self):
+        return UnityMetricConfigParser()
 
-    def get_calculator(self, unity_clz, metric_name):
-        config_list = self.get_config(unity_clz)
-        return config_list.get_calculator(metric_name)
-
-    def get_config(self, unity_clz):
-        return self._metric_config.get_config(unity_clz)
-
-    def get_metric_names(self, unity_clz):
-        return self.get_config(unity_clz).metric_names()
-
-    def get_metric_value(self, unity_clz, metric_name, cli, obj=None):
+    def get_metric_value(self, clz, metric_name, cli, obj=None):
         if not hasattr(cli, 'curr_counter'):
             raise ValueError('cli should has "curr_counter" attribute.')
         if not hasattr(cli, 'prev_counter'):
             raise ValueError('cli should has "prev_counter" attribute.')
 
-        config = self.get_config(unity_clz).get_metric_config(metric_name)
+        config = self.get_config(clz).get_metric_config(metric_name)
         return config.calculator(config.paths, cli.prev_counter,
                                  cli.curr_counter, obj)
 
@@ -416,4 +369,4 @@ class CalculatorMetaInfo(object):
         return self._metric_config.paths(clz_list)
 
 
-calculators = CalculatorMetaInfo()
+calculators = UnityCalculatorMetaInfo()

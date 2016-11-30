@@ -17,7 +17,7 @@ from __future__ import unicode_literals
 
 from storops.exception import raise_if_err, VNXPingNodeError, \
     VNXPingNodeSuccess, VNXPortError
-from storops.lib.common import check_int
+from storops.lib.common import check_int, instance_cache
 from storops.vnx.enums import VNXSPEnum, VNXPortType
 from storops.vnx.resource import VNXCliResourceList, VNXCliResource
 
@@ -45,6 +45,16 @@ class VNXPort(VNXCliResource):
     @property
     def wwn(self):
         return self._get_property('_wwn')
+
+    @property
+    @instance_cache
+    def index(self):
+        sp = 'A' if self.sp == VNXSPEnum.SP_A else 'B'
+        if self.vport_id is not None:
+            ret = '{}_{}_{}'.format(sp, self.port_id, self.vport_id)
+        else:
+            ret = '{}_{}'.format(sp, self.port_id)
+        return ret
 
     @property
     def display_name(self):
@@ -147,6 +157,17 @@ class VNXSPPortList(VNXCliResourceList):
 
     def _get_raw_resource(self):
         return self._cli.get_sp_port(poll=self.poll)
+
+    @property
+    @instance_cache
+    def _port_index_map(self):
+        return {port.index: port for port in self}
+
+    def get(self, index):
+        if isinstance(index, VNXSPPort):
+            index = index.index
+
+        return self._port_index_map.get(index)
 
 
 class VNXSPPort(VNXPort):

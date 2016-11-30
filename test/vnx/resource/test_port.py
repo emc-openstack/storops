@@ -24,12 +24,13 @@ from storops.exception import VNXInvalidCliParamError, \
     VNXPortNotInitializedError, VNXInitiatorExistedError, \
     VNXDeleteHbaNotFoundError, VNXPingNodeTimeOutError, VNXGateWayError, \
     VNXVirtualPortNotFoundError
-from test.vnx.cli_mock import patch_cli, t_cli
-from test.vnx.resource.fakes import STORAGE_GROUP_HBA
+from storops.lib.common import instance_cache
 from storops.vnx.enums import VNXSPEnum, VNXPortType
 from storops.vnx.resource.port import VNXHbaPort, VNXSPPort, \
     VNXConnectionPort, VNXStorageGroupHBA
 from storops.vnx.resource.sg import VNXStorageGroup
+from test.vnx.cli_mock import patch_cli, t_cli
+from test.vnx.resource.fakes import STORAGE_GROUP_HBA
 
 __author__ = 'Cedric Zhuang'
 
@@ -63,6 +64,7 @@ class VNXSPPortTest(TestCase):
         assert_that(port.sp, equal_to(VNXSPEnum.SP_A))
         assert_that(port.port_id, equal_to(0))
         assert_that(port.vport_id, none())
+        assert_that(port.index, equal_to('A_0'))
         assert_that(port.wwn, equal_to(
             '50:06:01:60:B6:E0:16:81:50:06:01:60:36:E0:16:81'))
         assert_that(port.link_status, equal_to('Up'))
@@ -74,6 +76,22 @@ class VNXSPPortTest(TestCase):
         assert_that(port.not_logged_in_initiators, equal_to(2))
         assert_that(port.type, equal_to(VNXPortType.FC))
         assert_that(port.display_name, equal_to('A-0'))
+        assert_that(port.sfp_state, equal_to('Online'))
+        assert_that(port.reads, equal_to(1))
+        assert_that(port.writes, equal_to(2))
+        assert_that(port.blocks_read, equal_to(3))
+        assert_that(port.blocks_written, equal_to(4))
+        assert_that(port.queue_full_busy, equal_to(5))
+        assert_that(port.i_o_module_slot, equal_to('6'))
+        assert_that(port.physical_port_id, equal_to(7))
+        assert_that(port.usage, equal_to("General"))
+        assert_that(port.sfp_connector_emc_part_number,
+                    equal_to('019-078-042'))
+        assert_that(port.sfp_connector_emc_serial_number,
+                    equal_to('000000000000000'))
+        assert_that(port.sfp_connector_vendor_part_number, equal_to('N/A'))
+        assert_that(port.sfp_connector_vendor_serial_number,
+                    equal_to('PL31D5E'))
 
     @patch_cli
     def test_get_port_by_type(self):
@@ -81,6 +99,47 @@ class VNXSPPortTest(TestCase):
         assert_that(len(ports), equal_to(4))
         ports = VNXSPPort.get(cli=t_cli(), port_type=VNXPortType.FC)
         assert_that(len(ports), equal_to(28))
+
+    @property
+    @instance_cache
+    def port_a0(self):
+        return VNXSPPort.get(t_cli(), sp=VNXSPEnum.SP_A, port_id=0)[0]
+
+    @patch_cli
+    def test_port_read_iops(self):
+        assert_that(self.port_a0.read_iops, equal_to(10.0))
+
+    @patch_cli
+    def test_port_write_iops(self):
+        assert_that(self.port_a0.write_iops, equal_to(20.0))
+
+    @patch_cli
+    def test_port_total_iops(self):
+        assert_that(self.port_a0.total_iops, equal_to(30.0))
+
+    @patch_cli
+    def test_port_read_mbps(self):
+        assert_that(self.port_a0.read_mbps, equal_to(1.0))
+
+    @patch_cli
+    def test_port_write_mbps(self):
+        assert_that(self.port_a0.write_mbps, equal_to(1.5))
+
+    @patch_cli
+    def test_port_total_mbps(self):
+        assert_that(self.port_a0.total_mbps, equal_to(2.5))
+
+    @patch_cli
+    def test_port_read_size_kb(self):
+        assert_that(self.port_a0.read_size_kb, equal_to(102.4))
+
+    @patch_cli
+    def test_port_write_size_kb(self):
+        assert_that(self.port_a0.write_size_kb, equal_to(76.8))
+
+    @patch_cli
+    def test_property_names(self):
+        assert_that(self.port_a0.property_names(), has_item('read_iops'))
 
 
 class VNXHbaPortTest(TestCase):
@@ -434,3 +493,11 @@ class VNXPortTest(TestCase):
         hba = test_hba()
         h_port = VNXHbaPort.create('a', 3, vport_id=1)
         assert_that(hba, equal_to(h_port))
+
+    @patch_cli
+    def test_get_metrics_csv(self):
+        ports = VNXSPPort.get(t_cli())
+        csv = ports.get_metrics_csv()
+        assert_that(csv, contains_string(',A_0,'))
+        assert_that(csv, contains_string('30.0,2.5,'))
+        assert_that(csv, contains_string('timestamp,name,'))

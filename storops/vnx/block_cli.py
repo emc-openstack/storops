@@ -27,6 +27,7 @@ from storops import exception as ex
 from storops.exception import OptionMissingError
 from storops.lib.common import check_int, text_var, int_var, enum_var, \
     yes_no_var
+from storops.lib.metric import PerfManager
 from storops.vnx.enums import VNXSPEnum, VNXTieringEnum, VNXProvisionEnum, \
     VNXMigrationRate, VNXCompressionRate, \
     VNXMirrorViewRecoveryPolicy, VNXMirrorViewSyncRate, VNXLunType, \
@@ -61,8 +62,14 @@ def command(f):
 
     @functools.wraps(f)
     def func_wrapper(self, *argv, **kwargs):
+        if 'ip' in kwargs:
+            ip = kwargs['ip']
+            del kwargs['ip']
+        else:
+            ip = None
+
         commands = _get_commands(f, self, *argv, **kwargs)
-        return self.execute(commands)
+        return self.execute(commands, ip=ip)
 
     return func_wrapper
 
@@ -82,13 +89,11 @@ def duel_command(f):
     return func_wrapper
 
 
-class CliClient(object):
-    def __init__(self, ip=None,
-                 username=None, password=None, scope=None,
-                 sec_file=None,
-                 timeout=None,
-                 heartbeat_interval=None,
+class CliClient(PerfManager):
+    def __init__(self, ip=None, username=None, password=None, scope=None,
+                 sec_file=None, timeout=None, heartbeat_interval=None,
                  naviseccli=None):
+        super(CliClient, self).__init__()
         if heartbeat_interval is None:
             heartbeat_interval = 60
         if scope is None:
@@ -103,6 +108,21 @@ class CliClient(object):
             naviseccli=naviseccli)
         self._heart_beat.add(VNXSPEnum.SP_A, ip)
         self._system_version = None
+
+    def persist_rsc_list_metrics(self):
+        persist_rsc_list = self.get_persist_rsc_list()
+        if self.prev_counter and persist_rsc_list:
+            for rsc_list in persist_rsc_list:
+                rsc_list.persist_metric_data()
+
+    def get_persist_rsc_list(self):
+        if self.curr_counter is not None:
+            ret = [rsc_list
+                   for rsc_list in self.curr_counter.get_rsc_list_collection()
+                   if self.is_perf_metric_enabled(rsc_list)]
+        else:
+            ret = []
+        return ret
 
     def set_binary(self, binary):
         if binary is not None:
@@ -139,6 +159,10 @@ class CliClient(object):
     @property
     def heartbeat(self):
         return self._heart_beat
+
+    @command
+    def get_control(self):
+        return 'getcontrol'
 
     @command
     def get_agent(self):
@@ -835,6 +859,16 @@ class CliClient(object):
     def set_array_name(self, new_name):
         cmd = text_var('arrayname', new_name)
         cmd.append('-o')
+        return cmd
+
+    @command
+    def set_stats(self, enable=None):
+        cmd = ['setstats']
+        if enable is not None:
+            if enable:
+                cmd.append('-on')
+            else:
+                cmd.append('-off')
         return cmd
 
     @property

@@ -21,7 +21,8 @@ import six
 
 import storops.unity.resource.type_resource
 from storops.connection.connector import UnityRESTConnector
-from storops.lib.common import instance_cache, EnumList, RepeatedTimer
+from storops.lib.common import instance_cache, EnumList
+from storops.lib.metric import PerfManager
 from storops.unity.enums import UnityEnum, UnityEnumList
 from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.system
@@ -32,130 +33,7 @@ __author__ = 'Cedric Zhuang'
 log = logging.getLogger(__name__)
 
 
-class MetricCounterRecords(object):
-    """ Data structure to save metric counter in memory
-    """
-
-    def __init__(self, maximum=None):
-        self.enabled = False
-        if maximum is None:
-            maximum = 2
-        self._maximum_len = maximum
-        self._records = []
-
-    def add_results(self, result):
-        self.enabled = True
-        if result is not None:
-            self._records.insert(0, result)
-            while len(self._records) > self._maximum_len:
-                self._records.pop()
-
-    def reset(self):
-        self.enabled = False
-        self._records = []
-
-    def __len__(self):
-        return len(self._records)
-
-    @property
-    def curr(self):
-        if self.enabled and len(self._records) > 0:
-            ret = self._records[0]
-        else:
-            ret = None
-        return ret
-
-    @property
-    def prev(self):
-        if self.enabled and len(self._records) > 1:
-            ret = self._records[1]
-        else:
-            ret = None
-        return ret
-
-
-class UnityPerfManager(object):
-    def __init__(self):
-        self.metric_collector = None
-        self._perf_rsc_list = None
-        self._perf_rsc_clz_list = None
-        self.metric_counter_records = MetricCounterRecords()
-
-    def persist_rsc_list_metrics(self):
-        persist_rsc_list = self.get_persist_rsc_list()
-        if self.prev_counter and persist_rsc_list:
-            for rsc_list in persist_rsc_list:
-                rsc_list.update()
-                rsc_list.persist_metric_data()
-
-    def _is_perf_monitored(self, rsc):
-        if self._perf_rsc_clz_list is not None:
-            if isinstance(rsc, UnityResourceList):
-                clz = rsc.get_resource_class()
-            else:
-                clz = type(rsc)
-            ret = clz in self._perf_rsc_clz_list
-        else:
-            ret = True
-        return ret
-
-    def get_persist_rsc_list(self):
-        if self._perf_rsc_list is not None:
-            ret = [rsc_list
-                   for rsc_list in self._perf_rsc_list
-                   if self.is_perf_metric_enabled(rsc_list)]
-        else:
-            ret = []
-        return ret
-
-    def enable_perf_metric(self, interval, callback, rsc_clz_list=None):
-        self._perf_rsc_clz_list = rsc_clz_list
-
-        def f():
-            self.metric_counter_records.add_results(callback())
-            self.persist_rsc_list_metrics()
-
-        if self.metric_counter_records.enabled:
-            self.disable_perf_metric()
-
-        self.metric_counter_records.enabled = True
-        if interval > 0:
-            self.metric_collector = RepeatedTimer(interval, f)
-            self.metric_collector.start()
-
-    def disable_perf_metric(self):
-        if self.metric_collector:
-            self.metric_collector.stop()
-        self.metric_counter_records.reset()
-
-    def is_perf_metric_enabled(self, rsc=None):
-        ret = self.metric_counter_records.enabled
-        if rsc is not None and ret:
-            ret &= self._is_perf_monitored(rsc)
-        return ret
-
-    @property
-    def prev_counter(self):
-        return self.metric_counter_records.prev
-
-    @property
-    def curr_counter(self):
-        return self.metric_counter_records.curr
-
-    def __del__(self):
-        self.disable_perf_metric()
-
-    def persist_perf_stats(self, perf_rsc_list):
-        self._perf_rsc_list = perf_rsc_list
-
-    def is_perf_stats_persisted(self):
-        return self._perf_rsc_list is not None and len(self._perf_rsc_list) > 0
-
-    def add_metric_record(self, record):
-        self.metric_counter_records.add_results(record)
-
-
-class UnityClient(UnityPerfManager):
+class UnityClient(PerfManager):
     def __init__(self, ip, username, password, port=443, verify=False):
         super(UnityClient, self).__init__()
         self.ip = ip

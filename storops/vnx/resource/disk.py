@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 import re
 from collections import Counter
 
-from storops.lib.common import check_text
+from storops.lib.common import check_text, instance_cache
 from storops.vnx.resource import VNXCliResource, VNXCliResourceList
 
 __author__ = 'Cedric Zhuang'
@@ -94,6 +94,17 @@ class VNXDiskList(VNXCliResourceList):
     def __init__(self, cli=None, disk_indices=None, drive_type=None,
                  capacity=None):
         super(VNXDiskList, self).__init__(cli)
+        self._disk_indices = None
+        self._drive_type = None
+        self._capacity = None
+
+        self._set_filter(disk_indices, drive_type, capacity)
+
+    @staticmethod
+    def _normalize_indices(indices):
+        return [index.lower() for index in indices if index is not None]
+
+    def _set_filter(self, disk_indices=None, drive_type=None, capacity=None):
         if disk_indices is not None:
             self._disk_indices = self._normalize_indices(disk_indices)
         else:
@@ -101,21 +112,14 @@ class VNXDiskList(VNXCliResourceList):
         self._drive_type = drive_type
         self._capacity = capacity
 
-    @staticmethod
-    def _normalize_indices(indices):
-        return [index.lower() for index in indices if index is not None]
-
     def set_indices(self, disk_indices):
-        self._disk_indices = self._normalize_indices(disk_indices)
-        self._apply_filter()
+        self.set_filter(disk_indices=disk_indices)
 
     def set_drive_type(self, drive_type):
-        self._drive_type = drive_type
-        self._apply_filter()
+        self.set_filter(drive_type=drive_type)
 
     def set_capacity(self, capacity):
-        self._capacity = capacity
-        self._apply_filter()
+        self.set_filter(capacity=capacity)
 
     def _filter(self, disk):
         ret = True
@@ -167,3 +171,14 @@ class VNXDiskList(VNXCliResourceList):
 
     def _get_raw_resource(self):
         return self._cli.get_disk(poll=self.poll)
+
+    @property
+    @instance_cache
+    def _disk_index_map(self):
+        return {disk.index: disk for disk in self}
+
+    def get(self, index):
+        if isinstance(index, VNXDisk):
+            index = index.index
+
+        return self._disk_index_map.get(index)

@@ -15,13 +15,14 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import time
 from unittest import TestCase
 
-from hamcrest import equal_to, assert_that, raises
+from hamcrest import equal_to, assert_that, raises, less_than
 
 from storops.exception import VNXCredentialError
-from test.vnx.cli_mock import patch_cli
 from storops.vnx.navi_command import NaviCommand
+from test.vnx.cli_mock import patch_cli
 
 __author__ = 'Cedric Zhuang'
 
@@ -81,3 +82,10 @@ class NaviCommandTest(TestCase):
         assert_that(cmd.is_credential_valid, equal_to(True))
         assert_that(cmd.get_credentials, raises(VNXCredentialError, 'missing'))
         assert_that(cmd.is_credential_valid, equal_to(False))
+
+    def test_timeout_error(self):
+        cmd = NaviCommand()
+        start = time.time()
+        cmd.execute('python'.split(), timeout=0.1)
+        dt = time.time() - start
+        assert_that(dt, less_than(1))

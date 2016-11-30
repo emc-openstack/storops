@@ -18,32 +18,27 @@ from __future__ import unicode_literals
 from datetime import datetime, timedelta
 
 import storops.exception as ex
-import storops.lib.parser
 from storops.lib.common import JsonPrinter, clear_instance_cache
 
 __author__ = 'Cedric Zhuang'
 
 
 class Resource(JsonPrinter):
-
     def __init__(self):
-        self._property_cache = {}
         self._parsed_resource = None
         super(Resource, self).__init__()
 
-    @staticmethod
-    def _get(data, key):
-        if isinstance(key, storops.lib.parser.PropDescriptor):
-            key = key.key
-        try:
-            ret = data.__getitem__(key)
-        except KeyError:
-            ret = None
-        return ret
+    def shadow_copy(self):
+        """ Return a copy of the resource with same raw data
 
-    @staticmethod
-    def _has_get(data):
-        return hasattr(data, '__getitem__')
+        :return: copy of the resource
+        """
+        ret = self.__class__()
+        if not self._is_updated():
+            # before copy, make sure source is updated.
+            self.update()
+        ret._parsed_resource = self._parsed_resource
+        return ret
 
     def _get_name(self):
         if hasattr(self, '_name') and self._name is not None:
@@ -97,12 +92,6 @@ class Resource(JsonPrinter):
                 break
         return ret
 
-    def is_valid(self):
-        return self.existed()
-
-    def _get_parsed_resource(self):
-        return self._get_raw_resource()
-
     def _parse_raw(self, data):
         return self._get_parser().parse(data)
 
@@ -137,15 +126,6 @@ class Resource(JsonPrinter):
             ret = None
         return ret
 
-    @classmethod
-    def get_property_key(cls, label):
-        parser = cls._get_parser()
-        if parser is not None:
-            ret = parser.get_property_key(label)
-        else:
-            ret = None
-        return ret
-
     @property
     def system_version(self):
         # Return the version of backing system
@@ -174,10 +154,6 @@ class Resource(JsonPrinter):
                     continue
         return props
 
-    @property
-    def _cache_size(self):
-        return len(self._property_cache)
-
     def _get_raw_resource(self):
         """get raw input of this resource
 
@@ -187,19 +163,11 @@ class Resource(JsonPrinter):
         return ''
 
     def __getattr__(self, item):
-        # To avoid infinite loop of accessing the nonexistent property
-        if '_property_cache' not in self.__dict__:
-            raise AttributeError(item)
-        if item in self._property_cache:
-            ret = self._property_cache[item]
-        elif not item.startswith('_'):
+        if not item.startswith('_'):
             ret = self._get_property_from_raw(item)
         else:
             raise AttributeError(item)
         return ret
-
-    def _update_property_cache(self, name, value):
-        self._property_cache[name] = value
 
     def _is_updated(self):
         return self._parsed_resource is not None
@@ -228,7 +196,15 @@ class ResourceList(Resource):
     def __init__(self):
         super(ResourceList, self).__init__()
         self._list = None
-        self._iter = None
+
+    def shadow_copy(self):
+        ret = super(ResourceList, self).shadow_copy()
+        ret._list = self._list
+        return ret
+
+    @classmethod
+    def get_rsc_clz_list(cls, rsc_list_collection):
+        return [l.get_resource_class() for l in rsc_list_collection]
 
     @clear_instance_cache
     def update(self, data=None):
@@ -242,7 +218,7 @@ class ResourceList(Resource):
             parsed_list = self._parse_raw(data)
 
         for i in parsed_list:
-            item = self.get_resource_class()()
+            item = self._get_resource_instance()
             item.update(i)
             if self._filter(item):
                 self._list.append(item)
@@ -287,14 +263,7 @@ class ResourceList(Resource):
         return len(self.list)
 
     def __iter__(self):
-        self._iter = self.list.__iter__()
-        return self
-
-    def next(self):
-        return next(self._iter)
-
-    def __next__(self):
-        return self.next()
+        return iter(self.list)
 
     def __getitem__(self, item):
         return self.list[item]
@@ -322,3 +291,49 @@ class ResourceList(Resource):
 
     def _is_updated(self):
         return self._list is not None
+
+
+class ResourceListCollection(object):
+    def __init__(self, init_list=None):
+        if init_list:
+            self._items = {rsc_list.get_resource_class(): rsc_list
+                           for rsc_list in init_list}
+        else:
+            self._items = {}
+        self.timestamp = datetime.now()
+
+    def add_rsc_list(self, rsc_list):
+        if not hasattr(rsc_list, 'get_resource_class'):
+            raise ValueError('expect a ResourceList.')
+        self._items[rsc_list.get_resource_class()] = rsc_list
+
+    def get_rsc(self, obj):
+        ret = None
+        rsc_list = self.get_rsc_list(type(obj))
+        if rsc_list:
+            try:
+                ret = rsc_list.get(obj)
+            except TypeError:
+                raise TypeError('"get(id)" method not found in ResourceList.')
+        return ret
+
+    def get_rsc_list(self, rsc_clz):
+        return self._items.get(rsc_clz)
+
+    def get_rsc_list_collection(self):
+        return self._items.values()
+
+    def get_rsc_clz_list(self):
+        return self._items.keys()
+
+    def __len__(self):
+        return len(self._items)
+
+    def update(self):
+        for rsc_list in self.get_rsc_list_collection():
+            rsc_list.update()
+        self.timestamp = datetime.now()
+        return self
+
+    def delta_seconds(self, other):
+        return (self.timestamp - other.timestamp).total_seconds()

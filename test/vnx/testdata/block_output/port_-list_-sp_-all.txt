@@ -214,13 +214,13 @@ Auto
 Requested Value:      Auto
 MAC Address:         Not Applicable
 SFP State:           Online
-Reads:               0
-Writes:              0
-Blocks Read:         0
-Blocks Written:      0
-Queue Full/Busy:     0
-I/O Module Slot:     0
-Physical Port ID:    0
+Reads:               1
+Writes:              2
+Blocks Read:         3
+Blocks Written:      4
+Queue Full/Busy:     5
+I/O Module Slot:     6
+Physical Port ID:    7
 Usage:     General
 SFP/Connector EMC Part Number: 019-078-042
 SFP/Connector EMC Serial Number: 000000000000000

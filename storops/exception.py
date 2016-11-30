@@ -548,6 +548,14 @@ class UnityHostNotInSameTenantError(StoropsException):
     error_code = 151036194
 
 
+class VNXStatsError(VNXException):
+    pass
+
+
+class VNXPerMonNotEnabledError(VNXStatsError):
+    pass
+
+
 class NaviseccliNotAvailableError(VNXException):
     message = ("naviseccli not found.  please make sure it's installed"
                " and available in path.")
@@ -925,6 +933,10 @@ class VNXUserNotFoundError(VNXSecurityException, VNXObjectNotFoundError):
     error_message = 'User does not exist'
 
 
+class VNXStatsException(VNXException):
+    pass
+
+
 class VNXRaidGroupError(VNXException):
     pass
 
@@ -946,7 +958,12 @@ class VNXCreatePoolError(VNXPoolError):
 
 
 @cli_exception
-class VNXPoolNameInUseError(VNXCreatePoolError):
+class VNXNameInUseError(VNXException):
+    error_message = 'Could not set properties:(Name).'
+
+
+@cli_exception
+class VNXPoolNameInUseError(VNXCreatePoolError, VNXNameInUseError):
     error_message = ['0x712d8501', 'Pool name is already used']
 
 

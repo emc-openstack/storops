@@ -18,31 +18,29 @@ from __future__ import unicode_literals
 import logging
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, none, instance_of, raises
-from storops.vnx.resource.mover import VNXMoverList
-from storops.vnx.resource.system import VNXArrayName, VNXAgent
+from hamcrest import assert_that, equal_to, none, instance_of, raises, is_not
 
-from storops.vnx.resource.vdm import VNXVdmList
-
-from storops.vnx.resource.cifs_server import CifsDomain
-
-from storops.lib.common import instance_cache
-from storops.vnx.resource.mirror_view import VNXMirrorViewList
-
+from storops import VNXSystem
 from storops.exception import VNXDeleteHbaNotFoundError, VNXCredentialError, \
     VNXUserNameInUseError, VNXBackendError, VNXSetArrayNameError
+from storops.lib.common import instance_cache
+from storops.lib.resource import ResourceListCollection
+from storops.vnx.enums import VNXLunType, VNXPortType, VNXSPEnum, \
+    VNXUserRoleEnum
+from storops.vnx.resource.cifs_server import CifsDomain
+from storops.vnx.resource.disk import VNXDisk
+from storops.vnx.resource.lun import VNXLun
+from storops.vnx.resource.mirror_view import VNXMirrorViewList
+from storops.vnx.resource.mover import VNXMoverList
 from storops.vnx.resource.port import VNXSPPortList, VNXConnectionPortList
+from storops.vnx.resource.system import VNXAgent
+from storops.vnx.resource.system import VNXArrayName
+from storops.vnx.resource.vdm import VNXVdmList
 from storops.vnx.resource.vnx_domain import VNXDomainMemberList, \
     VNXStorageProcessor
-
 from test.vnx.cli_mock import patch_cli, t_vnx, t_cli
 from test.vnx.nas_mock import patch_post
 from test.vnx.resource.verifiers import verify_pool_0
-from storops import VNXSystem
-from storops.vnx.enums import VNXLunType, VNXPortType, VNXSPEnum, \
-    VNXUserRoleEnum
-from storops.vnx.resource.disk import VNXDisk
-from storops.vnx.resource.lun import VNXLun
 
 __author__ = 'Cedric Zhuang'
 
@@ -355,6 +353,7 @@ class VNXSystemTest(TestCase):
 
     @patch_cli
     def test_alive_sp_ip(self):
+        log.debug('sp ips {}, {}'.format(self.vnx.spa_ip, self.vnx.spb_ip))
         assert_that(self.vnx.alive_sp_ip, equal_to('10.244.211.30'))
 
     @patch_cli
@@ -379,6 +378,44 @@ class VNXSystemTest(TestCase):
         assert_that(host.name, equal_to('ubuntu14'))
         assert_that(host.existed, equal_to(True))
         assert_that(len(host.connections), equal_to(4))
+
+    @patch_cli
+    def test_enable_perf_stats_default(self):
+        vnx = VNXSystem('10.244.211.30')
+        clz_list = vnx.enable_perf_stats()
+        assert_that(len(clz_list), equal_to(6))
+        assert_that(vnx.is_perf_stats_enabled(), equal_to(True))
+
+        vnx.disable_perf_stats()
+        assert_that(vnx.is_perf_stats_enabled(), equal_to(False))
+
+    @patch_cli
+    def test_enable_perf_stats_filtered(self):
+        vnx = VNXSystem('10.244.211.30')
+        clz_list = vnx.enable_perf_stats([VNXLun, VNXDisk])
+        assert_that(len(clz_list), equal_to(2))
+        vnx.disable_perf_stats()
+
+    @patch_cli
+    def test_get_rsc_list_2_returns_different_instances(self):
+        ret1 = self.vnx.get_rsc_list_2()
+        ret2 = self.vnx.get_rsc_list_2()
+        assert_that(ret1, is_not(equal_to(ret2)))
+
+    @patch_cli
+    def test_enable_persist_perf_stats(self):
+        vnx = VNXSystem('10.244.211.30')
+        vnx.enable_persist_perf_stats()
+        assert_that(vnx.is_perf_stats_persisted(), equal_to(True))
+
+        vnx.disable_persist_perf_stats()
+        assert_that(vnx.is_perf_stats_persisted(), equal_to(False))
+
+    @patch_cli
+    def test_collect_perf_record(self):
+        record = self.vnx.collect_perf_record([VNXLun, VNXDisk])
+        assert_that(record, instance_of(ResourceListCollection))
+        assert_that(len(record), equal_to(2))
 
 
 class VNXArrayNameTest(TestCase):

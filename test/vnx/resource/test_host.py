@@ -20,8 +20,7 @@ from unittest import TestCase
 from hamcrest import equal_to, assert_that, none, has_items, only_contains
 
 from storops.vnx.resource.host import VNXHostList, VNXHost
-from test import patch_cli
-from test.vnx.cli_mock import t_cli
+from test.vnx.cli_mock import t_cli, patch_cli
 
 __author__ = 'Cedric Zhuang'
 

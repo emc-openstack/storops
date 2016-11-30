@@ -22,8 +22,6 @@ import six
 
 from storops.exception import StoropsException, SystemAPINotSupported
 from storops.lib.resource import Resource
-from storops.unity.client import UnityClient
-from storops.vnx.block_cli import CliClient
 
 __author__ = 'Tina Tang'
 
@@ -239,9 +237,13 @@ def get_version(dec_type, *args, **kwargs):
     return _get_version_from_client_in_args(*args, **kwargs)
 
 
+def is_valid_client_instance(inst):
+    return inst.__class__.__name__ in ('UnityClient', 'CliClient')
+
+
 def _get_version_from_client_in_args(*args, **kwargs):
     for parm in list(args) + list(kwargs.values()):
-        if isinstance(parm, (UnityClient, CliClient)):
+        if is_valid_client_instance(parm):
             return parm.system_version
     return None
 

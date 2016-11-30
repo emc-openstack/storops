@@ -17,8 +17,9 @@ from __future__ import unicode_literals
 
 import logging
 
-from storops import exception as ex
+import storops.exception
 from storops.lib.common import instance_cache
+from storops.lib.resource import ResourceList
 from storops.unity.calculator import calculators
 from storops.unity.client import UnityClient
 from storops.unity.enums import UnityEnum, DNSServerOriginEnum
@@ -88,7 +89,7 @@ class UnitySystem(UnitySingletonResource):
                     tenant=None):
         host = UnityHostList.get(self._cli, name=name)
         if host:
-            raise ex.UnityHostNameInUseError()
+            raise storops.exception.UnityHostNameInUseError()
         else:
             host = UnityHost.create(self._cli, name, host_type=host_type,
                                     desc=desc, os=os, tenant=tenant)
@@ -275,7 +276,8 @@ class UnitySystem(UnitySingletonResource):
         if interval is None:
             interval = 60
         if rsc_clz_list is None:
-            rsc_clz_list = self._default_rsc_clz_list_with_perf_stats()
+            rsc_list_collection = self._default_rsc_list_with_perf_stats()
+            rsc_clz_list = ResourceList.get_rsc_clz_list(rsc_list_collection)
 
         def get_real_time_query_list():
             paths = calculators.get_all_paths(rsc_clz_list)
@@ -320,10 +322,6 @@ class UnitySystem(UnitySingletonResource):
                 self.get_lun(),
                 self.get_filesystem(),
                 self.get_disk(inserted=True))
-
-    def _default_rsc_clz_list_with_perf_stats(self):
-        return [l.get_resource_class()
-                for l in self._default_rsc_list_with_perf_stats()]
 
     def is_perf_stats_persisted(self):
         return self._cli.is_perf_stats_persisted()

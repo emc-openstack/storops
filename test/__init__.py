@@ -20,25 +20,20 @@ import unittest
 
 from hamcrest import assert_that, not_none, equal_to, instance_of
 
-from test.unity.rest_mock import patch_rest
-from test.vnx.cli_mock import patch_cli
-
 import storops
 
 __author__ = 'Cedric Zhuang'
 
 logging.basicConfig(
     format='%(asctime)s [%(levelname)s] %(name)s - %(message)s',
-    level=logging.DEBUG)
+    level=logging.INFO)
 
 
 class StoropsTest(unittest.TestCase):
-    @patch_cli
     def test_vnx_availability(self):
         vnx = storops.VNXSystem('10.244.211.30')
         assert_that(vnx, not_none())
 
-    @patch_rest
     def test_unity_availability(self):
         unity = storops.UnitySystem('1.1.1.1', 'admin', 'password')
         assert_that(unity, not_none())

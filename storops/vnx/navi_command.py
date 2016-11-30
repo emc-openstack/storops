@@ -24,7 +24,7 @@ from subprocess import Popen, PIPE
 import time
 
 import storops.exception as ex
-from storops.lib.common import int_var, text_var, synchronized, cache
+from storops.lib.common import int_var, text_var, synchronized, cache, daemon
 
 __author__ = 'Cedric Zhuang'
 
@@ -125,17 +125,42 @@ class NaviCommand(object):
     @classmethod
     def execute_naviseccli(cls, cmd):
         cmd = list(map(six.text_type, cmd))
-        cls._log_command(cmd)
-        start = time.time()
         try:
-            p = Popen(cmd, bufsize=-1, stdout=PIPE, stderr=PIPE)
+            ret = cls.execute(cmd)
         except OSError:
             raise ex.NaviseccliNotAvailableError()
-        output = p.stdout.read()
-        cls._log_output(cmd, output, start)
-        if isinstance(output, bytes):
-            output = output.decode("utf-8")
-        return output.strip()
+        return ret
+
+    @classmethod
+    def execute(cls, cmd, timeout=None):
+        if timeout is None:
+            timeout = cls.MAX_TIMEOUT
+        # closure cannot modify value, use list to work around
+        process = [None]
+        output = [None]
+
+        def run():
+            start = time.time()
+            cls._log_command(cmd)
+
+            p = Popen(cmd, bufsize=-1, stdout=PIPE, stderr=PIPE)
+            process[0] = p
+            out = p.stdout.read()
+
+            cls._log_output(cmd, out, start)
+            if isinstance(out, bytes):
+                out = out.decode("utf-8")
+            out = out.strip()
+            output[0] = out
+            return out
+
+        thread = daemon(run)
+        thread.join(timeout)
+        if thread.is_alive() and process[0] is not None:
+            log.warn('terminate timeout command: {}'.format(cmd))
+            process[0].terminate()
+            thread.join()
+        return output[0]
 
     @classmethod
     def _log_command(cls, cmd):
@@ -153,7 +178,7 @@ class NaviCommand(object):
     @classmethod
     def _log_output(cls, cmd, output, start):
         if log.isEnabledFor(logging.DEBUG):
-            output = output.replace('\r\n', '\n').strip()
+            output = six.text_type(output).replace('\r\n', '\n').strip()
             if not output:
                 output = 'empty'
             else:

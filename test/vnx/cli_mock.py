@@ -15,45 +15,30 @@
 #    under the License.
 from __future__ import unicode_literals
 
-import logging
-
 import functools
+import logging
 import os
-
 import re
+from datetime import timedelta
+
 import six
 from mock import patch
 
-from test.utils import ConnectorMock
+from storops import VNXSPEnum
 from storops.lib.common import cache, allow_omit_parentheses
+from storops.lib.resource import ResourceListCollection
 from storops.vnx.block_cli import CliClient
+from storops.vnx.resource.disk import VNXDiskList
+from storops.vnx.resource.lun import VNXLunList
+from storops.vnx.resource.port import VNXSPPortList
 from storops.vnx.resource.system import VNXSystem
+from storops.vnx.resource.vnx_domain import VNXStorageProcessor, \
+    VNXStorageProcessorList
+from test.utils import ConnectorMock
 
 __author__ = 'Cedric Zhuang'
 
 log = logging.getLogger(__name__)
-
-
-@cache
-def t_cli(version=None):
-    """ get the test cli client
-
-    :return: test cli client
-    """
-    cli = CliClient("10.244.211.30", heartbeat_interval=0)
-    cli.set_system_version(version)
-    return cli
-
-
-@cache
-def t_vnx():
-    """ get the test vnx instance
-
-    :return: test vnx instance
-    """
-    return VNXSystem('10.244.211.30', heartbeat_interval=0,
-                     file_username='nasadmin',
-                     file_password='nasadmin')
 
 
 class MockCli(ConnectorMock):
@@ -117,8 +102,8 @@ def patch_cli(output=None, mock_map=None):
         @patch(target='storops.vnx.navi_command.'
                       'NaviCommand.execute_naviseccli',
                new=cli.mock_execute)
-        def func_wrapper(self):
-            return func(self)
+        def func_wrapper(*args):
+            return func(*args)
 
         return func_wrapper
 
@@ -134,8 +119,12 @@ def extract_command(func):
     :param func: test function to wrap
     """
 
-    def mock(_, commands):
-        return ' '.join(map(six.text_type, commands))
+    def mock(_, commands, ip=None):
+        if ip is None:
+            pre = ''
+        else:
+            pre = '[{}] '.format(ip)
+        return pre + ' '.join(map(six.text_type, commands))
 
     @functools.wraps(func)
     @patch(target='storops.vnx.block_cli.CliClient.execute', new=mock)
@@ -144,3 +133,87 @@ def extract_command(func):
         return func(self)
 
     return func_wrapper
+
+
+@cache
+@patch_cli
+def t_cli(version=None):
+    """ get the test cli client
+
+    :param with_stats: if true, returns a client with stats enabled.
+    :param version: system version
+    :return: test cli client
+    """
+    c = CliClient('10.244.212.182', heartbeat_interval=0)
+    c.set_system_version(version)
+    c.get_agent()
+    prev = ResourceListCollection([get_sp_list_t0(c),
+                                   get_lun_list_t0(c),
+                                   get_disk_list_t0(c),
+                                   get_port_list_t0(c)])
+    curr = ResourceListCollection([get_sp_list_t1(c),
+                                   get_lun_list_t1(c),
+                                   get_disk_list_t1(c),
+                                   get_port_list_t1(c)])
+    curr.timestamp += timedelta(seconds=60)
+    c.add_metric_record(prev)
+    c.add_metric_record(curr)
+    return c
+
+
+@cache
+def t_vnx():
+    """ get the test vnx instance
+
+    :return: test vnx instance
+    """
+    return VNXSystem('10.244.211.30', heartbeat_interval=0,
+                     file_username='nasadmin',
+                     file_password='nasadmin')
+
+
+@patch_cli
+def get_sp_list_t0(cli):
+    sp = VNXStorageProcessor(cli, VNXSPEnum.SP_A, '10.244.211.30')
+    sp.with_no_poll()
+    ret = VNXStorageProcessorList(sp)
+    ret.update()
+    return ret
+
+
+@patch_cli
+def get_sp_list_t1(cli):
+    sp = VNXStorageProcessor(cli, VNXSPEnum.SP_A, '10.244.211.30')
+    ret = VNXStorageProcessorList(sp)
+    ret.update()
+    return ret
+
+
+@patch_cli(output='lun_-list_-all_t0.txt')
+def get_lun_list_t0(cli):
+    return VNXLunList(cli=cli).update()
+
+
+@patch_cli(output='getdisk_t0.txt')
+def get_disk_list_t0(cli):
+    return VNXDiskList(cli=cli).update()
+
+
+@patch_cli(output='lun_-list_-all_t1.txt')
+def get_lun_list_t1(cli):
+    return VNXLunList(cli=cli).update()
+
+
+@patch_cli(output='getdisk_t1.txt')
+def get_disk_list_t1(cli):
+    return VNXDiskList(cli=cli).update()
+
+
+@patch_cli
+def get_port_list_t0(cli):
+    return VNXSPPortList(cli=cli).update()
+
+
+@patch_cli(output='port_-list_-sp_-all_t1.txt')
+def get_port_list_t1(cli):
+    return VNXSPPortList(cli=cli).update()

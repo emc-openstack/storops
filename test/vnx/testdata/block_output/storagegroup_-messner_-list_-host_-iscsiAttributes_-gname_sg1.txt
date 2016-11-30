@@ -1,4 +1,11 @@
 
 Storage Group Name:    sg1
 Storage Group UID:     BB:50:E8:2F:23:01:E6:11:83:36:00:60:16:58:B3:E9
+
+HLU/ALU Pairs:
+
+  HLU Number     ALU Number
+  ----------     ----------
+    123             5
+    125             4
 Shareable:             YES

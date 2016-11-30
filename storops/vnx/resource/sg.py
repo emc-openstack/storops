@@ -21,12 +21,13 @@ from threading import Lock
 
 from retryz import retry
 
-from storops.vnx.enums import VNXPortType
-import storops.vnx.resource.lun
 import storops.vnx.resource.host
-from storops.vnx.resource.port import VNXHbaPort
-from storops.vnx.resource import VNXCliResource, VNXCliResourceList
+import storops.vnx.resource.lun
 from storops import exception as ex
+from storops.lib.common import instance_cache
+from storops.vnx.enums import VNXPortType
+from storops.vnx.resource import VNXCliResource, VNXCliResourceList
+from storops.vnx.resource.port import VNXHbaPort
 
 __author__ = 'Cedric Zhuang'
 
@@ -34,10 +35,12 @@ log = logging.getLogger(__name__)
 
 
 class VNXStorageGroup(VNXCliResource):
-    def __init__(self, name=None, cli=None, shuffle_hlu=True):
+    def __init__(self, name=None, cli=None, shuffle_hlu=True,
+                 system_lun_list=None):
         super(VNXStorageGroup, self).__init__()
         self._cli = cli
         self._name = name
+        self._system_lun_list = system_lun_list
 
         self._uid = ''
         self._hba_port_list = []
@@ -51,11 +54,11 @@ class VNXStorageGroup(VNXCliResource):
                                 engineering=True)
 
     @classmethod
-    def get(cls, cli, name=None):
+    def get(cls, cli, name=None, system_lun_list=None):
         if name is None:
-            ret = VNXStorageGroupList(cli)
+            ret = VNXStorageGroupList(cli, system_lun_list=system_lun_list)
         else:
-            ret = VNXStorageGroup(name, cli)
+            ret = VNXStorageGroup(name, cli, system_lun_list=system_lun_list)
         return ret
 
     @classmethod
@@ -97,9 +100,16 @@ class VNXStorageGroup(VNXCliResource):
         return clz(cli=self._cli, names=host_names)
 
     @property
+    @instance_cache
     def lun_list(self):
-        clz = storops.vnx.resource.lun.VNXLunList
-        return clz(cli=self._cli, lun_ids=self.get_alu_hlu_map().keys())
+        lun_ids = self.get_alu_hlu_map().keys()
+        if self._system_lun_list is not None:
+            ret = self._system_lun_list.shadow_copy(lun_ids=lun_ids)
+        else:
+            clz = storops.vnx.resource.lun.VNXLunList
+            ret = clz(cli=self._cli, lun_ids=lun_ids)
+        ret.poll = self.poll
+        return ret
 
     @property
     def hba_port_list(self):
@@ -220,7 +230,7 @@ class VNXStorageGroup(VNXCliResource):
 
     def get_alu_hlu_map(self):
         if self.alu_hlu_map is None:
-            self._update_property_cache('alu_hlu_map', {})
+            self._parsed_resource['alu_hlu_map'] = {}
         return self.alu_hlu_map
 
     @property
@@ -347,16 +357,20 @@ class VNXStorageGroup(VNXCliResource):
                                  host_ip, host_name, vport_id=vport_id)
         ex.raise_if_err(out)
 
+    def set_system_lun_list(self, system_lun_list):
+        self._system_lun_list = system_lun_list
+
 
 class VNXStorageGroupList(VNXCliResourceList):
     @classmethod
     def get_resource_class(cls):
         return VNXStorageGroup
 
-    def __init__(self, cli=None, engineering=False):
+    def __init__(self, cli=None, engineering=False, system_lun_list=None):
         super(VNXStorageGroupList, self).__init__(cli)
         self._sg_map = {}
         self._engineering = engineering
+        self._system_lun_list = system_lun_list
 
     def add_sg(self, sg):
         self._sg_map[sg.name] = sg
@@ -368,3 +382,19 @@ class VNXStorageGroupList(VNXCliResourceList):
 
     def _get_raw_resource(self):
         return self._cli.get_sg(poll=self.poll, engineering=self._engineering)
+
+    @property
+    @instance_cache
+    def _name_sg_map(self):
+        return {sg.name: sg for sg in self}
+
+    def _get_resource_instance(self):
+        ret = super(VNXStorageGroupList, self)._get_resource_instance()
+        ret.set_system_lun_list(self._system_lun_list)
+        return ret
+
+    def get(self, name):
+        if isinstance(name, VNXStorageGroup):
+            name = name.name
+
+        return self._name_sg_map.get(name)

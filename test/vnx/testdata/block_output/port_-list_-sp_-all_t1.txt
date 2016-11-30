@@ -1,0 +1,1255 @@
+Total number of initiators: 4
+
+SP Name:             SP A
+SP Port ID:          0
+Registered Initiators:        3
+Logged-In Initiators:         1
+Not Logged-In Initiators:     2
+
+SP Name:             SP A
+SP Port ID:          1
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          2
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          3
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          4
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          5
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          6
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          7
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          12
+Registered Initiators:        1
+Logged-In Initiators:         1
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          13
+Registered Initiators:        1
+Logged-In Initiators:         1
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          14
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          15
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          0
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          1
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          2
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          3
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          4
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          5
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          6
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          7
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          12
+Registered Initiators:        1
+Logged-In Initiators:         1
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          13
+Registered Initiators:        1
+Logged-In Initiators:         1
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          14
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          15
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          10
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          11
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          10
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          11
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          8
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP A
+SP Port ID:          9
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          8
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+SP Name:             SP B
+SP Port ID:          9
+Registered Initiators:        0
+Logged-In Initiators:         0
+Not Logged-In Initiators:     0
+
+
+Information about each SPPORT:
+
+SP Name:             SP A
+SP Port ID:          0
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:60:36:E0:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      YES
+Switch UID:          10:00:00:05:1E:E0:1D:A1:20:0B:00:05:1E:E0:1D:A1
+SP Source ID:        10226432
+ALPA Value:         0
+Speed Value :         8Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               601
+Writes:              1202
+Blocks Read:         122883
+Blocks Written:      184324
+Queue Full/Busy:     5
+I/O Module Slot:     6
+Physical Port ID:    7
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL31D5E
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          1
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:61:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      8Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25JTS
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          2
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:62:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    2
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25HNQ
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          3
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:63:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    3
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25Q71
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          4
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:64:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: NRC2YYQ
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          5
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:65:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL22N8X
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          6
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:66:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    2
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL323H1
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          7
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:67:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    3
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25ZLN
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          12
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:64:36:E4:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         8Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               95039
+Writes:              66511035
+Blocks Read:         4550244
+Blocks Written:      2215703509
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL325FB
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          13
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:65:36:E4:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         8Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               27075
+Writes:              36468
+Blocks Read:         120616
+Blocks Written:      716816
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25Q6A
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          14
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:66:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    2
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25EPW
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          15
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:67:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    3
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL22NBE
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          0
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:68:36:E0:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      YES
+Switch UID:          10:00:00:05:1E:E0:1D:A1:20:0A:00:05:1E:E0:1D:A1
+SP Source ID:        10226176
+ALPA Value:         0
+Speed Value :         8Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: NRC2YNZ
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          1
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:69:36:E0:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      YES
+Switch UID:          10:00:00:05:1E:E0:1D:A1:20:0E:00:05:1E:E0:1D:A1
+SP Source ID:        10227200
+ALPA Value:         0
+Speed Value :         2Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: NRC2Y3V
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          2
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6A:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    2
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: NRC2XNH
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          3
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6B:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     0
+Physical Port ID:    3
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: NRC2XVV
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          4
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6C:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL23BHJ
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          5
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6D:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25ZSK
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          6
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6E:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    2
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25ZSQ
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          7
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6F:36:E0:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     1
+Physical Port ID:    3
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL31DHW
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          12
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6C:36:E4:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         8Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25PZD
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          13
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6D:36:E4:16:81
+Link Status:         Up
+Port Status:         Online
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         8Gbps
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL25ZSN
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          14
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6E:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    2
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: NRC2YVN
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP B
+SP Port ID:          15
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:6F:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         0
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+2Gbps
+4Gbps
+8Gbps
+Auto
+Requested Value:      4Gbps
+MAC Address:         Not Applicable
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     4
+Physical Port ID:    3
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-042
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: PL2115B
+SFP/Connector Supported Speeds:
+2Gbps
+4Gbps
+8Gbps
+
+SP Name:             SP A
+SP Port ID:          10
+SP UID:              iqn.1992-04.com.emc:cx.apm00153042305.a10
+Link Status:         Down
+Port Status:         Online
+Switch Present:      Not Applicable
+Speed Value :         N/A
+Auto Negotiable :     YES
+Available Speeds:
+1Gbps
+10Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         00:60:16:58:B3:E8
+SFP State:           None
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     3
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: N/A
+SFP/Connector EMC Serial Number: N/A
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: N/A
+SFP/Connector Supported Speeds:
+N/A
+
+SP Name:             SP A
+SP Port ID:          11
+SP UID:              iqn.1992-04.com.emc:cx.apm00153042305.a11
+Link Status:         Down
+Port Status:         Online
+Switch Present:      Not Applicable
+Speed Value :         N/A
+Auto Negotiable :     YES
+Available Speeds:
+1Gbps
+10Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         00:60:16:58:B3:E9
+SFP State:           None
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     3
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: N/A
+SFP/Connector EMC Serial Number: N/A
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: N/A
+SFP/Connector Supported Speeds:
+N/A
+
+SP Name:             SP B
+SP Port ID:          10
+SP UID:              iqn.1992-04.com.emc:cx.apm00153042305.b10
+Link Status:         Down
+Port Status:         Online
+Switch Present:      Not Applicable
+Speed Value :         N/A
+Auto Negotiable :     YES
+Available Speeds:
+1Gbps
+10Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         00:60:16:49:77:88
+SFP State:           None
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     3
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: N/A
+SFP/Connector EMC Serial Number: N/A
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: N/A
+SFP/Connector Supported Speeds:
+N/A
+
+SP Name:             SP B
+SP Port ID:          11
+SP UID:              iqn.1992-04.com.emc:cx.apm00153042305.b11
+Link Status:         Down
+Port Status:         Online
+Switch Present:      Not Applicable
+Speed Value :         N/A
+Auto Negotiable :     YES
+Available Speeds:
+1Gbps
+10Gbps
+Auto
+Requested Value:      Auto
+MAC Address:         00:60:16:49:77:89
+SFP State:           None
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     3
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: N/A
+SFP/Connector EMC Serial Number: N/A
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: N/A
+SFP/Connector Supported Speeds:
+N/A
+
+SP Name:             SP A
+SP Port ID:          8
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:60:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         4294967295
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+10Gbps
+Requested Value:      N/A
+MAC Address:         00:60:16:48:D6:42
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     2
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-041
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: ATK09HL
+SFP/Connector Supported Speeds:
+10Gbps
+
+SP Name:             SP A
+SP Port ID:          9
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:61:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         4294967295
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+10Gbps
+Requested Value:      N/A
+MAC Address:         00:60:16:48:D6:43
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     2
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-041
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: ATK09EP
+SFP/Connector Supported Speeds:
+10Gbps
+
+SP Name:             SP B
+SP Port ID:          8
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:68:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         4294967295
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+10Gbps
+Requested Value:      N/A
+MAC Address:         00:60:16:3B:4E:5E
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     2
+Physical Port ID:    0
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-041
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: ATK0989
+SFP/Connector Supported Speeds:
+10Gbps
+
+SP Name:             SP B
+SP Port ID:          9
+SP UID:              50:06:01:60:B6:E0:16:81:50:06:01:69:36:E4:16:81
+Link Status:         Down
+Port Status:         DISABLED
+Switch Present:      NO
+ALPA Value:         4294967295
+Speed Value :         N/A
+Auto Negotiable :     NO
+Available Speeds:
+10Gbps
+Requested Value:      N/A
+MAC Address:         00:60:16:3B:4E:5F
+SFP State:           Online
+Reads:               0
+Writes:              0
+Blocks Read:         0
+Blocks Written:      0
+Queue Full/Busy:     0
+I/O Module Slot:     2
+Physical Port ID:    1
+Usage:     General
+SFP/Connector EMC Part Number: 019-078-041
+SFP/Connector EMC Serial Number: 000000000000000
+SFP/Connector Vendor Part Number: N/A
+SFP/Connector Vendor Serial Number: ATK098X
+SFP/Connector Supported Speeds:
+10Gbps
+

@@ -17,17 +17,40 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, contains_string, is_not, none
+from hamcrest import assert_that, equal_to, contains_string, is_not, none, \
+    has_item, close_to
 
-from test.vnx.cli_mock import t_cli, patch_cli
+from storops.lib.common import instance_cache
+from test.vnx.cli_mock import t_cli, patch_cli, t_vnx
 from storops.vnx.enums import VNXSPEnum
 from storops.vnx.resource.vnx_domain import VNXDomainNodeList, \
-    VNXNetworkAdmin, VNXStorageProcessor
+    VNXNetworkAdmin, VNXStorageProcessor, VNXStorageProcessorList
 
 __author__ = 'Cedric Zhuang'
 
 
-class VNXStorageProcessTest(TestCase):
+class VNXStorageProcessorTest(TestCase):
+    @patch_cli
+    def test_sp_list_update_without_poll(self):
+        sp_list = self.get_sp_list()
+        with sp_list.with_no_poll():
+            sp_list.update()
+        assert_that(sp_list.total_reads, has_item(1234))
+        assert_that(sp_list.timestamp, is_not(none()))
+
+    def get_sp_list(self):
+        vnx = t_vnx()
+        sp_list = VNXStorageProcessorList(vnx.spa, vnx.spb)
+        return sp_list
+
+    @patch_cli
+    def test_default_metric_csv_filename(self):
+        sp_list = self.get_sp_list()
+        filename = sp_list.get_default_metric_csv_filename()
+        assert_that(filename, contains_string('.storops'))
+        assert_that(filename,
+                    contains_string('_VNXStorageProcessor.csv'))
+
     @patch_cli
     def test_sp_properties(self):
         sp = VNXStorageProcessor(t_cli(), VNXSPEnum.SP_A, '1.1.1.2')
@@ -55,12 +78,12 @@ class VNXStorageProcessTest(TestCase):
         assert_that(sp.total_writes, equal_to(6364257))
         assert_that(sp.prct_busy, equal_to(1.91))
         assert_that(sp.prct_idle, equal_to(98.0))
-        assert_that(str(sp.timestamp), equal_to('2016-04-26 09:59:16'))
+        assert_that(str(sp.system_timestamp), equal_to('2016-04-26 09:59:16'))
         assert_that(sp.day_of_the_week, equal_to('Tuesday'))
-        assert_that(sp.read_requests, equal_to(7978))
-        assert_that(sp.write_requests, equal_to(6364257))
-        assert_that(sp.blocks_read, equal_to(262334))
-        assert_that(sp.blocks_written, equal_to(198312227))
+        assert_that(sp.read_requests, equal_to(8308))
+        assert_that(sp.write_requests, equal_to(6364593))
+        assert_that(sp.blocks_read, equal_to(975038))
+        assert_that(sp.blocks_written, equal_to(199037219))
         assert_that(sp.sum_queue_lengths_by_arrivals, equal_to(8059572))
         assert_that(sp.arrivals_to_non_zero_queue, equal_to(1321389))
         assert_that(sp.hw_flush_on, equal_to(False))
@@ -70,6 +93,43 @@ class VNXStorageProcessTest(TestCase):
         assert_that(sp.write_cache_blocks_flushed, equal_to(477297069))
         assert_that(sp.controller_busy_ticks, equal_to(46703))
         assert_that(sp.controller_idle_ticks, equal_to(2394689))
+
+    @property
+    @instance_cache
+    def sp_a(self):
+        return VNXStorageProcessor(t_cli(), VNXSPEnum.SP_A, '10.244.211.30')
+
+    @patch_cli
+    def test_sp_read_iops(self):
+        assert_that(self.sp_a.read_iops, equal_to(5.5))
+
+    @patch_cli
+    def test_sp_write_iops(self):
+        assert_that(self.sp_a.write_iops, equal_to(5.6))
+
+    @patch_cli
+    def test_sp_total_iops(self):
+        assert_that(self.sp_a.total_iops, equal_to(11.1))
+
+    @patch_cli
+    def test_sp_read_mbps(self):
+        assert_that(self.sp_a.read_mbps, equal_to(5.8))
+
+    @patch_cli
+    def test_sp_write_mbps(self):
+        assert_that(self.sp_a.write_mbps, equal_to(5.9))
+
+    @patch_cli
+    def test_sp_total_mbps(self):
+        assert_that(self.sp_a.total_mbps, equal_to(11.7))
+
+    @patch_cli
+    def test_sp_read_size_kb(self):
+        assert_that(self.sp_a.read_size_kb, close_to(1079.8, 0.1))
+
+    @patch_cli
+    def test_sp_write_size_kb(self):
+        assert_that(self.sp_a.write_size_kb, close_to(1078.8, 0.1))
 
 
 class VNXDomainNodeListTest(TestCase):

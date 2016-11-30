@@ -25,7 +25,6 @@ __author__ = 'Cedric Zhuang'
 
 
 class Resource(JsonPrinter):
-
     def __init__(self):
         self._property_cache = {}
         self._parsed_resource = None
@@ -225,6 +224,10 @@ class ResourceList(Resource):
         self._list = None
         self._iter = None
 
+    @classmethod
+    def get_rsc_clz_list(cls, rsc_list_collection):
+        return [l.get_resource_class() for l in rsc_list_collection]
+
     @clear_instance_cache
     def update(self, data=None):
         self._list = []
@@ -317,3 +320,48 @@ class ResourceList(Resource):
 
     def _is_updated(self):
         return self._list is not None
+
+
+class ResourceListCollection(object):
+    def __init__(self, init_list=None):
+        if init_list:
+            self._items = {rsc_list.get_resource_class(): rsc_list
+                           for rsc_list in init_list}
+        else:
+            self._items = {}
+        self.timestamp = datetime.now()
+
+    def add_rsc_list(self, rsc_list):
+        if not hasattr(rsc_list, 'get_resource_class'):
+            raise ValueError('expect a ResourceList.')
+        self._items[rsc_list.get_resource_class()] = rsc_list
+
+    def get_rsc(self, obj):
+        ret = None
+        rsc_list = self.get_rsc_list(type(obj))
+        if rsc_list:
+            try:
+                ret = rsc_list.get(obj)
+            except TypeError:
+                raise TypeError('"get(id)" method not found in ResourceList.')
+        return ret
+
+    def get_rsc_list(self, rsc_clz):
+        return self._items[rsc_clz]
+
+    def get_rsc_list_collection(self):
+        return self._items.values()
+
+    def get_rsc_clz_list(self):
+        return self._items.keys()
+
+    def __len__(self):
+        return len(self._items)
+
+    def update(self):
+        for rsc_list in self.get_rsc_list_collection():
+            rsc_list.update()
+        self.timestamp = datetime.now()
+
+    def delta_seconds(self, other):
+        return (self.timestamp - other.timestamp).total_seconds()

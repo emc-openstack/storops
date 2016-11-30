@@ -49,6 +49,8 @@ class VNXLunList(VNXCliResourceList):
         else:
             self._pool_name = pool
 
+        self._lun_id_map = None
+
     def _filter(self, lun):
         if self._lun_ids is not None:
             ret = VNXLun.get_id(lun) in self._lun_ids
@@ -62,8 +64,21 @@ class VNXLunList(VNXCliResourceList):
     def get_resource_class(cls):
         return VNXLun
 
+    def update(self, data=None):
+        ret = super(VNXLunList, self).update(data)
+        self._lun_id_map = None
+        return ret
+
     def _get_raw_resource(self):
         return self._cli.get_lun(lun_type=self._lun_type, poll=self.poll)
+
+    def get(self, _id):
+        if isinstance(_id, VNXLun):
+            _id = VNXLun.get_id(_id)
+
+        if self._lun_id_map is None:
+            self._lun_id_map = {lun.lun_id: lun for lun in self}
+        return self._lun_id_map.get(_id)
 
 
 class VNXLun(VNXCliResource):

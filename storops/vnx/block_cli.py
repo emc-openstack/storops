@@ -27,6 +27,7 @@ from storops import exception as ex
 from storops.exception import OptionMissingError
 from storops.lib.common import check_int, text_var, int_var, enum_var, \
     yes_no_var
+from storops.lib.metric import PerfManager
 from storops.vnx.enums import VNXSPEnum, VNXTieringEnum, VNXProvisionEnum, \
     VNXMigrationRate, VNXCompressionRate, \
     VNXMirrorViewRecoveryPolicy, VNXMirrorViewSyncRate, VNXLunType, \
@@ -82,13 +83,11 @@ def duel_command(f):
     return func_wrapper
 
 
-class CliClient(object):
-    def __init__(self, ip=None,
-                 username=None, password=None, scope=None,
-                 sec_file=None,
-                 timeout=None,
-                 heartbeat_interval=None,
+class CliClient(PerfManager):
+    def __init__(self, ip=None, username=None, password=None, scope=None,
+                 sec_file=None, timeout=None, heartbeat_interval=None,
                  naviseccli=None):
+        super(CliClient, self).__init__()
         if heartbeat_interval is None:
             heartbeat_interval = 60
         if scope is None:
@@ -834,6 +833,16 @@ class CliClient(object):
     def set_array_name(self, new_name):
         cmd = text_var('arrayname', new_name)
         cmd.append('-o')
+        return cmd
+
+    @command
+    def set_stats(self, enable=None):
+        cmd = ['setstats']
+        if enable is not None:
+            if enable:
+                cmd.append('-on')
+            else:
+                cmd.append('-off')
         return cmd
 
     @property

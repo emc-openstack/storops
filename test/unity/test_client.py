@@ -17,16 +17,13 @@
 from __future__ import unicode_literals
 
 import unittest
-from time import sleep
 
 from hamcrest import assert_that, equal_to, only_contains, none, any_of, \
-    contains_string, raises, has_items, greater_than, less_than
+    contains_string, raises
 
-from storops.unity.client import UnityClient, UnityDoc, MetricCounterRecords, \
-    UnityPerfManager
+from storops.unity.client import UnityClient, UnityDoc
 from storops.unity.enums import RaidTypeEnum, HealthEnum, RaidTypeEnumList, \
     ServiceLevelEnum, ServiceLevelEnumList
-from storops.unity.resource.disk import UnityDisk, UnityDiskList
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from test.unity.rest_mock import patch_rest, t_rest
 
@@ -177,76 +174,6 @@ class UnityClientTest(unittest.TestCase):
         assert_that(ret, none())
 
 
-class UnityPerfManagerTest(unittest.TestCase):
-    def perf_mon(self):
-        return UnityPerfManager()
-
-    def test_enable_perf_metric(self):
-        cli = self.perf_mon()
-        assert_that(cli.is_perf_metric_enabled(), equal_to(False))
-        cli.enable_perf_metric(0, lambda: 1)
-        assert_that(cli.is_perf_metric_enabled(), equal_to(True))
-        cli.disable_perf_metric()
-        assert_that(cli.is_perf_metric_enabled(), equal_to(False))
-
-    def test_double_enable(self):
-        cli = self.perf_mon()
-        c = []
-        cli.enable_perf_metric(0.1, lambda: c.append(1))
-        sleep(0.5)
-        assert_that(len(c), greater_than(1))
-        assert_that(len(c), less_than(8))
-        cli.enable_perf_metric(10, lambda: c.append(1))
-        sleep(0.5)
-        assert_that(len(c), less_than(10))
-        cli.disable_perf_metric()
-        assert_that(cli.prev_counter, none())
-        assert_that(cli.curr_counter, none())
-        assert_that(cli.is_perf_metric_enabled(), equal_to(False))
-
-    def test_is_perf_metric_enabled_rsc_default(self):
-        cli = self.perf_mon()
-        cli.enable_perf_metric(0, lambda: 1)
-        enabled = cli.is_perf_metric_enabled(UnityDiskList(cli=cli))
-        assert_that(enabled, equal_to(True))
-        enabled = cli.is_perf_metric_enabled(UnityDisk(_id='', cli=cli))
-        assert_that(enabled, equal_to(True))
-
-    def test_is_perf_metric_enabled_rsc_specific(self):
-        cli = self.perf_mon()
-        cli.enable_perf_metric(0, lambda: 1, [UnityDisk])
-        enabled = cli.is_perf_metric_enabled(UnityDiskList(cli=cli))
-        assert_that(enabled, equal_to(True))
-
-        enabled = cli.is_perf_metric_enabled(UnityLunList(cli=cli))
-        assert_that(enabled, equal_to(False))
-
-        enabled = cli.is_perf_metric_enabled(UnityDisk(_id='', cli=cli))
-        assert_that(enabled, equal_to(True))
-
-        enabled = cli.is_perf_metric_enabled(UnityLun(_id='', cli=cli))
-        assert_that(enabled, equal_to(False))
-
-    def test_is_perf_monitored_default(self):
-        assert_that(self.perf_mon()._is_perf_monitored('abc'), equal_to(True))
-
-    def test_is_perf_monitored_resource(self):
-        cli = self.perf_mon()
-        cli._perf_rsc_clz_list = [UnityDisk]
-        assert_that(cli._is_perf_monitored(UnityDisk('', cli=cli)),
-                    equal_to(True))
-        assert_that(cli._is_perf_monitored(UnityLun('', cli=cli)),
-                    equal_to(False))
-
-    def test_is_perf_monitored_resource_list(self):
-        cli = self.perf_mon()
-        cli._perf_rsc_clz_list = [UnityDisk]
-        assert_that(cli._is_perf_monitored(UnityDiskList(cli=cli)),
-                    equal_to(True))
-        assert_that(cli._is_perf_monitored(UnityLunList(cli=cli)),
-                    equal_to(False))
-
-
 class UnityDocTest(unittest.TestCase):
     @patch_rest
     def test_get_doc_of_field(self):
@@ -299,51 +226,3 @@ class UnityDocTest(unittest.TestCase):
         props = [('a', 'b')]
         assert_that(UnityDoc.format_prop(props, header=('name', 'value')),
                     equal_to(['name  value', 'a     b']))
-
-
-class UnityMetricCounterRecordsTest(unittest.TestCase):
-    def test_max_count(self):
-        records = MetricCounterRecords()
-        records.add_results(1)
-        records.add_results(2)
-        records.add_results(3)
-        assert_that(len(records), equal_to(2))
-        assert_that(records._records, has_items(2, 3))
-        assert_that(records.enabled, equal_to(True))
-
-    def test_default_enabled(self):
-        records = MetricCounterRecords()
-        assert_that(records.enabled, equal_to(False))
-
-    def test_reset(self):
-        records = MetricCounterRecords()
-        records.add_results(1)
-        records.reset()
-        assert_that(len(records), equal_to(0))
-        assert_that(records.enabled, equal_to(False))
-
-    def test_add_none_result(self):
-        records = MetricCounterRecords()
-        records.add_results(None)
-        assert_that(len(records), equal_to(0))
-
-    def test_curr_prev_value(self):
-        records = MetricCounterRecords()
-        assert_that(records.curr, none())
-        assert_that(records.prev, none())
-
-        records.add_results(1)
-        assert_that(records.curr, equal_to(1))
-        assert_that(records.prev, none())
-
-        records.add_results(2)
-        assert_that(records.curr, equal_to(2))
-        assert_that(records.prev, equal_to(1))
-
-        records.add_results(3)
-        assert_that(records.curr, equal_to(3))
-        assert_that(records.prev, equal_to(2))
-
-        records.enabled = False
-        assert_that(records.curr, none())
-        assert_that(records.prev, none())

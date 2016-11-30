@@ -17,27 +17,26 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-import math
 from hamcrest import assert_that, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
-
-from storops.unity.resource.disk import UnityDisk
-from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 
 from storops import UnitySystem
 from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError
+from storops.unity.enums import HostLUNAccessEnum, NodeEnum
+from storops.unity.resource.disk import UnityDisk
+from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 from storops.unity.resource.lun import UnityLun, UnityLunList
 from storops.unity.resource.pool import UnityPool
 from storops.unity.resource.port import UnityIoLimitPolicy, \
     UnityIoLimitRuleSetting
 from storops.unity.resource.snap import UnitySnap
-from storops.unity.enums import HostLUNAccessEnum, NodeEnum
-from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resource.sp import UnityStorageProcessor
+from storops.unity.resource.storage_resource import UnityStorageResource
 from test.unity.rest_mock import t_rest, patch_rest, t_unity
+from test.utils import is_nan
 
 __author__ = 'Cedric Zhuang'
 
@@ -284,7 +283,7 @@ class UnityLunEnablePerfStatsTest(TestCase):
     @patch_rest
     def test_lun_perf_not_enabled_exception(self):
         disk = self.unity.get_disk(_id='dae_0_1_disk_0')
-        assert_that(math.isnan(disk.read_iops), equal_to(True))
+        assert_that(disk.read_iops, is_nan())
 
         def f():
             return self.unity.get_lun(_id='sv_2').read_iops

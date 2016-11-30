@@ -21,9 +21,14 @@ import functools
 import os
 
 import re
+from datetime import timedelta
+
 import six
 from mock import patch
 
+from storops.lib.resource import ResourceListCollection
+from storops.vnx.resource.disk import VNXDiskList
+from storops.vnx.resource.lun import VNXLunList
 from test.utils import ConnectorMock
 from storops.lib.common import cache, allow_omit_parentheses
 from storops.vnx.block_cli import CliClient
@@ -32,26 +37,6 @@ from storops.vnx.resource.system import VNXSystem
 __author__ = 'Cedric Zhuang'
 
 log = logging.getLogger(__name__)
-
-
-@cache
-def t_cli():
-    """ get the test cli client
-
-    :return: test cli client
-    """
-    return CliClient("10.244.211.30", heartbeat_interval=0)
-
-
-@cache
-def t_vnx():
-    """ get the test vnx instance
-
-    :return: test vnx instance
-    """
-    return VNXSystem('10.244.211.30', heartbeat_interval=0,
-                     file_username='nasadmin',
-                     file_password='nasadmin')
 
 
 class MockCli(ConnectorMock):
@@ -115,8 +100,8 @@ def patch_cli(output=None, mock_map=None):
         @patch(target='storops.vnx.navi_command.'
                       'NaviCommand.execute_naviseccli',
                new=cli.mock_execute)
-        def func_wrapper(self):
-            return func(self)
+        def func_wrapper(*args):
+            return func(*args)
 
         return func_wrapper
 
@@ -142,3 +127,49 @@ def extract_command(func):
         return func(self)
 
     return func_wrapper
+
+
+@cache
+def t_cli():
+    """ get the test cli client
+
+    :return: test cli client
+    """
+    c = CliClient("10.244.211.30", heartbeat_interval=0)
+    prev = ResourceListCollection([get_lun_list_t0(c), get_disk_list_t0(c)])
+    curr = ResourceListCollection([get_lun_list_t1(c), get_disk_list_t1(c)])
+    curr.timestamp += timedelta(seconds=60)
+    c.add_metric_record(prev)
+    c.add_metric_record(curr)
+    return c
+
+
+@cache
+def t_vnx():
+    """ get the test vnx instance
+
+    :return: test vnx instance
+    """
+    return VNXSystem('10.244.211.30', heartbeat_interval=0,
+                     file_username='nasadmin',
+                     file_password='nasadmin')
+
+
+@patch_cli(output='lun_-list_-all_t0.txt')
+def get_lun_list_t0(cli):
+    return VNXLunList(cli=cli).update()
+
+
+@patch_cli(output='getdisk_t0.txt')
+def get_disk_list_t0(cli):
+    return VNXDiskList(cli=cli).update()
+
+
+@patch_cli(output='lun_-list_-all_t1.txt')
+def get_lun_list_t1(cli):
+    return VNXLunList(cli=cli).update()
+
+
+@patch_cli(output='getdisk_t1.txt')
+def get_disk_list_t1(cli):
+    return VNXDiskList(cli=cli).update()

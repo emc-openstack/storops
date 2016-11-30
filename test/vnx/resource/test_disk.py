@@ -19,6 +19,7 @@ from unittest import TestCase
 
 from hamcrest import assert_that, raises, equal_to, has_items
 
+from storops.lib.common import instance_cache
 from test.vnx.cli_mock import patch_cli, t_cli
 from test.vnx.resource.verifiers import verify_disk_4_0_e8
 from storops.vnx.resource.disk import VNXDisk, VNXDiskList
@@ -59,17 +60,36 @@ class VNXDiskTest(TestCase):
         disk = VNXDisk.get(t_cli(), '4_0_e8')
         verify_disk_4_0_e8(disk)
 
+    @property
+    @instance_cache
+    def disk_001(self):
+        return VNXDisk('0_0_1', t_cli())
+
     @patch_cli
     def test_delete_disk(self):
-        disk = VNXDisk('0_0_1', t_cli())
-        ret = disk.delete()
+        ret = self.disk_001.delete()
         assert_that(ret, has_items(''))
 
     @patch_cli
     def test_install_disk(self):
-        disk = VNXDisk('0_0_1', t_cli())
-        ret = disk.install()
+        ret = self.disk_001.install()
         assert_that(ret, has_items(''))
+
+    @patch_cli
+    def test_disk_read_iops(self):
+        assert_that(self.disk_001.read_iops, equal_to(4.1))
+
+    @patch_cli
+    def test_disk_write_iops(self):
+        assert_that(self.disk_001.write_iops, equal_to(5.1))
+
+    @patch_cli
+    def test_disk_read_mbps(self):
+        assert_that(self.disk_001.read_mbps, equal_to(3.2))
+
+    @patch_cli
+    def test_disk_write_mbps(self):
+        assert_that(self.disk_001.write_mbps, equal_to(4.2))
 
 
 class VNXDiskListTest(TestCase):

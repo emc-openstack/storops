@@ -17,8 +17,7 @@ from __future__ import unicode_literals
 
 import logging
 
-from lxml.builder import E
-
+from storops.vnx import xmlapi
 from storops.vnx.resource.fs import VNXFileSystem
 from storops.vnx.resource.mover import VNXMover
 from storops.vnx.resource import VNXResource, VNXCliResourceList
@@ -36,21 +35,18 @@ class NfsHostConfig(object):
         self.rw_hosts = rw_hosts
         self.access_hosts = access_hosts
 
-    @staticmethod
-    def _list_element(name, items):
-        li_list = [E('li', i) for i in items]
-        return E(name, *li_list)
-
     def get_xml_node(self):
+        xb = xmlapi.XmlBuilder()
+
         ret = []
         if self.access_hosts is not None:
-            ret.append(self._list_element('AccessHosts', self.access_hosts))
+            ret.append(xb.list_elements('AccessHosts', self.access_hosts))
         if self.rw_hosts is not None:
-            ret.append(self._list_element('RwHosts', self.rw_hosts))
+            ret.append(xb.list_elements('RwHosts', self.rw_hosts))
         if self.ro_hosts is not None:
-            ret.append(self._list_element('RoHosts', self.ro_hosts))
+            ret.append(xb.list_elements('RoHosts', self.ro_hosts))
         if self.root_hosts is not None:
-            ret.append(self._list_element('RootHosts', self.root_hosts))
+            ret.append(xb.list_elements('RootHosts', self.root_hosts))
         return ret
 
     @staticmethod

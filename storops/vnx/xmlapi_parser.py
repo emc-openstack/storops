@@ -19,7 +19,7 @@ import logging
 
 import re
 import six
-from lxml import etree
+from xml import etree
 
 __author__ = 'Jay Xu'
 
@@ -59,8 +59,8 @@ class XMLAPIParser(object):
 
         events = ("start", "end")
 
-        context = etree.iterparse(six.BytesIO(xml.encode('utf-8')),
-                                  events=events, encoding='utf-8')
+        context = etree.ElementTree.iterparse(six.BytesIO(xml.encode('utf-8')),
+                                              events=events)
         for action, elem in context:
             self.tag = self._delete_ns(elem.tag)
 

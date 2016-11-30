@@ -20,7 +20,6 @@ import logging
 import re
 
 import six
-from lxml import etree
 from retryz import retry
 
 from storops.connection import connector
@@ -81,7 +80,7 @@ class VNXNasConnections(object):
     @classmethod
     def _get_req_xml(cls, req):
         base = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>{}'
-        return str(base.format(etree.tostring(req).decode('utf-8')))
+        return base.format(req)
 
     @retry(on_error=VNXLockRequiredException)
     def _request(self, req, retry_patterns=None):
@@ -168,55 +167,55 @@ def nas_command(f):
 class VNXNasClient(VNXNasConnections):
     @xml_get_request
     def get_filesystem(self, name=None, fs_id=None):
-        return NasXmlBuilder().get_filesystem(name, fs_id=fs_id)
+        return NasXmlBuilder.get_filesystem(name, fs_id=fs_id)
 
     @xml_set_request
     def create_filesystem(self, name, size, pool_id,
                           mover_id, is_vdm=False):
-        return NasXmlBuilder().create_filesystem(
+        return NasXmlBuilder.create_filesystem(
             name, size, pool_id, mover_id, is_vdm)
 
     @xml_set_request
     def delete_filesystem(self, fs_id):
-        return NasXmlBuilder().delete_filesystem(fs_id)
+        return NasXmlBuilder.delete_filesystem(fs_id)
 
     @xml_set_request
     def extend_fs(self, fs_id, delta_size, pool_id):
-        return NasXmlBuilder().extend_filesystem(fs_id, delta_size, pool_id)
+        return NasXmlBuilder.extend_filesystem(fs_id, delta_size, pool_id)
 
     @xml_get_request
     def get_nas_pool(self):
-        return NasXmlBuilder().get_nas_pool()
+        return NasXmlBuilder.get_nas_pool()
 
     @xml_get_request
     def get_mover(self, mover_id=None, full=True):
-        return NasXmlBuilder().get_mover(mover_id, full)
+        return NasXmlBuilder.get_mover(mover_id, full)
 
     @xml_set_request
     def create_dns_domain(self, mover_id, domain_name, servers,
                           protocol='udp'):
-        return NasXmlBuilder().create_dns_domain(
+        return NasXmlBuilder.create_dns_domain(
             mover_id, domain_name, servers, protocol)
 
     @xml_set_request
     def delete_dns_domain(self, mover_id, domain_name):
-        return NasXmlBuilder().delete_dns_domain(mover_id, domain_name)
+        return NasXmlBuilder.delete_dns_domain(mover_id, domain_name)
 
     @xml_get_request
     def get_fs_snap(self, name=None, snap_id=None):
-        return NasXmlBuilder().get_fs_snap(name, snap_id)
+        return NasXmlBuilder.get_fs_snap(name, snap_id)
 
     @xml_set_request
     def create_snap(self, name, fs_id, pool_id, size=None):
-        return NasXmlBuilder().create_snap(name, fs_id, pool_id, size)
+        return NasXmlBuilder.create_snap(name, fs_id, pool_id, size)
 
     @xml_set_request
     def delete_snap(self, snap_id, force=False):
-        return NasXmlBuilder().delete_snap(snap_id, force)
+        return NasXmlBuilder.delete_snap(snap_id, force)
 
     @xml_get_request
     def get_cifs_server(self, name=None, mover_id=None, is_vdm=False):
-        return NasXmlBuilder().get_cifs_server(name, mover_id, is_vdm)
+        return NasXmlBuilder.get_cifs_server(name, mover_id, is_vdm)
 
     @xml_set_request
     def create_cifs_server(self, name,
@@ -225,7 +224,7 @@ class VNXNasClient(VNXNasConnections):
                            ip_list=None,
                            alias_name=None,
                            local_admin_password=None):
-        return NasXmlBuilder().create_cifs_server(
+        return NasXmlBuilder.create_cifs_server(
             name=name, mover_id=mover_id, is_vdm=is_vdm,
             workgroup=workgroup, domain=domain,
             ip_list=ip_list, alias_name=alias_name,
@@ -235,38 +234,38 @@ class VNXNasClient(VNXNasConnections):
     def modify_domain_cifs_server(self, name, mover_id, is_vdm=False,
                                   join_domain=None, username=None,
                                   password=None):
-        return NasXmlBuilder().modify_domain_cifs_server(
+        return NasXmlBuilder.modify_domain_cifs_server(
             name, mover_id, is_vdm, join_domain, username, password)
 
     @xml_set_request
     def delete_cifs_server(self, name, mover_id=None, is_vdm=False):
-        return NasXmlBuilder().delete_cifs_server(name, mover_id, is_vdm)
+        return NasXmlBuilder.delete_cifs_server(name, mover_id, is_vdm)
 
     @xml_get_request
     def get_fs_mp(self, path=None, mover_id=None, is_vdm=False):
-        return NasXmlBuilder().get_fs_mp(path, mover_id, is_vdm)
+        return NasXmlBuilder.get_fs_mp(path, mover_id, is_vdm)
 
     @xml_set_request
     def create_fs_mp(self, path, fs_id, mover_id, is_vdm=False):
-        return NasXmlBuilder().create_fs_mp(path, fs_id, mover_id, is_vdm)
+        return NasXmlBuilder.create_fs_mp(path, fs_id, mover_id, is_vdm)
 
     @xml_set_request
     def delete_fs_mp(self, path, mover_id, is_vdm=False):
-        return NasXmlBuilder().delete_fs_mp(path, mover_id, is_vdm)
+        return NasXmlBuilder.delete_fs_mp(path, mover_id, is_vdm)
 
     @xml_get_request
     def get_mover_host(self, mover_host_id=None):
-        return NasXmlBuilder().get_mover_host(mover_host_id)
+        return NasXmlBuilder.get_mover_host(mover_host_id)
 
     @xml_set_request
     def create_mover_interface(self, mover_id, device, ip, net_mask,
                                vlan_id=0, name=None):
-        return NasXmlBuilder().create_mover_interface(
+        return NasXmlBuilder.create_mover_interface(
             mover_id, device, ip, net_mask, vlan_id, name)
 
     @xml_set_request
     def delete_mover_interface(self, mover_id, ip):
-        return NasXmlBuilder().delete_mover_interface(mover_id, ip)
+        return NasXmlBuilder.delete_mover_interface(mover_id, ip)
 
     @nas_command
     def get_mover_interconnect_id_list(self):
@@ -274,15 +273,15 @@ class VNXNasClient(VNXNasConnections):
 
     @xml_get_request
     def get_vdm(self, vdm_id=None):
-        return NasXmlBuilder().get_vdm(vdm_id)
+        return NasXmlBuilder.get_vdm(vdm_id)
 
     @xml_set_request
     def create_vdm(self, mover_id, name, pool_id=None):
-        return NasXmlBuilder().create_vdm(mover_id, name, pool_id)
+        return NasXmlBuilder.create_vdm(mover_id, name, pool_id)
 
     @xml_set_request
     def delete_vdm(self, vdm_id):
-        return NasXmlBuilder().delete_vdm(vdm_id)
+        return NasXmlBuilder.delete_vdm(vdm_id)
 
     @nas_command
     def get_dm_interfaces(self, name=None, is_vdm=True):
@@ -300,37 +299,37 @@ class VNXNasClient(VNXNasConnections):
 
     @xml_get_request
     def get_nfs_export(self, mover_id=None, path=None):
-        return NasXmlBuilder().get_nfs_export(mover_id, path)
+        return NasXmlBuilder.get_nfs_export(mover_id, path)
 
     @xml_set_request
     def create_nfs_export(self, mover_id, path, ro=False, host_config=None):
-        return NasXmlBuilder().create_nfs_export(mover_id, path, ro,
-                                                 host_config)
+        return NasXmlBuilder.create_nfs_export(mover_id, path, ro,
+                                               host_config)
 
     @xml_set_request
     def delete_nfs_export(self, mover_id, path):
-        return NasXmlBuilder().delete_nfs_export(mover_id, path)
+        return NasXmlBuilder.delete_nfs_export(mover_id, path)
 
     @xml_set_request
     def modify_nfs_export(self, mover_id, path, ro=None, host_config=None):
-        return NasXmlBuilder().modify_nfs_export(mover_id, path, ro,
-                                                 host_config)
+        return NasXmlBuilder.modify_nfs_export(mover_id, path, ro,
+                                               host_config)
 
     @xml_get_request
     def get_cifs_share(self, server_name=None, share_name=None,
                        mover_id=None, is_vdm=False):
-        return NasXmlBuilder().get_cifs_share(
+        return NasXmlBuilder.get_cifs_share(
             server_name, share_name, mover_id, is_vdm)
 
     @xml_set_request
     def create_cifs_share(self, name, server_name, mover_id,
                           is_vdm=False, path=None):
-        return NasXmlBuilder().create_cifs_share(name, server_name, mover_id,
-                                                 is_vdm, path)
+        return NasXmlBuilder.create_cifs_share(name, server_name, mover_id,
+                                               is_vdm, path)
 
     @xml_set_request
     def delete_cifs_share(self, name, mover_id, server_names, is_vdm=False):
-        return NasXmlBuilder().delete_cifs_share(
+        return NasXmlBuilder.delete_cifs_share(
             name=name, mover_id=mover_id, server_names=server_names,
             is_vdm=is_vdm)
 

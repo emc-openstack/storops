@@ -505,3 +505,7 @@ class RepeatedTimer(object):
 
     def __del__(self):
         self.stop()
+
+
+def all_not_none(*items):
+    return all(map(lambda item: item is not None, items))

@@ -20,6 +20,7 @@ from unittest import TestCase
 from hamcrest import assert_that, equal_to, contains_string, has_item, \
     only_contains, raises, instance_of, none, is_not, not_none
 
+from storops.lib.common import instance_cache
 from test.vnx.cli_mock import t_cli, patch_cli
 from test.vnx.resource.verifiers import verify_lun_0
 from storops.exception import VNXModifyLunError, VNXCompressionError, \
@@ -624,6 +625,59 @@ class VNXLunTest(TestCase):
 
         assert_that(f, raises(VNXLunNotFoundError, 'may not exist'))
 
+    @property
+    @instance_cache
+    def lun_5(self):
+        return VNXLun(lun_id=5, cli=t_cli())
+
+    @patch_cli
+    def test_lun_read_iops(self):
+        assert_that(self.lun_5.read_iops, equal_to(2.0))
+
+    @patch_cli
+    def test_lun_read_iops_spa(self):
+        assert_that(self.lun_5.read_iops_sp_a, equal_to(1.5))
+
+    @patch_cli
+    def test_lun_read_iops_spb(self):
+        assert_that(self.lun_5.read_iops_sp_b, equal_to(0.5))
+
+    @patch_cli
+    def test_lun_write_iops(self):
+        assert_that(self.lun_5.write_iops, equal_to(4.0))
+
+    @patch_cli
+    def test_lun_write_iops_spa(self):
+        assert_that(self.lun_5.write_iops_sp_a, equal_to(3.0))
+
+    @patch_cli
+    def test_lun_write_iops_spb(self):
+        assert_that(self.lun_5.write_iops_sp_b, equal_to(1.0))
+
+    @patch_cli
+    def test_lun_read_mbps(self):
+        assert_that(self.lun_5.read_mbps, equal_to(2.3))
+
+    @patch_cli
+    def test_lun_read_mbps_spa(self):
+        assert_that(self.lun_5.read_mbps_sp_a, equal_to(1.1))
+
+    @patch_cli
+    def test_lun_read_mbps_spb(self):
+        assert_that(self.lun_5.read_mbps_sp_b, equal_to(1.2))
+
+    @patch_cli
+    def test_lun_write_mbps(self):
+        assert_that(self.lun_5.write_mbps, equal_to(2.7))
+
+    @patch_cli
+    def test_lun_write_mbps_spa(self):
+        assert_that(self.lun_5.write_mbps_sp_a, equal_to(1.3))
+
+    @patch_cli
+    def test_lun_write_mbps_spb(self):
+        assert_that(self.lun_5.write_mbps_sp_b, equal_to(1.4))
+
 
 class VNXLunMigrationCallbackTest(TestCase):
     @patch_cli
@@ -663,8 +717,29 @@ class _Counter(object):
 
 
 class VNXLunListTest(TestCase):
+    lun_list = VNXLunList(t_cli())
+
     @patch_cli
     def test_get_lun_list(self):
-        lun_list = VNXLunList(t_cli())
-        assert_that(lun_list, instance_of(VNXLunList))
-        assert_that(len(lun_list), equal_to(183))
+        assert_that(self.lun_list, instance_of(VNXLunList))
+        assert_that(len(self.lun_list), equal_to(183))
+
+    @patch_cli
+    def test_get_lun_by_id_found(self):
+        lun = self.lun_list.get(148)
+        assert_that(lun.lun_id, equal_to(148))
+
+    @patch_cli
+    def test_get_lun_by_lun(self):
+        lun = self.lun_list.get(VNXLun(lun_id=148, cli=t_cli()))
+        assert_that(lun.lun_id, equal_to(148))
+
+    @patch_cli
+    def test_get_lun_by_id_not_found(self):
+        lun = self.lun_list.get(12345)
+        assert_that(lun, none())
+
+    @patch_cli
+    def test_lun_list_perf_properties(self):
+        read_iops_values = set(self.lun_list.read_iops)
+        assert_that(read_iops_values, has_item(2.0))

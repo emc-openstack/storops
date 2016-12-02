@@ -379,6 +379,24 @@ class VNXSystemTest(TestCase):
         assert_that(host.existed, equal_to(True))
         assert_that(len(host.connections), equal_to(4))
 
+    @patch_cli
+    def test_enable_perf_stats(self):
+        vnx = VNXSystem('10.244.211.30')
+        vnx.enable_perf_stats()
+        assert_that(vnx.is_perf_stats_enabled(), equal_to(True))
+
+        vnx.disable_perf_stats()
+        assert_that(vnx.is_perf_stats_enabled(), equal_to(False))
+
+    @patch_cli
+    def test_enable_persist_perf_stats(self):
+        vnx = VNXSystem('10.244.211.30')
+        vnx.enable_persist_perf_stats()
+        assert_that(vnx.is_perf_stats_persisted(), equal_to(True))
+
+        vnx.disable_persist_perf_stats()
+        assert_that(vnx.is_perf_stats_persisted(), equal_to(False))
+
 
 class VNXArrayNameTest(TestCase):
     @patch_cli

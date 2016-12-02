@@ -18,11 +18,12 @@ from __future__ import unicode_literals
 import codecs
 import json
 import logging
+import math
 import os
-
 from os.path import dirname, abspath, join, exists, basename
 
 import fasteners
+from hamcrest.core.base_matcher import BaseMatcher
 
 from storops.lib.common import instance_cache, get_lock_file
 
@@ -166,3 +167,19 @@ class PersistedDict(object):
     def clear_lock_file(self):
         if exists(self.lock_file_name):
             os.remove(self.lock_file_name)
+
+
+class IsNaN(BaseMatcher):
+    def __init__(self):
+        self.value = None
+
+    def _matches(self, value):
+        self.value = value
+        return math.isnan(value)
+
+    def describe_to(self, description):
+        description.append_text('"{}" should be NaN.'.format(self.value))
+
+
+def is_nan():
+    return IsNaN()

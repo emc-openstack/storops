@@ -519,6 +519,14 @@ class UnityMetricQueryNotFoundError(UnityMetricException):
     error_code = 131153932
 
 
+class VNXStatsError(VNXException):
+    pass
+
+
+class VNXPerMonNotEnabledError(VNXStatsError):
+    pass
+
+
 class NaviseccliNotAvailableError(VNXException):
     message = ("naviseccli not found.  please make sure it's installed"
                " and available in path.")
@@ -894,6 +902,10 @@ class VNXUserNameInUseError(VNXSecurityException):
 @cli_exception
 class VNXUserNotFoundError(VNXSecurityException, VNXObjectNotFoundError):
     error_message = 'User does not exist'
+
+
+class VNXStatsException(VNXException):
+    pass
 
 
 class VNXRaidGroupError(VNXException):

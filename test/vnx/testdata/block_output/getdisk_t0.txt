@@ -1,0 +1,1184 @@
+Bus 0 Enclosure 0  Disk 0
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H5HGJG
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 0
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         1405490
+Number of Writes:        510146
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           1405490
+Write Requests:          510146
+Kbytes Read:             97900938
+Kbytes Written:          17067742
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              193715018
+Busy Ticks:              689060179
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 1
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H5AWZG
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 1
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         1079114
+Number of Writes:        315017
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           1079114
+Write Requests:          315017
+Kbytes Read:             97032922
+Kbytes Written:          15733916
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              1467884718
+Busy Ticks:              3710536722
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 2
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H5H9KG
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 2
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         1406251
+Number of Writes:        510722
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           1406251
+Write Requests:          510722
+Kbytes Read:             97940864
+Kbytes Written:          17088348
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              235751438
+Busy Ticks:              647056828
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 3
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H57G2G
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 3
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         1078541
+Number of Writes:        192343
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           1078541
+Write Requests:          192343
+Kbytes Read:             97686568
+Kbytes Written:          9349047
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              1995877658
+Busy Ticks:              3182870304
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 4
+Vendor Id:               SAMSUNG
+Product Id:              SM162521 CLAR100
+Product Revision:        DM0M
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           7WNEAG600115
+Sectors:                 0 (0)
+Capacity:                93928
+Private:                 Unbound
+Bind Signature:          N/A, 0, 4
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033252
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS Flash 2
+Clariion TLA Part Number:005050540M
+User Capacity:           0
+Idle Ticks:              770075373
+Busy Ticks:              145523259
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 5
+Vendor Id:               SAMSUNG
+Product Id:              SM162521 CLAR100
+Product Revision:        DM0M
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           7WNEAG500240
+Sectors:                 0 (0)
+Capacity:                93928
+Private:                 Unbound
+Bind Signature:          N/A, 0, 5
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86940
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033252
+Request Service Time:    N/A
+Read Requests:           86940
+Write Requests:          0
+Kbytes Read:             89026560
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS Flash 2
+Clariion TLA Part Number:005050540M
+User Capacity:           0
+Idle Ticks:              771097054
+Busy Ticks:              141585689
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 6
+Vendor Id:               SAMSUNG
+Product Id:              SM162521 CLAR100
+Product Revision:        DM0M
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           7WNEAG600305
+Sectors:                 0 (0)
+Capacity:                93928
+Private:                 Unbound
+Bind Signature:          N/A, 0, 6
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033252
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS Flash 2
+Clariion TLA Part Number:005050540M
+User Capacity:           0
+Idle Ticks:              757638409
+Busy Ticks:              157961122
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 7
+Vendor Id:               SAMSUNG
+Product Id:              SM162521 CLAR100
+Product Revision:        DM0M
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           7WNEAG600286
+Sectors:                 0 (0)
+Capacity:                93928
+Private:                 Unbound
+Bind Signature:          N/A, 0, 7
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86940
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033252
+Request Service Time:    N/A
+Read Requests:           86940
+Write Requests:          0
+Kbytes Read:             89026560
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS Flash 2
+Clariion TLA Part Number:005050540M
+User Capacity:           0
+Idle Ticks:              765372933
+Busy Ticks:              147309987
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 8
+Vendor Id:               SAMSUNG
+Product Id:              SM162521 CLAR100
+Product Revision:        DM0M
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           7WNEAG600304
+Sectors:                 0 (0)
+Capacity:                93928
+Private:                 Unbound
+Bind Signature:          N/A, 0, 8
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033252
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS Flash 2
+Clariion TLA Part Number:005050540M
+User Capacity:           0
+Idle Ticks:              759790556
+Busy Ticks:              155808419
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 9
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H59L3G
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 9
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              667990921
+Busy Ticks:              245127267
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 10
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H5JW7G
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 10
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              679577755
+Busy Ticks:              235922490
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 11
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H5AL4G
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 11
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              674810577
+Busy Ticks:              238089239
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 12
+Vendor Id:               HITACHI
+Product Id:              HUC10906 CLAR600
+Product Revision:        C600
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           W7H5E2JG
+Sectors:                 0 (0)
+Capacity:                549691
+Private:                 Unbound
+Bind Signature:          N/A, 0, 12
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033213
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              SAS
+Clariion TLA Part Number:005050344PWR
+User Capacity:           0
+Idle Ticks:              670618758
+Busy Ticks:              244760236
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 0 Enclosure 0  Disk 13
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 14
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 15
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 16
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 17
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 18
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 19
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 20
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 21
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 22
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 23
+State:                   Empty
+
+Bus 0 Enclosure 0  Disk 24
+State:                   Empty
+
+Bus 1 Enclosure 0  Disk 0
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3G5NR
+Sectors:                 0 (0)
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 0
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3974258068
+Busy Ticks:              1236433117
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 1
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3GSWC
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 1
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              4002654065
+Busy Ticks:              1204570228
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 2
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3FL8K
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 2
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3988775213
+Busy Ticks:              1221146453
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 3
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3G4GL
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 3
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              4035973630
+Busy Ticks:              1172013808
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 4
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3G8FH
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 4
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3950990953
+Busy Ticks:              1259150824
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 5
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3G6WQ
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 5
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3951532575
+Busy Ticks:              1256127482
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 6
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3FMPP
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 6
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86942
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86942
+Write Requests:          0
+Kbytes Read:             89028608
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3969083500
+Busy Ticks:              1241272618
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 7
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3G8GQ
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 7
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              4004683576
+Busy Ticks:              1202647508
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 8
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Unbound
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3GSMJ
+Sectors:                 0 (0)
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 8
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           This disk does not belong to a RAIDGroup
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3946289807
+Busy Ticks:              1263849309
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 9
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     Unbound
+Type:                    N/A
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            Unbound
+Prct Bound:              Unbound
+Serial Number:           Z1Y3G771
+Sectors:                 N/A
+Capacity:                2817564
+Private:                 Unbound
+Bind Signature:          N/A, 0, 9
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         86941
+Number of Writes:        0
+Number of Luns:          0
+Raid Group ID:           N/A
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           86941
+Write Requests:          0
+Kbytes Read:             89027584
+Kbytes Written:          0
+Stripe Boundary Crossing: None
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           0
+Idle Ticks:              3962749272
+Busy Ticks:              1244805028
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 10
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     110 111 112 113 17 18 19 20 21 22 1 2 23 24 25 114 115 116 117 118 300 301 302 303 304 400 401 402 404 405 500 501 503 504 119 120 121 122 123
+Type:                    110: RAID5 111: RAID5 112: RAID5 113: RAID5 17: RAID5 18: RAID5 19: RAID5 20: RAID5 21: RAID5 22: RAID5 1: RAID5 2: RAID5 23: RAID5 24: RAID5 25: RAID5 114: RAID5 115: RAID5 116: RAID5 117: RAID5 118: RAID5 300: RAID5 301: RAID5 302: RAID5 303: RAID5 304: RAID5 400: RAID5 401: RAID5 402: RAID5 404: RAID5 405: RAID5 500: RAID5 501: RAID5 503: RAID5 504: RAID5 119: RAID5 120: RAID5 121: RAID5 122: RAID5 123: RAID5
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Prct Bound:              110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Serial Number:           Z1Y3F2D7
+Sectors:                 306184089 (149503)
+Capacity:                2817564
+Private:                 110: 65536 111: 4268032 112: 8470528 113: 12673024 17: 16875520 18: 37855232 19: 58834944 20: 79814656 21: 100794368 22: 121774080 1: 142753792 2: 151150592 23: 159547392 24: 180527104 25: 201506816 114: 222486528 115: 327352320 116: 432218112 117: 537083904 118: 641949696 300: 746815488 301: 767795200 302: 830717952 303: 893640704 304: 998506496 400: 1103372288 401: 1166295040 402: 1229217792 404: 1292140544 405: 1355063296 500: 1417986048 501: 1420091392 503: 1422196736 504: 1424302080 119: 1426407424 120: 1447387136 121: 1468366848 122: 1489346560 123: 1510326272
+Bind Signature:          N/A, 0, 10
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         115129
+Number of Writes:        33349
+Number of Luns:          39
+Raid Group ID:           0
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           115129
+Write Requests:          33349
+Kbytes Read:             90010921
+Kbytes Written:          2998322
+Stripe Boundary Crossing: 0
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           145.999951
+Idle Ticks:              3736201389
+Busy Ticks:              1440925907
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 11
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     110 111 112 113 17 18 19 20 21 22 1 2 23 24 25 114 115 116 117 118 300 301 302 303 304 400 401 402 404 405 500 501 503 504 119 120 121 122 123
+Type:                    110: RAID5 111: RAID5 112: RAID5 113: RAID5 17: RAID5 18: RAID5 19: RAID5 20: RAID5 21: RAID5 22: RAID5 1: RAID5 2: RAID5 23: RAID5 24: RAID5 25: RAID5 114: RAID5 115: RAID5 116: RAID5 117: RAID5 118: RAID5 300: RAID5 301: RAID5 302: RAID5 303: RAID5 304: RAID5 400: RAID5 401: RAID5 402: RAID5 404: RAID5 405: RAID5 500: RAID5 501: RAID5 503: RAID5 504: RAID5 119: RAID5 120: RAID5 121: RAID5 122: RAID5 123: RAID5
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Prct Bound:              110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Serial Number:           Z1Y3G4NA
+Sectors:                 306184089 (149503)
+Capacity:                2817564
+Private:                 110: 65536 111: 4268032 112: 8470528 113: 12673024 17: 16875520 18: 37855232 19: 58834944 20: 79814656 21: 100794368 22: 121774080 1: 142753792 2: 151150592 23: 159547392 24: 180527104 25: 201506816 114: 222486528 115: 327352320 116: 432218112 117: 537083904 118: 641949696 300: 746815488 301: 767795200 302: 830717952 303: 893640704 304: 998506496 400: 1103372288 401: 1166295040 402: 1229217792 404: 1292140544 405: 1355063296 500: 1417986048 501: 1420091392 503: 1422196736 504: 1424302080 119: 1426407424 120: 1447387136 121: 1468366848 122: 1489346560 123: 1510326272
+Bind Signature:          N/A, 0, 11
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         118980
+Number of Writes:        37593
+Number of Luns:          39
+Raid Group ID:           0
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           118980
+Write Requests:          37593
+Kbytes Read:             90142152
+Kbytes Written:          3104740
+Stripe Boundary Crossing: 0
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           145.999951
+Idle Ticks:              3682147006
+Busy Ticks:              1504370830
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 12
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     110 111 112 113 17 18 19 20 21 22 1 2 23 24 25 114 115 116 117 118 300 301 302 303 304 400 401 402 404 405 500 501 503 504 119 120 121 122 123
+Type:                    110: RAID5 111: RAID5 112: RAID5 113: RAID5 17: RAID5 18: RAID5 19: RAID5 20: RAID5 21: RAID5 22: RAID5 1: RAID5 2: RAID5 23: RAID5 24: RAID5 25: RAID5 114: RAID5 115: RAID5 116: RAID5 117: RAID5 118: RAID5 300: RAID5 301: RAID5 302: RAID5 303: RAID5 304: RAID5 400: RAID5 401: RAID5 402: RAID5 404: RAID5 405: RAID5 500: RAID5 501: RAID5 503: RAID5 504: RAID5 119: RAID5 120: RAID5 121: RAID5 122: RAID5 123: RAID5
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Prct Bound:              110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Serial Number:           Z1Y3F94M
+Sectors:                 306184089 (149503)
+Capacity:                2817564
+Private:                 110: 65536 111: 4268032 112: 8470528 113: 12673024 17: 16875520 18: 37855232 19: 58834944 20: 79814656 21: 100794368 22: 121774080 1: 142753792 2: 151150592 23: 159547392 24: 180527104 25: 201506816 114: 222486528 115: 327352320 116: 432218112 117: 537083904 118: 641949696 300: 746815488 301: 767795200 302: 830717952 303: 893640704 304: 998506496 400: 1103372288 401: 1166295040 402: 1229217792 404: 1292140544 405: 1355063296 500: 1417986048 501: 1420091392 503: 1422196736 504: 1424302080 119: 1426407424 120: 1447387136 121: 1468366848 122: 1489346560 123: 1510326272
+Bind Signature:          N/A, 0, 12
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         117114
+Number of Writes:        35455
+Number of Luns:          39
+Raid Group ID:           0
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           117114
+Write Requests:          35455
+Kbytes Read:             90042895
+Kbytes Written:          3003411
+Stripe Boundary Crossing: 0
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           145.999951
+Idle Ticks:              3707815000
+Busy Ticks:              1469638863
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 13
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     110 111 112 113 17 18 19 20 21 22 1 2 23 24 25 114 115 116 117 118 300 301 302 303 304 400 401 402 404 405 500 501 503 504 119 120 121 122 123
+Type:                    110: RAID5 111: RAID5 112: RAID5 113: RAID5 17: RAID5 18: RAID5 19: RAID5 20: RAID5 21: RAID5 22: RAID5 1: RAID5 2: RAID5 23: RAID5 24: RAID5 25: RAID5 114: RAID5 115: RAID5 116: RAID5 117: RAID5 118: RAID5 300: RAID5 301: RAID5 302: RAID5 303: RAID5 304: RAID5 400: RAID5 401: RAID5 402: RAID5 404: RAID5 405: RAID5 500: RAID5 501: RAID5 503: RAID5 504: RAID5 119: RAID5 120: RAID5 121: RAID5 122: RAID5 123: RAID5
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Prct Bound:              110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Serial Number:           Z1Y3EPH0
+Sectors:                 306184089 (149503)
+Capacity:                2817564
+Private:                 110: 65536 111: 4268032 112: 8470528 113: 12673024 17: 16875520 18: 37855232 19: 58834944 20: 79814656 21: 100794368 22: 121774080 1: 142753792 2: 151150592 23: 159547392 24: 180527104 25: 201506816 114: 222486528 115: 327352320 116: 432218112 117: 537083904 118: 641949696 300: 746815488 301: 767795200 302: 830717952 303: 893640704 304: 998506496 400: 1103372288 401: 1166295040 402: 1229217792 404: 1292140544 405: 1355063296 500: 1417986048 501: 1420091392 503: 1422196736 504: 1424302080 119: 1426407424 120: 1447387136 121: 1468366848 122: 1489346560 123: 1510326272
+Bind Signature:          N/A, 0, 13
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         119851
+Number of Writes:        37722
+Number of Luns:          39
+Raid Group ID:           0
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           119851
+Write Requests:          37722
+Kbytes Read:             90120750
+Kbytes Written:          3079765
+Stripe Boundary Crossing: 0
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           145.999951
+Idle Ticks:              3677885196
+Busy Ticks:              1499566119
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+
+Bus 1 Enclosure 0  Disk 14
+Vendor Id:               SEAGATE
+Product Id:              ST3000NXCLAR3000
+Product Revision:        GS18
+Lun:                     110 111 112 113 17 18 19 20 21 22 1 2 23 24 25 114 115 116 117 118 300 301 302 303 304 400 401 402 404 405 500 501 503 504 119 120 121 122 123
+Type:                    110: RAID5 111: RAID5 112: RAID5 113: RAID5 17: RAID5 18: RAID5 19: RAID5 20: RAID5 21: RAID5 22: RAID5 1: RAID5 2: RAID5 23: RAID5 24: RAID5 25: RAID5 114: RAID5 115: RAID5 116: RAID5 117: RAID5 118: RAID5 300: RAID5 301: RAID5 302: RAID5 303: RAID5 304: RAID5 400: RAID5 401: RAID5 402: RAID5 404: RAID5 405: RAID5 500: RAID5 501: RAID5 503: RAID5 504: RAID5 119: RAID5 120: RAID5 121: RAID5 122: RAID5 123: RAID5
+State:                   Enabled
+Hot Spare:               N/A
+Prct Rebuilt:            110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Prct Bound:              110: 100 111: 100 112: 100 113: 100 17: 100 18: 100 19: 100 20: 100 21: 100 22: 100 1: 100 2: 100 23: 100 24: 100 25: 100 114: 100 115: 100 116: 100 117: 100 118: 100 300: 100 301: 100 302: 100 303: 100 304: 100 400: 100 401: 100 402: 100 404: 100 405: 100 500: 100 501: 100 503: 100 504: 100 119: 100 120: 100 121: 100 122: 100 123: 100
+Serial Number:           Z1Y3EQQ9
+Sectors:                 306184089 (149503)
+Capacity:                2817564
+Private:                 110: 65536 111: 4268032 112: 8470528 113: 12673024 17: 16875520 18: 37855232 19: 58834944 20: 79814656 21: 100794368 22: 121774080 1: 142753792 2: 151150592 23: 159547392 24: 180527104 25: 201506816 114: 222486528 115: 327352320 116: 432218112 117: 537083904 118: 641949696 300: 746815488 301: 767795200 302: 830717952 303: 893640704 304: 998506496 400: 1103372288 401: 1166295040 402: 1229217792 404: 1292140544 405: 1355063296 500: 1417986048 501: 1420091392 503: 1422196736 504: 1424302080 119: 1426407424 120: 1447387136 121: 1468366848 122: 1489346560 123: 1510326272
+Bind Signature:          N/A, 0, 14
+Hard Read Errors:        0
+Hard Write Errors:       0
+Soft Read Errors:        0
+Soft Write Errors:       0
+Read Retries:     N/A
+Write Retries:    N/A
+Remapped Sectors:        N/A
+Number of Reads:         117575
+Number of Writes:        35541
+Number of Luns:          39
+Raid Group ID:           0
+Clariion Part Number:    DG118033057
+Request Service Time:    N/A
+Read Requests:           117575
+Write Requests:          35541
+Kbytes Read:             90181639
+Kbytes Written:          3116028
+Stripe Boundary Crossing: 0
+Drive Type:              NL SAS
+Clariion TLA Part Number:005050144PWR
+User Capacity:           145.999951
+Idle Ticks:              3724338913
+Busy Ticks:              1452752458
+Current Speed: 6Gbps
+Maximum Speed: 6Gbps
+

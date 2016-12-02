@@ -153,7 +153,7 @@ class NaviCommand(object):
     @classmethod
     def _log_output(cls, cmd, output, start):
         if log.isEnabledFor(logging.DEBUG):
-            output = output.replace('\r\n', '\n').strip()
+            output = six.text_type(output).replace('\r\n', '\n').strip()
             if not output:
                 output = 'empty'
             else:

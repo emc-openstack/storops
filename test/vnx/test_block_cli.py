@@ -798,3 +798,18 @@ class CliClientTest(TestCase):
     def test_set_array_name(self):
         cmd = self.client.set_array_name('new_name')
         assert_that(cmd, equal_to('arrayname new_name -o'))
+
+    @extract_command
+    def test_get_stats_status(self):
+        cmd = self.client.set_stats()
+        assert_that(cmd, equal_to('setstats'))
+
+    @extract_command
+    def test_set_stats_enabled(self):
+        cmd = self.client.set_stats(True)
+        assert_that(cmd, equal_to('setstats -on'))
+
+    @extract_command
+    def test_set_stats_disabled(self):
+        cmd = self.client.set_stats(False)
+        assert_that(cmd, equal_to('setstats -off'))

@@ -20,7 +20,9 @@ from retryz import retry
 from storops.exception import VNXDiskUsedError, raise_if_err, \
     VNXSetArrayNameError
 from storops.lib.common import daemon, instance_cache, clear_instance_cache
+from storops.lib.resource import ResourceList, ResourceListCollection
 from storops.vnx.resource.host import VNXHost
+from storops.vnx.resource.metric import VNXStats
 from storops.vnx.resource.nfs_share import VNXNfsShare
 from storops.vnx.resource.fs_snap import VNXFsSnap
 from storops.vnx.resource.mover import VNXMover
@@ -445,6 +447,48 @@ class VNXSystem(VNXCliResource):
 
     def get_nfs_share(self, mover=None, path=None):
         return VNXNfsShare.get(cli=self._file_cli, mover=mover, path=path)
+
+    def _default_rsc_list_with_perf_stats(self):
+        return (self.get_lun(),
+                self.get_disk())
+
+    def collect_perf_record(self):
+        record = ResourceListCollection(
+            self._default_rsc_list_with_perf_stats())
+        record.update()
+        return record
+
+    def enable_perf_stats(self, rsc_clz_list=None):
+        VNXStats.get(self._cli).enable_stats()
+
+        if rsc_clz_list is None:
+            rsc_list = self._default_rsc_list_with_perf_stats()
+            rsc_clz_list = ResourceList.get_rsc_clz_list(rsc_list)
+
+        self._cli.enable_perf_metric(60, self.collect_perf_record,
+                                     rsc_clz_list)
+        return len(rsc_clz_list)
+
+    def disable_perf_stats(self, disable_counter_collection=False):
+        if disable_counter_collection:
+            VNXStats.get(self._cli).disable_stats()
+        self._cli.disable_perf_metric()
+
+    def is_perf_stats_enabled(self):
+        return self._cli.is_perf_metric_enabled()
+
+    def is_counter_collection_enabled(self):
+        return VNXStats.get(self._cli).is_enabled()
+
+    def enable_persist_perf_stats(self):
+        rsc_list = self._default_rsc_list_with_perf_stats()
+        self._cli.persist_perf_stats(rsc_list)
+
+    def disable_persist_perf_stats(self):
+        self._cli.persist_perf_stats(None)
+
+    def is_perf_stats_persisted(self):
+        return self._cli.is_perf_stats_persisted()
 
     def __del__(self):
         del self._cli

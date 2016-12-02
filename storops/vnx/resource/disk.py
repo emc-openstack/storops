@@ -100,6 +100,7 @@ class VNXDiskList(VNXCliResourceList):
             self._disk_indices = None
         self._drive_type = drive_type
         self._capacity = capacity
+        self._disk_index_map = None
 
     @staticmethod
     def _normalize_indices(indices):
@@ -167,3 +168,16 @@ class VNXDiskList(VNXCliResourceList):
 
     def _get_raw_resource(self):
         return self._cli.get_disk(poll=self.poll)
+
+    def update(self, data=None):
+        ret = super(VNXDiskList, self).update(data)
+        self._disk_index_map = None
+        return ret
+
+    def get(self, index):
+        if isinstance(index, VNXDisk):
+            index = index.index
+
+        if self._disk_index_map is None:
+            self._disk_index_map = {disk.index: disk for disk in self}
+        return self._disk_index_map.get(index)

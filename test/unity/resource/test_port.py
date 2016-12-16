@@ -68,6 +68,16 @@ class UnityIpPortTest(TestCase):
         la = UnityIpPort('spa_la_2', cli=t_rest())
         la.set_mtu(1500)
 
+    @patch_rest
+    def test_mtu_of_link_aggregation(self):
+        la = UnityIpPort('spa_la_2', cli=t_rest())
+        assert_that(la.mtu, equal_to(9000))
+
+    @patch_rest
+    def test_mtu_of_eth_port(self):
+        port = UnityIpPort('spa_eth3', cli=t_rest())
+        assert_that(port.mtu, equal_to(1500))
+
 
 @ddt.ddt
 class UnityEthernetPortTest(TestCase):

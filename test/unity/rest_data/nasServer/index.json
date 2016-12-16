@@ -81,6 +81,10 @@
     {
       "url": "/api/instances/nasServer/nas_3?compact=True",
       "response": "remove_nas_3.json"
+    },
+    {
+      "url": "/api/types/nasServer/instances?compact=True&fields=allowUnmappedUser,cifsServer,credentialsCacheTTL,currentSP,currentUnixDirectoryService,defaultUnixUser,defaultWindowsUser,fileDNSServer,fileInterface,health,homeSP,id,instanceId,isExtendedUnixCredentialEnabled,isMultiProtocolEnabled,isReplicationDestination,isReplicationEnabled,isSystem,isWindowsToUnixUsernameMappingEnabled,name,objectId,pool,preferredInterfaceSettings,replicationType,sizeAllocated,type,virusChecker&filter=tenant eq \"tenant_1\"",
+      "response": "nas_server_in_tenant2.json"
     }
   ]
 }

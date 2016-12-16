@@ -64,3 +64,15 @@ class ResourceListCollectionTest(unittest.TestCase):
         t0 = rlc.timestamp
         rlc.update()
         assert_that(t0, is_not(equal_to(rlc.timestamp)))
+
+
+class ResourceListTest(unittest.TestCase):
+    @patch_rest
+    def test_add_resource_list(self):
+        ret = t_unity().get_ethernet_port() + t_unity().get_link_aggregation()
+        assert_that(len(ret), equal_to(10))
+
+    def test_add_resource_list_type_error(self):
+        def do():
+            return t_unity().get_ethernet_port() + None
+        assert_that(do, raises(TypeError))

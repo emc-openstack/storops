@@ -1,0 +1,12 @@
+{
+    "error": {
+        "errorCode": 118939691,
+        "httpStatusCode": 409,
+        "messages": [
+            {
+                "en-US": "Unable to delete tenant with NAS Servers (Error Code:0x716e02b)"
+            }
+        ],
+        "created": "2016-12-16T02:44:13.285Z"
+    }
+}

@@ -548,6 +548,16 @@ class UnityHostNotInSameTenantError(StoropsException):
     error_code = 151036194
 
 
+@rest_exception
+class UnityTenantHasNasServerError(StoropsException):
+    error_code = 118939691
+
+
+@rest_exception
+class UnityTenantHasHostsError(StoropsException):
+    error_code = 118939704
+
+
 class VNXStatsError(VNXException):
     pass
 

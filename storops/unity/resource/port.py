@@ -32,17 +32,27 @@ LOG = logging.getLogger(__name__)
 
 class UnityIpPort(UnityResource):
     def set_mtu(self, mtu):
-        if self.is_link_aggregation():
-            la = UnityLinkAggregation.get(self._cli, self.get_id())
-            la.modify(mtu=mtu)
-        else:
-            eth = UnityEthernetPort.get(self._cli, self.get_id())
-            eth.modify(mtu=mtu)
+        port = self.get_physical_port()
+        port.modify(mtu=mtu)
 
     @instance_cache
     def is_link_aggregation(self):
         port = UnityLinkAggregation.get(self._cli, self.get_id())
         return port.existed
+
+    def get_physical_port(self):
+        """Returns the link aggregation object or the ethernet port object."""
+        obj = None
+        if self.is_link_aggregation():
+            obj = UnityLinkAggregation.get(self._cli, self.get_id())
+        else:
+            obj = UnityEthernetPort.get(self._cli, self.get_id())
+        return obj
+
+    @property
+    def mtu(self):
+        port = self.get_physical_port()
+        return port.mtu
 
 
 class UnityIpPortList(UnityResourceList):

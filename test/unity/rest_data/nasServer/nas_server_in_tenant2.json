@@ -1,0 +1,70 @@
+{
+    "@base": "https://10.244.223.61/api/types/nasServer/instances?filter=tenant eq \"tenant_2\"&fields=allowUnmappedUser,credentialsCacheTTL,currentUnixDirectoryService,defaultUnixUser,defaultWindowsUser,health,id,instanceId,isExtendedUnixCredentialEnabled,isMigrationDestination,isMultiProtocolEnabled,isPacketReflectEnabled,isReplicationDestination,isReplicationEnabled,isSystem,isWindowsToUnixUsernameMappingEnabled,name,objectId,replicationType,sizeAllocated,type,preferredInterfaceSettings.id,cifsServer.id,tenant.id,currentSP.id,pool.id,fileDNSServer.id,nfsServer.id,virusChecker.id,fileInterface.id,homeSP.id,eventPublisher.id&per_page=2000&compact=true",
+    "updated": "2016-12-16T03:33:23.672Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "isMigrationDestination": false,
+                "isExtendedUnixCredentialEnabled": false,
+                "instanceId": "root/emc:EMC_UEM_FileServerContainerLeaf%InstanceID=nas_8",
+                "credentialsCacheTTL": "00:15:00.000",
+                "homeSP": {
+                    "id": "spa"
+                },
+                "id": "nas_8",
+                "objectId": 103079215114,
+                "currentUnixDirectoryService": 0,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ],
+                    "value": 5
+                },
+                "pool": {
+                    "id": "pool_2"
+                },
+                "sizeAllocated": 2952790016,
+                "type": 64,
+                "nfsServer": {
+                    "id": "nfs_6"
+                },
+                "fileInterface": [
+                    {
+                        "id": "if_15"
+                    }
+                ],
+                "replicationType": 0,
+                "virusChecker": {
+                    "id": "cava_8"
+                },
+                "isSystem": false,
+                "tenant": {
+                    "id": "tenant_2"
+                },
+                "isReplicationEnabled": false,
+                "name": "nas_tenant",
+                "isPacketReflectEnabled": false,
+                "eventPublisher": {
+                    "id": "cepa_8"
+                },
+                "isMultiProtocolEnabled": false,
+                "isReplicationDestination": false,
+                "currentSP": {
+                    "id": "spa"
+                },
+                "preferredInterfaceSettings": {
+                    "id": "preferred_if_8"
+                }
+            }
+        }
+    ]
+}

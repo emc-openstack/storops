@@ -22,6 +22,7 @@ from time import sleep
 from hamcrest import assert_that, less_than, greater_than, none, equal_to, \
     has_items, contains_string
 
+from storops.lib.common import get_data_file
 from storops.lib.metric import PerfManager, MetricCounterRecords, MetricsDumper
 from storops.unity.resource.disk import UnityDiskList, UnityDisk
 from storops.unity.resource.lun import UnityLun, UnityLunList
@@ -167,7 +168,7 @@ class SampleRscList(object):
 class MetricsDumperTest(unittest.TestCase):
     dumper = MetricsDumper(SampleRscList(), ['time', 'name'],
                            SampleRscList._hdr_cb)
-    filename = 'temp_test_metric.csv'
+    filename = get_data_file('temp_test_metric.csv')
 
     @classmethod
     def tearDownClass(cls):

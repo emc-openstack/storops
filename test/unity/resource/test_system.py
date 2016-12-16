@@ -201,6 +201,7 @@ class UnitySystemTest(TestCase):
         unity = t_unity()
         ports = unity.get_ethernet_port()
         assert_that(ports, instance_of(UnityEthernetPortList))
+        assert_that(len(ports), equal_to(8))
 
     @patch_rest
     def test_get_host_list(self):

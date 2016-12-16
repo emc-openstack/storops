@@ -71,6 +71,7 @@ class UnityNasServerTest(TestCase):
         assert_that(server.file_dns_server, instance_of(UnityFileDnsServer))
         assert_that(server.file_interface, instance_of(UnityFileInterfaceList))
         assert_that(server.virus_checker, instance_of(UnityVirusChecker))
+        assert_that(server.tenant, equal_to(None))
 
     @patch_rest
     def test_get_all(self):

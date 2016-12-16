@@ -19,6 +19,7 @@ import logging
 
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.lib.version import version
+import storops.unity.resource.nas_server
 
 __author__ = 'Tina Tang'
 
@@ -46,6 +47,17 @@ class UnityTenant(UnityResource):
                                 self.get_id(), **req_body)
         resp.raise_if_err()
         return resp
+
+    def delete(self, delete_hosts=False):
+        if delete_hosts and self.hosts:
+            for host in self.hosts:
+                host.delete()
+        return super(UnityTenant, self).delete()
+
+    @property
+    def nas_servers(self):
+        clz = storops.unity.resource.nas_server.UnityNasServerList
+        return clz(cli=self._cli, tenant=self)
 
 
 @version('>=4.1')

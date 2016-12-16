@@ -123,6 +123,10 @@
     {
       "url":  "/api/instances/host/Host_16?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostLUNs,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "host_16.json"
+    },
+    {
+      "url": "/api/instances/host/Host_6?compact=True",
+      "response": "empty.json"
     }
   ]
 }

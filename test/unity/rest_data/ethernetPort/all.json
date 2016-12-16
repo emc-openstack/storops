@@ -1,0 +1,482 @@
+{
+    "@base": "https://10.244.223.61/api/types/ethernetPort/instances?fields=bond,cascadeNames,connectorType,health,id,instanceId,isLinkUp,isRDMACapable,isRSSCapable,linuxDeviceName,macAddress,mtu,name,needsReplacement,operationalStatus,parent,portNumber,requestedMtu,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,speed,supportedMtus,supportedSpeeds,parentStorageProcessor.id,parentIOModule.id,storageProcessor.id&per_page=2000&compact=true",
+    "updated": "2016-12-20T02:13:54.948Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "macAddress": "00:60:16:5C:07:0B",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spa"
+                },
+                "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:00:00",
+                "portNumber": 2,
+                "cascadeNames": [
+                    "Ethernet Port 2",
+                    "SP A"
+                ],
+                "requestedMtu": 1500,
+                "mtu": 1500,
+                "speed": 1000,
+                "id": "spa_eth2",
+                "supportedSpeeds": [
+                    1000,
+                    10000,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500,
+                    9000
+                ],
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "connectorType": 1,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spa"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    2,
+                    32784
+                ],
+                "shortName": "Ethernet Port 2",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP A Ethernet Port 2",
+                "linuxDeviceName": "eth2",
+                "isLinkUp": true,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "00:60:16:5C:07:0A",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spa"
+                },
+                "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:00:01",
+                "portNumber": 3,
+                "cascadeNames": [
+                    "Ethernet Port 3",
+                    "SP A"
+                ],
+                "requestedMtu": 0,
+                "mtu": 1500,
+                "connectorType": 1,
+                "id": "spa_eth3",
+                "supportedSpeeds": [
+                    1000,
+                    10000,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500,
+                    9000
+                ],
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spa"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    2,
+                    32785
+                ],
+                "shortName": "Ethernet Port 3",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP A Ethernet Port 3",
+                "linuxDeviceName": "eth3",
+                "isLinkUp": false,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "08:00:1B:FF:16:F9",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spa"
+                },
+                "instanceId": "root/emc:EMC_UEM_ManagementPortLeaf%Tag=00:00:00:00",
+                "portNumber": 0,
+                "cascadeNames": [
+                    "Management Port",
+                    "SP A"
+                ],
+                "requestedMtu": 0,
+                "mtu": 1500,
+                "speed": 1000,
+                "id": "spa_mgmt",
+                "supportedSpeeds": [
+                    1000,
+                    10,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500
+                ],
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "connectorType": 1,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spa"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    32784
+                ],
+                "shortName": "Management Port",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP A Management Port",
+                "linuxDeviceName": "mgmt_vdev",
+                "isLinkUp": true,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "76:CA:E8:15:06:34",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spa"
+                },
+                "instanceId": "root/emc:EMC_UEM_ManagementPortLeaf%Tag=00:00:00:FF",
+                "portNumber": 0,
+                "cascadeNames": [
+                    "Sync Replication Management Port",
+                    "SP A"
+                ],
+                "requestedMtu": 0,
+                "mtu": 1500,
+                "speed": 1000,
+                "id": "spa_srm",
+                "supportedSpeeds": [
+                    1000,
+                    10,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500
+                ],
+                "storageProcessor": {
+                    "id": "spa"
+                },
+                "connectorType": 1,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spa"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    32784
+                ],
+                "shortName": "Sync Replication Management Port",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP A Sync Replication Management Port",
+                "linuxDeviceName": "srm",
+                "isLinkUp": true,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "00:60:16:5C:05:FF",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spb"
+                },
+                "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:01:00",
+                "portNumber": 2,
+                "cascadeNames": [
+                    "Ethernet Port 2",
+                    "SP B"
+                ],
+                "requestedMtu": 1500,
+                "mtu": 1500,
+                "speed": 10000,
+                "id": "spb_eth2",
+                "supportedSpeeds": [
+                    1000,
+                    10000,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500,
+                    9000
+                ],
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "connectorType": 1,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spb"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    2,
+                    32784
+                ],
+                "shortName": "Ethernet Port 2",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP B Ethernet Port 2",
+                "linuxDeviceName": "eth2",
+                "isLinkUp": true,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "00:60:16:5C:05:FE",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spb"
+                },
+                "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:01:01",
+                "portNumber": 3,
+                "cascadeNames": [
+                    "Ethernet Port 3",
+                    "SP B"
+                ],
+                "requestedMtu": 0,
+                "mtu": 1500,
+                "connectorType": 1,
+                "id": "spb_eth3",
+                "supportedSpeeds": [
+                    1000,
+                    10000,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500,
+                    9000
+                ],
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+                    ],
+                    "descriptions": [
+                        "The port link is down, but not in use. No action is required."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spb"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    2,
+                    32785
+                ],
+                "shortName": "Ethernet Port 3",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP B Ethernet Port 3",
+                "linuxDeviceName": "eth3",
+                "isLinkUp": false,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "00:00:00:00:00:00",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spb"
+                },
+                "instanceId": "root/emc:EMC_UEM_ManagementPortLeaf%Tag=00:00:01:00",
+                "portNumber": 0,
+                "cascadeNames": [
+                    "Management Port",
+                    "SP B"
+                ],
+                "requestedMtu": 0,
+                "mtu": 1500,
+                "speed": 1000,
+                "id": "spb_mgmt",
+                "supportedSpeeds": [
+                    1000,
+                    10,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500
+                ],
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "connectorType": 1,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spb"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    32784
+                ],
+                "shortName": "Management Port",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP B Management Port",
+                "linuxDeviceName": "mgmt",
+                "isLinkUp": true,
+                "bond": false
+            }
+        },
+        {
+            "content": {
+                "macAddress": "AA:7B:BA:2D:04:7C",
+                "isRDMACapable": false,
+                "parentStorageProcessor": {
+                    "id": "spb"
+                },
+                "instanceId": "root/emc:EMC_UEM_ManagementPortLeaf%Tag=00:00:01:FF",
+                "portNumber": 0,
+                "cascadeNames": [
+                    "Sync Replication Management Port",
+                    "SP B"
+                ],
+                "requestedMtu": 0,
+                "mtu": 1500,
+                "speed": 1000,
+                "id": "spb_srm",
+                "supportedSpeeds": [
+                    1000,
+                    10,
+                    100,
+                    0
+                ],
+                "supportedMtus": [
+                    1500
+                ],
+                "storageProcessor": {
+                    "id": "spb"
+                },
+                "connectorType": 1,
+                "health": {
+                    "descriptionIds": [
+                        "ALRT_PORT_LINK_UP"
+                    ],
+                    "descriptions": [
+                        "The port is operating normally."
+                    ],
+                    "value": 5
+                },
+                "parent": {
+                    "resource": "storageProcessor",
+                    "id": "spb"
+                },
+                "needsReplacement": false,
+                "sfpSupportedSpeeds": [],
+                "sfpSupportedProtocols": [],
+                "operationalStatus": [
+                    32784
+                ],
+                "shortName": "Sync Replication Management Port",
+                "requestedSpeed": 0,
+                "isRSSCapable": false,
+                "name": "SP B Sync Replication Management Port",
+                "linuxDeviceName": "srm",
+                "isLinkUp": true,
+                "bond": false
+            }
+        }
+    ]
+}

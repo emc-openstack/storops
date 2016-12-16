@@ -9,6 +9,10 @@
       "response": "tenant_1.json"
     },
     {
+      "url": "/api/instances/tenant/tenant_2?compact=True&fields=hosts,id,instanceId,name,uuid,vlans",
+      "response": "tenant_2.json"
+    },
+    {
       "url": "/api/types/tenant/instances?compact=True&fields=hosts,id,instanceId,name,uuid,vlans",
       "response": "all.json"
     },
@@ -58,6 +62,14 @@
     {
       "url": "/api/types/tenant/instances?compact=True&fields=hosts,id,instanceId,name,uuid,vlans&filter=vlans eq 5",
       "response": "vlan_not_found.json"
+    },
+    {
+      "url": "/api/instances/tenant/tenant_1?compact=True",
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/tenant/tenant_2?compact=True",
+      "response": "empty.json"
     }
   ]
 }

@@ -21,6 +21,7 @@ from hamcrest import assert_that, only_contains, instance_of, raises
 from hamcrest import equal_to
 from storops.unity.resource.tenant import UnityTenant, UnityTenantList
 from storops.unity.resource.host import UnityHostList
+from storops.unity.resource.nas_server import UnityNasServerList
 from storops.exception import UnityTenantNameInUseError, SystemAPINotSupported
 from test.unity.rest_mock import t_rest, patch_rest
 
@@ -71,6 +72,8 @@ class UnityTenantTest(TestCase):
         assert_that(tenant.vlans, only_contains(1, 3))
         assert_that(len(tenant.hosts), equal_to(1))
         assert_that(tenant.hosts, instance_of(UnityHostList))
+        assert_that(tenant.nas_servers, instance_of(UnityNasServerList))
+        assert_that(len(tenant.nas_servers), equal_to(1))
 
     @patch_rest()
     def test_get_all(self):
@@ -82,3 +85,13 @@ class UnityTenantTest(TestCase):
         tenants = UnityTenantList(cli=t_rest('4.1.0'),
                                   vlans=[1, 3])
         assert_that(len(tenants), equal_to(1))
+
+    @patch_rest()
+    def test_delete_tenant(self):
+        tenant = UnityTenant('tenant_1', cli=t_rest())
+        tenant.delete()
+
+    @patch_rest()
+    def test_delete_tenant_with_hosts(self):
+        tenant = UnityTenant('tenant_2', cli=t_rest())
+        tenant.delete(delete_hosts=True)

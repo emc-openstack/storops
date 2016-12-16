@@ -292,6 +292,11 @@ class ResourceList(Resource):
     def _is_updated(self):
         return self._list is not None
 
+    def __add__(self, other):
+        if not isinstance(other, ResourceList):
+            raise TypeError
+        return self.list + other.list
+
 
 class ResourceListCollection(object):
     def __init__(self, init_list=None):

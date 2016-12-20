@@ -21,17 +21,21 @@ import os
 
 import six
 import xmltodict as xmltodict
-from lxml import etree
+import xml.etree.ElementTree as ET
 from mock import patch
 
 from storops.lib.common import cache, allow_omit_parentheses
 from storops.vnx.nas_client import VNXNasClient
+from storops.vnx.xmlapi import XML_NS
 from test.utils import ConnectorMock, read_test_file
 from test.vnx.cli_mock import MockCli
 
 __author__ = 'Cedric Zhuang'
 
 log = logging.getLogger(__name__)
+
+
+ET.register_namespace('', XML_NS)
 
 
 @cache
@@ -52,7 +56,7 @@ class MockXmlPost(ConnectorMock):
 
         ret = [cls.base_folder]
         # get two levels after Request
-        node = etree.fromstring(body.encode('utf-8'))
+        node = ET.fromstring(body.encode('utf-8'))
         while len(ret) < 3:
             tag = cls.delete_ns(node.tag)
             if tag in skipped_nodes:
@@ -82,7 +86,7 @@ class MockXmlPost(ConnectorMock):
     @classmethod
     def get_filename(cls, body):
         xml_string = cls.read_index(cls.get_folder(body))
-        indices = etree.fromstring(xml_string.encode('utf-8'))
+        indices = ET.fromstring(xml_string.encode('utf-8'))
         ret = None
         for index in indices:
             for request_packet in index:
@@ -210,9 +214,9 @@ def xml_compare(a, b):
     :param b: xml to compare
     """
     if not isinstance(a, six.string_types):
-        a = etree.tostring(a)
+        a = ET.tostring(a, encoding='utf-8').decode('utf-8')
     if not isinstance(b, six.string_types):
-        b = etree.tostring(b)
+        b = ET.tostring(b, encoding='utf-8').decode('utf-8')
     a = normalise_dict(xmltodict.parse(a))
     b = normalise_dict(xmltodict.parse(b))
     return a == b

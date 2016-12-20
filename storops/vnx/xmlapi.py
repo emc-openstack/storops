@@ -53,7 +53,7 @@ class XmlBuilder(object):
 
 _xb = XmlBuilder()
 _default_task_timeout = 5 * 60
-xml_ns = 'http://www.emc.com/schemas/celerra/xml_api'
+XML_NS = 'http://www.emc.com/schemas/celerra/xml_api'
 
 
 class NasXmlBuilder(object):
@@ -61,13 +61,13 @@ class NasXmlBuilder(object):
     @staticmethod
     def query_package(body):
         return _xb.RequestPacket(_xb.Request(_xb.Query(body)),
-                                 xmlns=xml_ns)
+                                 xmlns=XML_NS)
 
     @staticmethod
     def task_package(body):
         return _xb.RequestPacket(
             _xb.Request(_xb.StartTask(body, timeout=_default_task_timeout)),
-            xmlns=xml_ns)
+            xmlns=XML_NS)
 
     @classmethod
     def get_filesystem(cls, name=None, fs_id=None):

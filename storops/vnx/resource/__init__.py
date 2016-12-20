@@ -169,17 +169,9 @@ class VNXCliResourceList(VNXCliResource, ResourceList):
         self._poll = True
 
     def shadow_copy(self, *args, **kwargs):
-        ret = super(VNXCliResourceList, self).shadow_copy()
+        ret = VNXCliResource.shadow_copy(self)
         ret.set_filter(*args, **kwargs)
         return ret
-
-    def set_filter(self, *args, **kwargs):
-        self._set_filter(*args, **kwargs)
-        self._apply_filter()
-
-    def _set_filter(self, *args, **kwargs):
-        # implemented by child classes if needed
-        pass
 
     @classmethod
     def _get_parser(cls):

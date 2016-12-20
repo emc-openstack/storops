@@ -112,8 +112,9 @@ class UnityResource(Resource):
                     len(self.get_preloaded_prop_keys()) > 1)
             else:
                 # Return False when only id is parsed
-                ret = not (len(self._parsed_resource) == 1 and
-                           len(self.property_names()) > 1)
+                ret = not (self.parsed_resource is None or
+                           (len(self._parsed_resource) == 1 and
+                            len(self.property_names()) > 1))
         return ret
 
     def _get_properties(self, dec=0):

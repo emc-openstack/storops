@@ -65,6 +65,116 @@
     },
     {
       "content": {
+        "id": "nas_2",
+        "replicationType": 0,
+        "type": 64,
+        "currentUnixDirectoryService": 0,
+        "instanceId": "root/emc:EMC_UEM_FileServerContainerLeaf%InstanceID=nas_2",
+        "objectId": 103079215108,
+        "name": "esa_nasserver",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "sizeAllocated": 2952790016,
+        "isSystem": false,
+        "isReplicationEnabled": false,
+        "isReplicationDestination": false,
+        "isMultiProtocolEnabled": false,
+        "credentialsCacheTTL": "00:15:00.000",
+        "isExtendedUnixCredentialEnabled": false,
+        "homeSP": {
+          "id": "spb"
+        },
+        "currentSP": {
+          "id": "spb"
+        },
+        "pool": {
+          "id": "pool_1"
+        },
+        "cifsServer": [
+          {
+            "id": "cifs_1"
+          }
+        ],
+        "fileDNSServer": {
+          "id": "dns_1"
+        },
+        "fileInterface": [
+          {
+            "id": "if_5"
+          }
+        ],
+        "preferredInterfaceSettings": {
+          "id": "preferred_if_1"
+        },
+        "virusChecker": {
+          "id": "cava_1"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "nas_3",
+        "replicationType": 0,
+        "type": 64,
+        "currentUnixDirectoryService": 0,
+        "instanceId": "root/emc:EMC_UEM_FileServerContainerLeaf%InstanceID=nas_3",
+        "objectId": 103079215109,
+        "name": "esa_nasserver",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "sizeAllocated": 2952790016,
+        "isSystem": false,
+        "isReplicationEnabled": false,
+        "isReplicationDestination": false,
+        "isMultiProtocolEnabled": false,
+        "credentialsCacheTTL": "00:15:00.000",
+        "isExtendedUnixCredentialEnabled": false,
+        "homeSP": {
+          "id": "spb"
+        },
+        "currentSP": {
+          "id": "spb"
+        },
+        "pool": {
+          "id": "pool_1"
+        },
+        "cifsServer": [
+          {
+            "id": "cifs_1"
+          }
+        ],
+        "fileDNSServer": {
+          "id": "dns_1"
+        },
+        "fileInterface": [
+          {
+            "id": "if_5"
+          }
+        ],
+        "preferredInterfaceSettings": {
+          "id": "preferred_if_1"
+        },
+        "virusChecker": {
+          "id": "cava_1"
+        }
+      }
+    },
+    {
+      "content": {
         "id": "system_nas_0",
         "replicationType": 0,
         "type": 64,
@@ -92,7 +202,7 @@
           "id": "spa"
         },
         "currentSP": {
-          "id": "spb"
+          "id": "spa"
         }
       }
     },

@@ -272,6 +272,36 @@ class UnitySystemTest(TestCase):
         assert_that(nas_server.existed, equal_to(True))
 
     @patch_rest
+    def test_auto_balance_sp_one_sp(self):
+        unity = t_unity()
+
+        @patch_rest(output='auto_balance_sp_one_sp.json')
+        def inner():
+            sp = unity._auto_balance_sp()
+            assert_that(sp.get_id(), equal_to('spa'))
+
+        unity._auto_balance_sp()
+        inner()
+
+    @patch_rest
+    def test_auto_balance_sp_to_spb(self):
+        unity = t_unity()
+        sp = unity._auto_balance_sp()
+        assert_that(sp.get_id(), equal_to('spb'))
+
+    @patch_rest
+    def test_auto_balance_sp_to_spa(self):
+        unity = t_unity()
+
+        @patch_rest(output='auto_balance_sp_to_spa.json')
+        def inner():
+            sp = unity._auto_balance_sp()
+            assert_that(sp.get_id(), equal_to('spa'))
+
+        unity._auto_balance_sp()
+        inner()
+
+    @patch_rest
     def test_get_ip_ports(self):
         unity = t_unity()
         ip_ports = unity.get_ip_port()

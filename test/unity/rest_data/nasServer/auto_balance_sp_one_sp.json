@@ -92,40 +92,7 @@
           "id": "spa"
         },
         "currentSP": {
-          "id": "spb"
-        }
-      }
-    },
-    {
-      "content": {
-        "id": "system_nas_1",
-        "replicationType": 0,
-        "type": 64,
-        "currentUnixDirectoryService": 0,
-        "instanceId": "root/emc:EMC_UEM_FileServerContainerLeaf%InstanceID=system_nas_1",
-        "objectId": 103079215106,
-        "name": "SVDM_B",
-        "health": {
-          "value": 5,
-          "descriptionIds": [
-            "ALRT_COMPONENT_OK"
-          ],
-          "descriptions": [
-            "The component is operating normally. No action is required."
-          ]
-        },
-        "sizeAllocated": 2684354560,
-        "isSystem": true,
-        "isReplicationEnabled": false,
-        "isReplicationDestination": false,
-        "isMultiProtocolEnabled": false,
-        "credentialsCacheTTL": "00:20:00.000",
-        "isExtendedUnixCredentialEnabled": false,
-        "homeSP": {
-          "id": "spb"
-        },
-        "currentSP": {
-          "id": "spb"
+          "id": "spa"
         }
       }
     }

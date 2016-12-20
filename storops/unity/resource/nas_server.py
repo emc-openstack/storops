@@ -142,6 +142,25 @@ class UnityNasServer(UnityResource):
 
 
 class UnityNasServerList(UnityResourceList):
+    def __init__(self, cli=None, home_sp=None, current_sp=None, **filters):
+        super(UnityNasServerList, self).__init__(cli, **filters)
+        self._home_sp_id = None
+        self._current_sp_id = None
+        self._set_filter(home_sp, current_sp)
+
+    def _set_filter(self, home_sp=None, current_sp=None, **kwargs):
+        self._home_sp_id, self._current_sp_id = (
+            [sp.get_id() if isinstance(sp, UnityStorageProcessor)
+             else sp for sp in (home_sp, current_sp)])
+
+    def _filter(self, nas_server):
+        ret = True
+        if self._home_sp_id is not None:
+            ret &= nas_server.home_sp.get_id() == self._home_sp_id
+        if self._current_sp_id is not None:
+            ret &= nas_server.current_sp.get_id() == self._current_sp_id
+        return ret
+
     @classmethod
     def get_resource_class(cls):
         return UnityNasServer

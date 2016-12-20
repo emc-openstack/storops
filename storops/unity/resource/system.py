@@ -124,11 +124,25 @@ class UnitySystem(UnitySingletonResource):
     def create_nas_server(self, name, sp=None, pool=None, is_repl_dst=None,
                           multi_proto=None, tenant=None):
         if sp is None:
-            sp = self.get_sp().first_item
+            sp = self._auto_balance_sp()
 
         return sp.create_nas_server(name, pool,
                                     is_repl_dst=is_repl_dst,
                                     multi_proto=multi_proto, tenant=tenant)
+
+    def _auto_balance_sp(self):
+        sp_list = self.get_sp()
+        if len(sp_list) < 2:
+            LOG.debug('spb not present. pick spa to host nas server.')
+            return sp_list.first_item
+
+        servers = self.get_nas_server()
+        spa, spb = sp_list
+        servers_on_spa = servers.shadow_copy(home_sp=spa)
+        sp = spb if len(servers_on_spa) * 2 > len(servers) else spa
+        LOG.debug('pick %s to balance of spa and spb to host nas servers.',
+                  sp.get_id())
+        return sp
 
     def get_ip_port(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityIpPortList, _id=_id, name=name,

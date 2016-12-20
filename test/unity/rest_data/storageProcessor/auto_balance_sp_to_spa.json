@@ -1,0 +1,93 @@
+{
+  "@base": "https://10.244.223.66/api/types/storageProcessor/instances?fields=biosFirmwareRevision,emcPartNumber,emcSerialNumber,health,id,instanceId,isRescueMode,manufacturer,memorySize,model,name,needsReplacement,operationalStatus,parent,postFirmwareRevision,sasExpanderVersion,slotNumber,vendorPartNumber,vendorSerialNumber,parentDpe.id&per_page=2000&compact=true",
+  "updated": "2016-03-16T03:43:30.538Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "spa",
+        "operationalStatus": [
+          32771,
+          32832,
+          32834
+        ],
+        "instanceId": "root/emc:EMC_UEM_StorageProcessorLeaf%Tag=06:00:00:00:05:00:00:00:00:00:00:00:00:00:00:02",
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "isRescueMode": false,
+        "model": "OBERON CANISTER 10C 105W 2.6G",
+        "slotNumber": 0,
+        "name": "SP A",
+        "emcPartNumber": "110-297-008C-04",
+        "emcSerialNumber": "CF2HF150300001",
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "sasExpanderVersion": "2.7.1",
+        "biosFirmwareRevision": "30.89",
+        "postFirmwareRevision": "21.2",
+        "memorySize": 65536,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb",
+        "operationalStatus": [
+          32832,
+          32834
+        ],
+        "instanceId": "root/emc:EMC_UEM_StorageProcessorLeaf%Tag=06:00:00:00:05:00:00:00:01:00:00:01:01:00:00:02",
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "isRescueMode": false,
+        "model": "OBERON CANISTER 10C 105W 2.6G",
+        "slotNumber": 1,
+        "name": "SP B",
+        "emcPartNumber": "110-297-008C-04",
+        "emcSerialNumber": "CF2HF150500023",
+        "manufacturer": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "sasExpanderVersion": "2.7.1",
+        "biosFirmwareRevision": "30.89",
+        "postFirmwareRevision": "21.2",
+        "memorySize": 65536,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    }
+  ]
+}

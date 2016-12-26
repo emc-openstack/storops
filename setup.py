@@ -15,10 +15,13 @@
 #    under the License.
 
 from __future__ import unicode_literals
-from setuptools import setup, find_packages
+
 import io
 import os
 import re
+import sys
+
+from setuptools import setup, find_packages
 
 __author__ = 'Cedric Zhuang'
 
@@ -51,6 +54,12 @@ def read_requirements(filename):
         return f.read().splitlines()
 
 
+def install_requirements(filename):
+    packages = read_requirements(filename)
+    if sys.version_info < (3, 4):
+        packages.append("enum34>=1.0.4")
+
+
 def get_description():
     return "Python API for VNX and Unity."
 
@@ -77,6 +86,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         "Natural Language :: English",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",

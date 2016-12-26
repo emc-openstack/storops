@@ -392,6 +392,21 @@ class UnityHostInitiatorPath(UnityResource):
 
 
 class UnityHostInitiatorPathList(UnityResourceList):
+    def __init__(self, cli=None, is_logged_in=None, **filters):
+        super(UnityHostInitiatorPathList, self).__init__(cli, **filters)
+        self._is_logged_in = None
+        self._set_filter(is_logged_in)
+
+    def _set_filter(self, is_logged_in=None, **kwargs):
+        self._is_logged_in = is_logged_in
+
+    def _filter(self, initiator_path):
+        ret = True
+        if self._is_logged_in is not None:
+            ret &= (initiator_path.initiator.type == HostInitiatorTypeEnum.FC
+                    and initiator_path.is_logged_in == self._is_logged_in)
+        return ret
+
     @classmethod
     def get_resource_class(cls):
         return UnityHostInitiatorPath

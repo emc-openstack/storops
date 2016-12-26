@@ -1,0 +1,66 @@
+{
+    "@base": "https://10.244.223.61/api/types/iscsiPortal/instances?compact=True&fields=ethernetPort,gateway,id,instanceId,ipAddress,ipProtocolVersion,iscsiNode,iscsiNode.name,netmask,portalGroupTag,v6PrefixLength,vlanId",
+    "updated": "2016-10-18T01:56:10.923Z",
+    "links": [
+        {
+            "href": "&page=1",
+            "rel": "self"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "instanceId": "root/emc:EMC_UEM_IPInterfaceLeaf%InstanceID=if_4",
+                "portalGroupTag": 1,
+                "iscsiNode": {
+                    "id": "iscsinode_spa_eth2",
+                    "name": "iqn.1992-04.com.emc:cx.fnm00150600267.a0"
+                },
+                "gateway": "10.244.213.1",
+                "ipProtocolVersion": 4,
+                "netmask": "255.255.255.0",
+                "ethernetPort": {
+                    "id": "spa_eth2"
+                },
+                "ipAddress": "10.244.213.177",
+                "id": "if_4"
+            }
+        },
+        {
+            "content": {
+                "instanceId": "root/emc:EMC_UEM_IPInterfaceLeaf%InstanceID=if_5",
+                "portalGroupTag": 1,
+                "iscsiNode": {
+                    "id": "iscsinode_spa_eth2",
+                    "name": "iqn.1992-04.com.emc:cx.fnm00150600267.a0"
+                },
+                "gateway": "10.244.213.1",
+                "ipProtocolVersion": 4,
+                "netmask": "255.255.255.0",
+                "ethernetPort": {
+                    "id": "spa_eth2"
+                },
+                "ipAddress": "10.244.213.178",
+                "id": "if_5"
+            }
+        },
+        {
+            "content": {
+                "instanceId": "root/emc:EMC_UEM_IPInterfaceLeaf%InstanceID=if_6",
+                "portalGroupTag": 1,
+                "iscsiNode": {
+                    "id": "iscsinode_spb_eth2",
+                    "name": "iqn.1992-04.com.emc:cx.fnm00150600267.b0"
+                },
+                "gateway": "10.244.213.1",
+                "ipProtocolVersion": 4,
+                "netmask": "255.255.255.0",
+                "ethernetPort": {
+                    "id": "spb_eth2"
+                },
+                "ipAddress": "10.244.213.179",
+                "id": "if_6"
+            }
+        }
+    ]
+}

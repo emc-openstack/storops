@@ -1,0 +1,88 @@
+{
+    "content": {
+        "documentation": "https://10.244.223.61/apidocs/classes/hostInitiatorPath.html",
+        "description": "Information about host initiator paths in the storage system. Each initiator can be associated with multiple initiator paths. <br/> <br/>  ",
+        "attributes": [
+            {
+                "description": "Internal identifier of the hostInitiatorPath instance.  ",
+                "displayValue": "instanceId",
+                "type": "String",
+                "name": "instanceId"
+            },
+            {
+                "description": "Unique identifier of the hostInitiatorPath instance.  ",
+                "displayValue": "id",
+                "type": "String",
+                "name": "id"
+            },
+            {
+                "description": "Operational statuses for the host initiator path.  ",
+                "displayValue": "operationalStatus",
+                "type": "List<HostOperationalStatusEnum>",
+                "name": "operationalStatus"
+            },
+            {
+                "description": "Health information for the host initiator path, as defined by the health resource type.  ",
+                "displayValue": "health",
+                "type": "health",
+                "name": "health"
+            },
+            {
+                "description": "Universal Unique Identifier (UUID) of the associated host.  ",
+                "displayValue": "hostUUID",
+                "type": "String",
+                "name": "hostUUID"
+            },
+            {
+                "description": "Indicates how the initiator in the path was registered to the host.  ",
+                "displayValue": "registrationType",
+                "type": "HostInitiatorPathTypeEnum",
+                "name": "registrationType"
+            },
+            {
+                "description": "Indicates whether the host initiator is logged into the storage system. Values are: <ul> <li>true - Host initiator is logged into the storage system.</li> <li>false - Host initiator is not logged into the storage system.</li> </ul>  ",
+                "displayValue": "isLoggedIn",
+                "type": "Boolean",
+                "name": "isLoggedIn"
+            },
+            {
+                "description": "(Applies when the value of the registrationType attribute is set to ESXAuto.) Name of the host that is automatically associated with the initiator path through host push.  ",
+                "displayValue": "hostPushName",
+                "type": "String",
+                "name": "hostPushName"
+            },
+            {
+                "description": "(Applies to iSCSI paths only.) Session identifiers in the host initiator path.  ",
+                "displayValue": "sessionIds",
+                "type": "List<String>",
+                "name": "sessionIds"
+            },
+            {
+                "description": "Host initiator associated with the host initiator path, as defined by the hostInitiator resource type.  ",
+                "displayValue": "initiator",
+                "type": "hostInitiator",
+                "name": "initiator"
+            },
+            {
+                "description": "(Applies to Fibre Channel paths only.) Target Fibre Channel port, as defined by the fcPort resource type.  ",
+                "displayValue": "fcPort",
+                "type": "fcPort",
+                "name": "fcPort"
+            },
+            {
+                "description": "(Applies to iSCSI paths only.) Target iSCSI port, as defined by the ethernetPort resource type.  ",
+                "displayValue": "iscsiTarget",
+                "type": "ethernetPort",
+                "name": "iscsiTarget"
+            },
+            {
+                "description": "(Applies to iSCSI paths only.) iSCSI portal, as defined by the iscsiPortal resource type.  ",
+                "displayValue": "iscsiPortal",
+                "type": "iscsiPortal",
+                "name": "iscsiPortal"
+            }
+        ],
+        "name": "hostInitiatorPath"
+    }
+}
+

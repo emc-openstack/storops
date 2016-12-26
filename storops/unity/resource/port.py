@@ -66,6 +66,20 @@ class UnityFcPort(UnityResource):
 
 
 class UnityFcPortList(UnityResourceList):
+    def __init__(self, cli=None, port_ids=None, **filters):
+        super(UnityFcPortList, self).__init__(cli, **filters)
+        self._port_ids = None
+        self._set_filter(port_ids)
+
+    def _set_filter(self, port_ids=None, **kwargs):
+        self._port_ids = port_ids
+
+    def _filter(self, fc_port):
+        ret = True
+        if self._port_ids is not None:
+            ret &= fc_port.get_id() in self._port_ids
+        return ret
+
     @classmethod
     def get_resource_class(cls):
         return UnityFcPort
@@ -144,6 +158,20 @@ class UnityIscsiPortal(UnityResource):
 
 
 class UnityIscsiPortalList(UnityResourceList):
+    def __init__(self, cli=None, port_ids=None, **filters):
+        super(UnityIscsiPortalList, self).__init__(cli, **filters)
+        self._port_ids = None
+        self._set_filter(port_ids)
+
+    def _set_filter(self, port_ids=None, **kwargs):
+        self._port_ids = port_ids
+
+    def _filter(self, iscsi_portal):
+        ret = True
+        if self._port_ids is not None:
+            ret &= iscsi_portal.ethernet_port.get_id() in self._port_ids
+        return ret
+
     @classmethod
     def get_resource_class(cls):
         return UnityIscsiPortal
@@ -190,6 +218,20 @@ class UnityEthernetPort(UnityResource):
 
 
 class UnityEthernetPortList(UnityResourceList):
+    def __init__(self, cli=None, port_ids=None, **filters):
+        super(UnityEthernetPortList, self).__init__(cli, **filters)
+        self._port_ids = None
+        self._set_filter(port_ids)
+
+    def _set_filter(self, port_ids=None, **kwargs):
+        self._port_ids = port_ids
+
+    def _filter(self, ethernet_port):
+        ret = True
+        if self._port_ids is not None:
+            ret &= ethernet_port.get_id() in self._port_ids
+        return ret
+
     @classmethod
     def get_resource_class(cls):
         return UnityEthernetPort

@@ -503,3 +503,19 @@ class UnityHostInitiatorTest(TestCase):
         initiator = UnityHostInitiator(cli=t_rest(), _id='HostInitiator_2')
         resp = initiator.delete()
         assert_that(resp.is_ok(), equal_to(True))
+
+
+class UnityHostInitiatorPathListTest(TestCase):
+    @patch_rest
+    def test_filter(self):
+        is_logged_in = True
+
+        all_paths = UnityHostInitiatorPathList(cli=t_rest())
+        paths = all_paths.shadow_copy(is_logged_in=is_logged_in)
+        assert_that(len(paths), equal_to(2))
+        assert_that(all(p.is_logged_in for p in paths), equal_to(True))
+
+        paths = UnityHostInitiatorPathList(cli=t_rest(),
+                                           is_logged_in=is_logged_in)
+        assert_that(len(paths), equal_to(2))
+        assert_that(all(p.is_logged_in for p in paths), equal_to(True))

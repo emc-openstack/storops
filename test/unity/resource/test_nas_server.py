@@ -194,6 +194,8 @@ class UnityNasServerTest(TestCase):
 
         assert_that(f, raises(UnitySmbNameInUseError, 'name already exists'))
 
+
+class UnityNasServerListTest(TestCase):
     @patch_rest
     def test_shadow_copy_home_sp(self):
         nas_servers = UnityNasServerList(cli=t_rest(), home_sp='spa')

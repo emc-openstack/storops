@@ -5,6 +5,10 @@
       "response": "type.json"
     },
     {
+      "url": "/api/types/iscsiPortal/instances?compact=True&fields=ethernetPort,gateway,id,instanceId,ipAddress,ipProtocolVersion,iscsiNode,iscsiNode.name,netmask,portalGroupTag,v6PrefixLength,vlanId",
+      "response": "all.json"
+    },
+    {
       "url": "/api/instances/iscsiPortal/if_4?compact=True&fields=ethernetPort,gateway,id,instanceId,ipAddress,ipProtocolVersion,iscsiNode,iscsiNode.name,netmask,portalGroupTag,v6PrefixLength,vlanId",
       "response": "if_4.json"
     }

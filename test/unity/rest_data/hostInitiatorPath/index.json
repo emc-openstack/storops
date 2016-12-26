@@ -1,0 +1,12 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/hostInitiatorPath?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/hostInitiatorPath/instances?compact=True&fields=fcPort,health,hostPushName,hostUUID,id,initiator,instanceId,isLoggedIn,iscsiPortal,iscsiTarget,operationalStatus,registrationType,sessionIds",
+      "response": "all.json"
+    }
+  ]
+}

@@ -26,8 +26,9 @@ from storops.exception import UnityEthernetPortSpeedNotSupportError, \
 from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum, \
     FcSpeedEnum, IOLimitPolicyStateEnum
 from storops.unity.resource.lun import UnityLun
-from storops.unity.resource.port import UnityEthernetPort, UnityIpPort, \
-    UnityIpPortList, UnityIscsiPortal, UnityIscsiNode, UnityFcPort, \
+from storops.unity.resource.port import UnityEthernetPort, \
+    UnityEthernetPortList, UnityIpPort, UnityIpPortList, UnityIscsiPortal, \
+    UnityIscsiPortalList, UnityIscsiNode, UnityFcPort, UnityFcPortList, \
     UnityIoLimitRule, UnityIoLimitPolicy, UnityIoLimitPolicyList, \
     UnityLinkAggregation
 from storops.unity.resource.sp import UnityStorageProcessor
@@ -154,6 +155,21 @@ class UnityEthernetPortTest(TestCase):
         assert_that(peer.get_id(), equal_to(peer_id))
 
 
+class UnityEthernetPortListTest(TestCase):
+    @patch_rest
+    def test_filter(self):
+        port_id = 'spa_eth2'
+
+        all_ports = UnityEthernetPortList(cli=t_rest())
+        ports = all_ports.shadow_copy(port_ids=[port_id])
+        assert_that(len(ports), equal_to(1))
+        assert_that(ports[0].get_id(), equal_to(port_id))
+
+        ports = UnityEthernetPortList(cli=t_rest(), port_ids=[port_id])
+        assert_that(len(ports), equal_to(1))
+        assert_that(ports[0].get_id(), equal_to(port_id))
+
+
 class UnityIscsiPortalTest(TestCase):
     @patch_rest
     def test_get_properties(self):
@@ -164,6 +180,21 @@ class UnityIscsiPortalTest(TestCase):
                     equal_to('iqn.1992-04.com.emc:cx.fnm00150600267.a0'))
         assert_that(portal.netmask, equal_to('255.255.255.0'))
         assert_that(portal.gateway, equal_to('10.244.213.1'))
+
+
+class UnityIscsiPortalListTest(TestCase):
+    @patch_rest
+    def test_filter(self):
+        port_id = 'spa_eth2'
+
+        all_ports = UnityIscsiPortalList(cli=t_rest())
+        ports = all_ports.shadow_copy(port_ids=[port_id])
+        assert_that(len(ports), equal_to(2))
+        assert_that(set(ports.id), equal_to(set(['if_4', 'if_5'])))
+
+        ports = UnityIscsiPortalList(cli=t_rest(), port_ids=[port_id])
+        assert_that(len(ports), equal_to(2))
+        assert_that(set(ports.id), equal_to(set(['if_4', 'if_5'])))
 
 
 class UnityFcPortTest(TestCase):
@@ -186,6 +217,21 @@ class UnityFcPortTest(TestCase):
                     equal_to("SP A FC Port 4"))
         assert_that(port.storage_processor,
                     equal_to(UnityStorageProcessor('spa', cli=t_rest())))
+
+
+class UnityFcPortListTest(TestCase):
+    @patch_rest
+    def test_filter(self):
+        port_id = 'spa_iom_1_fc2'
+
+        all_ports = UnityFcPortList(cli=t_rest())
+        ports = all_ports.shadow_copy(port_ids=[port_id])
+        assert_that(len(ports), equal_to(1))
+        assert_that(ports[0].get_id(), equal_to(port_id))
+
+        ports = UnityFcPortList(cli=t_rest(), port_ids=[port_id])
+        assert_that(len(ports), equal_to(1))
+        assert_that(ports[0].get_id(), equal_to(port_id))
 
 
 class UnityIoLimitRuleTest(TestCase):

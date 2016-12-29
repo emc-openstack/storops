@@ -148,6 +148,25 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityIpPortList, _id=_id, name=name,
                                    **filters)
 
+    @version(">=4.1")
+    def get_file_port(self):
+        """Returns ports list can be used by File
+
+        File ports includes ethernet ports and link aggregation ports.
+        """
+        eths = self.get_ethernet_port()
+        las = self.get_link_aggregation()
+        return eths + las
+
+    @version("<4.1")   # noqa
+    def get_file_port(self):
+        """Returns ports list can be used by File
+
+        File ports includes ethernet ports and link aggregation ports.
+        """
+        eths = self.get_ethernet_port()
+        return eths.list
+
     def get_file_interface(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityFileInterfaceList, _id=_id, name=name,
                                    **filters)
@@ -281,6 +300,7 @@ class UnitySystem(UnitySingletonResource):
     def info(self):
         return UnityBasicSystemInfo.get(cli=self._cli)
 
+    @version('>=4.1')
     def get_link_aggregation(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityLinkAggregationList, _id=_id,
                                    name=name,

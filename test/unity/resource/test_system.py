@@ -548,6 +548,18 @@ class UnitySystemTest(TestCase):
         assert_that(cg.id, equal_to('spa_la_2'))
 
     @patch_rest
+    def test_get_file_port(self):
+        unity = UnitySystem(cli=t_rest("4.1.0"))
+        ports = unity.get_file_port()
+        assert_that(len(ports), equal_to(10))
+
+    @patch_rest
+    def test_get_file_port_la_unsupported(self):
+        unity = UnitySystem(cli=t_rest("4.0.0"))
+        ports = unity.get_file_port()
+        assert_that(len(ports), equal_to(8))
+
+    @patch_rest
     def test_enable_performance_statistics(self):
         unity = UnitySystem('10.244.223.61')
         assert_that(unity.is_perf_stats_enabled(), equal_to(False))

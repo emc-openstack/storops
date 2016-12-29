@@ -303,7 +303,7 @@ class ResourceList(Resource):
 
     def __add__(self, other):
         if not isinstance(other, ResourceList):
-            raise TypeError
+            raise TypeError('Unsupported type {}'.format(type(other)))
         return self.list + other.list
 
 

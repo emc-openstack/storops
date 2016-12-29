@@ -23,6 +23,7 @@ from hamcrest import assert_that, equal_to, instance_of, only_contains, \
 from storops.exception import UnityEthernetPortSpeedNotSupportError, \
     UnityEthernetPortMtuSizeNotSupportError, UnityResourceNotFoundError, \
     UnityPolicyNameInUseError, UnityEthernetPortAlreadyAggregatedError
+from storops.exception import SystemAPINotSupported
 from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum, \
     FcSpeedEnum, IOLimitPolicyStateEnum
 from storops.unity.resource.lun import UnityLun
@@ -58,6 +59,11 @@ class UnityIpPortTest(TestCase):
         assert_that(port.is_link_aggregation(), equal_to(False))
         port = UnityIpPort('spa_la_2', cli=t_rest())
         assert_that(port.is_link_aggregation(), equal_to(True))
+
+    @patch_rest
+    def test_is_link_aggregation_not_supported(self):
+        port = UnityIpPort('spa_eth6', cli=t_rest("4.0"))
+        assert_that(port.is_link_aggregation(), equal_to(False))
 
     @patch_rest
     def test_set_mtu_on_eth_port(self):
@@ -359,3 +365,9 @@ class UnityLinkAggregationTest(TestCase):
         la.modify(mtu=1500,
                   remove_ports=[UnityEthernetPort.get(t_rest(), "spa_eth2")],
                   add_ports=[UnityEthernetPort.get(t_rest(), "spa_eth4")])
+
+    @patch_rest()
+    def test_list_la_unsupported(self):
+        def f():
+            UnityLinkAggregation.get(t_rest("4.0.0"))
+        assert_that(f, raises(SystemAPINotSupported))

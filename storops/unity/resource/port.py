@@ -23,7 +23,7 @@ from storops.unity.resource import UnityResource, UnityResourceList, \
 from storops.exception import UnityEthernetPortMtuSizeNotSupportError
 from storops.exception import UnityEthernetPortSpeedNotSupportError
 from storops.unity.enums import EPSpeedValuesEnum, IOLimitPolicyTypeEnum
-
+from storops.lib.version import version
 
 __author__ = 'Jay Xu'
 
@@ -36,9 +36,16 @@ class UnityIpPort(UnityResource):
         port.modify(mtu=mtu)
 
     @instance_cache
+    @version('>=4.1')
     def is_link_aggregation(self):
         port = UnityLinkAggregation.get(self._cli, self.get_id())
         return port.existed
+
+    @instance_cache  # noqa
+    @version('<4.1')
+    def is_link_aggregation(self):
+        # Link aggregation is not supported before Falcon 4.1
+        return False
 
     def get_physical_port(self):
         """Returns the link aggregation object or the ethernet port object."""
@@ -237,6 +244,7 @@ class UnityEthernetPortList(UnityResourceList):
         return UnityEthernetPort
 
 
+@version(">=4.1")
 class UnityLinkAggregation(UnityResource):
     @classmethod
     def create(cls, cli, ports, mtu=None):
@@ -260,6 +268,7 @@ class UnityLinkAggregation(UnityResource):
         resp.raise_if_err()
 
 
+@version(">=4.1")
 class UnityLinkAggregationList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):

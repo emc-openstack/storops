@@ -1,0 +1,41 @@
+Storage Group Name:    wcmsc2-l-rh-cmp-2.hqplan.lab
+Storage Group UID:     BB:CD:9D:89:12:D9:E6:11:8D:24:82:E6:BF:48:3A:C7
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------·
+  iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4ccaSP A1
+Host name:             wcmsc2-l-rh-cmp-2.hqplan.lab
+SPPort:                A-1v0
+Initiator IP:          N/A
+TPGT:                  6
+ISID:                  N/A
+
+  iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4ccbSP B 1
+Host name:             wcmsc2-l-rh-cmp-2.hqplan.lab
+SPPort:                B-1v0
+Initiator IP:          N/A
+TPGT:                  10
+ISID:                  N/A
+
+  iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4ccc SP A3
+Host name:             wcmsc2-l-rh-cmp-2.hqplan.lab
+SPPort:                A-3v0
+Initiator IP:          N/A
+TPGT:                  8
+ISID:                  N/A
+
+  iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4ccdSP B3
+Host name:             wcmsc2-l-rh-cmp-2.hqplan.lab
+SPPort:                B-3v0
+Initiator IP:          N/A
+TPGT:                  12
+ISID:                  N/A
+
+
+HLU/ALU Pairs:
+
+  HLU Number     ALU Number
+  ----------     ----------
+    196             24
+Shareable:             YES

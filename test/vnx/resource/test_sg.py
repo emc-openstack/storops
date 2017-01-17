@@ -109,6 +109,35 @@ class VNXStorageGroupTest(TestCase):
         assert_that(sg.existed, equal_to(True))
 
     @patch_cli
+    def test_missing_two_tab(self):
+        sg = VNXStorageGroup(name='a.b.c', cli=t_cli())
+        assert_that(len(sg.alu_hlu_map), equal_to(1))
+        assert_that(len(sg.hba_sp_pairs), equal_to(4))
+        uid = 'iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4cca'
+        port = list(filter(lambda i: i[0] == uid, sg.hba_port_list))[0][1]
+        assert_that(port.sp, equal_to(VNXSPEnum.SP_A))
+        assert_that(port.port_id, equal_to(1))
+        assert_that(port.host_initiator_list, has_item(uid))
+
+    @patch_cli
+    def test_missing_left_tab(self):
+        sg = VNXStorageGroup(name='a.b.c', cli=t_cli())
+        uid = 'iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4ccb'
+        port = list(filter(lambda i: i[0] == uid, sg.hba_port_list))[0][1]
+        assert_that(port.sp, equal_to(VNXSPEnum.SP_B))
+        assert_that(port.port_id, equal_to(1))
+        assert_that(port.host_initiator_list, has_item(uid))
+
+    @patch_cli
+    def test_missing_right_tab(self):
+        sg = VNXStorageGroup(name='a.b.c', cli=t_cli())
+        uid = 'iqn.1994-05.com.abcdef:ghijk2-l-mn-opq-2.rstuvw.xyz:c3bf2f4ccc'
+        port = list(filter(lambda i: i[0] == uid, sg.hba_port_list))[0][1]
+        assert_that(port.sp, equal_to(VNXSPEnum.SP_A))
+        assert_that(port.port_id, equal_to(3))
+        assert_that(port.host_initiator_list, has_item(uid))
+
+    @patch_cli
     def test_property_hosts(self):
         hosts = get_sg('~management').hosts
         assert_that(len(hosts), equal_to(2))

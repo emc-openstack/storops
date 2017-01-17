@@ -461,7 +461,7 @@ VNXStorageGroupHBA:
   data_src: cli
   properties:
     - label:  |
-        ^\s*(\S+)\s+(SP \w)\s+(\d+)\s*$
+        ^\s*(\S+)\s*(SP \w)\s*(\d+)\s*$
       is_index: True
       is_regex: True
       key: hba

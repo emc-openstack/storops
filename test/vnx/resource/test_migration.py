@@ -19,7 +19,7 @@ from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, raises
 
-from storops.exception import VNXLunNotMigratingError
+from storops.exception import VNXLunNotMigratingError, VNXLunSyncCompletedError
 from storops.vnx.resource.lun import VNXLun
 from test.vnx.cli_mock import t_cli, patch_cli
 from storops.vnx.enums import VNXMigrationRate
@@ -88,3 +88,12 @@ class VNXMigrationSessionTest(TestCase):
 
         assert_that(f, raises(VNXLunNotMigratingError,
                               'not currently migrating'))
+
+    @patch_cli
+    def test_cancel_migrate_sync_completed(self):
+        def f():
+            ms = VNXMigrationSession(1, t_cli())
+            ms.cancel()
+
+        assert_that(f, raises(VNXLunSyncCompletedError,
+                              'because data sychronization is completed'))

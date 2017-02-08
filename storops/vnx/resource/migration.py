@@ -60,6 +60,10 @@ class VNXMigrationSession(VNXCliResource):
     @property
     @instance_cache
     def source_lun(self):
+        if self._source is not None:
+            return storops.vnx.resource.lun.VNXLun(
+                lun_id=self._source,
+                cli=self._cli)
         return storops.vnx.resource.lun.VNXLun.get(
             cli=self._cli, lun_id=self.source_lu_id, name=self.source_lu_name)
 

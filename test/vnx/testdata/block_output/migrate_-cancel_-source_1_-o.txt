@@ -1,0 +1,2 @@
+Error: migrate -cancel command failed.
+Migration cannot be cancelled because data sychronization is completed (0x714a8021)

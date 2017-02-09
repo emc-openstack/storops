@@ -19,7 +19,8 @@ from __future__ import unicode_literals
 import shutil
 from unittest import TestCase
 import tempfile
-from hamcrest import assert_that, equal_to
+from hamcrest import assert_that, equal_to, raises
+from persistqueue import Empty
 
 from storops.lib import tasks
 from test.vnx.cli_mock import patch_cli, t_vnx
@@ -52,6 +53,10 @@ class TestPQueue(TestCase):
         assert_that(pickled_item['object']._ip, equal_to(fake_vnx._ip))
         assert_that(pickled_item['method'], equal_to('delete_lun'))
         assert_that(pickled_item['params']['name'], equal_to('l1'))
+        self.q.task_done()
+        self.q = None
+        self.q = tasks.PQueue(self.path)
+        assert_that(self.q.get, raises(Empty))
 
     def test_run_empty_queue(self):
         self.q.set_interval(0.01)
@@ -91,8 +96,7 @@ class TestPQueue(TestCase):
         self.q.put(fake_vnx.delete_hba, hba_uid=uid)
         self.q.start()
         time.sleep(0.2)
-        reenqueued_item = self.q.get()
-        assert_that(None, equal_to(reenqueued_item))
+        assert_that(self.q.get, raises(Empty))
 
     @patch_cli
     def test_enqueue_storops_error(self):

@@ -15,14 +15,16 @@
 #    under the License.
 
 import logging
-import queuelib
-import pickle
+import persistqueue
+
+from persistqueue import Empty
 import threading
 import time
 from storops.exception import StoropsException
 from storops.exception import VNXObjectNotFoundError
 
 __author__ = 'Peter Wang'
+
 log = logging.getLogger(__name__)
 
 
@@ -32,7 +34,7 @@ class PQueue(object):
 
     def __init__(self, path, interval=None):
         self.path = path
-        self._q = queuelib.FifoDiskQueue(self.path)
+        self._q = persistqueue.Queue(self.path)
         self._interval = (
             self.DEFAULT_INTERVAL if interval is None else interval)
         self.started = False
@@ -40,11 +42,13 @@ class PQueue(object):
     def put(self, func, **kwargs):
         item = {'object': func.__self__, 'method': func.__name__,
                 'params': kwargs}
-        self._q.push(self._dumps(item))
+        self._q.put_nowait(item)
 
-    def get(self):
-        item = self._q.pop()
-        return self._loads(item) if item else None
+    def get(self, block=False):
+        return self._q.get(block=block)
+
+    def task_done(self):
+            self._q.task_done()
 
     def start(self):
         if not self.started:
@@ -56,12 +60,6 @@ class PQueue(object):
     def stop(self):
         self._interval = 0
         self.started = False
-
-    def _dumps(self, obj):
-        return pickle.dumps(obj)
-
-    def _loads(self, pickle_bytes):
-        return pickle.loads(pickle_bytes)
 
     def set_interval(self, interval):
         self._interval = interval
@@ -81,16 +79,17 @@ class PQueue(object):
             else:
                 retries += 1
                 item['retries'] = retries
-                self._q.push(self._dumps(item))
+                self._q.put_nowait(item)
         else:
             item['retries'] = 1
-            self._q.push(self._dumps(item))
+            self._q.put_nowait(item)
 
     def _run_tasks(self):
         while self._interval > 0:
             log.debug("Running periodical check.")
-            data = self.get()
-            if not data:
+            try:
+                data = self.get()
+            except Empty:
                 log.debug("Queue is empty now.")
             else:
                 method = getattr(data['object'], data['method'], None)
@@ -110,6 +109,7 @@ class PQueue(object):
                         log.error("Unexpected error occurs when executing {}:"
                                   " {}, this job will not be executed"
                                   " again".format(method.__name__, ex))
+                self.task_done()
             time.sleep(self._interval)
         log.info("{} with path {} has been "
                  "stopped.".format(self.__class__.__name__, self._q.path))

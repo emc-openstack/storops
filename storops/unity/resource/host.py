@@ -183,6 +183,9 @@ class UnityHost(UnityResource):
             lun_or_snap.attach_to(self)
             self.update()
             hlu = self.get_hlu(lun_or_snap)
+        except ex.SystemAPINotSupported:
+            # Attaching snap to host not support before 4.1.
+            raise
         except ex.UnityAttachExceedLimitError:
             # The number of luns exceeds system limit
             raise

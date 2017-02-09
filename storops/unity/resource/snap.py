@@ -18,6 +18,7 @@ from __future__ import unicode_literals
 import logging
 
 from storops.lib.common import instance_cache
+from storops.lib.version import version
 from storops.unity import enums
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum, \
     SnapAccessLevelEnum
@@ -104,6 +105,7 @@ class UnitySnap(UnityResource):
         return (super(UnitySnap, self).existed and
                 self.state != SnapStateEnum.DESTROYING)
 
+    @version('>=4.1')
     def attach_to(self, host, access_mask=SnapAccessLevelEnum.READ_WRITE):
         host_access = [{'host': host, 'allowedAccess': access_mask}]
         # If this lun has been attached to other host, don't overwrite it.

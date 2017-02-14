@@ -13,7 +13,7 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://landscape.io/github/emc-openstack/storops/master/landscape.svg?style=flat
     :target: https://landscape.io/github/emc-openstack/storops/
 
-VERSION: 0.4.6
+VERSION: 0.4.7
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
@@ -355,6 +355,29 @@ Getting Help
     vnx.get_ndu                      vnx.is_valid                     vnx.with_no_poll
     vnx.get_pool                     vnx.json                         vnx.with_poll
     vnx.get_pool_feature             vnx.parse
+
+How to Run Unittests
+--------------------
+
+Unittests are included in the `storops_test` package.
+
+Use following command to install test dependencies.
+
+.. code-block:: bash
+
+    $ pip install -r test-requirements.txt
+
+Use `pytest` to run the tests.
+
+.. code-block:: bash
+
+    $ pytest storops_test
+
+Or you could use `tox` to run the tests.
+
+.. code-block:: bash
+
+    $ tox -e py36
 
 
 How to Contribute

@@ -44,3 +44,4 @@ def disable_log():
     logger.info('disabling logging to console.')
     logger.setLevel(logging.NOTSET)
     logger.handlers = []
+    return logger

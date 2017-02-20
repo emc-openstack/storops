@@ -265,6 +265,7 @@ class VNXPoolRaidType(VNXEnum):
     RAID5 = 'r_5'
     RAID6 = 'r_6'
     RAID10 = 'r_10'
+    RAID_MIXED = 'Mixed'
 
     @property
     def min_disk_requirement(self):
@@ -282,6 +283,46 @@ class VNXPoolRaidType(VNXEnum):
         else:
             raise ValueError('invalid VNXPoolRaidType supplied.')
         return ret
+
+
+class VNXCtrlMethod(object):
+    NO_CTRL = 'noctrl'
+    LIMIT_CTRL = 'limit'
+    CRUISE_CTRL = 'cruise'
+    FIXED_CTRL = 'fixed'
+
+    def __init__(self, method, metric=None, value=None, tolerance=None):
+        self.method = method
+        self.metric = metric
+        self.value = value
+        self.tolerance = tolerance
+
+    def get_option(self):
+        if self.method == VNXCtrlMethod.NO_CTRL:
+            option = ['-noctrl']
+        elif self.method == VNXCtrlMethod.LIMIT_CTRL:
+            option = ['-ctrlmethod', self.method, '-gmetric', self.metric,
+                      '-gval', self.value]
+        elif self.method == VNXCtrlMethod.CRUISE_CTRL:
+            option = ['-ctrlmethod', self.method, '-gmetric', self.metric,
+                      '-gval', self.value, '-gtol', self.tolerance]
+        elif self.method == VNXCtrlMethod.FIXED_CTRL:
+            option = ['-ctrlmethod', self.method, '-gval', self.value]
+        elif not self.method:
+            option = []
+        else:
+            raise ValueError(
+                'Invalid control method specified. %s' % self.method)
+        return option
+
+    @staticmethod
+    def parse_cmd(ctrlmethod):
+        if not ctrlmethod:
+            ctrlmethod = VNXCtrlMethod(method=None)
+        elif ctrlmethod == VNXCtrlMethod.NO_CTRL:
+            ctrlmethod = VNXCtrlMethod(method=ctrlmethod)
+        cmd = ctrlmethod.get_option()
+        return cmd
 
 
 class VNXAccessLevel(VNXEnum):

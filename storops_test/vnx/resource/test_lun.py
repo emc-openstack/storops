@@ -32,7 +32,7 @@ from storops.exception import VNXCompressionError, \
     VNXLunUsedByFeatureError, VNXNameInUseError
 from storops.lib.common import instance_cache, cache
 from storops.vnx.enums import VNXProvisionEnum, VNXTieringEnum, \
-    VNXCompressionRate, VNXSPEnum
+    VNXCompressionRate, VNXSPEnum, VNXPoolRaidType
 from storops.vnx.resource.lun import VNXLun, VNXLunList
 from storops.vnx.resource.snap import VNXSnap
 from storops_test.vnx.cli_mock import t_cli, patch_cli
@@ -78,6 +78,7 @@ class VNXLunTest(TestCase):
         assert_that(l.consumed_capacity_gbs, equal_to(512.249))
         assert_that(len(l.snapshot_mount_points), equal_to(0))
         assert_that(l.primary_lun, none())
+        assert_that(l.raid_type, equal_to(VNXPoolRaidType.RAID_MIXED))
 
     @patch_cli
     def test_lun_perf_counters(self):

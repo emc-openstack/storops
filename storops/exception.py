@@ -716,6 +716,26 @@ class VNXLunSyncCompletedError(VNXMigrationError):
     error_code = 0x714a8021
 
 
+class VNXIOClassError(VNXException):
+    pass
+
+
+@cli_exception
+class VNXIOCLassRunningError(VNXIOClassError):
+    error_message = 'Can not modify or delete an I/O Class while it is '
+    'currently running'
+
+
+class VNXIOPolicyError(VNXException):
+    pass
+
+
+@cli_exception
+class VNXIOPolicyRunningError(VNXIOPolicyError):
+    error_message = 'Can not modify a Policy, delete a Policy or update event '
+    'log settings while it is currently running'
+
+
 @cli_exception
 class VNXTargetNotReadyError(VNXMigrationError):
     error_message = 'The destination LUN is not available for migration'

@@ -1,0 +1,98 @@
+
+Name:  peter_mixed
+Current State:  Idle
+Status:  Ready
+LUN(s):  Not Lun Specific
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Throughput
+Goal Value:  150.0 IO/s
+
+Name:  peter_test_1
+Current State:  Idle
+Status:  Ready
+Number of LUN(s):  1
+LUN(s):
+    LUN Number:  8
+    LUN Name:  volume-ba8d8715-a897-4caf-85ea-d159d92ca86a
+    LUN WWN:  60:06:01:60:12:90:38:00:03:A1:CD:E8:01:D3:E6:11
+    RAID Type:  RAID5
+Number of Snapshot(s):  1
+Snapshot(s):
+    Snapshot Name:  volume-d5108611-f234-4ef5-879f-2868a281a112
+    Snapshot WWN:  60:06:01:60:12:90:38:00:7B:46:43:4E:8A:E0:E6:11
+    Target Logical Unit:  113
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Bandwidth
+Goal Value:  1000.0 MB/s
+
+Name:  peter_test_2
+Current State:  Idle
+Status:  Ready
+Number of LUN(s):  1
+LUN(s):
+    LUN Number:  8
+    LUN Name:  volume-ba8d8715-a897-4caf-85ea-d159d92ca86a
+    LUN WWN:  60:06:01:60:12:90:38:00:03:A1:CD:E8:01:D3:E6:11
+    RAID Type:  RAID5
+Number of Snapshot(s):  1
+Snapshot(s):
+    Snapshot Name:  volume-d5108611-f234-4ef5-879f-2868a281a112
+    Snapshot WWN:  60:06:01:60:12:90:38:00:7B:46:43:4E:8A:E0:E6:11
+    Target Logical Unit:  113
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Bandwidth
+Goal Value:  1000.0 MB/s
+
+Name:  peter_test_3
+Current State:  Idle
+Status:  Ready
+Number of LUN(s):  1
+LUN(s):
+    LUN Number:  5
+    LUN Name:  volume-72d2b9fe-6636-41e6-a3d3-0e1a81e3825d
+    LUN WWN:  60:06:01:60:12:90:38:00:44:DF:FA:DD:01:D3:E6:11
+    RAID Type:  RAID5
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Bandwidth
+Goal Value:  1000.0 MB/s
+
+Name:  peter_test
+Current State:  Idle
+Status:  Ready
+LUN(s):  Not Lun Specific
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Bandwidth
+Goal Value:  1000.0 MB/s
+
+Name:  peter
+Current State:  Idle
+Status:  Ready
+Number of LUN(s):  2
+LUN(s):
+    LUN Number:  0
+    LUN Name:  volume-1cdca780-1186-43c2-8abe-71d201c87041
+    LUN WWN:  60:06:01:60:12:90:38:00:05:41:19:4A:4C:D2:E6:11
+    RAID Type:  RAID5
+    LUN Number:  1
+    LUN Name:  volume-653cf7bf-45dd-4dfd-87c5-8d63ccb19288
+    LUN WWN:  60:06:01:60:12:90:38:00:C9:40:FC:AD:CA:D3:E6:11
+    RAID Type:  RAID5
+IO Type:  ReadWrite
+IO Size Range:  1.0 KB -- 10.0 KB
+Control Method:  Limit
+Metric Type:  Bandwidth
+Goal Value:  1000.0 MB/s
+
+
+
+

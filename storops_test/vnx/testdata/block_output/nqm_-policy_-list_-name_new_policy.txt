@@ -1,0 +1,10 @@
+Name:  new_policy
+Current State:  Idle
+Status:  Warning
+Number of I/O Class(es):  1
+NQM Class(es):
+    Name:  Background Class
+Action on Failure:  Stop running NQM if it fails to satisfy its goals
+Time Limit:  60min
+Evaluation Window:  3 samples
+

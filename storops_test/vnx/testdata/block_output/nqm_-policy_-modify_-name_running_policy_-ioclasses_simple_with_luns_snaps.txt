@@ -1,0 +1,1 @@
+Execute modify policy request failed. Error returned from NQM Provider: Can not modify a Policy, delete a Policy or update event log settings while it is currently running. Stop NQM first before performing the operation.

@@ -26,12 +26,13 @@ import storops.vnx.resource.system
 from storops import exception as ex
 from storops.exception import OptionMissingError
 from storops.lib.common import check_int, text_var, int_var, enum_var, \
-    yes_no_var
+    yes_no_var, list_var
 from storops.lib.metric import PerfManager
 from storops.vnx.enums import VNXSPEnum, VNXTieringEnum, VNXProvisionEnum, \
     VNXMigrationRate, VNXCompressionRate, \
     VNXMirrorViewRecoveryPolicy, VNXMirrorViewSyncRate, VNXLunType, \
-    VNXRaidType, VNXPoolRaidType, VNXUserScopeEnum, VNXUserRoleEnum
+    VNXRaidType, VNXPoolRaidType, VNXUserScopeEnum, VNXUserRoleEnum, \
+    VNXCtrlMethod
 from storops.vnx.heart_beat import NodeHeartBeat
 
 __author__ = 'Cedric Zhuang'
@@ -870,6 +871,100 @@ class CliClient(PerfManager):
             else:
                 cmd.append('-off')
         return cmd
+
+    @command
+    def get_ioclass(self, name=None):
+        cmd = ['nqm', '-ioclass', '-list']
+        cmd += text_var('-name', name)
+        return cmd
+
+    @command
+    def create_ioclass(
+            self, name, iotype='rw', lun_ids=None, smp_names=None,
+            ctrlmethod=VNXCtrlMethod.NO_CTRL, minsize=None, maxsize=None):
+        cmd = ['nqm', '-ioclass', '-create', '-name', name, '-iotype', iotype]
+        cmd += int_var('-minsize', minsize)
+        cmd += int_var('-maxsize', maxsize)
+        cmd += list_var('-luns', lun_ids)
+        cmd += list_var('-snapshots', smp_names)
+        cmd += VNXCtrlMethod.parse_cmd(ctrlmethod)
+        return cmd
+
+    @command
+    def modify_ioclass(self, name, new_name=None, iotype=None, lun_ids=None,
+                       smp_names=None, ctrlmethod=None,
+                       minsize=None, maxsize=None):
+        cmd = ['nqm', '-ioclass', '-modify', '-name', name]
+        cmd += text_var('-newname', new_name)
+        cmd += text_var('-iotype', iotype)
+        cmd += int_var('-minsize', minsize)
+        cmd += int_var('-maxsize', maxsize)
+        # Currently we do not support reset to anyio
+        # if anyio is True:
+        #     cmd += text_var('-anyio')
+        cmd += list_var('-luns', lun_ids)
+        cmd += list_var('-snapshots', smp_names)
+        # Currently we do not support clear all luns
+        # if (lun_ids and len(lun_ids) == 0)
+        # and (smp_names and len(smp_names) == 0):
+        #     cmd += ['-nolun']
+        cmd += VNXCtrlMethod.parse_cmd(ctrlmethod)
+        cmd.append('-o')
+        return cmd
+
+    @command
+    def delete_ioclass(self, name):
+        return ['nqm', '-ioclass', '-destroy', '-name', name, '-o']
+
+    @command
+    def get_policy(self, name=None):
+        cmd = ['nqm', '-policy', '-list']
+        cmd += text_var('-name', name)
+        return cmd
+
+    @command
+    def create_policy(
+            self, name, ioclasses=None, fail_action=None, time_limit=None,
+            eval_window=None):
+        cmd = ['nqm', '-policy', '-create', '-name', name]
+        cmd += list_var('-ioclasses', ioclasses)
+        cmd += text_var('-failaction', fail_action)
+        cmd += int_var('-timelimit', time_limit)
+        cmd += int_var('-evalwindow', eval_window)
+        return cmd
+
+    @command
+    def modify_policy(
+            self, name, new_name=None, new_ioclasses=None, time_limit=None,
+            fail_action=None, eval_window=None):
+        cmd = ['nqm', '-policy', '-modify', '-name', name]
+        cmd += text_var('-newname', new_name)
+        # This will clear all existing ioclasses
+        if new_ioclasses is not None and len(new_ioclasses) == 0:
+            cmd.append('-noclass')
+        else:
+            cmd += list_var('-ioclasses', new_ioclasses)
+        cmd += text_var('-failaction', fail_action)
+        cmd += int_var('-timelimit', time_limit)
+        cmd += int_var('-evalwindow', eval_window)
+        return cmd
+
+    @command
+    def delete_policy(self, name):
+        return ['nqm', '-policy', '-destroy', '-name', name, '-o']
+
+    @command
+    def run_policy(self, name):
+        return ['nqm', '-run', name]
+
+    @command
+    def stop_policy(self):
+        cmd = ['nqm', '-stop', '-o']
+        return cmd
+
+    @command
+    def measure_policy(self, name):
+        return ['nqm', '-measure', name]
 
     @property
     def ip(self):

@@ -1,0 +1,15 @@
+
+Name:  new_name_test
+Current State:  Idle
+Status:  Broken
+Number of I/O Class(es):  2
+NQM Class(es):
+    Name:  Background Class
+    Name:  peter
+    Name:  with_luns_snaps
+Action on Failure:  Stop running NQM if it fails to satisfy its goals
+Time Limit:  60min
+Evaluation Window:  3 samples
+
+
+

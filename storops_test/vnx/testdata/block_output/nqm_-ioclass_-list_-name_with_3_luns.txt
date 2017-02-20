@@ -1,0 +1,23 @@
+
+Name:  with_3_luns
+Current State:  Idle
+Status:  Warning
+Number of LUN(s):  3
+LUN(s):
+    LUN Number:  15
+    LUN Name:  volume-22f94784-ba0f-42e9-a754-b8decf889be8
+    LUN WWN:  60:06:01:60:12:90:38:00:3D:3C:AD:2F:CA:D3:E6:11
+    RAID Type:  RAID5
+    LUN Number:  18
+    LUN Name:  volume-2d810496-8236-4665-a50a-ea6150c1eff8
+    LUN WWN:  60:06:01:60:12:90:38:00:50:AD:CD:84:03:D3:E6:11
+    RAID Type:  RAID5
+    LUN Number:  21
+    LUN Name:  volume-c17684b9-4506-4e8a-a1f9-35b244eae85d
+    LUN WWN:  60:06:01:60:12:90:38:00:DE:7B:48:1A:CB:D3:E6:11
+    RAID Type:  RAID5
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  No Control
+
+

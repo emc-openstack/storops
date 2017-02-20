@@ -817,6 +817,43 @@ class CliClientTest(TestCase):
         assert_that(self.client.system_version, equal_to('05.33.008.3.297'))
 
     @extract_command
+    def test_create_ioclass(self):
+        cmd = self.client.create_ioclass('simple', 'r', minsize=1, maxsize=20)
+        assert_that(cmd, equal_to('nqm -ioclass -create -name simple '
+                                  '-iotype r -minsize 1 -maxsize 20 -noctrl'))
+
+    @extract_command
+    def test_create_ioclass_with_smp(self):
+        cmd = self.client.create_ioclass('simple', 'r', smp_names=['test_smp'],
+                                         maxsize=20)
+        assert_that(cmd, equal_to('nqm -ioclass -create -name simple '
+                                  '-iotype r -maxsize 20 -snapshots test_smp '
+                                  '-noctrl'))
+
+    @extract_command
+    def test_create_policy(self):
+        cmd = self.client.create_policy('simple', fail_action='stop',
+                                        time_limit=10, eval_window=20)
+        assert_that(
+            cmd,
+            equal_to('nqm -policy -create -name simple -failaction stop'
+                     ' -timelimit 10 -evalwindow 20'))
+
+    @extract_command
+    def test_delete_policy(self):
+        cmd = self.client.delete_policy('simple')
+        assert_that(
+            cmd,
+            equal_to('nqm -policy -destroy -name simple -o'))
+
+    @extract_command
+    def test_stop_policy(self):
+        cmd = self.client.stop_policy()
+        assert_that(
+            cmd,
+            equal_to('nqm -stop -o'))
+
+    @extract_command
     def test_get_stats_status(self):
         cmd = self.client.set_stats()
         assert_that(cmd, equal_to('setstats'))

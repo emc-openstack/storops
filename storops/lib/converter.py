@@ -214,6 +214,7 @@ to_sp_enum = _to_enum(enums.VNXSPEnum)
 to_mirror_view_recovery_policy = _to_enum(enums.VNXMirrorViewRecoveryPolicy)
 to_mirror_view_sync_rate = _to_enum(enums.VNXMirrorViewSyncRate)
 to_raid_type = _to_enum(enums.VNXRaidType)
+to_pool_raid_type = _to_enum(enums.VNXPoolRaidType)
 to_port_type = _to_enum(enums.VNXPortType)
 to_migration_rate_enum = _to_enum(enums.VNXMigrationRate)
 

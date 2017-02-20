@@ -25,8 +25,8 @@ from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
 
 from storops.exception import EnumValueNotFoundError
 from storops.lib.common import Dict, Enum, WeightedAverage, synchronized, \
-    text_var, int_var, enum_var, yes_no_var, JsonPrinter, get_lock_file, \
-    EnumList, round_3, RepeatedTimer
+    text_var, int_var, enum_var, yes_no_var, list_var, JsonPrinter, \
+    get_lock_file, EnumList, round_3, RepeatedTimer
 from storops.vnx.enums import VNXRaidType
 
 log = logging.getLogger(__name__)
@@ -267,6 +267,15 @@ class VarTest(TestCase):
         assert_that(yes_no_var('-a', True), only_contains('-a', 'yes'))
         assert_that(yes_no_var('-a', False), only_contains('-a', 'no'))
         assert_that(yes_no_var('-a', None), equal_to([]))
+
+    def test_list_var(self):
+        assert_that(list_var('-a', []), equal_to([]))
+        assert_that(list_var('-a', None), equal_to([]))
+        assert_that(list_var('-a', ['b', 'c']), equal_to(['-a', 'b', 'c']))
+
+        def _inner():
+            list_var('-a', 'asf')
+        assert_that(_inner, raises(ValueError))
 
 
 class JsonPrinterDemo(JsonPrinter):

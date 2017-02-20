@@ -1,0 +1,10 @@
+
+Name:  running_ioclass
+Current State:  Running
+Status:  Ready
+LUN(s):  Not Lun Specific
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Throughput
+Goal Value:  150.0 IO/s

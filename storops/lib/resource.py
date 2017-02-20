@@ -306,6 +306,11 @@ class ResourceList(Resource):
             raise TypeError('Unsupported type {}'.format(type(other)))
         return self.list + other.list
 
+    def append(self, item):
+        if not isinstance(item, self.get_resource_class()):
+            raise TypeError('Unsupported type {}'.format(type(item)))
+        return self.list.append(item)
+
 
 class ResourceListCollection(object):
     def __init__(self, init_list=None):

@@ -299,6 +299,9 @@ VNXLun:
       is_index: True
     - label: "Pool Name:"
       option: -poolName
+    - label: "Raid Type:"
+      key: raid_type
+      converter: to_pool_raid_type
     - label: "Is Thin LUN:"
       option: -isThinLUN
       converter: to_bool
@@ -722,7 +725,7 @@ VNXDisk:
       converter: to_int
     - label: "Queue Length:"
       converter: to_int
-    
+
 
 VNXRaidGroup:
   data_src: cli
@@ -776,6 +779,86 @@ VNXBlockUser:
       converter: VNXUserScopeEnum
     - label: "Type:"
 
+VNXIOClass:
+  data_src: cli
+  properties:
+    - label: "Name:"
+      is_index: True
+      key: name
+    - label: "Current State:"
+      key: state
+    - label: "Status:"
+      key: status
+    - label: "LUN(s):"
+      key: ioclass_luns
+      converter: VNXIOClassLunList
+      end_pattern: "(?:IO Type\\:|Number of Snapshot\\(s\\)\\:)"
+    - label: "Number of LUN(s):"
+      key: number_of_luns
+    - label: "Number of Snapshot(s):"
+      key: number_of_snapshots
+    - label: "Snapshot(s):"
+      key: ioclass_snapshots
+      converter: VNXIOClassSnapshotList
+      end_pattern: "(?:IO Type\\:|\\Z)"
+    - label: "IO Type:"
+      key: io_type
+    - label: "IO Size Range:"
+      key: io_size_range
+#      converter: to_float_tuple
+    - label: "Control Method:"
+      key: control_method
+    - label: "Metric Type:"
+      key: metric_type
+    - label: "Goal Value:"
+      key: goal_value
+#      converter: to_float
+
+VNXIOClassLun:
+  data_src: cli
+  properties:
+    - label: "LUN Number:"
+      key: lun_id
+      is_index: True
+    - label: "LUN Name:"
+      key: name
+    - label: "LUN WWN:"
+      key: wwn
+    - label: "RAID Type:"
+      key: raid_type
+
+VNXIOClassSnapshot:
+  data_src: cli
+  properties:
+    - label: "Snapshot Name:"
+      key: name
+      is_index: True
+    - label: "Snapshot WWN:"
+      key: wwn
+    - label: "Target Logical Unit:"
+      key: primary_lun_id
+
+
+VNXIOPolicy:
+  data_src: cli
+  properties:
+    - label: "^Name:\\s*(.*)"
+      key: name
+      is_index: True
+      is_regex: True
+    - label: "Current State:"
+      key: state
+    - label: "Status:"
+    - label: "Number of I/O Class(es):"
+      key: num_of_classes
+    - label: "NQM Class(es):"
+      key: ioclasses
+      converter: VNXIOClassList
+      end_pattern: "Action on Failure"
+    - label: "Action on Failure:"
+    - label: "Time Limit:"
+    - label: "Evaluation Window:"
+      key: eval_window
 
 VNXCifsServer:
   data_src: xmlapi

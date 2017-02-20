@@ -25,7 +25,7 @@ from storops import exception
 from storops.exception import VNXFsNotFoundError, VNXException, raise_if_err
 from storops.vnx.enums import VNXProvisionEnum, \
     VNXTieringEnum, VNXSPEnum, VNXRaidType, \
-    VNXMigrationRate, VNXPortType, VNXPoolRaidType
+    VNXMigrationRate, VNXPortType, VNXPoolRaidType, VNXCtrlMethod
 from storops.vnx.nas_client import NasXmlResponse
 from storops_test.vnx.nas_mock import MockXmlPost
 
@@ -233,3 +233,42 @@ class VNXPortTypeTest(TestCase):
         ret = VNXPortType.parse('50:06:01:60:B6:E0:16:81:'
                                 '50:06:01:68:36:E4:16:81')
         assert_that(ret, equal_to(VNXPortType.FC))
+
+
+class VNXControlMethodTest(TestCase):
+    def test_get_no_ctrl(self):
+        no_ctrl = VNXCtrlMethod(method=VNXCtrlMethod.NO_CTRL)
+        options = no_ctrl.get_option()
+        assert_that(options, equal_to(['-noctrl']))
+
+    def test_get_limit_ctrl(self):
+        limit_ctrl = VNXCtrlMethod(method=VNXCtrlMethod.LIMIT_CTRL,
+                                   metric='bw',
+                                   value=100)
+        options = limit_ctrl.get_option()
+        assert_that(options, equal_to(['-ctrlmethod', 'limit', '-gmetric',
+                                       'bw', '-gval', 100]))
+
+    def test_get_cruise_ctrl(self):
+        cruise_ctrl = VNXCtrlMethod(method=VNXCtrlMethod.CRUISE_CTRL,
+                                    metric='bw',
+                                    value=100,
+                                    tolerance=10)
+        options = cruise_ctrl.get_option()
+        assert_that(options, equal_to(['-ctrlmethod', 'cruise', '-gmetric',
+                                       'bw', '-gval', 100, '-gtol', 10]))
+
+    def test_get_fix_ctrl(self):
+        fixed_ctrl = VNXCtrlMethod(method=VNXCtrlMethod.FIXED_CTRL,
+                                   value=100)
+        options = fixed_ctrl.get_option()
+        assert_that(options, equal_to(['-ctrlmethod', 'fixed', '-gval', 100]))
+
+    def test_get_invalid_ctrl(self):
+
+        def _inner():
+            invalid = VNXCtrlMethod(method='invalid')
+            invalid.get_option()
+
+        assert_that(_inner, raises(ValueError,
+                                   'Invalid control method specified.'))

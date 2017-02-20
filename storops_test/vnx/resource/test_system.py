@@ -32,6 +32,8 @@ from storops.vnx.resource.disk import VNXDisk
 from storops.vnx.resource.lun import VNXLun
 from storops.vnx.resource.mirror_view import VNXMirrorViewList
 from storops.vnx.resource.mover import VNXMoverList
+from storops.vnx.resource.nqm import VNXIOClass, VNXIOClassList, VNXIOPolicy, \
+    VNXIOPolicyList
 from storops.vnx.resource.port import VNXSPPortList, VNXConnectionPortList
 from storops.vnx.resource.system import VNXAgent
 from storops.vnx.resource.system import VNXArrayName
@@ -378,6 +380,49 @@ class VNXSystemTest(TestCase):
         assert_that(host.name, equal_to('ubuntu14'))
         assert_that(host.existed, equal_to(True))
         assert_that(len(host.connections), equal_to(4))
+
+    @patch_cli
+    def create_policy(self):
+        ioclass = VNXIOClass.get(cli=self.naviseccli, name='simple')
+        policy = self.vnx.create_policy('new_policy', ioclasses=[ioclass])
+        assert_that(policy, instance_of(VNXIOPolicy))
+
+    @patch_cli
+    def test_get_policy(self):
+        policy = self.vnx.get_policy('new_policy')
+        assert_that(policy, instance_of(VNXIOPolicy))
+        assert_that(policy.name, equal_to('new_policy'))
+        assert_that(policy.status, equal_to('Warning'))
+
+    @patch_cli
+    def test_get_policies(self):
+        policies = self.vnx.get_policy()
+        assert_that(policies, instance_of(VNXIOPolicyList))
+        assert_that(len(policies), equal_to(3))
+
+    @patch_cli
+    def test_stop_policy(self):
+        self.vnx.stop_policy()
+
+    @patch_cli
+    def test_create_ioclass(self):
+        lun = self.vnx.get_lun(name='lun1')
+        ioclass = self.vnx.create_ioclass('simple', iotype='w', luns=lun)
+        assert_that(ioclass, instance_of(VNXIOClass))
+        assert_that(ioclass.status, equal_to('Ready'))
+
+    @patch_cli
+    def test_get_ioclass(self):
+        ioclass = self.vnx.get_ioclass('simple')
+        assert_that(ioclass, instance_of(VNXIOClass))
+        assert_that(ioclass.name, equal_to('simple'))
+        assert_that(ioclass.status, equal_to('Ready'))
+
+    @patch_cli
+    def test_get_ioclasses(self):
+        ioclasses = self.vnx.get_ioclass()
+        assert_that(ioclasses, instance_of(VNXIOClassList))
+        assert_that(len(ioclasses), equal_to(6))
 
     @patch_cli
     def test_enable_perf_stats_default(self):

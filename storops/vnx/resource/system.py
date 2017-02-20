@@ -38,7 +38,8 @@ from storops.vnx.resource.nas_pool import VNXNasPool
 from storops.vnx.nas_client import VNXNasClient
 from storops.vnx.resource.fs import VNXFileSystem
 from storops.vnx.resource.mirror_view import VNXMirrorView
-from storops.vnx.enums import VNXPortType, VNXPoolRaidType, VNXSPEnum
+from storops.vnx.enums import VNXPortType, VNXPoolRaidType, VNXSPEnum, \
+    VNXCtrlMethod
 from storops.vnx.block_cli import CliClient
 from storops.vnx.resource.block_pool import VNXPool, VNXPoolFeature
 from storops.vnx.resource.cg import VNXConsistencyGroup
@@ -50,6 +51,7 @@ from storops.vnx.resource.vnx_domain import VNXDomainMemberList, \
 from storops.vnx.resource.lun import VNXLun
 from storops.vnx.resource.migration import VNXMigrationSession
 from storops.vnx.resource.ndu import VNXNdu, VNXNduList
+from storops.vnx.resource.nqm import VNXIOClass, VNXIOPolicy
 from storops.vnx.resource.port import VNXConnectionPort, VNXSPPort
 from storops.vnx.resource import VNXCliResource
 from storops.vnx.resource.rg import VNXRaidGroup
@@ -422,6 +424,27 @@ class VNXSystem(VNXCliResource):
 
     def get_capacity(self):
         return VNXCapacity.get(cli=self._cli)
+
+    def create_ioclass(self, name, iotype, luns=None,
+                       ctrlmethod=VNXCtrlMethod.NO_CTRL):
+        return VNXIOClass.create(cli=self._cli, name=name, iotype=iotype,
+                                 luns=luns, ctrlmethod=ctrlmethod)
+
+    def get_ioclass(self, name=None):
+        return VNXIOClass.get(cli=self._cli, name=name)
+
+    def create_policy(self, name, ioclasses=None, fail_action=None,
+                      time_limit=None, eval_window=None):
+        return VNXIOPolicy.create(
+            cli=self._cli, name=name, ioclasses=ioclasses,
+            fail_action=fail_action, time_limit=time_limit,
+            eval_window=eval_window)
+
+    def get_policy(self, name=None):
+        return VNXIOPolicy.get(cli=self._cli, name=name)
+
+    def stop_policy(self):
+        return VNXIOPolicy.stop_policy(cli=self._cli)
 
     def get_file_system(self, name=None, fs_id=None):
         return VNXFileSystem.get(cli=self._file_cli, name=name, fs_id=fs_id)

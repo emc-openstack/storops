@@ -1,0 +1,20 @@
+Name:  with_luns_snaps
+Current State:  Idle
+Status:  Ready
+Number of LUN(s):  1
+LUN(s):
+    LUN Number:  0
+    LUN Name:  volume-ba8d8715-a897-4caf-85ea-d159d92ca86a
+    LUN WWN:  60:06:01:60:12:90:38:00:03:A1:CD:E8:01:D3:E6:11
+    RAID Type:  RAID5
+Number of Snapshot(s):  1
+Snapshot(s):
+    Snapshot Name:  m1
+    Snapshot WWN:  60:06:01:60:12:90:38:00:7B:46:43:4E:8A:E0:E6:11
+    Target Logical Unit:  113
+IO Type:  ReadWrite
+IO Size Range:  Any
+Control Method:  Limit
+Metric Type:  Bandwidth
+Goal Value:  1000.0 MB/s
+

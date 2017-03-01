@@ -20,7 +20,7 @@ import shutil
 from unittest import TestCase
 import tempfile
 from hamcrest import assert_that, equal_to, raises
-from persistqueue import Empty
+import persistqueue
 
 from storops.lib import tasks
 from storops_test.vnx.cli_mock import patch_cli, t_vnx
@@ -56,7 +56,7 @@ class TestPQueue(TestCase):
         self.q.task_done()
         self.q = None
         self.q = tasks.PQueue(self.path)
-        assert_that(self.q.get, raises(Empty))
+        assert_that(self.q.get, raises(persistqueue.Empty))
 
     def test_run_empty_queue(self):
         self.q.set_interval(0.01)
@@ -96,7 +96,7 @@ class TestPQueue(TestCase):
         self.q.put(fake_vnx.delete_hba, hba_uid=uid)
         self.q.start()
         time.sleep(0.2)
-        assert_that(self.q.get, raises(Empty))
+        assert_that(self.q.get, raises(persistqueue.Empty))
 
     @patch_cli
     def test_enqueue_storops_error(self):

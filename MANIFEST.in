@@ -1,6 +1,7 @@
 include *.md
 include *.cfg
 include *.rst
+include *.txt
 recursive-include . *.txt
 recursive-include storops_test *.json
 recursive-include storops_test *.xml

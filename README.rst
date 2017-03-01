@@ -4,8 +4,8 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://img.shields.io/travis/emc-openstack/storops.svg
     :target: https://travis-ci.org/emc-openstack/storops
 
-.. image:: https://img.shields.io/coveralls/emc-openstack/storops.svg
-    :target: https://coveralls.io/github/emc-openstack/storops
+.. image:: https://img.shields.io/codecov/c/github/emc-openstack/storops.svg
+    :target: https://codecov.io/gh/emc-openstack/storops
 
 .. image:: https://img.shields.io/pypi/v/storops.svg
     :target: https://pypi.python.org/pypi/storops

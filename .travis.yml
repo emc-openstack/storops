@@ -11,8 +11,8 @@ install:
 script:
     - flake8 storops storops_test storops_comptest
     - "py.test -n2 --cov=storops --cov-config coverage.ini  --cov-report=xml --cov-report term --junit-xml=junit-result.xml storops_test"
-after_success:
-    - coveralls
+#after_success:
+#    - coveralls
 notifications:
     email:
         - cedric.zhuang@emc.com

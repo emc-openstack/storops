@@ -51,6 +51,10 @@
     {
       "url": "/api/types/ethernetPort/instances?compact=True&fields=bond,cascadeNames,connectorType,health,id,instanceId,isLinkUp,isRDMACapable,isRSSCapable,linuxDeviceName,macAddress,mtu,name,needsReplacement,operationalStatus,parent,parentIOModule,parentStorageProcessor,portNumber,requestedMtu,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,speed,storageProcessor,supportedMtus,supportedSpeeds",
       "response": "all.json"
+    },
+    {
+      "url": "/api/instances/ethernetPort/spa_iom_0_eth0?compact=True&fields=bond,cascadeNames,connectorType,health,id,instanceId,isLinkUp,isRDMACapable,isRSSCapable,linuxDeviceName,macAddress,mtu,name,needsReplacement,operationalStatus,parent,parentIOModule,parentStorageProcessor,portNumber,requestedMtu,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,speed,storageProcessor,supportedMtus,supportedSpeeds",
+      "response": "spa_iom_0_eth0.json"
     }
   ]
 }

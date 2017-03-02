@@ -1,0 +1,50 @@
+{
+    "content": {
+        "id": "spa_iom_0_eth0",
+        "speed": 10000,
+        "connectorType": 2,
+        "requestedSpeed": 0,
+        "supportedSpeeds": [
+            0
+        ],
+        "sfpSupportedSpeeds": [
+            10000
+        ],
+        "sfpSupportedProtocols": [
+            2
+        ],
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_PORT_LINK_UP"
+            ],
+            "descriptions": [
+                "The port is operating normally."
+            ]
+        },
+        "needsReplacement": false,
+        "name": "SP A I/O Module 0 Ethernet Port 0",
+        "portNumber": 0,
+        "mtu": 1500,
+        "bond": false,
+        "isLinkUp": true,
+        "macAddress": "00:60:16:57:EC:58",
+        "isRSSCapable": false,
+        "isRDMACapable": false,
+        "requestedMtu": 0,
+        "supportedMtus": [
+            1500,
+            9000
+        ],
+        "parent": {
+            "id": "spa_iom_0",
+            "resource": "ioModule"
+        },
+        "storageProcessor": {
+            "id": "spa"
+        },
+        "parentIOModule": {
+            "id": "spa_iom_0"
+        }
+    }
+}

@@ -110,6 +110,27 @@ class UnityEthernetPortTest(TestCase):
         assert_that(port.bond, equal_to(False))
 
     @patch_rest
+    def test_get_properties_io_module_port(self):
+        port = UnityEthernetPort('spa_iom_0_eth0', cli=t_rest())
+        assert_that(port.name, equal_to('SP A I/O Module 0 Ethernet Port 0'))
+        assert_that(port.mac_address, equal_to("00:60:16:57:EC:58"))
+        assert_that(port.parent_storage_processor, equal_to(
+            UnityStorageProcessor('spa', cli=t_rest())))
+        assert_that(port.mtu, equal_to(1500))
+        assert_that(port.requested_mtu, equal_to(0))
+        assert_that(port.connector_type, equal_to(ConnectorTypeEnum.LC))
+        assert_that(port.supported_speeds, only_contains(
+            EPSpeedValuesEnum.AUTO,
+            EPSpeedValuesEnum._100MbPS,
+            EPSpeedValuesEnum._1GbPS,
+            EPSpeedValuesEnum._10GbPS))
+        assert_that(port.supported_mtus, only_contains(1500, 9000))
+        assert_that(port.speed, equal_to(EPSpeedValuesEnum._10GbPS))
+        assert_that(port.needs_replacement, equal_to(False))
+        assert_that(port.is_link_up, equal_to(True))
+        assert_that(port.bond, equal_to(False))
+
+    @patch_rest
     def test_modify_mtu(self):
         port = UnityEthernetPort(cli=t_rest(), _id='spa_eth3')
         port.modify(mtu=9000)

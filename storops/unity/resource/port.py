@@ -223,6 +223,12 @@ class UnityEthernetPort(UnityResource):
             return _id.replace('spa', 'spb')
         return _id.replace('spb', 'spa')
 
+    @property
+    def parent_storage_processor(self):
+        # For ports on IO modules, there is no `parent_storage_processor`.
+        # Set it manually.
+        return self.storage_processor
+
 
 class UnityEthernetPortList(UnityResourceList):
     def __init__(self, cli=None, port_ids=None, **filters):

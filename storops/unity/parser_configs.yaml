@@ -1097,8 +1097,6 @@ UnityEthernetPort:
       converter: EPSpeedValuesEnum
     - label: parentIOModule
       converter: UnityIoModule
-    - label: parentStorageProcessor
-      converter: UnityStorageProcessor
     - label: supportedSpeeds
       converter: EPSpeedValuesEnumList
     - label: requestedMtu

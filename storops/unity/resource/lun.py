@@ -17,6 +17,7 @@ from __future__ import unicode_literals
 
 import logging
 
+from storops.lib.version import version
 from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.pool
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, HostLUNAccessEnum
@@ -105,6 +106,20 @@ class UnityLun(UnityResource):
         resp = self.modify(size=new_size)
         resp.raise_if_err()
         return ret
+
+    @staticmethod
+    def _compose_thin_clone(cli, **kwargs):
+        name = kwargs.get('name')
+        snap = kwargs.get('snap')
+        description = kwargs.get('description')
+        io_limit_policy = kwargs.get('io_limit_policy')
+        req_body = cli.make_body(
+            name=name,
+            snap=snap,
+            description=description,
+            lunParameters=cli.make_body(ioLimitParameters=io_limit_policy)
+        )
+        return req_body
 
     @staticmethod
     def _compose_lun_parameter(cli, **kwargs):
@@ -205,6 +220,26 @@ class UnityLun(UnityResource):
                                 is_auto_delete=is_auto_delete,
                                 retention_duration=retention_duration,
                                 is_read_only=None, fs_access_type=None)
+
+    @version(">=4.2")
+    def thin_clone(self, name, snap=None, io_limit_policy=None,
+                   description=None):
+        # Create a temporary snapshot for thin clone if needed
+        temp_snap = None
+        if not snap:
+            temp_snap = self.create_snap(name='tmp-{}'.format(name),
+                                         is_auto_delete=False)
+        req_body = self._compose_thin_clone(
+            self._cli, name=name, snap=snap if snap else temp_snap,
+            description=description,
+            io_limit_policy=io_limit_policy)
+        resp = self._cli.action(UnityStorageResource().resource_class,
+                                self.get_id(), 'createLunThinClone',
+                                **req_body)
+        if temp_snap:
+            temp_snap.delete()
+        resp.raise_if_err()
+        return UnityLun(cli=self._cli, _id=resp.resource_id)
 
     @property
     def snapshots(self):

@@ -572,6 +572,11 @@ class UnityPoolNameInUseError(UnityException):
     error_code = 108003600
 
 
+@rest_exception
+class UnityThinCloneLimitExceededError(UnityException):
+    error_code = 108008767
+
+
 class VNXStatsError(VNXException):
     pass
 

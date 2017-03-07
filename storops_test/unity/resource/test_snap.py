@@ -21,7 +21,7 @@ from hamcrest import assert_that, equal_to, instance_of, raises, none
 
 from storops.exception import UnityShareOnCkptSnapError, \
     UnityDeleteAttachedSnapError, UnityResourceNotFoundError, \
-    UnitySnapAlreadyPromotedException
+    UnitySnapAlreadyPromotedException, UnityException
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, \
     SnapCreatorTypeEnum, SnapStateEnum, NFSTypeEnum, CIFSTypeEnum
 from storops.unity.resource.filesystem import UnityFileSystem
@@ -29,6 +29,8 @@ from storops.unity.resource.host import UnityHost
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.storage_resource import UnityStorageResource
+from storops.unity.resource.port import UnityIoLimitPolicy
+
 from storops_test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
@@ -187,3 +189,22 @@ class UnitySnapTest(TestCase):
         assert_that(snap.snap_group.get_id(), equal_to(snap_group.get_id()))
         assert_that(snap.storage_resource.get_id(), equal_to('res_19'))
         assert_that(snap.lun.get_id(), equal_to(lun.get_id()))
+
+    @patch_rest
+    def test_thin_clone(self):
+        snap = UnitySnap(_id='38654705847', cli=t_rest(version='4.2.0'))
+        policy = UnityIoLimitPolicy(_id='qp_2', cli=t_rest())
+        clone = snap.thin_clone(name='test_thin_clone',
+                                description='This is description.',
+                                io_limit_policy=policy)
+        assert_that(clone.id, equal_to('sv_4678'))
+
+    @patch_rest
+    def test_thin_clone_auto_delete(self):
+        snap = UnitySnap(_id='38654709077', cli=t_rest(version='4.2.0'))
+
+        def _inner():
+            snap.thin_clone(name='test_thin_clone',
+                            description='This is description.',
+                            io_limit_policy=None)
+        assert_that(_inner, raises(UnityException, "Error Code:0x670166b"))

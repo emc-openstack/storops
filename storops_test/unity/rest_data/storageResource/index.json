@@ -926,6 +926,52 @@
         ]
       },
       "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
+      "body": {
+            "name": "test_thin_clone",
+            "snap": {
+              "id": "38654705847"
+            },
+            "description": "This is description."
+      },
+      "response": "thin_clone.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
+      "body": {
+            "name": "test_thin_clone",
+            "snap": {
+              "id": "38654705847"
+            },
+            "description": "This is description.",
+            "lunParameters": {
+              "ioLimitParameters": {"id": "qp_2"}}
+      },
+      "response": "thin_clone.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
+      "body": {
+            "name": "test_thin_clone_limit_exceeded",
+            "snap": {
+              "id": "38654705847"
+            },
+            "description": "This is description."
+      },
+      "response": "thin_clone_limit_exceeded.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_3338/action/createLunThinClone?compact=True",
+      "body": {
+            "name": "test_thin_clone",
+            "snap": {
+              "id": "38654709077"
+            },
+            "description": "This is description."
+      },
+      "response": "thin_clone_auto_delete.json"
     }
   ]
 }

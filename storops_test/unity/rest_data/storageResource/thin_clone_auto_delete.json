@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108009067,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "Snapshot with enabled auto-deletion cannot be used as a source of Thin Clone. (Error Code:0x670166b)"
+      }
+    ],
+    "created": "2017-03-08T03:50:02.649Z"
+  }
+}

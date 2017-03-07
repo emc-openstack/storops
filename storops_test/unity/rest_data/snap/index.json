@@ -13,6 +13,14 @@
       "response": "171798691852.json"
     },
     {
+      "url": "/api/instances/snap/38654705847?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "38654705847.json"
+    },
+    {
+      "url": "/api/instances/snap/38654709077?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "38654709077.json"
+    },
+    {
       "url": "/api/instances/snap/171798691884?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
       "response": "171798691884.json"
     },
@@ -155,6 +163,31 @@
           "id": "sv_8"
         },
         "name": "lun_snap_1"
+      },
+      "response": "create_38654705847.json"
+    },
+    {"url": "/api/instances/snap/38654705847?compact=True",
+    "response": "38654705847.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "sv_2"
+        },
+        "name": "tmp-test_thin_clone",
+        "isAutoDelete": false
+      },
+      "response": "create_38654705847.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "sv_2"
+        },
+        "name": "tmp-test_thin_clone_limit_exceeded",
+        "isAutoDelete": false
       },
       "response": "create_38654705847.json"
     },

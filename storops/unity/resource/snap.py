@@ -144,6 +144,16 @@ class UnitySnap(UnityResource):
         members = UnitySnapList(cli=self._cli, snap_group=self, lun=lun)
         return members.first_item
 
+    @version('>=4.2')
+    def thin_clone(self, name, io_limit_policy=None, description=None):
+        """Creates a new thin clone from this snapshot.
+        .. note:: this snapshot should not enable Auto-Delete.
+        """
+        parent_lun = self.lun
+        return parent_lun.thin_clone(
+                name=name, snap=self, io_limit_policy=io_limit_policy,
+                description=description)
+
 
 class UnitySnapList(UnityResourceList):
     @classmethod

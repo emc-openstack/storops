@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108008767,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "Number of thin clones of base LUN exceeds system limit. (Error Code:0x670153f)"
+      }
+    ],
+    "created": "2017-03-08T07:46:40.807Z"
+  }
+}

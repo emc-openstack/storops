@@ -139,15 +139,15 @@ class NaviCommand(object):
         process = [None]
         output = [None]
 
+        start = time.time()
+        cls._log_command(cmd)
+
         def run():
-            start = time.time()
-            cls._log_command(cmd)
 
             p = Popen(cmd, bufsize=-1, stdout=PIPE, stderr=PIPE)
             process[0] = p
             out = p.stdout.read()
 
-            cls._log_output(cmd, out, start)
             if isinstance(out, bytes):
                 out = out.decode("utf-8")
             out = out.strip()
@@ -156,6 +156,7 @@ class NaviCommand(object):
 
         thread = daemon(run)
         thread.join(timeout)
+        cls._log_output(cmd, output[0], start)
         if thread.is_alive() and process[0] is not None:
             log.warn('terminate timeout command: {}'.format(cmd))
             process[0].terminate()

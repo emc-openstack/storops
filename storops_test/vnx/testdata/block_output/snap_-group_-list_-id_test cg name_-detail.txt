@@ -1,0 +1,5 @@
+Name:  test cg name
+Description: a cg 4 test
+Allow auto delete:  No
+Member LUN ID(s):  1, 3
+State:  Ready

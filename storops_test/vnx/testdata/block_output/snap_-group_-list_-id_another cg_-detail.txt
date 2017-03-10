@@ -1,0 +1,5 @@
+Name:  another cg
+Description:
+Allow auto delete:  Yes
+Member LUN ID(s):  23, 24
+State:  Offline

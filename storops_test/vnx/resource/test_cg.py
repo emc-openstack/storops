@@ -52,6 +52,14 @@ class VNXConsistencyGroupTest(TestCase):
         assert_that(cg_list.name, only_contains('another cg', 'test cg name'))
 
     @patch_cli
+    def test_update_consistency_group_list_member(self):
+        cg_list = VNXConsistencyGroup.get(t_cli())
+        cg = cg_list[1]
+        name = cg.name
+        cg.update()
+        assert_that(cg.name, equal_to(name))
+
+    @patch_cli
     def test_properties(self):
         cg = VNXConsistencyGroup(name="test_cg", cli=t_cli())
         assert_that(cg.name, equal_to('test_cg'))

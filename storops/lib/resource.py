@@ -61,7 +61,12 @@ class Resource(JsonPrinter):
             data = self._get_raw_resource()
 
         self._parsed_resource = self._parse_raw(data)
+        self.update_name_if_exists()
         return self
+
+    def update_name_if_exists(self):
+        if hasattr(self, '_name') and self._name is None:
+            setattr(self, '_name', self._get_value_by_key("name"))
 
     def get_index(self):
         parser = self._get_parser()

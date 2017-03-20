@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import bitmath
 import logging
 from multiprocessing.pool import ThreadPool
 from time import sleep
@@ -26,7 +27,7 @@ from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
 from storops.exception import EnumValueNotFoundError
 from storops.lib.common import Dict, Enum, WeightedAverage, synchronized, \
     text_var, int_var, enum_var, yes_no_var, list_var, JsonPrinter, \
-    get_lock_file, EnumList, round_3, RepeatedTimer
+    get_lock_file, EnumList, round_3, RepeatedTimer, supplement_filesystem
 from storops.vnx.enums import VNXRaidType
 
 log = logging.getLogger(__name__)
@@ -334,3 +335,25 @@ class RepeatedTimerTest(TestCase):
         timer.start()
         assert_that(timer.is_daemon(), equal_to(True))
         assert_that(results[0], equal_to(0))
+
+
+class SupplementFilesystemTest(TestCase):
+    def test_size_larger_2(self):
+        size_byte = bitmath.GiB(2.5).to_Byte().value
+        new_size = supplement_filesystem(size_byte, True)
+        assert_that(new_size, equal_to(bitmath.GiB(4).to_Byte().value))
+        assert_that(str(new_size).isdigit(), equal_to(True))
+
+    def test_size_equal_1(self):
+        size_byte = bitmath.GiB(1).to_Byte().value
+        new_size = supplement_filesystem(size_byte, True)
+        assert_that(new_size, equal_to(bitmath.GiB(3).to_Byte().value))
+
+    def test_user_cap_no(self):
+        size_byte = bitmath.GiB(1).to_Byte().value
+        new_size = supplement_filesystem(size_byte, False)
+        assert_that(new_size, equal_to(bitmath.GiB(1).to_Byte().value))
+
+        size_byte = bitmath.GiB(3).to_Byte().value
+        new_size = supplement_filesystem(size_byte, False)
+        assert_that(new_size, equal_to(bitmath.GiB(3).to_Byte().value))

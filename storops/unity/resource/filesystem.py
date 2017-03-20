@@ -16,6 +16,8 @@
 from __future__ import unicode_literals
 
 import logging
+
+from storops.lib.common import supplement_filesystem
 from storops.exception import UnityResourceNotFoundError, \
     UnityCifsServiceNotEnabledError
 from storops.unity.enums import FSSupportedProtocolEnum, TieringPolicyEnum, \
@@ -38,7 +40,7 @@ class UnityFileSystem(UnityResource):
     @classmethod
     def create(cls, cli, pool, nas_server, name, size,
                proto=None, is_thin=None,
-               tiering_policy=None):
+               tiering_policy=None, user_cap=False):
         pool_clz = storops.unity.resource.pool.UnityPool
         nas_server_clz = storops.unity.resource.nas_server.UnityNasServer
 
@@ -49,6 +51,7 @@ class UnityFileSystem(UnityResource):
         nas_server = nas_server_clz.get(cli, nas_server)
         FSSupportedProtocolEnum.verify(proto)
         TieringPolicyEnum.verify(tiering_policy)
+        size = supplement_filesystem(size, user_cap)
 
         req_body = {
             'name': name,
@@ -94,8 +97,9 @@ class UnityFileSystem(UnityResource):
         resp.raise_if_err()
         return resp
 
-    def extend(self, new_size):
+    def extend(self, new_size, user_cap=False):
         sr = self.storage_resource
+        new_size = supplement_filesystem(new_size, user_cap)
         param = self._cli.make_body(size=new_size)
         resp = sr.modify_fs(fsParameters=param)
         resp.raise_if_err()

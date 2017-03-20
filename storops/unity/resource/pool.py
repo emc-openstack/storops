@@ -31,7 +31,8 @@ LOG = logging.getLogger(__name__)
 
 class UnityPool(UnityResource):
     def create_filesystem(self, nas_server, name, size,
-                          proto=None, is_thin=None, tiering_policy=None):
+                          proto=None, is_thin=None, tiering_policy=None,
+                          user_cap=False):
         clz = storops.unity.resource.filesystem.UnityFileSystem
         return clz.create(self._cli, self,
                           nas_server=nas_server,
@@ -39,7 +40,8 @@ class UnityPool(UnityResource):
                           size=size,
                           proto=proto,
                           is_thin=is_thin,
-                          tiering_policy=tiering_policy)
+                          tiering_policy=tiering_policy,
+                          user_cap=user_cap)
 
     def create_lun(self, lun_name=None, size_gb=1, sp=None, host_access=None,
                    is_thin=None, description=None, tiering_policy=None,
@@ -54,11 +56,12 @@ class UnityPool(UnityResource):
                                io_limit_policy=io_limit_policy)
 
     def create_nfs_share(self, nas_server, name, size, is_thin=None,
-                         tiering_policy=None):
+                         tiering_policy=None, user_cap=False):
         clz = storops.unity.resource.job.UnityJob
         return clz.create_nfs_share(
             self._cli, self, nas_server, name, size,
-            is_thin, tiering_policy, False)
+            is_thin, tiering_policy, False,
+            user_cap=user_cap)
 
 
 class UnityPoolList(UnityResourceList):

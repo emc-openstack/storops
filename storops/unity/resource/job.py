@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 import retryz
 from storops import exception as ex
 from storops.exception import get_rest_exception
-from storops.lib.common import instance_cache
+from storops.lib.common import instance_cache, supplement_filesystem
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
 from storops.unity.enums import FSSupportedProtocolEnum
@@ -33,10 +33,11 @@ class UnityJob(UnityResource):
     @classmethod
     def create_nfs_share(cls, cli, pool, nas_server, name, size,
                          is_thin=None,
-                         tiering_policy=None, async=True):
+                         tiering_policy=None, async=True,
+                         user_cap=False):
         pool_clz = storops.unity.resource.pool.UnityPool
         nas_server_clz = storops.unity.resource.nas_server.UnityNasServer
-
+        size = supplement_filesystem(size, user_cap)
         pool = pool_clz.get(cli, pool)
         nas_server = nas_server_clz.get(cli, nas_server)
         proto = FSSupportedProtocolEnum.NFS

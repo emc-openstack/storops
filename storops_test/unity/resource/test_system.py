@@ -551,7 +551,7 @@ class UnitySystemTest(TestCase):
     def test_get_file_port(self):
         unity = UnitySystem(cli=t_rest("4.1.0"))
         ports = unity.get_file_port()
-        assert_that(len(ports), equal_to(10))
+        assert_that(len(ports), equal_to(6))
 
     @patch_rest
     def test_get_file_port_la_unsupported(self):

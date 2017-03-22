@@ -20,7 +20,7 @@ import io
 import os
 import re
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 __author__ = 'Cedric Zhuang'
 
@@ -72,7 +72,7 @@ setup(
     license='Apache Software License',
     keywords='VNX Unity EMC Storage',
     include_package_data=True,
-    packages=['storops', 'storops_test', 'storops_comptest'],
+    packages=find_packages(),
     platforms=['any'],
     long_description=get_long_description(),
     classifiers=[

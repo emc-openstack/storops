@@ -359,6 +359,10 @@ class UnityResourceNotFoundError(UnityException):
     error_code = 131149829
 
 
+class UnityResourceNotSupportedError(UnityResourceNotFoundError):
+    pass
+
+
 @rest_exception
 class UnityNasServerNameUsedError(UnityException):
     error_code = 108011556

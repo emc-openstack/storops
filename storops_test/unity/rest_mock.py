@@ -46,11 +46,12 @@ def t_rest(version=None):
 
 
 @cache
-def t_unity():
+def t_unity(version=None):
     clz = storops.unity.resource.system.UnitySystem
     unity = clz('10.244.223.61', 'admin', 'Password123!', verify=False)
     unity.add_metric_record(unity.get_metric_query_result(17))
     unity.add_metric_record(unity.get_metric_query_result(34))
+    unity._cli.set_system_version(version)
     return unity
 
 

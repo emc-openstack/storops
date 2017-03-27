@@ -31,7 +31,7 @@ from storops.unity.resource.port import UnityEthernetPort, \
     UnityEthernetPortList, UnityIpPort, UnityIpPortList, UnityIscsiPortal, \
     UnityIscsiPortalList, UnityIscsiNode, UnityFcPort, UnityFcPortList, \
     UnityIoLimitRule, UnityIoLimitPolicy, UnityIoLimitPolicyList, \
-    UnityLinkAggregation
+    UnityLinkAggregation, UnityLinkAggregationList
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops_test.unity.rest_mock import t_rest, patch_rest
 
@@ -392,3 +392,8 @@ class UnityLinkAggregationTest(TestCase):
         def f():
             UnityLinkAggregation.get(t_rest("4.0.0"))
         assert_that(f, raises(SystemAPINotSupported))
+
+    @patch_rest(output='link_aggregation_not_supported.json')
+    def test_link_aggregation_not_supported(self):
+        ports = UnityLinkAggregationList(cli=t_rest("4.1.2"))
+        assert_that(len(ports), equal_to(0))

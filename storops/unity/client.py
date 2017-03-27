@@ -18,7 +18,9 @@ from __future__ import unicode_literals
 import logging
 
 import six
+from functools import wraps
 
+from storops.exception import UnityResourceNotSupportedError
 import storops.unity.resource.type_resource
 from storops.connection.connector import UnityRESTConnector
 from storops.lib.common import instance_cache, EnumList
@@ -33,6 +35,17 @@ __author__ = 'Cedric Zhuang'
 log = logging.getLogger(__name__)
 
 
+def wrap_not_supported(func):
+    @wraps(func)
+    def _wrap(*args, **kwargs):
+        try:
+            ret = func(*args, **kwargs)
+        except UnityResourceNotSupportedError:
+            ret = RestResponse(inputs="")
+        return ret
+    return _wrap
+
+
 class UnityClient(PerfManager):
     def __init__(self, ip, username, password, port=443, verify=False):
         super(UnityClient, self).__init__()
@@ -42,6 +55,7 @@ class UnityClient(PerfManager):
                                         verify=verify)
         self._system_version = None
 
+    @wrap_not_supported
     def get_all(self, type_name, base_fields=None, the_filter=None,
                 nested_fields=None):
         """Get the resource by resource id.
@@ -147,6 +161,7 @@ class UnityClient(PerfManager):
     def get_doc(self, clz):
         return UnityDoc.get_doc(self, clz)
 
+    @wrap_not_supported
     def get(self, type_name, obj_id, base_fields=None, nested_fields=None):
         """Get the resource by resource id.
 

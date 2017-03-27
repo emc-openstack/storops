@@ -417,6 +417,12 @@ class UnitySystemTest(TestCase):
         assert_that(fi_list, instance_of(UnityFcPortList))
         assert_that(len(fi_list), equal_to(12))
 
+    @patch_rest(output='fc_port_not_supported.json')
+    def test_get_fc_port_not_supported(self):
+        unity = t_unity(version='4.1.2')
+        fc = unity.get_fc_port()
+        assert_that(len(fc), equal_to(0))
+
     @patch_rest
     def test_get_io_limit_policy_by_name(self):
         unity = t_unity()
@@ -546,6 +552,12 @@ class UnitySystemTest(TestCase):
     def test_get_link_aggregation_by_id(self):
         cg = t_unity().get_link_aggregation(_id='spa_la_2')
         assert_that(cg.id, equal_to('spa_la_2'))
+
+    @patch_rest(output='link_aggregation_not_supported.json')
+    def test_get_link_aggregation_not_supported(self):
+        unity = t_unity(version='4.1.2')
+        la = unity.get_link_aggregation()
+        assert_that(len(la), equal_to(0))
 
     @patch_rest
     def test_get_file_port(self):

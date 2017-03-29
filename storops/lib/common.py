@@ -21,6 +21,7 @@ import functools
 import inspect
 import json
 import logging
+import re
 import sys
 import threading
 from functools import partial
@@ -557,3 +558,16 @@ def supplement_filesystem(old_size, user_cap=False):
 
 def _GiB_to_Byte(size_gb):
     return bitmath.GiB(size_gb).to_Byte().value
+
+
+def is_iscsi_uid(uid):
+    """Validate the iSCSI initiator format.
+
+    :param uid: format like iqn.yyyy-mm.naming-authority:unique
+    """
+    return uid.startswith('iqn')
+
+
+def is_fc_uid(uid):
+    """Validate the FC initiator format."""
+    return re.match("(\w{2}:){15}\w{2}", uid, re.I) is not None

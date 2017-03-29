@@ -25,6 +25,7 @@ from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
     contains_string, has_items
 
 from storops.exception import EnumValueNotFoundError
+from storops.lib import common
 from storops.lib.common import Dict, Enum, WeightedAverage, synchronized, \
     text_var, int_var, enum_var, yes_no_var, list_var, JsonPrinter, \
     get_lock_file, EnumList, round_3, RepeatedTimer, supplement_filesystem
@@ -357,3 +358,27 @@ class SupplementFilesystemTest(TestCase):
         size_byte = bitmath.GiB(3).to_Byte().value
         new_size = supplement_filesystem(size_byte, False)
         assert_that(new_size, equal_to(bitmath.GiB(3).to_Byte().value))
+
+
+class InitiatorFormatTest(TestCase):
+    def test_iscsi_format_rh(self):
+        assert_that(common.is_iscsi_uid('iqn.1994-05.com.redhat:4dc0b7e1edc9'),
+                    equal_to(True))
+
+    def test_iscsi_format_debian(self):
+        assert_that(
+            common.is_iscsi_uid('iqn.1993-08.org.debian:01:816ce05feaa6'),
+            equal_to(True))
+
+    def test_iscsi_format_invalid(self):
+        assert_that(common.is_iscsi_uid('invalid format'), equal_to(False))
+
+    def test_fc_format(self):
+        assert_that(
+            common.is_fc_uid(
+                '20:00:00:90:DA:73:5C:D1:10:00:00:90:FB:54:4C:D1'),
+            equal_to(True))
+
+    def test_fc_format_invalid(self):
+        assert_that(
+            common.is_fc_uid('20:00:00:90:DA:73:5C:D1'), equal_to(False))

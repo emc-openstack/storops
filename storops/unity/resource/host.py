@@ -16,13 +16,13 @@
 from __future__ import unicode_literals
 
 import logging
-import re
 from itertools import chain
 
 import six
 
 from storops import exception as ex
 from storops.lib import converter
+from storops.lib import common
 from storops.unity.enums import HostTypeEnum, HostInitiatorTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
@@ -251,10 +251,9 @@ class UnityHost(UnityResource):
 
         if not initiators:
             # Set the ISCSI or FC type
-            if re.match("(\w{2}:){15}\w{2}", uid, re.I):
+            if common.is_fc_uid(uid):
                 uid_type = HostInitiatorTypeEnum.FC
-            elif re.match("iqn.\d{4}-\d{2}.\w+.\w+:\d+:[A-F0-9]+", uid, re.I):
-                # iqn.yyyy-mm.<reversed domain name>[:identifier] )
+            elif common.is_iscsi_uid(uid):
                 uid_type = HostInitiatorTypeEnum.ISCSI
             else:
                 uid_type = HostInitiatorTypeEnum.UNKNOWN

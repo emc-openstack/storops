@@ -231,6 +231,9 @@ class VNXMirrorViewRecoveryPolicy(VNXEnum):
         }
 
 
+VNXMirrorGroupRecoveryPolicy = VNXMirrorViewRecoveryPolicy
+
+
 class VNXMirrorViewSyncRate(VNXEnum):
     HIGH = 'high'
     MEDIUM = 'medium'

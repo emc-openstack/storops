@@ -17,8 +17,8 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, instance_of, raises, none
-from hamcrest import equal_to
+from hamcrest import assert_that, instance_of, raises, none, not_none
+from hamcrest import equal_to, has_length
 
 from storops.exception import VNXMirrorLunNotAvailableError, \
     VNXMirrorNameInUseError, VNXMirrorAlreadyMirroredError, \
@@ -26,13 +26,16 @@ from storops.exception import VNXMirrorLunNotAvailableError, \
     VNXMirrorSyncImageError, VNXMirrorPromoteNonLocalImageError, \
     VNXMirrorPromotePrimaryError, VNXMirrorFeatureNotAvailableError, \
     VNXMirrorNotFoundError, VNXDeleteMirrorWithSecondaryError, \
-    VNXMirrorRemoveSynchronizingError
+    VNXMirrorRemoveSynchronizingError, VNXMirrorGroupAlreadyMemberError, \
+    VNXMirrorGroupMirrorNotMemberError, VNXMirrorGroupAlreadyPromotedError, \
+    VNXMirrorGroupNameInUseError
 from storops_test.vnx.cli_mock import patch_cli
 from storops_test.vnx.cli_mock import t_cli
 from storops.vnx.enums import VNXMirrorViewRecoveryPolicy, \
-    VNXMirrorViewSyncRate, VNXSPEnum, VNXMirrorImageState
+    VNXMirrorViewSyncRate, VNXSPEnum, VNXMirrorImageState, \
+    VNXMirrorGroupRecoveryPolicy
 from storops.vnx.resource.mirror_view import VNXMirrorView, \
-    VNXMirrorViewImage
+    VNXMirrorViewImage, VNXMirrorGroup, VNXMirrorGroupList
 
 __author__ = 'Cedric Zhuang'
 
@@ -275,3 +278,110 @@ class VNXMirrorViewImageTest(TestCase):
         assert_that(image.condition, equal_to('Primary Image'))
         assert_that(image.state, none())
         assert_that(image.preferred_sp, equal_to(VNXSPEnum.SP_A))
+
+
+class VNXMirrorGroupTest(TestCase):
+
+    @patch_cli
+    def test_create(self):
+        mg = VNXMirrorGroup.create(t_cli(), name='test_group')
+        assert_that(mg, instance_of(VNXMirrorGroup))
+
+    @patch_cli
+    def test_create_name_in_use(self):
+
+        def _inner():
+            VNXMirrorGroup.create(t_cli(), name='test_group_in_use')
+
+        assert_that(_inner, raises(VNXMirrorGroupNameInUseError))
+
+    @patch_cli
+    def test_create_and_add(self):
+        mirror = VNXMirrorView.get(t_cli(), name='mv_sync_2')
+        mg = VNXMirrorGroup.create(t_cli(), name='petermg1', mirror=mirror)
+        assert_that(mg, instance_of(VNXMirrorGroup))
+
+    @patch_cli
+    def test_get_single(self):
+        mg = VNXMirrorGroup.get(t_cli(), name='petermg')
+        assert_that(mg, instance_of(VNXMirrorGroup))
+        assert_that(mg.name, equal_to('petermg'))
+        assert_that(mg.gid, equal_to('50:06:01:60:B6:60:25:22:00:00:00:00'))
+        assert_that(mg.description, equal_to(''))
+        assert_that(mg.state, equal_to('Synchronized'))
+        assert_that(mg.role, equal_to('Primary'))
+        assert_that(mg.condition, equal_to('Active'))
+        assert_that(mg.policy, equal_to(VNXMirrorGroupRecoveryPolicy.MANUAL))
+        assert_that(mg.mirrors, has_length(2))
+        assert_that(mg.group_mirrors, has_length(2))
+        for m in mg.mirrors:
+            assert_that(m, instance_of(VNXMirrorView))
+
+        for mg in mg.group_mirrors:
+            assert_that(
+                mg.mirror_name,
+                not_none())
+            assert_that(mg.src_lun_id, instance_of(int))
+
+    @patch_cli
+    def test_get_all(self):
+        mg_list = VNXMirrorGroup.get(t_cli())
+        assert_that(len(mg_list), equal_to(2))
+        assert_that(mg_list, instance_of(VNXMirrorGroupList))
+
+    @patch_cli
+    def test_promote_group(self):
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg1')
+        mg1.promote_group()
+
+    @patch_cli
+    def test_fracture_group(self):
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg1')
+        mg1.fracture_group()
+
+    @patch_cli
+    def test_add_to_group(self):
+        mirror = VNXMirrorView.get(t_cli(), name='mv_sync_2')
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg1')
+        mg1.add_mirror(mirror)
+
+    @patch_cli
+    def test_add_to_group_existed(self):
+        mirror = VNXMirrorView.get(t_cli(), name='mv0')
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+
+        def _inner():
+            mg1.add_mirror(mirror)
+
+        assert_that(_inner, raises(VNXMirrorGroupAlreadyMemberError))
+
+    @patch_cli
+    def test_remove_from_group(self):
+        mirror = VNXMirrorGroup.get(t_cli(), name='mv_sync_2')
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mg1.remove_mirror(mirror)
+
+    @patch_cli
+    def test_remove_from_group_already_removed(self):
+        mirror = VNXMirrorGroup.get(t_cli(), name='not_in_group')
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+
+        def _inner():
+            mg1.remove_mirror(mirror)
+
+        assert_that(_inner, raises(VNXMirrorGroupMirrorNotMemberError))
+
+    @patch_cli
+    def test_sync_group(self):
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mg1.sync_group()
+
+    @patch_cli
+    def test_sync_group_already_promoted(self):
+        mg1 = VNXMirrorGroup.get(t_cli(), name='mg_promote_on_primary')
+        assert_that(mg1.sync_group, raises(VNXMirrorGroupAlreadyPromotedError))
+
+    @patch_cli
+    def test_delete_group(self):
+        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mg1.delete()

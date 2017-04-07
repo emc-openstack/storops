@@ -32,7 +32,7 @@ from storops.vnx.enums import VNXSPEnum, VNXTieringEnum, VNXProvisionEnum, \
     VNXMigrationRate, VNXCompressionRate, \
     VNXMirrorViewRecoveryPolicy, VNXMirrorViewSyncRate, VNXLunType, \
     VNXRaidType, VNXPoolRaidType, VNXUserScopeEnum, VNXUserRoleEnum, \
-    VNXCtrlMethod
+    VNXCtrlMethod, VNXMirrorGroupRecoveryPolicy
 from storops.vnx.heart_beat import NodeHeartBeat
 
 __author__ = 'Cedric Zhuang'
@@ -721,6 +721,58 @@ class CliClient(PerfManager):
     @command
     def get_mirror_view(self, name=None):
         cmd = 'mirror -sync -list'.split()
+        cmd += text_var('-name', name)
+        return cmd
+
+    @command
+    def create_mirror_group(self, name,
+                            policy=VNXMirrorGroupRecoveryPolicy.AUTO,
+                            description=None):
+        cmd = ['mirror', '-sync', '-creategroup', '-name', name]
+        cmd += text_var('-description', description)
+        cmd += VNXMirrorViewRecoveryPolicy.get_opt(policy)
+        cmd += ['-o']
+        return cmd
+
+    @command
+    def delete_mirror_group(self, name, force=True):
+        cmd = ['mirror', '-sync', '-destroygroup', '-name', name]
+        cmd += ['-force'] if force else []
+        cmd += ['-o']
+        return cmd
+
+    @command
+    def add_to_mirror_group(self, name, mirror_name):
+        cmd = ['mirror', '-sync', '-addtogroup', '-name', name,
+               '-mirrorname', mirror_name]
+        return cmd
+
+    @command
+    def remove_from_mirror_group(self, name, mirror_name):
+        cmd = ['mirror', '-sync', '-removefromgroup', '-name', name,
+               '-mirrorname', mirror_name]
+        cmd += ['-force', '-o']
+        return cmd
+
+    @command
+    def sync_mirror_group(self, name):
+        cmd = ['mirror', '-sync', '-syncgroup', '-name', name]
+        return cmd
+
+    @command
+    def fracture_mirror_group(self, name):
+        cmd = ['mirror', '-sync', '-fracturegroup', '-name', name, '-o']
+        return cmd
+
+    @command
+    def promote_mirror_group(self, name, promote_type=None):
+        cmd = ['mirror', '-sync', '-promotegroup', '-name', name]
+        cmd += ['-o']
+        return cmd
+
+    @command
+    def get_mirror_group(self, name=None):
+        cmd = ['mirror', '-sync', '-listgroups']
         cmd += text_var('-name', name)
         return cmd
 

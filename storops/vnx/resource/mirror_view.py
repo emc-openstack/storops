@@ -211,3 +211,97 @@ class VNXMirrorViewList(VNXCliResourceList):
 
     def _get_raw_resource(self):
         return self._cli.get_mirror_view(poll=self.poll)
+
+
+class VNXMirrorGroup(VNXCliResource):
+    def __init__(self, cli, name=None):
+        super(VNXMirrorGroup, self).__init__()
+        self._cli = cli
+        self._name = name
+
+    def _get_raw_resource(self):
+        return self._cli.get_mirror_group(name=self._name, poll=self.poll)
+
+    @classmethod
+    def create(cls, cli, name, mirror=None):
+        out = cli.create_mirror_group(name)
+        raise_if_err(out, default=VNXMirrorException)
+        group = VNXMirrorGroup(cli=cli, name=name)
+        if mirror is not None:
+            # Add to mirror group as well
+            group.add_mirror(mirror)
+        return group
+
+    @classmethod
+    def get(cls, cli, name=None):
+        if name is None:
+            ret = VNXMirrorGroupList(cli)
+        else:
+            ret = VNXMirrorGroup(cli, name)
+        return ret
+
+    def add_mirror(self, mirror):
+        mirror_name = mirror._get_name()
+        out = self._cli.add_to_mirror_group(self._get_name(), mirror_name,
+                                            poll=self.poll)
+        raise_if_err(out, default=VNXMirrorException)
+
+    def remove_mirror(self, mirror):
+        mirror_name = mirror._get_name()
+        out = self._cli.remove_from_mirror_group(self._get_name(), mirror_name,
+                                                 poll=self.poll)
+        raise_if_err(out, default=VNXMirrorException)
+
+    def fracture_group(self):
+        out = self._cli.fracture_mirror_group(self._get_name(), poll=self.poll)
+        raise_if_err(out, default=VNXMirrorException)
+
+    def sync_group(self):
+        out = self._cli.sync_mirror_group(self._get_name(), poll=self.poll)
+        raise_if_err(out, default=VNXMirrorException)
+
+    def promote_group(self):
+        out = self._cli.promote_mirror_group(self._get_name(), poll=self.poll)
+        raise_if_err(out, default=VNXMirrorException)
+
+    def delete(self, force=False):
+        out = self._cli.delete_mirror_group(self._get_name(), force=force)
+        raise_if_err(out, default=VNXMirrorException)
+
+    @property
+    def mirrors(self):
+        mirrors = []
+        for m in self.group_mirrors:
+            mirrors.append(VNXMirrorView(cli=self._cli, name=m.mirror_name))
+        return mirrors
+
+
+class VNXMirrorGroupMirror(VNXCliResource):
+    def __init__(self, cli=None, name=None):
+        super(VNXMirrorGroupMirror, self).__init__()
+        self._cli = cli
+        self._name = name
+
+
+class VNXMirrorGroupMirrorList(VNXCliResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return VNXMirrorGroupMirror
+
+    def __init__(self, cli=None):
+        super(VNXMirrorGroupMirrorList, self).__init__()
+        self._cli = cli
+
+
+class VNXMirrorGroupList(VNXCliResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return VNXMirrorGroup
+
+    def __init__(self, cli=None, name=None):
+        super(VNXMirrorGroupList, self).__init__()
+        self._cli = cli
+        self._name = name
+
+    def _get_raw_resource(self):
+        return self._cli.get_mirror_group(name=self._name, poll=self.poll)

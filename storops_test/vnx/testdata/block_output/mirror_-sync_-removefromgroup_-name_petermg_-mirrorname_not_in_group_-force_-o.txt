@@ -1,0 +1,2 @@
+Removing sync mirror from group failed. The specified mirror is not a member of the group petermg
+

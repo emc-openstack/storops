@@ -30,7 +30,8 @@ from storops.vnx.enums import VNXLunType, VNXPortType, VNXSPEnum, \
 from storops.vnx.resource.cifs_server import CifsDomain
 from storops.vnx.resource.disk import VNXDisk
 from storops.vnx.resource.lun import VNXLun
-from storops.vnx.resource.mirror_view import VNXMirrorViewList
+from storops.vnx.resource.mirror_view import VNXMirrorViewList, \
+    VNXMirrorGroup, VNXMirrorGroupList
 from storops.vnx.resource.mover import VNXMoverList
 from storops.vnx.resource.nqm import VNXIOClass, VNXIOClassList, VNXIOPolicy, \
     VNXIOPolicyList
@@ -283,6 +284,19 @@ class VNXSystemTest(TestCase):
         lun = VNXLun(245)
         mv = self.vnx.create_mirror_view('mv0', lun)
         assert_that(mv.state, equal_to('Active'))
+
+    @patch_cli
+    def test_get_mirror_group(self):
+        mg_list = self.vnx.get_mirror_group()
+        assert_that(mg_list, instance_of(VNXMirrorGroupList))
+        assert_that(len(mg_list), equal_to(2))
+
+    @patch_cli
+    def test_create_mirror_group(self):
+        mg = self.vnx.create_mirror_group('test_group')
+        assert_that(mg.state, equal_to('Synchronized'))
+        assert_that(mg.condition, equal_to('Active'))
+        assert_that(mg, instance_of(VNXMirrorGroup))
 
     @patch_cli(output='credential_error.txt')
     def test_credential_error(self):

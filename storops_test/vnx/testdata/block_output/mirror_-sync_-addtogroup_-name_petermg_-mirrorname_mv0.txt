@@ -1,0 +1,3 @@
+Adding sync mirror to group failed.  The mirror is already a member of a group,
+so it cannot be added to this one.
+

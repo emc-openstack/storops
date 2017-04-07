@@ -1,0 +1,10 @@
+Group Name:  petermg1
+Group ID:  50:06:01:60:B6:60:25:22:01:00:00:00
+Description:
+State:  Empty
+Role:  Primary
+Condition:  Active
+Recovery Policy:  Manual
+Mirrors can be added to group:
+
+

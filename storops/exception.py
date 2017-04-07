@@ -1104,6 +1104,31 @@ class VNXDeleteMirrorWithSecondaryError(VNXMirrorException):
     error_code = 0x71058243
 
 
+@cli_exception
+class VNXMirrorGroupNameInUseError(VNXMirrorException):
+    error_message = 'Mirror Group name already in use'
+
+
+@cli_exception
+class VNXMirrorGroupNotFoundError(VNXMirrorException, VNXObjectNotFoundError):
+    error_message = 'Unable to locate the specified group'
+
+
+@cli_exception
+class VNXMirrorGroupAlreadyMemberError(VNXMirrorException):
+    error_message = 'The mirror is already a member of a group'
+
+
+@cli_exception
+class VNXMirrorGroupMirrorNotMemberError(VNXMirrorException):
+    error_message = 'The specified mirror is not a member of the group'
+
+
+@cli_exception
+class VNXMirrorGroupAlreadyPromotedError(VNXMirrorException):
+    error_message = 'The Consistency Group has no secondary images to promote'
+
+
 class VNXPortError(VNXException):
     pass
 

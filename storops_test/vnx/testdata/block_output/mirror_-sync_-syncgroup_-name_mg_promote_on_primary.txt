@@ -1,0 +1,1 @@
+The Consistency Group has no secondary images to promote. (0x7105893f)

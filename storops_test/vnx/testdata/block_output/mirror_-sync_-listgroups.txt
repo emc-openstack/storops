@@ -1,0 +1,37 @@
+Maximum Number of Groups Allowed:  64
+Maximum Number of Mirrors per Group:  64
+
+Group Name:  petermg1
+Group ID:  50:06:01:60:B6:60:25:22:01:00:00:00
+Description:
+State:  Empty
+Role:  Primary
+Condition:  Active
+Recovery Policy:  Manual
+Mirrors can be added to group:
+
+Group Name:  petermg
+Group ID:  50:06:01:60:B6:60:25:22:00:00:00:00
+Description:
+State:  Synchronized
+Role:  Primary
+Condition:  Active
+Recovery Policy:  Manual
+Mirror Name:  mirror_82cc64e4-5eea-4664-b1ac-761f43da015c
+Mirror WWN:  50:06:01:60:B6:60:25:22:0D:00:00:00:00:00:00:00
+Primary WWN:  50:06:01:60:B6:60:25:22
+Secondary WWN:  50:06:01:60:B6:E0:1C:2E
+Array hosting remote image:  50:06:01:60:B6:E0:1C:2E
+Local LUN ID:  60:06:01:60:48:A0:36:00:14:58:E1:28:99:1E:E7:11
+Local LUN Number:  322
+Remote LUN ID:  60:06:01:60:44:00:3E:00:A4:46:02:82:9D:1E:E7:11
+Mirror Name:  mirror_728ae822-7654-451f-8e14-63001a2b3c3e
+Mirror WWN:  50:06:01:60:B6:60:25:22:0C:00:00:00:00:00:00:00
+Primary WWN:  50:06:01:60:B6:60:25:22
+Secondary WWN:  50:06:01:60:B6:E0:1C:2E
+Array hosting remote image:  50:06:01:60:B6:E0:1C:2E
+Local LUN ID:  60:06:01:60:48:A0:36:00:47:40:36:26:EB:1D:E7:11
+Local LUN Number:  315
+Remote LUN ID:  60:06:01:60:44:00:3E:00:69:B6:14:7F:EF:1D:E7:11
+Mirrors can be added to group:
+

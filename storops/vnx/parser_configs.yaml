@@ -619,6 +619,44 @@ VNXMirrorViewImage:
     - label: "Preferred SP:"
       converter: to_sp_enum
 
+VNXMirrorGroup:
+  data_src: cli
+  properties:
+    - label: "Group Name:"
+      key: "name"
+      is_index: True
+    - label: "Group ID:"
+      key: "gid"
+    - label: "Description:"
+    - label: "State:"
+    - label: "Role:"
+    - label: "Condition:"
+    - label: "Recovery Policy:"
+      key: "policy"
+      converter: to_mirror_group_recovery_policy
+      # The group mirrors does not start with a label
+      # as a workaround use the label of previous property.
+    - label: "Recovery Policy:"
+      key: "group_mirrors"
+      converter: VNXMirrorGroupMirrorList
+      end_pattern: "Mirrors can be added to group:"
+
+VNXMirrorGroupMirror:
+  data_src: cli
+  properties:
+    - label: "Mirror Name:"
+      key: "mirror_name"
+      is_index: True
+    - label: "Mirror WWN:"
+      key: "mirror_wwn"
+    - label: "Local LUN ID:"
+      key: "src_lun_wwn"
+    - label: "Local LUN Number:"
+      key: "src_lun_id"
+      converter: to_int
+    - label: "Remote LUN ID:"
+      key: "dst_lun_wwn"
+
 
 VNXDisk:
   data_src: cli

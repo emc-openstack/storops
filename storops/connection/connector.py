@@ -16,17 +16,18 @@
 
 from __future__ import unicode_literals
 
+from storops.lib import common
 import logging
 import pipes
 
 import functools
-import paramiko
-from paramiko import ssh_exception
 import six
 from storops.connection import client
 from storops.connection.exceptions import SFtpExecutionError, \
     SSHExecutionError, HTTPClientError
 from retryz import retry
+
+paramiko = common.try_import('paramiko')
 
 LOG = logging.getLogger(__name__)
 
@@ -140,7 +141,7 @@ class SSHConnector(object):
         if password:
             try:
                 self.transport.connect(username=username, password=password)
-            except ssh_exception.SSHException as ex:
+            except paramiko.ssh_exception.SSHException as ex:
                 error_msg = ('Failed to setup SSH connection. '
                              'Reason:%s.' % six.text_type(ex))
                 LOG.error(error_msg)

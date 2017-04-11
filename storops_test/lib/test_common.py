@@ -22,13 +22,14 @@ from time import sleep
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
-    contains_string, has_items
+    contains_string, has_items, not_none, none
 
 from storops.exception import EnumValueNotFoundError
 from storops.lib import common
 from storops.lib.common import Dict, Enum, WeightedAverage, synchronized, \
     text_var, int_var, enum_var, yes_no_var, list_var, JsonPrinter, \
-    get_lock_file, EnumList, round_3, RepeatedTimer, supplement_filesystem
+    get_lock_file, EnumList, round_3, RepeatedTimer, supplement_filesystem, \
+    try_import
 from storops.vnx.enums import VNXRaidType
 
 log = logging.getLogger(__name__)
@@ -300,6 +301,14 @@ class CommonTest(TestCase):
         name = get_lock_file('a.lock')
         assert_that(name, contains_string('.storops'))
         assert_that(name, contains_string('a.lock'))
+
+    def test_try_import_none(self):
+        mod = try_import('paramiko_none')
+        assert_that(mod, none())
+
+    def test_try_import_normal(self):
+        mod = try_import('os')
+        assert_that(mod, not_none())
 
 
 class RoundItTest(TestCase):

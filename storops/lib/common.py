@@ -571,3 +571,11 @@ def is_iscsi_uid(uid):
 def is_fc_uid(uid):
     """Validate the FC initiator format."""
     return re.match("(\w{2}:){15}\w{2}", uid, re.I) is not None
+
+
+def try_import(import_str, default=None):
+    try:
+        __import__(import_str)
+        return sys.modules[import_str]
+    except ImportError:
+        return default

@@ -16,11 +16,11 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://landscape.io/github/emc-openstack/storops/master/landscape.svg?style=flat
     :target: https://landscape.io/github/emc-openstack/storops/
 
-VERSION: 0.4.11
+VERSION: 0.4.12
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
-Check different release branch/tag for matched documents. 
+Check different release branch/tag for matched documents.
 
 License
 -------
@@ -36,9 +36,16 @@ You could use "pip" to install "storops".
 
     $ pip install storops
 
-Make sure naviseccli is installed if you want to manage VNX.
+Make sure `naviseccli` is installed if you want to manage VNX.
 
-*PIP Install Failed?*
+Optional package requirement
+````````````````````````````
+
+#. `paramiko` package
+
+The `paramiko` is required if you need to manage the VNX file related
+resources. please follow `install paramiko <http://www.paramiko.org/installing.html>`_ install `paramiko`.
+
 
 Feature List
 ------------

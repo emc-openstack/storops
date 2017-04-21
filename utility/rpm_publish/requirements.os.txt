@@ -1,8 +1,0 @@
-## Please download these files with "--no-deps" option, e.g.
-##   pip download --no-deps -r <path to>/requirements.os.txt
-python-dateutil>=2.4.2 # BSD
-retryz>=0.1.8 # Apache-2.0
-cachez>=0.1.0 # Apache-2.0
-bitmath>=1.3.0 # MIT
-persist-queue==0.2.1 # BSD
-storops # Apache-2.0

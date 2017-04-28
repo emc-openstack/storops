@@ -65,7 +65,9 @@ class MockRestClient(ConnectorMock):
             url = url[:pos]
         except ValueError:
             pass
-        return url.strip('/').split('/')[2]
+        if len(url.strip('/').split('/')) >= 3:
+            return url.strip('/').split('/')[2]
+        return ""
 
     def get(self, url, **kwargs):
         return self._get_mock_output(url, kwargs)

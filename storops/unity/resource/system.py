@@ -360,6 +360,11 @@ class UnitySystem(UnitySingletonResource):
     def is_perf_stats_persisted(self):
         return self._cli.is_perf_stats_persisted()
 
+    def upload_license(self, license):
+        files = {'filename': license}
+        resp = self._cli.rest_post('/upload/license', files=files)
+        resp.raise_if_err()
+
 
 class UnitySystemList(UnityResourceList):
     @classmethod

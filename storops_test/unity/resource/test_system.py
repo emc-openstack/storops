@@ -16,6 +16,7 @@
 from __future__ import unicode_literals
 
 import datetime
+
 import time
 from unittest import TestCase
 
@@ -629,6 +630,11 @@ class UnitySystemTest(TestCase):
         unity.create_tenant(
             'test', uuid='173ca6c3-5952-427d-82a6-df88f49e3926',
             vlans=[3])
+
+    @patch_rest(output='system/license_upload.json')
+    def test_upload_license(self):
+        unity = t_unity()
+        unity.upload_license(license="license.lic")
 
 
 class UnityDpeTest(TestCase):

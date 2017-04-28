@@ -119,9 +119,9 @@ class UnityClient(PerfManager):
         url = self.assemble_url(url, **params)
         return RestResponse(self._rest.get(url))
 
-    def rest_post(self, url, body=None, **params):
+    def rest_post(self, url, body=None, files=None,  **params):
         url = self.assemble_url(url, **params)
-        return RestResponse(self._rest.post(url, body=body))
+        return RestResponse(self._rest.post(url, files=files, body=body))
 
     def rest_delete(self, url, body=None, **params):
         url = self.assemble_url(url, **params)

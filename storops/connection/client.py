@@ -75,20 +75,24 @@ class HTTPClient(object):
     def request(self, full_url, method, **kwargs):
         headers = copy.deepcopy(self.headers)
         headers.update(kwargs.get('headers', {}))
-
         options = copy.deepcopy(self.request_options)
-
         content_type = headers.get('Content-Type', None)
-        if 'body' in kwargs:
+        if kwargs.get('body', None):
             if content_type == 'application/json':
                 options['data'] = json.dumps(kwargs['body'])
             else:
                 options['data'] = kwargs['body']
-
+        files = kwargs.get('files', None)
+        files_opener = None
+        if files:
+            files_opener = {}
+            headers.pop('Content-Type')
+            for name, path in files.items():
+                files_opener[name] = open(path, 'rb')
         self.log_request(full_url, method, options.get('data', None))
         start = time.time()
         resp = self.session.request(method, full_url, headers=headers,
-                                    **options)
+                                    files=files_opener, **options)
 
         self.log_response(full_url, method, resp, start)
 

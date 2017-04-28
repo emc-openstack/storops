@@ -20,9 +20,17 @@ import unittest
 from hamcrest import assert_that, calling, equal_to, raises
 import mock
 from requests import exceptions
+import tempfile
 
 from storops.connection import client
 from storops.connection import exceptions as storops_ex
+
+
+class FakeOpener(dict):
+    def __eq__(self, other):
+        if 'filename' in self and 'filename' in other:
+            return other['filename'].name == self['filename'].name
+        return False
 
 
 class MockResponse(object):
@@ -86,9 +94,28 @@ class HTTPClientTest(unittest.TestCase):
                                          body={"k_abc": "v_abc"})
 
         self.client.session.request.assert_called_with(
-            'GET', 'right_url_json', auth=None, verify=True,
+            'GET', 'right_url_json', auth=None, files=None, verify=True,
             headers={'Content-Type': 'application/json'},
             data='{"k_abc": "v_abc"}')
+        assert_that(resp.status_code, equal_to(200))
+        assert_that(body, equal_to({'id': 'id_123'}))
+
+    def test_request_with_file(self):
+        self.client.session.request = mock.MagicMock(
+            side_effect=_request_side_effect)
+        self.client.headers['Content-Type'] = 'application/json'
+        _, name = tempfile.mkstemp(suffix='.lic')
+        files = dict()
+        files['filename'] = name
+        resp, body = self.client.request('right_url_json', 'GET',
+                                         files=files, body={"k_abc": "v_abc"})
+
+        fake_files = FakeOpener()
+        fake_files['filename'] = open(name, 'rb')
+        self.client.session.request.assert_called_with(
+            'GET', 'right_url_json', auth=None, files=fake_files, verify=True,
+            headers={}, data='{"k_abc": "v_abc"}')
+
         assert_that(resp.status_code, equal_to(200))
         assert_that(body, equal_to({'id': 'id_123'}))
 
@@ -100,7 +127,8 @@ class HTTPClientTest(unittest.TestCase):
                                          body='{"k_abc": "v_abc"}')
 
         self.client.session.request.assert_called_with(
-            'GET', 'right_url', auth=None, verify=True, headers={},
+            'GET', 'right_url', auth=None, files=None,
+            verify=True, headers={},
             data='{"k_abc": "v_abc"}')
         assert_that(resp.status_code, equal_to(200))
         assert_that(body, equal_to('OK'))
@@ -113,8 +141,8 @@ class HTTPClientTest(unittest.TestCase):
                                          body='{"k_abc": "v_abc"}')
 
         self.client.session.request.assert_called_with(
-            'GET', 'bad_url', auth=None, verify=True, headers={},
-            data='{"k_abc": "v_abc"}')
+            'GET', 'bad_url', auth=None, files=None,
+            verify=True, headers={}, data='{"k_abc": "v_abc"}')
         assert_that(resp.status_code, equal_to(404))
         assert_that(body, equal_to('Failed'))
 
@@ -131,9 +159,8 @@ class HTTPClientTest(unittest.TestCase):
                     raises(storops_ex.HttpError))
 
         self.client.session.request.assert_called_with(
-            'GET', 'bad_url_raise', auth=None, verify=True,
-            headers={},
-            data='{"k_abc": "v_abc"}')
+            'GET', 'bad_url_raise', auth=None, files=None,
+            verify=True, headers={}, data='{"k_abc": "v_abc"}')
 
     @mock.patch(
         'storops.connection.client.HTTPClient._cs_request_with_retries')

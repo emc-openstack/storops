@@ -190,6 +190,10 @@ UnityPool:
     - label: metadataSizeUsed
     - label: snapSizeUsed
     - label: rebalanceProgress
+    - label: type
+      key: pool_type
+      converter: PoolTypeEnum
+    - label: isAllFlash
 
 
 UnityPoolTier:
@@ -1489,6 +1493,26 @@ UnityDisk:
     - label: bank
     - label: bankSlotNumber
     - label: bankSlot
+
+
+UnityDiskGroup:
+  data_src: rest
+  name: diskGroup
+  properties:
+    - label: id
+    - label: name
+    - label: tierType
+      converter: TierTypeEnum
+    - label: diskTechnology
+      converter: DiskTechnologyEnum
+    - label: isFASTCacheAllowable
+      key: is_fast_cache_allowable
+    - label: diskSize
+    - label: advertisedSize
+    - label: rpm
+    - label: speed
+    - label: totalDisks
+    - label: unconfiguredDisks
 
 
 UnityMetric:

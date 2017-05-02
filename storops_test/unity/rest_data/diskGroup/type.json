@@ -1,0 +1,135 @@
+{
+  "content": {
+    "name": "diskGroup",
+    "description": "Disk groups classify the disks in the system into groups  with equivalent storage characteristics. These  characteristics include disk type, capacity, and rotational  speed.  <br/>  <br/>  The system uses disk groups for creating pools.",
+    "documentation": "https://10.244.223.61/apidocs/classes/diskGroup.html",
+    "attributes": [
+      {
+        "name": "tierType",
+        "type": "TierTypeEnum",
+        "description": "Disk type.",
+        "displayValue": "tierType"
+      },
+      {
+        "name": "disksPastEOL",
+        "type": "Integer",
+        "description": "The number of disks past EOL (end of life).",
+        "displayValue": "disksPastEOL"
+      },
+      {
+        "name": "disksWithEOLLess30Days",
+        "type": "Integer",
+        "description": "The number of disks in disk group with EOL (end of life) less than 30 days.",
+        "displayValue": "disksWithEOLLess30Days"
+      },
+      {
+        "name": "disksWithEOLLess60Days",
+        "type": "Integer",
+        "description": "The number of disks in disk group with EOL (end of life) less than 60 days.",
+        "displayValue": "disksWithEOLLess60Days"
+      },
+      {
+        "name": "disksWithEOLLess90Days",
+        "type": "Integer",
+        "description": "The number of disks in disk group with EOL (end of life) less than 90 days.",
+        "displayValue": "disksWithEOLLess90Days"
+      },
+      {
+        "name": "disksWithEOLLess180Days",
+        "type": "Integer",
+        "description": "The number of disks in disk group with EOL (end of life) less than 180 days.",
+        "displayValue": "disksWithEOLLess180Days"
+      },
+      {
+        "name": "totalDisks",
+        "type": "Integer",
+        "description": "Total number of disks in the disk group.",
+        "displayValue": "totalDisks"
+      },
+      {
+        "name": "minHotSpareCandidates",
+        "type": "Integer",
+        "description": "Minimum number of hot spares required for traditional pools for the disk group.  As a rule one Hot spare is required per 30 disks.",
+        "displayValue": "minHotSpareCandidates"
+      },
+      {
+        "name": "configuredFastCacheDisks",
+        "type": "Integer",
+        "description": "The number of configured disks used by FAST Cache.",
+        "displayValue": "configuredFastCacheDisks"
+      },
+      {
+        "name": "advertisedSize",
+        "type": "Integer",
+        "description": "Capacity written on the label of the disks in the disk  group.",
+        "displayValue": "advertisedSize"
+      },
+      {
+        "name": "hotSparePolicyStatus",
+        "type": "HotSparePolicyStatusEnum",
+        "description": "Status of the hot spare policy for the disk group.",
+        "displayValue": "hotSparePolicyStatus"
+      },
+      {
+        "name": "isFASTCacheAllowable",
+        "type": "Boolean",
+        "description": "Indicates whether or not disks from this diskGroup are valid to use for FASTCache.  Values are:  <ul>  <li> true - Disks may be used in FASTCache.</li>  <li> false - Disks may not be used in FASTCache.</li>",
+        "displayValue": "isFASTCacheAllowable"
+      },
+      {
+        "name": "configuredTraditionalPoolDisks",
+        "type": "Integer",
+        "description": "The number of configured disks used by traditional pools.",
+        "displayValue": "configuredTraditionalPoolDisks"
+      },
+      {
+        "name": "rpm",
+        "type": "Integer",
+        "description": "For non-Flash disks, the rotational speed in revolutions per minute (RPM).",
+        "displayValue": "rpm"
+      },
+      {
+        "name": "unconfiguredDisks",
+        "type": "Integer",
+        "description": "The number of unconfigured disks in disk group. Determined by subtracting the number of disks in use by pools, FAST Cache and the number of disks reserved for pools that are in the process of being created or extended from the total number of disks. Hot spares are not included in the determination of this value.",
+        "displayValue": "unconfiguredDisks"
+      },
+      {
+        "name": "speed",
+        "type": "Integer",
+        "description": "Interface speed of the disks in the disk group.",
+        "displayValue": "speed"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number of the disks.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Disk group name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "diskTechnology",
+        "type": "DiskTechnologyEnum",
+        "description": "Disk technology of the disks in the disk group.  There are  two hard disk technologies: SAS and NL-SAS, and flash disk  technologies are MLC (Multi-Level Cell) and TLC  (Triple-Level Cell). MLC drives are referred to as SAS Flash 2  in this API and TLC are referred to as SAS Flash 3.  <br/>  SAS hard disks have greater performance, throughput and less  latency than NL-SAS disks.  <br/>",
+        "displayValue": "diskTechnology"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the diskGroup instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "diskSize",
+        "type": "Integer",
+        "description": "The capacity of each disk.",
+        "displayValue": "diskSize"
+      }
+    ]
+  }
+}

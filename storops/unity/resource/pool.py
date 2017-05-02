@@ -22,6 +22,7 @@ import bitmath
 from storops.unity.resource import UnityResource, \
     UnityAttributeResource, UnityResourceList
 import storops.unity.resource.filesystem
+from storops.unity.resource.disk import UnityDiskGroup
 from storops.unity.resource.lun import UnityLun
 
 __author__ = 'Jay Xu'
@@ -30,6 +31,35 @@ LOG = logging.getLogger(__name__)
 
 
 class UnityPool(UnityResource):
+    @classmethod
+    def create(cls, cli, name, description=None, raid_groups=None,
+               alert_threshold=None,
+               is_harvest_enabled=None,
+               is_snap_harvest_enabled=None,
+               pool_harvest_high_threshold=None,
+               pool_harvest_low_threshold=None,
+               snap_harvest_high_threshold=None,
+               snap_harvest_low_threshold=None,
+               is_fast_cache_enabled=None,
+               is_fastvp_enabled=None,
+               pool_type=None):
+        req_body = cls._compose_pool_parameter(
+            cli, name=name, description=description,
+            raid_groups=raid_groups, alert_threshold=alert_threshold,
+            is_harvest_enabled=is_harvest_enabled,
+            is_snap_harvest_enabled=is_snap_harvest_enabled,
+            pool_harvest_high_threshold=pool_harvest_high_threshold,
+            pool_harvest_low_threshold=pool_harvest_low_threshold,
+            snap_harvest_high_threshold=snap_harvest_high_threshold,
+            snap_harvest_low_threshold=snap_harvest_low_threshold,
+            is_fast_cache_enabled=is_fast_cache_enabled,
+            is_fastvp_enabled=is_fastvp_enabled,
+            pool_type=pool_type)
+        resp = cli.post(cls().resource_class, **req_body)
+        resp.raise_if_err()
+        pool = cls.get(cli, resp.resource_id)
+        return pool
+
     def create_filesystem(self, nas_server, name, size,
                           proto=None, is_thin=None, tiering_policy=None,
                           user_cap=False):
@@ -63,6 +93,47 @@ class UnityPool(UnityResource):
             is_thin, tiering_policy, False,
             user_cap=user_cap)
 
+    @staticmethod
+    def _compose_pool_parameter(cli, **kwargs):
+        name = kwargs.get('name')
+        raid_groups = kwargs.get('raid_groups')
+        req_body = cli.make_body(
+            name=name,
+            description=kwargs.get('description'),
+            addRaidGroupParameters=UnityPool._compose_raid_group_parameter(
+                cli, raid_groups),
+            alertThreshold=kwargs.get('alert_threshold'),
+            poolSpaceHarvestHighThreshold=kwargs.get(
+                'pool_harvest_high_threshold'),
+            poolSpaceHarvestLowThreshold=kwargs.get(
+                'pool_harvest_low_threshold'),
+            snapSpaceHarvestHighThreshold=kwargs.get(
+                'snap_harvest_high_threshold'),
+            snapSpaceHarvestLowThreshold=kwargs.get(
+                'snap_harvest_low_threshold'),
+            isHarvestEnabled=kwargs.get('is_harvest_enabled'),
+            isSnapHarvestEnabled=kwargs.get('is_snap_harvest_enabled'),
+            isFASTCacheEnabled=kwargs.get('is_fast_cache_enabled'),
+            isFASTVpScheduleEnabled=kwargs.get('is_fastvp_enabled'),
+            type=kwargs.get('pool_type'))
+        return req_body
+
+    @staticmethod
+    def _compose_raid_group_parameter(cli, raid_groups):
+        req_body = None
+        if raid_groups:
+            req_body = []
+            for raid in raid_groups:
+                each = cli.make_body(
+                    dskGroup=raid.disk_group,
+                    numDisks=raid.disk_num,
+                    raidType=raid.raid_type,
+                    stripeWidth=raid.stripe_width
+                )
+                req_body.append(each)
+
+        return req_body
+
 
 class UnityPoolList(UnityResourceList):
     @classmethod
@@ -92,3 +163,14 @@ class UnityPoolUnitList(UnityResourceList):
 
 class UnityPoolFastVp(UnityAttributeResource):
     pass
+
+
+class RaidGroupParameter(object):
+    def __init__(self, disk_group, disk_num, raid_type, stripe_width):
+        """Object to store parameters needed by the UnityPool.create."""
+        if not isinstance(disk_group, UnityResource):
+            disk_group = UnityDiskGroup(_id=disk_group)
+        self.disk_group = disk_group
+        self.disk_num = disk_num
+        self.raid_type = raid_type
+        self.stripe_width = stripe_width

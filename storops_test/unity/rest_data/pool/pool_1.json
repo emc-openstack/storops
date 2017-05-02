@@ -112,6 +112,8 @@
     "metadataSizeSubscribed": 59324235776,
     "snapSizeSubscribed": 873220538368,
     "metadataSizeUsed": 36775657472,
-    "snapSizeUsed": 24452407296
+    "snapSizeUsed": 24452407296,
+    "type": 2,
+    "isAllFlash": false
   }
 }

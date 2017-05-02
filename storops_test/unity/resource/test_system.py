@@ -27,7 +27,8 @@ from storops.exception import UnityResourceNotFoundError, \
 from storops.lib.resource import ResourceList
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
-    StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum
+    StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum, \
+    RaidTypeEnum, RaidStripeWidthEnum, PoolTypeEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -45,7 +46,8 @@ from storops.unity.resource.nas_server import UnityNasServer, \
     UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
-from storops.unity.resource.pool import UnityPoolList
+from storops.unity.resource.pool import UnityPoolList, \
+    RaidGroupParameter, UnityPool
 from storops.unity.resource.port import UnityFcPortList
 
 from storops.unity.resource.lun import UnityLun
@@ -242,6 +244,25 @@ class UnitySystemTest(TestCase):
         pools = unity.get_pool()
         assert_that(pools, instance_of(UnityPoolList))
         assert_that(len(pools), equal_to(2))
+
+    @patch_rest
+    def test_create_pool(self):
+        unity = t_unity()
+        disk_group = unity.get_disk_group(_id='dg_15')
+        raid_group_0 = RaidGroupParameter(
+            disk_group=disk_group,
+            disk_num=3, raid_type=RaidTypeEnum.RAID5,
+            stripe_width=RaidStripeWidthEnum.BEST_FIT)
+        raid_groups = [raid_group_0]
+        pool = unity.create_pool(
+            name='test_pool', description='Unity test pool.',
+            raid_groups=raid_groups, alert_threshold=15,
+            is_harvest_enabled=True, is_snap_harvest_enabled=True,
+            pool_harvest_high_threshold=80, pool_harvest_low_threshold=40,
+            snap_harvest_high_threshold=80, snap_harvest_low_threshold=40,
+            is_fast_cache_enabled=True, is_fastvp_enabled=True,
+            pool_type=PoolTypeEnum.DYNAMIC)
+        assert_that(pool, instance_of(UnityPool))
 
     @patch_rest
     def test_get_snaps_all(self):

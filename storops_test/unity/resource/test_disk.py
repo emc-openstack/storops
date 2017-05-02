@@ -18,10 +18,11 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, has_items, close_to, \
-    contains_string
+    contains_string, instance_of, has_length
 
 from storops import DiskTechnologyEnum, TierTypeEnum
-from storops.unity.resource.disk import UnityDiskList, UnityDisk
+from storops.unity.resource.disk import UnityDiskList, UnityDisk, \
+    UnityDiskGroup, UnityDiskGroupList
 from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
 
 __author__ = 'Cedric Zhuang'
@@ -107,3 +108,29 @@ class UnityDiskTest(TestCase):
         ret = set(disks.inserted)
         assert_that(ret, equal_to({True}))
         assert_that(len(disks), equal_to(26))
+
+
+class DiskGroupTest(TestCase):
+
+    @patch_rest
+    def test_get_all(self):
+        t_cli = t_rest()
+        disk_groups = UnityDiskGroupList.get(cli=t_cli)
+        assert_that(disk_groups, instance_of(UnityDiskGroupList))
+        assert_that(disk_groups, has_length(4))
+
+    @patch_rest
+    def test_get_one(self):
+        disk_group = UnityDiskGroup.get(cli=t_rest(), _id='dg_15')
+        assert_that(disk_group, instance_of(UnityDiskGroup))
+        assert_that(disk_group.id, equal_to('dg_15'))
+        assert_that(disk_group.disk_technology,
+                    equal_to(DiskTechnologyEnum.SAS))
+        assert_that(disk_group.name, equal_to('600 GB SAS 15K'))
+        assert_that(disk_group.is_fast_cache_allowable, equal_to(False))
+        assert_that(disk_group.disk_size, equal_to(590894538752))
+        assert_that(disk_group.advertised_size, equal_to(644245094400))
+        assert_that(disk_group.rpm, equal_to(15000))
+        assert_that(disk_group.speed, equal_to(9))
+        assert_that(disk_group.total_disks, equal_to(12))
+        assert_that(disk_group.unconfigured_disks, equal_to(8))

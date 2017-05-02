@@ -187,6 +187,22 @@
         "type": "Integer",
         "description": "(Applies if FAST VP is supported on the system and the corresponding license is installed.) Percent of work completed for data rebalancing. ",
         "displayValue": "rebalanceProgress"
+      },
+      {
+        "name": "type",
+        "type": "StoragePoolTypeEnum",
+        "visibility": 0,
+        "description": "Indicates type of this pool. Values are:  <ul>  <li>Dynamic - It is dynamic pool.</li>  <li>Traditional - It is traditional pool.</li>  </ul>",
+        "displayValue": "type",
+        "counter": 39804
+      },
+      {
+        "name": "isAllFlash",
+        "type": "Boolean",
+        "visibility": 0,
+        "description": "Indicates whether this pool contains only Flash drives. Values are:  <ul>  <li>true - It is an all Flash pool.</li>  <li>false - This pool contains drives other than Flash drives.</li>  </ul>",
+        "displayValue": "isAllFlash",
+        "counter": 39770
       }
     ]
   }

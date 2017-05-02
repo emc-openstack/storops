@@ -1,0 +1,101 @@
+{
+  "content": {
+    "id": "pool_4",
+    "operationalStatus": [
+      2
+    ],
+    "raidType": 1,
+    "harvestState": 0,
+    "type": 1,
+    "instanceId": "root/emc:EMC_UEM_MappedStoragePoolLeaf%InstanceID=pool_4",
+    "objectId": 12884901893,
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "name": "test_pool",
+    "description": "Unity test pool.",
+    "sizeFree": 1903207383040,
+    "sizeTotal": 1903207383040,
+    "sizeUsed": 0,
+    "sizeSubscribed": 0,
+    "alertThreshold": 70,
+    "isFASTCacheEnabled": false,
+    "tiers": [
+      {
+        "tierType": 10,
+        "raidType": 0,
+        "instanceId": "root/emc:EMC_UEM_StoragePoolTierLeaf%InstanceID=7",
+        "sizeTotal": 0,
+        "sizeUsed": 0,
+        "sizeFree": 0,
+        "sizeMovingDown": 0,
+        "sizeMovingUp": 0,
+        "sizeMovingWithin": 0,
+        "name": "Extreme Performance",
+        "diskCount": 0
+      },
+      {
+        "tierType": 20,
+        "stripeWidth": 5,
+        "raidType": 1,
+        "instanceId": "root/emc:EMC_UEM_StoragePoolTierLeaf%InstanceID=9",
+        "sizeTotal": 1903207383040,
+        "sizeUsed": 0,
+        "sizeFree": 1903207383040,
+        "sizeMovingDown": 0,
+        "sizeMovingUp": 0,
+        "sizeMovingWithin": 0,
+        "name": "Performance",
+        "diskCount": 5,
+        "poolUnits": [
+          {
+            "id": "rg_4"
+          }
+        ]
+      },
+      {
+        "tierType": 30,
+        "raidType": 0,
+        "instanceId": "root/emc:EMC_UEM_StoragePoolTierLeaf%InstanceID=8",
+        "sizeTotal": 0,
+        "sizeUsed": 0,
+        "sizeFree": 0,
+        "sizeMovingDown": 0,
+        "sizeMovingUp": 0,
+        "sizeMovingWithin": 0,
+        "name": "Capacity",
+        "diskCount": 0
+      }
+    ],
+    "creationTime": "2017-05-04T05:42:46.000Z",
+    "isEmpty": true,
+    "poolFastVP": {
+      "status": 4,
+      "relocationRate": 2,
+      "type": 2,
+      "isScheduleEnabled": true,
+      "relocationDurationEstimate": "00:00:00.000",
+      "sizeMovingDown": 0,
+      "sizeMovingUp": 0,
+      "sizeMovingWithin": 0,
+      "percentComplete": 0
+    },
+    "isHarvestEnabled": true,
+    "isSnapHarvestEnabled": false,
+    "poolSpaceHarvestHighThreshold": 95,
+    "poolSpaceHarvestLowThreshold": 85,
+    "snapSpaceHarvestHighThreshold": 25,
+    "snapSpaceHarvestLowThreshold": 20,
+    "metadataSizeSubscribed": 0,
+    "snapSizeSubscribed": 0,
+    "metadataSizeUsed": 0,
+    "snapSizeUsed": 0,
+    "isAllFlash": false
+  }
+}

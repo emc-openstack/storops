@@ -1,0 +1,20 @@
+{
+    "content": {
+        "id": "dg_15",
+        "tierType": 20,
+        "diskTechnology": 1,
+        "hotSparePolicyStatus": 0,
+        "name": "600 GB SAS 15K",
+        "emcPartNumber": "CLAR600#NEO600#EMC600",
+        "isFASTCacheAllowable": false,
+        "diskSize": 590894538752,
+        "advertisedSize": 644245094400,
+        "rpm": 15000,
+        "speed": 9,
+        "totalDisks": 12,
+        "minHotSpareCandidates": 1,
+        "unconfiguredDisks": 8,
+        "configuredTraditionalPoolDisks": 4,
+        "configuredFastCacheDisks": 0
+    }
+}

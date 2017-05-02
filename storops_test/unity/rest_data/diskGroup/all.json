@@ -1,0 +1,129 @@
+{
+    "@base": "https://10.244.223.61/api/types/diskGroup/instances?fields=tierType,disksPastEOL,disksWithEOLLess30Days,disksWithEOLLess60Days,disksWithEOLLess90Days,disksWithEOLLess180Days,totalDisks,minHotSpareCandidates,configuredFastCacheDisks,advertisedSize,hotSparePolicyStatus,isFASTCacheAllowable,configuredTraditionalPoolDisks,rpm,unconfiguredDisks,speed,emcPartNumber,name,diskTechnology,id,diskSize&per_page=2000",
+    "updated": "2017-05-03T09:08:06.984Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "@base": "https://10.244.223.61/api/instances/diskGroup",
+            "updated": "2017-05-03T09:08:06.984Z",
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "/dg_2"
+                }
+            ],
+            "content": {
+                "id": "dg_2",
+                "tierType": 10,
+                "diskTechnology": 6,
+                "hotSparePolicyStatus": 0,
+                "name": "200 GB SAS Flash 2",
+                "emcPartNumber": "CLAR200#NEO200#EMC200",
+                "isFASTCacheAllowable": true,
+                "diskSize": 196971960832,
+                "advertisedSize": 214748364800,
+                "rpm": 0,
+                "speed": 9,
+                "totalDisks": 4,
+                "minHotSpareCandidates": 1,
+                "unconfiguredDisks": 4,
+                "configuredTraditionalPoolDisks": 0,
+                "configuredFastCacheDisks": 0,
+                "disksPastEOL": 0,
+                "disksWithEOLLess30Days": 0,
+                "disksWithEOLLess60Days": 0,
+                "disksWithEOLLess90Days": 0,
+                "disksWithEOLLess180Days": 0
+            }
+        },
+        {
+            "@base": "https://10.244.223.61/api/instances/diskGroup",
+            "updated": "2017-05-03T09:08:06.984Z",
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "/dg_8"
+                }
+            ],
+            "content": {
+                "id": "dg_8",
+                "tierType": 30,
+                "diskTechnology": 2,
+                "hotSparePolicyStatus": 0,
+                "name": "2 TB NL-SAS 7.2K",
+                "emcPartNumber": "CLAR2000#NEO2000#EMC2000",
+                "isFASTCacheAllowable": false,
+                "diskSize": 1969623564288,
+                "advertisedSize": 2199023255552,
+                "rpm": 7200,
+                "speed": 9,
+                "totalDisks": 7,
+                "minHotSpareCandidates": 1,
+                "unconfiguredDisks": 5,
+                "configuredTraditionalPoolDisks": 2,
+                "configuredFastCacheDisks": 0
+            }
+        },
+        {
+            "@base": "https://10.244.223.61/api/instances/diskGroup",
+            "updated": "2017-05-03T09:08:06.984Z",
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "/dg_15"
+                }
+            ],
+            "content": {
+                "id": "dg_15",
+                "tierType": 20,
+                "diskTechnology": 1,
+                "hotSparePolicyStatus": 0,
+                "name": "600 GB SAS 15K",
+                "emcPartNumber": "CLAR600#NEO600#EMC600",
+                "isFASTCacheAllowable": false,
+                "diskSize": 590894538752,
+                "advertisedSize": 644245094400,
+                "rpm": 15000,
+                "speed": 9,
+                "totalDisks": 12,
+                "minHotSpareCandidates": 1,
+                "unconfiguredDisks": 8,
+                "configuredTraditionalPoolDisks": 4,
+                "configuredFastCacheDisks": 0
+            }
+        },
+        {
+            "@base": "https://10.244.223.61/api/instances/diskGroup",
+            "updated": "2017-05-03T09:08:06.984Z",
+            "links": [
+                {
+                    "rel": "self",
+                    "href": "/dg_23"
+                }
+            ],
+            "content": {
+                "id": "dg_23",
+                "tierType": 30,
+                "diskTechnology": 2,
+                "hotSparePolicyStatus": 0,
+                "name": "6 TB NL-SAS 7.2K",
+                "emcPartNumber": "CLAR6000#NEO6000#EMC6000",
+                "isFASTCacheAllowable": false,
+                "diskSize": 5908849352704,
+                "advertisedSize": 6597069766656,
+                "rpm": 7200,
+                "speed": 9,
+                "totalDisks": 3,
+                "minHotSpareCandidates": 1,
+                "unconfiguredDisks": 3,
+                "configuredTraditionalPoolDisks": 0,
+                "configuredFastCacheDisks": 0
+            }
+        }
+    ]
+}

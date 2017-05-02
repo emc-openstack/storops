@@ -45,3 +45,13 @@ class UnityDiskList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnityDisk
+
+
+class UnityDiskGroup(UnityResource):
+    pass
+
+
+class UnityDiskGroupList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityDiskGroup

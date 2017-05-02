@@ -5,12 +5,66 @@
       "response": "type.json"
     },
     {
-      "url": "/api/instances/pool/pool_1?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers",
+      "url": "/api/instances/pool/pool_1?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isAllFlash,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers,type",
       "response": "pool_1.json"
     },
     {
-      "url": "/api/types/pool/instances?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers",
+      "url": "/api/types/pool/instances?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isAllFlash,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers,type",
       "response": "all.json"
+    },
+    {
+      "url": "/api/types/pool/instances?compact=True",
+      "body": {
+        "addRaidGroupParameters": [
+          {
+            "raidType": 1,
+            "stripeWidth": 0,
+            "dskGroup": {
+              "id": "dg_15"
+            },
+            "numDisks": 3
+          }
+        ],
+        "name": "test_pool",
+        "snapSpaceHarvestLowThreshold": 40,
+        "description": "Unity test pool.",
+        "alertThreshold": 15,
+        "snapSpaceHarvestHighThreshold": 80,
+        "poolSpaceHarvestLowThreshold": 40,
+        "isFASTVpScheduleEnabled": true,
+        "isHarvestEnabled": true,
+        "poolSpaceHarvestHighThreshold": 80,
+        "isSnapHarvestEnabled": true,
+        "type": 1,
+        "isFASTCacheEnabled": true
+      },
+      "response": "create_pool_4.json"
+    },
+    {
+      "url": "/api/instances/pool/pool_4?compact=True&fields=alertThreshold,creationTime,description,harvestState,health,id,instanceId,isAllFlash,isEmpty,isFASTCacheEnabled,isHarvestEnabled,isSnapHarvestEnabled,metadataSizeSubscribed,metadataSizeUsed,name,objectId,operationalStatus,poolFastVP,poolSpaceHarvestHighThreshold,poolSpaceHarvestLowThreshold,raidType,rebalanceProgress,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,snapSizeSubscribed,snapSizeUsed,snapSpaceHarvestHighThreshold,snapSpaceHarvestLowThreshold,storageResourceType,tiers,type",
+      "response": "pool_4.json"
+    },
+    {
+      "url": "/api/instances/pool/pool_4?compact=True",
+      "response": "delete_pool_4.json"
+    },
+    {
+      "url": "/api/types/pool/instances?compact=True",
+      "body": {
+        "addRaidGroupParameters": [
+          {
+            "raidType": 1,
+            "stripeWidth": 0,
+            "dskGroup": {
+              "id": "dg_15"
+            },
+            "numDisks": 3
+          }
+        ],
+        "name": "duplicate_pool",
+        "description": "Unity test pool."
+      },
+      "response": "duplicate_pool_4.json"
     }
   ]
 }

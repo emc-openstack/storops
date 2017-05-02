@@ -285,6 +285,11 @@ class PoolUnitTypeEnum(UnityEnum):
     VIRTUAL_DISK = (2, 'Virtual Disk')
 
 
+class PoolTypeEnum(UnityEnum):
+    DYNAMIC = (1, 'Dynamic')
+    TRADITIONAL = (2, 'Traditional')
+
+
 class IpProtocolVersionEnum(UnityEnum):
     IPv4 = (4, 'IPv4')
     IPv6 = (6, 'IPv6')

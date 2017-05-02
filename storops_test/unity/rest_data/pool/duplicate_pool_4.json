@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108003600,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "The specified pool name has already been reserved or pool with this name already exists. (Error Code:0x6700110)"
+      }
+    ],
+    "created": "2017-05-15T01:21:51.312Z"
+  }
+}

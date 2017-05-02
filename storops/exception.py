@@ -567,6 +567,11 @@ class UnityTenantHasHostsError(StoropsException):
     error_code = 118939704
 
 
+@rest_exception
+class UnityPoolNameInUseError(UnityException):
+    error_code = 108003600
+
+
 class VNXStatsError(VNXException):
     pass
 

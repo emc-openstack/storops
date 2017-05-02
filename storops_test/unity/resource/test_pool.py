@@ -19,12 +19,16 @@ from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, raises
 
-from storops.exception import UnityLunNameInUseError, JobStateError
+from storops.exception import UnityLunNameInUseError, JobStateError, \
+    UnityPoolNameInUseError
 from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     FastVPRelocationRateEnum, PoolDataRelocationTypeEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
-    FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum
-from storops.unity.resource.pool import UnityPool, UnityPoolList
+    FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum, \
+    PoolTypeEnum
+from storops.unity.resource.disk import UnityDiskGroup
+from storops.unity.resource.pool import UnityPool, UnityPoolList, \
+    RaidGroupParameter
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.nas_server import UnityNasServer
@@ -65,6 +69,8 @@ class UnityPoolTest(TestCase):
         assert_that(pool.snap_size_subscribed, equal_to(873220538368))
         assert_that(pool.metadata_size_used, equal_to(36775657472))
         assert_that(pool.snap_size_used, equal_to(24452407296))
+        assert_that(pool.is_all_flash, equal_to(False))
+        assert_that(pool.pool_type, equal_to(PoolTypeEnum.TRADITIONAL))
         tiers = pool.tiers
 
         assert_that(len(tiers), equal_to(3))
@@ -139,6 +145,50 @@ class UnityPoolTest(TestCase):
         tier = next(t for t in pool.tiers if t.name == 'Performance')
         unit = next(u for u in tier.pool_units if u.description == '123')
         assert_that(unit.id, equal_to('rg_2'))
+
+    @patch_rest
+    def test_create_pool(self):
+        cli = t_rest()
+        disk_group = UnityDiskGroup.get(cli=cli, _id='dg_15')
+        raid_group_0 = RaidGroupParameter(
+            disk_group=disk_group,
+            disk_num=3, raid_type=RaidTypeEnum.RAID5,
+            stripe_width=RaidStripeWidthEnum.BEST_FIT)
+        raid_groups = [raid_group_0]
+        pool = UnityPool.create(
+            cli=cli, name='test_pool', description='Unity test pool.',
+            raid_groups=raid_groups, alert_threshold=15,
+            is_harvest_enabled=True, is_snap_harvest_enabled=True,
+            pool_harvest_high_threshold=80, pool_harvest_low_threshold=40,
+            snap_harvest_high_threshold=80, snap_harvest_low_threshold=40,
+            is_fast_cache_enabled=True, is_fastvp_enabled=True,
+            pool_type=PoolTypeEnum.DYNAMIC)
+        assert_that(pool.id, equal_to('pool_4'))
+        assert_that(pool.pool_type, equal_to(PoolTypeEnum.DYNAMIC))
+        assert_that(pool.is_all_flash, equal_to(False))
+
+    @patch_rest
+    def test_create_pool_name_in_use(self):
+        cli = t_rest()
+        raid_group_0 = RaidGroupParameter(
+            disk_group='dg_15',
+            disk_num=3, raid_type=RaidTypeEnum.RAID5,
+            stripe_width=RaidStripeWidthEnum.BEST_FIT)
+        raid_groups = [raid_group_0]
+
+        def _inner():
+            UnityPool.create(
+                cli=cli, name='duplicate_pool',
+                description='Unity test pool.',
+                raid_groups=raid_groups)
+        assert_that(_inner, raises(UnityPoolNameInUseError))
+
+    @patch_rest
+    def test_delete_pool(self):
+        cli = t_rest()
+        pool = UnityPool.get(cli=cli, _id='pool_4')
+        resp = pool.delete()
+        assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
     def test_create_filesystem_success(self):

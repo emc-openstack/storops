@@ -1,0 +1,16 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/diskGroup?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/diskGroup/instances?compact=True&fields=advertisedSize,configuredFastCacheDisks,configuredTraditionalPoolDisks,diskSize,diskTechnology,disksPastEOL,disksWithEOLLess180Days,disksWithEOLLess30Days,disksWithEOLLess60Days,disksWithEOLLess90Days,emcPartNumber,hotSparePolicyStatus,id,isFASTCacheAllowable,minHotSpareCandidates,name,rpm,speed,tierType,totalDisks,unconfiguredDisks",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/diskGroup/dg_15?compact=True&fields=advertisedSize,configuredFastCacheDisks,configuredTraditionalPoolDisks,diskSize,diskTechnology,disksPastEOL,disksWithEOLLess180Days,disksWithEOLLess30Days,disksWithEOLLess60Days,disksWithEOLLess90Days,emcPartNumber,hotSparePolicyStatus,id,isFASTCacheAllowable,minHotSpareCandidates,name,rpm,speed,tierType,totalDisks,unconfiguredDisks",
+      "response": "dg_15.json"
+    }
+  ]
+}

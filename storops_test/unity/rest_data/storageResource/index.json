@@ -972,6 +972,47 @@
             "description": "This is description."
       },
       "response": "thin_clone_auto_delete.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
+      "body": {
+        "name": "test_thin_clone_lun",
+        "snap": {
+          "id": "38654700001"
+        },
+        "description": "description"
+      },
+      "response": "thin_clone_lun.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_3/action/createLunThinClone?compact=True",
+      "body": {
+        "name": "test_thin_clone_lun",
+        "snap": {
+          "id": "38654700001"
+        },
+        "description": "description"
+      },
+      "response": "thin_clone_new_base.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
+      "body": {
+        "name": "test_thin_clone_snap",
+        "snap": {
+          "id": "38654700002"
+        },
+        "description": "description"
+      },
+      "response": "thin_clone_snap.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5604?compact=True",
+      "body": {
+        "forceSnapDeletion": true,
+        "forceVvolDeletion": true
+      },
+      "response": "sv_5604.json"
     }
   ]
 }

@@ -55,6 +55,7 @@
         },
         "pool": {
             "id": "pool_1"
-        }
+        },
+        "isThinClone": false
     }
 }

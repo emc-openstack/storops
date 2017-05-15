@@ -121,6 +121,14 @@ class UnityLunTest(TestCase):
         assert_that(resp.job.existed, equal_to(False))
 
     @patch_rest
+    def test_lun_delete_thinclone(self):
+        lun = UnityLun(_id='sv_5604', cli=t_rest())
+        resp = lun.delete(force_snap_delete=True, force_vvol_delete=True)
+        lun.update()
+        assert_that(resp.is_ok(), equal_to(True))
+        assert_that(resp.job.existed, equal_to(False))
+
+    @patch_rest
     def test_lun_attach_to_new_host(self):
         host = UnityHost(_id="Host_10", cli=t_rest())
         lun = UnityLun(_id='sv_4', cli=t_rest())

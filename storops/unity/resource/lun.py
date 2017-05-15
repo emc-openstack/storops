@@ -17,14 +17,16 @@ from __future__ import unicode_literals
 
 import logging
 
-from storops.lib.version import version
-from storops.unity.resource import UnityResource, UnityResourceList
 import storops.unity.resource.pool
-from storops.unity.enums import TieringPolicyEnum, NodeEnum, HostLUNAccessEnum
-from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.exception import UnityResourceNotFoundError
+from storops.lib.thinclone_helper import TCHelper
+from storops.lib.version import version
+from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
+    HostLUNAccessEnum, TCActionEnum
+from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor
+from storops.unity.resource.storage_resource import UnityStorageResource
 
 __author__ = 'Jay Xu'
 
@@ -108,20 +110,6 @@ class UnityLun(UnityResource):
         return ret
 
     @staticmethod
-    def _compose_thin_clone(cli, **kwargs):
-        name = kwargs.get('name')
-        snap = kwargs.get('snap')
-        description = kwargs.get('description')
-        io_limit_policy = kwargs.get('io_limit_policy')
-        req_body = cli.make_body(
-            name=name,
-            snap=snap,
-            description=description,
-            lunParameters=cli.make_body(ioLimitParameters=io_limit_policy)
-        )
-        return req_body
-
-    @staticmethod
     def _compose_lun_parameter(cli, **kwargs):
         sp = kwargs.get('sp')
         if isinstance(sp, UnityStorageProcessor):
@@ -188,6 +176,9 @@ class UnityLun(UnityResource):
                                 forceVvolDeletion=force_vvol_delete,
                                 async=async)
         resp.raise_if_err()
+
+        if self.is_thin_clone:
+            TCHelper.notify(self, TCActionEnum.TC_DELETE)
         return resp
 
     def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
@@ -200,6 +191,7 @@ class UnityLun(UnityResource):
 
         resp = self.modify(host_access=host_access)
         resp.raise_if_err()
+        TCHelper.notify(self, TCActionEnum.LUN_ATTACH)
         return resp
 
     def detach_from(self, host):
@@ -222,24 +214,16 @@ class UnityLun(UnityResource):
                                 is_read_only=None, fs_access_type=None)
 
     @version(">=4.2")
-    def thin_clone(self, name, snap=None, io_limit_policy=None,
-                   description=None):
-        # Create a temporary snapshot for thin clone if needed
-        temp_snap = None
-        if not snap:
-            temp_snap = self.create_snap(name='tmp-{}'.format(name),
-                                         is_auto_delete=False)
-        req_body = self._compose_thin_clone(
-            self._cli, name=name, snap=snap if snap else temp_snap,
-            description=description,
-            io_limit_policy=io_limit_policy)
-        resp = self._cli.action(UnityStorageResource().resource_class,
-                                self.get_id(), 'createLunThinClone',
-                                **req_body)
-        if temp_snap:
-            temp_snap.delete()
-        resp.raise_if_err()
-        return UnityLun(cli=self._cli, _id=resp.resource_id)
+    def thin_clone(self, name, io_limit_policy=None, description=None):
+        return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
+                                   description)
+
+    # `__getstate__` and `__setstate__` are used by Pickle.
+    def __getstate__(self):
+        return {'_id': self.get_id(), 'cli': self._cli}
+
+    def __setstate__(self, state):
+        self.__init__(**state)
 
     @property
     def snapshots(self):

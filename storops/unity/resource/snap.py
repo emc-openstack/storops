@@ -17,15 +17,16 @@ from __future__ import unicode_literals
 
 import logging
 
+import storops.unity.resource.cifs_share
+import storops.unity.resource.nfs_share
+import storops.unity.resource.storage_resource
 from storops.lib.common import instance_cache
+from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity import enums
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum, \
     SnapAccessLevelEnum
 from storops.unity.resource import UnityResource, UnityResourceList
-import storops.unity.resource.cifs_share
-import storops.unity.resource.nfs_share
-import storops.unity.resource.storage_resource
 
 __author__ = 'Cedric Zhuang'
 
@@ -149,10 +150,8 @@ class UnitySnap(UnityResource):
         """Creates a new thin clone from this snapshot.
         .. note:: this snapshot should not enable Auto-Delete.
         """
-        parent_lun = self.lun
-        return parent_lun.thin_clone(
-                name=name, snap=self, io_limit_policy=io_limit_policy,
-                description=description)
+        return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
+                                   description)
 
 
 class UnitySnapList(UnityResourceList):

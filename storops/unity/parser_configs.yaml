@@ -67,6 +67,10 @@ UnityLun:
     - label: snapCount
     - label: effectiveIoLimitMaxIOPS
     - label: effectiveIoLimitMaxKBPS
+    - label: familyBaseLun
+      converter: UnityLun
+    - label: familyCloneCount
+    - label: isThinClone
 
 
 UnityHealth:

@@ -1264,3 +1264,7 @@ class JobStateError(UnityJobException):
     def message(self):
         return 'Job State: {}.  Error Detail: {}'.format(
             self.job.state.name, '.  '.join(self.job.messages))
+
+
+class UnityBaseHasThinCloneError(UnityException):
+    error_code = 108009078

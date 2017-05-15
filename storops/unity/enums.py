@@ -721,3 +721,9 @@ class DiskTechnologyEnum(UnityEnum):
     SAS_FLASH_3 = (7, 'SAS_FLASH_3')
     MIXED = (50, 'Mixed')
     VIRTUAL = (99, 'Virtual')
+
+
+class TCActionEnum(UnityEnum):
+    DD_COPY = (1, 'Copy via dd')
+    LUN_ATTACH = (2, 'Attach a base LUN')
+    TC_DELETE = (3, 'Delete a thin-cloned LUN')

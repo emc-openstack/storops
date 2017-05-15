@@ -71,6 +71,38 @@
     {
       "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn&filter=name eq \"storops_dummy_lun\"",
       "response": "not_found.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5555?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5555.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5556?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5556.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5557?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5557.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5600?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5600.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5601?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5601.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5602?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5602.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5603?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5603.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_5604?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,id,instanceId,ioLimitPolicy,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,tieringPolicy,type,wwn",
+      "response": "sv_5604.json"
     }
   ]
 }

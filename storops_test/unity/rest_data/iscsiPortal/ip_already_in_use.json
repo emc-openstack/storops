@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 118939658,
+    "httpStatusCode": 422,
+    "messages": [
+      {
+        "en-US": "The specified IP address is already in use (Error Code:0x716e00a)"
+      }
+    ],
+    "created": "2017-05-18T02:54:38.239Z"
+  }
+}

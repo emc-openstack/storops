@@ -40,7 +40,7 @@ from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList, UnityPool
 from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
-    UnityIoLimitPolicyList, UnityLinkAggregationList
+    UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
 
@@ -198,7 +198,7 @@ class UnitySystem(UnitySingletonResource):
         las = self.get_link_aggregation()
         return eths + las
 
-    @version("<4.1")   # noqa
+    @version("<4.1")  # noqa
     def get_file_port(self):
         """Returns ports list can be used by File
 
@@ -210,6 +210,12 @@ class UnitySystem(UnitySingletonResource):
     def get_file_interface(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityFileInterfaceList, _id=_id, name=name,
                                    **filters)
+
+    def create_iscsi_portal(self, ethernet_port, ip, netmask=None,
+                            v6_prefix_len=None, vlan=None, gateway=None):
+        return UnityIscsiPortal.create(
+            cli=self._cli, ethernet_port=ethernet_port, ip=ip, netmask=netmask,
+            v6_prefix_len=v6_prefix_len, vlan=vlan, gateway=gateway)
 
     def get_dns_server(self, _id=None, **filters):
         return self._get_unity_rsc(UnityFileDnsServerList, _id=_id, **filters)

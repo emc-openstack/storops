@@ -543,6 +543,11 @@ class UnityEthernetPortAlreadyAggregatedError(UnityException):
     error_code = 100665643
 
 
+@rest_exception
+class UnityIPInUseException(UnityException):
+    error_code = 118939658
+
+
 class UnityMetricException(UnityException):
     pass
 

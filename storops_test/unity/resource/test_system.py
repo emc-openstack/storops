@@ -200,6 +200,14 @@ class UnitySystemTest(TestCase):
         assert_that(portals, instance_of(UnityIscsiPortalList))
 
     @patch_rest
+    def test_create_iscsi_portal(self):
+        unity = t_unity()
+        portal = unity.create_iscsi_portal(
+            ethernet_port='spa_eth3', ip="10.244.213.244",
+            netmask="255.255.255.0", vlan=133, gateway="10.244.213.1")
+        assert_that(portal.id, equal_to('if_4'))
+
+    @patch_rest
     def test_get_ethernet_list(self):
         unity = t_unity()
         ports = unity.get_ethernet_port()

@@ -163,6 +163,38 @@ class UnityIscsiPortal(UnityResource):
     def get_nested_properties(cls):
         return 'iscsi_node.name'
 
+    @classmethod
+    def create(cls, cli, ethernet_port, ip, netmask=None,
+               v6_prefix_len=None, vlan=None, gateway=None):
+        if not isinstance(ethernet_port, UnityEthernetPort):
+            ethernet_port = UnityEthernetPort.get(cli, _id=ethernet_port)
+
+        req_body = cli.make_body(
+            ethernetPort=ethernet_port,
+            ipAddress=ip,
+            netmask=netmask,
+            v6PrefixLength=v6_prefix_len,
+            vlanId=vlan,
+            gateway=gateway,
+        )
+        resp = cli.post(cls().resource_class, **req_body)
+        resp.raise_if_err()
+        return cls(cli=cli, _id=resp.resource_id)
+
+    def modify(self, ip=None, netmask=None,
+               v6_prefix_len=None, vlan=None, gateway=None):
+        req_body = self._cli.make_body(
+            ipAddress=ip,
+            netmask=netmask,
+            v6PrefixLength=v6_prefix_len,
+            vlanId=vlan,
+            gateway=gateway
+        )
+        resp = self._cli.modify(self.resource_class,
+                                self.get_id(), **req_body)
+        resp.raise_if_err()
+        return resp
+
 
 class UnityIscsiPortalList(UnityResourceList):
     def __init__(self, cli=None, port_ids=None, **filters):

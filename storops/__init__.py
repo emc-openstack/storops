@@ -16,8 +16,8 @@
 from __future__ import unicode_literals
 
 import sys
-import logging
 
+from storops.lib.thinclone_helper import TCHelper
 from storops.unity.enums import *  # noqa
 from storops.unity.resource.system import UnitySystem  # noqa
 from storops.vnx.enums import *  # noqa

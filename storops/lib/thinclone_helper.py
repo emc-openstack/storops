@@ -1,7 +1,11 @@
+import logging
+
 from persistqueue import PDict
 
 from storops.lib.tasks import PQueue
 from storops.unity.enums import TCActionEnum
+
+log = logging.getLogger(__name__)
 
 
 class TCHelper(object):
@@ -12,6 +16,7 @@ class TCHelper(object):
 
     @staticmethod
     def set_up(persist_path):
+        log.debug('Set up TCHelper, persist path: %s.', persist_path)
         TCHelper._tc_cache = PDict(persist_path, 'tc_cache',
                                    multithreading=True)
         TCHelper._gc_candidates = PDict(persist_path, 'gc_candidates',
@@ -52,6 +57,7 @@ class TCHelper(object):
             # `lun_or_snap` is an UnityLun, create a temp snap which is needed
             # when creating the thin-clone.
             tc_node = lun_or_snap
+            tc_base_id = lun_or_snap.get_id
             snap_to_tc = tc_node.create_snap(name='tmp-{}'.format(name),
                                              is_auto_delete=False)
         else:
@@ -62,6 +68,9 @@ class TCHelper(object):
         _id = lun_or_snap.get_id()
         if _id in TCHelper._tc_cache:
             tc_node = TCHelper._tc_cache[_id]
+            log.debug('Found %(id)s in TCHelper cache. Use it: %(cache)s as '
+                      'the base to thin clone.',
+                      {'id': _id, 'cache': tc_node})
 
         req_body = TCHelper._compose_thin_clone(
             cli, name=name, snap=snap_to_tc, description=description,
@@ -84,6 +93,9 @@ class TCHelper(object):
             #     functools.partial(TCHelper._delete_base_lun, base_lun))
             TCHelper._gc_background.put(TCHelper._delete_base_lun,
                                         base_lun=base_lun)
+            log.debug('Found %(id)s in TCHelper cache. Put its base lun: '
+                      '%(base)s to gc candidates list and background.',
+                      {'id': lun_or_snap_id, 'base': base_lun.get_id()})
 
     @staticmethod
     def _delete_thin_clone(thin_clone):
@@ -95,6 +107,8 @@ class TCHelper(object):
                 and base_lun.family_clone_count == 0):
             base_lun.delete()
             del TCHelper._gc_candidates[base_lun.get_id()]
+            log.debug('Base lun %s deleted. And remove from gc candidates.',
+                      base_lun.get_id())
 
     @staticmethod
     def _update_cache(lun_or_snap, action_enum, *args):
@@ -110,6 +124,8 @@ class TCHelper(object):
     @staticmethod
     def notify(lun_or_snap, action_enum, *args):
         if action_enum in (TCActionEnum.TC_DELETE,):
+            log.debug('Try to delete base lun of %s actively.',
+                      lun_or_snap.get_id())
             # Delete the base lun of thin-clone actively.
             TCHelper._delete_thin_clone(lun_or_snap)
 

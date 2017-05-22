@@ -53,24 +53,27 @@ class TCHelper(object):
         from storops.unity.resource.storage_resource import \
             UnityStorageResource
 
+        snap_to_tc = None  # None means to create a temp snap for thin clone
         if isinstance(lun_or_snap, UnityLun):
-            # `lun_or_snap` is an UnityLun, create a temp snap which is needed
-            # when creating the thin-clone.
             tc_node = lun_or_snap
-            tc_base_id = lun_or_snap.get_id
-            snap_to_tc = tc_node.create_snap(name='tmp-{}'.format(name),
-                                             is_auto_delete=False)
         else:
-            # `lun_or_snap` is an UnitySnap
+            # `lun_or_snap` is an UnitySnap, use it for thin clone directly.
             tc_node = lun_or_snap.lun
             snap_to_tc = lun_or_snap
 
         _id = lun_or_snap.get_id()
         if _id in TCHelper._tc_cache:
             tc_node = TCHelper._tc_cache[_id]
+            snap_to_tc = None
             log.debug('Found %(id)s in TCHelper cache. Use it: %(cache)s as '
                       'the base to thin clone.',
                       {'id': _id, 'cache': tc_node})
+
+        if snap_to_tc is None:
+            snap_to_tc = tc_node.create_snap(name='tmp-{}'.format(name),
+                                             is_auto_delete=False)
+            log.debug('Temp snap used for thin clone is created: %s.',
+                      snap_to_tc.get_id())
 
         req_body = TCHelper._compose_thin_clone(
             cli, name=name, snap=snap_to_tc, description=description,

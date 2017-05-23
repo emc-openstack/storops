@@ -1268,3 +1268,7 @@ class JobStateError(UnityJobException):
 
 class UnityBaseHasThinCloneError(UnityException):
     error_code = 108009078
+
+
+class UnityTCSnapUnderDestroyError(UnityException):
+    error_code = 108008719

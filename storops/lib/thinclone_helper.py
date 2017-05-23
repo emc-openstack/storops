@@ -2,6 +2,7 @@ import logging
 
 from persistqueue import PDict
 
+from storops import exception
 from storops.lib.tasks import PQueue
 from storops.unity.enums import TCActionEnum
 
@@ -108,10 +109,18 @@ class TCHelper(object):
     def _delete_base_lun(cls, base_lun):
         if (base_lun.get_id() in TCHelper._gc_candidates
                 and base_lun.family_clone_count == 0):
-            base_lun.delete()
-            del TCHelper._gc_candidates[base_lun.get_id()]
-            log.debug('Base lun %s deleted. And remove from gc candidates.',
-                      base_lun.get_id())
+            try:
+                base_lun.delete()
+                del TCHelper._gc_candidates[base_lun.get_id()]
+                log.debug(
+                    'Base lun %s deleted. And remove from gc candidates.',
+                    base_lun.get_id())
+            except exception.UnityTCSnapUnderDestroyError:
+                log.debug('Failed to delete base lun %s due to the underlying '
+                          'snapshot for thin clone still under destroying. '
+                          'The background gc will delete it later.',
+                          base_lun.get_id())
+                pass
 
     @staticmethod
     def _update_cache(lun_or_snap, action_enum, *args):

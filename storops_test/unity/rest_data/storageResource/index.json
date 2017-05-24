@@ -985,7 +985,7 @@
       "response": "thin_clone_lun.json"
     },
     {
-      "url": "/api/instances/storageResource/sv_3/action/createLunThinClone?compact=True",
+      "url": "/api/instances/storageResource/sv_5605/action/createLunThinClone?compact=True",
       "body": {
         "name": "test_thin_clone_lun",
         "snap": {
@@ -1013,6 +1013,14 @@
         "forceVvolDeletion": true
       },
       "response": "sv_5604.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5606?compact=True",
+      "body": {
+        "forceSnapDeletion": false,
+        "forceVvolDeletion": false
+      },
+      "response": "sv_5606.json"
     }
   ]
 }

@@ -1266,9 +1266,11 @@ class JobStateError(UnityJobException):
             self.job.state.name, '.  '.join(self.job.messages))
 
 
+@rest_exception
 class UnityBaseHasThinCloneError(UnityException):
     error_code = 108009078
 
 
+@rest_exception
 class UnityTCSnapUnderDestroyError(UnityException):
     error_code = 108008719

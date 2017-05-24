@@ -316,6 +316,17 @@
     {
       "url": "/api/instances/snap/38654700002?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
       "response": "38654700002.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "sv_5605"
+        },
+        "name": "tmp-test_thin_clone_lun",
+        "isAutoDelete": false
+      },
+      "response": "create_38654700001.json"
     }
   ]
 }

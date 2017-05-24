@@ -92,14 +92,15 @@ class TCHelper(object):
         lun_or_snap_id = lun_or_snap.get_id()
         if lun_or_snap_id in TCHelper._tc_cache:
             base_lun = TCHelper._tc_cache[lun_or_snap_id]
+            log.debug('Found %(id)s in TCHelper cache. Base lun: %(base)s.',
+                      {'id': lun_or_snap_id, 'base': base_lun.get_id()})
             TCHelper._gc_candidates[base_lun.get_id()] = base_lun.get_id()
-            # TCHelper._gc_background.put(
-            #     functools.partial(TCHelper._delete_base_lun, base_lun))
+            log.debug('Put base lun: %s to gc candidates list.',
+                      base_lun.get_id())
             TCHelper._gc_background.put(TCHelper._delete_base_lun,
                                         base_lun=base_lun)
-            log.debug('Found %(id)s in TCHelper cache. Put its base lun: '
-                      '%(base)s to gc candidates list and background.',
-                      {'id': lun_or_snap_id, 'base': base_lun.get_id()})
+            log.debug('Put base lun: %s to background gc process.',
+                      base_lun.get_id())
 
     @staticmethod
     def _delete_thin_clone(thin_clone):
@@ -127,11 +128,20 @@ class TCHelper(object):
         lun_or_snap_id = lun_or_snap.get_id()
         if action_enum in (TCActionEnum.DD_COPY,):
             TCHelper._gc_base_lun(lun_or_snap)
+            log.debug('Garbage collected for base lun of %(id)s, triggered by '
+                      '%(action)s action.',
+                      {'id': lun_or_snap_id, 'action': action_enum.name})
             TCHelper._tc_cache[lun_or_snap_id] = args[0]
+            log.debug('Cache updated for base lun of %(id)s to %(new)s.',
+                      {'id': lun_or_snap_id, 'new': args[0]})
         elif action_enum in (TCActionEnum.LUN_ATTACH,):
             TCHelper._gc_base_lun(lun_or_snap)
+            log.debug('Garbage collected for base lun of %(id)s, triggered by '
+                      '%(action)s action.',
+                      {'id': lun_or_snap_id, 'action': action_enum.name})
             if lun_or_snap_id in TCHelper._tc_cache:
                 del TCHelper._tc_cache[lun_or_snap_id]
+                log.debug('Removed base lun of %s from cache.', lun_or_snap_id)
 
     @staticmethod
     def notify(lun_or_snap, action_enum, *args):

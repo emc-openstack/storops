@@ -23,7 +23,8 @@ from unittest import TestCase
 import mock
 from hamcrest import assert_that, equal_to, raises
 
-from storops.exception import UnityThinCloneLimitExceededError
+from storops.exception import UnityThinCloneLimitExceededError,\
+    UnityTCSnapUnderDestroyError
 from storops.lib.thinclone_helper import TCHelper
 from storops.unity.enums import TCActionEnum
 from storops.unity.resource.lun import UnityLun
@@ -52,7 +53,7 @@ class TestThinCloneHelper(TestCase):
 
     @patch_rest
     def test_thin_clone_lun_new_tc_base(self):
-        TCHelper._tc_cache['sv_2'] = UnityLun.get(_id='sv_3',
+        TCHelper._tc_cache['sv_2'] = UnityLun.get(_id='sv_5605',
                                                   cli=t_rest(version='4.2.0'))
         lun = UnityLun.get(_id='sv_2', cli=t_rest(version='4.2.0'))
         cloned = TCHelper.thin_clone(lun._cli, lun, name='test_thin_clone_lun',
@@ -71,7 +72,7 @@ class TestThinCloneHelper(TestCase):
 
     @patch_rest
     def test_thin_clone_snap_new_tc_base(self):
-        TCHelper._tc_cache['sv_2'] = UnityLun.get(_id='sv_3',
+        TCHelper._tc_cache['sv_2'] = UnityLun.get(_id='sv_5605',
                                                   cli=t_rest(version='4.2.0'))
         lun = UnityLun.get(_id='sv_2', cli=t_rest(version='4.2.0'))
         cloned = TCHelper.thin_clone(lun._cli, lun, name='test_thin_clone_lun',
@@ -172,3 +173,9 @@ class TestThinCloneHelper(TestCase):
         self.assertFalse(lun.get_id() in TCHelper._gc_candidates)
         self.assertFalse(base_lun.get_id() in TCHelper._gc_candidates)
         lun_delete.assert_called_once()
+
+    @patch_rest
+    def test_delete_base_lun_raise(self):
+        base_lun = UnityLun.get(_id='sv_5606', cli=t_rest(version='4.2.0'))
+        TCHelper._gc_candidates[base_lun.get_id()] = base_lun.get_id()
+        self.assertTrue(base_lun.get_id() in TCHelper._gc_candidates)

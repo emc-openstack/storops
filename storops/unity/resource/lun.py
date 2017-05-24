@@ -191,6 +191,8 @@ class UnityLun(UnityResource):
 
         resp = self.modify(host_access=host_access)
         resp.raise_if_err()
+        log.debug('Notify TCHelper the attaching action of lun: %s.',
+                  self.get_id())
         TCHelper.notify(self, TCActionEnum.LUN_ATTACH)
         return resp
 

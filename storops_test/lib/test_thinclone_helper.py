@@ -23,8 +23,7 @@ from unittest import TestCase
 import mock
 from hamcrest import assert_that, equal_to, raises
 
-from storops.exception import UnityThinCloneLimitExceededError,\
-    UnityTCSnapUnderDestroyError
+from storops.exception import UnityThinCloneLimitExceededError
 from storops.lib.thinclone_helper import TCHelper
 from storops.unity.enums import TCActionEnum
 from storops.unity.resource.lun import UnityLun

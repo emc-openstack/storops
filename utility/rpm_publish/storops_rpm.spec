@@ -16,20 +16,26 @@ RPM package of Storops for Openstack distribution.
 # create the folders
 mkdir -p $RPM_BUILD_ROOT/tmp/storops
 
-cp %{getenv:PWD}/requirements.txt $RPM_BUILD_ROOT/tmp/storops
-pip download -r $RPM_BUILD_ROOT/tmp/storops/requirements.txt -d $RPM_BUILD_ROOT/tmp/storops
-pip download -d $RPM_BUILD_ROOT/tmp/storops --no-deps storops
+grep 'rpm-package' %{getenv:PWD}/requirements.txt > $RPM_BUILD_ROOT/tmp/storops/requirements.txt
+pip download -r $RPM_BUILD_ROOT/tmp/storops/requirements.txt -d $RPM_BUILD_ROOT/tmp/storops --no-binary :all: --no-deps
+pip download -d $RPM_BUILD_ROOT/tmp/storops --no-binary :all: --no-deps storops
+rm $RPM_BUILD_ROOT/tmp/storops/requirements.txt
 
 %post
 echo Installing storops and dependencies.
-pip install --no-index --find-links file:///tmp/storops storops
+cd /tmp/storops
+for i in $(ls *.tar.gz); do
+    cd /tmp/storops
+    echo Installing Python package ${i%.tar.gz}
+    tar -xzf ${i} && cd ${i%.tar.gz} && python setup.py install
+done
 
 %clean
 rm -rf "$RPM_BUILD_ROOT/tmp"
 
 %files
 %defattr (-,root,root)
-/tmp/storops/*
+/tmp/storops/*.tar.gz
 
 
 %changelog

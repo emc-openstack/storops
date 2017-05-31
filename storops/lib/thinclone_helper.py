@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright (c) 2015 EMC Corporation.
+# Copyright (c) 2017 Dell Inc. or its subsidiaries.
 # All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -21,7 +21,7 @@ from persistqueue import PDict
 
 from storops import exception
 from storops.lib.tasks import PQueue
-from storops.unity.enums import TCActionEnum
+from storops.unity.enums import ThinCloneActionEnum
 
 log = logging.getLogger(__name__)
 
@@ -51,18 +51,11 @@ class TCHelper(object):
         TCHelper._gc_background = {}
 
     @staticmethod
-    def _compose_thin_clone(cli, **kwargs):
-        name = kwargs.get('name')
-        snap = kwargs.get('snap')
-        description = kwargs.get('description')
-        io_limit_policy = kwargs.get('io_limit_policy')
-        req_body = cli.make_body(
-            name=name,
-            snap=snap,
-            description=description,
-            lunParameters=cli.make_body(ioLimitParameters=io_limit_policy)
-        )
-        return req_body
+    def _compose_thin_clone(cli, name=None, snap=None, description=None,
+                            io_limit_policy=None):
+        return cli.make_body(name=name, snap=snap, description=description,
+                             lunParameters=cli.make_body(
+                                 ioLimitParameters=io_limit_policy))
 
     @staticmethod
     def thin_clone(cli, lun_or_snap, name, io_limit_policy=None,
@@ -121,29 +114,34 @@ class TCHelper(object):
 
     @staticmethod
     def _delete_thin_clone(thin_clone):
-        TCHelper._delete_base_lun(thin_clone.family_base_lun)
+        try:
+            TCHelper._delete_base_lun(thin_clone.family_base_lun)
+        except exception.UnityBaseHasThinCloneError:
+            log.info('Failed to delete base lun %s due to it still has other '
+                     'thin clones. The background gc will delete it later.',
+                     thin_clone.family_base_lun.get_id())
+        except exception.UnityTCSnapUnderDestroyError:
+            log.info('Failed to delete base lun %s due to the underlying '
+                     'snapshot for thin clone still under destroying. '
+                     'The background gc will delete it later.',
+                     thin_clone.family_base_lun.get_id())
 
     @classmethod
     def _delete_base_lun(cls, base_lun):
-        if (base_lun.get_id() in TCHelper._gc_candidates
-                and base_lun.family_clone_count == 0):
-            try:
-                base_lun.delete()
-                del TCHelper._gc_candidates[base_lun.get_id()]
-                log.debug(
-                    'Base lun %s deleted. And remove from gc candidates.',
-                    base_lun.get_id())
-            except exception.UnityTCSnapUnderDestroyError:
-                log.debug('Failed to delete base lun %s due to the underlying '
-                          'snapshot for thin clone still under destroying. '
-                          'The background gc will delete it later.',
-                          base_lun.get_id())
-                pass
+        if base_lun.get_id() in TCHelper._gc_candidates:
+            if base_lun.family_clone_count > 0:
+                # Will re-enter the background gc queue
+                raise exception.UnityBaseHasThinCloneError()
+
+            base_lun.delete()
+            del TCHelper._gc_candidates[base_lun.get_id()]
+            log.debug('Base lun %s deleted. And removed from gc candidates.',
+                      base_lun.get_id())
 
     @staticmethod
     def _update_cache(lun_or_snap, action_enum, *args):
         lun_or_snap_id = lun_or_snap.get_id()
-        if action_enum in (TCActionEnum.DD_COPY,):
+        if action_enum in (ThinCloneActionEnum.DD_COPY,):
             TCHelper._gc_base_lun(lun_or_snap)
             log.debug('Garbage collected for base lun of %(id)s, triggered by '
                       '%(action)s action.',
@@ -151,7 +149,7 @@ class TCHelper(object):
             TCHelper._tc_cache[lun_or_snap_id] = args[0]
             log.debug('Cache updated for base lun of %(id)s to %(new)s.',
                       {'id': lun_or_snap_id, 'new': args[0]})
-        elif action_enum in (TCActionEnum.LUN_ATTACH,):
+        elif action_enum in (ThinCloneActionEnum.LUN_ATTACH,):
             TCHelper._gc_base_lun(lun_or_snap)
             log.debug('Garbage collected for base lun of %(id)s, triggered by '
                       '%(action)s action.',
@@ -162,7 +160,7 @@ class TCHelper(object):
 
     @staticmethod
     def notify(lun_or_snap, action_enum, *args):
-        if action_enum in (TCActionEnum.TC_DELETE,):
+        if action_enum in (ThinCloneActionEnum.TC_DELETE,):
             log.debug('Try to delete base lun of %s actively.',
                       lun_or_snap.get_id())
             # Delete the base lun of thin-clone actively.

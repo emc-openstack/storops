@@ -1015,12 +1015,20 @@
       "response": "sv_5604.json"
     },
     {
-      "url": "/api/instances/storageResource/sv_5606?compact=True",
+      "url": "/api/instances/storageResource/sv_5607?compact=True",
       "body": {
         "forceSnapDeletion": false,
         "forceVvolDeletion": false
       },
-      "response": "sv_5606.json"
+      "response": "sv_5607.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_4?compact=True",
+      "body": {
+        "forceSnapDeletion": false,
+        "forceVvolDeletion": false
+      },
+      "response": "sv_4.json"
     }
   ]
 }

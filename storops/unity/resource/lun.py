@@ -22,7 +22,7 @@ from storops.exception import UnityResourceNotFoundError
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
-    HostLUNAccessEnum, TCActionEnum
+    HostLUNAccessEnum, ThinCloneActionEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor
@@ -178,7 +178,7 @@ class UnityLun(UnityResource):
         resp.raise_if_err()
 
         if self.is_thin_clone:
-            TCHelper.notify(self, TCActionEnum.TC_DELETE)
+            TCHelper.notify(self, ThinCloneActionEnum.TC_DELETE)
         return resp
 
     def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
@@ -193,7 +193,7 @@ class UnityLun(UnityResource):
         resp.raise_if_err()
         log.debug('Notify TCHelper the attaching action of lun: %s.',
                   self.get_id())
-        TCHelper.notify(self, TCActionEnum.LUN_ATTACH)
+        TCHelper.notify(self, ThinCloneActionEnum.LUN_ATTACH)
         return resp
 
     def detach_from(self, host):

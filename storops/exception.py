@@ -572,11 +572,6 @@ class UnityPoolNameInUseError(UnityException):
     error_code = 108003600
 
 
-@rest_exception
-class UnityThinCloneLimitExceededError(UnityException):
-    error_code = 108008767
-
-
 class VNXStatsError(VNXException):
     pass
 
@@ -1266,11 +1261,23 @@ class JobStateError(UnityJobException):
             self.job.state.name, '.  '.join(self.job.messages))
 
 
+class UnityThinCloneException(UnityException):
+    """Unity exceptions for Thin clone.
+
+    Any thin-clone related exceptions should inherit this exception."""
+    pass
+
+
 @rest_exception
-class UnityBaseHasThinCloneError(UnityException):
+class UnityThinCloneLimitExceededError(UnityThinCloneException):
+    error_code = 108008767
+
+
+@rest_exception
+class UnityBaseHasThinCloneError(UnityThinCloneException):
     error_code = 108009078
 
 
 @rest_exception
-class UnityTCSnapUnderDestroyError(UnityException):
+class UnityTCSnapUnderDestroyError(UnityThinCloneException):
     error_code = 108008719

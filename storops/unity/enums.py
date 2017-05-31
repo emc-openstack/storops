@@ -723,7 +723,7 @@ class DiskTechnologyEnum(UnityEnum):
     VIRTUAL = (99, 'Virtual')
 
 
-class TCActionEnum(UnityEnum):
+class ThinCloneActionEnum(UnityEnum):
     DD_COPY = (1, 'Copy via dd')
     LUN_ATTACH = (2, 'Attach a base LUN')
     TC_DELETE = (3, 'Delete a thin-cloned LUN')

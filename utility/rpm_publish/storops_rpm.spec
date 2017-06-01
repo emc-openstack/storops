@@ -1,5 +1,5 @@
 Name: storops_os
-Version: 0.4.12
+Version: 0.4.13
 Release: 0
 Vendor: Cedric Zhuang
 Summary: Python API for VNX and Unity.
@@ -39,6 +39,9 @@ rm -rf "$RPM_BUILD_ROOT/tmp"
 
 
 %changelog
+* Thu Jun 1 2017 Denny Zhao
+- 0.4.13 for storops 0.4.13 and it's dependencies.
+
 * Fri Apr 21 2017 Denny Zhao
 - 0.4.12 for storops 0.4.12 and it's dependencies.
 

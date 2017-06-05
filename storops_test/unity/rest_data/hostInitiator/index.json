@@ -11,7 +11,7 @@
     {
       "url": "/api/instances/hostInitiator/HostInitiator_1?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type",
       "response": "initiator_1.json"
-    },    
+    },
     {
       "url": "/api/instances/hostInitiator/HostInitiator_2?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type",
       "response": "initiator_2.json"
@@ -31,7 +31,7 @@
     {
       "url": "/api/types/hostInitiator/instances?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type&filter=initiatorId eq \"HostInitiator_2\"",
       "response": "initiator_2.json"
-    },    
+    },
     {
       "url": "/api/types/hostInitiator/instances?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type&filter=initiatorId eq \"50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10\"",
       "response": "initiator_2.json"
@@ -50,58 +50,58 @@
     },
     {
       "url": "/api/types/hostInitiator/instances?compact=True",
-        "body":  {
-          "host": {
-              "id": "Host_9"
-          },
-          "initiatorType": 1,
-          "initiatorWWNorIqn": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"
+      "body": {
+        "host": {
+          "id": "Host_9"
         },
-        "response": "create_fc_initiator.json"
+        "initiatorType": 1,
+        "initiatorWWNorIqn": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"
+      },
+      "response": "create_fc_initiator.json"
     },
     {
       "url": "/api/types/hostInitiator/instances?compact=True",
-        "body":  {
-          "host": {
-              "id": "Host_9"
-          },
-          "initiatorType": 1,
-          "initiatorWWNorIqn": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:99:99"
+      "body": {
+        "host": {
+          "id": "Host_9"
         },
-        "response": "create_fc_initiator.json"
+        "initiatorType": 1,
+        "initiatorWWNorIqn": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:99:99"
+      },
+      "response": "create_fc_initiator.json"
     },
     {
       "url": "/api/types/hostInitiator/instances?compact=True",
-        "body":  {
-          "host": {
-              "id": "Host_9"
-          },
-          "initiatorType": 2,
-          "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed14d65"
+      "body": {
+        "host": {
+          "id": "Host_9"
         },
-        "response": "create_iscsi_initiator.json"
+        "initiatorType": 2,
+        "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed14d65"
+      },
+      "response": "create_iscsi_initiator.json"
     },
     {
       "url": "/api/types/hostInitiator/instances?compact=True",
-        "body":  {
-          "host": {
-              "id": "Host_1"
-          },
-          "initiatorType": 2,
-          "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed19999"
+      "body": {
+        "host": {
+          "id": "Host_1"
         },
-        "response": "create_iscsi_initiator.json"
+        "initiatorType": 2,
+        "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed19999"
+      },
+      "response": "create_iscsi_initiator.json"
     },
     {
       "url": "/api/types/hostInitiator/instances?compact=True",
-        "body":  {
-          "host": {
-              "id": "Host_9"
-          },
-          "initiatorType": 2,
-          "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed19999"
+      "body": {
+        "host": {
+          "id": "Host_9"
         },
-        "response": "initiator_already_existed.json"
+        "initiatorType": 2,
+        "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed19999"
+      },
+      "response": "initiator_already_existed.json"
     },
     {
       "url": "/api/instances/hostInitiator/HostInitiator_1/action/modify?compact=True",
@@ -143,6 +143,86 @@
     },
     {
       "url": "/api/instances/hostInitiator/HostInitiator_2?compact=True",
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/hostInitiator/instances?compact=True",
+      "body": {
+        "host": {
+          "id": "Host_22"
+        },
+        "initiatorType": 2,
+        "initiatorWWNorIqn": "iqn.1993-08.org.debian:01:a4f95ed19999"
+      },
+      "response": "create_iscsi_initiator.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_3/action/modify?compact=True",
+      "body": {
+        "host": {
+          "id": "Host_22"
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_48?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type",
+      "response": "initiator_4.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_48/action/modify?compact=True",
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_48?compact=True",
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_2/action/modify?compact=True",
+      "body": {
+        "host": {
+          "id": "Host_22"
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_19/action/modify?compact=True",
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_19?compact=True",
+      "body": {},
+      "response": "initiator_19.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_2/action/modify?compact=True",
+      "body": {
+        "host": {
+          "id": "Host_15"
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_19?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type",
+      "response": "initiator_19.json"
+    },
+    {
+      "url": "/api/types/hostInitiator/instances?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type&filter=initiatorId eq \"50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:11\"",
+      "response": "initiator_19.json"
+    },
+    {
+      "url": "/api/types/hostInitiator/instances?compact=True&fields=chapUserName,health,id,initiatorId,instanceId,isBound,isChapSecretEnabled,isIgnored,iscsiType,name,nodeWWN,operationalStatus,parentHost,paths,portWWN,sourceType,type&filter=initiatorId eq \"50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:12\"",
+      "response": "initiator_19.json"
+    },
+    {
+      "url": "/api/instances/hostInitiator/HostInitiator_19/action/modify?compact=True",
+      "body": {
+        "host": {
+          "id": "Host_9"
+        }
+      },
       "response": "empty.json"
     }
   ]

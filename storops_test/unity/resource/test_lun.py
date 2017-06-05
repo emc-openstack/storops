@@ -36,6 +36,7 @@ from storops.unity.resource.port import UnityIoLimitPolicy, \
 from storops.unity.resource.snap import UnitySnap
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.storage_resource import UnityStorageResource
+from storops.unity.resp import RestResponse
 from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
 from storops_test.utils import is_nan
 
@@ -69,6 +70,7 @@ class UnityLunTest(TestCase):
         assert_that(lun.storage_resource, instance_of(UnityStorageResource))
         assert_that(lun.pool, instance_of(UnityPool))
         assert_that(lun.io_limit_rule, none())
+        assert_that(lun.is_compression_enabled, equal_to(False))
 
     @patch_rest
     def test_lun_modify_host_access(self):
@@ -90,6 +92,18 @@ class UnityLunTest(TestCase):
         assert_that(sp.to_node_enum(), equal_to(NodeEnum.SPB))
 
     @patch_rest
+    def test_lun_modify_sp_with_id(self):
+        lun = UnityLun(_id='sv_4', cli=t_rest())
+        resp = lun.modify(sp=1)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_lun_modify_sp_with_enum(self):
+        lun = UnityLun(_id='sv_4', cli=t_rest())
+        resp = lun.modify(sp=NodeEnum.SPB)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
     def test_lun_modify_none(self):
         lun = UnityLun(_id='sv_4', cli=t_rest())
         resp = lun.modify(host_access=None)
@@ -106,7 +120,7 @@ class UnityLunTest(TestCase):
     @patch_rest
     def test_lun_modify_muitl_property_except_sp(self):
         lun = UnityLun(_id='sv_4', cli=t_rest())
-        lun.modify(name="RestLun100", is_thin=True,
+        lun.modify(name="RestLun100", is_compression=True,
                    description="Lun description")
         lun.update()
         assert_that(lun.name, equal_to('RestLun100'))
@@ -185,6 +199,7 @@ class UnityLunTest(TestCase):
         assert_that(access.access_mask, equal_to(HostLUNAccessEnum.PRODUCTION))
         assert_that(access.host, instance_of(UnityHost))
         assert_that(access.host.id, equal_to('Host_1'))
+        assert_that(lun.host_access.get_host_id(), equal_to([access.host.id]))
 
     @patch_rest
     def test_lun_snap_create(self):
@@ -296,6 +311,18 @@ class UnityLunTest(TestCase):
                            io_limit_policy=None)
 
         assert_that(_inner, raises(UnityThinCloneLimitExceededError))
+
+    @patch_rest
+    def test_update_hosts(self):
+        lun = UnityLun.get(cli=t_rest(), _id="sv_4")
+        r = lun.update_hosts(host_names=["ubuntu-server7"])
+        assert_that(r, instance_of(RestResponse))
+
+    @patch_rest
+    def test_update_hosts_no_change(self):
+        lun = UnityLun.get(cli=t_rest(), _id="sv_4")
+        r = lun.update_hosts(host_names=["10.244.209.90"])
+        assert_that(r, none())
 
 
 class UnityLunEnablePerfStatsTest(TestCase):

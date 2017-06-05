@@ -27,6 +27,7 @@ from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.storage_resource import UnityStorageResource
+from storops.unity.resource.host import UnityHostList
 
 __author__ = 'Jay Xu'
 
@@ -37,7 +38,8 @@ class UnityLun(UnityResource):
     @classmethod
     def create(cls, cli, name, pool, size, sp=None, host_access=None,
                is_thin=None, description=None, io_limit_policy=None,
-               is_repl_dst=None, tiering_policy=None, snap_schedule=None):
+               is_repl_dst=None, tiering_policy=None, snap_schedule=None,
+               is_compression=None):
         pool_clz = storops.unity.resource.pool.UnityPool
         pool = pool_clz.get(cli, pool)
 
@@ -45,7 +47,8 @@ class UnityLun(UnityResource):
             cli, name=name, pool=pool, size=size, sp=sp, is_thin=is_thin,
             host_access=host_access, description=description,
             io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
-            tiering_policy=tiering_policy, snap_schedule=snap_schedule)
+            tiering_policy=tiering_policy, snap_schedule=snap_schedule,
+            is_compression=is_compression)
         resp = cli.type_action(UnityStorageResource().resource_class,
                                'createLun', **req_body)
         resp.raise_if_err()
@@ -114,8 +117,10 @@ class UnityLun(UnityResource):
         sp = kwargs.get('sp')
         if isinstance(sp, UnityStorageProcessor):
             sp_node = sp.to_node_enum()
+        elif isinstance(sp, NodeEnum):
+            sp_node = sp
         else:
-            sp_node = None
+            sp_node = NodeEnum.parse(sp)
 
         TieringPolicyEnum.verify(kwargs.get('tiering_policy'))
         NodeEnum.verify(sp_node)
@@ -129,6 +134,7 @@ class UnityLun(UnityResource):
             ),
             lunParameters=cli.make_body(
                 isThinEnabled=kwargs.get('is_thin'),
+                isCompressionEnabled=kwargs.get('is_compression'),
                 size=kwargs.get('size'),
                 pool=kwargs.get('pool'),
                 defaultNode=sp_node,
@@ -151,15 +157,16 @@ class UnityLun(UnityResource):
         return req_body
 
     def modify(self, name=None, size=None, host_access=None,
-               description=None, is_thin=None, sp=None, io_limit_policy=None,
-               is_repl_dst=None, tiering_policy=None, snap_schedule=None):
+               description=None, sp=None, io_limit_policy=None,
+               is_repl_dst=None, tiering_policy=None, snap_schedule=None,
+               is_compression=None):
 
         req_body = self._compose_lun_parameter(
             self._cli, name=name, pool=None, size=size, sp=sp,
-            host_access=host_access, is_thin=is_thin, description=description,
+            host_access=host_access, description=description,
             io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
             tiering_policy=tiering_policy, snap_schedule=snap_schedule,
-        )
+            is_compression=is_compression)
         resp = self._cli.action(UnityStorageResource().resource_class,
                                 self.get_id(), 'modifyLun', **req_body)
         resp.raise_if_err()
@@ -203,6 +210,34 @@ class UnityLun(UnityResource):
         new_access = [{'host': item.host,
                        'accessMask': item.access_mask} for item
                       in self.host_access if host.id != item.host.id]
+        resp = self.modify(host_access=new_access)
+        resp.raise_if_err()
+        return resp
+
+    def update_hosts(self, host_names):
+
+        """Primarily for puppet-unity use.
+
+        Update the hosts for the lun if needed.
+
+        :param host_names: specify the new hosts which access the LUN.
+        """
+
+        if self.host_access:
+            curr_hosts = [access.host.name for access in self.host_access]
+        else:
+            curr_hosts = []
+
+        if set(curr_hosts) == set(host_names):
+            log.info('Hosts for updating is equal to current hosts, '
+                     'skip modification.')
+            return None
+
+        new_hosts = [UnityHostList.get(cli=self._cli, name=host_name)[0]
+                     for host_name in host_names]
+        new_access = [{'host': item,
+                       'accessMask': HostLUNAccessEnum.PRODUCTION}
+                      for item in new_hosts]
         resp = self.modify(host_access=new_access)
         resp.raise_if_err()
         return resp

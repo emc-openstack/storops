@@ -273,3 +273,43 @@ def mb_to_gb(mib):
 
 def block_to_gb(block):
     return bitmath.Byte(block * 512).to_GiB().value
+
+
+def to_minute(minute_str):
+    ret = None
+    if minute_str:
+        m = re.match("00:(\d+):00.000$", minute_str)
+        if m:
+            ret = int(m.group(1))
+    return ret
+
+
+def from_minute(minute_in_int):
+    if minute_in_int:
+        if 1 <= minute_in_int <= 60:
+            ret = "00:%02d:00.000" % minute_in_int
+        else:
+            raise ValueError("Value for minute must be 1 - 60.")
+    else:
+        ret = None
+    return ret
+
+
+def to_hour(hour_str):
+    ret = None
+    if hour_str:
+        m = re.match("(\d+):00:00.000$", hour_str)
+        if m:
+            ret = int(m.group(1))
+    return ret
+
+
+def from_hour(hour_in_int):
+    if hour_in_int:
+        if 1 <= hour_in_int <= 24:
+            ret = "%02d:00:00.000" % hour_in_int
+        else:
+            raise ValueError("Value for hour must be 1 - 24.")
+    else:
+        ret = None
+    return ret

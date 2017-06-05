@@ -539,7 +539,7 @@
       "url": "/api/instances/storageResource/sv_4/action/modifyLun?compact=True",
       "body": {
         "lunParameters": {
-          "isThinEnabled": 1
+          "isCompressionEnabled": true
         },
         "description": "Lun description",
         "name": "RestLun100"
@@ -1029,6 +1029,11 @@
         "forceVvolDeletion": false
       },
       "response": "sv_4.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_4/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_9"}, "accessMask": 1}]}},
+      "response": "empty.json"
     }
   ]
 }

@@ -19,7 +19,7 @@ from unittest import TestCase
 
 from datetime import datetime
 from hamcrest import assert_that, equal_to, none, has_items, instance_of, \
-    only_contains
+    only_contains, raises
 
 from storops.lib import converter
 
@@ -226,3 +226,33 @@ class ConverterTest(TestCase):
         url = 'https://10.244.211.30/router'
         ret = converter.url_to_mask(url)
         assert_that(ret, none())
+
+    def test_to_minute(self):
+        r = converter.to_minute("00:06:00.000")
+        assert_that(r, equal_to(6))
+
+    def test_to_minute_invalid(self):
+        r = converter.to_minute("07:00:00.000")
+        assert_that(r, none())
+
+    def test_to_hour(self):
+        r = converter.to_hour("07:00:00.000")
+        assert_that(r, equal_to(7))
+
+    def test_from_minute(self):
+        r = converter.from_minute(8)
+        assert_that(r, equal_to("00:08:00.000"))
+
+    def test_from_minite_str_lt_60(self):
+        def conv():
+            converter.from_minute(70)
+        assert_that(conv, raises(ValueError))
+
+    def test_from_hour_str(self):
+        r = converter.from_hour(11)
+        assert_that(r, equal_to("11:00:00.000"))
+
+    def test_from_hour_str_lt_24(self):
+        def conv():
+            converter.from_hour(25)
+        assert_that(conv, raises(ValueError))

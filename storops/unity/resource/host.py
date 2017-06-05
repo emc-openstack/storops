@@ -28,6 +28,8 @@ from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
 from storops.unity.resource.tenant import UnityTenant
 
+# from storops.unity.resource import lun
+
 __author__ = 'Cedric Zhuang'
 
 log = logging.getLogger(__name__)
@@ -41,6 +43,9 @@ class UnityBlockHostAccessList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnityBlockHostAccess
+
+    def get_host_id(self):
+        return [access.host.id for access in self]
 
 
 class UnitySnapHostAccess(UnityAttributeResource):
@@ -115,6 +120,17 @@ class UnityHost(UnityResource):
         else:
             ret = cls.get(cli=cli, _id=_id)
         return ret
+
+    def modify(self, name=None, desc=None, os=None):
+        req_body = self._cli.make_body(
+            name=name,
+            description=desc,
+            osType=os,
+        )
+        resp = self._cli.modify(self.resource_class,
+                                self.get_id(), **req_body)
+        resp.raise_if_err()
+        return self
 
     def _get_host_lun(self, lun=None, snap=None, hlu=None):
         lun_id = lun.id if lun is not None else None
@@ -311,6 +327,27 @@ class UnityHost(UnityResource):
                      .format(address, self.name))
         return resp
 
+    def update_initiators(self, iqns=None, wwns=None):
+        """Primarily for puppet-unity use.
+
+        Update the iSCSI and FC initiators if needed.
+        """
+        # First get current iqns
+        iqns = set(iqns) if iqns else set()
+        current_iqns = set()
+        if self.iscsi_host_initiators:
+            current_iqns = {initiator.initiator_id
+                            for initiator in self.iscsi_host_initiators}
+        # Then get current wwns
+        wwns = set(wwns) if wwns else set()
+        current_wwns = set()
+        if self.fc_host_initiators:
+            current_wwns = {initiator.initiator_id
+                            for initiator in self.fc_host_initiators}
+        updater = UnityHostInitiatorUpdater(
+            self, current_iqns | current_wwns, iqns | wwns)
+        return updater.update()
+
     @property
     def ip_list(self):
         if self.host_ip_ports:
@@ -318,6 +355,26 @@ class UnityHost(UnityResource):
         else:
             ret = []
         return ret
+
+
+class UnityHostInitiatorUpdater(object):
+    def __init__(self, host, current, new_initiators):
+        self.host = host
+        self.current = current
+        self.new_initiators = new_initiators
+
+    def compute(self):
+        to_add = self.new_initiators - self.current
+        to_delete = self.current - self.new_initiators
+        return to_add, to_delete
+
+    def update(self):
+        to_add, to_delete = self.compute()
+        for a in to_add:
+            self.host.add_initiator(a)
+        for d in to_delete:
+            self.host.delete_initiator(d)
+        return len(to_add | to_delete)
 
 
 class UnityHostList(UnityResourceList):

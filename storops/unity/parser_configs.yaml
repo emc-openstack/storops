@@ -40,6 +40,7 @@ UnityLun:
     - label: sizeAllocated
     - label: perTierSizeUsed
     - label: isThinEnabled
+    - label: isCompressionEnabled
     - label: storageResource
       converter: UnityStorageResource
     - label: pool
@@ -813,6 +814,8 @@ UnityIoLimitPolicy:
     - label: state
       converter: IOLimitPolicyStateEnum
     - label: isPaused
+    - label: type
+      converter: IOLimitPolicyTypeEnum
 
 
 # deprecated
@@ -830,7 +833,9 @@ UnityIoLimitRule:
     - label: maxKBPSDensity
     - label: burstRate
     - label: burstTime
+      converter: to_minute
     - label: burstFrequency
+      converter: to_hour
     - label: ioLimitpolicy
       key: io_limit_policy
       converter: UnityIoLimitPolicy
@@ -848,6 +853,7 @@ UnityIoLimitRuleSetting:
     - label: maxKBPS
     - label: maxIOPSDensity
     - label: maxKBPSDensity
+    - label: burstRate
     - label: burstTime
     - label: burstFrequency
 

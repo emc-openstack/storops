@@ -35,7 +35,7 @@ from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.host import UnityHost, UnityHostContainer, \
     UnityHostInitiator, UnityHostInitiatorList, UnityHostIpPortList, \
     UnityHostList, UnityHostIpPort, UnityHostInitiatorPathList, \
-    UnityHostLun, UnityHostLunList
+    UnityHostLun, UnityHostLunList, UnityHostInitiatorUpdater
 from storops.unity.resource.snap import UnitySnap
 from storops.unity.resource.tenant import UnityTenant
 from storops.unity.resource.vmware import UnityDataStoreList, UnityVmList
@@ -115,6 +115,7 @@ class UnityHostTest(TestCase):
         def do():
             UnityHost.get_host(t_rest('3.1.0'), '192.168.112.23',
                                tenant='tenant_1')
+
         assert_that(do, raises(SystemAPINotSupported))
 
     @patch_rest
@@ -208,6 +209,7 @@ class UnityHostTest(TestCase):
 
         def _inner():
             host.add_initiator(iqn)
+
         assert_that(_inner, raises(UnityHostInitiatorExistedError))
 
     @patch_rest
@@ -385,6 +387,39 @@ class UnityHostTest(TestCase):
         host = UnityHost(cli=t_rest(), _id='Host_22')
         lun = UnityLun(cli=t_rest(), _id='sv_3338')
         assert_that(host.get_hlu(lun), equal_to(3))
+
+    @patch_rest
+    def test_host_modify(self):
+        host = UnityHost(cli=t_rest(), _id='Host_22')
+        new_host = host.modify(name="new_host", desc="new Desc", os="Ubuntu")
+        assert_that(host, equal_to(new_host))
+
+    @patch_rest
+    def test_update_initators(self):
+        host = UnityHost(cli=t_rest(), _id='Host_22')
+        r = host.update_initiators(
+            iqns=["iqn.1993-08.org.debian:01:a4f95ed19999"],
+            wwns=["50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"])
+        assert_that(r, equal_to(3))
+
+    @patch_rest
+    def test_update_initators_with_fc(self):
+        host = UnityHost(cli=t_rest(), _id='Host_9')
+        r = host.update_initiators(
+            wwns=["50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:11",
+                  "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:12"])
+        assert_that(r, equal_to(3))
+
+
+class UnityHostInitiatorUpdaterTest(TestCase):
+    def test_compute(self):
+        updater = UnityHostInitiatorUpdater(
+            "fake_host",
+            {'iqn1', 'iqn2', 'wwn1', 'wwn3'},
+            {'iqn3', 'iqn1', 'wwn1'})
+        to_add, to_delete = updater.compute()
+        assert_that(to_add, equal_to({'iqn3'}))
+        assert_that(to_delete, equal_to({'iqn2', 'wwn3'}))
 
 
 class UnityHostIpPortTest(TestCase):

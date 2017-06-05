@@ -106,6 +106,25 @@
         ]
       },
       "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_4?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "qp_4.json"
+    },
+    {
+      "url": "/api/instances/ioLimitPolicy/qp_4/action/modify?compact=True",
+      "response": "empty.json",
+      "body": {
+        "type": 2,
+        "name": "new_name",
+        "ioLimitRulesToModify": [
+          {
+            "maxIOPSDensity": 100,
+            "maxKBPSDensity": 1024,
+            "id": "qr_4"
+          }
+        ]
+      }
     }
   ]
 }

@@ -26,7 +26,7 @@ from storops.exception import UnityEthernetPortSpeedNotSupportError, \
     UnityIPInUseException
 from storops.exception import SystemAPINotSupported
 from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum, \
-    FcSpeedEnum, IOLimitPolicyStateEnum
+    FcSpeedEnum, IOLimitPolicyStateEnum, IOLimitPolicyTypeEnum
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.port import UnityEthernetPort, \
     UnityEthernetPortList, UnityIpPort, UnityIpPortList, UnityIscsiPortal, \
@@ -239,7 +239,6 @@ class UnityIscsiPortalTest(TestCase):
 
     @patch_rest
     def test_delete_portal_not_found(self):
-
         portal = UnityIscsiPortal.get(cli=t_rest(), _id='if_20')
 
         def f():
@@ -322,7 +321,7 @@ class UnityIoLimitPolicyTest(TestCase):
         assert_that(len(lun_list), equal_to(1))
         assert_that(rule.name, equal_to('Limit_2_MBPS'))
         assert_that(rule.state, equal_to(IOLimitPolicyStateEnum.ACTIVE))
-
+        assert_that(rule.type, equal_to(IOLimitPolicyTypeEnum.ABSOLUTE))
         settings = rule.io_limit_rule_settings
         assert_that(len(settings), equal_to(1))
 
@@ -388,6 +387,14 @@ class UnityIoLimitPolicyTest(TestCase):
         lun2 = UnityLun('sv_2025', t_rest())
         resp = policy.remove_from_storage(lun1, lun2)
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_modify_policy(self):
+        policy = UnityIoLimitPolicy('qp_4', t_rest())
+        policy.modify(
+            name="new_name",
+            policy_type=IOLimitPolicyTypeEnum.DENSITY_BASED,
+            max_iops_density=100, max_kbps_density=1024)
 
 
 class UnityLinkAggregationTest(TestCase):

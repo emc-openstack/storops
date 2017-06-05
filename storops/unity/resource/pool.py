@@ -75,7 +75,8 @@ class UnityPool(UnityResource):
 
     def create_lun(self, lun_name=None, size_gb=1, sp=None, host_access=None,
                    is_thin=None, description=None, tiering_policy=None,
-                   is_repl_dst=None, snap_schedule=None, io_limit_policy=None):
+                   is_repl_dst=None, snap_schedule=None, io_limit_policy=None,
+                   is_compression=None):
         size = int(bitmath.GiB(size_gb).to_Byte().value)
         return UnityLun.create(self._cli, lun_name, self, size, sp=sp,
                                host_access=host_access, is_thin=is_thin,
@@ -83,7 +84,8 @@ class UnityPool(UnityResource):
                                is_repl_dst=is_repl_dst,
                                tiering_policy=tiering_policy,
                                snap_schedule=snap_schedule,
-                               io_limit_policy=io_limit_policy)
+                               io_limit_policy=io_limit_policy,
+                               is_compression=is_compression)
 
     def create_nfs_share(self, nas_server, name, size, is_thin=None,
                          tiering_policy=None, user_cap=False):

@@ -118,7 +118,7 @@ class TestThinCloneHelper(TestCase):
         self.assertEqual(copied_lun, TCHelper._tc_cache[lun.get_id()])
         self.assertTrue(old_lun.get_id() in TCHelper._gc_candidates)
         time.sleep(1)
-        self.assertFalse(TCHelper._gc_background._q.qsize())
+        self.assertEqual(0, TCHelper._gc_background._q.qsize())
 
     @mock.patch('storops.lib.thinclone_helper.TCHelper._gc_background.put')
     @patch_rest
@@ -204,4 +204,3 @@ class TestThinCloneHelper(TestCase):
         self.assertFalse(lun.get_id() in TCHelper._gc_candidates)
         self.assertFalse(base_lun.get_id() in TCHelper._gc_candidates)
         lun_delete.assert_called_once()
-

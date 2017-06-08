@@ -1,8 +1,10 @@
 # How to publish storops rpm package
 
-- cd to root directory where the `requirements.txt` is.
-- Update `Version` and `Change log` in the `utility/rpm_publish/storops_rpm.spec`.
-- Run command: `rpmbuild -ba utility/rpm_publish/storops_rpm.spec -v`
+- Find a Fedora machine. Download the `utility/rpm_publish/python-storops.spec` to it.
+- Update `Version` and `Change log` in the `python-storops.spec`.
+    - Update `Requires` and `BuildRequires` in the `python-storops.spec` if new dependencies are added.
+- Run command: `rpmbuild -ba storops_rpm.spec -v`
+    - It will fail quickly if any dependencies is not installed. Install them using `sudo dnf install <package_name>`.
 - Follow the log on the screen to find the rpm built.
 
 

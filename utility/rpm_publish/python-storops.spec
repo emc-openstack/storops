@@ -110,6 +110,7 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 %py3_install
 %endif
 
+
 %files -n python2-%{pypi_name}
 %license LICENSE.txt
 %doc README.rst
@@ -125,6 +126,20 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 %exclude %{python3_sitelib}/storops_comptest*
 %exclude %{python3_sitelib}/storops_test*
 %endif
+
+
+%post -n python2-%{pypi_name}
+if [ "$1" -ge 1 ] ; then
+    echo NOTE: If need to managing VNX system, please install Unisphere CLI rpm package first. Contact with Dell/EMC support on that.
+fi
+
+%if 0%{?with_python3}
+%post -n python3-%{pypi_name}
+if [ "$1" -ge 1 ] ; then
+    echo NOTE: If need to managing VNX system, please install Unisphere CLI rpm package first. Contact with Dell/EMC support on that.
+fi
+%endif
+
 
 %changelog
 * Thu Jun 8 2017 Ryan Liang <ryan.liang@dell.com> - 0.4.14-1

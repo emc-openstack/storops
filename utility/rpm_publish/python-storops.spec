@@ -18,6 +18,7 @@ BuildArch:      noarch
 %description
 Library for managing Unity/VNX systems. Please refer to https://github.com/emc-openstack/storops for more details.
 
+
 %package -n python2-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{pypi_name}}
@@ -55,6 +56,7 @@ BuildRequires:  PyYAML
 %description -n python2-%{pypi_name}
 Library for managing Unity/VNX systems. Please refer to https://github.com/emc-openstack/storops for more details.
 
+
 %if 0%{?with_python3}
 %package -n python3-%{pypi_name}
 Summary:        %{summary}
@@ -91,6 +93,7 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 
 %endif
 
+
 %prep
 %setup -q -n %{pypi_name}-%{upstream_version}
 
@@ -125,19 +128,6 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 %{python3_sitelib}/storops*
 %exclude %{python3_sitelib}/storops_comptest*
 %exclude %{python3_sitelib}/storops_test*
-%endif
-
-
-%post -n python2-%{pypi_name}
-if [ "$1" -ge 1 ] ; then
-    echo NOTE: If need to managing VNX system, please install Unisphere CLI rpm package first. Contact with Dell/EMC support on that.
-fi
-
-%if 0%{?with_python3}
-%post -n python3-%{pypi_name}
-if [ "$1" -ge 1 ] ; then
-    echo NOTE: If need to managing VNX system, please install Unisphere CLI rpm package first. Contact with Dell/EMC support on that.
-fi
 %endif
 
 

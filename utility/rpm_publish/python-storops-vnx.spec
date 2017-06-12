@@ -6,7 +6,7 @@
 %define debug_package %{nil}
 %global pypi_name storops
 
-Name:           python-%{pypi_name}
+Name:           python-%{pypi_name}-vnx
 Version:        0.4.14
 Release:        1%{?dist}
 Summary:        Library for managing Unity/VNX systems.
@@ -23,7 +23,7 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{pypi_name}-vnx}
 
-Requires:       python2-storops
+Requires:       python2-storops == %{version}
 %ifarch %ix86
 Requires:       NaviCLI-Linux-32-x86-en_US
 %endif
@@ -40,7 +40,7 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}-vnx}
 
-Requires:       python3-storops
+Requires:       python3-storops == %{version}
 %ifarch %ix86
 Requires:       NaviCLI-Linux-32-x86-en_US
 %endif

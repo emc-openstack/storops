@@ -18,7 +18,6 @@ from __future__ import unicode_literals
 
 import shutil
 import tempfile
-import time
 from unittest import TestCase
 
 import mock
@@ -41,7 +40,7 @@ class TestThinCloneHelper(TestCase):
     def setUp(self):
         self.path = tempfile.mkdtemp(suffix='storops')
         TCHelper.set_up(self.path)
-        TCHelper._gc_background.set_interval(0.50)
+        TCHelper._gc_background.set_interval(0.10)
         TCHelper._gc_background.MAX_RETRIES = 1
 
     def tearDown(self):
@@ -117,8 +116,6 @@ class TestThinCloneHelper(TestCase):
         self.assertTrue(lun.get_id() in TCHelper._tc_cache)
         self.assertEqual(copied_lun, TCHelper._tc_cache[lun.get_id()])
         self.assertTrue(old_lun.get_id() in TCHelper._gc_candidates)
-        time.sleep(1)
-        self.assertEqual(0, TCHelper._gc_background._q.qsize())
 
     @mock.patch('storops.lib.thinclone_helper.TCHelper._gc_background.put')
     @patch_rest

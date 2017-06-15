@@ -262,7 +262,11 @@ class EnumValueNotFoundError(StoropsException, ValueError):
     pass
 
 
-class MockFileNotFoundError(StoropsException):
+class StoropsTestException(Exception):
+    pass
+
+
+class MockFileNotFoundError(StoropsTestException):
     pass
 
 

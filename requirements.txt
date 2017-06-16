@@ -1,5 +1,5 @@
 requests!=2.9.0,>=2.8.1 # Apache-2.0, cinder, manila
-PyYAML>=3.11 # MIT, cinder, manila
+PyYAML>=3.10 # MIT, cinder, manila
 six>=1.9.0 # MIT, cinder, manila
 enum-compat # MIT, BSD, cinder, manila, rpm-package
 

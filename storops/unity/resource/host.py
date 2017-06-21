@@ -66,6 +66,7 @@ class UnityHost(UnityResource):
     def get_nested_properties(cls):
         return (
             'fc_host_initiators.initiator_id',
+            'fc_host_initiators.paths.initiator.type',
             'fc_host_initiators.paths.is_logged_in',
             'fc_host_initiators.paths.fc_port.wwn',
             'iscsi_host_initiators.initiator_id',

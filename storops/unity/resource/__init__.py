@@ -390,3 +390,6 @@ class UnityResourceList(UnityResource, ResourceList):
     @property
     def resource_class_name(self):
         return self._get_resource_instance().resource_class
+
+    def _is_updated(self):
+        return ResourceList._is_updated(self)

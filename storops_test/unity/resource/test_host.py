@@ -83,6 +83,20 @@ class UnityHostTest(TestCase):
         assert_that(
             host.fc_host_initiators[1].paths[0].fc_port.wwn,
             equal_to('50:06:01:60:C7:E0:01:DA:50:06:01:6C:47:E0:01:DA'))
+        assert_that(
+            host.fc_host_initiators[1].paths[0].initiator.type,
+            equal_to(HostInitiatorTypeEnum.FC))
+
+    @patch_rest
+    def test_nested_properties_shadow_copy(self):
+        host = UnityHost(_id='Host_12', cli=t_rest())
+        host.fc_host_initiators[0].paths[0].is_logged_in = False
+        host.fc_host_initiators[0].paths[0].initiator.type = \
+            HostInitiatorTypeEnum.ISCSI
+        paths = host.fc_host_initiators[0].paths.shadow_copy()
+        assert_that(paths[0].is_logged_in, equal_to(False))
+        assert_that(paths[0].initiator.type,
+                    equal_to(HostInitiatorTypeEnum.ISCSI))
 
     @patch_rest
     def test_properties_in_tenant(self):

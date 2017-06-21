@@ -5,6 +5,10 @@
                 "paths": [
                     {
                         "isLoggedIn": true,
+                        "initiator": {
+                            "type": 1,
+                            "id": "HostInitiator_1"
+                        },
                         "fcPort": {
                             "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:65:47:E0:01:DA",
                             "id": "spa_iom_1_fc1"
@@ -13,6 +17,10 @@
                     },
                     {
                         "isLoggedIn": true,
+                        "initiator": {
+                            "type": 1,
+                            "id": "HostInitiator_1"
+                        },
                         "fcPort": {
                             "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:64:47:E0:01:DA",
                             "id": "spa_iom_1_fc0"
@@ -27,6 +35,10 @@
                 "paths": [
                     {
                         "isLoggedIn": true,
+                        "initiator": {
+                            "type": 1,
+                            "id": "HostInitiator_1"
+                        },
                         "fcPort": {
                             "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6C:47:E0:01:DA",
                             "id": "spb_iom_1_fc0"
@@ -35,6 +47,10 @@
                     },
                     {
                         "isLoggedIn": true,
+                        "initiator": {
+                            "type": 1,
+                            "id": "HostInitiator_1"
+                        },
                         "fcPort": {
                             "wwn": "50:06:01:60:C7:E0:01:DA:50:06:01:6D:47:E0:01:DA",
                             "id": "spb_iom_1_fc1"

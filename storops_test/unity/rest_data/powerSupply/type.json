@@ -1,0 +1,105 @@
+{
+  "content": {
+    "name": "powerSupply",
+    "description": "(Applies to physical deployments only.) Information about power supplies in the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/powerSupply.html",
+    "attributes": [
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the powerSupply instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the power supply, as defined by the health resource  type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Power supply name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the power supply needs replacement. Values are:  <ul>  <li>true - Power supply needs replacement.</li>  <li>false - Power supply does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and unique identifier for the power supply's parent enclosure.",
+        "displayValue": "parent"
+      },
+      {
+        "name": "parentDpe",
+        "type": "dpe",
+        "description": "Parent Disk Processor Enclosure (DPE) of the power supply.",
+        "displayValue": "parentDpe"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number for the power supply.",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number for the power supply.",
+        "displayValue": "vendorPartNumber"
+      },
+      {
+        "name": "firmwareVersion",
+        "type": "String",
+        "description": "Firmware version number for the power supply.",
+        "displayValue": "firmwareVersion"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number for the power supply.",
+        "displayValue": "emcSerialNumber"
+      },
+      {
+        "name": "parentDae",
+        "type": "dae",
+        "description": "Parent Disk Array Enclosures (DAE) of the power supply.",
+        "displayValue": "parentDae"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "Slot number where the power supply is located in the parent enclosure.",
+        "displayValue": "slotNumber"
+      },
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Manufacturer of the power supply.",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer's model number for the power supply.",
+        "displayValue": "model"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number for the power supply.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "storageProcessor",
+        "type": "storageProcessor",
+        "description": "Storage Processor that the power supply is associated to.",
+        "displayValue": "storageProcessor"
+      }
+    ]
+  }
+}

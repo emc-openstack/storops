@@ -1,0 +1,12 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/license?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/license/instances?compact=True&fields=expires,feature,id,isInstalled,isPermanent,isValid,issued,name,version",
+      "response": "all.json"
+    }
+  ]
+}

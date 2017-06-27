@@ -1,0 +1,126 @@
+{
+  "@base": "https://10.245.101.35/api/types/sasPort/instances?fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,port,parentStorageProcessor.id,storageProcessor.id,parentIOModule.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T03:20:27.658Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "spa_sas0",
+        "currentSpeed": 12,
+        "connectorType": 3,
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_PORT_LINK_UP"
+          ],
+          "descriptions": [
+            "The port is operating normally."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "name": "SP A SAS Port 0",
+        "port": 0,
+        "storageProcessor": {
+          "id": "spa"
+        },
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spa_sas1",
+        "connectorType": 7,
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+          ],
+          "descriptions": [
+            "The port link is down, but not in use. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "name": "SP A SAS Port 1",
+        "port": 1,
+        "storageProcessor": {
+          "id": "spa"
+        },
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_sas0",
+        "currentSpeed": 12,
+        "connectorType": 3,
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_PORT_LINK_UP"
+          ],
+          "descriptions": [
+            "The port is operating normally."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "name": "SP B SAS Port 0",
+        "port": 0,
+        "storageProcessor": {
+          "id": "spb"
+        },
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_sas1",
+        "connectorType": 7,
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+          ],
+          "descriptions": [
+            "The port link is down, but not in use. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "name": "SP B SAS Port 1",
+        "port": 1,
+        "storageProcessor": {
+          "id": "spb"
+        },
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    }
+  ]
+}

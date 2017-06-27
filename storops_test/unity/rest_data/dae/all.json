@@ -1,0 +1,55 @@
+{
+  "@base": "https://10.245.101.35/api/types/dae/instances?fields=avgPower,avgTemperature,busId,currentPower,currentSpeed,currentTemperature,driveTypes,emcPartNumber,emcSerialNumber,enclosureType,health,id,manufacturer,maxPower,maxSpeed,maxTemperature,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,parentSystem.id&per_page=2000&compact=true",
+  "updated": "2017-06-26T02:37:17.493Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "dae_0_1",
+        "enclosureType": 30,
+        "driveTypes": [
+          10
+        ],
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "0",
+          "resource": "system"
+        },
+        "slotNumber": 1,
+        "name": "DAE 0 1",
+        "manufacturer": "",
+        "model": "ANCHO LF 12G SAS DAE",
+        "emcPartNumber": "100-900-000-04",
+        "emcSerialNumber": "CF22W145100058",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "busId": 0,
+        "currentPower": 110,
+        "avgPower": 110,
+        "maxPower": 110,
+        "currentTemperature": 25,
+        "avgTemperature": 25,
+        "maxTemperature": 25,
+        "currentSpeed": 12000000000,
+        "maxSpeed": 12000000000,
+        "parentSystem": {
+          "id": "0"
+        }
+      }
+    }
+  ]
+}

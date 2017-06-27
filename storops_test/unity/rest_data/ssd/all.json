@@ -1,0 +1,74 @@
+{
+  "@base": "https://10.245.101.35/api/types/ssd/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,parentStorageProcessor.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T03:50:12.894Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "spa_ssd",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 0,
+        "name": "SP A Internal Disk",
+        "manufacturer": "",
+        "model": "Intel DC 3500 Series SSDs M.2",
+        "firmwareVersion": "G201EM05",
+        "emcPartNumber": "INTEL SSDSCKHB120G4M           118000040",
+        "emcSerialNumber": "BTWM4CO00FTB",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_ssd",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 0,
+        "name": "SP B Internal Disk",
+        "manufacturer": "",
+        "model": "Intel DC 3500 Series SSDs M.2",
+        "firmwareVersion": "G201EM05",
+        "emcPartNumber": "INTEL SSDSCKHB120G4M           118000040",
+        "emcSerialNumber": "BTWM4CO00FHB",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    }
+  ]
+}

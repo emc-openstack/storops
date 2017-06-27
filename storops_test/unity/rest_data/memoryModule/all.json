@@ -1,0 +1,276 @@
+{
+  "@base": "https://10.245.101.35/api/types/memoryModule/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,isInserted,manufacturer,model,name,needsReplacement,parent,size,slotNumber,vendorPartNumber,vendorSerialNumber,parentStorageProcessor.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T02:32:52.281Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "spa_mm_0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 0,
+        "name": "SP A Memory Module 0",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE4865",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE4865",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spa_mm_1",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 1,
+        "name": "SP A Memory Module 1",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE490A",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE490A",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spa_mm_2",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 2,
+        "name": "SP A Memory Module 2",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE48E3",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE48E3",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spa_mm_3",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spa",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 3,
+        "name": "SP A Memory Module 3",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE470B",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE470B",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_mm_0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 0,
+        "name": "SP B Memory Module 0",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE487F",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE487F",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_mm_1",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 1,
+        "name": "SP B Memory Module 1",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE4793",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE4793",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_mm_2",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 2,
+        "name": "SP B Memory Module 2",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE498C",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE498C",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "spb_mm_3",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "spb",
+          "resource": "storageProcessor"
+        },
+        "slotNumber": 3,
+        "name": "SP B Memory Module 3",
+        "manufacturer": "Samsung",
+        "model": "DDR4 SDRAM",
+        "firmwareVersion": "",
+        "size": 16,
+        "emcPartNumber": "100-564-193-00",
+        "emcSerialNumber": "80CE02151171BE4893",
+        "vendorPartNumber": "M393A2G40DB0-CPB",
+        "vendorSerialNumber": "71BE4893",
+        "isInserted": true,
+        "parentStorageProcessor": {
+          "id": "spb"
+        }
+      }
+    }
+  ]
+}

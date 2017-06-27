@@ -1,0 +1,312 @@
+{
+  "@base": "https://10.245.101.35/api/types/license/instances?fields=expires,id,isInstalled,isPermanent,isValid,issued,name,version,feature.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T06:17:02.527Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "ANTIVIRUS",
+        "name": "ANTIVIRUS",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "ANTIVIRUS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "BASE_OE_V4_0",
+        "name": "BASE_OE_V4_0",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "BASE_OE_V4_0"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "CIFS",
+        "name": "CIFS",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "CIFS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "EMC_SUPPORT_ECOSYSTEM",
+        "name": "EMC_SUPPORT_ECOSYSTEM",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "EMC_SUPPORT_ECOSYSTEM"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "ESA_ADAPTER",
+        "name": "ESA_ADAPTER",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "ESA_ADAPTER"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FAST_CACHE",
+        "name": "FAST_CACHE",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "FAST_CACHE"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FAST_VP",
+        "name": "FAST_VP",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "FAST_VP"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FIBRE_CHANNEL",
+        "name": "FIBRE_CHANNEL",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "FIBRE_CHANNEL"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FILE_SYSTEM_EVENTS",
+        "name": "FILE_SYSTEM_EVENTS",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "FILE_SYSTEM_EVENTS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "INLINE_COMPRESSION",
+        "name": "INLINE_COMPRESSION",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "INLINE_COMPRESSION"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "IP_MULTI_TENANCY",
+        "name": "IP_MULTI_TENANCY",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "IP_MULTI_TENANCY"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "ISCSI",
+        "name": "ISCSI",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "ISCSI"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "LOCAL_COPIES",
+        "name": "LOCAL_COPIES",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "LOCAL_COPIES"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "NFS",
+        "name": "NFS",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "NFS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "QUALITY_OF_SERVICE",
+        "name": "QUALITY_OF_SERVICE",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "QUALITY_OF_SERVICE"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "REPLICATION",
+        "name": "REPLICATION",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "REPLICATION"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "THIN_PROVISIONING",
+        "name": "THIN_PROVISIONING",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "THIN_PROVISIONING"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "UNISPHERE",
+        "name": "UNISPHERE",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "UNISPHERE"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "UNISPHERE_CENTRAL",
+        "name": "UNISPHERE_CENTRAL",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "UNISPHERE_CENTRAL"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "VASA",
+        "name": "VASA",
+        "isInstalled": true,
+        "version": "1.0",
+        "isValid": true,
+        "issued": "2006-09-08T00:00:00.000Z",
+        "expires": "2017-06-30T00:00:00.000Z",
+        "isPermanent": false,
+        "feature": {
+          "id": "VASA"
+        }
+      }
+    }
+  ]
+}

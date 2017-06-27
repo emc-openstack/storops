@@ -1,0 +1,12 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/sasPort?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/sasPort/instances?compact=True&fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,parentIOModule,parentStorageProcessor,port,storageProcessor",
+      "response": "all.json"
+    }
+  ]
+}

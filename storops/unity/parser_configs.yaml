@@ -1522,8 +1522,264 @@ UnityDiskGroup:
     - label: rpm
     - label: speed
     - label: totalDisks
+    - label: minHotSpareCandidates
+    - label: hotSparePolicyStatus
+      converter: HotSparePolicyStatusEnum
     - label: unconfiguredDisks
+    - label: configuredTraditionalPoolDisks
+    - label: configuredFastCacheDisks
+    - label: disksPastEOL
+    - label: disksWithEOLLess30Days
+    - label: disksWithEOLLess60Days
+    - label: disksWithEOLLess90Days
+    - label: disksWithEOLLess180Days
 
+UnityBattery:
+  data_src: rest
+  name: battery
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: parent
+    - label: slotNumber
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: sasExpanderVersions
+    - label: firmwareVersion
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: parentStorageProcessor
+      converter: UnityStorageProcessor
+
+UnityDae:
+  data_src: rest
+  name: dae
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: parent
+    - label: slotNumber
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: enclosureType
+      converter: EnclosureTypeEnum
+    - label: busId
+    - label: driveTypes
+      converter: DiskTypeEnumList
+    - label: currentPower
+    - label: avgPower
+    - label: maxPower
+    - label: currentTemperature
+    - label: avgTemperature
+    - label: maxTemperature
+    - label: currentSpeed
+    - label: maxSpeed
+    - label: parentSystem
+      converter: UnitySystem
+
+
+UnityLcc:
+  data_src: rest
+  name: lcc
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: parent
+    - label: slotNumber
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: sasExpanderVersions
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: currentSpeed
+    - label: maxSpeed
+    - label: parentDae
+      converter: UnityDae
+
+UnityMemoryModule:
+  data_src: rest
+  name: memoryModule
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: slotNumber
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: firmwareVersion
+    - label: size
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: parentStorageProcessor
+      converter: UnityStorageProcessor
+    - label: isInserted
+
+UnityPowerSupply:
+  data_src: rest
+  name: powerSupply
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: slotNumber
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: firmwareVersion
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: emcPartNumber
+    - label: parentDae
+      converter: UnityDae
+    - label: parentDpe
+      converter: UnityDpe
+    - label: storageProcessor
+      converter: UnityStorageProcessor
+
+
+UnitySasPort:
+  data_src: rest
+  name: sasPort
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: name
+    - label: port
+    - label: currentSpeed
+      converter: SpeedValuesEnum
+    - label: connectorType
+      converter: ConnectorTypeEnum
+    - label: storageProcessor
+      converter: UnityStorageProcessor
+    - label: parentIOModule
+      converter: UnityIoModule
+    - label: parentStorageProcessor
+      converter: UnityStorageProcessor
+
+
+UnitySsc:
+  data_src: rest
+  name: ssc
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: slotNumber
+    - label: name
+    - label: parentDae
+      converter: UnityDae
+    - label: manufacturer
+    - label: model
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+
+UnitySsd:
+  data_src: rest
+  name: ssd
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: needsReplacement
+    - label: slotNumber
+    - label: name
+    - label: manufacturer
+    - label: model
+    - label: firmwareVersion
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: parentStorageProcessor
+      converter: UnityStorageProcessor
+
+
+UnityFan:
+  data_src: rest
+  name: fan
+  properties:
+    - label: id
+      is_index: True
+    - label: health
+      converter: UnityHealth
+    - label: parent
+    - label: slotNumber
+    - label: name
+    - label: emcPartNumber
+    - label: emcSerialNumber
+    - label: manufacturer
+    - label: model
+    - label: vendorPartNumber
+    - label: vendorSerialNumber
+    - label: needsReplacement
+    - label: parentDpe
+      converter: UnityDpe
+    - label: parentDae
+      converter: UnityDae
+
+UnityLicense:
+  data_src: rest
+  name: license
+  properties:
+    - label: id
+    - label: name
+    - label: isInstalled
+    - label: version
+    - label: isValid
+    - label: issued
+    - label: expires
+    - label: isPermanent
+    - label: feature
+      converter: UnityFeature
+
+UnityFeature:
+  data_src: rest
+  name: feature
+  properties:
+    - label: id
+    - label: name
+    - label: state
+      converter: FeatureStateEnum
+    - label: reason
+      converter: FeatureReasonEnum
+    - label: license
+      converter: UnityLicense
 
 UnityMetric:
   data_src: rest

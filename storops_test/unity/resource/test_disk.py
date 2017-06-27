@@ -18,9 +18,9 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, has_items, close_to, \
-    contains_string, instance_of, has_length
+    contains_string, instance_of, has_length, none
 
-from storops import DiskTechnologyEnum, TierTypeEnum
+from storops import DiskTechnologyEnum, TierTypeEnum, HotSparePolicyStatusEnum
 from storops.unity.resource.disk import UnityDiskList, UnityDisk, \
     UnityDiskGroup, UnityDiskGroupList
 from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
@@ -134,3 +134,13 @@ class DiskGroupTest(TestCase):
         assert_that(disk_group.speed, equal_to(9))
         assert_that(disk_group.total_disks, equal_to(12))
         assert_that(disk_group.unconfigured_disks, equal_to(8))
+        assert_that(disk_group.min_hot_spare_candidates, equal_to(1))
+        assert_that(disk_group.hot_spare_policy_status,
+                    HotSparePolicyStatusEnum.OK)
+        assert_that(disk_group.configured_traditional_pool_disks, equal_to(4))
+        assert_that(disk_group.configured_fast_cache_disks, equal_to(0))
+        assert_that(disk_group.disks_past_eol, none())
+        assert_that(disk_group.disks_with_eol_less30_days, none())
+        assert_that(disk_group.disks_with_eol_less60_days, none())
+        assert_that(disk_group.disks_with_eol_less90_days, none())
+        assert_that(disk_group.disks_with_eol_less180_days, none())

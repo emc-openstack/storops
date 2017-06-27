@@ -1,0 +1,93 @@
+{
+  "content": {
+    "name": "fan",
+    "description": "(Applies to physical deployments only.) Information about the fans in the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/fan.html",
+    "attributes": [
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the fan instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the fan, as defined by the health resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number for the fan.",
+        "displayValue": "vendorPartNumber"
+      },
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Manufacturer of the fan.",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number for the fan.",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the fan needs replacement. Values are:  <ul>  <li>true - Fan needs replacement.</li>  <li>false - Fan does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "parentDae",
+        "type": "dae",
+        "description": "Parent Disk Array Enclosure (DAE) of the fan.",
+        "displayValue": "parentDae"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number for the fan.",
+        "displayValue": "emcSerialNumber"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Fan name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "parentDpe",
+        "type": "dpe",
+        "description": "Parent Disk Processor Enclosure (DPE) of the fan.",
+        "displayValue": "parentDpe"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number for the fan.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "Slot where the fan is located in the parent enclosure.",
+        "displayValue": "slotNumber"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer's model number for the fan.",
+        "displayValue": "model"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and identifier of the fan's parent enclosure.",
+        "displayValue": "parent"
+      }
+    ]
+  }
+}

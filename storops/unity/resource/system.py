@@ -40,13 +40,14 @@ from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList, UnityPool
 from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
-    UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal
+    UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal, \
+    UnitySasPortList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
 
 from storops.unity.resource.tenant import UnityTenant, UnityTenantList
 from storops.unity.resource.port import UnityEthernetPortList, \
-    UnityIscsiPortalList, UnityFcPortList
+    UnityIscsiPortalList, UnityFcPortList, UnityIoModuleList
 from storops.unity.resource.storage_resource import UnityConsistencyGroup, \
     UnityConsistencyGroupList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
@@ -347,6 +348,58 @@ class UnitySystem(UnitySingletonResource):
     def get_disk_group(self, _id=None):
         return self._get_unity_rsc(UnityDiskGroupList, _id=_id)
 
+    def get_dae(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityDaeList, _id=_id, name=name, **filters)
+
+    def get_dpe(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityDpeList, _id=_id, name=name, **filters)
+
+    def get_sas_port(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnitySasPortList, _id=_id, name=name, **filters)
+
+    def get_io_module(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityIoModuleList, _id=_id, name=name, **filters)
+
+    def get_lcc(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityLccList, _id=_id, name=name, **filters)
+
+    def get_memory_module(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityMemoryModuleList, _id=_id, name=name, **filters)
+
+    def get_fan(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityFanList, _id=_id, name=name, **filters)
+
+    def get_power_supply(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityPowerSupplyList, _id=_id, name=name, **filters)
+
+    def get_battery(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityBatteryList, _id=_id, name=name, **filters)
+
+    def get_ssc(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnitySscList, _id=_id, name=name, **filters)
+
+    def get_ssd(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnitySsdList, _id=_id, name=name, **filters)
+
+    def get_license(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityLicenseList, _id=_id, name=name, **filters)
+
+    def get_feature(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityFeatureList, _id=_id, name=name, **filters)
+
     @property
     @instance_cache
     def info(self):
@@ -516,3 +569,103 @@ class UnityDnsServer(_UnityNtpDnsServerCommonBase):
         resp.raise_if_err()
         self.update()
         return exists
+
+
+class UnityBattery(UnityResource):
+    pass
+
+
+class UnityBatteryList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityBattery
+
+
+class UnityDae(UnityResource):
+    pass
+
+
+class UnityDaeList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityDae
+
+
+class UnityLcc(UnityResource):
+    pass
+
+
+class UnityLccList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityLcc
+
+
+class UnityMemoryModule(UnityResource):
+    pass
+
+
+class UnityMemoryModuleList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityMemoryModule
+
+
+class UnityPowerSupply(UnityResource):
+    pass
+
+
+class UnityPowerSupplyList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityPowerSupply
+
+
+class UnitySsc(UnityResource):
+    pass
+
+
+class UnitySscList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnitySsc
+
+
+class UnitySsd(UnityResource):
+    pass
+
+
+class UnitySsdList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnitySsd
+
+
+class UnityFan(UnityResource):
+    pass
+
+
+class UnityFanList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityFan
+
+
+class UnityLicense(UnityResource):
+    pass
+
+
+class UnityLicenseList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityLicense
+
+
+class UnityFeature(UnityResource):
+    pass
+
+
+class UnityFeatureList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityFeature

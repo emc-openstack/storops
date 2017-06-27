@@ -1,0 +1,12 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/dae?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/dae/instances?compact=True&fields=avgPower,avgTemperature,busId,currentPower,currentSpeed,currentTemperature,driveTypes,emcPartNumber,emcSerialNumber,enclosureType,health,id,manufacturer,maxPower,maxSpeed,maxTemperature,model,name,needsReplacement,parent,parentSystem,slotNumber,vendorPartNumber,vendorSerialNumber",
+      "response": "all.json"
+    }
+  ]
+}

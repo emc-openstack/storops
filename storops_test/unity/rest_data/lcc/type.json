@@ -1,0 +1,105 @@
+{
+  "content": {
+    "name": "lcc",
+    "description": "(Applies to physical deployments only.) Information about Link Control Cards (LCCs) in the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/lcc.html",
+    "attributes": [
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Manufacturer of the LCC.",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number for the LCC.",
+        "displayValue": "emcSerialNumber"
+      },
+      {
+        "name": "currentSpeed",
+        "type": "Integer",
+        "description": "Current LCC speed.",
+        "displayValue": "currentSpeed"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number for the LCC.",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number for the LCC.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer's model number for the LCC.",
+        "displayValue": "model"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "Slot number where the LCC is located in the parent enclosure.",
+        "displayValue": "slotNumber"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "LCC name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "maxSpeed",
+        "type": "Integer",
+        "description": "Maximum LCC speed.",
+        "displayValue": "maxSpeed"
+      },
+      {
+        "name": "parentDae",
+        "type": "dae",
+        "description": "Parent Disk Array Enclosure (DAE) of the LCC.",
+        "displayValue": "parentDae"
+      },
+      {
+        "name": "sasExpanderVersions",
+        "type": "List<String>",
+        "description": "Revision numbers of the LCC firmware.",
+        "displayValue": "sasExpanderVersions"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the LCC, as defined by the health resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the LCC needs replacement. Values are:  <ul>  <li>true - LCC needs replacement.</li>  <li>false - LCC does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and unique identifier of the LCC's parent enclosure.",
+        "displayValue": "parent"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the LCC instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number for the LCC.",
+        "displayValue": "vendorPartNumber"
+      }
+    ]
+  }
+}

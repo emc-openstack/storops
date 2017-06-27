@@ -1,0 +1,39 @@
+{
+  "content": {
+    "name": "feature",
+    "description": "Information about features on the storage system.    @engdocs  New concept introduced by the feature F1295 System Configuration, Licensing  and Upgrades. Updated with concepts introduced by F4569: Black Content   Stream Integration & Enablement.",
+    "documentation": "https://10.245.101.39/apidocs/classes/feature.html",
+    "attributes": [
+      {
+        "name": "reason",
+        "type": "FeatureReasonEnum",
+        "description": "Reason for the feature to be in a state other than enabled. If state is enabled, reason is not applicable.",
+        "displayValue": "reason"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Feature name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the feature instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "license",
+        "type": "license",
+        "description": "License that enables the feature, as defined by the license resource type.  An empty value indicates that the feature is not license-based.",
+        "displayValue": "license"
+      },
+      {
+        "name": "state",
+        "type": "FeatureStateEnum",
+        "description": "State of the feature.",
+        "displayValue": "state"
+      }
+    ]
+  }
+}

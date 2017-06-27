@@ -1,0 +1,93 @@
+{
+  "content": {
+    "name": "ssd",
+    "description": "(Applies to physical deployments only.) Information about internal Flash-based Solid State Disks (SSDs, mSATAs) in the  storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/ssd.html",
+    "attributes": [
+      {
+        "name": "firmwareVersion",
+        "type": "String",
+        "description": "SSD firmware revision number.",
+        "displayValue": "firmwareVersion"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number for the SSD",
+        "displayValue": "vendorPartNumber"
+      },
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Manufacturer of the SSD.",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number for the SSD.",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the SSD needs replacement. Values are:  <ul>  <li>true - SSD needs replacement.</li>  <li>false - SSD does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "parentStorageProcessor",
+        "type": "storageProcessor",
+        "description": "Parent storage processor of the ssd.",
+        "displayValue": "parentStorageProcessor"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the ssd.",
+        "displayValue": "id"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "Slot where the SSD is located in the parent enclosure.",
+        "displayValue": "slotNumber"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number for the SSD.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the SSD, as defined by the health resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "SSD name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer's model number for the SSD.",
+        "displayValue": "model"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and unique identifier for the SSD's parent enclosure.",
+        "displayValue": "parent"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number for the SSD.",
+        "displayValue": "emcSerialNumber"
+      }
+    ]
+  }
+}

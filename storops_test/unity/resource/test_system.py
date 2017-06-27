@@ -29,7 +29,8 @@ from storops.lib.resource import ResourceList
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
     StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum, \
-    RaidTypeEnum, RaidStripeWidthEnum, PoolTypeEnum
+    RaidTypeEnum, RaidStripeWidthEnum, PoolTypeEnum, DiskTypeEnumList, \
+    SpeedValuesEnum, ConnectorTypeEnum, FeatureStateEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -61,7 +62,7 @@ from storops.unity.resource.sp import UnityStorageProcessor, \
 from storops.unity.resource.system import UnitySystemList, UnitySystem, \
     UnityDpeList, UnityDpe, UnityVirusChecker, UnityVirusCheckerList, \
     UnityBasicSystemInfo, UnityBasicSystemInfoList, UnitySystemTime, \
-    UnityNtpServer
+    UnityNtpServer, UnityDae, UnityFeature
 from storops.unity.resource.vmware import UnityCapabilityProfileList
 from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
 
@@ -753,3 +754,259 @@ class UnityNtpServerTest(TestCase):
         ntp_server = UnityNtpServer(cli=t_rest())
         assert_that(ntp_server.addresses,
                     has_items('10.245.54.152', '10.245.54.153'))
+
+
+class UnityBatteryTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        batteries = t_unity().get_battery()
+        assert_that(len(batteries), equal_to(2))
+        battery0 = batteries[0]
+        assert_that(battery0.id, equal_to("spa_bbu_0"))
+        assert_that(battery0.health, instance_of(UnityHealth))
+        assert_that(battery0.needs_replacement, equal_to(False))
+        assert_that(battery0.parent, instance_of(dict))
+        assert_that(battery0.slot_number, equal_to(0))
+        assert_that(battery0.name, equal_to("SP A Battery 0"))
+        assert_that(battery0.manufacturer, equal_to("ACBEL POLYTECH INC."))
+        assert_that(battery0.model, equal_to("LITHIUM-ION, UNIVERSAL BOB"))
+        assert_that(battery0.firmware_version, equal_to("073.91"))
+        assert_that(battery0.emc_part_number, equal_to("078-000-128-02"))
+        assert_that(battery0.emc_serial_number, equal_to("ACPJ5143800045"))
+        assert_that(battery0.vendor_part_number, equal_to("SGD006-710G"))
+        assert_that(battery0.vendor_serial_number, equal_to(""))
+        assert_that(battery0.parent_storage_processor,
+                    instance_of(UnityStorageProcessor))
+
+
+class UnityDaeTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        daes = t_unity().get_dae()
+        assert_that(len(daes), equal_to(1))
+        dae0 = daes[0]
+        assert_that(dae0.id, equal_to("dae_0_1"))
+        assert_that(dae0.enclosure_type,
+                    equal_to(EnclosureTypeEnum.ANCHO_12G_SAS_DAE))
+        assert_that(dae0.drive_types, instance_of(DiskTypeEnumList))
+        assert_that(dae0.drive_types[0], DiskTypeEnum.NL_SAS)
+        assert_that(dae0.health, instance_of(UnityHealth))
+        assert_that(dae0.needs_replacement, equal_to(False))
+        assert_that(dae0.parent, instance_of(dict))
+        assert_that(dae0.slot_number, equal_to(1))
+        assert_that(dae0.name, equal_to("DAE 0 1"))
+        assert_that(dae0.manufacturer, equal_to(""))
+        assert_that(dae0.model, equal_to("ANCHO LF 12G SAS DAE"))
+        assert_that(dae0.emc_part_number, equal_to("100-900-000-04"))
+        assert_that(dae0.emc_serial_number, equal_to("CF22W145100058"))
+        assert_that(dae0.vendor_part_number, equal_to(""))
+        assert_that(dae0.vendor_serial_number, equal_to(""))
+        assert_that(dae0.bus_id, equal_to(0))
+        assert_that(dae0.current_power, equal_to(110))
+        assert_that(dae0.avg_power, equal_to(110))
+        assert_that(dae0.max_power, equal_to(110))
+        assert_that(dae0.current_temperature, equal_to(25))
+        assert_that(dae0.avg_temperature, equal_to(25))
+        assert_that(dae0.max_temperature, equal_to(25))
+        assert_that(dae0.current_speed, equal_to(12000000000))
+        assert_that(dae0.max_speed, equal_to(12000000000))
+        assert_that(dae0.parent_system, instance_of(UnitySystem))
+
+
+class UnityLccTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        lccs = t_unity().get_lcc()
+        assert_that(len(lccs), equal_to(2))
+        lcc = lccs[0]
+        assert_that(lcc.id, equal_to("dae_0_1_lcc_a"))
+        assert_that(lcc.health, instance_of(UnityHealth))
+        assert_that(lcc.needs_replacement, equal_to(False))
+        assert_that(lcc.parent, instance_of(dict))
+        assert_that(lcc.slot_number, equal_to(0))
+        assert_that(lcc.name, equal_to("DAE 0 1 Link Control Card A"))
+        assert_that(lcc.manufacturer, equal_to(""))
+        assert_that(lcc.model, equal_to("ANCHO 12G SAS LCC FRU ASSY"))
+        assert_that(lcc.sas_expander_versions, equal_to(["2.20.0"]))
+        assert_that(lcc.emc_part_number, equal_to("303-300-000C-02"))
+        assert_that(lcc.emc_serial_number, equal_to("CF2W9145000032"))
+        assert_that(lcc.vendor_part_number, equal_to(""))
+        assert_that(lcc.vendor_serial_number, equal_to(""))
+        assert_that(lcc.current_speed, equal_to(12000000000))
+        assert_that(lcc.max_speed, equal_to(12000000000))
+        assert_that(lcc.parent_dae, instance_of(UnityDae))
+
+
+class UnityMemoryModuleTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        memory_modules = t_unity().get_memory_module()
+        assert_that(len(memory_modules), equal_to(8))
+        memory_module = memory_modules[0]
+        assert_that(memory_module.id, equal_to("spa_mm_0"))
+        assert_that(memory_module.health, instance_of(UnityHealth))
+        assert_that(memory_module.needs_replacement, equal_to(False))
+        assert_that(memory_module.slot_number, equal_to(0))
+        assert_that(memory_module.name, equal_to("SP A Memory Module 0"))
+        assert_that(memory_module.manufacturer, equal_to("Samsung"))
+        assert_that(memory_module.model, equal_to("DDR4 SDRAM"))
+        assert_that(memory_module.firmware_version, equal_to(""))
+        assert_that(memory_module.size, equal_to(16))
+        assert_that(memory_module.emc_part_number, equal_to("100-564-193-00"))
+        assert_that(memory_module.emc_serial_number,
+                    equal_to("80CE02151171BE4865"))
+        assert_that(memory_module.vendor_part_number,
+                    equal_to("M393A2G40DB0-CPB"))
+        assert_that(memory_module.vendor_serial_number,
+                    equal_to("71BE4865"))
+        assert_that(memory_module.is_inserted, equal_to(True))
+        assert_that(memory_module.parent_storage_processor,
+                    instance_of(UnityStorageProcessor))
+
+
+class UnityPowerSupplyTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        supplies = t_unity().get_power_supply()
+        assert_that(len(supplies), equal_to(4))
+        supply = supplies[0]
+
+        assert_that(supply.id, equal_to("dae_0_1_ps_a0"))
+        assert_that(supply.health, instance_of(UnityHealth))
+        assert_that(supply.needs_replacement, equal_to(False))
+        assert_that(supply.slot_number, equal_to(0))
+        assert_that(supply.name, equal_to("DAE 0 1 Power Supply A0"))
+        assert_that(supply.manufacturer, equal_to("ACBEL POLYTECH INC."))
+        assert_that(supply.model, equal_to("Third Gen VE.400W, Dual +12V P/S"))
+        assert_that(supply.firmware_version, equal_to("0421"))
+        assert_that(supply.emc_serial_number, equal_to("AC7B7143200521"))
+        assert_that(supply.vendor_part_number, equal_to("SGA001-710G"))
+        assert_that(supply.vendor_serial_number, equal_to("AC7143202316"))
+        assert_that(supply.emc_part_number, equal_to("071-000-553"))
+        assert_that(supply.parent_dae, instance_of(UnityDae))
+        assert_that(supply.storage_processor,
+                    instance_of(UnityStorageProcessor))
+
+
+class UnitySasPortTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        ports = t_unity().get_sas_port()
+        assert_that(len(ports), equal_to(4))
+        port = ports[0]
+
+        assert_that(port.id, equal_to("spa_sas0"))
+        assert_that(port.health, instance_of(UnityHealth))
+        assert_that(port.needs_replacement, equal_to(False))
+        assert_that(port.name, equal_to("SP A SAS Port 0"))
+        assert_that(port.port, equal_to(0))
+        assert_that(port.current_speed, equal_to(SpeedValuesEnum._12Gbps))
+        assert_that(port.connector_type,
+                    equal_to(ConnectorTypeEnum.MINI_SAS_HD))
+        assert_that(port.storage_processor, instance_of(UnityStorageProcessor))
+        assert_that(port.parent_io_module, none())
+        assert_that(port.parent_storage_processor,
+                    instance_of(UnityStorageProcessor))
+
+
+# TODO find a system with ssc
+class UnitySscTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        sscs = t_unity().get_ssc()
+
+        assert_that(len(sscs), equal_to(0))
+        # ssc = sscs[0]
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+        # assert_that(ssc.id, equal_to(""))
+
+
+class UnitySsdTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        ssds = t_unity().get_ssd()
+
+        ssd = ssds[0]
+        assert_that(ssd.id, equal_to("spa_ssd"))
+        assert_that(ssd.health, instance_of(UnityHealth))
+        assert_that(ssd.needs_replacement, equal_to(False))
+        assert_that(ssd.slot_number, equal_to(0))
+        assert_that(ssd.name, equal_to("SP A Internal Disk"))
+        assert_that(ssd.manufacturer, equal_to(""))
+        assert_that(ssd.model, equal_to("Intel DC 3500 Series SSDs M.2"))
+        assert_that(ssd.firmware_version, equal_to("G201EM05"))
+        assert_that(ssd.emc_part_number, equal_to(
+            "INTEL SSDSCKHB120G4M           118000040"))
+        assert_that(ssd.emc_serial_number, equal_to("BTWM4CO00FTB"))
+        assert_that(ssd.vendor_part_number, equal_to(""))
+        assert_that(ssd.vendor_serial_number, equal_to(""))
+        assert_that(ssd.parent_storage_processor, instance_of(
+            UnityStorageProcessor))
+
+
+class UnityFanTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        fans = t_unity().get_fan()
+        assert_that(len(fans), equal_to(10))
+
+        fan = fans[0]
+        assert_that(fan.id, equal_to("dpe_fan_a0"))
+        assert_that(fan.health, instance_of(UnityHealth))
+        assert_that(fan.parent, instance_of(dict))
+        assert_that(fan.slot_number, equal_to(0))
+        assert_that(fan.name, equal_to("DPE Cooling Module A0"))
+        assert_that(fan.emc_part_number, equal_to("100-542-054-05"))
+        assert_that(fan.emc_serial_number, equal_to(""))
+        assert_that(fan.manufacturer, equal_to(""))
+        assert_that(fan.model, equal_to(""))
+        assert_that(fan.vendor_part_number, equal_to(""))
+        assert_that(fan.needs_replacement, equal_to(False))
+        assert_that(fan.parent_dpe, instance_of(UnityDpe))
+        assert_that(fan.parent_dae, none())
+
+
+class UnityLicenseTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        licenses = t_unity().get_license()
+
+        assert_that(len(licenses), equal_to(20))
+
+        license = licenses[0]
+        assert_that(license.id, equal_to("ANTIVIRUS"))
+        assert_that(license.name, equal_to("ANTIVIRUS"))
+        assert_that(license.is_installed, equal_to(True))
+        assert_that(license.version, equal_to("1.0"))
+        assert_that(license.is_valid, equal_to(True))
+        assert_that(license.issued, equal_to("2006-09-08T00:00:00.000Z"))
+        assert_that(license.expires, equal_to("2017-06-30T00:00:00.000Z"))
+        assert_that(license.is_permanent, equal_to(False))
+        assert_that(license.feature, instance_of(UnityFeature))
+
+
+class UnityFeatureTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        features = t_unity().get_feature()
+
+        assert_that(len(features), equal_to(37))
+        feature = features[0]
+        assert_that(feature.id, equal_to("ADVANCED_STATIC_ROUTING"))
+        assert_that(feature.name, equal_to("ADVANCED_STATIC_ROUTING"))
+        assert_that(feature.state, equal_to(FeatureStateEnum.Enabled))
+        assert_that(feature.reason, none())
+        assert_that(feature.license, none())

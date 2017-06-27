@@ -1,0 +1,153 @@
+{
+  "content": {
+    "name": "dae",
+    "description": "Information about Disk Array Enclosure (DAE) components in the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/dae.html",
+    "attributes": [
+      {
+        "name": "parentSystem",
+        "type": "system",
+        "description": "Parent system of the Disk Array Enclosure (DAE).",
+        "displayValue": "parentSystem"
+      },
+      {
+        "name": "driveTypes",
+        "type": "List<DiskTypeEnum>",
+        "description": "Disk type of the disks in the DAE.",
+        "displayValue": "driveTypes"
+      },
+      {
+        "name": "avgPower",
+        "type": "Integer",
+        "description": "Average amount of power used by the DAE. The system uses a one hour window of  30-second samples to determine this value.",
+        "displayValue": "avgPower"
+      },
+      {
+        "name": "currentPower",
+        "type": "Integer",
+        "description": "Current amount of power used by the DAE.",
+        "displayValue": "currentPower"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number for the DAE.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "DAE name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "maxPower",
+        "type": "Integer",
+        "description": "Maximum amount of power used by the DAE. The system uses a one hour window of  30-second samples to determine this value.",
+        "displayValue": "maxPower"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the DAE needs replacement. Values are:  <ul>  <li>true - DAE needs replacement.</li>  <li>false - DAE does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the DAE, as defined by the health resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Manufacturer of the DAE.",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "busId",
+        "type": "Integer",
+        "description": "Identifier of the bus used by the DAE.",
+        "displayValue": "busId"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and unique identifier of the DAE's parent enclosure.",
+        "displayValue": "parent"
+      },
+      {
+        "name": "currentSpeed",
+        "type": "Integer",
+        "description": "Current speed of the DAE SAS disk connection.",
+        "displayValue": "currentSpeed"
+      },
+      {
+        "name": "currentTemperature",
+        "type": "Integer",
+        "description": "Current temperature of the DAE.",
+        "displayValue": "currentTemperature"
+      },
+      {
+        "name": "enclosureType",
+        "type": "EnclosureTypeEnum",
+        "description": "DAE enclosure type.",
+        "displayValue": "enclosureType"
+      },
+      {
+        "name": "maxSpeed",
+        "type": "Integer",
+        "description": "Maximum speed of the DAE SAS disk connection. The system uses a one hour  window of 30-second samples to determine this value.",
+        "displayValue": "maxSpeed"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number for the DAE.",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "maxTemperature",
+        "type": "Integer",
+        "description": "Maximum temperature of the DAE. The system uses a one hour window of 30-second  samples to determine this value.",
+        "displayValue": "maxTemperature"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer's model  number for the DAE.",
+        "displayValue": "model"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number for the DAE.",
+        "displayValue": "vendorPartNumber"
+      },
+      {
+        "name": "avgTemperature",
+        "type": "Integer",
+        "description": "Average temperature of the DAE. The system uses a one hour window of 30-second  samples to determine this value.",
+        "displayValue": "avgTemperature"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the dae instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "The enclosure number or position where the DAE is located on the bus.",
+        "displayValue": "slotNumber"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number for the DAE.",
+        "displayValue": "emcSerialNumber"
+      }
+    ]
+  }
+}

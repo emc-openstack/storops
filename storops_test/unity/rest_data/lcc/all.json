@@ -1,0 +1,82 @@
+{
+  "@base": "https://10.245.101.35/api/types/lcc/instances?fields=currentSpeed,emcPartNumber,emcSerialNumber,health,id,manufacturer,maxSpeed,model,name,needsReplacement,parent,sasExpanderVersions,slotNumber,vendorPartNumber,vendorSerialNumber,parentDae.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T02:16:40.471Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "dae_0_1_lcc_a",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "dae_0_1",
+          "resource": "dae"
+        },
+        "slotNumber": 0,
+        "name": "DAE 0 1 Link Control Card A",
+        "manufacturer": "",
+        "model": "ANCHO 12G SAS LCC FRU ASSY",
+        "sasExpanderVersions": [
+          "2.20.0"
+        ],
+        "emcPartNumber": "303-300-000C-02",
+        "emcSerialNumber": "CF2W9145000032",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "currentSpeed": 12000000000,
+        "maxSpeed": 12000000000,
+        "parentDae": {
+          "id": "dae_0_1"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dae_0_1_lcc_b",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "dae_0_1",
+          "resource": "dae"
+        },
+        "slotNumber": 1,
+        "name": "DAE 0 1 Link Control Card B",
+        "manufacturer": "",
+        "model": "ANCHO 12G SAS LCC FRU ASSY",
+        "sasExpanderVersions": [
+          "2.20.0"
+        ],
+        "emcPartNumber": "303-300-000C-02",
+        "emcSerialNumber": "CF2W9145000004",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "currentSpeed": 12000000000,
+        "maxSpeed": 12000000000,
+        "parentDae": {
+          "id": "dae_0_1"
+        }
+      }
+    }
+  ]
+}

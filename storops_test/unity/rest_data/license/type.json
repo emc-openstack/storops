@@ -1,0 +1,63 @@
+{
+  "content": {
+    "name": "license",
+    "description": "Information about licenses on the storage system.  @engdocs  Supercedes the previous implementation of licenses via C4CB_LicensedFeature  and LicensingServices.",
+    "documentation": "https://10.245.101.39/apidocs/classes/license.html",
+    "attributes": [
+      {
+        "name": "isValid",
+        "type": "Boolean",
+        "description": "Indicates whether the license is currently valid. Values are:  <ul>  <li>true - License is valid. It is either permanent, or the expiration date  has not yet passed.</li>  <li>false - License is invalid.</li>  </ul>",
+        "displayValue": "isValid"
+      },
+      {
+        "name": "version",
+        "type": "String",
+        "description": "License version.",
+        "displayValue": "version"
+      },
+      {
+        "name": "expires",
+        "type": "DateTime",
+        "description": "Date and time when the license will expire.",
+        "displayValue": "expires"
+      },
+      {
+        "name": "issued",
+        "type": "DateTime",
+        "description": "Date and time when the license became available.",
+        "displayValue": "issued"
+      },
+      {
+        "name": "feature",
+        "type": "feature",
+        "description": "Name of the feature that the license enables.",
+        "displayValue": "feature"
+      },
+      {
+        "name": "isInstalled",
+        "type": "Boolean",
+        "description": "Indicates whether the license is installed or not.",
+        "displayValue": "isInstalled"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the license instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "License name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "isPermanent",
+        "type": "Boolean",
+        "description": "Indicates whether the license is permanent. Values are:  <ul>  <li>true - License is permanent.</li>  <li>false - License is temporary.</li>  </ul>",
+        "displayValue": "isPermanent"
+      }
+    ]
+  }
+}

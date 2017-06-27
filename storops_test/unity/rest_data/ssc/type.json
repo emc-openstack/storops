@@ -1,0 +1,87 @@
+{
+  "content": {
+    "name": "ssc",
+    "description": "(Applies to physical deployments only.) Information about System Status Cards (SSCs) in the  storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/ssc.html",
+    "attributes": [
+      {
+        "name": "name",
+        "type": "String",
+        "description": "SSC name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Resource type and unique identifier for the SSC's parent enclosure.",
+        "displayValue": "parent"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the SSC needs replacement. Values are:  <ul>  <li>true - SSC needs replacement.</li>  <li>false - SSC does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "emcSerialNumber",
+        "type": "String",
+        "description": "EMC serial number for the SSC.",
+        "displayValue": "emcSerialNumber"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the ssc.",
+        "displayValue": "id"
+      },
+      {
+        "name": "manufacturer",
+        "type": "String",
+        "description": "Manufacturer of the SSC.",
+        "displayValue": "manufacturer"
+      },
+      {
+        "name": "emcPartNumber",
+        "type": "String",
+        "description": "EMC part number for the SSC.",
+        "displayValue": "emcPartNumber"
+      },
+      {
+        "name": "parentDae",
+        "type": "dae",
+        "description": "Parent Disk Array Enclosure (DAE) of the SSC.",
+        "displayValue": "parentDae"
+      },
+      {
+        "name": "vendorSerialNumber",
+        "type": "String",
+        "description": "Vendor serial number for the SSC.",
+        "displayValue": "vendorSerialNumber"
+      },
+      {
+        "name": "vendorPartNumber",
+        "type": "String",
+        "description": "Vendor part number for the SSC.",
+        "displayValue": "vendorPartNumber"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the SSC, as defined by the health resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "model",
+        "type": "String",
+        "description": "Manufacturer's model number for the SSC.",
+        "displayValue": "model"
+      },
+      {
+        "name": "slotNumber",
+        "type": "Integer",
+        "description": "Slot where the SSC is located in the parent enclosure.",
+        "displayValue": "slotNumber"
+      }
+    ]
+  }
+}

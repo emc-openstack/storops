@@ -1,0 +1,312 @@
+{
+  "@base": "https://10.245.101.35/api/types/fan/instances?fields=emcPartNumber,emcSerialNumber,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,parentDpe.id,parentDae.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T06:01:05.136Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "dpe_fan_a0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 0,
+        "name": "DPE Cooling Module A0",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_a1",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 1,
+        "name": "DPE Cooling Module A1",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_a2",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 2,
+        "name": "DPE Cooling Module A2",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_a3",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 3,
+        "name": "DPE Cooling Module A3",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_a4",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 4,
+        "name": "DPE Cooling Module A4",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_b0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 0,
+        "name": "DPE Cooling Module B0",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_b1",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 1,
+        "name": "DPE Cooling Module B1",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_b2",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 2,
+        "name": "DPE Cooling Module B2",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_b3",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 3,
+        "name": "DPE Cooling Module B3",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_fan_b4",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 4,
+        "name": "DPE Cooling Module B4",
+        "emcPartNumber": "100-542-054-05",
+        "emcSerialNumber": "",
+        "manufacturer": "",
+        "model": "",
+        "vendorPartNumber": "",
+        "vendorSerialNumber": "",
+        "needsReplacement": false,
+        "parentDpe": {
+          "id": "dpe"
+        }
+      }
+    }
+  ]
+}

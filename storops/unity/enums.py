@@ -560,6 +560,12 @@ class ConnectorTypeEnum(UnityEnum):
     NOT_PRESENT = (7, "Not present")
 
 
+class SpeedValuesEnum(UnityEnum):
+    _3Gbps = (3, "3Gbps")
+    _6Gbps = (6, "6Gbps")
+    _12Gbps = (12, "12Gbps")
+
+
 class EPSpeedValuesEnum(UnityEnum):
     AUTO = (0, 'Auto')
     _10MbPS = (10, '10MbPS')
@@ -727,3 +733,21 @@ class ThinCloneActionEnum(UnityEnum):
     DD_COPY = (1, 'Copy via dd')
     LUN_ATTACH = (2, 'Attach a base LUN')
     TC_DELETE = (3, 'Delete a thin-cloned LUN')
+
+
+class FeatureStateEnum(UnityEnum):
+    Disabled = (1, "FeatureStateDisabled")
+    Enabled = (2, "FeatureStateEnabled")
+    Hidden = (3, "FeatureStateHidden")
+
+
+class FeatureReasonEnum(UnityEnum):
+    UNLICENSED = (1, "FeatureReasonUnlicensed")
+    EXPIRED_LICENSE = (2, "FeatureReasonExpiredLicense")
+    PLATFORM_RESTRICTION = (3, "FeatureReasonPlatformRestriction")
+    EXCLUDED = (4, "FeatureReasonExcluded")
+
+
+class HotSparePolicyStatusEnum(UnityEnum):
+    OK = (0, "OK")
+    VIOLATED = (741, "Violated")

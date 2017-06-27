@@ -352,3 +352,13 @@ class UnityIscsiNodeList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnityIscsiNode
+
+
+class UnitySasPort(UnityResource):
+    pass
+
+
+class UnitySasPortList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnitySasPort

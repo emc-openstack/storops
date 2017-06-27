@@ -1,0 +1,148 @@
+{
+  "@base": "https://10.245.101.35/api/types/powerSupply/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,storageProcessor.id,parentDpe.id,parentDae.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T02:57:33.557Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "dae_0_1_ps_a0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "dae_0_1",
+          "resource": "dae"
+        },
+        "slotNumber": 0,
+        "name": "DAE 0 1 Power Supply A0",
+        "manufacturer": "ACBEL POLYTECH INC.",
+        "model": "Third Gen VE.400W, Dual +12V P/S",
+        "firmwareVersion": "0421",
+        "emcSerialNumber": "AC7B7143200521",
+        "vendorPartNumber": "SGA001-710G",
+        "vendorSerialNumber": "AC7143202316",
+        "emcPartNumber": "071-000-553",
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "storageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dae_0_1_ps_b0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "dae_0_1",
+          "resource": "dae"
+        },
+        "slotNumber": 0,
+        "name": "DAE 0 1 Power Supply B0",
+        "manufacturer": "ACBEL POLYTECH INC.",
+        "model": "Third Gen VE.400W, Dual +12V P/S",
+        "firmwareVersion": "0421",
+        "emcSerialNumber": "AC7B7143200523",
+        "vendorPartNumber": "SGA001-710G",
+        "vendorSerialNumber": "AC7143202684",
+        "emcPartNumber": "071-000-553",
+        "parentDae": {
+          "id": "dae_0_1"
+        },
+        "storageProcessor": {
+          "id": "spb"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_ps_a0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 0,
+        "name": "DPE Power Supply A0",
+        "manufacturer": "FLEXTRONICS POWER INC.",
+        "model": "12V P/S WITH 12VSTBY AND FAN",
+        "firmwareVersion": "0501",
+        "emcSerialNumber": "FPSAH153300096",
+        "vendorPartNumber": "S1100ADU00501003",
+        "vendorSerialNumber": "FPSAH153300096",
+        "emcPartNumber": "071-000-610-01",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "storageProcessor": {
+          "id": "spa"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "dpe_ps_b0",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_COMPONENT_OK"
+          ],
+          "descriptions": [
+            "The component is operating normally. No action is required."
+          ]
+        },
+        "needsReplacement": false,
+        "parent": {
+          "id": "dpe",
+          "resource": "dpe"
+        },
+        "slotNumber": 0,
+        "name": "DPE Power Supply B0",
+        "manufacturer": "FLEXTRONICS POWER INC.",
+        "model": "12V P/S WITH 12VSTBY AND FAN",
+        "firmwareVersion": "0501",
+        "emcSerialNumber": "FPSAH153300162",
+        "vendorPartNumber": "S1100ADU00501003",
+        "vendorSerialNumber": "FPSAH153300162",
+        "emcPartNumber": "071-000-610-01",
+        "parentDpe": {
+          "id": "dpe"
+        },
+        "storageProcessor": {
+          "id": "spb"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,334 @@
+{
+  "@base": "https://10.245.101.35/api/types/feature/instances?fields=id,name,reason,state,license.id&per_page=2000&compact=true",
+  "updated": "2017-06-27T06:37:26.392Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "ADVANCED_STATIC_ROUTING",
+        "state": 2,
+        "name": "ADVANCED_STATIC_ROUTING"
+      }
+    },
+    {
+      "content": {
+        "id": "ANTIVIRUS",
+        "state": 2,
+        "name": "ANTIVIRUS",
+        "license": {
+          "id": "ANTIVIRUS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "BASE_OE_V4_0",
+        "state": 2,
+        "name": "BASE_OE_V4_0",
+        "license": {
+          "id": "BASE_OE_V4_0"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "CIFS",
+        "state": 2,
+        "name": "CIFS",
+        "license": {
+          "id": "CIFS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "CIFS_MIGRATION",
+        "state": 2,
+        "name": "CIFS_MIGRATION"
+      }
+    },
+    {
+      "content": {
+        "id": "DATA_AT_REST_ENCRYPTION",
+        "state": 3,
+        "reason": 1,
+        "name": "DATA_AT_REST_ENCRYPTION"
+      }
+    },
+    {
+      "content": {
+        "id": "ELMSUPLOAD",
+        "state": 2,
+        "name": "ELMSUPLOAD"
+      }
+    },
+    {
+      "content": {
+        "id": "EMC_SUPPORT_ECOSYSTEM",
+        "state": 2,
+        "name": "EMC_SUPPORT_ECOSYSTEM",
+        "license": {
+          "id": "EMC_SUPPORT_ECOSYSTEM"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "ENCRYPTION",
+        "state": 2,
+        "name": "ENCRYPTION"
+      }
+    },
+    {
+      "content": {
+        "id": "ESA_ADAPTER",
+        "state": 2,
+        "name": "ESA_ADAPTER",
+        "license": {
+          "id": "ESA_ADAPTER"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "EVE",
+        "state": 2,
+        "name": "EVE"
+      }
+    },
+    {
+      "content": {
+        "id": "FAST_CACHE",
+        "state": 2,
+        "name": "FAST_CACHE",
+        "license": {
+          "id": "FAST_CACHE"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FAST_VP",
+        "state": 2,
+        "name": "FAST_VP",
+        "license": {
+          "id": "FAST_VP"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FIBRE_CHANNEL",
+        "state": 2,
+        "name": "FIBRE_CHANNEL",
+        "license": {
+          "id": "FIBRE_CHANNEL"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "FILE",
+        "state": 2,
+        "name": "FILE"
+      }
+    },
+    {
+      "content": {
+        "id": "FILE_SYSTEM_EVENTS",
+        "state": 2,
+        "name": "FILE_SYSTEM_EVENTS",
+        "license": {
+          "id": "FILE_SYSTEM_EVENTS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "HA",
+        "state": 2,
+        "name": "HA"
+      }
+    },
+    {
+      "content": {
+        "id": "INLINE_COMPRESSION",
+        "state": 2,
+        "name": "INLINE_COMPRESSION",
+        "license": {
+          "id": "INLINE_COMPRESSION"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "IP_MULTI_TENANCY",
+        "state": 2,
+        "name": "IP_MULTI_TENANCY",
+        "license": {
+          "id": "IP_MULTI_TENANCY"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "ISCSI",
+        "state": 2,
+        "name": "ISCSI",
+        "license": {
+          "id": "ISCSI"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "LINK_AGGREGATION",
+        "state": 2,
+        "name": "LINK_AGGREGATION"
+      }
+    },
+    {
+      "content": {
+        "id": "LOCAL_COPIES",
+        "state": 2,
+        "name": "LOCAL_COPIES",
+        "license": {
+          "id": "LOCAL_COPIES"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "MIGRATION",
+        "state": 2,
+        "name": "MIGRATION"
+      }
+    },
+    {
+      "content": {
+        "id": "NAS_SERVER",
+        "state": 2,
+        "name": "NAS_SERVER"
+      }
+    },
+    {
+      "content": {
+        "id": "NFS",
+        "state": 2,
+        "name": "NFS",
+        "license": {
+          "id": "NFS"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "NFS_SERVER",
+        "state": 2,
+        "name": "NFS_SERVER"
+      }
+    },
+    {
+      "content": {
+        "id": "PHYSICAL_DEPLOYMENT",
+        "state": 2,
+        "name": "PHYSICAL_DEPLOYMENT"
+      }
+    },
+    {
+      "content": {
+        "id": "PHYSICAL_DEPLOYMENT_SINGLE",
+        "state": 1,
+        "reason": 3,
+        "name": "PHYSICAL_DEPLOYMENT_SINGLE"
+      }
+    },
+    {
+      "content": {
+        "id": "QUALITY_OF_SERVICE",
+        "state": 2,
+        "name": "QUALITY_OF_SERVICE",
+        "license": {
+          "id": "QUALITY_OF_SERVICE"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "REPLICATION",
+        "state": 2,
+        "name": "REPLICATION",
+        "license": {
+          "id": "REPLICATION"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "RG_BASED_PROVISION",
+        "state": 2,
+        "name": "RG_BASED_PROVISION"
+      }
+    },
+    {
+      "content": {
+        "id": "THIN_CLONES",
+        "state": 2,
+        "name": "THIN_CLONES"
+      }
+    },
+    {
+      "content": {
+        "id": "THIN_PROVISIONING",
+        "state": 2,
+        "name": "THIN_PROVISIONING",
+        "license": {
+          "id": "THIN_PROVISIONING"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "UNISPHERE",
+        "state": 2,
+        "name": "UNISPHERE",
+        "license": {
+          "id": "UNISPHERE"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "UNISPHERE_CENTRAL",
+        "state": 2,
+        "name": "UNISPHERE_CENTRAL",
+        "license": {
+          "id": "UNISPHERE_CENTRAL"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "VASA",
+        "state": 2,
+        "name": "VASA",
+        "license": {
+          "id": "VASA"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "VIRTUAL_DEPLOYMENT_SINGLE",
+        "state": 1,
+        "reason": 3,
+        "name": "VIRTUAL_DEPLOYMENT_SINGLE"
+      }
+    }
+  ]
+}

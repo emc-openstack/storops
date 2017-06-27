@@ -1,0 +1,74 @@
+{
+    "@base": "https://10.245.101.35/api/types/battery/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,parentStorageProcessor.id&per_page=2000&compact=true",
+    "updated": "2017-06-26T01:43:25.221Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "id": "spa_bbu_0",
+                "health": {
+                    "value": 5,
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ]
+                },
+                "needsReplacement": false,
+                "parent": {
+                    "id": "spa",
+                    "resource": "storageProcessor"
+                },
+                "slotNumber": 0,
+                "name": "SP A Battery 0",
+                "manufacturer": "ACBEL POLYTECH INC.",
+                "model": "LITHIUM-ION, UNIVERSAL BOB",
+                "firmwareVersion": "073.91",
+                "emcPartNumber": "078-000-128-02",
+                "emcSerialNumber": "ACPJ5143800045",
+                "vendorPartNumber": "SGD006-710G",
+                "vendorSerialNumber": "",
+                "parentStorageProcessor": {
+                    "id": "spa"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "spb_bbu_0",
+                "health": {
+                    "value": 5,
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ]
+                },
+                "needsReplacement": false,
+                "parent": {
+                    "id": "spb",
+                    "resource": "storageProcessor"
+                },
+                "slotNumber": 0,
+                "name": "SP B Battery 0",
+                "manufacturer": "ACBEL POLYTECH INC.",
+                "model": "LITHIUM-ION, UNIVERSAL BOB",
+                "firmwareVersion": "073.91",
+                "emcPartNumber": "078-000-128-02",
+                "emcSerialNumber": "ACPJ5143800258",
+                "vendorPartNumber": "SGD006-710G",
+                "vendorSerialNumber": "",
+                "parentStorageProcessor": {
+                    "id": "spb"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,75 @@
+{
+  "content": {
+    "name": "sasPort",
+    "description": "(Applies to physical deployments only.) Information about Serial Attached SCSI (SAS) ports in the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/sasPort.html",
+    "attributes": [
+      {
+        "name": "currentSpeed",
+        "type": "SpeedValuesEnum",
+        "description": "Current speed of the SAS port.",
+        "displayValue": "currentSpeed"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "SAS port name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "needsReplacement",
+        "type": "Boolean",
+        "description": "Indicates whether the SAS port needs replacement. Values are:  <ul>  <li>true - SAS port needs replacement.</li>  <li>false - SAS port does not need replacement.</li>  </ul>",
+        "displayValue": "needsReplacement"
+      },
+      {
+        "name": "parent",
+        "type": "resourceRef",
+        "description": "Class and identifier of the SAS port's parent enclosure.",
+        "displayValue": "parent"
+      },
+      {
+        "name": "port",
+        "type": "Integer",
+        "description": "<font color=#0f0f0f>Physical SAS port number on the storage processor.  Valid values are 0 and 1.</font>",
+        "displayValue": "port"
+      },
+      {
+        "name": "parentIOModule",
+        "type": "ioModule",
+        "description": "(Applies if the SAS port resides on an I/O module.) Parent I/O module of the SAS port, as defined by the ioModule resource type.",
+        "displayValue": "parentIOModule"
+      },
+      {
+        "name": "parentStorageProcessor",
+        "type": "storageProcessor",
+        "description": "(Applies if the SAS port resides directly on an SP.) Parent SP of the SAS port, as defined by the storageProcessor resource type.",
+        "displayValue": "parentStorageProcessor"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the SAS port, as defined by the health resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "connectorType",
+        "type": "ConnectorTypeEnum",
+        "description": "Physical connector type.",
+        "displayValue": "connectorType"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the SAS port instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "storageProcessor",
+        "type": "storageProcessor",
+        "description": "SP on which the SAS port directly or indirectly resides, as defined by the storageProcessor resource type.",
+        "displayValue": "storageProcessor"
+      }
+    ]
+  }
+}

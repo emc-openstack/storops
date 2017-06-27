@@ -1,0 +1,12 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/memoryModule?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/memoryModule/instances?compact=True&fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,isInserted,manufacturer,model,name,needsReplacement,parent,parentStorageProcessor,size,slotNumber,vendorPartNumber,vendorSerialNumber",
+      "response": "all.json"
+    }
+  ]
+}

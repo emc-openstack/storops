@@ -25,8 +25,12 @@ environment:
 install:
   # We need wheel installed to build wheels
   - echo Installed Pythons
+  - pip.exe list
   - dir C:\Python*
   - "%PYTHON%\\python.exe -m pip install tox"
+  # Try to workaround the issue:
+  # Expected version spec in enum34;python_version<"3.4" # BSD at ;python_version<"3.4" # BSD
+  - "%PYTHON%\\python.exe -m pip install --upgrade pip setuptools"
 
 build: off
 

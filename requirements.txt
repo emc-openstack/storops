@@ -1,7 +1,7 @@
 requests!=2.9.0,>=2.8.1 # Apache-2.0, cinder, manila
 PyYAML>=3.10 # MIT, cinder, manila
 six>=1.9.0 # MIT, cinder, manila
-enum34;python_version=='2.7' or python_version=='2.6' or python_version=='3.3' # BSD
+enum34;python_version<'3.4' # BSD
 
 python-dateutil>=2.4.2 # BSD
 retryz>=0.1.8 # Apache-2.0

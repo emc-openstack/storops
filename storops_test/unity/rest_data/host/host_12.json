@@ -62,6 +62,21 @@
                 "initiatorId": "20:00:00:00:C9:F3:AB:0D:10:00:00:00:C9:F3:AB:0D"
             }
         ],
+        "hostIPPorts": [
+            {
+                "id": "HostNetworkAddress_1",
+                "address": "10.245.54.151"
+            }
+        ],
+        "hostLUNs": [
+            {
+                "id": "Host_1_sv_1_prod",
+                "lun": {
+                    "id": "sv_1",
+                    "name": "Yangpu"
+                }
+            }
+        ],
         "name": "ESD-HOST193221.meng.lab.emc.com",
         "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_12",
         "iscsiHostInitiators": [

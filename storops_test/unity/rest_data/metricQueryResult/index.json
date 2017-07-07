@@ -39,6 +39,14 @@
     {
       "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 34",
       "response": "query_id_34.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 128",
+      "response": "query_id_128.json"
+    },
+    {
+      "url": "/api/types/metricQueryResult/instances?compact=True&fields=path,queryId,timestamp,values&filter=queryId eq 130",
+      "response": "query_id_130.json"
     }
   ]
 }

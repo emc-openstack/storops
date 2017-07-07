@@ -1,0 +1,34 @@
+{
+  "content": {
+    "id": "spa_sas4",
+    "currentSpeed": 12,
+    "connectorType": 3,
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_PORT_LINK_UP"
+      ],
+      "descriptions": [
+        "The port is operating normally."
+      ]
+    },
+    "needsReplacement": false,
+    "parent": {
+      "id": "spa",
+      "resource": "storageProcessor"
+    },
+    "name": "SP A SAS Port 4",
+    "port": 0,
+    "storageProcessor": {
+      "id": "spa"
+    },
+    "parentStorageProcessor": {
+      "id": "spa",
+      "name": "SP A"
+    },
+    "parentIOModule": {
+      "id": "ioa",
+      "name": "IO_Module_A"
+    }
+  }
+}

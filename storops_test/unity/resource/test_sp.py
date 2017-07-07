@@ -205,8 +205,8 @@ class UnityStorageProcessorTest(TestCase):
         assert_that(csv, contains_string('timestamp,id,name,'))
         assert_that(csv, contains_string('block_read_iops,block_read_mbps'))
         assert_that(csv, contains_string('2016-11-21 09:10:00+00:00,spa'))
-        assert_that(csv, contains_string('spa,SP A,87.0,89.0'))
-        assert_that(csv, contains_string('spb,SP B,88.0,90.0'))
+        assert_that(csv, contains_string('spa,SP A,89,87.0,89.0'))
+        assert_that(csv, contains_string('spb,SP B,78,88.0,90.0'))
 
     FILENAME = path.join(get_local_folder(),
                          'unittest_sp_metric_persist_csv_file.csv')

@@ -345,7 +345,14 @@ class UnityLinkAggregationList(UnityResourceList):
 
 
 class UnityIscsiNode(UnityResource):
-    pass
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'ethernet_port.connector_type',
+            'ethernet_port.speed',
+            'ethernet_port.supported_speeds',
+            'ethernet_port.health',
+        )
 
 
 class UnityIscsiNodeList(UnityResourceList):
@@ -355,7 +362,12 @@ class UnityIscsiNodeList(UnityResourceList):
 
 
 class UnitySasPort(UnityResource):
-    pass
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'parentIOModule.name',
+            'parent_storage_processor.name',
+        )
 
 
 class UnitySasPortList(UnityResourceList):

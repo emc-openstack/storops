@@ -1,0 +1,23 @@
+{
+  "content": {
+    "paths": [
+      "sp.*.fastCache.blockSize",
+      "sp.*.fastCache.volume.*.readHits",
+      "sp.*.fastCache.volume.*.writeHits",
+      "sp.*.fibreChannel.fePort.*.readBlocks",
+      "sp.*.fibreChannel.fePort.*.reads",
+      "sp.*.fibreChannel.fePort.*.writeBlocks",
+      "sp.*.fibreChannel.fePort.*.writes",
+      "sp.*.iscsi.fePort.*.readBlocks",
+      "sp.*.iscsi.fePort.*.reads",
+      "sp.*.iscsi.fePort.*.writeBlocks",
+      "sp.*.iscsi.fePort.*.writes",
+      "sp.*.physical.blockSize",
+      "sp.*.storage.blockSize"
+    ],
+    "id": 2,
+    "expiration": "2016-11-15T07:30:00.000Z",
+    "maximumSamples": -1,
+    "interval": 300
+  }
+}

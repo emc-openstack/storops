@@ -42,6 +42,38 @@
       "response": "create_id_15.json"
     },
     {
+      "url": "/api/types/metricRealTimeQuery/instances?compact=True",
+      "body": {
+        "interval": 1,
+        "paths": [
+          "sp.*.physical.blockSize"
+        ]
+      },
+      "response": "block_size.json"
+    },
+    {
+      "url": "/api/types/metricRealTimeQuery/instances?compact=True",
+      "body": {
+        "interval": 1,
+        "paths": [
+          "sp.*.fastCache.blockSize",
+          "sp.*.fastCache.volume.*.readHits",
+          "sp.*.fastCache.volume.*.writeHits",
+          "sp.*.fibreChannel.fePort.*.readBlocks",
+          "sp.*.fibreChannel.fePort.*.reads",
+          "sp.*.fibreChannel.fePort.*.writeBlocks",
+          "sp.*.fibreChannel.fePort.*.writes",
+          "sp.*.iscsi.fePort.*.readBlocks",
+          "sp.*.iscsi.fePort.*.reads",
+          "sp.*.iscsi.fePort.*.writeBlocks",
+          "sp.*.iscsi.fePort.*.writes",
+          "sp.*.physical.blockSize",
+          "sp.*.storage.blockSize"
+        ]
+      },
+      "response": "13.json"
+    },
+    {
       "url": "/api/instances/metricRealTimeQuery/4?compact=True",
       "response": "query_id_not_found.json"
     }

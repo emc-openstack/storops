@@ -16,16 +16,17 @@
 
 from __future__ import unicode_literals
 
-from storops.lib import common
+import functools
 import logging
 import pipes
 
-import functools
 import six
+from retryz import retry
+
 from storops.connection import client
 from storops.connection.exceptions import SFtpExecutionError, \
     SSHExecutionError, HTTPClientError
-from retryz import retry
+from storops.lib import common
 
 paramiko = common.try_import('paramiko')
 
@@ -53,7 +54,7 @@ class UnityRESTConnector(object):
     }
 
     def __init__(self, host, port=443, user='admin', password='',
-                 verify=False):
+                 verify=False, retries=None, cache_interval=0):
         base_url = 'https://{host}:{port}'.format(host=host, port=port)
 
         insecure = False
@@ -66,7 +67,9 @@ class UnityRESTConnector(object):
                                              headers=self.HEADERS,
                                              auth=(user, password),
                                              insecure=insecure,
-                                             ca_cert_path=ca_cert_path)
+                                             retries=retries,
+                                             ca_cert_path=ca_cert_path,
+                                             cache_interval=cache_interval)
 
     def get(self, url, **kwargs):
         return self.http_client.get(url, **kwargs)

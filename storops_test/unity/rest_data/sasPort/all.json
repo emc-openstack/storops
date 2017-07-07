@@ -1,6 +1,6 @@
 {
-  "@base": "https://10.245.101.35/api/types/sasPort/instances?fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,port,parentStorageProcessor.id,storageProcessor.id,parentIOModule.id&per_page=2000&compact=true",
-  "updated": "2017-06-27T03:20:27.658Z",
+  "@base": "https://10.245.101.39/api/types/sasPort/instances?fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,parentIOModule.name,parentStorageProcessor.name,port,parentStorageProcessor.id,storageProcessor.id,parentIOModule.id,parentStorageProcessor.id,parentIOModule.id&per_page=2000&compact=true",
+  "updated": "2017-08-15T10:06:56.022Z",
   "links": [
     {
       "rel": "self",
@@ -33,7 +33,8 @@
           "id": "spa"
         },
         "parentStorageProcessor": {
-          "id": "spa"
+          "id": "spa",
+          "name": "SP A"
         }
       }
     },
@@ -61,7 +62,8 @@
           "id": "spa"
         },
         "parentStorageProcessor": {
-          "id": "spa"
+          "id": "spa",
+          "name": "SP A"
         }
       }
     },
@@ -90,7 +92,8 @@
           "id": "spb"
         },
         "parentStorageProcessor": {
-          "id": "spb"
+          "id": "spb",
+          "name": "SP B"
         }
       }
     },
@@ -118,7 +121,8 @@
           "id": "spb"
         },
         "parentStorageProcessor": {
-          "id": "spb"
+          "id": "spb",
+          "name": "SP B"
         }
       }
     }

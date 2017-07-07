@@ -1,0 +1,108 @@
+{
+  "@base": "https://10.245.101.39/api/types/metricRealTimeQuery/instances?fields=expiration,id,interval,maximumSamples,paths&per_page=2000&compact=true",
+  "updated": "2017-08-16T11:54:39.253Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": 2,
+        "paths": [
+          "sp.*.physical.disk.*.reads",
+          "sp.*.physical.disk.*.writes",
+          "sp.*.physical.disk.*.readBlocks",
+          "sp.*.physical.disk.*.writeBlocks",
+          "sp.*.physical.disk.*.idleTicks",
+          "sp.*.physical.disk.*.busyTicks",
+          "sp.*.platform.storageProcessorTemperature",
+          "sp.*.memory.summary.freeBytes",
+          "sp.*.memory.summary.totalBytes",
+          "sp.*.memory.summary.totalUsedBytes",
+          "sp.*.storage.filesystem.*.reads",
+          "sp.*.storage.filesystem.*.writes",
+          "sp.*.storage.filesystem.*.readBytes",
+          "sp.*.storage.filesystem.*.writeBytes",
+          "sp.*.storage.lun.*.reads",
+          "sp.*.storage.lun.*.writes",
+          "sp.*.storage.lun.*.readBlocks",
+          "sp.*.storage.lun.*.writeBlocks",
+          "sp.*.storage.lun.*.idleTime",
+          "sp.*.storage.lun.*.busyTime"
+        ],
+        "interval": 300,
+        "maximumSamples": -1,
+        "expiration": "2017-08-16T12:20:00.000Z"
+      }
+    },
+    {
+      "content": {
+        "id": 128,
+        "paths": [
+          "sp.*.net.basic.outBytes",
+          "sp.*.blockCache.global.summary.writeHits",
+          "sp.*.storage.lun.*.writeBlocks",
+          "sp.*.platform.storageProcessorTemperature",
+          "sp.*.storage.blockSize",
+          "sp.*.cifs.global.basic.readBytes",
+          "sp.*.physical.disk.*.writes",
+          "sp.*.physical.disk.*.idleTicks",
+          "sp.*.blockCache.global.summary.readHits",
+          "sp.*.fibreChannel.fePort.*.writeBlocks",
+          "sp.*.storage.summary.writes",
+          "sp.*.physical.disk.*.writeBlocks",
+          "sp.*.fibreChannel.fePort.*.readBlocks",
+          "sp.*.net.basic.inBytes",
+          "sp.*.storage.lun.*.readBlocks",
+          "sp.*.blockCache.global.summary.readMisses",
+          "sp.*.fastCache.blockSize",
+          "sp.*.fibreChannel.blockSize",
+          "sp.*.fastCache.volume.*.readHits",
+          "sp.*.physical.coreCount",
+          "sp.*.storage.summary.reads",
+          "sp.*.blockCache.global.summary.writeMisses",
+          "sp.*.storage.summary.writeBlocks",
+          "sp.*.iscsi.fePort.*.writes",
+          "sp.*.physical.disk.*.busyTicks",
+          "sp.*.iscsi.fePort.*.writeBlocks",
+          "sp.*.storage.filesystem.*.writeBytes",
+          "sp.*.fastCache.volume.*.writeHits",
+          "sp.*.fibreChannel.fePort.*.writes",
+          "sp.*.storage.lun.*.idleTime",
+          "sp.*.fibreChannel.fePort.*.reads",
+          "sp.*.storage.summary.readBlocks",
+          "sp.*.cpu.summary.idleTicks",
+          "sp.*.cifs.global.basic.writeBytes",
+          "sp.*.blockCache.global.summary.dirtyBytes",
+          "sp.*.storage.filesystem.*.reads",
+          "sp.*.storage.filesystem.*.writes",
+          "sp.*.storage.filesystem.*.readBytes",
+          "sp.*.physical.disk.*.reads",
+          "sp.*.iscsi.fePort.*.reads",
+          "sp.*.nfs.basic.writes",
+          "sp.*.nfs.basic.readBytes",
+          "sp.*.storage.lun.*.currentIOCount",
+          "sp.*.cpu.summary.busyTicks",
+          "sp.*.physical.disk.*.sumArrivalQueueLength",
+          "sp.*.storage.lun.*.writes",
+          "sp.*.iscsi.fePort.*.readBlocks",
+          "sp.*.cifs.global.basic.reads",
+          "sp.*.physical.blockSize",
+          "sp.*.nfs.basic.writeBytes",
+          "sp.*.physical.disk.*.readBlocks",
+          "sp.*.cifs.global.basic.writes",
+          "sp.*.storage.lun.*.reads",
+          "sp.*.storage.lun.*.busyTime",
+          "sp.*.nfs.basic.reads",
+          "sp.*.storage.lun.*.totalIoTime"
+        ],
+        "interval": 60,
+        "maximumSamples": -1,
+        "expiration": "2017-08-16T12:04:00.000Z"
+      }
+    }
+  ]
+}

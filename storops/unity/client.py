@@ -16,18 +16,18 @@
 from __future__ import unicode_literals
 
 import logging
-
-import six
 from functools import wraps
 
-from storops.exception import UnityResourceNotSupportedError
+import six
+
+import storops.unity.resource.system
 import storops.unity.resource.type_resource
 from storops.connection.connector import UnityRESTConnector
+from storops.exception import UnityResourceNotSupportedError
 from storops.lib.common import instance_cache, EnumList
 from storops.lib.metric import PerfManager
 from storops.unity.enums import UnityEnum, UnityEnumList
 from storops.unity.resource import UnityResource, UnityResourceList
-import storops.unity.resource.system
 from storops.unity.resp import RestResponse
 
 __author__ = 'Cedric Zhuang'
@@ -43,16 +43,20 @@ def wrap_not_supported(func):
         except UnityResourceNotSupportedError:
             ret = RestResponse(inputs="")
         return ret
+
     return _wrap
 
 
 class UnityClient(PerfManager):
-    def __init__(self, ip, username, password, port=443, verify=False):
+    def __init__(self, ip, username, password, port=443, verify=False,
+                 retries=None, cache_interval=0):
         super(UnityClient, self).__init__()
         self.ip = ip
         self._rest = UnityRESTConnector(ip, port=port, user=username,
                                         password=password,
-                                        verify=verify)
+                                        verify=verify,
+                                        retries=retries,
+                                        cache_interval=cache_interval)
         self._system_version = None
 
     @wrap_not_supported
@@ -119,7 +123,7 @@ class UnityClient(PerfManager):
         url = self.assemble_url(url, **params)
         return RestResponse(self._rest.get(url))
 
-    def rest_post(self, url, body=None, files=None,  **params):
+    def rest_post(self, url, body=None, files=None, **params):
         url = self.assemble_url(url, **params)
         return RestResponse(self._rest.post(url, files=files, body=body))
 

@@ -1,6 +1,6 @@
 {
-    "@base": "https://10.245.101.35/api/types/battery/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,parentStorageProcessor.id&per_page=2000&compact=true",
-    "updated": "2017-06-26T01:43:25.221Z",
+    "@base": "https://10.245.101.39/api/types/battery/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,parentStorageProcessor.name,slotNumber,vendorPartNumber,vendorSerialNumber,parentStorageProcessor.id,parentStorageProcessor.id&per_page=2000&compact=true",
+    "updated": "2017-08-15T10:15:13.797Z",
     "links": [
         {
             "rel": "self",
@@ -35,7 +35,8 @@
                 "vendorPartNumber": "SGD006-710G",
                 "vendorSerialNumber": "",
                 "parentStorageProcessor": {
-                    "id": "spa"
+                    "id": "spa",
+                    "name": "SP A"
                 }
             }
         },
@@ -66,7 +67,8 @@
                 "vendorPartNumber": "SGD006-710G",
                 "vendorSerialNumber": "",
                 "parentStorageProcessor": {
-                    "id": "spb"
+                    "id": "spb",
+                    "name": "SP B"
                 }
             }
         }

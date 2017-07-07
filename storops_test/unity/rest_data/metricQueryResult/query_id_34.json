@@ -3136,6 +3136,17 @@
           "spb": {}
         }
       }
+    },
+    {
+      "content": {
+        "queryId": 34,
+        "path": "sp.*.storage.blockSize",
+        "timestamp": "2016-11-21T09:07:00.000Z",
+        "values": {
+          "spa": "512",
+          "spb": "512"
+        }
+      }
     }
   ]
 }

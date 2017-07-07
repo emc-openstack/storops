@@ -1,0 +1,12 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/systemCapacity?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/systemCapacity/instances?compact=True&fields=compressionPercent,compressionRatio,compressionSizeSaved,id,instanceId,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,tiers",
+      "response": "all.json"
+    }
+  ]
+}

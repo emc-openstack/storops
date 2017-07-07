@@ -20,19 +20,22 @@ from unittest import TestCase
 import ddt
 from hamcrest import assert_that, equal_to, instance_of, only_contains, \
     raises, contains_string
+
+from storops.exception import SystemAPINotSupported
 from storops.exception import UnityEthernetPortSpeedNotSupportError, \
     UnityEthernetPortMtuSizeNotSupportError, UnityResourceNotFoundError, \
     UnityPolicyNameInUseError, UnityEthernetPortAlreadyAggregatedError, \
     UnityIPInUseException
-from storops.exception import SystemAPINotSupported
-from storops.unity.enums import ConnectorTypeEnum, EPSpeedValuesEnum, \
-    FcSpeedEnum, IOLimitPolicyStateEnum, IOLimitPolicyTypeEnum
+from storops.unity.enums import EPSpeedValuesEnum, \
+    FcSpeedEnum, IOLimitPolicyStateEnum, IOLimitPolicyTypeEnum, \
+    SpeedValuesEnum, ConnectorTypeEnum
+from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.port import UnityEthernetPort, \
     UnityEthernetPortList, UnityIpPort, UnityIpPortList, UnityIscsiPortal, \
     UnityIscsiPortalList, UnityIscsiNode, UnityFcPort, UnityFcPortList, \
     UnityIoLimitRule, UnityIoLimitPolicy, UnityIoLimitPolicyList, \
-    UnityLinkAggregation, UnityLinkAggregationList
+    UnityLinkAggregation, UnityLinkAggregationList, UnitySasPort
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops_test.unity.rest_mock import t_rest, patch_rest
 
@@ -445,3 +448,52 @@ class UnityLinkAggregationTest(TestCase):
     def test_link_aggregation_not_supported(self):
         ports = UnityLinkAggregationList(cli=t_rest("4.1.2"))
         assert_that(len(ports), equal_to(0))
+
+
+class UnityIscsiNodeTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        node = UnityIscsiNode(_id='iscsinode_spb_eth3', cli=t_rest())
+        assert_that(node.id, equal_to('iscsinode_spb_eth3'))
+        assert_that(node.name, equal_to('iqn.1992-04.com.emc:cx.'
+                                        'fnm00150600267.b1'))
+        assert_that(node.alias, equal_to('0267.b1'))
+
+    @patch_rest
+    def test_get_nested_properties(self):
+        node = UnityIscsiNode(_id='iscsinode_spb_eth3', cli=t_rest())
+        assert_that(node.ethernet_port.id, equal_to('spb_eth3'))
+        assert_that(node.ethernet_port.connector_type,
+                    equal_to(ConnectorTypeEnum.RJ45))
+        assert_that(node.ethernet_port.speed,
+                    equal_to(EPSpeedValuesEnum._10GbPS))
+        assert_that(node.ethernet_port.supported_speeds,
+                    only_contains(
+                        EPSpeedValuesEnum.AUTO,
+                        EPSpeedValuesEnum._100MbPS,
+                        EPSpeedValuesEnum._1GbPS,
+                        EPSpeedValuesEnum._10GbPS))
+        assert_that(node.ethernet_port.health, instance_of(UnityHealth))
+
+
+class UnitySasPortTest(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        port = UnitySasPort(_id='spa_sas4', cli=t_rest())
+        assert_that(port.id, equal_to('spa_sas4'))
+        assert_that(port.current_speed, equal_to(SpeedValuesEnum._12Gbps))
+        assert_that(port.connector_type,
+                    equal_to(ConnectorTypeEnum.MINI_SAS_HD))
+        assert_that(port.health, instance_of(UnityHealth))
+        assert_that(port.needs_replacement, equal_to(False))
+        assert_that(port.name, equal_to('SP A SAS Port 4'))
+        assert_that(port.port, equal_to(0))
+        assert_that(port.storage_processor.id, equal_to('spa'))
+
+    @patch_rest
+    def test_get_nested_properties(self):
+        port = UnitySasPort(_id='spa_sas4', cli=t_rest())
+        assert_that(port.parent_storage_processor.id, equal_to('spa'))
+        assert_that(port.parent_storage_processor.name, equal_to('SP A'))
+        assert_that(port.parent_io_module.id, equal_to('ioa'))
+        assert_that(port.parent_io_module.name, equal_to('IO_Module_A'))

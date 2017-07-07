@@ -70,6 +70,8 @@ class UnityHost(UnityResource):
             'fc_host_initiators.paths.is_logged_in',
             'fc_host_initiators.paths.fc_port.wwn',
             'iscsi_host_initiators.initiator_id',
+            'hostLUNs.lun.name',
+            'hostIPPorts.address',
         )
 
     @classmethod

@@ -45,7 +45,8 @@ class UnityMetricRealTimeQuery(UnityResource):
                 id_list.append(query.get_id())
                 paths -= query_paths
         if paths:
-            id_list.append(cls.create(cli, interval, list(paths)).get_id())
+            id_list.append(
+                cls.create(cli, interval, sorted(list(paths))).get_id())
             queries.update()
         return queries.set_id_list(id_list)
 
@@ -123,6 +124,52 @@ class UnityMetricQueryResult(UnityResource):
             ret = IdValues()
         else:
             ret = IdValues({k: int(v) for k, v in self.values.items()})
+        return ret
+
+    @property
+    def sum_sp_values(self):
+        """
+        spa + spb
+        """
+        if self.values is None:
+            ret = IdValues()
+        else:
+            ret = IdValues({'0': sum(int(x) for x in self.values.values())})
+        return ret
+
+    def combine_numeric_values(self, other):
+        """
+        numeric_values * sp_values
+        """
+        if self.values is None:
+            ret = IdValues()
+        else:
+            ret = sum([IdValues(
+                {k: int(v) * int(other.values[key]) for k, v in value.items()})
+                for key, value in self.values.items()])
+        return ret
+
+    def combine_sp_values(self, other):
+        """
+        sp_values * sp_values
+        """
+        if self.values is None:
+            ret = IdValues()
+        else:
+            ret = IdValues({k: int(v) * int(other.values[k]) for k, v in
+                            self.values.items()})
+        return ret
+
+    def sum_combined_sp_values(self, other):
+        """
+        sum(sp_values * sp_values)
+        """
+        if self.values is None:
+            ret = IdValues()
+        else:
+            ret = IdValues({'0': sum(int(x) for x in
+                                     {k: int(v) * int(other.values[k]) for k, v
+                                      in self.values.items()}.values())})
         return ret
 
     def diff_timestamp(self, other):

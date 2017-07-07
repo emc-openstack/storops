@@ -190,6 +190,15 @@ def delta_ps(path, prev, curr):
     return ret
 
 
+@metric_calculator
+def total_delta_ps(path, prev, curr):
+    if len(path) != 2:
+        raise ValueError('takes in "reads" and "writes" counter.')
+
+    part1, part2 = path
+    return delta_ps(part1, prev, curr) + delta_ps(part2, prev, curr)
+
+
 def only_one_path(path):
     if isinstance(path, (list, tuple, set)):
         if len(path) != 1:
@@ -248,6 +257,15 @@ def sp_delta_ps(path, prev, curr):
 
 
 @metric_calculator
+def sp_total_delta_ps(path, prev, curr):
+    if len(path) != 2:
+        raise ValueError('takes in "reads" and "writes" counter.')
+
+    part1, part2 = path
+    return sp_delta_ps(part1, prev, curr) + sp_delta_ps(part2, prev, curr)
+
+
+@metric_calculator
 def sp_mb_ps_by_byte(path, prev, curr):
     return sp_delta_ps(path, prev, curr) / (2.0 ** 20)
 
@@ -293,6 +311,254 @@ def _sp_pct(path, curr, prev):
     else:
         ret = IdValues()
     return ret
+
+
+@metric_calculator
+def system_delta_ps(path, prev, curr):
+    path = only_one_path(path)
+
+    if all_not_none(prev, curr):
+        prev_counter = prev.by_path(path)
+        curr_counter = curr.by_path(path)
+    else:
+        prev_counter = None
+        curr_counter = None
+
+    if all_not_none(prev_counter, curr_counter):
+        delta = curr_counter.sum_sp_values - prev_counter.sum_sp_values
+        ret = delta / curr.diff_seconds(prev)
+    else:
+        ret = IdValues()
+    return ret
+
+
+@metric_calculator
+def system_total_delta_ps(path, prev, curr):
+    if len(path) != 2:
+        raise ValueError('takes in "reads" and "writes" counter.')
+
+    part1, part2 = path
+    return system_delta_ps(part1, prev, curr) + system_delta_ps(part2, prev,
+                                                                curr)
+
+
+@metric_calculator
+def disk_response_time(path, prev, curr):
+    if len(path) != 5:
+        raise ValueError(
+            'takes in "busyTicks", "sumArrivalQueueLength", "reads", '
+            '"writes" and "coreCount" counter.')
+
+    part1, part2, part3, part4, part5 = path
+    if all_not_none(prev, curr):
+        prev_part1 = prev.by_path(part1)
+        prev_part2 = prev.by_path(part2)
+        prev_part3 = prev.by_path(part3)
+        prev_part4 = prev.by_path(part4)
+        prev_part5 = prev.by_path(part5)
+
+        curr_part1 = curr.by_path(part1)
+        curr_part2 = curr.by_path(part2)
+        curr_part3 = curr.by_path(part3)
+        curr_part4 = curr.by_path(part4)
+        curr_part5 = curr.by_path(part5)
+
+        delta_part1 = curr_part1.sum_sp() - prev_part1.sum_sp()
+        delta_part2 = curr_part2.sum_sp() - prev_part2.sum_sp()
+        delta_part3 = curr_part3.sum_sp() - prev_part3.sum_sp()
+        delta_part4 = curr_part4.sum_sp() - prev_part4.sum_sp()
+
+        delta_other1 = curr_part3.combine_numeric_values(
+            curr_part5) - prev_part3.combine_numeric_values(prev_part5)
+        delta_other2 = curr_part4.combine_numeric_values(
+            curr_part5) - prev_part4.combine_numeric_values(prev_part5)
+
+        ret = delta_part1 * delta_part2 / ((delta_part3 + delta_part4) *
+                                           (delta_other1 + delta_other2))
+
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def disk_queue_length(path, prev, curr):
+    if len(path) != 3:
+        raise ValueError(
+            'takes in "sumArrivalQueueLength", "reads" and '
+            '"writes" counter.')
+
+    part1, part2, part3 = path
+    if all_not_none(prev, curr):
+        prev_part1 = prev.by_path(part1)
+        prev_part2 = prev.by_path(part2)
+        prev_part3 = prev.by_path(part3)
+
+        curr_part1 = curr.by_path(part1)
+        curr_part2 = curr.by_path(part2)
+        curr_part3 = curr.by_path(part3)
+
+        delta_part1 = curr_part1.sum_sp() - prev_part1.sum_sp()
+        delta_part2 = curr_part2.sum_sp() - prev_part2.sum_sp()
+        delta_part3 = curr_part3.sum_sp() - prev_part3.sum_sp()
+
+        ret = delta_part1 / (delta_part2 + delta_part3)
+
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def lun_response_time(path, prev, curr):
+    if len(path) != 3:
+        raise ValueError(
+            'takes in "totalIoTime", "reads" and "writes" counter.')
+
+    part1, part2, part3 = path
+    if all_not_none(prev, curr):
+        prev_part1 = prev.by_path(part1)
+        prev_part2 = prev.by_path(part2)
+        prev_part3 = prev.by_path(part3)
+
+        curr_part1 = curr.by_path(part1)
+        curr_part2 = curr.by_path(part2)
+        curr_part3 = curr.by_path(part3)
+
+        delta_part1 = curr_part1.sum_sp() - prev_part1.sum_sp()
+        delta_part2 = curr_part2.sum_sp() - prev_part2.sum_sp()
+        delta_part3 = curr_part3.sum_sp() - prev_part3.sum_sp()
+
+        ret = delta_part1 / (delta_part2 + delta_part3)
+
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def lun_queue_length(path, prev, curr):
+    if len(path) != 3:
+        raise ValueError(
+            'takes in "currentIOCount", "busyTime" and '
+            '"idleTime" counter.')
+
+    part1, part2, part3 = path
+    if all_not_none(prev, curr):
+        prev_part1 = prev.by_path(part1)
+        prev_part2 = prev.by_path(part2)
+        prev_part3 = prev.by_path(part3)
+
+        curr_part1 = curr.by_path(part1)
+        curr_part2 = curr.by_path(part2)
+        curr_part3 = curr.by_path(part3)
+
+        delta_part1 = curr_part1.sum_sp() - prev_part1.sum_sp()
+        delta_part2 = curr_part2.sum_sp() - prev_part2.sum_sp()
+        delta_part3 = curr_part3.sum_sp() - prev_part3.sum_sp()
+
+        ret = delta_part1 * delta_part2 / (delta_part2 + delta_part3)
+
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def sum_sp(path, _, curr):
+    path = only_one_path(path)
+    return curr.by_path(path).sum_sp()
+
+
+@metric_calculator
+def byte_rate(path, prev, curr):
+    if len(path) != 2:
+        raise ValueError('takes in "Blocks" and "blockSize" counter.')
+
+    part1, part2 = path
+    if all_not_none(prev, curr):
+        delta = curr.by_path(part1).combine_numeric_values(
+            curr.by_path(part2)) - prev.by_path(
+            part1).combine_numeric_values(
+            prev.by_path(part2))
+        ret = delta / curr.diff_seconds(prev)
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def total_byte_rate(path, prev, curr):
+    if len(path) != 3:
+        raise ValueError(
+            'takes in "readBlocks" "writeBlocks" and '
+            '"blockSize" counter.')
+
+    part1, part2, part3 = path
+    return byte_rate((part1, part3), prev, curr) + byte_rate((part2, part3),
+                                                             prev, curr)
+
+
+@metric_calculator
+def sp_byte_rate(path, prev, curr):
+    if len(path) != 2:
+        raise ValueError('takes in "Blocks" and "blockSize" counter.')
+
+    part1, part2 = path
+    if all_not_none(prev, curr):
+        delta = curr.by_path(part1).combine_sp_values(
+            curr.by_path(part2)) - prev.by_path(part1).combine_sp_values(
+            prev.by_path(part2))
+        ret = delta / curr.diff_seconds(prev)
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def sp_total_byte_rate(path, prev, curr):
+    if len(path) != 3:
+        raise ValueError(
+            'takes in "readBlocks" "writeBlocks" and '
+            '"blockSize" counter.')
+
+    part1, part2, part3 = path
+    return sp_byte_rate((part1, part3), prev, curr) + sp_byte_rate(
+        (part2, part3), prev, curr)
+
+
+@metric_calculator
+def system_byte_rate(path, prev, curr):
+    if len(path) != 2:
+        raise ValueError('takes in "Blocks" and "blockSize" counter.')
+
+    part1, part2 = path
+    if all_not_none(prev, curr):
+        delta = curr.by_path(part1).sum_combined_sp_values(
+            curr.by_path(part2)) - prev.by_path(
+            part1).sum_combined_sp_values(prev.by_path(part2))
+        ret = delta / curr.diff_seconds(prev)
+    else:
+        ret = IdValues()
+
+    return ret
+
+
+@metric_calculator
+def system_total_byte_rate(path, prev, curr):
+    if len(path) != 3:
+        raise ValueError('takes in "readBlocks", "writeBlocks" and '
+                         '"blockSize" counter.')
+
+    part1, part2, part3 = path
+    return system_byte_rate((part1, part3), prev, curr) + system_byte_rate(
+        (part2, part3), prev, curr)
 
 
 @cache

@@ -1,6 +1,6 @@
 {
-  "@base": "https://10.245.101.35/api/types/powerSupply/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,storageProcessor.id,parentDpe.id,parentDae.id&per_page=2000&compact=true",
-  "updated": "2017-06-27T02:57:33.557Z",
+  "@base": "https://10.245.101.39/api/types/powerSupply/instances?fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,parentDae.name,parentDpe.name,slotNumber,storageProcessor.name,vendorPartNumber,vendorSerialNumber,storageProcessor.id,parentDpe.id,parentDae.id,storageProcessor.id,parentDae.id,parentDpe.id&per_page=2000&compact=true",
+  "updated": "2017-08-15T10:13:26.135Z",
   "links": [
     {
       "rel": "self",
@@ -35,10 +35,12 @@
         "vendorSerialNumber": "AC7143202316",
         "emcPartNumber": "071-000-553",
         "parentDae": {
-          "id": "dae_0_1"
+          "id": "dae_0_1",
+          "name": "DAE 0 1"
         },
         "storageProcessor": {
-          "id": "spa"
+          "id": "spa",
+          "name": "SP A"
         }
       }
     },
@@ -69,10 +71,12 @@
         "vendorSerialNumber": "AC7143202684",
         "emcPartNumber": "071-000-553",
         "parentDae": {
-          "id": "dae_0_1"
+          "id": "dae_0_1",
+          "name": "DAE 0 1"
         },
         "storageProcessor": {
-          "id": "spb"
+          "id": "spb",
+          "name": "SP B"
         }
       }
     },
@@ -103,10 +107,12 @@
         "vendorSerialNumber": "FPSAH153300096",
         "emcPartNumber": "071-000-610-01",
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         },
         "storageProcessor": {
-          "id": "spa"
+          "id": "spa",
+          "name": "SP A"
         }
       }
     },
@@ -137,10 +143,12 @@
         "vendorSerialNumber": "FPSAH153300162",
         "emcPartNumber": "071-000-610-01",
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         },
         "storageProcessor": {
-          "id": "spb"
+          "id": "spb",
+          "name": "SP B"
         }
       }
     }

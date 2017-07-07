@@ -5,8 +5,12 @@
       "response": "type.json"
     },
     {
-      "url": "/api/types/sasPort/instances?compact=True&fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,parentIOModule,parentStorageProcessor,port,storageProcessor",
+      "url": "/api/types/sasPort/instances?compact=True&fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,parentIOModule,parentIOModule.name,parentStorageProcessor,parentStorageProcessor.name,port,storageProcessor",
       "response": "all.json"
+    },
+    {
+      "url": "/api/instances/sasPort/spa_sas4?compact=True&fields=connectorType,currentSpeed,health,id,name,needsReplacement,parent,parentIOModule,parentIOModule.name,parentStorageProcessor,parentStorageProcessor.name,port,storageProcessor",
+      "response": "spa_sas4.json"
     }
   ]
 }

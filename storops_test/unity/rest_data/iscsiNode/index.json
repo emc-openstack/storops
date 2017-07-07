@@ -1,0 +1,16 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/iscsiNode?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/iscsiNode/instances?compact=True&fields=alias,ethernetPort,ethernetPort.connectorType,ethernetPort.health,ethernetPort.speed,ethernetPort.supportedSpeeds,id,instanceId,name",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/iscsiNode/iscsinode_spb_eth3?compact=True&fields=alias,ethernetPort,ethernetPort.connectorType,ethernetPort.health,ethernetPort.speed,ethernetPort.supportedSpeeds,id,instanceId,name",
+      "response": "iscsinode_spb_eth3.json"
+    }
+  ]
+}

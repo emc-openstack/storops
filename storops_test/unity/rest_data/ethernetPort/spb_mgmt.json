@@ -1,0 +1,58 @@
+{
+  "content": {
+    "id": "spb_mgmt",
+    "operationalStatus": [
+      32784
+    ],
+    "speed": 1000,
+    "connectorType": 1,
+    "requestedSpeed": 0,
+    "supportedSpeeds": [
+      1000,
+      10,
+      100,
+      0
+    ],
+    "sfpSupportedSpeeds": [],
+    "sfpSupportedProtocols": [],
+    "instanceId": "root/emc:EMC_UEM_ManagementPortLeaf%Tag=00:00:01:00",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_PORT_LINK_UP"
+      ],
+      "descriptions": [
+        "The port is operating normally."
+      ]
+    },
+    "needsReplacement": false,
+    "name": "SP B Management Port",
+    "portNumber": 0,
+    "mtu": 1500,
+    "bond": false,
+    "isLinkUp": true,
+    "macAddress": "08:00:1B:FF:16:F9",
+    "isRSSCapable": false,
+    "isRDMACapable": false,
+    "requestedMtu": 0,
+    "supportedMtus": [
+      1500
+    ],
+    "shortName": "Management Port",
+    "cascadeNames": [
+      "Management Port",
+      "SP B"
+    ],
+    "linuxDeviceName": "mgmt_vdev",
+    "parent": {
+      "id": "spb",
+      "resource": "storageProcessor"
+    },
+    "storageProcessor": {
+      "id": "spb"
+    },
+    "parentStorageProcessor": {
+      "id": "spb"
+    }
+  }
+}

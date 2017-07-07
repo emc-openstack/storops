@@ -5,7 +5,7 @@
       "response": "type.json"
     },
     {
-      "url": "/api/types/battery/instances?compact=True&fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,parentStorageProcessor,slotNumber,vendorPartNumber,vendorSerialNumber",
+      "url": "/api/types/battery/instances?compact=True&fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,parentStorageProcessor,parentStorageProcessor.name,slotNumber,vendorPartNumber,vendorSerialNumber",
       "response": "all.json"
     }
   ]

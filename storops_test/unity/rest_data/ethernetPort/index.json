@@ -13,6 +13,10 @@
       "response": "spb_eth3.json"
     },
     {
+      "url": "/api/instances/ethernetPort/spb_mgmt?compact=True&fields=bond,cascadeNames,connectorType,health,id,instanceId,isLinkUp,isRDMACapable,isRSSCapable,linuxDeviceName,macAddress,mtu,name,needsReplacement,operationalStatus,parent,parentIOModule,parentStorageProcessor,portNumber,requestedMtu,requestedSpeed,sfpSupportedProtocols,sfpSupportedSpeeds,shortName,speed,storageProcessor,supportedMtus,supportedSpeeds",
+      "response": "spb_mgmt.json"
+    },
+    {
       "url": "/api/instances/ethernetPort/spa_eth3/action/modify?compact=True",
       "body": {
         "mtuSize": 9000

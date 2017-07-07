@@ -36,6 +36,14 @@ log = logging.getLogger(__name__)
 
 class UnityLun(UnityResource):
     @classmethod
+    def get_nested_properties(cls):
+        return (
+            'pool.raid_type',
+            'pool.isFASTCacheEnabled',
+            'host_access.host.name',
+        )
+
+    @classmethod
     def create(cls, cli, name, pool, size, sp=None, host_access=None,
                is_thin=None, description=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,

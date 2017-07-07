@@ -21,6 +21,12 @@ __author__ = 'Cedric Zhuang'
 
 
 class UnityDisk(UnityResource):
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'pool.name',
+        )
+
     @property
     def inserted(self):
         return self.raw_size > 0

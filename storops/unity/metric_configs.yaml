@@ -18,6 +18,11 @@ UnityDisk:
     paths: sp.*.physical.disk.*.reads
   - name: write_iops
     paths: sp.*.physical.disk.*.writes
+  - name: total_iops
+    paths:
+      - sp.*.physical.disk.*.reads
+      - sp.*.physical.disk.*.writes
+    calculator: total_delta_ps
   - name: read_mbps
     paths: sp.*.physical.disk.*.readBlocks
     calculator: mb_ps_by_block
@@ -29,6 +34,36 @@ UnityDisk:
       - sp.*.physical.disk.*.busyTicks
       - sp.*.physical.disk.*.idleTicks
     calculator: busy_idle_util
+  - name: response_time
+    paths:
+      - sp.*.physical.disk.*.busyTicks
+      - sp.*.physical.disk.*.sumArrivalQueueLength
+      - sp.*.physical.disk.*.reads
+      - sp.*.physical.disk.*.writes
+      - sp.*.physical.coreCount
+    calculator: disk_response_time
+  - name: queue_length
+    paths:
+      - sp.*.physical.disk.*.sumArrivalQueueLength
+      - sp.*.physical.disk.*.reads
+      - sp.*.physical.disk.*.writes
+    calculator: disk_queue_length
+  - name: read_byte_rate
+    paths:
+      - sp.*.physical.disk.*.readBlocks
+      - sp.*.physical.blockSize
+    calculator: byte_rate
+  - name: write_byte_rate
+    paths:
+      - sp.*.physical.disk.*.writeBlocks
+      - sp.*.physical.blockSize
+    calculator: byte_rate
+  - name: total_byte_rate
+    paths:
+      - sp.*.physical.disk.*.readBlocks
+      - sp.*.physical.disk.*.writeBlocks
+      - sp.*.physical.blockSize
+    calculator: total_byte_rate
 
 
 UnityLun:
@@ -36,6 +71,11 @@ UnityLun:
     paths: sp.*.storage.lun.*.reads
   - name: write_iops
     paths: sp.*.storage.lun.*.writes
+  - name: total_iops
+    paths:
+      - sp.*.storage.lun.*.reads
+      - sp.*.storage.lun.*.writes
+    calculator: total_delta_ps
   - name: read_mbps
     paths: sp.*.storage.lun.*.readBlocks
     calculator: mb_ps_by_block
@@ -47,7 +87,50 @@ UnityLun:
       - sp.*.storage.lun.*.busyTime
       - sp.*.storage.lun.*.idleTime
     calculator: busy_idle_util
-
+  - name: response_time
+    paths:
+      - sp.*.storage.lun.*.totalIoTime
+      - sp.*.storage.lun.*.reads
+      - sp.*.storage.lun.*.writes
+    calculator: lun_response_time
+  - name: queue_length
+    paths:
+      - sp.*.storage.lun.*.currentIOCount
+      - sp.*.storage.lun.*.busyTime
+      - sp.*.storage.lun.*.idleTime
+    calculator: lun_queue_length
+  - name: read_byte_rate
+    paths:
+      - sp.*.storage.lun.*.readBlocks
+      - sp.*.storage.blockSize
+    calculator: byte_rate
+  - name: write_byte_rate
+    paths:
+      - sp.*.storage.lun.*.writeBlocks
+      - sp.*.storage.blockSize
+    calculator: byte_rate
+  - name: total_byte_rate
+    paths:
+      - sp.*.storage.lun.*.readBlocks
+      - sp.*.storage.lun.*.writeBlocks
+      - sp.*.storage.blockSize
+    calculator: total_byte_rate
+  - name: fast_cache_read_hits
+    paths: sp.*.fastCache.volume.*.readHits
+    calculator: sum_sp
+  - name: fast_cache_write_hits
+    paths: sp.*.fastCache.volume.*.writeHits
+    calculator: sum_sp
+  - name: fast_cache_read_hit_rate
+    paths:
+      - sp.*.fastCache.volume.*.readHits
+      - sp.*.fastCache.blockSize
+    calculator: byte_rate
+  - name: fast_cache_write_hit_rate
+    paths:
+      - sp.*.fastCache.volume.*.writeHits
+      - sp.*.fastCache.blockSize
+    calculator: byte_rate
 
 UnityFileSystem:
   - name: read_iops
@@ -75,6 +158,11 @@ UnityStorageProcessor:
   - name: block_write_iops
     paths: sp.*.storage.summary.writes
     calculator: sp_delta_ps
+  - name: block_total_iops
+    paths:
+      - sp.*.storage.summary.reads
+      - sp.*.storage.summary.writes
+    calculator: sp_total_delta_ps
   - name: block_read_mbps
     paths: sp.*.storage.summary.readBlocks
     calculator: sp_mb_ps_by_block
@@ -126,5 +214,108 @@ UnityStorageProcessor:
   - name: core_count
     paths: sp.*.physical.coreCount
     calculator: sp_fact
+  - name: block_cache_dirty_size
+    paths: sp.*.blockCache.global.summary.dirtyBytes
+    calculator: sp_fact
+  - name: read_byte_rate
+    paths:
+      - sp.*.storage.summary.readBlocks
+      - sp.*.storage.blockSize
+    calculator: sp_byte_rate
+  - name: write_byte_rate
+    paths:
+      - sp.*.storage.summary.writeBlocks
+      - sp.*.storage.blockSize
+    calculator: sp_byte_rate
+  - name: total_byte_rate
+    paths:
+      - sp.*.storage.summary.readBlocks
+      - sp.*.storage.summary.writeBlocks
+      - sp.*.storage.blockSize
+    calculator: sp_total_byte_rate
 
 
+UnityFcPort:
+  - name: read_iops
+    paths: sp.*.fibreChannel.fePort.*.reads
+  - name: write_iops
+    paths: sp.*.fibreChannel.fePort.*.writes
+  - name: total_iops
+    paths:
+      - sp.*.fibreChannel.fePort.*.reads
+      - sp.*.fibreChannel.fePort.*.writes
+    calculator: total_delta_ps
+  - name: read_byte_rate
+    paths:
+      - sp.*.fibreChannel.fePort.*.readBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: byte_rate
+  - name: write_byte_rate
+    paths:
+      - sp.*.fibreChannel.fePort.*.writeBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: byte_rate
+  - name: total_byte_rate
+    paths:
+      - sp.*.fibreChannel.fePort.*.readBlocks
+      - sp.*.fibreChannel.fePort.*.writeBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: total_byte_rate
+
+
+UnityIscsiNode:
+  - name: read_iops
+    paths: sp.*.iscsi.fePort.*.reads
+  - name: write_iops
+    paths: sp.*.iscsi.fePort.*.writes
+  - name: total_iops
+    paths:
+      - sp.*.iscsi.fePort.*.reads
+      - sp.*.iscsi.fePort.*.writes
+    calculator: total_delta_ps
+  - name: read_byte_rate
+    paths:
+      - sp.*.iscsi.fePort.*.readBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: byte_rate
+  - name: write_byte_rate
+    paths:
+      - sp.*.iscsi.fePort.*.writeBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: byte_rate
+  - name: total_byte_rate
+    paths:
+      - sp.*.iscsi.fePort.*.readBlocks
+      - sp.*.iscsi.fePort.*.writeBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: total_byte_rate
+
+
+UnitySystem:
+  - name: read_iops
+    paths: sp.*.storage.summary.reads
+    calculator: system_delta_ps
+  - name: write_iops
+    paths: sp.*.storage.summary.writes
+    calculator: system_delta_ps
+  - name: total_iops
+    paths:
+      - sp.*.storage.summary.reads
+      - sp.*.storage.summary.writes
+    calculator: system_total_delta_ps
+  - name: read_byte_rate
+    paths:
+      - sp.*.storage.summary.readBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: system_byte_rate
+  - name: write_byte_rate
+    paths:
+      - sp.*.storage.summary.writeBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: system_byte_rate
+  - name: total_byte_rate
+    paths:
+      - sp.*.storage.summary.readBlocks
+      - sp.*.storage.summary.writeBlocks
+      - sp.*.fibreChannel.blockSize
+    calculator: system_total_byte_rate

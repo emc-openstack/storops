@@ -20,11 +20,12 @@ import logging
 import storops.exception
 from storops.lib.common import instance_cache
 from storops.lib.resource import ResourceList
+from storops.lib.version import version
 from storops.unity.calculator import calculators
 from storops.unity.client import UnityClient
 from storops.unity.enums import UnityEnum, DNSServerOriginEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
-    UnitySingletonResource
+    UnitySingletonResource, UnityAttributeResource
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList
 from storops.unity.resource.disk import UnityDiskList, UnityDiskGroupList
@@ -39,19 +40,17 @@ from storops.unity.resource.nas_server import UnityNasServerList
 from storops.unity.resource.nfs_server import UnityNfsServerList
 from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList, UnityPool
-from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
-    UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal, \
-    UnitySasPortList
-from storops.unity.resource.snap import UnitySnapList
-from storops.unity.resource.sp import UnityStorageProcessorList
-
-from storops.unity.resource.tenant import UnityTenant, UnityTenantList
 from storops.unity.resource.port import UnityEthernetPortList, \
     UnityIscsiPortalList, UnityFcPortList, UnityIoModuleList
+from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
+    UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal, \
+    UnitySasPortList, UnityIscsiNodeList
+from storops.unity.resource.snap import UnitySnapList
+from storops.unity.resource.sp import UnityStorageProcessorList
 from storops.unity.resource.storage_resource import UnityConsistencyGroup, \
     UnityConsistencyGroupList
+from storops.unity.resource.tenant import UnityTenant, UnityTenantList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
-from storops.lib.version import version
 
 __author__ = 'Jay Xu, Cedric Zhuang'
 
@@ -60,13 +59,19 @@ LOG = logging.getLogger(__name__)
 
 class UnitySystem(UnitySingletonResource):
     def __init__(self, host=None, username=None, password=None,
-                 port=443, cli=None, verify=False):
+                 port=443, cli=None, verify=False, retries=None,
+                 cache_interval=0):
         super(UnitySystem, self).__init__(cli=cli)
         if cli is None:
             self._cli = UnityClient(host, username, password, port,
-                                    verify=verify)
+                                    verify=verify, retries=retries,
+                                    cache_interval=cache_interval)
         else:
             self._cli = cli
+
+    @classmethod
+    def get_resource_class(cls):
+        return cls
 
     def get_capability_profile(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityCapabilityProfileList,
@@ -78,6 +83,9 @@ class UnitySystem(UnitySingletonResource):
 
     def get_iscsi_portal(self, _id=None, **filters):
         return self._get_unity_rsc(UnityIscsiPortalList, _id=_id, **filters)
+
+    def get_iscsi_node(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityIscsiNodeList, _id=_id, **filters)
 
     def get_fc_port(self, _id=None, **filters):
         return self._get_unity_rsc(UnityFcPortList, _id=_id, **filters)
@@ -400,6 +408,14 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(
             UnityFeatureList, _id=_id, name=name, **filters)
 
+    def get_mgmt_interface(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityMgmtInterfaceList, _id=_id, **filters)
+
+    def get_system_capacity(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnitySystemCapacityList, _id=_id, **filters)
+
     @property
     @instance_cache
     def info(self):
@@ -460,7 +476,11 @@ class UnitySystem(UnitySingletonResource):
         return (self.get_sp(),
                 self.get_lun(),
                 self.get_filesystem(),
-                self.get_disk(inserted=True))
+                self.get_disk(inserted=True),
+                self.get_fc_port(),
+                self.get_iscsi_node(),
+                self.update(),
+                )
 
     def is_perf_stats_persisted(self):
         return self._cli.is_perf_stats_persisted()
@@ -572,7 +592,11 @@ class UnityDnsServer(_UnityNtpDnsServerCommonBase):
 
 
 class UnityBattery(UnityResource):
-    pass
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'parent_storage_processor.name',
+        )
 
 
 class UnityBatteryList(UnityResourceList):
@@ -612,7 +636,13 @@ class UnityMemoryModuleList(UnityResourceList):
 
 
 class UnityPowerSupply(UnityResource):
-    pass
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'parent_dae.name',
+            'parent_dpe.name',
+            'storage_processor.name',
+        )
 
 
 class UnityPowerSupplyList(UnityResourceList):
@@ -642,7 +672,12 @@ class UnitySsdList(UnityResourceList):
 
 
 class UnityFan(UnityResource):
-    pass
+    @classmethod
+    def get_nested_properties(cls):
+        return (
+            'parent_dae.name',
+            'parent_dpe.name',
+        )
 
 
 class UnityFanList(UnityResourceList):
@@ -669,3 +704,33 @@ class UnityFeatureList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnityFeature
+
+
+class UnityMgmtInterface(UnityResource):
+    pass
+
+
+class UnityMgmtInterfaceList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnityMgmtInterface
+
+
+class UnitySystemCapacity(UnityResource):
+    pass
+
+
+class UnitySystemCapacityList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnitySystemCapacity
+
+
+class UnitySystemTierCapacity(UnityAttributeResource):
+    pass
+
+
+class UnitySystemTierCapacityList(UnityResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return UnitySystemTierCapacity

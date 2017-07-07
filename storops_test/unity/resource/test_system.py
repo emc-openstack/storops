@@ -16,7 +16,6 @@
 from __future__ import unicode_literals
 
 import datetime
-
 import time
 from unittest import TestCase
 
@@ -30,7 +29,8 @@ from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
     StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum, \
     RaidTypeEnum, RaidStripeWidthEnum, PoolTypeEnum, DiskTypeEnumList, \
-    SpeedValuesEnum, ConnectorTypeEnum, FeatureStateEnum
+    SpeedValuesEnum, ConnectorTypeEnum, FeatureStateEnum, \
+    InterfaceConfigModeEnum, IpProtocolVersionEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.cifs_share import UnityCifsShareList, \
     UnityCifsShare
@@ -42,6 +42,8 @@ from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.host import UnityHostInitiator, \
     UnityHostInitiatorList, UnityHost, UnityHostList
 from storops.unity.resource.interface import UnityFileInterfaceList
+from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.metric import UnityMetricQueryResultList, \
     UnityMetricRealTimeQueryList
 from storops.unity.resource.nas_server import UnityNasServer, \
@@ -51,9 +53,6 @@ from storops.unity.resource.nfs_share import UnityNfsShareList
 from storops.unity.resource.pool import UnityPoolList, \
     RaidGroupParameter, UnityPool
 from storops.unity.resource.port import UnityFcPortList
-
-from storops.unity.resource.lun import UnityLun
-from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.port import UnityIpPortList, \
     UnityEthernetPortList, UnityIscsiPortalList
 from storops.unity.resource.snap import UnitySnapList
@@ -62,7 +61,9 @@ from storops.unity.resource.sp import UnityStorageProcessor, \
 from storops.unity.resource.system import UnitySystemList, UnitySystem, \
     UnityDpeList, UnityDpe, UnityVirusChecker, UnityVirusCheckerList, \
     UnityBasicSystemInfo, UnityBasicSystemInfoList, UnitySystemTime, \
-    UnityNtpServer, UnityDae, UnityFeature
+    UnityNtpServer, UnityDae, UnityFeature, UnityMgmtInterfaceList, \
+    UnitySystemCapacityList, \
+    UnitySystemTierCapacity, UnityIscsiNodeList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
 from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
 
@@ -610,7 +611,7 @@ class UnitySystemTest(TestCase):
         queries = unity.enable_perf_stats(1)
         assert_that(queries, instance_of(UnityMetricRealTimeQueryList))
 
-        time.sleep(1.5)
+        time.sleep(5)
         assert_that(unity.is_perf_stats_enabled(), equal_to(True))
         assert_that(unity._cli.curr_counter,
                     instance_of(UnityMetricQueryResultList))
@@ -631,6 +632,7 @@ class UnitySystemTest(TestCase):
         unity.disable_persist_perf_stats()
         assert_that(unity.is_perf_stats_persisted(), equal_to(False))
 
+    @patch_rest
     def test_default_rsc_clz_list_with_perf_stats(self):
         rsc_list_collection = t_unity()._default_rsc_list_with_perf_stats()
         clz_list = ResourceList.get_rsc_clz_list(rsc_list_collection)
@@ -665,6 +667,27 @@ class UnitySystemTest(TestCase):
     def test_upload_license(self):
         unity = t_unity()
         unity.upload_license(license="license.lic")
+
+    @patch_rest
+    def test_get_iscsi_node(self):
+        unity = t_unity()
+        nodes = unity.get_iscsi_node()
+        assert_that(nodes, instance_of(UnityIscsiNodeList))
+        assert_that(len(nodes), equal_to(4))
+
+    @patch_rest
+    def test_get_mgmt_interface(self):
+        unity = t_unity()
+        interfaces = unity.get_mgmt_interface()
+        assert_that(interfaces, instance_of(UnityMgmtInterfaceList))
+        assert_that(len(interfaces), equal_to(1))
+
+    @patch_rest
+    def test_get_system_capacity(self):
+        unity = t_unity()
+        capacities = unity.get_system_capacity()
+        assert_that(capacities, instance_of(UnitySystemCapacityList))
+        assert_that(len(capacities), equal_to(1))
 
 
 class UnityDpeTest(TestCase):
@@ -778,6 +801,14 @@ class UnityBatteryTest(TestCase):
         assert_that(battery0.parent_storage_processor,
                     instance_of(UnityStorageProcessor))
 
+    @patch_rest
+    def test_get_nested_properties(self):
+        batteries = t_unity().get_battery()
+        assert_that(len(batteries), equal_to(2))
+        battery0 = batteries[0]
+        assert_that(battery0.parent_storage_processor.id, equal_to("spa"))
+        assert_that(battery0.parent_storage_processor.name, equal_to("SP A"))
+
 
 class UnityDaeTest(TestCase):
     @patch_rest
@@ -887,6 +918,21 @@ class UnityPowerSupplyTest(TestCase):
         assert_that(supply.storage_processor,
                     instance_of(UnityStorageProcessor))
 
+    @patch_rest
+    def test_get_nested_properties(self):
+        supplies = t_unity().get_power_supply()
+        assert_that(len(supplies), equal_to(4))
+
+        supply0 = supplies[0]
+        assert_that(supply0.parent_dae.id, equal_to('dae_0_1'))
+        assert_that(supply0.parent_dae.name, equal_to('DAE 0 1'))
+        assert_that(supply0.storage_processor.id, equal_to('spa'))
+        assert_that(supply0.storage_processor.name, equal_to('SP A'))
+
+        supply2 = supplies[2]
+        assert_that(supply2.parent_dpe.id, equal_to('dpe'))
+        assert_that(supply2.parent_dpe.name, equal_to('DPE'))
+
 
 class UnitySasPortTest(TestCase):
     @patch_rest
@@ -976,7 +1022,18 @@ class UnityFanTest(TestCase):
         assert_that(fan.vendor_part_number, equal_to(""))
         assert_that(fan.needs_replacement, equal_to(False))
         assert_that(fan.parent_dpe, instance_of(UnityDpe))
-        assert_that(fan.parent_dae, none())
+        assert_that(fan.parent_dpe.name, equal_to('DPE'))
+
+    @patch_rest
+    def test_get_nested_properties(self):
+        fans = t_unity().get_fan()
+        assert_that(len(fans), equal_to(10))
+
+        fan = fans[0]
+        assert_that(fan.parent_dpe.id, equal_to("dpe"))
+        assert_that(fan.parent_dpe.name, equal_to("DPE"))
+        assert_that(fan.parent_dae.id, equal_to("dae"))
+        assert_that(fan.parent_dae.name, equal_to("DAE"))
 
 
 class UnityLicenseTest(TestCase):
@@ -1010,3 +1067,39 @@ class UnityFeatureTest(TestCase):
         assert_that(feature.state, equal_to(FeatureStateEnum.Enabled))
         assert_that(feature.reason, none())
         assert_that(feature.license, none())
+
+
+class UnityMgmtInterface(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        interfaces = t_unity().get_mgmt_interface()
+        assert_that(len(interfaces), equal_to(1))
+
+        interface = interfaces[0]
+        assert_that(interface.id, equal_to('mgmt_ipv4'))
+        assert_that(interface.config_mode,
+                    equal_to(InterfaceConfigModeEnum.AUTO))
+        assert_that(interface.protocol_version,
+                    equal_to(IpProtocolVersionEnum.IPv4))
+        assert_that(interface.ip_address, equal_to('10.245.101.39'))
+        assert_that(interface.netmask, equal_to('255.255.255.0'))
+        assert_that(interface.gateway, equal_to('10.245.101.1'))
+        assert_that(interface.ethernet_port.id, equal_to('spb_mgmt'))
+
+
+class UnitySystemCapacity(TestCase):
+    @patch_rest
+    def test_get_properties(self):
+        capacities = t_unity().get_system_capacity()
+        assert_that(len(capacities), equal_to(1))
+
+        capacity = capacities[0]
+        assert_that(capacity.id, equal_to('0'))
+        assert_that(capacity.size_free, equal_to(9496172691456))
+        assert_that(capacity.size_total, equal_to(9641664708608))
+        assert_that(capacity.size_used, equal_to(145492017152))
+        assert_that(capacity.compression_size_saved, equal_to(0))
+        assert_that(capacity.compression_percent, equal_to(0))
+        assert_that(capacity.compression_ratio, equal_to(1))
+        assert_that(capacity.size_subscribed, equal_to(1018980990976))
+        assert_that(capacity.tiers[0], instance_of(UnitySystemTierCapacity))

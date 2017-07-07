@@ -86,6 +86,9 @@ class UnityHostTest(TestCase):
         assert_that(
             host.fc_host_initiators[1].paths[0].initiator.type,
             equal_to(HostInitiatorTypeEnum.FC))
+        assert_that(host.host_ip_ports[0].address, equal_to('10.245.54.151'))
+        assert_that(host.host_luns, instance_of(UnityHostLunList))
+        assert_that(host.host_luns[0].lun.name, equal_to('Yangpu'))
 
     @patch_rest
     def test_nested_properties_shadow_copy(self):

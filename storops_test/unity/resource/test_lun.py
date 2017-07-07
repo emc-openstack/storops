@@ -26,7 +26,7 @@ from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError, \
     UnityThinCloneLimitExceededError
-from storops.unity.enums import HostLUNAccessEnum, NodeEnum
+from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
 from storops.unity.resource.lun import UnityLun, UnityLunList
@@ -351,3 +351,11 @@ class UnityLunEnablePerfStatsTest(TestCase):
         assert_that(lun.property_names, is_not(has_item('read_iops')))
         disk = self.unity.get_disk(_id='dae_0_1_disk_0')
         assert_that(disk.property_names(), has_item('read_iops'))
+
+    @patch_rest
+    def test_nested_properties(self):
+        lun = self.unity.get_lun(_id='sv_12')
+        assert_that(lun.pool.raid_type, equal_to(RaidTypeEnum.RAID10))
+        assert_that(lun.pool.is_fast_cache_enabled, equal_to(False))
+        assert_that(lun.host_access[0].host.name,
+                    equal_to('Virtual_Machine_12'))

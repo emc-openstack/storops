@@ -1,0 +1,48 @@
+{
+  "@base": "https://10.245.101.39/api/types/systemCapacity/instances?fields=compressionPercent,compressionRatio,compressionSizeSaved,id,instanceId,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,tiers&per_page=2000&compact=true",
+  "updated": "2017-08-16T07:40:51.563Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "instanceId": "root/emc:EMC_UIS_UEM_SystemCapacityLeaf.InstanceID=1",
+        "id": "0",
+        "sizeFree": 9496172691456,
+        "sizeTotal": 9641664708608,
+        "sizeUsed": 145492017152,
+        "compressionSizeSaved": 0,
+        "compressionPercent": 0,
+        "compressionRatio": 1,
+        "sizeSubscribed": 1018980990976,
+        "tiers": [
+          {
+            "tierType": 10,
+            "instanceId": "root/emc:EMC_UIS_UIS_UEM_SystemTierCapacityLeaf.InstanceID=0\"",
+            "sizeFree": 0,
+            "sizeTotal": 0,
+            "sizeUsed": 0
+          },
+          {
+            "tierType": 20,
+            "instanceId": "root/emc:EMC_UIS_UIS_UEM_SystemTierCapacityLeaf.InstanceID=1\"",
+            "sizeFree": 1621887025152,
+            "sizeTotal": 1767110606848,
+            "sizeUsed": 145223581696
+          },
+          {
+            "tierType": 30,
+            "instanceId": "root/emc:EMC_UIS_UIS_UEM_SystemTierCapacityLeaf.InstanceID=2\"",
+            "sizeFree": 7874285666304,
+            "sizeTotal": 7874554101760,
+            "sizeUsed": 268435456
+          }
+        ]
+      }
+    }
+  ]
+}

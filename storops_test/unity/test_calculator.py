@@ -13,7 +13,7 @@
 #    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 #    License for the specific language governing permissions and limitations
 #    under the License.
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 
 from unittest import TestCase
 
@@ -25,10 +25,15 @@ from storops.unity.calculator import calculators, IdValues, \
     delta_ps, mb_ps_by_block, busy_idle_util, \
     sp_delta_ps, sp_mb_ps_by_byte, sp_mb_ps_by_block, sp_busy_idle_util, \
     only_one_path, sp_fact, all_not_none, UnityMetricConfig, \
-    UnityMetricConfigParser
+    UnityMetricConfigParser, total_delta_ps, sp_total_delta_ps, \
+    system_delta_ps, system_total_delta_ps, disk_response_time, \
+    disk_queue_length, lun_response_time, lun_queue_length, \
+    sum_sp, byte_rate, total_byte_rate, sp_byte_rate, \
+    sp_total_byte_rate, system_byte_rate, system_total_byte_rate
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.filesystem import UnityFileSystem
-from storops_test.unity.resource.test_metric import qr_6, qr_14, qr_17, qr_34
+from storops_test.unity.resource.test_metric import qr_6, qr_14, qr_17, \
+    qr_34, qr_128, qr_130
 from storops_test.unity.rest_mock import patch_rest
 from storops_test.utils import is_nan
 
@@ -381,6 +386,324 @@ class CalculatorTest(TestCase):
     def test_all_not_none(self):
         assert_that(all_not_none(1, 'a', 2.3), equal_to(True))
         assert_that(all_not_none(1, 'a', None, 2.3), equal_to(False))
+
+    @patch_rest
+    def test_total_delta_ps(self):
+        path = ['sp.*.physical.disk.*.reads',
+                'sp.*.physical.disk.*.writes']
+        ret = total_delta_ps(path, qr_6, qr_14)
+
+        delta_reads = (4158667 + 5) - (2966780 + 5)
+        delta_writes = (3762339 + 5) - (2679611 + 5)
+        diff_time = 163800.0
+
+        expected = (delta_reads + delta_writes) / diff_time
+        assert_that(ret['dae_0_1_disk_2'], close_to(expected, 0.01))
+
+        assert_that(total_delta_ps(path, qr_6, qr_14, 'dae_0_1_disk_2'),
+                    close_to(expected, 0.01))
+
+    def test_total_delta_ps_error_path(self):
+        def f():
+            total_delta_ps(['a', 'b', 'c'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "reads" and "writes" counter.'))
+
+    @patch_rest
+    def test_sp_total_delta_ps(self):
+        path = ['sp.*.storage.summary.reads',
+                'sp.*.storage.summary.writes']
+        ret = sp_total_delta_ps(path, qr_17, qr_34)
+
+        diff_time = 180.0
+        expected_spa = ((270 - 0) + (306 - 0)) / diff_time
+        expected_spb = ((296 - 8) + (324 - 0)) / diff_time
+        assert_that(ret['spa'], close_to(expected_spa, 0.01))
+        assert_that(ret['spb'], close_to(expected_spb, 0.01))
+
+        assert_that(sp_total_delta_ps(path, qr_17, qr_34, 'spa'),
+                    close_to(expected_spa, 0.01))
+        assert_that(sp_total_delta_ps(path, qr_17, qr_34, 'spb'),
+                    close_to(expected_spb, 0.01))
+
+    def test_sp_total_delta_ps_error_path(self):
+        def f():
+            sp_total_delta_ps(['a', 'b', 'c'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "reads" and "writes" counter.'))
+
+    @patch_rest
+    def test_system_delta_ps(self):
+        path = 'sp.*.storage.summary.reads'
+        ret = system_delta_ps(path, qr_17, qr_34)
+
+        diff_time = 180.0
+        expected = ((270 - 0) + (296 - 8)) / diff_time
+        assert_that(ret['0'], close_to(expected, 0.01))
+
+    def test_system_delta_ps_error_path(self):
+        def f():
+            system_delta_ps(['a', 'b'], None, None)
+
+        assert_that(f, raises(ValueError, 'takes in one and only one path.'))
+
+    @patch_rest
+    def test_system_total_delta_ps(self):
+        path = ['sp.*.storage.summary.reads',
+                'sp.*.storage.summary.writes']
+        ret = system_total_delta_ps(path, qr_17, qr_34)
+
+        delta_total_reads = (270 - 0) + (296 - 8)
+        delta_total_writes = (306 - 0) + (324 - 0)
+        diff_time = 180.0
+
+        expected = (delta_total_reads + delta_total_writes) / diff_time
+        assert_that(ret['0'], close_to(expected, 0.01))
+
+    def test_system_total_delta_ps_error_path(self):
+        def f():
+            system_total_delta_ps(['a', 'b', 'c'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "reads" and "writes" counter.'))
+
+    @patch_rest
+    def test_disk_response_time(self):
+        path = ['sp.*.physical.disk.*.busyTicks',
+                'sp.*.physical.disk.*.sumArrivalQueueLength',
+                'sp.*.physical.disk.*.reads',
+                'sp.*.physical.disk.*.writes',
+                'sp.*.physical.coreCount']
+        ret = disk_response_time(path, qr_128, qr_130)
+
+        delta_busy_ticks = (151624601961 + 3485236370346) - \
+                           (149509372140 + 3436715092500)
+        delta_sum_ql = (3532917 + 705) - (3484428 + 705)
+        delta_reads = (3532917 + 704) - (3484427 + 704)
+        delta_writes = (0 + 0) - (0 + 0)
+        delta_size_reads = (3532917 - 3484427) * 10 + (704 - 704) * 10
+        delta_size_writes = (0 - 0) * 10 + (0 - 0) * 10
+
+        expected = (delta_busy_ticks * delta_sum_ql) / \
+                   ((delta_reads + delta_writes) *
+                    (delta_size_reads + delta_size_writes))
+        assert_that(ret['dae_0_1_disk_1'], close_to(expected, 0.01))
+
+    def test_disk_response_time_error_path(self):
+        def f():
+            disk_response_time(['a', 'b', 'c', 'd', 'e', 'f'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "busyTicks", "sumArrivalQueueLength",'
+                              ' "reads", "writes" and "coreCount" counter.'))
+
+    @patch_rest
+    def test_disk_queue_length(self):
+        path = ['sp.*.physical.disk.*.sumArrivalQueueLength',
+                'sp.*.physical.disk.*.reads',
+                'sp.*.physical.disk.*.writes']
+        ret = disk_queue_length(path, qr_128, qr_130)
+
+        delta_sum_ql = (3532917 + 705) - (3484428 + 705)
+        delta_reads = (3532917 + 704) - (3484427 + 704)
+        delta_writes = (0 + 0) - (0 + 0)
+
+        expected = delta_sum_ql / (delta_reads + delta_writes)
+        assert_that(ret['dae_0_1_disk_1'], close_to(expected, 0.01))
+
+    def test_disk_queue_length_error_path(self):
+        def f():
+            disk_queue_length(['a', 'b', 'c', 'd'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "sumArrivalQueueLength", "reads" '
+                              'and "writes" counter.'))
+
+    @patch_rest
+    def test_lun_response_time(self):
+        path = ['sp.*.storage.lun.*.totalIoTime',
+                'sp.*.storage.lun.*.reads',
+                'sp.*.storage.lun.*.writes']
+        ret = lun_response_time(path, qr_128, qr_130)
+
+        delta_sum_ql = (13012626542 + 27073895) - (12782881910 + 26805216)
+        delta_reads = (166979 + 0) - (164007 + 0)
+        delta_writes = (1618548 + 213) - (1596862 + 213)
+
+        expected = delta_sum_ql / (delta_reads + delta_writes)
+        assert_that(ret['sv_4'], close_to(expected, 0.01))
+
+    def test_lun_response_time_error_path(self):
+        def f():
+            lun_response_time(['a', 'b', 'c', 'd'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "totalIoTime", "reads" and '
+                              '"writes" counter.'))
+
+    @patch_rest
+    def test_lun_queue_length(self):
+        path = ['sp.*.storage.lun.*.currentIOCount',
+                'sp.*.storage.lun.*.busyTime',
+                'sp.*.storage.lun.*.idleTime']
+        ret = lun_queue_length(path, qr_128, qr_130)
+
+        delta_io = (0 + 0) - (0 + 0)
+        delta_busy = (319229585 + 1193127357) - (314779461 + 1176806087)
+        delta_idle = (2989316155 + 3185505629) - (4117396013 + 4325740825)
+
+        expected = delta_io * delta_busy / (delta_busy + delta_idle)
+        assert_that(ret['sv_4'], close_to(expected, 0.01))
+
+    def test_lun_queue_length_error_path(self):
+        def f():
+            lun_queue_length(['a', 'b', 'c', 'd'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "currentIOCount", "busyTime" and '
+                              '"idleTime" counter.'))
+
+    @patch_rest
+    def test_sum_sp(self):
+        path = 'sp.*.fastCache.volume.*.readHits'
+        ret = sum_sp(path, qr_128, qr_130)
+        expected = 50 + 100
+        assert_that(ret['7'], equal_to(expected))
+
+    def test_sum_sp_error_path(self):
+        def f():
+            sum_sp(['a', 'b'], None, None)
+
+        assert_that(f, raises(ValueError, 'takes in one and only one path.'))
+
+    @patch_rest
+    def test_byte_rate(self):
+        path = ['sp.*.storage.lun.*.readBlocks',
+                'sp.*.storage.blockSize']
+        ret = byte_rate(path, qr_128, qr_130)
+
+        delta_read_blocks = (10831709 - 10677980)
+        block_size = 512
+        diff_time = 48540.0
+
+        expected = delta_read_blocks * block_size / diff_time
+        assert_that(ret['sv_4'], close_to(expected, 0.01))
+
+    def test_byte_rate_error_path(self):
+        def f():
+            byte_rate(['a', 'b', 'c'], None, None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "Blocks" and "blockSize" counter.'))
+
+    @patch_rest
+    def test_total_byte_rate(self):
+        path = ['sp.*.physical.disk.*.readBlocks',
+                'sp.*.physical.disk.*.writeBlocks',
+                'sp.*.physical.blockSize']
+        ret = total_byte_rate(path, qr_128, qr_130)
+
+        delta_read_byte = (7235384336 - 7136076816) * 512 + \
+                          (1348912 - 1348912) * 512
+        delta_write_byte = (1000 - 10) * 512 + (1100 - 20) * 512
+        diff_time = 48540.0
+
+        expected = (delta_read_byte + delta_write_byte) / diff_time
+        assert_that(ret['dae_0_1_disk_1'], close_to(expected, 0.01))
+
+    def test_total_byte_rate_error_path(self):
+        def f():
+            total_byte_rate(['a', 'b', 'c', 'd'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "readBlocks" "writeBlocks" and '
+                              '"blockSize" counter.'))
+
+    @patch_rest
+    def test_sp_byte_rate(self):
+        path = ['sp.*.storage.summary.readBlocks',
+                'sp.*.storage.blockSize']
+        ret = sp_byte_rate(path, qr_128, qr_130)
+
+        delta_blocks = 11450335 - 11289244
+        block_size = 512
+        diff_time = 48540.0
+
+        expected = delta_blocks * block_size / diff_time
+        assert_that(ret['spa'], close_to(expected, 0.01))
+
+    def test_sp_byte_rate_error_path(self):
+        def f():
+            sp_byte_rate(['a', 'b', 'c'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "Blocks" and "blockSize" counter.'))
+
+    @patch_rest
+    def test_sp_total_byte_rate(self):
+        path = ['sp.*.storage.summary.readBlocks',
+                'sp.*.storage.summary.writeBlocks',
+                'sp.*.storage.blockSize']
+        ret = sp_total_byte_rate(path, qr_128, qr_130)
+
+        delta_blocks_1 = 11450335 - 11289244
+        delta_blocks_2 = 33497820 - 32954971
+        block_size = 512
+        diff_time = 48540.0
+
+        expected = (delta_blocks_1 + delta_blocks_2) * block_size / diff_time
+        assert_that(ret['spa'], close_to(expected, 0.01))
+
+    def test_sp_total_byte_rate_error_path(self):
+        def f():
+            sp_total_byte_rate(['a', 'b', 'c', 'd'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "readBlocks" "writeBlocks" and '
+                              '"blockSize" counter.'))
+
+    @patch_rest
+    def test_system_byte_rate(self):
+        path = ['sp.*.storage.summary.readBlocks',
+                'sp.*.storage.blockSize']
+        ret = system_byte_rate(path, qr_128, qr_130)
+
+        delta_bytes = (11450335 - 11289244) * 512 + (183144 - 183137) * 512
+        diff_time = 48540.0
+
+        expected = delta_bytes / diff_time
+        assert_that(ret['0'], close_to(expected, 0.01))
+
+    def test_system_byte_rate_error_path(self):
+        def f():
+            system_byte_rate(['a', 'b', 'c'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "Blocks" and "blockSize" counter.'))
+
+    @patch_rest
+    def test_system_total_byte_rate(self):
+        path = ['sp.*.storage.summary.readBlocks',
+                'sp.*.storage.summary.writeBlocks',
+                'sp.*.storage.blockSize']
+        ret = system_total_byte_rate(path, qr_128, qr_130)
+
+        delta_byte_1 = ((11450335 - 11289244) + (183144 - 183137)) * 512
+        delta_byte_2 = ((33497820 - 32954971) + (70507 - 70507)) * 512
+        diff_time = 48540.0
+
+        expected = (delta_byte_1 + delta_byte_2) / diff_time
+        assert_that(ret['0'], close_to(expected, 0.01))
+
+    def test_system_total_byte_rate_error_path(self):
+        def f():
+            system_total_byte_rate(['a', 'b', 'c', 'd'], None, None)
+
+        assert_that(f, raises(ValueError,
+                              'takes in "readBlocks", "writeBlocks" and '
+                              '"blockSize" counter.'))
 
 
 class UnityMetricConfigTest(TestCase):

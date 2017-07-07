@@ -1,0 +1,26 @@
+{
+  "@base": "https://10.245.101.39/api/types/mgmtInterface/instances?fields=configMode,gateway,id,instanceId,ipAddress,netmask,protocolVersion,v6PrefixLength,ethernetPort.id&per_page=2000&compact=true",
+  "updated": "2017-08-16T07:37:57.742Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "mgmt_ipv4",
+        "configMode": 2,
+        "protocolVersion": 4,
+        "instanceId": "root/emc:EMC_UEM_MgmtInterfaceLeaf%InstanceID=if_41",
+        "ipAddress": "10.245.101.39",
+        "netmask": "255.255.255.0",
+        "gateway": "10.245.101.1",
+        "ethernetPort": {
+          "id": "spb_mgmt"
+        }
+      }
+    }
+  ]
+}

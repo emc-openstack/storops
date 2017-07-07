@@ -1,6 +1,6 @@
 {
-  "@base": "https://10.245.101.35/api/types/fan/instances?fields=emcPartNumber,emcSerialNumber,health,id,manufacturer,model,name,needsReplacement,parent,slotNumber,vendorPartNumber,vendorSerialNumber,parentDpe.id,parentDae.id&per_page=2000&compact=true",
-  "updated": "2017-06-27T06:01:05.136Z",
+  "@base": "https://10.245.101.39/api/types/fan/instances?fields=emcPartNumber,emcSerialNumber,health,id,manufacturer,model,name,needsReplacement,parent,parentDae.name,parentDpe.name,slotNumber,vendorPartNumber,vendorSerialNumber,parentDpe.id,parentDae.id,parentDae.id,parentDpe.id&per_page=2000&compact=true",
+  "updated": "2017-08-15T09:59:19.804Z",
   "links": [
     {
       "rel": "self",
@@ -34,7 +34,12 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
+        },
+        "parentDae": {
+          "id": "dae",
+          "name": "DAE"
         }
       }
     },
@@ -64,7 +69,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -94,7 +100,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -124,7 +131,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -154,7 +162,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -184,7 +193,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -214,7 +224,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -244,7 +255,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -274,7 +286,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     },
@@ -304,7 +317,8 @@
         "vendorSerialNumber": "",
         "needsReplacement": false,
         "parentDpe": {
-          "id": "dpe"
+          "id": "dpe",
+          "name": "DPE"
         }
       }
     }

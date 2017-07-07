@@ -1,0 +1,39 @@
+{
+  "content": {
+    "name": "iscsiNode",
+    "description": "Information about the iSCSI nodes in the storage system. An iSCSI node  represents a single iSCSI initiator or target.  <br/>  iSCSI nodes are created automatically on every non-aggregated Ethernet port except of ports used for management access.",
+    "documentation": "https://10.245.101.39/apidocs/classes/iscsiNode.html",
+    "attributes": [
+      {
+        "name": "name",
+        "type": "String",
+        "description": "iSCSI node name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "alias",
+        "type": "String",
+        "description": "Descriptive name of the iSCSI node. This name does not have to be unique.",
+        "displayValue": "alias"
+      },
+      {
+        "name": "instanceId",
+        "type": "String",
+        "description": "Internal identifier of the iscsiNode instance.",
+        "displayValue": "instanceId"
+      },
+      {
+        "name": "ethernetPort",
+        "type": "ethernetPort",
+        "description": "Ethernet port associated with the iSCSI Node. (Each Ethernet port  can be associated with one iSCSI node.)",
+        "displayValue": "ethernetPort"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the iscsiNode instance.",
+        "displayValue": "id"
+      }
+    ]
+  }
+}

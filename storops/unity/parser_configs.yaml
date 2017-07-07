@@ -1536,6 +1536,7 @@ UnityDiskGroup:
     - label: disksWithEOLLess90Days
     - label: disksWithEOLLess180Days
 
+
 UnityBattery:
   data_src: rest
   name: battery
@@ -1830,3 +1831,49 @@ UnityTenant:
     - label: vlans
     - label: hosts
       converter: UnityHostList
+
+
+UnityMgmtInterface:
+  data_src: rest
+  name: mgmtInterface
+  properties:
+    - label: id
+      is_index: True
+    - label: configMode
+      converter: InterfaceConfigModeEnum
+    - label: ethernetPort
+      converter: UnityEthernetPort
+    - label: protocolVersion
+      converter: IpProtocolVersionEnum
+    - label: ipAddress
+    - label: netmask
+    - label: v6PrefixLength
+    - label: gateway
+
+
+UnitySystemCapacity:
+  data_src: rest
+  name: systemCapacity
+  properties:
+    - label: id
+      is_index: True
+    - label: sizeFree
+    - label: sizeTotal
+    - label: sizeUsed
+    - label: compressionSizeSaved
+    - label: compressionPercent
+    - label: compressionRatio
+    - label: sizeSubscribed
+    - label: tiers
+      converter: UnitySystemTierCapacityList
+
+
+UnitySystemTierCapacity:
+  data_src: rest
+  name: systemTierCapacity
+  properties:
+    - label: tierType
+      converter: TierTypeEnum
+    - label: sizeFree
+    - label: sizeTotal
+    - label: sizeUsed

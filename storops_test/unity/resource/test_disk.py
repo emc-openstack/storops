@@ -41,6 +41,12 @@ class UnityDiskTest(TestCase):
         disk = UnityDisk(_id='dae_0_1_disk_0', cli=t_rest())
         self.verify_dae_0_1_disk_0(disk)
 
+    @patch_rest
+    def test_nested_properties(self):
+        disk = UnityDisk(_id='dpe_disk_12', cli=t_rest())
+        assert_that(disk.pool.id, equal_to('pool_1'))
+        assert_that(disk.pool.name, equal_to('perfpool1130'))
+
     def verify_dae_0_1_disk_0(self, disk):
         assert_that(disk.id, equal_to('dae_0_1_disk_0'))
         assert_that(disk.bus_id, equal_to(0))

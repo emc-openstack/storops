@@ -36,7 +36,9 @@ class UnityRESTConnectorTest(unittest.TestCase):
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=True,
-            ca_cert_path=None)
+            retries=None,
+            ca_cert_path=None,
+            cache_interval=0)
 
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_verify_true(self, mocked_httpclient):
@@ -49,7 +51,9 @@ class UnityRESTConnectorTest(unittest.TestCase):
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=False,
-            ca_cert_path=None)
+            retries=None,
+            ca_cert_path=None,
+            cache_interval=0)
 
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_verify_path(self, mocked_httpclient):
@@ -62,4 +66,6 @@ class UnityRESTConnectorTest(unittest.TestCase):
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=False,
-            ca_cert_path='/tmp/ca_cert.crt')
+            retries=None,
+            ca_cert_path='/tmp/ca_cert.crt',
+            cache_interval=0)

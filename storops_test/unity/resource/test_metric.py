@@ -39,6 +39,8 @@ qr_6 = get_query_result(6)
 qr_14 = get_query_result(14)
 qr_17 = get_query_result(17)
 qr_34 = get_query_result(34)
+qr_128 = get_query_result(128)
+qr_130 = get_query_result(130)
 
 
 class UnityMetricTest(TestCase):
@@ -226,3 +228,38 @@ class UnityMetricQueryResultTest(TestCase):
         result = qr_34.by_path('sp.*.cifs.smb1.basic.writes')
         assert_that(result.sp_values, instance_of(IdValues))
         assert_that(result.sp_values['spa'], equal_to(500))
+
+    @patch_rest
+    def test_sum_sp_values(self):
+        result = qr_128.by_path('sp.*.cpu.summary.busyTicks')
+        expected = 92496181 + 944939818
+        assert_that(result.sum_sp_values, instance_of(IdValues))
+        assert_that(result.sum_sp_values['0'], equal_to(expected))
+
+    @patch_rest
+    def test_combine_numeric_values(self):
+        result = qr_128.by_path('sp.*.storage.lun.*.writeBlocks')
+        other = qr_128.by_path('sp.*.storage.blockSize')
+        expected = 4281 * 512 + 67756 * 512
+        assert_that(result.combine_numeric_values(other),
+                    instance_of(IdValues))
+        assert_that(result.combine_numeric_values(other)['sv_677'],
+                    equal_to(expected))
+
+    @patch_rest
+    def test_combine_sp_values(self):
+        result = qr_128.by_path('sp.*.storage.summary.writes')
+        other = qr_128.by_path('sp.*.storage.blockSize')
+        expected = 1177 * 512
+        assert_that(result.combine_sp_values(other), instance_of(IdValues))
+        assert_that(result.combine_sp_values(other)['spb'], equal_to(expected))
+
+    @patch_rest
+    def test_sum_combined_sp_values(self):
+        result = qr_128.by_path('sp.*.storage.summary.writes')
+        other = qr_128.by_path('sp.*.storage.blockSize')
+        expected = 1597454 * 512 + 1177 * 512
+        assert_that(result.sum_combined_sp_values(other),
+                    instance_of(IdValues))
+        assert_that(result.sum_combined_sp_values(other)['0'],
+                    equal_to(expected))

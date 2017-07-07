@@ -1,0 +1,63 @@
+{
+  "content": {
+    "name": "mgmtInterface",
+    "description": "Information about management interfaces in the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/mgmtInterface.html",
+    "attributes": [
+      {
+        "name": "instanceId",
+        "type": "String",
+        "description": "Internal identifier of the mgmtInterface instance.",
+        "displayValue": "instanceId"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the mgmtInterface instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "ethernetPort",
+        "type": "ethernetPort",
+        "description": "Ethernet port on the storage processor on which the interface is running.",
+        "displayValue": "ethernetPort"
+      },
+      {
+        "name": "ipAddress",
+        "type": "IPAddress",
+        "description": "IPv4 or IPv6 address for the interface.",
+        "displayValue": "ipAddress"
+      },
+      {
+        "name": "protocolVersion",
+        "type": "IpProtocolVersionEnum",
+        "description": "IP protocol version (IPv4 or IPv6).",
+        "displayValue": "protocolVersion"
+      },
+      {
+        "name": "gateway",
+        "type": "IPAddress",
+        "description": "Gateway IP address.",
+        "displayValue": "gateway"
+      },
+      {
+        "name": "v6PrefixLength",
+        "type": "Integer",
+        "description": "IPv6 prefix length for the interface, if the interface uses an IPv6 address.",
+        "displayValue": "v6PrefixLength"
+      },
+      {
+        "name": "netmask",
+        "type": "IPAddress",
+        "description": "IPv4 netmask for the interface, if the interface uses an IPv4 address.",
+        "displayValue": "netmask"
+      },
+      {
+        "name": "configMode",
+        "type": "InterfaceConfigModeEnum",
+        "description": "Configuration mode.",
+        "displayValue": "configMode"
+      }
+    ]
+  }
+}

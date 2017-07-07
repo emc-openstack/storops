@@ -1,0 +1,154 @@
+{
+  "@base": "https://10.245.101.39/api/types/iscsiNode/instances?fields=alias,ethernetPort.connectorType,ethernetPort.health,ethernetPort.speed,ethernetPort.supportedSpeeds,id,instanceId,name,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id,ethernetPort.id&per_page=2000",
+  "updated": "2017-08-16T06:14:03.083Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "@base": "https://10.245.101.39/api/instances/iscsiNode",
+      "updated": "2017-08-16T06:14:03.083Z",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/iscsinode_spa_eth2"
+        }
+      ],
+      "content": {
+        "id": "iscsinode_spa_eth2",
+        "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:00:00",
+        "name": "iqn.1992-04.com.emc:cx.fnm00150600267.a0",
+        "alias": "0267.a0",
+        "ethernetPort": {
+          "id": "spa_eth2",
+          "speed": 10000,
+          "connectorType": 1,
+          "supportedSpeeds": [
+            1000,
+            10000,
+            100,
+            0
+          ],
+          "health": {
+            "value": 5,
+            "descriptionIds": [
+              "ALRT_PORT_LINK_UP"
+            ],
+            "descriptions": [
+              "The port is operating normally."
+            ]
+          }
+        }
+      }
+    },
+    {
+      "@base": "https://10.245.101.39/api/instances/iscsiNode",
+      "updated": "2017-08-16T06:14:03.083Z",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/iscsinode_spa_eth3"
+        }
+      ],
+      "content": {
+        "id": "iscsinode_spa_eth3",
+        "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:00:01",
+        "name": "iqn.1992-04.com.emc:cx.fnm00150600267.a1",
+        "alias": "0267.a1",
+        "ethernetPort": {
+          "id": "spa_eth3",
+          "connectorType": 1,
+          "supportedSpeeds": [
+            1000,
+            10000,
+            100,
+            0
+          ],
+          "health": {
+            "value": 5,
+            "descriptionIds": [
+              "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+            ],
+            "descriptions": [
+              "The port link is down, but not in use. No action is required."
+            ]
+          }
+        }
+      }
+    },
+    {
+      "@base": "https://10.245.101.39/api/instances/iscsiNode",
+      "updated": "2017-08-16T06:14:03.083Z",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/iscsinode_spb_eth2"
+        }
+      ],
+      "content": {
+        "id": "iscsinode_spb_eth2",
+        "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:01:00",
+        "name": "iqn.1992-04.com.emc:cx.fnm00150600267.b0",
+        "alias": "0267.b0",
+        "ethernetPort": {
+          "id": "spb_eth2",
+          "speed": 10000,
+          "connectorType": 1,
+          "supportedSpeeds": [
+            1000,
+            10000,
+            100,
+            0
+          ],
+          "health": {
+            "value": 5,
+            "descriptionIds": [
+              "ALRT_PORT_LINK_UP"
+            ],
+            "descriptions": [
+              "The port is operating normally."
+            ]
+          }
+        }
+      }
+    },
+    {
+      "@base": "https://10.245.101.39/api/instances/iscsiNode",
+      "updated": "2017-08-16T06:14:03.083Z",
+      "links": [
+        {
+          "rel": "self",
+          "href": "/iscsinode_spb_eth3"
+        }
+      ],
+      "content": {
+        "id": "iscsinode_spb_eth3",
+        "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:01:01",
+        "name": "iqn.1992-04.com.emc:cx.fnm00150600267.b1",
+        "alias": "0267.b1",
+        "ethernetPort": {
+          "id": "spb_eth3",
+          "connectorType": 1,
+          "supportedSpeeds": [
+            1000,
+            10000,
+            100,
+            0
+          ],
+          "health": {
+            "value": 5,
+            "descriptionIds": [
+              "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+            ],
+            "descriptions": [
+              "The port link is down, but not in use. No action is required."
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

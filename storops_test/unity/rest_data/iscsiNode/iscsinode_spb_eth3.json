@@ -1,0 +1,28 @@
+{
+  "content": {
+    "id": "iscsinode_spb_eth3",
+    "instanceId": "root/emc:EMC_UEM_EthernetPortLeaf%Tag=03:00:01:01",
+    "name": "iqn.1992-04.com.emc:cx.fnm00150600267.b1",
+    "alias": "0267.b1",
+    "ethernetPort": {
+      "id": "spb_eth3",
+      "connectorType": 1,
+      "speed": 10000,
+      "supportedSpeeds": [
+        1000,
+        10000,
+        100,
+        0
+      ],
+      "health": {
+        "value": 5,
+        "descriptionIds": [
+          "ALRT_PORT_LINK_DOWN_NOT_IN_USE"
+        ],
+        "descriptions": [
+          "The port link is down, but not in use. No action is required."
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "content": {
+    "name": "systemCapacity",
+    "description": "Capacity data for all pools collected for the storage system.",
+    "documentation": "https://10.245.101.39/apidocs/classes/systemCapacity.html",
+    "attributes": [
+      {
+        "name": "compressionPercent",
+        "type": "Integer",
+        "description": "Compression enabled increase of storage space expressed as percentage of summary of used and compression saved space size.",
+        "displayValue": "compressionPercent"
+      },
+      {
+        "name": "sizeUsed",
+        "type": "Integer",
+        "description": "Amount of used space in the pools on the storage system.",
+        "displayValue": "sizeUsed"
+      },
+      {
+        "name": "compressionRatio",
+        "type": "Float",
+        "description": "compression ratio",
+        "displayValue": "compressionRatio"
+      },
+      {
+        "name": "instanceId",
+        "type": "String",
+        "description": "Internal identifier of the systemCapacity instance.",
+        "displayValue": "instanceId"
+      },
+      {
+        "name": "sizeFree",
+        "type": "Integer",
+        "description": "Amount of free space available in the pools on the storage system.",
+        "displayValue": "sizeFree"
+      },
+      {
+        "name": "sizeSubscribed",
+        "type": "Integer",
+        "description": "Size of space requested by the storage resources allocated in all pools for possible future allocations. If this value is greater than the total size, it means pools are oversubscribed.",
+        "displayValue": "sizeSubscribed"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the systemCapacity instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "sizeTotal",
+        "type": "Integer",
+        "description": "Total amount of space (used space plus free space) in the pools on the storage system.",
+        "displayValue": "sizeTotal"
+      },
+      {
+        "name": "tiers",
+        "type": "List<systemTierCapacity>",
+        "description": "Size information (total, free, used) per tier.",
+        "displayValue": "tiers"
+      },
+      {
+        "name": "compressionSizeSaved",
+        "type": "Integer",
+        "description": "Amount of space saved by compression in the pools on the storage system.",
+        "displayValue": "compressionSizeSaved"
+      }
+    ]
+  }
+}

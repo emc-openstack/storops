@@ -19,10 +19,10 @@ from __future__ import unicode_literals
 import copy
 import json
 import logging
+import time
 
 import requests
 import six
-import time
 from requests.exceptions import RequestException
 from retryz import retry
 
@@ -41,7 +41,8 @@ def _wait_callback(tried):
 
 class HTTPClient(object):
     def __init__(self, base_url, headers, insecure=False, auth=None,
-                 timeout=None, retries=None, ca_cert_path=None):
+                 timeout=None, retries=None, ca_cert_path=None,
+                 cache_interval=0):
         self.base_url = base_url
         if retries is None:
             retries = 2
@@ -50,6 +51,8 @@ class HTTPClient(object):
             insecure, auth, timeout, ca_cert_path)
         self.headers = headers
         self.session = requests.session()
+        self.cache_interval = cache_interval
+        self.cache_dict = {}
 
     def __del__(self):
         self.session.close()
@@ -127,7 +130,21 @@ class HTTPClient(object):
         return self.request(url, method, **kwargs)
 
     def get(self, url, **kwargs):
-        return self._cs_request(url, 'GET', **kwargs)
+        if self.cache_interval <= 0:
+            result = self._cs_request(url, 'GET', **kwargs)
+        else:
+            current = time.time()
+            if url in self.cache_dict.keys() and (
+                    current - self.cache_dict.get(url)[
+                    0] < self.cache_interval):
+                result = self.cache_dict[url][1]
+                log.debug('Read response from cache, URL: {}'.format(url))
+            else:
+                result = self._cs_request(url, 'GET', **kwargs)
+                current = time.time()
+                log.debug('Write response to cache, URL: {}'.format(url))
+                self.cache_dict[url] = (current, result)
+        return result
 
     def post(self, url, **kwargs):
         return self._cs_request(url, 'POST', **kwargs)

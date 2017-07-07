@@ -751,3 +751,9 @@ class FeatureReasonEnum(UnityEnum):
 class HotSparePolicyStatusEnum(UnityEnum):
     OK = (0, "OK")
     VIOLATED = (741, "Violated")
+
+
+class InterfaceConfigModeEnum(UnityEnum):
+    DISABLED = (0, "Disabled")
+    STATIC = (1, "Static")
+    AUTO = (2, "Auto")

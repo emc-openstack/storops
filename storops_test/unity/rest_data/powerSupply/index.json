@@ -5,7 +5,7 @@
       "response": "type.json"
     },
     {
-      "url": "/api/types/powerSupply/instances?compact=True&fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,parentDae,parentDpe,slotNumber,storageProcessor,vendorPartNumber,vendorSerialNumber",
+      "url": "/api/types/powerSupply/instances?compact=True&fields=emcPartNumber,emcSerialNumber,firmwareVersion,health,id,manufacturer,model,name,needsReplacement,parent,parentDae,parentDae.name,parentDpe,parentDpe.name,slotNumber,storageProcessor,storageProcessor.name,vendorPartNumber,vendorSerialNumber",
       "response": "all.json"
     }
   ]

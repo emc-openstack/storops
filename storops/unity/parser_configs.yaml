@@ -1503,6 +1503,8 @@ UnityDisk:
     - label: bank
     - label: bankSlotNumber
     - label: bankSlot
+    - label: diskGroup
+      converter: UnityDiskGroup
 
 
 UnityDiskGroup:

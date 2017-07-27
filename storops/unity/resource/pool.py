@@ -22,10 +22,10 @@ import bitmath
 from storops.unity.resource import UnityResource, \
     UnityAttributeResource, UnityResourceList
 import storops.unity.resource.filesystem
-from storops.unity.resource.disk import UnityDiskGroup
+from storops.unity.resource.disk import UnityDiskGroup, UnityDiskList
 from storops.unity.resource.lun import UnityLun
 
-__author__ = 'Jay Xu'
+__author__ = 'Jay Xu, Peter Wang'
 
 LOG = logging.getLogger(__name__)
 
@@ -59,6 +59,31 @@ class UnityPool(UnityResource):
         resp.raise_if_err()
         pool = cls.get(cli, resp.resource_id)
         return pool
+
+    def modify(self, name=None, description=None, raid_groups=None,
+               alert_threshold=None,
+               is_harvest_enabled=None,
+               is_snap_harvest_enabled=None,
+               pool_harvest_high_threshold=None,
+               pool_harvest_low_threshold=None,
+               snap_harvest_high_threshold=None,
+               snap_harvest_low_threshold=None,
+               is_fast_cache_enabled=None,
+               is_fastvp_enabled=None):
+        req_body = self._compose_pool_parameter(
+            self._cli, name=name, description=description,
+            raid_groups=raid_groups, alert_threshold=alert_threshold,
+            is_harvest_enabled=is_harvest_enabled,
+            is_snap_harvest_enabled=is_snap_harvest_enabled,
+            pool_harvest_high_threshold=pool_harvest_high_threshold,
+            pool_harvest_low_threshold=pool_harvest_low_threshold,
+            snap_harvest_high_threshold=snap_harvest_high_threshold,
+            snap_harvest_low_threshold=snap_harvest_low_threshold,
+            is_fast_cache_enabled=is_fast_cache_enabled,
+            is_fastvp_enabled=is_fastvp_enabled)
+        resp = self.action('modify', **req_body)
+        resp.raise_if_err()
+        return resp
 
     def create_filesystem(self, nas_server, name, size,
                           proto=None, is_thin=None, tiering_policy=None,
@@ -135,6 +160,20 @@ class UnityPool(UnityResource):
                 req_body.append(each)
 
         return req_body
+
+    @property
+    def disk_groups(self):
+        disks = self._get_unity_rsc(clz=UnityDiskList)
+        pool_disks = [d for d in disks if
+                      d.pool and d.pool.get_id() == self.get_id()]
+        dgs = {}
+
+        for pd in pool_disks:
+            if pd.disk_group.get_id() in dgs:
+                dgs[pd.disk_group.get_id()].append(pd)
+            else:
+                dgs[pd.disk_group.get_id()] = [pd]
+        return dgs
 
 
 class UnityPoolList(UnityResourceList):

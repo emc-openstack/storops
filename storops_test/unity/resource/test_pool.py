@@ -26,7 +26,7 @@ from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
     FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum, \
     PoolTypeEnum
-from storops.unity.resource.disk import UnityDiskGroup
+from storops.unity.resource.disk import UnityDiskGroup, UnityDisk
 from storops.unity.resource.pool import UnityPool, UnityPoolList, \
     RaidGroupParameter
 from storops.unity.resource.lun import UnityLun
@@ -124,6 +124,19 @@ class UnityPoolTest(TestCase):
         self.verify_pool_1(pool)
 
     @patch_rest
+    def test_disk_groups(self):
+        cli = t_rest()
+        pool0 = UnityPool.get(cli=cli, _id='pool_1')
+        disk_groups = pool0.disk_groups
+        assert_that(disk_groups, instance_of(dict))
+        assert_that(len(disk_groups), equal_to(2))
+        assert_that(disk_groups['dg_8'], instance_of(list))
+        assert_that(disk_groups['dg_15'], instance_of(list))
+        for key in disk_groups:
+            for disk in disk_groups[key]:
+                assert_that(disk, instance_of(UnityDisk))
+
+    @patch_rest
     def test_get_nested_resource_properties(self):
         pools = UnityPoolList(cli=t_rest())
         pool = next(pool for pool in pools if pool.id == 'pool_1')
@@ -181,7 +194,30 @@ class UnityPoolTest(TestCase):
                 cli=cli, name='duplicate_pool',
                 description='Unity test pool.',
                 raid_groups=raid_groups)
+
         assert_that(_inner, raises(UnityPoolNameInUseError))
+
+    @patch_rest
+    def test_extend_pool(self):
+        cli = t_rest()
+        raid_group_0 = RaidGroupParameter(
+            disk_group='dg_8',
+            disk_num=4,
+            raid_type=RaidTypeEnum.RAID10,
+            stripe_width=RaidStripeWidthEnum.BEST_FIT)
+        raid_groups = [raid_group_0]
+        pool0 = UnityPool.get(cli=cli, _id='pool_1')
+        resp = pool0.modify(raid_groups=raid_groups)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_modify_pool(self):
+        cli = t_rest()
+        pool0 = UnityPool.get(cli=cli, _id='pool_30')
+        resp = pool0.modify(name="new_name",
+                            is_fastvp_enabled=True,
+                            alert_threshold=80)
+        assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
     def test_delete_pool(self):

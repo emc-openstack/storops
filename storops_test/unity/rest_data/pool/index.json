@@ -65,6 +65,31 @@
         "description": "Unity test pool."
       },
       "response": "duplicate_pool_4.json"
+    },
+    {
+      "url": "/api/instances/pool/pool_1/action/modify?compact=True",
+      "body": {
+        "addRaidGroupParameters": [
+          {
+            "stripeWidth": 0,
+            "raidType": 7,
+            "dskGroup": {
+              "id": "dg_8"
+            },
+            "numDisks": 4
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/pool/pool_30/action/modify?compact=True",
+      "body": {
+        "alertThreshold": 80,
+        "isFASTVpScheduleEnabled": true,
+        "name": "new_name"
+      },
+      "response": "empty.json"
     }
   ]
 }

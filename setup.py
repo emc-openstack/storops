@@ -70,7 +70,7 @@ setup(
     url='https://github.com/emc-openstack/storops',
     description=get_description(),
     license='Apache Software License',
-    keywords='VNX Unity EMC Storage',
+    keywords=['VNX', 'Unity', 'EMC', 'Storage'],
     include_package_data=True,
     packages=find_packages(),
     platforms=['any'],

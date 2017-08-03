@@ -857,6 +857,7 @@ VNXIOClassLun:
   properties:
     - label: "LUN Number:"
       key: lun_id
+      converter: to_int
       is_index: True
     - label: "LUN Name:"
       key: name
@@ -875,6 +876,8 @@ VNXIOClassSnapshot:
       key: wwn
     - label: "Target Logical Unit:"
       key: primary_lun_id
+      converter: to_int
+
 
 
 VNXIOPolicy:

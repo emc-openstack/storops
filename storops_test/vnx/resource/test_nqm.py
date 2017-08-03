@@ -17,7 +17,7 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, instance_of, raises
+from hamcrest import assert_that, equal_to, instance_of, raises, is_not
 
 from storops_test.vnx.cli_mock import t_cli, patch_cli
 
@@ -102,6 +102,14 @@ class VNXIOClassTest(TestCase):
         ioclass.add_lun(2)
 
     @patch_cli
+    def test_add_smp_to_ioclass(self):
+        ioclass = VNXIOClass(name='with_luns_snaps', cli=t_cli())
+        smp1 = VNXLun(name='m2', cli=t_cli())
+        new_class = ioclass.add_lun(smp1)
+        assert_that(new_class, instance_of(VNXIOClass))
+        assert_that(new_class, is_not(ioclass))
+
+    @patch_cli
     def test_add_lun_to_running_ioclass(self):
         ioclass = VNXIOClass(name='running_ioclass', cli=t_cli())
         lun1 = VNXLun(lun_id=1, cli=t_cli())
@@ -111,7 +119,7 @@ class VNXIOClassTest(TestCase):
     @patch_cli
     def test_remove_lun(self):
         ioclass = VNXIOClass(name='with_luns_snaps', cli=t_cli())
-        ioclass.remove_lun(1)
+        ioclass.remove_lun(0)
         lun1 = VNXLun(lun_id=2, cli=t_cli())
         ioclass.remove_lun(lun1)
 

@@ -140,29 +140,28 @@ class VNXIOClass(VNXCliResource):
         ex.raise_if_err(out, default=ex.VNXIOClassError)
         return VNXIOClass(name, cli)
 
-    def modify(self, new_name=None, iotype=None, new_luns=None,
-               ctrlmethod=None, minsize=None,
-               maxsize=None):
+    def modify(self, new_name=None, iotype=None, lun_ids=None, smp_names=None,
+               ctrlmethod=None, minsize=None, maxsize=None):
         """Overwrite the current properties for a VNX ioclass.
 
         :param new_name: new name for the ioclass
         :param iotype: can be 'rw', 'r' or 'w'
-        :param new_luns: VNXLun list or VNXLunList to replace current LUN
+        :param lun_ids: list of LUN IDs
+        :param smp_names: list of Snapshot Mount Point names
         :param ctrlmethod: the new CtrlMethod
         :param minsize: minimal size in kb
-        :param maxsize: maximium size in kb
+        :param maxsize: maximum size in kb
         """
-        if not any([new_name, iotype, new_luns, ctrlmethod]):
+        if not any([new_name, iotype, lun_ids, smp_names, ctrlmethod]):
             raise ValueError('Cannot apply modification, please specify '
                              'parameters to modify.')
-        new_luns = normalize_lun(new_luns, self._cli)
-        lun_ids, smp_names = convert_lun(new_luns)
 
         def _do_modify():
             out = self._cli.modify_ioclass(
                 self._get_name(), new_name, iotype, lun_ids, smp_names,
                 ctrlmethod, minsize, maxsize)
             ex.raise_if_err(out, default=ex.VNXIOClassError)
+
         try:
             _do_modify()
         except ex.VNXIOCLassRunningError:
@@ -177,20 +176,22 @@ class VNXIOClass(VNXCliResource):
 
         .. note:: This API only append luns to existing luns.
         """
-        current_luns = self.luns
-        current_names = map(lambda x: x.name, self.luns)
+        curr_lun_ids, curr_smp_names = self._get_current_names()
         luns = normalize_lun(luns, self._cli)
-        to_add = list(filter(lambda x: x.name not in current_names, luns))
-        current_luns.extend(to_add)
-        self.modify(new_luns=current_luns)
+        new_ids, new_smps = convert_lun(luns)
+        if new_ids:
+            curr_lun_ids.extend(new_ids)
+        if new_smps:
+            curr_smp_names.extend(new_smps)
+        return self.modify(lun_ids=curr_lun_ids, smp_names=curr_smp_names)
 
     def remove_lun(self, luns):
-        current_luns = self.luns
         luns = normalize_lun(luns, self._cli)
-        lun_names = map(lambda x: x.name, luns)
-        new_luns = list(filter(lambda x: x.name not in lun_names,
-                        current_luns))
-        self.modify(new_luns=new_luns)
+        curr_lun_ids, curr_smp_names = self._get_current_names()
+        rm_ids, rm_smps = convert_lun(luns)
+        new_ids = [curr for curr in curr_lun_ids if curr not in rm_ids]
+        new_smps = [curr for curr in curr_smp_names if curr not in rm_smps]
+        return self.modify(lun_ids=new_ids, smp_names=new_smps)
 
     def delete(self):
         out = self._cli.delete_ioclass(self._get_name())
@@ -201,6 +202,17 @@ class VNXIOClass(VNXCliResource):
         if not isinstance(policy, VNXIOPolicy):
             policy = VNXIOPolicy(self._cli, policy)
         return policy.add_class(self)
+
+    def _get_current_names(self):
+        lun_ids = []
+        smp_names = []
+
+        for lun in self.ioclass_luns:
+            lun_ids.append(lun.lun_id)
+        for smp in self.ioclass_snapshots:
+            smp_names.append(smp.name)
+
+        return lun_ids, smp_names
 
 
 class VNXIOPolicyList(VNXCliResourceList):

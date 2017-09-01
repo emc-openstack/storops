@@ -517,9 +517,8 @@ class CalculatorTest(TestCase):
         def f():
             disk_queue_length(['a', 'b', 'c', 'd'], None, None)
 
-        assert_that(f, raises(ValueError,
-                              'takes in "sumArrivalQueueLength", "reads" '
-                              'and "writes" counter.'))
+        msg = 'takes in "sumArrivalQueueLength", "reads" and "writes" counter.'
+        assert_that(f, raises(ValueError, msg))
 
     @patch_rest
     def test_lun_response_time(self):
@@ -539,9 +538,8 @@ class CalculatorTest(TestCase):
         def f():
             lun_response_time(['a', 'b', 'c', 'd'], None, None)
 
-        assert_that(f, raises(ValueError,
-                              'takes in "totalIoTime", "reads" and '
-                              '"writes" counter.'))
+        msg = 'takes in "totalIoTime", "reads" and "writes" counter.'
+        assert_that(f, raises(ValueError, msg))
 
     @patch_rest
     def test_lun_queue_length(self):
@@ -561,9 +559,8 @@ class CalculatorTest(TestCase):
         def f():
             lun_queue_length(['a', 'b', 'c', 'd'], None, None)
 
-        assert_that(f, raises(ValueError,
-                              'takes in "currentIOCount", "busyTime" and '
-                              '"idleTime" counter.'))
+        msg = 'takes in "currentIOCount", "busyTime" and "idleTime" counter.'
+        assert_that(f, raises(ValueError, msg))
 
     @patch_rest
     def test_sum_sp(self):
@@ -617,9 +614,8 @@ class CalculatorTest(TestCase):
         def f():
             total_byte_rate(['a', 'b', 'c', 'd'], None, None)
 
-        assert_that(f, raises(ValueError,
-                              'takes in "readBlocks" "writeBlocks" and '
-                              '"blockSize" counter.'))
+        msg = 'takes in "readBlocks", "writeBlocks" and "blockSize" counter.'
+        assert_that(f, raises(ValueError, msg))
 
     @patch_rest
     def test_sp_byte_rate(self):
@@ -660,9 +656,8 @@ class CalculatorTest(TestCase):
         def f():
             sp_total_byte_rate(['a', 'b', 'c', 'd'], None, None)
 
-        assert_that(f, raises(ValueError,
-                              'takes in "readBlocks" "writeBlocks" and '
-                              '"blockSize" counter.'))
+        msg = 'takes in "readBlocks", "writeBlocks" and "blockSize" counter.'
+        assert_that(f, raises(ValueError, msg))
 
     @patch_rest
     def test_system_byte_rate(self):
@@ -701,9 +696,8 @@ class CalculatorTest(TestCase):
         def f():
             system_total_byte_rate(['a', 'b', 'c', 'd'], None, None)
 
-        assert_that(f, raises(ValueError,
-                              'takes in "readBlocks", "writeBlocks" and '
-                              '"blockSize" counter.'))
+        msg = 'takes in "readBlocks", "writeBlocks" and "blockSize" counter.'
+        assert_that(f, raises(ValueError, msg))
 
 
 class UnityMetricConfigTest(TestCase):

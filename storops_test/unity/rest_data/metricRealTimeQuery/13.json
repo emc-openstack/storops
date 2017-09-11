@@ -1,7 +1,6 @@
 {
   "content": {
     "paths": [
-      "sp.*.fastCache.blockSize",
       "sp.*.fastCache.volume.*.readHits",
       "sp.*.fastCache.volume.*.writeHits",
       "sp.*.fibreChannel.fePort.*.readBlocks",

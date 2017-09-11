@@ -237,8 +237,7 @@ def busy_idle_util(path, prev, curr):
     return ret
 
 
-@metric_calculator
-def sp_delta_ps(path, prev, curr):
+def _io_ps(path, prev, curr, attr):
     path = only_one_path(path)
 
     if all_not_none(prev, curr):
@@ -249,7 +248,7 @@ def sp_delta_ps(path, prev, curr):
         curr_counter = None
 
     if all_not_none(prev_counter, curr_counter):
-        delta = curr_counter.sp_values - prev_counter.sp_values
+        delta = getattr(curr_counter, attr) - getattr(prev_counter, attr)
         ret = delta / curr.diff_seconds(prev)
     else:
         ret = IdValues()
@@ -257,13 +256,23 @@ def sp_delta_ps(path, prev, curr):
 
 
 @metric_calculator
-def sp_total_delta_ps(path, prev, curr):
-    if len(path) != 2:
-        raise ValueError('takes in "reads" and "writes" counter.')
+def sp_delta_ps(path, prev, curr):
+    attr = 'sp_values'
+    return _io_ps(path, prev, curr, attr)
 
-    read_path, write_path = path
-    return sp_delta_ps(read_path, prev, curr) + sp_delta_ps(write_path, prev,
-                                                            curr)
+
+def _total_io_ps(path, prev, curr, err_msg, func):
+    if len(path) != 2:
+        raise ValueError(err_msg)
+
+    part1, part2 = path
+    return func(part1, prev, curr) + func(part2, prev, curr)
+
+
+@metric_calculator
+def sp_total_delta_ps(path, prev, curr):
+    err_msg = 'takes in "reads" and "writes" counter.'
+    return _total_io_ps(path, prev, curr, err_msg, sp_delta_ps)
 
 
 @metric_calculator
@@ -315,32 +324,27 @@ def _sp_pct(path, curr, prev):
 
 
 @metric_calculator
-def system_delta_ps(path, prev, curr):
+def sp_sum_values(path, _, curr):
     path = only_one_path(path)
+    return curr.by_path(path).sp_sum_values
 
-    if all_not_none(prev, curr):
-        prev_counter = prev.by_path(path)
-        curr_counter = curr.by_path(path)
-    else:
-        prev_counter = None
-        curr_counter = None
 
-    if all_not_none(prev_counter, curr_counter):
-        delta = curr_counter.sum_sp_values - prev_counter.sum_sp_values
-        ret = delta / curr.diff_seconds(prev)
-    else:
-        ret = IdValues()
-    return ret
+@metric_calculator
+def sp_io_rate(path, prev, curr):
+    attr = 'sp_sum_values'
+    return _io_ps(path, prev, curr, attr)
+
+
+@metric_calculator
+def system_delta_ps(path, prev, curr):
+    attr = 'sum_sp_values'
+    return _io_ps(path, prev, curr, attr)
 
 
 @metric_calculator
 def system_total_delta_ps(path, prev, curr):
-    if len(path) != 2:
-        raise ValueError('takes in "reads" and "writes" counter.')
-
-    read_path, write_path = path
-    return system_delta_ps(read_path, prev, curr) + system_delta_ps(write_path,
-                                                                    prev, curr)
+    err_msg = 'takes in "reads" and "writes" counter.'
+    return _total_io_ps(path, prev, curr, err_msg, system_delta_ps)
 
 
 @metric_calculator
@@ -432,12 +436,6 @@ def lun_queue_length(path, prev, curr):
     err_msg = 'takes in "currentIOCount", "busyTime" and "idleTime" counter.'
     return _queue_length(path, prev, curr, err_msg,
                          lambda x, y, z: x * y / (y + z))
-
-
-@metric_calculator
-def sum_sp(path, _, curr):
-    path = only_one_path(path)
-    return curr.by_path(path).sum_sp()
 
 
 def _byte_rate(path, prev, curr, err_msg, attr):

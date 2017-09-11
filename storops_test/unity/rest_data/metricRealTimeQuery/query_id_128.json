@@ -58,7 +58,6 @@
           "sp.*.net.basic.inBytes",
           "sp.*.storage.lun.*.readBlocks",
           "sp.*.blockCache.global.summary.readMisses",
-          "sp.*.fastCache.blockSize",
           "sp.*.fibreChannel.blockSize",
           "sp.*.fastCache.volume.*.readHits",
           "sp.*.physical.coreCount",

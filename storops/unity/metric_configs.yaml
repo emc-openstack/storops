@@ -115,22 +115,7 @@ UnityLun:
       - sp.*.storage.lun.*.writeBlocks
       - sp.*.storage.blockSize
     calculator: total_byte_rate
-  - name: fast_cache_read_hits
-    paths: sp.*.fastCache.volume.*.readHits
-    calculator: sum_sp
-  - name: fast_cache_write_hits
-    paths: sp.*.fastCache.volume.*.writeHits
-    calculator: sum_sp
-  - name: fast_cache_read_hit_rate
-    paths:
-      - sp.*.fastCache.volume.*.readHits
-      - sp.*.fastCache.blockSize
-    calculator: byte_rate
-  - name: fast_cache_write_hit_rate
-    paths:
-      - sp.*.fastCache.volume.*.writeHits
-      - sp.*.fastCache.blockSize
-    calculator: byte_rate
+
 
 UnityFileSystem:
   - name: read_iops
@@ -233,6 +218,20 @@ UnityStorageProcessor:
       - sp.*.storage.summary.writeBlocks
       - sp.*.storage.blockSize
     calculator: sp_total_byte_rate
+  - name: fast_cache_read_hits
+    paths: sp.*.fastCache.volume.*.readHits
+    calculator: sp_sum_values
+  - name: fast_cache_write_hits
+    paths: sp.*.fastCache.volume.*.writeHits
+    calculator: sp_sum_values
+  - name: fast_cache_read_hit_rate
+    paths:
+      - sp.*.fastCache.volume.*.readHits
+    calculator: sp_io_rate
+  - name: fast_cache_write_hit_rate
+    paths:
+      - sp.*.fastCache.volume.*.writeHits
+    calculator: sp_io_rate
 
 
 UnityFcPort:

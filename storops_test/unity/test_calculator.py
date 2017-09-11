@@ -28,7 +28,7 @@ from storops.unity.calculator import calculators, IdValues, \
     UnityMetricConfigParser, total_delta_ps, sp_total_delta_ps, \
     system_delta_ps, system_total_delta_ps, disk_response_time, \
     disk_queue_length, lun_response_time, lun_queue_length, \
-    sum_sp, byte_rate, total_byte_rate, sp_byte_rate, \
+    sp_sum_values, sp_io_rate, byte_rate, total_byte_rate, sp_byte_rate, \
     sp_total_byte_rate, system_byte_rate, system_total_byte_rate
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.filesystem import UnityFileSystem
@@ -563,15 +563,39 @@ class CalculatorTest(TestCase):
         assert_that(f, raises(ValueError, msg))
 
     @patch_rest
-    def test_sum_sp(self):
+    def test_sp_sum_values(self):
         path = 'sp.*.fastCache.volume.*.readHits'
-        ret = sum_sp(path, qr_128, qr_130)
-        expected = 50 + 100
-        assert_that(ret['7'], equal_to(expected))
+        ret = sp_sum_values(path, qr_128, qr_130)
+        expected_spa = 1000 + 2000 + 3000 + 4000 + 5000
+        assert_that(ret['spa'], equal_to(expected_spa))
+        expected_spb = 2000 + 4000 + 6000 + 8000 + 10000
+        assert_that(ret['spb'], equal_to(expected_spb))
 
-    def test_sum_sp_error_path(self):
+    def test_sp_sum_values_error_path(self):
         def f():
-            sum_sp(['a', 'b'], None, None)
+            sp_sum_values(['a', 'b'], None, None)
+
+        assert_that(f, raises(ValueError, 'takes in one and only one path.'))
+
+    @patch_rest
+    def test_sp_io_rate(self):
+        path = 'sp.*.fastCache.volume.*.readHits'
+        ret = sp_io_rate(path, qr_128, qr_130)
+        diff_time = 48540.0
+
+        delta_spa = (1000 + 2000 + 3000 + 4000 + 5000) - (
+            1000 + 1000 + 1000 + 1000 + 1000)
+        expected_spa = delta_spa / diff_time
+        assert_that(ret['spa'], close_to(expected_spa, 0.01))
+
+        delta_spb = (2000 + 4000 + 6000 + 8000 + 10000) - (
+            2000 + 2000 + 2000 + 2000 + 2000)
+        expected_spb = delta_spb / diff_time
+        assert_that(ret['spb'], close_to(expected_spb, 0.01))
+
+    def test_sp_io_rate_error_path(self):
+        def f():
+            sp_io_rate(['a', 'b'], None, None)
 
         assert_that(f, raises(ValueError, 'takes in one and only one path.'))
 

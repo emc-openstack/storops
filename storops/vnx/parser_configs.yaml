@@ -209,7 +209,38 @@ VNXPool:
     - label: "Disks:"
       converter: indices_to_disk_list
       end_pattern: "LUNs:"
+    - label: "Auto-Tiering:" # This is key word precedes the 'Tier Name'
+      key: tiers
+      converter: VNXPoolTierList
+      end_pattern: "Rebalance Percent Complete:"
 
+VNXPoolTier:
+  data_src: cli
+  properties:
+    - label: "Tier Name:"
+      is_index: True
+    - label: "Raid Type:"
+      converter: VNXPoolRaidType
+    - label: "User Capacity (GBs):"
+      key: user_capacity_gb
+      converter: to_float
+    - label: "Consumed Capacity (GBs):"
+      key: consumed_capacity_gb
+      converter: to_float
+    - label: "Available Capacity (GBs):"
+      key: available_capacity_gb
+      converter: to_float
+    - label: "Percent Subscribed:"
+      converter: to_float
+    - label: "Data Targeted for Higher Tier (GBs):"
+      key: data_targeted_for_higher_tier_gb
+      converter: to_float
+    - label: "Data Targeted for Lower Tier (GBs):"
+      key: data_targeted_for_lower_tier
+      converter: to_float
+    - label: "Data Targeted Within Tier (GBs):"
+      key: data_targeted_within_tier
+      converter: to_float
 
 VNXConsistencyGroup:
   data_src: cli

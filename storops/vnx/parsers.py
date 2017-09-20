@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from collections import OrderedDict
 import logging
 import re
 
@@ -145,7 +146,7 @@ class VNXCliParser(OutputParser):
                     if k not in existed or v is not None:
                         existed[k] = v
 
-        idx_inst_map = {}
+        idx_inst_map = OrderedDict()
         indices = self.index_property_list
         list(map(update_map, instances))
         return list(idx_inst_map.values())

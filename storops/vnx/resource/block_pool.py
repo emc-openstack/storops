@@ -183,3 +183,13 @@ class VNXPool(VNXCliResource):
 
     def set_system_lun_list(self, system_lun_list):
         self._system_lun_list = system_lun_list
+
+
+class VNXPoolTier(VNXCliResource):
+    pass
+
+
+class VNXPoolTierList(VNXCliResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return VNXPoolTier

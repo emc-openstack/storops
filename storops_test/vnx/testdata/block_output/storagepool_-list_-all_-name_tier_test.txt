@@ -1,0 +1,96 @@
+Pool Name:  DAILY_1
+Pool ID:  0
+Raid Type:  r_5
+Percent Full Threshold:  70
+Description:
+Disk Type:  SAS
+State:  Ready
+Status:  OK(0x0)
+Current Operation:  None
+Current Operation State:  N/A
+Current Operation Status:  N/A
+Current Operation Percent Completed:  0
+Raw Capacity (Blocks):  5162884632
+Raw Capacity (GBs):  2461.855
+User Capacity (Blocks):  3438692352
+User Capacity (GBs):  1639.696
+Consumed Capacity (Blocks):  271060992
+Consumed Capacity (GBs):  129.252
+Available Capacity (Blocks):  3167631360
+Available Capacity (GBs):  1510.444
+Percent Full:  7.883
+LUN Allocation (Blocks):  178257920
+LUN Allocation (GBs):  85.000
+Snapshot Allocation (Blocks):  0
+Snapshot Allocation (GBs):  0.000
+Metadata Allocation (Blocks):  89663488
+Metadata Allocation (GBs):  42.755
+Total Subscribed Capacity (Blocks):  413420544
+Total Subscribed Capacity (GBs):  197.134
+Percent Subscribed:  12.023
+Oversubscribed by (Blocks):  0
+Oversubscribed by (GBs):  0.000
+LUN Subscribed Capacity (Blocks):  232783872
+LUN Subscribed Capacity (GBs):  111.000
+Snapshot Subscribed Capacity (Blocks):  73400320
+Snapshot Subscribed Capacity (GBs):  35.000
+Metadata Subscribed Capacity (Blocks):  107236352
+Metadata Subscribed Capacity (GBs):  51.134
+Compression Savings (Blocks):  N/A
+Compression Savings (GBs):  N/A
+Auto-Tiering:  Manual
+
+Tier Name:  Performance
+Raid Type:  r_5
+Raid Drive Count:  5
+User Capacity (GBs):  1639.70
+Consumed Capacity (GBs):  129.25
+Available Capacity (GBs):  1510.44
+Percent Subscribed:  7.88%
+Data Targeted for Higher Tier (GBs):  0.00
+Data Targeted for Lower Tier (GBs):  0.00
+Data Targeted Within Tier (GBs):  0.00
+Disks (Type):
+Bus 0 Enclosure 0 Disk 12 (SAS)
+Bus 0 Enclosure 0 Disk 10 (SAS)
+Bus 0 Enclosure 0 Disk 11 (SAS)
+
+Tier Name:  Extreme Performance
+Raid Type:  r_5
+User Capacity (GBs):  2930.21
+Consumed Capacity (GBs):  2638.39
+Available Capacity (GBs):  291.82
+Percent Subscribed:  90.04%
+Data Targeted for Higher Tier (GBs):  0.00
+Data Targeted for Lower Tier (GBs):  226.44
+Disks (Type):
+
+Rebalance Percent Complete:  N/A
+Disks:
+Bus 0 Enclosure 0 Disk 12
+Bus 0 Enclosure 0 Disk 10
+Bus 0 Enclosure 0 Disk 11
+LUNs:  257, 63976, 114, 423, 0, 10, 59, 229, 60, 45, 407, 376, 2, 63929, 255, 259, 63934, 63935, 256, 63977, 248, 424, 61, 244
+FAST Cache:  Disabled
+Deduplication State:  Idle (No Deduplicated LUNs)
+Deduplication Status:  OK(0x0)
+Deduplication Percent Completed:  N/A
+Deduplication Remaining Size (Blocks):  N/A
+Deduplication Remaining Size (GBs):  N/A
+Optimal Deduplicated LUN SP Owner:  N/A
+Deduplication Rate:  Medium
+Deduplicated LUNs' Tiering Policy:  Auto Tier
+Deduplicated LUNs' Initial Tier:  Optimize Pool
+Efficiency Savings (Blocks):  N/A
+Efficiency Savings (GBs):  N/A
+Deduplication Shared Capacity (Blocks):  N/A
+Deduplication Shared Capacity (GBs):  N/A
+Auto-Delete Pool Full Threshold Enabled:  Off
+Auto-Delete Pool Full High Watermark:  95.00
+Auto-Delete Pool Full Low Watermark:  85.00
+Auto-Delete Pool Full State:  Idle
+Auto-Delete Snapshot Space Used Threshold Enabled:  Off
+Auto-Delete Snapshot Space Used High Watermark:  25.00
+Auto-Delete Snapshot Space Used Low Watermark:  20.00
+Auto-Delete Snapshot Space Used State:  Idle
+

@@ -19,6 +19,7 @@ from unittest import TestCase
 
 from hamcrest import assert_that, raises, equal_to, has_items, \
     only_contains, none, close_to, not_none, greater_than
+from storops.vnx.enums import VNXPoolRaidType
 
 from storops_test.vnx.cli_mock import t_cli, patch_cli
 from storops_test.vnx.resource.test_lun import get_lun_list
@@ -261,6 +262,25 @@ class VNXPoolListTest(TestCase):
         assert_that(len(pools), greater_than(0))
         for pool in pools:
             assert_that(pool.lun_list.timestamp, equal_to(lun_list.timestamp))
+
+
+class VNXPoolTierTest(TestCase):
+    @patch_cli
+    def test_pool_tier(self):
+        pool1 = VNXPool.get(t_cli(), name='tier_test')
+        assert_that(pool1.tiers, not_none())
+        assert_that(len(pool1.tiers), equal_to(2))
+        tier = pool1.tiers[0]
+
+        assert_that(tier.tier_name, equal_to('Performance'))
+        assert_that(tier.raid_type, equal_to(VNXPoolRaidType.RAID5))
+        assert_that(tier.user_capacity_gb, equal_to(1639.70))
+        assert_that(tier.consumed_capacity_gb, equal_to(129.25))
+        assert_that(tier.available_capacity_gb, equal_to(1510.44))
+        assert_that(tier.percent_subscribed, equal_to(7.88))
+        assert_that(tier.data_targeted_for_higher_tier_gb, equal_to(0.0))
+        assert_that(tier.data_targeted_for_lower_tier, equal_to(0.0))
+        assert_that(tier.data_targeted_within_tier, equal_to(0.0))
 
 
 class VNXPoolFeatureTest(TestCase):

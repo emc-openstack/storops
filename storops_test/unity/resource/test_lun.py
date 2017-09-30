@@ -15,13 +15,15 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import tempfile
 from unittest import TestCase
-
+import mock
+import shutil
 from hamcrest import assert_that, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
 
-from storops import UnitySystem
+from storops import UnitySystem, TCHelper
 from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError, \
@@ -44,6 +46,16 @@ __author__ = 'Cedric Zhuang'
 
 
 class UnityLunTest(TestCase):
+    def setUp(self):
+        self.path = tempfile.mkdtemp(suffix='storops')
+        TCHelper.set_up(self.path)
+        TCHelper._gc_background.set_interval(0.10)
+        TCHelper._gc_background.MAX_RETRIES = 1
+
+    def tearDown(self):
+        shutil.rmtree(self.path, ignore_errors=True)
+        TCHelper.clean_up()
+
     @patch_rest
     def test_get_lun_sv2_simple_property(self):
         lun = UnityLun(_id='sv_2', cli=t_rest())
@@ -134,13 +146,19 @@ class UnityLunTest(TestCase):
         assert_that(resp.is_ok(), equal_to(True))
         assert_that(resp.job.existed, equal_to(False))
 
+    @mock.patch('storops.lib.thinclone_helper.TCHelper._gc_background.put')
     @patch_rest
-    def test_lun_delete_thinclone(self):
+    def test_lun_delete_thinclone(self, mocked_input):
+        lun = UnityLun(_id='sv_5608', cli=t_rest())
+        resp = lun.delete(force_snap_delete=True, force_vvol_delete=True)
+        assert_that(resp, none())
+
+    @patch_rest
+    def test_lun_delete_has_thin_clone(self):
         lun = UnityLun(_id='sv_5604', cli=t_rest())
         resp = lun.delete(force_snap_delete=True, force_vvol_delete=True)
         lun.update()
         assert_that(resp.is_ok(), equal_to(True))
-        assert_that(resp.job.existed, equal_to(False))
 
     @patch_rest
     def test_lun_attach_to_new_host(self):

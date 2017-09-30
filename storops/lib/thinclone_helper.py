@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import functools
 import logging
 
 from persistqueue import PDict
@@ -167,3 +168,25 @@ class TCHelper(object):
             TCHelper._delete_thin_clone(lun_or_snap)
 
         TCHelper._update_cache(lun_or_snap, action_enum, *args)
+
+
+def wrap_tc_deletion(func):
+    @functools.wraps(func)
+    def _wrap(*args, **kwargs):
+        _self = args[0]
+        resp = None
+        try:
+            resp = func(*args, **kwargs)
+            if _self.is_thin_clone:
+                TCHelper.notify(_self, ThinCloneActionEnum.TC_DELETE)
+        except exception.UnityBaseHasThinCloneError:
+            # Add the base LUN to background queue.
+            # This is to handle the deletion of base LUN before
+            # deleting all it's child LUNs.
+            log.info(
+                'LUN still contains thin clones, '
+                'add it to queue for later deletion.')
+            TCHelper._gc_background.put(TCHelper._delete_base_lun,
+                                        base_lun=_self)
+        return resp
+    return _wrap

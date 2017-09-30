@@ -19,7 +19,7 @@ import logging
 
 import storops.unity.resource.pool
 from storops.exception import UnityResourceNotFoundError
-from storops.lib.thinclone_helper import TCHelper
+from storops.lib.thinclone_helper import TCHelper, wrap_tc_deletion
 from storops.lib.version import version
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
     HostLUNAccessEnum, ThinCloneActionEnum
@@ -180,6 +180,7 @@ class UnityLun(UnityResource):
         resp.raise_if_err()
         return resp
 
+    @wrap_tc_deletion
     def delete(self, async=False, force_snap_delete=False,
                force_vvol_delete=False):
         sr = self.storage_resource
@@ -192,8 +193,6 @@ class UnityLun(UnityResource):
                                 async=async)
         resp.raise_if_err()
 
-        if self.is_thin_clone:
-            TCHelper.notify(self, ThinCloneActionEnum.TC_DELETE)
         return resp
 
     def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):

@@ -63,30 +63,6 @@ class VNXPort(VNXCliResource):
             items.append(str(self.vport_id))
         return '-'.join(items)
 
-    def config_ip(self, ip, mask, gateway, vport_id=None, vlan_id=None):
-        if self.type != VNXPortType.ISCSI:
-            raise TypeError('configure IP only works for iSCSI ports.')
-        if vport_id is None:
-            vport_id = self.vport_id
-
-        out = self._cli.config_iscsi_ip(
-            self.sp, self.port_id, ip, mask, gateway, vport_id=vport_id,
-            vlan_id=vlan_id)
-        raise_if_err(out, default=VNXPortError)
-
-        if vport_id is None:
-            vport_id = 0
-        return VNXConnectionPort(self.sp, self.port_id, vport_id, self._cli)
-
-    def delete_ip(self, vport_id=None):
-        if self.type != VNXPortType.ISCSI:
-            raise TypeError('delete IP only works for iSCSI ports.')
-        if vport_id is None:
-            vport_id = self.vport_id
-
-        out = self._cli.delete_iscsi_ip(self.sp, self.port_id, vport_id)
-        raise_if_err(out, default=VNXPortError)
-
     @classmethod
     def delete_hba(cls, cli, hba_uid):
         out = cli.delete_hba(hba_uid)
@@ -106,8 +82,8 @@ class VNXPort(VNXCliResource):
         return ret
 
     def __hash__(self):
-        return hash('<VNXPort {{sp: {}, port_id: {}, vport_id: {}}}'
-                    .format(self.sp, self.port_id, self.vport_id))
+        return hash('<VNXPort {{sp: {}, port_id: {}}}'
+                    .format(self.sp, self.port_id))
 
     @staticmethod
     def _get_inst_prop(instance, name):
@@ -300,6 +276,51 @@ class VNXConnectionPortList(VNXCliResourceList):
     def _get_raw_resource(self):
         return self._cli.get_connection_port(poll=self.poll)
 
+    def __len__(self):
+        return len(self._virtual_port_list())
+
+    def __iter__(self):
+        return iter(self._virtual_port_list())
+
+    def __getitem__(self, item):
+        return self._virtual_port_list()[item]
+
+    def _virtual_port_list(self):
+        temp_list = super(VNXConnectionPortList, self).list
+        vport_lists = []
+        for item in temp_list:
+            if len(item.virtual_ports):
+                ports = self._flat_vports(item)
+                vport_lists.extend(ports)
+            else:
+                vport = VNXConnectionVirtualPort(
+                    cli=self._cli, sp=item.sp, port_id=item.port_id,
+                    vport_id=item.vport_id)
+                self._set_child_props(item, vport)
+                vport_lists.append(vport)
+        return vport_lists
+
+    def _flat_vports(self, connection_port):
+        """Flat the virtual ports."""
+        vports = []
+        for vport in connection_port.virtual_ports:
+            self._set_child_props(connection_port, vport)
+            vports.append(vport)
+        return vports
+
+    def _set_child_props(self, parent, child):
+        props = parent.property_names()
+        # Ignore virtual_ports for child
+        props = (x for x in props if x != 'virtual_ports')
+        for prop_name in props:
+            setattr(child, prop_name,
+                    getattr(parent, prop_name))
+
+    def get_dict_repr(self, dec=1):
+        items = [item.get_dict_repr(dec - 1) for
+                 item in self._virtual_port_list()]
+        return {self.__class__.__name__: items}
+
 
 class VNXConnectionPort(VNXPort):
     def __init__(self, sp=None, port_id=None, vport_id=None, cli=None):
@@ -308,14 +329,6 @@ class VNXConnectionPort(VNXPort):
         self._port_id = port_id
         self._vport_id = vport_id
         self._cli = cli
-
-    @property
-    def vport_id(self):
-        if self._vport_id is not None:
-            ret = self._vport_id
-        else:
-            ret = self.virtual_port_id
-        return ret
 
     @property
     def type(self):
@@ -338,6 +351,43 @@ class VNXConnectionPort(VNXPort):
         names.append('type')
         return names
 
+    def _get_virtual_port_prop(self, prop_name):
+        if len(self.virtual_ports) == 0:
+            return None
+        elif len(self.virtual_ports) == 1:
+            return getattr(self.virtual_ports[0], prop_name)
+        else:
+            return getattr(self.virtual_ports, prop_name)
+
+    @property
+    def virtual_port_id(self):
+        return self._get_virtual_port_prop('virtual_port_id')
+
+    @property
+    def vport_id(self):
+        return self.virtual_port_id
+
+    @property
+    def vlan_id(self):
+        return self._get_virtual_port_prop('vlan_id')
+
+    @property
+    def ip_address(self):
+        return self._get_virtual_port_prop('ip_address')
+
+    @property
+    def subnet_mask(self):
+        return self._get_virtual_port_prop('subnet_mask')
+
+    @property
+    def gateway_address(self):
+        return self._get_virtual_port_prop('gateway_address')
+
+    @property
+    def initiator_authentication(self):
+        # port = self._get_uniq_virtual_port()
+        return self._get_virtual_port_prop('initiator_authentication')
+
     @classmethod
     def get(cls, cli, sp=None, port_id=None, vport_id=None, port_type=None,
             has_ip=None):
@@ -349,6 +399,27 @@ class VNXConnectionPort(VNXPort):
         else:
             ret = VNXConnectionPortList(cli, sp, port_id, vport_id, port_type,
                                         has_ip)
+        return ret
+
+
+class VNXConnectionVirtualPort(VNXCliResource):
+    def __init__(self, sp=None, port_id=None, vport_id=None, cli=None):
+        super(VNXConnectionVirtualPort, self).__init__()
+        self._sp = sp
+        self._port_id = port_id
+        self._vport_id = vport_id
+        self._cli = cli
+
+    @property
+    def vport_id(self):
+        return self.virtual_port_id
+
+    def property_names(self):
+        ret = super(VNXConnectionVirtualPort, self).property_names()
+        ret.extend(['auto_negotiate', 'available_speed', 'current_mtu',
+                    'enode_mac_address', 'flow_control', 'host_window',
+                    'iscsi_alias', 'port_id', 'port_speed',
+                    'replication_window', 'sp', 'wwn', 'type'])
         return ret
 
     def ping_node(self, address, packet_size=None, count=None, timeout=None,
@@ -366,6 +437,43 @@ class VNXConnectionPort(VNXPort):
         except VNXPingNodeSuccess:
             # ping success, pass
             pass
+
+    def config_ip(self, ip, mask, gateway, vport_id=None, vlan_id=None):
+        if self.type != VNXPortType.ISCSI:
+            raise TypeError('configure IP only works for iSCSI ports.')
+        if vport_id is None:
+            vport_id = self.virtual_port_id
+
+        out = self._cli.config_iscsi_ip(
+            self.sp, self.port_id, ip, mask, gateway, vport_id=vport_id,
+            vlan_id=vlan_id)
+        raise_if_err(out, default=VNXPortError)
+
+        if vport_id is None:
+            vport_id = 0
+        return VNXConnectionPort(self.sp, self.port_id, vport_id, self._cli)
+
+    def delete_ip(self, vport_id=None):
+        if self.type != VNXPortType.ISCSI:
+            raise TypeError('delete IP only works for iSCSI ports.')
+        if vport_id is None:
+            vport_id = self.virtual_port_id
+
+        out = self._cli.delete_iscsi_ip(self.sp, self.port_id, vport_id)
+        raise_if_err(out, default=VNXPortError)
+
+    @property
+    def display_name(self):
+        items = [self.sp.display_name, str(self.port_id)]
+        if self.vport_id is not None:
+            items.append(str(self.vport_id))
+        return '-'.join(items)
+
+
+class VNXConnectionVirtualPortList(VNXCliResourceList):
+    @classmethod
+    def get_resource_class(cls):
+        return VNXConnectionVirtualPort
 
 
 class VNXStorageGroupHBA(VNXPort):

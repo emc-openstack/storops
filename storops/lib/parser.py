@@ -113,16 +113,18 @@ class PropDescriptor(PropMapper):
 
     def convert(self, value):
         c = self.converter
+        ret = value
         if c is not None:
             if self.is_parser():
-                value = c.parse_all(value)
+                ret = c.parse_all(value)
             elif self.is_resource_clazz():
-                value = c().update(value)
+                # value is raw output from cli.
+                ret = c().update(value)
             elif self.is_enum() or self.is_enum_list():
-                value = c.parse(value)
+                ret = c.parse(value)
             elif callable(c):
-                value = c(value)
-        return value
+                ret = c(value)
+        return ret
 
     def is_resource_list_clazz(self):
         rsc_list_clz = storops.lib.resource.ResourceList

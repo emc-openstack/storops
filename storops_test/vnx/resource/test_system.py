@@ -18,7 +18,8 @@ from __future__ import unicode_literals
 import logging
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, none, instance_of, raises, is_not
+from hamcrest import assert_that, equal_to, none, instance_of, raises,\
+    is_not
 
 from storops import VNXSystem
 from storops.exception import VNXDeleteHbaNotFoundError, VNXCredentialError, \
@@ -35,7 +36,8 @@ from storops.vnx.resource.mirror_view import VNXMirrorViewList, \
 from storops.vnx.resource.mover import VNXMoverList
 from storops.vnx.resource.nqm import VNXIOClass, VNXIOClassList, VNXIOPolicy, \
     VNXIOPolicyList
-from storops.vnx.resource.port import VNXSPPortList, VNXConnectionPortList
+from storops.vnx.resource.port import VNXSPPortList, VNXConnectionPortList, \
+    VNXConnectionPort, VNXConnectionVirtualPort
 from storops.vnx.resource.system import VNXAgent
 from storops.vnx.resource.system import VNXArrayName
 from storops.vnx.resource.vdm import VNXVdmList
@@ -125,7 +127,35 @@ class VNXSystemTest(TestCase):
 
     @patch_cli
     def test_connection_port(self):
-        assert_that(len(self.vnx.get_connection_port()), equal_to(20))
+        ports = self.vnx.get_connection_port()
+        assert_that(len(ports), equal_to(22))
+        assert_that(ports, instance_of(VNXConnectionPortList))
+        for x in ports:
+            assert_that(x, instance_of(VNXConnectionVirtualPort))
+
+    @patch_cli
+    def test_get_port_multi_vports(self):
+        port_a5 = self.vnx.get_connection_port(sp=VNXSPEnum.SP_A, port_id=5)
+        assert_that(port_a5, instance_of(VNXConnectionPortList))
+        assert_that(port_a5.existed, equal_to(True))
+        assert_that(len(port_a5), equal_to(3))
+        assert_that(port_a5[0].vport_id, equal_to(0))
+        assert_that(port_a5[0].virtual_port_id, equal_to(0))
+        assert_that(port_a5[1].vport_id, equal_to(1))
+        assert_that(port_a5[1].virtual_port_id, equal_to(1))
+
+    @patch_cli
+    def test_get_single_virtual_port(self):
+        port_a5_1_2 = self.vnx.get_connection_port(
+            sp=VNXSPEnum.SP_A, port_id=5, vport_id=2)
+        assert_that(port_a5_1_2, instance_of(VNXConnectionPort))
+        assert_that(port_a5_1_2.wwn,
+                    equal_to('iqn.1992-04.com.emc:cx.apm00153906536.a5'))
+        assert_that(port_a5_1_2.sp, equal_to(VNXSPEnum.SP_A))
+        assert_that(port_a5_1_2.port_id, equal_to(5))
+        assert_that(port_a5_1_2.virtual_port_id, equal_to(2))
+        assert_that(port_a5_1_2.vport_id, equal_to(2))
+        assert_that(port_a5_1_2.vlan_id, equal_to(3991))
 
     @patch_cli
     def test_is_feature_enabled(self):
@@ -216,7 +246,7 @@ class VNXSystemTest(TestCase):
         port = ports[0]
         assert_that(port.sp, equal_to(VNXSPEnum.SP_B))
         assert_that(port.port_id, equal_to(10))
-        assert_that(port.vport_id, none())
+        assert_that(port.virtual_port_id, none())
 
     @patch_cli
     def test_get_iscsi_port_filtered_no_vport(self):

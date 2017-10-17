@@ -114,6 +114,20 @@ Subnet Mask:  255.255.255.0
 Gateway Address:  0.0.0.0
 Initiator Authentication:  false
 
+Virtual Port ID:  1
+VLAN ID:  3301
+IP Address:  192.168.106.1
+Subnet Mask:  255.255.255.0
+Gateway Address:  0.0.0.0
+Initiator Authentication:  false
+
+Virtual Port ID:  2
+VLAN ID:  3991
+IP Address:  192.168.16.1
+Subnet Mask:  255.255.255.0
+Gateway Address:  0.0.0.0
+Initiator Authentication:  false
+
 SP:  A
 Port ID:  8
 Port WWN:  iqn.1992-04.com.emc:cx.apm00153906536.a8

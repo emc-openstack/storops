@@ -529,8 +529,18 @@ VNXConnectionPort:
     - label: "Flow Control:"
     - label: "Host Window:"
     - label: "Replication Window:"
+    - label: "Available Window Sizes:" # Starts parsing after this key
+      key: virtual_ports
+      converter: VNXConnectionVirtualPortList
+      end_pattern: "(?:SP:|\\Z)"
+
+
+VNXConnectionVirtualPort:
+  data_src: cli
+  properties:
     - label: "Virtual Port ID:"
       converter: to_int
+      is_index: True
     - label: "VLAN ID:"
       converter: to_int
     - label: "IP Address:"

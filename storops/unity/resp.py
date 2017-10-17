@@ -136,3 +136,6 @@ class RestResponse(object):
         ret = job.UnityJob(cli=self._cli)
         ret.update(self.body)
         return ret
+
+
+RESP_OK = RestResponse({})

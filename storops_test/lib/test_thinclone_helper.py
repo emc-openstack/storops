@@ -201,3 +201,13 @@ class TestThinCloneHelper(TestCase):
         self.assertFalse(lun.get_id() in TCHelper._gc_candidates)
         self.assertFalse(base_lun.get_id() in TCHelper._gc_candidates)
         lun_delete.assert_called_once()
+
+    @mock.patch('storops.lib.thinclone_helper.TCHelper._gc_background.put')
+    @patch_rest
+    def test_notify_tc_delete_base_lun(self, mocked_put):
+        base_lun = UnityLun.get(_id='sv_5608', cli=t_rest(version='4.2.0'))
+
+        TCHelper.notify(base_lun, ThinCloneActionEnum.BASE_LUN_DELETE)
+        self.assertTrue(base_lun.get_id() in TCHelper._gc_candidates)
+        mocked_put.assert_called_with(TCHelper._delete_base_lun,
+                                      base_lun=base_lun)

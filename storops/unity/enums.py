@@ -735,6 +735,7 @@ class ThinCloneActionEnum(UnityEnum):
     DD_COPY = (1, 'Copy via dd')
     LUN_ATTACH = (2, 'Attach a base LUN')
     TC_DELETE = (3, 'Delete a thin-cloned LUN')
+    BASE_LUN_DELETE = (4, 'Delete the base LUN of a thin-cloned LUN')
 
 
 class FeatureStateEnum(UnityEnum):

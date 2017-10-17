@@ -18,16 +18,18 @@ from __future__ import unicode_literals
 import logging
 
 import storops.unity.resource.pool
-from storops.exception import UnityResourceNotFoundError
+from storops.exception import UnityBaseHasThinCloneError, \
+    UnityResourceNotFoundError
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
     HostLUNAccessEnum, ThinCloneActionEnum
 from storops.unity.resource import UnityResource, UnityResourceList
+from storops.unity.resource.host import UnityHostList
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.storage_resource import UnityStorageResource
-from storops.unity.resource.host import UnityHostList
+from storops.unity.resp import RESP_OK
 
 __author__ = 'Jay Xu'
 
@@ -190,7 +192,13 @@ class UnityLun(UnityResource):
                                 forceSnapDeletion=force_snap_delete,
                                 forceVvolDeletion=force_vvol_delete,
                                 async=async)
-        resp.raise_if_err()
+        try:
+            resp.raise_if_err()
+        except UnityBaseHasThinCloneError:
+            log.warning('cannot delete the lun: %s, because it is a base lun '
+                        'of a thin-clone.', self.get_id())
+            TCHelper.notify(self, ThinCloneActionEnum.BASE_LUN_DELETE)
+            return RESP_OK
 
         if self.is_thin_clone:
             TCHelper.notify(self, ThinCloneActionEnum.TC_DELETE)

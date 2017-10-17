@@ -15,13 +15,15 @@
 #    under the License.
 
 import logging
-import persistqueue
-
-from persistqueue import Empty
 import threading
 import time
+
+import persistqueue
+from persistqueue import Empty
+
 from storops.exception import StoropsException
-from storops.exception import VNXObjectNotFoundError
+from storops.exception import VNXObjectNotFoundError, \
+    UnityResourceNotFoundError
 
 __author__ = 'Peter Wang'
 
@@ -48,7 +50,7 @@ class PQueue(object):
         return self._q.get(block=block)
 
     def task_done(self):
-            self._q.task_done()
+        self._q.task_done()
 
     def start(self):
         if not self.started:
@@ -84,6 +86,23 @@ class PQueue(object):
             item['retries'] = 1
             self._q.put_nowait(item)
 
+    @staticmethod
+    def _is_ignored_exception(ex):
+        ignored_exceptions = (VNXObjectNotFoundError,
+                              UnityResourceNotFoundError)
+        for ignored in ignored_exceptions:
+            if isinstance(ex, ignored):
+                return True
+        return False
+
+    @staticmethod
+    def _is_reenqueue_exception(ex):
+        reenqueue_exceptions = (StoropsException, )
+        for reenqueue in reenqueue_exceptions:
+            if isinstance(ex, reenqueue):
+                return True
+        return False
+
     def _run_tasks(self):
         while self._interval > 0:
             log.debug("Running periodical check.")
@@ -99,10 +118,10 @@ class PQueue(object):
                     log.debug("Failed to execute {}: {}, this message can be "
                               "safely ignored.".format(method.__name__,
                                                        ex))
-                    if isinstance(ex, VNXObjectNotFoundError):
+                    if self._is_ignored_exception(ex):
                         log.info("Object had been deleted: {}, this message "
                                  "can be safely ignored.".format(ex))
-                    elif isinstance(ex, StoropsException):
+                    elif self._is_reenqueue_exception(ex):
                         # Re-enqueue since failed to execute
                         self.re_enqueue(data)
                     else:

@@ -1015,6 +1015,14 @@
       "response": "sv_5604.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_5605?compact=True",
+      "body": {
+        "forceSnapDeletion": true,
+        "forceVvolDeletion": true
+      },
+      "response": "sv_5605.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_5607?compact=True",
       "body": {
         "forceSnapDeletion": false,

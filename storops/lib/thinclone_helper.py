@@ -29,7 +29,7 @@ log = logging.getLogger(__name__)
 class TCHelper(object):
     _tc_cache = {}
     _gc_candidates = {}
-    _gc_background = {}
+    _gc_background = None
     _GC_INTERVAL = 3600
 
     @staticmethod
@@ -46,9 +46,9 @@ class TCHelper(object):
     @staticmethod
     def clean_up():
         TCHelper._gc_background.stop()
+        TCHelper._gc_background = None
         TCHelper._tc_cache = {}
         TCHelper._gc_candidates = {}
-        TCHelper._gc_background = {}
 
     @staticmethod
     def _compose_thin_clone(cli, name=None, snap=None, description=None,
@@ -98,19 +98,27 @@ class TCHelper(object):
         return UnityLun(cli=cli, _id=resp.resource_id)
 
     @staticmethod
-    def _gc_base_lun(lun_or_snap):
+    def _gc_resources(lun_or_snap):
         lun_or_snap_id = lun_or_snap.get_id()
         if lun_or_snap_id in TCHelper._tc_cache:
             base_lun = TCHelper._tc_cache[lun_or_snap_id]
             log.debug('Found %(id)s in TCHelper cache. Base lun: %(base)s.',
                       {'id': lun_or_snap_id, 'base': base_lun.get_id()})
-            TCHelper._gc_candidates[base_lun.get_id()] = base_lun.get_id()
-            log.debug('Put base lun: %s to gc candidates list.',
-                      base_lun.get_id())
+            TCHelper._gc_base_lun(base_lun)
+
+    @staticmethod
+    def _gc_base_lun(base_lun):
+        TCHelper._gc_candidates[base_lun.get_id()] = base_lun.get_id()
+        log.debug('Put base lun: %s to gc candidates list.',
+                  base_lun.get_id())
+        if TCHelper._gc_background is not None:
             TCHelper._gc_background.put(TCHelper._delete_base_lun,
                                         base_lun=base_lun)
             log.debug('Put base lun: %s to background gc process.',
                       base_lun.get_id())
+        else:
+            log.warning('LUN will not be deleted because background GC thread'
+                        'is not running. Invoke TCHelper.set_up first.')
 
     @staticmethod
     def _delete_thin_clone(thin_clone):
@@ -130,7 +138,8 @@ class TCHelper(object):
     def _delete_base_lun(cls, base_lun):
         if base_lun.get_id() in TCHelper._gc_candidates:
             if base_lun.family_clone_count > 0:
-                # Will re-enter the background gc queue
+                # Raising exception will let the job re-enter the background gc
+                # queue
                 raise exception.UnityBaseHasThinCloneError()
 
             base_lun.delete()
@@ -142,7 +151,7 @@ class TCHelper(object):
     def _update_cache(lun_or_snap, action_enum, *args):
         lun_or_snap_id = lun_or_snap.get_id()
         if action_enum in (ThinCloneActionEnum.DD_COPY,):
-            TCHelper._gc_base_lun(lun_or_snap)
+            TCHelper._gc_resources(lun_or_snap)
             log.debug('Garbage collected for base lun of %(id)s, triggered by '
                       '%(action)s action.',
                       {'id': lun_or_snap_id, 'action': action_enum.name})
@@ -150,13 +159,19 @@ class TCHelper(object):
             log.debug('Cache updated for base lun of %(id)s to %(new)s.',
                       {'id': lun_or_snap_id, 'new': args[0]})
         elif action_enum in (ThinCloneActionEnum.LUN_ATTACH,):
-            TCHelper._gc_base_lun(lun_or_snap)
+            TCHelper._gc_resources(lun_or_snap)
             log.debug('Garbage collected for base lun of %(id)s, triggered by '
                       '%(action)s action.',
                       {'id': lun_or_snap_id, 'action': action_enum.name})
             if lun_or_snap_id in TCHelper._tc_cache:
                 del TCHelper._tc_cache[lun_or_snap_id]
                 log.debug('Removed base lun of %s from cache.', lun_or_snap_id)
+        elif action_enum in (ThinCloneActionEnum.BASE_LUN_DELETE,):
+            # `lun_or_snap` is a base lun here.
+            TCHelper._gc_base_lun(lun_or_snap)
+            log.debug('Garbage collected for base lun of %(id)s, triggered by '
+                      '%(action)s action.',
+                      {'id': lun_or_snap_id, 'action': action_enum.name})
 
     @staticmethod
     def notify(lun_or_snap, action_enum, *args):

@@ -347,8 +347,8 @@ class VNXStorageGroupHBATest(TestCase):
     def test_port_id(self):
         assert_that(test_hba().port_id, equal_to(3))
 
-    def test_vlan(self):
-        assert_that(test_hba().vlan, equal_to(1))
+    def test_vport_id(self):
+        assert_that(test_hba().vport_id, equal_to(1))
 
     def test_port_type(self):
         assert_that(test_hba().port_type,

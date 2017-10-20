@@ -161,18 +161,14 @@ class VNXStorageGroupTest(TestCase):
     @patch_cli
     def test_get_sg_os01(self):
         sg = VNXStorageGroup(name='os01', cli=t_cli())
-        assert_that(len(sg.hba_sp_pairs), equal_to(1))
+        # The hba pare is incomplete, should be 0
+        assert_that(len(sg.hba_sp_pairs), equal_to(0))
         assert_that(sg.hba_sp_pairs, instance_of(VNXStorageGroupHBAList))
-        hba = sg.hba_sp_pairs[0]
-        assert_that(hba.sp, equal_to(VNXSPEnum.SP_A))
-        assert_that(hba.uid,
-                    equal_to('iqn.1993-08.org.debian:01:95bbe389e025'))
-        assert_that(hba.port_id, equal_to(4))
 
     @patch_cli
     def test_initiator_uid_list(self):
         sg = get_sg('microsoft')
-        assert_that(len(sg.initiator_uid_list), equal_to(2))
+        assert_that(len(sg.initiator_uid_list), equal_to(1))
         assert_that(sg.initiator_uid_list,
                     has_item('iqn.1991-05.com.microsoft:abc.def.dev'))
 
@@ -221,6 +217,13 @@ class VNXStorageGroupTest(TestCase):
         assert_that(len(ports), equal_to(6))
         for port in ports:
             assert_that(port.host_initiator_list, has_item(wwn))
+
+    @patch_cli
+    def test_get_ports_by_iqn(self):
+        iqn = 'iqn.2005-03.org.open-iscsi:bdbc466e1af3'
+        ubuntu16 = get_sg('ubuntu16')
+        ports = ubuntu16.get_ports(iqn)
+        assert_that(len(ports), equal_to(3))
 
     @patch_cli
     def test_get_ports_no_wwn(self):

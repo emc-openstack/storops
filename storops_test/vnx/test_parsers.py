@@ -217,7 +217,7 @@ class VNXStorageGroupParserTest(TestCase):
         assert_that(sg.alu_hlu_map.get(3, None), none())
 
         # assert for hba members
-        assert_that(len(sg.hba_sp_pairs), equal_to(3))
+        assert_that(len(sg.hba_sp_pairs), equal_to(2))
         hba = sg.hba_sp_pairs[0]
         assert_that(hba.host_name, equal_to('abc.def.dev'))
 

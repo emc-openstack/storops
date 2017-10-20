@@ -247,7 +247,7 @@ class VNXHbaPort(VNXPort):
     @staticmethod
     def from_storage_group_hba(sg_hba):
         port = VNXHbaPort.create(sg_hba.sp, sg_hba.port_id,
-                                 vport_id=sg_hba.vlan)
+                                 vport_id=sg_hba.vport_id)
         port._host_initiator_list.append(sg_hba.hba[0])
         return port
 
@@ -260,6 +260,11 @@ class VNXHbaPort(VNXPort):
     def property_names(self):
         return ['sp', 'port_id', 'vport_id', 'type',
                 'host_initiator_list']
+
+    def __hash__(self):
+        return hash('<VNXPort {{sp: {}, port_id: {}, vport_id: {}}}'
+                    .format(self.sp, self.port_id,
+                            self.vport_id if self.vport_id else None))
 
 
 class VNXConnectionPortList(VNXCliResourceList):
@@ -381,8 +386,19 @@ class VNXStorageGroupHBA(VNXPort):
     def uid(self):
         return self.hba[0]
 
+    # @property
+    # def vlan(self):
+    #     sp_port = self.sp_port
+    #     ret = None
+    #
+    #     if self.type == VNXPortType.ISCSI:
+    #         # vport only valid for iSCSI
+    #         if sp_port is not None and 'v' in sp_port:
+    #             ret = int(sp_port[sp_port.find('v') + 1:])
+    #     return ret
+
     @property
-    def vlan(self):
+    def vport_id(self):
         sp_port = self.sp_port
         ret = None
 
@@ -391,10 +407,6 @@ class VNXStorageGroupHBA(VNXPort):
             if sp_port is not None and 'v' in sp_port:
                 ret = int(sp_port[sp_port.find('v') + 1:])
         return ret
-
-    @property
-    def vport_id(self):
-        return self.vlan
 
     @property
     def port_type(self):

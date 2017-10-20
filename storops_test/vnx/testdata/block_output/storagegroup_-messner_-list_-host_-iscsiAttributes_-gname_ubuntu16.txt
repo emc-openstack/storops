@@ -1,0 +1,28 @@
+Storage Group Name:    ubuntu16
+Storage Group UID:     F8:01:E8:34:9C:6B:E7:11:87:54:80:93:0D:9B:3E:61
+HBA/SP Pairs:
+
+  HBA UID                                          SP Name     SPPort
+  -------                                          -------     ------
+  iqn.2005-03.org.open-iscsi:bdbc466e1af3           SP A         12
+Host name:             ubuntu16
+SPPort:                A-12v0
+Initiator IP:          192.168.3.30
+TPGT:                  3
+ISID:                  43D0200
+
+  iqn.2005-03.org.open-iscsi:bdbc466e1af3           SP B         12
+Host name:             ubuntu16
+SPPort:                B-12v0
+Initiator IP:          192.168.3.30
+TPGT:                  4
+ISID:                  13D0200
+
+  iqn.2005-03.org.open-iscsi:bdbc466e1af3           SP B         12
+Host name:             ubuntu16
+SPPort:                B-12v1
+Initiator IP:          N/A
+TPGT:                  5
+ISID:                  N/A
+
+Shareable:             YES

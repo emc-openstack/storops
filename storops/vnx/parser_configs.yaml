@@ -501,6 +501,7 @@ VNXStorageGroupHBA:
       key: hba
     - label: "Host name:"
     - label: "SPPort:"
+      is_index: True
     - label: "Initiator IP:"
     - label: "TPGT:"
     - label: "ISID:"

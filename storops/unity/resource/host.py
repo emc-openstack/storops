@@ -208,7 +208,7 @@ class UnityHost(UnityResource):
         except ex.UnityAttachExceedLimitError:
             # The number of luns exceeds system limit
             raise
-        except:
+        except: # noqa
             # other attach error, remove this lun if already attached
             self.detach(lun_or_snap)
             raise
@@ -227,7 +227,7 @@ class UnityHost(UnityResource):
         except ex.UnityAttachAluExceedLimitError:
             # The number of luns exceeds system limit
             raise
-        except:
+        except: # noqa
             # other attach error, remove this lun if already attached
             self.detach_alu(lun)
             raise

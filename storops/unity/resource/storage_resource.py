@@ -67,7 +67,7 @@ class UnityConsistencyGroup(UnityResource):
             resp.raise_if_err()
         except UnityStorageResourceNameInUseError:
             raise UnityConsistencyGroupNameInUseError()
-        except:
+        except: # noqa
             raise
 
         return UnityConsistencyGroup(_id=resp.resource_id, cli=cli)

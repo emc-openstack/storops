@@ -253,7 +253,7 @@ def check_nas_cmd_error(output, default=None):
     except VNXNasCommandNoError:
         # meaning no error
         pass
-    except:
+    except: # noqa
         # re-raise the error
         raise
 

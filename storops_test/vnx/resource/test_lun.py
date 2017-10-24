@@ -56,66 +56,66 @@ class VNXLunTest(TestCase):
     @patch_cli
     def test_lun_properties(self):
         wwn = '60:06:01:60:12:60:3D:00:95:63:38:87:9D:69:E5:11'
-        l = VNXLun(lun_id=3, cli=t_cli())
-        assert_that(l.state, equal_to('Ready'))
-        assert_that(l.wwn, equal_to(wwn))
-        assert_that(l.status, equal_to('OK(0x0)'))
-        assert_that(l.operation, equal_to('None'))
-        assert_that(l.total_capacity_gb, equal_to(500.0))
-        assert_that(l.current_owner, equal_to(VNXSPEnum.SP_A))
-        assert_that(l.default_owner, equal_to(VNXSPEnum.SP_A))
-        assert_that(l.attached_snapshot, none())
-        assert_that(l.lun_id, equal_to(3))
-        assert_that(l.name, equal_to('File_CS0_21132_0_d7'))
-        assert_that(l.pool_name, equal_to('Pool4File'))
-        assert_that(l.is_thin_lun, equal_to(True))
-        assert_that(l.is_compressed, equal_to(False))
-        assert_that(l.is_dedup, equal_to(False))
-        assert_that(l.initial_tier, equal_to('Optimize Pool'))
-        assert_that(l.tiering_policy, none())
-        assert_that(l.is_private, equal_to(False))
-        assert_that(l.user_capacity_gbs, equal_to(500.0))
-        assert_that(l.consumed_capacity_gbs, equal_to(512.249))
-        assert_that(len(l.snapshot_mount_points), equal_to(0))
-        assert_that(l.primary_lun, none())
-        assert_that(l.raid_type, equal_to(VNXPoolRaidType.RAID_MIXED))
+        lun = VNXLun(lun_id=3, cli=t_cli())
+        assert_that(lun.state, equal_to('Ready'))
+        assert_that(lun.wwn, equal_to(wwn))
+        assert_that(lun.status, equal_to('OK(0x0)'))
+        assert_that(lun.operation, equal_to('None'))
+        assert_that(lun.total_capacity_gb, equal_to(500.0))
+        assert_that(lun.current_owner, equal_to(VNXSPEnum.SP_A))
+        assert_that(lun.default_owner, equal_to(VNXSPEnum.SP_A))
+        assert_that(lun.attached_snapshot, none())
+        assert_that(lun.lun_id, equal_to(3))
+        assert_that(lun.name, equal_to('File_CS0_21132_0_d7'))
+        assert_that(lun.pool_name, equal_to('Pool4File'))
+        assert_that(lun.is_thin_lun, equal_to(True))
+        assert_that(lun.is_compressed, equal_to(False))
+        assert_that(lun.is_dedup, equal_to(False))
+        assert_that(lun.initial_tier, equal_to('Optimize Pool'))
+        assert_that(lun.tiering_policy, none())
+        assert_that(lun.is_private, equal_to(False))
+        assert_that(lun.user_capacity_gbs, equal_to(500.0))
+        assert_that(lun.consumed_capacity_gbs, equal_to(512.249))
+        assert_that(len(lun.snapshot_mount_points), equal_to(0))
+        assert_that(lun.primary_lun, none())
+        assert_that(lun.raid_type, equal_to(VNXPoolRaidType.RAID_MIXED))
 
     @patch_cli
     def test_lun_perf_counters(self):
-        l = VNXLun(lun_id=3, cli=t_cli())
-        assert_that(l.read_requests, equal_to(1))
-        assert_that(l.read_requests_sp_a, equal_to(2))
-        assert_that(l.read_requests_sp_b, equal_to(3))
-        assert_that(l.write_requests, equal_to(4))
-        assert_that(l.write_requests_sp_a, equal_to(5))
-        assert_that(l.write_requests_sp_b, equal_to(6))
-        assert_that(l.blocks_read, equal_to(7))
-        assert_that(l.blocks_read_sp_a, equal_to(8))
-        assert_that(l.blocks_read_sp_b, equal_to(9))
-        assert_that(l.blocks_written, equal_to(10))
-        assert_that(l.blocks_written_sp_a, equal_to(11))
-        assert_that(l.blocks_written_sp_b, equal_to(12))
-        assert_that(l.busy_ticks, equal_to(13))
-        assert_that(l.busy_ticks_sp_a, equal_to(14))
-        assert_that(l.busy_ticks_sp_b, equal_to(15))
-        assert_that(l.idle_ticks, equal_to(16))
-        assert_that(l.idle_ticks_sp_a, equal_to(17))
-        assert_that(l.idle_ticks_sp_b, equal_to(18))
-        assert_that(l.sum_of_outstanding_requests, equal_to(19))
-        assert_that(l.sum_of_outstanding_requests_sp_a, equal_to(20))
-        assert_that(l.sum_of_outstanding_requests_sp_b, equal_to(21))
-        assert_that(l.non_zero_request_count_arrivals, equal_to(22))
-        assert_that(l.non_zero_request_count_arrivals_sp_a, equal_to(23))
-        assert_that(l.non_zero_request_count_arrivals_sp_b, equal_to(24))
-        assert_that(l.implicit_trespasses, equal_to(25))
-        assert_that(l.implicit_trespasses_sp_a, equal_to(26))
-        assert_that(l.implicit_trespasses_sp_b, equal_to(27))
-        assert_that(l.explicit_trespasses, equal_to(28))
-        assert_that(l.explicit_trespasses_sp_a, equal_to(29))
-        assert_that(l.explicit_trespasses_sp_b, equal_to(30))
-        assert_that(l.extreme_performance, equal_to(1.96))
-        assert_that(l.performance, equal_to(5.68))
-        assert_that(l.capacity, equal_to(92.37))
+        lun = VNXLun(lun_id=3, cli=t_cli())
+        assert_that(lun.read_requests, equal_to(1))
+        assert_that(lun.read_requests_sp_a, equal_to(2))
+        assert_that(lun.read_requests_sp_b, equal_to(3))
+        assert_that(lun.write_requests, equal_to(4))
+        assert_that(lun.write_requests_sp_a, equal_to(5))
+        assert_that(lun.write_requests_sp_b, equal_to(6))
+        assert_that(lun.blocks_read, equal_to(7))
+        assert_that(lun.blocks_read_sp_a, equal_to(8))
+        assert_that(lun.blocks_read_sp_b, equal_to(9))
+        assert_that(lun.blocks_written, equal_to(10))
+        assert_that(lun.blocks_written_sp_a, equal_to(11))
+        assert_that(lun.blocks_written_sp_b, equal_to(12))
+        assert_that(lun.busy_ticks, equal_to(13))
+        assert_that(lun.busy_ticks_sp_a, equal_to(14))
+        assert_that(lun.busy_ticks_sp_b, equal_to(15))
+        assert_that(lun.idle_ticks, equal_to(16))
+        assert_that(lun.idle_ticks_sp_a, equal_to(17))
+        assert_that(lun.idle_ticks_sp_b, equal_to(18))
+        assert_that(lun.sum_of_outstanding_requests, equal_to(19))
+        assert_that(lun.sum_of_outstanding_requests_sp_a, equal_to(20))
+        assert_that(lun.sum_of_outstanding_requests_sp_b, equal_to(21))
+        assert_that(lun.non_zero_request_count_arrivals, equal_to(22))
+        assert_that(lun.non_zero_request_count_arrivals_sp_a, equal_to(23))
+        assert_that(lun.non_zero_request_count_arrivals_sp_b, equal_to(24))
+        assert_that(lun.implicit_trespasses, equal_to(25))
+        assert_that(lun.implicit_trespasses_sp_a, equal_to(26))
+        assert_that(lun.implicit_trespasses_sp_b, equal_to(27))
+        assert_that(lun.explicit_trespasses, equal_to(28))
+        assert_that(lun.explicit_trespasses_sp_a, equal_to(29))
+        assert_that(lun.explicit_trespasses_sp_b, equal_to(30))
+        assert_that(lun.extreme_performance, equal_to(1.96))
+        assert_that(lun.performance, equal_to(5.68))
+        assert_that(lun.capacity, equal_to(92.37))
 
     @patch_cli
     def test_lun_state_properties(self):
@@ -368,40 +368,40 @@ class VNXLunTest(TestCase):
 
     @patch_cli
     def test_change_name(self):
-        l = VNXLun(name='m1', cli=t_cli())
-        l.name = 'l1'
-        assert_that(l.name, equal_to('l1'))
+        lun = VNXLun(name='m1', cli=t_cli())
+        lun.name = 'l1'
+        assert_that(lun.name, equal_to('l1'))
 
     @patch_cli
     def test_change_name_not_found(self):
         def f():
-            l = VNXLun(lun_id=4000, cli=t_cli())
-            l.name = 'l1'
+            lun = VNXLun(lun_id=4000, cli=t_cli())
+            lun.name = 'l1'
 
         assert_that(f, raises(VNXLunNotFoundError, 'may not exist'))
 
     @patch_cli
     def test_change_name_failed(self):
-        l = VNXLun(name='l1', cli=t_cli())
+        lun = VNXLun(name='l1', cli=t_cli())
         try:
-            l.name = 'l3'
+            lun.name = 'l3'
             self.fail('should have raised an exception.')
         except VNXNameInUseError:
-            assert_that(l._get_name(), equal_to('l1'))
+            assert_that(lun._get_name(), equal_to('l1'))
 
     @patch_cli
     def test_change_tier(self):
         def f():
-            l = VNXLun(lun_id=4000, cli=t_cli())
-            l.tier = VNXTieringEnum.LOW
+            lun = VNXLun(lun_id=4000, cli=t_cli())
+            lun.tier = VNXTieringEnum.LOW
 
         assert_that(f, raises(VNXLunNotFoundError, 'may not exist'))
 
     @patch_cli
     def test_expand_too_large(self):
         def f():
-            l = VNXLun(lun_id=0, cli=t_cli())
-            l.expand(999999)
+            lun = VNXLun(lun_id=0, cli=t_cli())
+            lun.expand(999999)
 
         assert_that(f, raises(VNXLunExtendError,
                               'capacity specified is not supported'))
@@ -409,8 +409,8 @@ class VNXLunTest(TestCase):
     @patch_cli
     def test_expand_file_lun(self):
         def f():
-            l = VNXLun(lun_id=1, cli=t_cli())
-            l.expand(500)
+            lun = VNXLun(lun_id=1, cli=t_cli())
+            lun.expand(500)
 
         assert_that(f, raises(VNXLunExtendError,
                               'affect a File System Storage'))
@@ -418,8 +418,8 @@ class VNXLunTest(TestCase):
     @patch_cli
     def test_expand_too_small(self):
         def f():
-            l = VNXLun(lun_id=1, cli=t_cli())
-            l.expand(1)
+            lun = VNXLun(lun_id=1, cli=t_cli())
+            lun.expand(1)
 
         assert_that(f, raises(VNXLunExpandSizeError,
                               'greater than current LUN size'))
@@ -427,8 +427,8 @@ class VNXLunTest(TestCase):
     @patch_cli
     def test_expand_preparing(self):
         def f():
-            l = VNXLun(lun_id=1, cli=t_cli())
-            l.expand(12)
+            lun = VNXLun(lun_id=1, cli=t_cli())
+            lun.expand(12)
 
         assert_that(f, raises(VNXLunPreparingError,
                               "is 'Preparing"))
@@ -561,15 +561,15 @@ class VNXLunTest(TestCase):
 
     @patch_cli
     def test_delete_lun_has_smp_force(self):
-        l = VNXLun(lun_id=196, cli=t_cli())
+        lun = VNXLun(lun_id=196, cli=t_cli())
         # no error raised
-        l.delete(force=True)
+        lun.delete(force=True)
 
     @patch_cli
     def test_delete_lun_has_migration(self):
         def f():
-            l = VNXLun(name='lun_in_migration', cli=t_cli())
-            l.delete()
+            lun = VNXLun(name='lun_in_migration', cli=t_cli())
+            lun.delete()
 
         assert_that(f, raises(VNXLunUsedByFeatureError,
                               'Cannot unbind LUN'))
@@ -604,26 +604,26 @@ class VNXLunTest(TestCase):
 
     @patch_cli
     def test_create_mirror_view(self):
-        l = VNXLun(lun_id=245, cli=t_cli())
-        mv = l.create_mirror_view('mv0')
+        lun = VNXLun(lun_id=245, cli=t_cli())
+        mv = lun.create_mirror_view('mv0')
         assert_that(mv.state, equal_to('Active'))
 
     @patch_cli
     def test_get_source_mirror_view(self):
-        l = self.get_lun()
-        assert_that(len(l.get_mirror_view(as_src=True)), equal_to(1))
+        lun = self.get_lun()
+        assert_that(len(lun.get_mirror_view(as_src=True)), equal_to(1))
 
     @patch_cli
     def test_get_target_mirror_view(self):
-        l = self.get_lun()
-        assert_that(len(l.get_mirror_view(as_tgt=True)), equal_to(2))
+        lun = self.get_lun()
+        assert_that(len(lun.get_mirror_view(as_tgt=True)), equal_to(2))
 
     @patch_cli
     def test_get_mirror_view_all(self):
-        l = self.get_lun()
-        assert_that(len(l.get_mirror_view(as_src=True, as_tgt=True)),
+        lun = self.get_lun()
+        assert_that(len(lun.get_mirror_view(as_src=True, as_tgt=True)),
                     equal_to(3))
-        assert_that(len(l.get_mirror_view()), equal_to(3))
+        assert_that(len(lun.get_mirror_view()), equal_to(3))
 
     @patch_cli
     def test_force_delete_lun_not_found(self):

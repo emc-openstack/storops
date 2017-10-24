@@ -1,0 +1,4 @@
+Reply from 192.168.1.50:  bytes=32 time=140ms TTL=30
+Reply from 192.168.1.50:  bytes=32 time=1ms TTL=30
+Reply from 192.168.1.50:  bytes=32 time=61ms TTL=30
+Reply from 192.168.1.50:  bytes=32 time=1ms TTL=30

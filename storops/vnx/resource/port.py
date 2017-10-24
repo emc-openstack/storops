@@ -29,22 +29,9 @@ class VNXPort(VNXCliResource):
 
     Include the basic property like sp, port_id and vport_id.
     """
-
-    @property
-    def sp(self):
-        return VNXSPEnum.parse(self._get_property('_sp'))
-
-    @property
-    def port_id(self):
-        return self._get_property('_port_id')
-
     @property
     def vport_id(self):
         return self._get_property('_vport_id')
-
-    @property
-    def wwn(self):
-        return self._get_property('_wwn')
 
     @property
     @instance_cache
@@ -58,10 +45,7 @@ class VNXPort(VNXCliResource):
 
     @property
     def display_name(self):
-        items = [self.sp.display_name, str(self.port_id)]
-        if self.vport_id is not None:
-            items.append(str(self.vport_id))
-        return '-'.join(items)
+        return self.index.replace('_', '-')
 
     @classmethod
     def delete_hba(cls, cli, hba_uid):
@@ -104,6 +88,46 @@ class VNXPort(VNXCliResource):
         ret &= self.vport_id == o_vport_id
 
         return ret
+
+    def ping_node(self, address, packet_size=None, count=None, timeout=None,
+                  delay=None):
+        out = self._cli.ping_node(address=address,
+                                  sp=self.sp,
+                                  port_id=self.port_id,
+                                  vport_id=self.virtual_port_id,
+                                  packet_size=packet_size,
+                                  count=count,
+                                  timeout=timeout,
+                                  delay=delay)
+        try:
+            raise_if_err(out, default=VNXPingNodeError)
+        except VNXPingNodeSuccess:
+            # ping success, pass
+            pass
+
+    def config_ip(self, ip, mask, gateway, vport_id=None, vlan_id=None):
+        if self.type != VNXPortType.ISCSI:
+            raise TypeError('configure IP only works for iSCSI ports.')
+        if vport_id is None:
+            vport_id = self.vport_id
+
+        out = self._cli.config_iscsi_ip(
+            self.sp, self.port_id, ip, mask, gateway, vport_id=vport_id,
+            vlan_id=vlan_id)
+        raise_if_err(out, default=VNXPortError)
+
+        if vport_id is None:
+            vport_id = 0
+        return VNXConnectionPort(self.sp, self.port_id, vport_id, self._cli)
+
+    def delete_ip(self, vport_id=None):
+        if self.type != VNXPortType.ISCSI:
+            raise TypeError('delete IP only works for iSCSI ports.')
+        if vport_id is None:
+            vport_id = self.vport_id
+
+        out = self._cli.delete_iscsi_ip(self.sp, self.port_id, vport_id)
+        raise_if_err(out, default=VNXPortError)
 
 
 class VNXSPPortList(VNXCliResourceList):
@@ -390,7 +414,6 @@ class VNXConnectionPort(VNXPort):
 
     @property
     def initiator_authentication(self):
-        # port = self._get_uniq_virtual_port()
         return self._get_virtual_port_prop('initiator_authentication')
 
     @classmethod
@@ -401,13 +424,14 @@ class VNXConnectionPort(VNXPort):
             ret = VNXConnectionPort(sp, port_id, vport_id, cli)
             if port_type is not None and ret.type != port_type:
                 ret = None
+
         else:
             ret = VNXConnectionPortList(cli, sp, port_id, vport_id, port_type,
                                         has_ip)
         return ret
 
 
-class VNXConnectionVirtualPort(VNXCliResource):
+class VNXConnectionVirtualPort(VNXPort):
     def __init__(self, sp=None, port_id=None, vport_id=None, cli=None):
         super(VNXConnectionVirtualPort, self).__init__()
         self._sp = sp
@@ -426,53 +450,6 @@ class VNXConnectionVirtualPort(VNXCliResource):
                     'iscsi_alias', 'port_id', 'port_speed',
                     'replication_window', 'sp', 'wwn', 'type'])
         return ret
-
-    def ping_node(self, address, packet_size=None, count=None, timeout=None,
-                  delay=None):
-        out = self._cli.ping_node(address=address,
-                                  sp=self.sp,
-                                  port_id=self.port_id,
-                                  vport_id=self.virtual_port_id,
-                                  packet_size=packet_size,
-                                  count=count,
-                                  timeout=timeout,
-                                  delay=delay)
-        try:
-            raise_if_err(out, default=VNXPingNodeError)
-        except VNXPingNodeSuccess:
-            # ping success, pass
-            pass
-
-    def config_ip(self, ip, mask, gateway, vport_id=None, vlan_id=None):
-        if self.type != VNXPortType.ISCSI:
-            raise TypeError('configure IP only works for iSCSI ports.')
-        if vport_id is None:
-            vport_id = self.virtual_port_id
-
-        out = self._cli.config_iscsi_ip(
-            self.sp, self.port_id, ip, mask, gateway, vport_id=vport_id,
-            vlan_id=vlan_id)
-        raise_if_err(out, default=VNXPortError)
-
-        if vport_id is None:
-            vport_id = 0
-        return VNXConnectionPort(self.sp, self.port_id, vport_id, self._cli)
-
-    def delete_ip(self, vport_id=None):
-        if self.type != VNXPortType.ISCSI:
-            raise TypeError('delete IP only works for iSCSI ports.')
-        if vport_id is None:
-            vport_id = self.virtual_port_id
-
-        out = self._cli.delete_iscsi_ip(self.sp, self.port_id, vport_id)
-        raise_if_err(out, default=VNXPortError)
-
-    @property
-    def display_name(self):
-        items = [self.sp.display_name, str(self.port_id)]
-        if self.vport_id is not None:
-            items.append(str(self.vport_id))
-        return '-'.join(items)
 
 
 class VNXConnectionVirtualPortList(VNXCliResourceList):

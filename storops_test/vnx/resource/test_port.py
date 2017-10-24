@@ -63,7 +63,6 @@ class VNXSPPortTest(TestCase):
         port = VNXSPPort.get(t_cli(), VNXSPEnum.SP_A, 0)[0]
         assert_that(port.sp, equal_to(VNXSPEnum.SP_A))
         assert_that(port.port_id, equal_to(0))
-        assert_that(port.vport_id, none())
         assert_that(port.index, equal_to('A_0'))
         assert_that(port.wwn, equal_to(
             '50:06:01:60:B6:E0:16:81:50:06:01:60:36:E0:16:81'))
@@ -258,7 +257,7 @@ class VNXConnectionPortTest(TestCase):
         assert_that(len(ports), equal_to(4))
 
     @patch_cli
-    def test_get_single(self):
+    def test_get_by_sp_port_id(self):
         ports = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 4)
         assert_that(len(ports), equal_to(1))
         port = ports[0]
@@ -266,6 +265,14 @@ class VNXConnectionPortTest(TestCase):
         assert_that(port.sp, equal_to(VNXSPEnum.SP_A))
         assert_that(port.virtual_port_id, equal_to(0))
         assert_that(port.vport_id, equal_to(0))
+
+    @patch_cli
+    def test_get_single(self):
+        port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 5, 2)
+        assert_that(port.port_id, equal_to(5))
+        assert_that(port.sp, equal_to(VNXSPEnum.SP_A))
+        assert_that(port.virtual_port_id, equal_to(2))
+        assert_that(port.vport_id, equal_to(2))
 
     @patch_cli
     def test_get_port_not_found(self):
@@ -329,7 +336,7 @@ class VNXConnectionPortTest(TestCase):
 
     @patch_cli
     def test_port_display_name(self):
-        port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 9, 0)
+        port = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A, 5, 0)
         assert_that('A-10-0', port.display_name)
 
 

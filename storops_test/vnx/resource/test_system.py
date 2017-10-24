@@ -261,6 +261,13 @@ class VNXSystemTest(TestCase):
         assert_that(len(ports), equal_to(4))
 
     @patch_cli
+    def test_ping_node(self):
+        port = self.vnx.get_iscsi_port(sp=VNXSPEnum.SP_A, port_id=5,
+                                       vport_id=2)
+        port.ping_node('192.168.1.50')
+        assert_that('A-5-2', port.display_name)
+
+    @patch_cli
     def test_get_fcoe_port_all(self):
         ports = self.vnx.get_fcoe_port()
         assert_that(ports, instance_of(VNXConnectionPortList))

@@ -844,7 +844,7 @@ VNXRaidGroup:
     - label: "Lun Expansion enabled:"
       converter: to_bool
     - label: "Legal RAID types:"
-      converter: to_raid_type
+      converter: to_raid_type_list
 
 
 VNXBlockUser:

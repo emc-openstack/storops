@@ -261,6 +261,7 @@ class VNXRaidType(VNXEnum):
     RAID6 = 'r6'
     RAID10 = 'r1_0'
     HOTSPARE = 'hot_spare'
+    UNBOUND = 'Unbound'
 
 
 class VNXPoolRaidType(VNXEnum):

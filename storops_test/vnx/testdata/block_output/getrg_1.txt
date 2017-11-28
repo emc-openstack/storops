@@ -1,0 +1,21 @@
+RaidGroup ID:                              0
+RaidGroup Type:                            Unbound
+RaidGroup State:                           Explicit_Remove
+                                           Valid_luns
+List of disks:                             Bus 0 Enclosure 1  Disk 8
+                                           Bus 0 Enclosure 1  Disk 2
+                                           Bus 0 Enclosure 1  Disk 1
+                                           Bus 0 Enclosure 1  Disk 0
+List of luns:                              Not Available
+Max Number of disks:                       16
+Max Number of luns:                        256
+Raw Capacity (Blocks):                     4490706944
+Logical Capacity (Blocks):                 4490706944
+Free Capacity (Blocks,non-contiguous):     4490706944
+Free contiguous group of unbound segments: 4490706944
+Defrag/Expand priority:                    Medium
+Percent defragmented:                      100
+Percent expanded:                          N/A
+Disk expanding onto:                       N/A
+Lun Expansion enabled:                     NO
+Legal RAID types:                          r5 r6 r0 r1_0

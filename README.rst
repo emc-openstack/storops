@@ -135,6 +135,7 @@ Feature List
 - Manage Unity System
     - supported resources
         - show system properties
+        - show system capacity
         - list/create/delete storage pools
         - list/create/delete remote hosts
         - list/create/delete host initiator
@@ -148,13 +149,22 @@ Feature List
         - list/create/delete NFS shares
         - list/create/delete DNS servers
         - list ip ports
+        - list sas ports
         - list/create/delete iSCSI portals
         - list/create/delete link aggregations
         - list/create/delete Consistency Groups
         - list/create/delete metric real time query
         - list metrics query result
         - list disks
+        - list disk groups
         - list/create/delete tenants
+        - list batteries
+        - list daes
+        - list fans
+        - list memory modules
+        - list management interfaces
+        - list power supplies
+        - list ssds
     - supported feature/operations
         - CIFS share access control
         - NFS share access control
@@ -162,27 +172,43 @@ Feature List
         - Persist historical metric data to csv files
         - Upload license
     - supported metrics
+        - system
+            - read/write/total IOPS
+            - read/write/total bandwidth
         - disk
-            - read/write IOPS
-            - read/write bandwidth
+            - read/write/total IOPS
+            - read/write/total bandwidth
             - utilization
+            - response time
+            - queue length
         - lun
-            - read/write IOPS
-            - read/write bandwidth
+            - read/write/total IOPS
+            - read/write/total bandwidth
             - utilization
+            - response time
+            - queue length
         - filesystem
             - read/write IOPS
             - read/write bandwidth
         - storage processor
             - net in/out bandwidth
-            - block read/write IOPS
-            - block read/write bandwidth
+            - block read/write/total IOPS
+            - block read/write/total bandwidth
             - CIFS read/write IOPS
             - CIFS read/write bandwidth
             - NFS read/write IOPS
             - NFS read/write bandwidth
             - utilization
             - block cache read/write hit ratio
+            - block cache dirty size
+            - fast cache read/write hits
+            - fast cache read/write hit rate
+        - fc port
+            - read/write/total IOPS
+            - read/write/total bandwidth
+        - iscsi node
+            - read/write/total IOPS
+            - read/write/total bandwidth
 
 Tutorial
 --------

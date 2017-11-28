@@ -131,7 +131,7 @@ Lun Expansion enabled:                     NO
 Legal RAID types:                          r5
 
 RaidGroup ID:                              6
-RaidGroup Type:                            r5
+RaidGroup Type:                            Unbound
 RaidGroup State:                           Valid_luns
 List of disks:                             Bus 0 Enclosure 0  Disk 15
                                            Bus 0 Enclosure 0  Disk 14
@@ -149,6 +149,6 @@ Percent defragmented:                      N/A
 Percent expanded:                          N/A
 Disk expanding onto:                       N/A
 Lun Expansion enabled:                     NO
-Legal RAID types:                          r5
+Legal RAID types:                          r5 r6 r0 r1_0
 
 

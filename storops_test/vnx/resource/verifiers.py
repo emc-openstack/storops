@@ -67,7 +67,17 @@ def verify_raid0(rg):
     assert_that(rg.percent_expanded, none())
     assert_that(rg.disk_expanding_onto, equal_to('N/A'))
     assert_that(rg.lun_expansion_enabled, equal_to(False))
-    assert_that(rg.legal_raid_types, equal_to(VNXRaidType.RAID5))
+    assert_that(rg.legal_raid_types[0], equal_to(VNXRaidType.RAID5))
+
+
+def verify_raid_1(rg):
+    assert_that(rg.raid_group_id, equal_to(0))
+    assert_that(rg.raid_group_type, equal_to(VNXRaidType.UNBOUND))
+    assert_that(len(rg.legal_raid_types), equal_to(4))
+    assert_that(rg.legal_raid_types[0], equal_to(VNXRaidType.RAID5))
+    assert_that(rg.legal_raid_types[1], equal_to(VNXRaidType.RAID6))
+    assert_that(rg.legal_raid_types[2], equal_to(VNXRaidType.RAID0))
+    assert_that(rg.legal_raid_types[3], equal_to(VNXRaidType.RAID10))
 
 
 def verify_pool_0(pool):

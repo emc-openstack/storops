@@ -220,6 +220,10 @@ to_port_type = _to_enum(enums.VNXPortType)
 to_migration_rate_enum = _to_enum(enums.VNXMigrationRate)
 
 
+def to_raid_type_list(value):
+    return [to_raid_type(x) for x in value.split()]
+
+
 def boolean_to_str(value, true_str='true', false_str='false'):
     if value:
         ret = true_str

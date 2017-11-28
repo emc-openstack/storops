@@ -15,13 +15,14 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from datetime import datetime
 from unittest import TestCase
 
-from datetime import datetime
 from hamcrest import assert_that, equal_to, none, has_items, instance_of, \
     only_contains, raises
 
 from storops.lib import converter
+from storops.vnx.enums import VNXRaidType
 
 __author__ = 'Cedric Zhuang'
 
@@ -246,6 +247,7 @@ class ConverterTest(TestCase):
     def test_from_minite_str_lt_60(self):
         def conv():
             converter.from_minute(70)
+
         assert_that(conv, raises(ValueError))
 
     def test_from_hour_str(self):
@@ -255,4 +257,14 @@ class ConverterTest(TestCase):
     def test_from_hour_str_lt_24(self):
         def conv():
             converter.from_hour(25)
+
         assert_that(conv, raises(ValueError))
+
+    def test_to_raid_type_list(self):
+        r = converter.to_raid_type_list('')
+        assert_that(len(r), equal_to(0))
+        r = converter.to_raid_type_list('r1 r1_0 hot_spare Unbound')
+        assert_that(r[0], equal_to(VNXRaidType.RAID1))
+        assert_that(r[1], equal_to(VNXRaidType.RAID10))
+        assert_that(r[2], equal_to(VNXRaidType.HOTSPARE))
+        assert_that(r[3], equal_to(VNXRaidType.UNBOUND))

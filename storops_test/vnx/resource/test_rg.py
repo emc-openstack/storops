@@ -20,7 +20,7 @@ from unittest import TestCase
 from hamcrest import assert_that, equal_to, raises, instance_of
 
 from storops_test.vnx.cli_mock import patch_cli, t_cli
-from storops_test.vnx.resource.verifiers import verify_raid0
+from storops_test.vnx.resource.verifiers import verify_raid0, verify_raid_1
 from storops.exception import VNXCreateRaidGroupError, \
     VNXDeleteRaidGroupError
 from storops.vnx.resource.disk import VNXDisk
@@ -45,6 +45,11 @@ class VNXRaidGroupTest(TestCase):
                 break
         else:
             self.fail('RAID group 0 not found.')
+
+    @patch_cli
+    def test_get_unbound_rg(self):
+        rg = VNXRaidGroup.get(t_cli(), 1)
+        verify_raid_1(rg)
 
     @patch_cli
     def test_create_rg(self):

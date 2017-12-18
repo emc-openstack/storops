@@ -1,0 +1,1 @@
+The attach or restore operation is disallowed because the snapshot and snapshot mount point are associated with different primary LUNs. Use LUNs and snapshots from correct primary LUN for attach and restore. (0x716d8008)

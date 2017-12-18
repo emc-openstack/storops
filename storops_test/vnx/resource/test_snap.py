@@ -21,7 +21,8 @@ from hamcrest import assert_that, equal_to, raises
 
 from storops_test.vnx.cli_mock import patch_cli, t_cli
 from storops.exception import VNXSnapError, VNXSnapNotExistsError, \
-    VNXDeleteAttachedSnapError
+    VNXDeleteAttachedSnapError, VNXRestoreSnapToMismatchLunError, \
+    VNXSnapNameInUseError
 from storops.vnx.resource.snap import VNXSnap, VNXSnapList
 
 __author__ = 'Cedric Zhuang'
@@ -107,3 +108,27 @@ class VNXSnapTest(TestCase):
     def test_get_by_res(self):
         snaps = VNXSnapList(cli=t_cli(), res=3)
         assert_that(len(snaps), equal_to(2))
+
+    @patch_cli
+    def test_restore_snap(self):
+        snap = VNXSnap(cli=t_cli(), name='s5')
+        snap.restore(res_id='540')
+        # No exception if succeed.
+
+    @patch_cli
+    def test_restore_snap_to_mismatch_lun(self):
+        def f():
+            snap = VNXSnap(cli=t_cli(), name='s5')
+            snap.restore(res_id='541')
+
+        assert_that(f, raises(VNXRestoreSnapToMismatchLunError,
+                              'associated with different primary LUNs'))
+
+    @patch_cli
+    def test_restore_snap_new_backup_snap_exist(self):
+        def f():
+            snap = VNXSnap(cli=t_cli(), name='s5')
+            snap.restore(res_id='540', backup_snap='a-existing-snap')
+
+        assert_that(f, raises(VNXSnapNameInUseError,
+                              'snapshot name is already in use'))

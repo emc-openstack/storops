@@ -207,6 +207,9 @@ class VNXLun(VNXCliResource):
     def delete_snap(self, name):
         VNXSnap(name, self._cli).delete()
 
+    def restore_snap(self, name):
+        VNXSnap(name, self._cli).restore(self.get_id(self))
+
     def migrate(self, tgt, rate=VNXMigrationRate.HIGH, on_complete=None,
                 on_error=None):
         tgt_id = self.get_id(tgt)

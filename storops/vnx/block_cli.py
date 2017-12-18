@@ -605,6 +605,15 @@ class CliClient(PerfManager):
         cmd.append('-o')
         return cmd
 
+    @command
+    def restore_snap(self, snap_name, res_id, backup_snap=None):
+        cmd = ['snap', '-restore']
+        cmd += text_var('-id', snap_name)
+        cmd += int_var('-res', res_id)
+        if backup_snap:
+            cmd += text_var('-bakName', backup_snap)
+        return cmd
+
     @staticmethod
     def _get_cg_member_repr(members):
         def member_converter(member):

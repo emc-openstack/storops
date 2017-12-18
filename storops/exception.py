@@ -828,6 +828,11 @@ class VNXSnapNotExistsError(VNXSnapError):
     error_message = 'The specified snapshot does not exist.'
 
 
+@cli_exception
+class VNXRestoreSnapToMismatchLunError(VNXSnapError):
+    error_code = 0x716d8008
+
+
 class VNXLunError(VNXException):
     pass
 

@@ -19,7 +19,7 @@ import ddt
 from unittest import TestCase
 
 from hamcrest import equal_to, assert_that, instance_of, raises, none, \
-    only_contains
+    only_contains, not_none
 from storops.unity.resource.nfs_share import UnityNfsShare
 
 from storops.exception import UnityHostIpInUseError, \
@@ -141,6 +141,14 @@ class UnityHostTest(TestCase):
                                   tenant='tenant_1',
                                   force_create=True)
         assert_that(host._id, equal_to('Host_15'))
+
+    @patch_rest
+    def test_get_host_ipv6_with_mask(self):
+        host = UnityHost.get_host(t_rest(), '2001:db8:a0b:12f0::/64',
+                                  tenant='tenant_1',
+                                  force_create=True)
+        assert_that(host, not_none())
+        assert_that(host.ip_list, only_contains('2001:db8:a0b:12f0:0:0:0:0'))
 
     @ddt.data({'version': '3.3.0'},
               {'version': '4.0.1'})

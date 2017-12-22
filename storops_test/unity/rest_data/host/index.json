@@ -101,6 +101,17 @@
       "response": "create_host_15.json"
     },
     {
+      "url": "/api/types/host/instances?compact=True",
+      "body": {
+        "type": 2,
+        "name": "2001:db8:a0b:12f0::_ffff:ffff:ffff:ffff:0000:0000:0000:0000",
+        "tenant": {
+          "id": "tenant_1"
+        }
+      },
+      "response": "create_subnet_6.json"
+    },
+    {
       "url": "/api/instances/host/Host_11?compact=True",
       "response": "empty.json"
     },
@@ -123,6 +134,14 @@
     {
       "url": "/api/instances/host/Host_16?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.lun.name,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "host_16.json"
+    },
+    {
+      "url": "/api/instances/host/Host_19?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.lun.name,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_19.json"
+    },
+    {
+      "url": "/api/instances/host/Subnet_6?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.lun.name,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "subnet_6.json"
     },
     {
       "url": "/api/instances/host/Host_6?compact=True",

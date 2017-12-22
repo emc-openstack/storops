@@ -236,39 +236,98 @@ def url_to_host(url):
     """convert a url to a host (ip or domain)
 
     :param url: url string
-    :returns: host
+    :returns: host: domain name or ipv4/v6 address
+    :rtype: str
+    :raises: ValueError: given an illegal url that without a ip or domain name
     """
 
-    m = re.match(r'^https?://(.*)$', url, re.IGNORECASE)
-    if m:
-        url = m.group(1)
+    regex_url = r"([a-z][a-z0-9+\-.]*://)?" + \
+                "([a-z0-9\-._~%!$&'()*+,;=]+@)?" + \
+                "([a-z0-9\-._~%]+" + \
+                "|\[[a-z0-9\-._~%!$&'()*+,;=:]+\])?" + \
+                "(:(?P<port>[0-9]+))?"
 
-    m = url.find('/')
-    if m >= 0:
-        url = url[0:m]
-
-    m = re.search(r':([0-9]+)$', url)
-    if m:
-        ret = url[0:m.start(0)]
+    m = re.match(regex_url, url, re.IGNORECASE)
+    if m and m.group(3):
+        return url[m.start(3): m.end(3)]
     else:
-        ret = url
-
-    return ret
+        raise ValueError("URL without a valid host or ip")
 
 
-def url_to_mask(url):
-    host = url_to_host(url)
-    remains = url[url.find(host) + len(host):]
-    m = re.match(r'^/(\d+).*', remains)
-    if m:
-        binary_len = int(m.group(1))
-        bin_mask_str = binary_len * '1' + (32 - binary_len) * '0'
-        grouped = [str(int(bin_mask_str[i:i + 8], base=2))
-                   for i in range(0, len(bin_mask_str), 8)]
-        ret = '.'.join(grouped)
+def parse_host_address(addr):
+    """
+    parse host address to get domain name or ipv4/v6 address,
+    cidr prefix and net mask code string if given a subnet address
+
+    :param addr:
+    :type addr: str
+    :return: parsed domain name/ipv4 address/ipv6 address,
+             cidr prefix if there is,
+             net mask code string if there is
+    :rtype: (string, int, string)
+    """
+
+    parts = addr.split('/')
+    if len(parts) == 1:
+        return parts[0], None, None
+    if len(parts) > 2:
+        raise ValueError("Illegal host address")
     else:
-        ret = None
-    return ret
+        domain_or_ip, prefix = parts
+        prefix = int(prefix)
+        if re.match(r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$", domain_or_ip):
+            return domain_or_ip, prefix, ipv4_prefix_to_mask(prefix)
+        elif ':' in domain_or_ip:
+            return domain_or_ip, prefix, ipv6_prefix_to_mask(prefix)
+        else:
+            return domain_or_ip, None, None
+
+
+def ipv4_prefix_to_mask(prefix):
+    """
+    ipv4 cidr prefix to net mask
+
+    :param prefix: cidr prefix , rang in (0, 32)
+    :type prefix: int
+    :return: dot separated ipv4 net mask code, eg: 255.255.255.0
+    :rtype: str
+    """
+    if prefix > 32 or prefix < 0:
+        raise ValueError("invalid cidr prefix for ipv4")
+    else:
+        mask = ((1 << 32) - 1) ^ ((1 << (32 - prefix)) - 1)
+        eight_ones = 255  # 0b11111111
+        mask_str = ''
+        for i in range(0, 4):
+            mask_str = str(mask & eight_ones) + mask_str
+            mask = mask >> 8
+            if i != 3:
+                mask_str = '.' + mask_str
+        return mask_str
+
+
+def ipv6_prefix_to_mask(prefix):
+    """
+    ipv6 cidr prefix to net mask
+
+    :param prefix: cidr prefix, rang in (0, 128)
+    :type prefix: int
+    :return: comma separated ipv6 net mask code,
+             eg: ffff:ffff:ffff:ffff:0000:0000:0000:0000
+    :rtype: str
+    """
+    if prefix > 128 or prefix < 0:
+        raise ValueError("invalid cidr prefix for ipv6")
+    else:
+        mask = ((1 << 128) - 1) ^ ((1 << (128 - prefix)) - 1)
+        f = 15  # 0xf or 0b1111
+        hex_mask_str = ''
+        for i in range(0, 32):
+            hex_mask_str = format((mask & f), 'x') + hex_mask_str
+            mask = mask >> 4
+            if i != 31 and i & 3 == 3:
+                hex_mask_str = ':' + hex_mask_str
+        return hex_mask_str
 
 
 def mb_to_gb(mib):

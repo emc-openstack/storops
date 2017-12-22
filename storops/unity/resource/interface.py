@@ -30,7 +30,8 @@ LOG = logging.getLogger(__name__)
 class UnityFileInterface(UnityResource):
     @classmethod
     def create(cls, cli, nas_server, ip_port, ip, netmask=None,
-               gateway=None, vlan_id=None, role=None):
+               gateway=None, vlan_id=None, role=None,
+               v6_prefix_length=None):
         clz = storops.unity.resource.nas_server.UnityNasServer
         nas_server = clz.get(cli, nas_server)
         ip_port = UnityIpPort.get(cli, ip_port)
@@ -40,6 +41,7 @@ class UnityFileInterface(UnityResource):
                         ipPort=ip_port,
                         ipAddress=ip,
                         netmask=netmask,
+                        v6PrefixLength=v6_prefix_length,
                         gateway=gateway,
                         vlanId=vlan_id,
                         role=role)

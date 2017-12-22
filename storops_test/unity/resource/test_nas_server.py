@@ -135,6 +135,20 @@ class UnityNasServerTest(TestCase):
         assert_that(fi.ip_address, equal_to('1.1.1.1'))
 
     @patch_rest
+    def test_create_file_interface_ipv6_success(self):
+        server = UnityNasServer(_id='nas_2', cli=t_rest())
+        file_interface_ipv6 = server.create_file_interface(
+            ip_port='spa_eth2',
+            ip='2001:db8:0:1:f816:3eff:fe76:35c4',
+            v6_prefix_length='64',
+            gateway='2001:db8:0:1::1',
+            role=FileInterfaceRoleEnum.PRODUCTION)
+        assert_that(file_interface_ipv6.ip_address,
+                    equal_to('2001:db8:0:1:f816:3eff:fe76:35c4'))
+        assert_that(file_interface_ipv6.v6_prefix_length, equal_to(64))
+        assert_that(file_interface_ipv6.netmask, equal_to(None))
+
+    @patch_rest
     def test_create_cifs_server_success(self):
         server = UnityNasServer(_id='nas_5', cli=t_rest())
         cifs_server = server.create_cifs_server(name='c_server1',

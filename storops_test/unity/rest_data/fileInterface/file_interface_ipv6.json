@@ -1,0 +1,29 @@
+{
+  "content": {
+    "id": "if_5",
+    "ipProtocolVersion": 6,
+    "role": 0,
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "ipAddress": "2001:db8:0:1:f816:3eff:fe76:35c4",
+    "v6PrefixLength": 64,
+    "gateway": "2001:db8:0:1:0:0:0:1",
+    "macAddress": "00:0C:29:59:78:73",
+    "name": "3_FCNCH097597869",
+    "isPreferred": true,
+    "isDisabled": false,
+    "nasServer": {
+      "id": "nas_2"
+    },
+    "ipPort": {
+      "id": "spa_eth2"
+    }
+  }
+}

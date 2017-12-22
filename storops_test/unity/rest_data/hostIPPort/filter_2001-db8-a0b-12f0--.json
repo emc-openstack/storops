@@ -1,0 +1,13 @@
+{
+  "@base": "https://10.244.223.66/api/types/hostIPPort/instances?filter=address eq \"2001:db8:a0b:12f0::\"&fields=address,id,instanceId,isIgnored,name,netmask,type,v6PrefixLength,host.id&per_page=2000&compact=true",
+  "updated": "2016-04-05T12:22:00.450Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+
+  ]
+}

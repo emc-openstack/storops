@@ -1,0 +1,13 @@
+{
+  "content": {
+    "isIgnored": false,
+    "instanceId": "root/emc:EMC_UEM_HostNetworkAddressLeaf%InstanceID=HostNetworkAddress_6",
+    "host": {
+      "id": "Subnet_6"
+    },
+    "v6PrefixLength": 64,
+    "address": "2001:db8:a0b:12f0:0:0:0:0",
+    "type": 0,
+    "id": "HostNetworkAddress_6"
+  }
+}

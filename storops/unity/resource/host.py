@@ -96,8 +96,7 @@ class UnityHost(UnityResource):
     def get_host(cls, cli, _id, force_create=False, tenant=None):
         if isinstance(_id, six.string_types) and ('.' in _id or ':' in _id):
             # it looks like an ip address, find or create the host
-            address = converter.url_to_host(_id)
-            netmask = converter.url_to_mask(_id)
+            address, prefix, netmask = converter.parse_host_address(_id)
             ports = UnityHostIpPortList(cli=cli, address=address)
             # since tenant is not supported by all kinds of system. So we
             # should avoid send the tenant request if tenant is None
@@ -116,8 +115,11 @@ class UnityHost(UnityResource):
                              else address)
                 host = cls.create(cli, host_name, host_type=host_type,
                                   tenant=tenant)
-                host.add_ip_port(address, netmask=netmask)
-                ret = host
+                if ':' in address:  # ipv6
+                    host.add_ip_port(address, v6_prefix_length=str(prefix))
+                else:  # ipv4
+                    host.add_ip_port(address, netmask=netmask)
+                ret = host.update()
             else:
                 ret = None
         else:

@@ -13,6 +13,10 @@
       "response": "if_20.json"
     },
     {
+      "url": "/api/instances/fileInterface/if_5?compact=True&fields=gateway,health,id,instanceId,ipAddress,ipPort,ipProtocolVersion,isDisabled,isPreferred,isSystem,macAddress,name,nasServer,netmask,replicationPolicy,role,sourceParameters,v6PrefixLength,vlanId",
+      "response": "file_interface_ipv6.json"
+    },
+    {
       "url": "/api/types/fileInterface/instances?compact=True&fields=gateway,health,id,instanceId,ipAddress,ipPort,ipProtocolVersion,isDisabled,isPreferred,isSystem,macAddress,name,nasServer,netmask,replicationPolicy,role,sourceParameters,v6PrefixLength,vlanId",
       "response": "all.json"
     },
@@ -43,6 +47,22 @@
         "role": 0
       },
       "response": "create_if_20.json"
+    },
+    {
+      "url": "/api/types/fileInterface/instances?compact=True",
+      "body": {
+        "ipAddress": "2001:db8:0:1:f816:3eff:fe76:35c4",
+        "ipPort": {
+          "id": "spa_eth2"
+        },
+        "nasServer": {
+          "id": "nas_2"
+        },
+        "v6PrefixLength": "64",
+        "gateway": "2001:db8:0:1::1",
+        "role": 0
+      },
+      "response": "create_file_interface_ipv6.json"
     },
     {
       "url": "/api/types/fileInterface/instances?compact=True",

@@ -64,14 +64,14 @@ class UnityNasServer(UnityResource):
         resp.raise_if_err()
         return resp
 
-    def create_file_interface(self, ip_port, ip,
-                              netmask=None, gateway=None,
-                              vlan_id=None, role=None):
+    def create_file_interface(self, ip_port, ip, netmask=None, gateway=None,
+                              vlan_id=None, role=None,
+                              v6_prefix_length=None):
         clz = storops.unity.resource.interface.UnityFileInterface
         return clz.create(self._cli, self,
-                          ip_port=ip_port, ip=ip,
-                          netmask=netmask, gateway=gateway,
-                          vlan_id=vlan_id, role=role)
+                          ip_port=ip_port, ip=ip, netmask=netmask,
+                          gateway=gateway, vlan_id=vlan_id, role=role,
+                          v6_prefix_length=v6_prefix_length)
 
     def create_cifs_server(self, interfaces=None,
                            netbios_name=None, name=None,

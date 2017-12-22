@@ -178,20 +178,29 @@ class ConverterTest(TestCase):
         ret = converter.url_to_host(url)
         assert_that(ret, equal_to('www.abc.com'))
 
+    def test_url_to_host_no_host(self):
+        url = 'http://'
+
+        def expect_error():
+            converter.url_to_host(url)
+        assert_that(expect_error, raises(ValueError))
+
     def test_url_to_host_ssl(self):
         url = 'https://10.0.0.1:4443/page/my.html?filter=name'
         ret = converter.url_to_host(url)
         assert_that(ret, equal_to('10.0.0.1'))
 
-    def test_url_to_host_ipv6(self):
-        url = 'https://[2001:db8:a0b:12f0::1%eth0]:21/my.txt'
-        ret = converter.url_to_host(url)
-        assert_that(ret, equal_to('[2001:db8:a0b:12f0::1%eth0]'))
+    def test_parse_host_address_ipv6(self):
+        ipv6 = '2001:db8:a0b:12f0::1%eth0'
+        address, prefix, netmask = converter.parse_host_address(ipv6)
+        assert_that(address, equal_to('2001:db8:a0b:12f0::1%eth0'))
+        assert_that(prefix, equal_to(None))
+        assert_that(netmask, equal_to(None))
 
     def test_url_to_host_default_port(self):
-        url = 'https://2001:db8:a0b:12f0::1-eth0/my.txt'
+        url = 'https://[2001:db8:a0b:12f0::1%eth0]/my.txt'
         ret = converter.url_to_host(url)
-        assert_that(ret, equal_to('2001:db8:a0b:12f0::1-eth0'))
+        assert_that(ret, equal_to('[2001:db8:a0b:12f0::1%eth0]'))
 
     def test_url_to_host_default_protocol(self):
         url = '10.0.0.1/my.txt'
@@ -204,29 +213,105 @@ class ConverterTest(TestCase):
         assert_that(ret, equal_to('10.0.0.1'))
 
     def test_url_to_host_suffix(self):
-        url = '10.0.0.1/32'
-        ret = converter.url_to_host(url)
-        assert_that(ret, equal_to('10.0.0.1'))
+        cidr = '10.0.0.1/32'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('10.0.0.1'))
+        assert_that(prefix, equal_to(32))
 
-    def test_url_to_mask_normal(self):
-        url = 'https://10.244.211.30/24'
-        ret = converter.url_to_mask(url)
-        assert_that(ret, equal_to('255.255.255.0'))
+    def test_parse_host_address_illegal_multi_prefix(self):
+        cidr = '10.0.0.1/32/16'
 
-    def test_url_to_mask_29_bit(self):
-        url = 'https://10.244.211.30/30'
-        ret = converter.url_to_mask(url)
-        assert_that(ret, equal_to('255.255.255.252'))
+        def expect_error():
+            converter.parse_host_address(cidr)
+        assert_that(expect_error, raises(ValueError))
 
-    def test_url_to_mask_7_bit(self):
-        url = 'https://10.244.211.30/7'
-        ret = converter.url_to_mask(url)
-        assert_that(ret, equal_to('254.0.0.0'))
+    def test_parse_host_address_no_ip(self):
+        cidr = 'abc.com/32'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, 'abc.com')
+        assert_that(prefix, none())
+        assert_that(mask, none())
 
-    def test_url_to_mask_not_found(self):
-        url = 'https://10.244.211.30/router'
-        ret = converter.url_to_mask(url)
-        assert_that(ret, none())
+    def test_parse_host_address_normal(self):
+        cidr = '10.244.211.30/24'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('10.244.211.30'))
+        assert_that(mask, equal_to('255.255.255.0'))
+        assert_that(prefix, equal_to(24))
+
+    def test_parse_host_address_29_bit(self):
+        cidr = '10.244.211.30/30'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('10.244.211.30'))
+        assert_that(mask, equal_to('255.255.255.252'))
+        assert_that(prefix, equal_to(30))
+
+    def test_parse_host_address_7_bit(self):
+        cidr = '10.244.211.30/7'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('10.244.211.30'))
+        assert_that(mask, equal_to('254.0.0.0'))
+        assert_that(prefix, equal_to(7))
+
+    def test_parse_host_address_illegal(self):
+        cidr = '10.244.211.30/router'
+
+        def expect_error():
+            return converter.parse_host_address(cidr)
+        assert_that(expect_error, raises(ValueError))
+
+    def test_parse_host_address_illegal_upper(self):
+        cidr = '10.244.211.30/33'
+
+        def expect_error():
+            return converter.parse_host_address(cidr)
+
+        assert_that(expect_error, raises(ValueError))
+
+    def test_parse_host_address_illegal_under(self):
+        cidr = '10.244.211.30/-1'
+
+        def expect_error():
+            return converter.parse_host_address(cidr)
+
+        assert_that(expect_error, raises(ValueError))
+
+    def test_parse_host_address_ipv6_cidr(self):
+        cidr = '2001:db8:a0b:12f0::/64'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('2001:db8:a0b:12f0::'))
+        assert_that(mask, equal_to('ffff:ffff:ffff:ffff:0000:0000:0000:0000'))
+        assert_that(prefix, equal_to(64))
+
+    def test_url_to_mask_ipv6_prefix_63(self):
+        cidr = '2001:db8:a0b:12f0::/63'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('2001:db8:a0b:12f0::'))
+        assert_that(mask, equal_to('ffff:ffff:ffff:fffe:0000:0000:0000:0000'))
+        assert_that(prefix, equal_to(63))
+
+    def test_url_to_mask_ipv6_prefix_65(self):
+        cidr = '2001:db8:a0b:12f0::/65'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('2001:db8:a0b:12f0::'))
+        assert_that(mask, equal_to('ffff:ffff:ffff:ffff:8000:0000:0000:0000'))
+        assert_that(prefix, equal_to(65))
+
+    def test_url_to_mask_ipv6_illegal_upper(self):
+        cidr = '2001:db8:a0b:12f0::/129'
+
+        def expect_error():
+            converter.parse_host_address(cidr)
+
+        assert_that(expect_error, raises(ValueError))
+
+    def test_url_to_mask_ipv6_illegal_under(self):
+        cidr = '2001:db8:a0b:12f0::/-1'
+
+        def expect_error():
+            converter.parse_host_address(cidr)
+
+        assert_that(expect_error, raises(ValueError))
 
     def test_to_minute(self):
         r = converter.to_minute("00:06:00.000")

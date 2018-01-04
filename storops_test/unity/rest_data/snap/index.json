@@ -338,6 +338,15 @@
         "isAutoDelete": false
       },
       "response": "create_38654700001.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705785/action/restore?compact=True",
+      "body": {"copyName": "backup_snap"},
+      "response": "backup_response.json"
+    },
+    {
+      "url": "/api/instances/snap/38654700002?compact=True",
+      "response": "empty.json"
     }
   ]
 }

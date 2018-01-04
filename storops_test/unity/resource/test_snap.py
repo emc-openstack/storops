@@ -208,3 +208,15 @@ class UnitySnapTest(TestCase):
                             description='This is description.',
                             io_limit_policy=None)
         assert_that(_inner, raises(UnityException, "Error Code:0x670166b"))
+
+    @patch_rest
+    def test_snap_restore(self):
+        snap = UnitySnap(cli=t_rest(), _id='38654705785')
+        backup = snap.restore(backup="backup_snap", delete_backup=True)
+        assert_that(backup.id, equal_to("38654700002"))
+
+    @patch_rest
+    def test_snap_restore_auto_delete_false(self):
+        snap = UnitySnap(cli=t_rest(), _id='38654705785')
+        backup = snap.restore(backup="backup_snap")
+        assert_that(backup.id, equal_to("38654700002"))

@@ -1,0 +1,15 @@
+{
+    "@base": "https://10.245.101.39/api/instances/snap",
+    "updated": "2018-01-04T06:01:22.620Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/38654700002"
+        }
+    ],
+    "content": {
+        "backup": {
+            "id": "38654700002"
+        }
+    }
+}

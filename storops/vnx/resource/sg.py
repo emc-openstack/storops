@@ -366,11 +366,25 @@ class VNXStorageGroupList(VNXCliResourceList):
     def get_resource_class(cls):
         return VNXStorageGroup
 
-    def __init__(self, cli=None, engineering=False, system_lun_list=None):
+    def __init__(self, cli=None, engineering=False, system_lun_list=None,
+                 attached_lun=None):
         super(VNXStorageGroupList, self).__init__(cli)
         self._sg_map = {}
         self._engineering = engineering
         self._system_lun_list = system_lun_list
+
+        self._attached_lun = None
+        self._set_filter(attached_lun)
+
+    def _set_filter(self, attached_lun=None):
+        self._attached_lun = attached_lun
+
+    def _filter(self, sg):
+        if self._attached_lun is not None:
+            ret = self._attached_lun in sg.used_alu_numbers
+        else:
+            ret = True
+        return ret
 
     def add_sg(self, sg):
         self._sg_map[sg.name] = sg

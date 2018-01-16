@@ -80,6 +80,13 @@ class VNXStorageGroupListTest(TestCase):
         for sg in sgs:
             assert_that(sg.lun_list.timestamp, equal_to(lun_list.timestamp))
 
+    @patch_cli
+    def test_sg_list_shadow_copy(self):
+        filtered_sgs = self.sg_list.shadow_copy(attached_lun=15)
+        assert_that(len(filtered_sgs), equal_to(1))
+        assert_that(len(self.sg_list), equal_to(4))
+        assert_that(filtered_sgs.timestamp, equal_to(self.sg_list.timestamp))
+
 
 def get_sg(name='server7'):
     sg = VNXStorageGroup(name=name, cli=t_cli())

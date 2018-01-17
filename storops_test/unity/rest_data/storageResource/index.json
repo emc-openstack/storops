@@ -1042,6 +1042,11 @@
       "url": "/api/instances/storageResource/sv_4/action/modifyLun?compact=True",
       "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_9"}, "accessMask": 1}]}},
       "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": []}},
+      "response": "empty.json"
     }
   ]
 }

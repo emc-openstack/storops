@@ -1,0 +1,61 @@
+{
+    "content": {
+        "id": "sv_5",
+        "operationalStatus": [
+            2
+        ],
+        "type": 2,
+        "tieringPolicy": 1,
+        "defaultNode": 1,
+        "currentNode": 1,
+        "auSize": 8192,
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_5",
+        "creationTime": "2016-05-24T05:24:55.000Z",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_VOL_OK"
+            ],
+            "descriptions": [
+                "The LUN is operating normally. No action is required."
+            ]
+        },
+        "name": "RestLun100",
+        "description": "Lun description",
+        "modificationTime": "2016-05-24T05:25:02.086Z",
+        "sizeTotal": 1073741824,
+        "sizeAllocated": 0,
+        "perTierSizeUsed": [
+            0,
+            0,
+            2952790016
+        ],
+        "isThinEnabled": true,
+        "wwn": "60:06:01:60:24:10:3E:00:A7:E5:43:57:C0:CE:10:18",
+        "isReplicationDestination": false,
+        "isSnapSchedulePaused": false,
+        "objectId": 42949674123,
+        "metadataSize": 3489660928,
+        "metadataSizeAllocated": 2684354560,
+        "snapWwn": "60:06:01:60:24:10:3E:00:AB:E5:43:57:AE:C6:38:02",
+        "snapsSize": 0,
+        "snapsSizeAllocated": 0,
+        "hostAccess": [
+            {
+                "accessMask": 3,
+                "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=544",
+                "host": {
+                    "id": "Host_1"
+                }
+            }
+        ],
+        "snapCount": 0,
+        "storageResource": {
+            "id": "sv_5"
+        },
+        "pool": {
+            "id": "pool_1"
+        },
+        "isThinClone": false
+    }
+}

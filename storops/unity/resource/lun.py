@@ -220,12 +220,17 @@ class UnityLun(UnityResource):
         return resp
 
     def detach_from(self, host):
-        if self.host_access is None or not host:
+        if self.host_access is None:
             return None
 
-        new_access = [{'host': item.host,
-                       'accessMask': item.access_mask} for item
-                      in self.host_access if host.id != item.host.id]
+        if host is None:
+            # Detach the lun from all hosts if `host` is None
+            log.info('Detach lun - %s from all hosts.', self.get_id())
+            new_access = []
+        else:
+            new_access = [{'host': item.host,
+                           'accessMask': item.access_mask} for item
+                          in self.host_access if host.id != item.host.id]
         resp = self.modify(host_access=new_access)
         resp.raise_if_err()
         return resp

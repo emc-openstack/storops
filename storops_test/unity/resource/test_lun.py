@@ -172,6 +172,12 @@ class UnityLunTest(TestCase):
         assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
+    def test_lun_detach_from_all_hosts(self):
+        lun = UnityLun(_id='sv_5', cli=t_rest())
+        resp = lun.detach_from(host=None)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
     def test_get_lun_sv2_nested_property_update_property(self):
         lun = UnityLun(_id='sv_2', cli=t_rest())
         sr = lun.storage_resource

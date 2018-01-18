@@ -283,6 +283,14 @@ class ConverterTest(TestCase):
         assert_that(mask, equal_to('ffff:ffff:ffff:ffff:0000:0000:0000:0000'))
         assert_that(prefix, equal_to(64))
 
+    def test_parse_host_address_ipv6_cidr2(self):
+        cidr = '[2001:db8:a0b:12f0::/64]'
+        address, prefix, mask = converter.parse_host_address(cidr)
+        assert_that(address, equal_to('2001:db8:a0b:12f0::'))
+        assert_that(mask,
+                    equal_to('ffff:ffff:ffff:ffff:0000:0000:0000:0000'))
+        assert_that(prefix, equal_to(64))
+
     def test_url_to_mask_ipv6_prefix_63(self):
         cidr = '2001:db8:a0b:12f0::/63'
         address, prefix, mask = converter.parse_host_address(cidr)

@@ -267,6 +267,9 @@ def parse_host_address(addr):
     :rtype: (string, int, string)
     """
 
+    if addr.startswith('[') and addr.endswith(']'):
+        addr = addr[1:-1]
+
     parts = addr.split('/')
     if len(parts) == 1:
         return parts[0], None, None

@@ -116,7 +116,7 @@ class UnityHost(UnityResource):
                 host = cls.create(cli, host_name, host_type=host_type,
                                   tenant=tenant)
                 if ':' in address:  # ipv6
-                    host.add_ip_port(address, v6_prefix_length=str(prefix))
+                    host.add_ip_port(address, v6_prefix_length=prefix)
                 else:  # ipv4
                     host.add_ip_port(address, netmask=netmask)
                 ret = host.update()

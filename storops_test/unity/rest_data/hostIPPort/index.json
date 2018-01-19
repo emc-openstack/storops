@@ -125,7 +125,7 @@
         "host": {
           "id": "Subnet_6"
         },
-        "v6PrefixLength": "64",
+        "v6PrefixLength": 64,
         "address": "2001:db8:a0b:12f0::"
       },
       "response": "create_HostNetworkAddress_6.json"

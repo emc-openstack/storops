@@ -237,12 +237,12 @@ class VNXConnectionPortTest(TestCase):
     @patch_cli
     def test_get_all(self):
         ports = VNXConnectionPort.get(t_cli())
-        assert_that(len(ports), equal_to(22))
+        assert_that(len(ports), equal_to(23))
 
     @patch_cli
     def test_get_by_sp(self):
         ports = VNXConnectionPort.get(t_cli(), VNXSPEnum.SP_A)
-        assert_that(len(ports), equal_to(12))
+        assert_that(len(ports), equal_to(13))
 
     @patch_cli
     def test_get_by_port(self):
@@ -252,7 +252,7 @@ class VNXConnectionPortTest(TestCase):
     @patch_cli
     def test_get_by_type(self):
         ports = VNXConnectionPort.get(t_cli(), port_type=VNXPortType.ISCSI)
-        assert_that(len(ports), equal_to(18))
+        assert_that(len(ports), equal_to(19))
         ports = VNXConnectionPort.get(t_cli(), port_type=VNXPortType.FCOE)
         assert_that(len(ports), equal_to(4))
 
@@ -507,6 +507,19 @@ class VNXPortTest(TestCase):
         hba = test_hba()
         h_port = VNXHbaPort.create('a', 3, vport_id=1)
         assert_that(hba, equal_to(h_port))
+
+    @patch_cli
+    def test_hba_port_with_connection_port(self):
+        sg = VNXStorageGroup.get(cli=t_cli(), name='microsoft')
+        h_port = sg.get_ports(
+            initiator_uid='iqn.1991-05.com.microsoft:abc.def.dev')
+        c_port = VNXConnectionPort.get(
+            sp=VNXSPEnum.SP_A, port_id=1, cli=t_cli())
+        assert_that(len(h_port), equal_to(2))
+        r = set(h_port) - {item for item in c_port}
+        assert_that(len(r), equal_to(1))
+        assert_that(list(r)[0].port_id, equal_to(1))
+        assert_that(list(r)[0].sp, equal_to(VNXSPEnum.SP_B))
 
     @patch_cli
     def test_get_metrics_csv(self):

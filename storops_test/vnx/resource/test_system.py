@@ -128,7 +128,7 @@ class VNXSystemTest(TestCase):
     @patch_cli
     def test_connection_port(self):
         ports = self.vnx.get_connection_port()
-        assert_that(len(ports), equal_to(22))
+        assert_that(len(ports), equal_to(23))
         assert_that(ports, instance_of(VNXConnectionPortList))
         for x in ports:
             assert_that(x, instance_of(VNXConnectionVirtualPort))

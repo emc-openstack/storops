@@ -263,8 +263,7 @@ class VNXHbaPort(VNXPort):
 
     def __hash__(self):
         return hash('<VNXPort {{sp: {}, port_id: {}, vport_id: {}}}'
-                    .format(self.sp, self.port_id,
-                            self.vport_id if self.vport_id else None))
+                    .format(self.sp, self.port_id, self.vport_id))
 
 
 class VNXConnectionPortList(VNXCliResourceList):
@@ -450,6 +449,10 @@ class VNXConnectionVirtualPort(VNXPort):
                     'iscsi_alias', 'port_id', 'port_speed',
                     'replication_window', 'sp', 'wwn', 'type'])
         return ret
+
+    def __hash__(self):
+        return hash('<VNXPort {{sp: {}, port_id: {}, vport_id: {}}}'
+                    .format(self.sp, self.port_id, self.vport_id))
 
 
 class VNXConnectionVirtualPortList(VNXCliResourceList):

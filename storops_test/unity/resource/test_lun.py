@@ -181,6 +181,21 @@ class UnityLunTest(TestCase):
         assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
+    def test_lun_attach_to_with_hlu(self):
+        host = UnityHost(_id="Host_1", cli=t_rest())
+        lun = UnityLun(_id='sv_6', cli=t_rest(version='4.4.0'))
+        resp = lun.attach_to(host, access_mask=HostLUNAccessEnum.BOTH,
+                             hlu=1655)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_lun_attach_to_without_hlu(self):
+        host = UnityHost(_id="Host_1", cli=t_rest())
+        lun = UnityLun(_id='sv_7', cli=t_rest(version='4.4.0'))
+        resp = lun.attach_to(host, access_mask=HostLUNAccessEnum.BOTH)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
     def test_lun_detach_from_host(self):
         host = UnityHost(_id="Host_1", cli=t_rest())
         lun = UnityLun(_id='sv_16', cli=t_rest())

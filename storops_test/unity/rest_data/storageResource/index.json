@@ -89,6 +89,14 @@
       "response": "sv_5605.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_6?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_6.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_7?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_7.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
       "body": {
         "cifsShareCreate": [
@@ -579,6 +587,39 @@
         },
         "description": "Lun description",
         "name": "RestLun100"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_6/action/modifyLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_1"
+              },
+              "accessMask": 3,
+              "hlu": 1655
+            }
+          ]
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_7/action/modifyLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_1"
+              },
+              "accessMask": 3
+            }
+          ]
+        }
       },
       "response": "empty.json"
     },

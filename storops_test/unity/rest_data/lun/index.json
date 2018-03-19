@@ -29,6 +29,14 @@
       "response": "sv_5.json"
     },
     {
+      "url": "/api/instances/lun/sv_6?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,hostAccess.host.name,id,instanceId,ioLimitPolicy,isCompressionEnabled,isDataReductionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,pool.isFASTCacheEnabled,pool.name,pool.raidType,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,storageResource.type,tieringPolicy,type,wwn",
+      "response": "sv_6.json"
+    },
+    {
+      "url": "/api/instances/lun/sv_7?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,hostAccess.host.name,id,instanceId,ioLimitPolicy,isCompressionEnabled,isDataReductionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,pool.isFASTCacheEnabled,pool.name,pool.raidType,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,storageResource.type,tieringPolicy,type,wwn",
+      "response": "sv_7.json"
+    },
+    {
       "url": "/api/instances/lun/sv_3338?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,hostAccess.host.name,id,instanceId,ioLimitPolicy,isCompressionEnabled,isDataReductionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,pool.isFASTCacheEnabled,pool.name,pool.raidType,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,storageResource.type,tieringPolicy,type,wwn",
       "response": "sv_3338.json"
     },

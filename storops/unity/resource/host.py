@@ -26,6 +26,7 @@ from retryz import retry
 from storops import exception as ex
 from storops.lib import common
 from storops.lib import converter
+from storops.lib.version import version
 from storops.unity.enums import HostTypeEnum, HostInitiatorTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
@@ -223,11 +224,11 @@ class UnityHost(UnityResource):
                 'but not in existing hlu: {exist}'.format(exist=existing_hlus,
                                                           max=MAX_HLU_NUMBER))
 
+    @version('<4.4.0')  # noqa
     @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
     def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
-        # TODO(ryan): add another `_attach_with_retry` if customized hlu is
-        # supported when `attach`.
-
+        # Before 4.4.0 (Osprey), it didn't support to pass in hlu when
+        # attaching.
         lun_or_snap.attach_to(self)
         self.update()
         host_lun = self.get_host_lun(lun_or_snap)
@@ -236,6 +237,23 @@ class UnityHost(UnityResource):
             self._modify_hlu(host_lun, candidate_hlu)
             return candidate_hlu
         else:
+            return host_lun.hlu
+
+    @version('>=4.4.0')  # noqa
+    @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
+    def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
+        # From 4.4.0 (Osprey), it supported to pass in hlu when attaching LUN,
+        # but not when attaching snap.
+        from storops.unity.resource.lun import UnityLun as _UnityLun
+        if skip_hlu_0 and isinstance(lun_or_snap, _UnityLun):
+            candidate_hlu = self._random_hlu_number()
+            lun_or_snap.attach_to(self, hlu=candidate_hlu)
+            self.update()
+            return candidate_hlu
+        else:
+            lun_or_snap.attach_to(self)
+            self.update()
+            host_lun = self.get_host_lun(lun_or_snap)
             return host_lun.hlu
 
     def attach(self, lun_or_snap, skip_hlu_0=False):

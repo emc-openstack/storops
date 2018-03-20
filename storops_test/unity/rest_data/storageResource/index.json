@@ -645,9 +645,9 @@
           },
           "size": 1073741824
         },
-        "name": "storops_dummy_lun"
+        "name": "storops_dummy_lun_Host_11"
       },
-      "response": "create_dummy_lun.json"
+      "response": "create_dummy_lun_Host_11.json"
     },
     {
       "url": "/api/instances/storageResource/sv_2019/action/modifyLun?compact=True",

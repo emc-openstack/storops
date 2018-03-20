@@ -28,7 +28,6 @@ from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
 from storops.unity.resource.tenant import UnityTenant
 
-# from storops.unity.resource import lun
 
 __author__ = 'Cedric Zhuang'
 
@@ -168,12 +167,14 @@ class UnityHost(UnityResource):
     def _create_attach_dummy_lun(self):
         import storops.unity.resource.lun as lun_module
         import storops.unity.resource.pool as pool_module
-        lun_list = lun_module.UnityLunList.get(self._cli, name=DUMMY_LUN_NAME)
+        # dummy lun for each host
+        dummy_lun_name = "storops_dummy_lun_{}".format(self.id)
+        lun_list = lun_module.UnityLunList.get(self._cli, name=dummy_lun_name)
         if not lun_list:
             try:
                 pool_list = pool_module.UnityPoolList.get(self._cli)
-                dummy_lun = pool_list[0].create_lun(lun_name=DUMMY_LUN_NAME)
-            except Exception as err:
+                dummy_lun = pool_list[0].create_lun(lun_name=dummy_lun_name)
+            except ex.UnityException as err:
                 # Ignore all errors of creating dummy lun.
                 log.warn('Failed to create dummy lun. Message: {}'.format(err))
                 dummy_lun = None
@@ -185,7 +186,7 @@ class UnityHost(UnityResource):
                 dummy_lun.attach_to(self)
             except ex.UnityResourceAlreadyAttachedError:
                 pass
-            except Exception as err:
+            except ex.UnityException as err:
                 # Ignore all errors of attaching dummy lun.
                 log.warn('Failed to attach dummy lun. Message: {}'.format(err))
 

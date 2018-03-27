@@ -158,7 +158,6 @@ class UnityHost(UnityResource):
         resp.raise_if_err()
 
     def _get_host_luns(self, lun=None, snap=None, hlu=None):
-        self.update()
         ret = self.host_luns
 
         if ret is None:
@@ -230,6 +229,7 @@ class UnityHost(UnityResource):
         # supported when `attach`.
 
         lun_or_snap.attach_to(self)
+        self.update()
         host_lun = self.get_host_lun(lun_or_snap)
         if skip_hlu_0 and host_lun.hlu == 0:
             candidate_hlu = self._random_hlu_number()
@@ -239,9 +239,15 @@ class UnityHost(UnityResource):
             return host_lun.hlu
 
     def attach(self, lun_or_snap, skip_hlu_0=False):
-        if self.has_hlu(lun_or_snap):
-            raise ex.UnityResourceAlreadyAttachedError()
 
+        # `UnityResourceAlreadyAttachedError` check was removed due to there
+        # is a host cache existing in Cinder driver. If the lun was attached to
+        # the host and the info was stored in the cache, wrong hlu would be
+        # returned.
+        # And attaching a lun to a host twice would success, if Cinder retry
+        # triggers another attachment of same lun to the host, the cost would
+        # be one more rest request of `modifyLun` and one for host instance
+        # query.
         try:
             return self._attach_with_retry(lun_or_snap, skip_hlu_0)
 

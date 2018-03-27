@@ -28,8 +28,7 @@ from storops.exception import UnityHostIpInUseError, \
     UnityAttachAluExceedLimitError, UnitySnapAlreadyPromotedException, \
     SystemAPINotSupported, UnityHostInitiatorExistedError, \
     UnityResourceNotAttachedError, UnityNoHluAvailableError, \
-    UnityHluNumberInUseError, \
-    UnityResourceAlreadyAttachedError, UnityAttachExceedLimitError
+    UnityHluNumberInUseError, UnityAttachExceedLimitError
 from storops.unity.enums import HostTypeEnum, HostManageEnum, \
     HostPortTypeEnum, HealthEnum, HostInitiatorTypeEnum, \
     HostInitiatorSourceTypeEnum, HostInitiatorIscsiTypeEnum
@@ -457,15 +456,6 @@ class UnityHostTest(TestCase):
                         new=mock.Mock(side_effect=UnityNoHluAvailableError)):
             assert_that(calling(host._attach_with_retry).with_args(lun, True),
                         raises(UnityNoHluAvailableError))
-
-    @patch_rest
-    def test_attach_an_attached_lun(self):
-        host = UnityHost(cli=t_rest(), _id='Host_23')
-        lun = UnityLun(_id='sv_5610', cli=t_rest())
-        assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
-                    raises(UnityResourceAlreadyAttachedError))
-        assert_that(calling(host.attach).with_args(lun, skip_hlu_0=False),
-                    raises(UnityResourceAlreadyAttachedError))
 
     @patch_rest
     def test_attach_exceptions(self):

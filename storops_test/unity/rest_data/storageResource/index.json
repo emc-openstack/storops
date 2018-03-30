@@ -1047,6 +1047,39 @@
       "url": "/api/instances/storageResource/sv_5/action/modifyLun?compact=True",
       "body": {"lunParameters": {"hostAccess": []}},
       "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5609/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_23"}, "accessMask": 1}]}},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5610/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_23"}, "accessMask": 1}]}},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5610/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_24"}, "accessMask": 1}]}},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5611/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_25"}, "accessMask": 1}]}},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5611/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": []}},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5612?compact=True",
+      "body": {
+        "forceSnapDeletion": false,
+        "forceVvolDeletion": false
+      },
+      "response": "empty.json"
     }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "content": {
+    "id": "Host_24",
+    "operationalStatus": [
+      2
+    ],
+    "type": 1,
+    "autoManageType": 0,
+    "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_24",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "hostLUNs": [
+      {
+        "id": "Host_24_sv_5610_prod",
+        "hlu": 1,
+        "lun": {
+          "id": "sv_5610"
+        }
+      }
+    ],
+    "name": "host24",
+    "description": "",
+    "osType": "customized os"
+  }
+}

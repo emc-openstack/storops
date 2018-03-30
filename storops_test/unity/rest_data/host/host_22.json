@@ -12,19 +12,45 @@
     "osType": "Linux",
     "hostLUNs": [
       {
-        "id": "Host_22_sv_2037_prod"
+        "id": "Host_22_sv_2037_prod",
+        "hlu": 1,
+        "lun": {
+          "id": "sv_2037"
+        }
       },
       {
-        "id": "Host_22_sv_3338_prod"
+        "id": "Host_22_sv_3338_prod",
+        "hlu": 3,
+        "lun": {
+          "id": "sv_3338"
+        }
       },
       {
-        "id": "Host_22_sv_3338_snap_60:06:01:60:15:E0:3A:00:81:74:05:AF:8D:F0:4F:41"
+        "id": "Host_22_sv_3338_snap_60:06:01:60:15:E0:3A:00:81:74:05:AF:8D:F0:4F:41",
+        "hlu": 2,
+        "lun": {
+          "id": "sv_3338"
+        },
+        "snap": {
+          "id": "38654709077"
+        }
       },
       {
-        "id": "Host_22_sv_3341_prod"
+        "id": "Host_22_sv_3341_prod",
+        "hlu": 4,
+        "lun": {
+          "id": "sv_3341"
+        }
       },
       {
-        "id": "Host_22_sv_3341_snap_60:06:01:60:15:E0:3A:00:E2:99:A1:86:43:F3:47:12"
+        "id": "Host_22_sv_3341_snap_60:06:01:60:15:E0:3A:00:E2:99:A1:86:43:F3:47:12",
+        "hlu": 5,
+        "lun": {
+          "id": "sv_3341"
+        },
+        "snap": {
+          "id": "38654709072"
+        }
       }
     ],
     "autoManageType": 0,

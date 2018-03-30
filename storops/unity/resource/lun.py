@@ -204,13 +204,19 @@ class UnityLun(UnityResource):
             TCHelper.notify(self, ThinCloneActionEnum.TC_DELETE)
         return resp
 
-    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
+    def _attach_to(self, host, access_mask, hlu):
         host_access = [{'host': host, 'accessMask': access_mask}]
+        if hlu is not None:
+            host_access[0]['hlu'] = hlu
         # If this lun has been attached to other host, don't overwrite it.
         if self.host_access:
-            host_access += [{'host': item.host,
-                             'accessMask': item.access_mask} for item
-                            in self.host_access if host.id != item.host.id]
+            for existing in self.host_access:
+                if host.id != existing.host.id:
+                    existing_access = {'host': existing.host,
+                                       'accessMask': existing.access_mask}
+                    if existing.hlu is not None:
+                        existing_access['hlu'] = existing.hlu
+                    host_access.append(existing_access)
 
         resp = self.modify(host_access=host_access)
         resp.raise_if_err()
@@ -218,6 +224,15 @@ class UnityLun(UnityResource):
                   self.get_id())
         TCHelper.notify(self, ThinCloneActionEnum.LUN_ATTACH)
         return resp
+
+    @version('<4.4.0')
+    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
+        return self._attach_to(host, access_mask, None)
+
+    @version('>=4.4.0')
+    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION,
+                  hlu=None):
+        return self._attach_to(host, access_mask, hlu)
 
     def detach_from(self, host):
         if self.host_access is None:

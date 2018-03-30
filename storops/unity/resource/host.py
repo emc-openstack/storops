@@ -16,13 +16,17 @@
 from __future__ import unicode_literals
 
 import logging
+import random
 from itertools import chain
 
 import six
 
+from retryz import retry
+
 from storops import exception as ex
-from storops.lib import converter
 from storops.lib import common
+from storops.lib import converter
+from storops.lib.version import version
 from storops.unity.enums import HostTypeEnum, HostInitiatorTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
@@ -59,6 +63,7 @@ class UnitySnapHostAccessList(UnityResourceList):
 
 
 DUMMY_LUN_NAME = 'storops_dummy_lun'
+MAX_HLU_NUMBER = 16381
 
 
 class UnityHost(UnityResource):
@@ -70,7 +75,10 @@ class UnityHost(UnityResource):
             'fc_host_initiators.paths.is_logged_in',
             'fc_host_initiators.paths.fc_port.wwn',
             'iscsi_host_initiators.initiator_id',
+            'hostLUNs.hlu',
+            'hostLUNs.lun.id',
             'hostLUNs.lun.name',
+            'hostLUNs.snap.id',
             'hostIPPorts.address',
         )
 
@@ -137,85 +145,132 @@ class UnityHost(UnityResource):
         resp.raise_if_err()
         return self
 
-    def _get_host_lun(self, lun=None, snap=None, hlu=None):
-        lun_id = lun.id if lun is not None else None
-        snap_id = snap.id if snap is not None else None
-        hlu_no = hlu if hlu is not None else None
+    def modify_host_lun(self, lun_or_snap, new_hlu):
+        host_lun = self.get_host_lun(lun_or_snap)
+        if not host_lun:
+            raise ex.UnityResourceNotAttachedError
+        self._modify_hlu(host_lun, new_hlu)
 
-        ret = UnityHostLunList.get(self._cli, host=self.id,
-                                   lun=lun_id, snap=snap_id, hlu=hlu_no)
+    def _modify_hlu(self, host_lun, new_hlu):
+        resp = self._cli.action(self.resource_class, self.get_id(),
+                                'modifyHostLUNs',
+                                hostLunModifyList=[{'hostLUN': host_lun,
+                                                    'hlu': new_hlu}])
+        resp.raise_if_err()
 
-        if len(ret) != 1:
+    def _get_host_luns(self, lun=None, snap=None, hlu=None):
+        self.update()
+        ret = self.host_luns
+
+        if ret is None:
+            log.debug('No lun attached to the host: {}.'.format(self.name))
+            return []
+        else:
+            lun_id = lun.id if lun is not None else None
+            snap_id = snap.id if snap is not None else None
+            hlu_no = hlu if hlu is not None else None
+
+            if lun_id is not None:
+                ret = filter(lambda x: x.lun and x.lun.get_id() == lun_id, ret)
+
+            if snap_id is None:
+                # get rid of the `Snapshot` type of host access
+                ret = filter(lambda x: x.snap is None, ret)
+            else:
+                ret = filter(lambda x: x.snap and x.snap.get_id() == snap_id,
+                             ret)
+
+            if hlu_no is not None:
+                ret = filter(lambda x: x.hlu == hlu_no, ret)
+
+            ret = list(ret)
             msg = ('Found {num} host luns attached to this host. '
                    'Filter: lun={lun_id}, snap={snap_id}, '
                    'hlu={hlu_no}.').format(num=len(ret), lun_id=lun_id,
                                            snap_id=snap_id, hlu_no=hlu_no)
             log.debug(msg)
 
-        # Need filter again for the hlu of LUN, excluding the hlu of snap.
-        if lun_id and snap_id is None:
-            ret = list(filter(lambda x: x.snap is None, ret))
-
-        return ret
+            return ret
 
     def detach(self, lun_or_snap):
+        if self.host_luns:
+            # To detach the `dummy luns` which are attached via legacy storops.
+            dummy_lun_ids = [lun.get_id() for lun in self.host_luns.lun
+                             if lun.name == DUMMY_LUN_NAME]
+            if dummy_lun_ids:
+                from storops.unity.resource.lun import UnityLun
+                dummy_lun = UnityLun(cli=self._cli, _id=dummy_lun_ids[0])
+                try:
+                    dummy_lun.delete(None)
+                except ex.UnityException:
+                    pass
         return lun_or_snap.detach_from(self)
 
     def detach_alu(self, lun):
         log.warn('Method detach_alu is deprecated. Use detach instead.')
         return lun.detach_from(self)
 
-    def _create_attach_dummy_lun(self):
-        import storops.unity.resource.lun as lun_module
-        import storops.unity.resource.pool as pool_module
-        lun_list = lun_module.UnityLunList.get(self._cli, name=DUMMY_LUN_NAME)
-        if not lun_list:
-            try:
-                pool_list = pool_module.UnityPoolList.get(self._cli)
-                dummy_lun = pool_list[0].create_lun(lun_name=DUMMY_LUN_NAME)
-            except Exception as err:
-                # Ignore all errors of creating dummy lun.
-                log.warn('Failed to create dummy lun. Message: {}'.format(err))
-                dummy_lun = None
-        else:
-            dummy_lun = lun_list[0]
+    def _random_hlu_number(self):
+        existing_hlus = [host_lun.hlu for host_lun in self._get_host_luns()]
+        try:
+            candidate = random.choice(
+                list(hlu for hlu in range(1, MAX_HLU_NUMBER + 1)
+                     if hlu not in existing_hlus))
+            log.debug('Random choose hlu: {hlu} from range [1, {max}].'.format(
+                hlu=candidate, max=MAX_HLU_NUMBER))
+            return candidate
+        except IndexError:
+            raise ex.UnityNoHluAvailableError(
+                'No hlu available. Random choose hlu from range [1, {max}] '
+                'but not in existing hlu: {exist}'.format(exist=existing_hlus,
+                                                          max=MAX_HLU_NUMBER))
 
-        if dummy_lun:
-            try:
-                dummy_lun.attach_to(self)
-            except ex.UnityResourceAlreadyAttachedError:
-                pass
-            except Exception as err:
-                # Ignore all errors of attaching dummy lun.
-                log.warn('Failed to attach dummy lun. Message: {}'.format(err))
+    @version('<4.4.0')
+    @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
+    def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
+        # Before 4.4.0 (Osprey), it didn't support to pass in hlu when
+        # attaching.
+        lun_or_snap.attach_to(self)
+        host_lun = self.get_host_lun(lun_or_snap)
+        if skip_hlu_0 and host_lun.hlu == 0:
+            candidate_hlu = self._random_hlu_number()
+            self._modify_hlu(host_lun, candidate_hlu)
+            return candidate_hlu
+        else:
+            return host_lun.hlu
+
+    @version('>=4.4.0')
+    @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
+    def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
+        # From 4.4.0 (Osprey), it supported to pass in hlu when attaching LUN,
+        # but not when attaching snap.
+        from storops.unity.resource.lun import UnityLun as _UnityLun
+        if skip_hlu_0 and isinstance(lun_or_snap, _UnityLun):
+            candidate_hlu = self._random_hlu_number()
+            lun_or_snap.attach_to(self, hlu=candidate_hlu)
+            return candidate_hlu
+        else:
+            lun_or_snap.attach_to(self)
+            host_lun = self.get_host_lun(lun_or_snap)
+            return host_lun.hlu
 
     def attach(self, lun_or_snap, skip_hlu_0=False):
         if self.has_hlu(lun_or_snap):
             raise ex.UnityResourceAlreadyAttachedError()
 
-        if skip_hlu_0:
-            hlu_0 = self._get_host_lun(hlu=0)
-            if not hlu_0:
-                log.debug(
-                    'Try to skip the hlu number 0 by attaching a dummy lun.')
-                self._create_attach_dummy_lun()
-
         try:
-            lun_or_snap.attach_to(self)
-            self.update()
-            hlu = self.get_hlu(lun_or_snap)
+            return self._attach_with_retry(lun_or_snap, skip_hlu_0)
+
         except ex.SystemAPINotSupported:
             # Attaching snap to host not support before 4.1.
             raise
         except ex.UnityAttachExceedLimitError:
             # The number of luns exceeds system limit
             raise
-        except: # noqa
+        except:  # noqa
             # other attach error, remove this lun if already attached
             self.detach(lun_or_snap)
             raise
-
-        return hlu
 
     def attach_alu(self, lun):
         log.warn('Method attach_alu is deprecated. Use attach instead.')
@@ -229,7 +284,7 @@ class UnityHost(UnityResource):
         except ex.UnityAttachAluExceedLimitError:
             # The number of luns exceeds system limit
             raise
-        except: # noqa
+        except:  # noqa
             # other attach error, remove this lun if already attached
             self.detach_alu(lun)
             raise
@@ -248,23 +303,27 @@ class UnityHost(UnityResource):
         else:
             return True
 
-    def get_hlu(self, resource, cg_member=None):
+    def get_host_lun(self, lun_or_snap, cg_member=None):
         import storops.unity.resource.lun as lun_module
         import storops.unity.resource.snap as snap_module
         which = None
-        if isinstance(resource, lun_module.UnityLun):
-            which = self._get_host_lun(lun=resource)
-        elif isinstance(resource, snap_module.UnitySnap):
+        if isinstance(lun_or_snap, lun_module.UnityLun):
+            which = self._get_host_luns(lun=lun_or_snap)
+        elif isinstance(lun_or_snap, snap_module.UnitySnap):
             if cg_member is not None:
-                resource = resource.get_member_snap(cg_member)
-                which = self._get_host_lun(lun=cg_member, snap=resource)
+                lun_or_snap = lun_or_snap.get_member_snap(cg_member)
+                which = self._get_host_luns(lun=cg_member, snap=lun_or_snap)
             else:
-                which = self._get_host_lun(snap=resource)
+                which = self._get_host_luns(snap=lun_or_snap)
         if not which:
             log.debug('Resource(LUN or Snap) {} is not attached to host {}'
-                      .format(resource.name, self.name))
+                      .format(lun_or_snap.name, self.name))
             return None
-        return which[0].hlu
+        return which[0]
+
+    def get_hlu(self, resource, cg_member=None):
+        host_lun = self.get_host_lun(resource, cg_member=cg_member)
+        return host_lun if host_lun is None else host_lun.hlu
 
     def add_initiator(self, uid, force_create=True, **kwargs):
         initiators = UnityHostInitiatorList.get(cli=self._cli,

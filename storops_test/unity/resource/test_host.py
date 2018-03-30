@@ -15,27 +15,31 @@
 #    under the License.
 from __future__ import unicode_literals
 
-import ddt
 from unittest import TestCase
 
+import ddt
+import mock
 from hamcrest import equal_to, assert_that, instance_of, raises, none, \
-    only_contains, not_none
-from storops.unity.resource.nfs_share import UnityNfsShare
+    only_contains, not_none, is_not, calling
 
 from storops.exception import UnityHostIpInUseError, \
     UnityResourceNotFoundError, UnityHostInitiatorNotFoundError, \
     UnityHostInitiatorUnknownType, UnityAluAlreadyAttachedError, \
     UnityAttachAluExceedLimitError, UnitySnapAlreadyPromotedException, \
-    SystemAPINotSupported, UnityHostInitiatorExistedError
+    SystemAPINotSupported, UnityHostInitiatorExistedError, \
+    UnityResourceNotAttachedError, UnityNoHluAvailableError, \
+    UnityHluNumberInUseError, \
+    UnityResourceAlreadyAttachedError, UnityAttachExceedLimitError
 from storops.unity.enums import HostTypeEnum, HostManageEnum, \
     HostPortTypeEnum, HealthEnum, HostInitiatorTypeEnum, \
     HostInitiatorSourceTypeEnum, HostInitiatorIscsiTypeEnum
 from storops.unity.resource.health import UnityHealth
-from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.host import UnityHost, UnityHostContainer, \
     UnityHostInitiator, UnityHostInitiatorList, UnityHostIpPortList, \
     UnityHostList, UnityHostIpPort, UnityHostInitiatorPathList, \
     UnityHostLun, UnityHostLunList, UnityHostInitiatorUpdater
+from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.nfs_share import UnityNfsShare
 from storops.unity.resource.snap import UnitySnap
 from storops.unity.resource.tenant import UnityTenant
 from storops.unity.resource.vmware import UnityDataStoreList, UnityVmList
@@ -283,14 +287,14 @@ class UnityHostTest(TestCase):
     @patch_rest
     def test_get_all_host_lun_all(self):
         host = UnityHost(cli=t_rest(), _id='Host_10')
-        all_luns = host._get_host_lun()
+        all_luns = host._get_host_luns()
         assert_that(len(all_luns), equal_to(2))
 
     @patch_rest
     def test_get_one_host_lun(self):
         host = UnityHost(cli=t_rest(), _id='Host_10')
         lun1 = UnityLun(cli=t_rest(), _id="sv_2")
-        which = host._get_host_lun(lun1)
+        which = host._get_host_luns(lun1)
         assert_that(len(which), equal_to(1))
         assert_that(which[0].lun.id, equal_to(lun1.id))
 
@@ -392,6 +396,123 @@ class UnityHostTest(TestCase):
         assert_that(f, raises(UnityAttachAluExceedLimitError))
 
     @patch_rest
+    def test_random_hlu_number(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        assert_that(host._random_hlu_number(), is_not(equal_to(0)))
+
+    @patch_rest
+    def test_random_hlu_number_no_available(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        with mock.patch('storops.unity.resource.host.MAX_HLU_NUMBER', 0):
+            assert_that(calling(host._random_hlu_number),
+                        raises(UnityNoHluAvailableError))
+
+    @patch_rest
+    def test_attach_with_retry_skip_hlu_0(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_random_hlu_number', new=lambda _: 12781):
+            hlu = host._attach_with_retry(lun, True)
+            assert_that(hlu, is_not(equal_to(0)))
+            assert_that(hlu, equal_to(12781))
+
+    @patch_rest
+    def test_attach_with_retry_no_skip_hlu_0(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        assert_that(host._attach_with_retry(lun, False), equal_to(0))
+
+    @patch_rest
+    def test_attach_with_retry_no_retry(self):
+        host = UnityHost(cli=t_rest(), _id='Host_24')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        assert_that(host._attach_with_retry(lun, True), equal_to(1))
+
+    @patch_rest
+    def test_attach_with_retry_hlu_in_use(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_modify_hlu',
+                        new=mock.Mock(side_effect=UnityHluNumberInUseError)):
+            assert_that(calling(host._attach_with_retry).with_args(lun, True),
+                        raises(UnityHluNumberInUseError))
+
+    @patch_rest
+    def test_attach_with_retry_hlu_in_use_but_no_retry(self):
+        host = UnityHost(cli=t_rest(), _id='Host_24')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_modify_hlu',
+                        new=mock.Mock(side_effect=UnityHluNumberInUseError)):
+            assert_that(host._attach_with_retry(lun, True), equal_to(1))
+
+    @patch_rest
+    def test_attach_with_retry_no_hlu_available(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_random_hlu_number',
+                        new=mock.Mock(side_effect=UnityNoHluAvailableError)):
+            assert_that(calling(host._attach_with_retry).with_args(lun, True),
+                        raises(UnityNoHluAvailableError))
+
+    @patch_rest
+    def test_attach_an_attached_lun(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                    raises(UnityResourceAlreadyAttachedError))
+        assert_that(calling(host.attach).with_args(lun, skip_hlu_0=False),
+                    raises(UnityResourceAlreadyAttachedError))
+
+    @patch_rest
+    def test_attach_exceptions(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5609', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_attach_with_retry',
+                        new=mock.Mock(side_effect=SystemAPINotSupported)):
+            assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                        raises(SystemAPINotSupported))
+        with mock.patch(
+                'storops.unity.resource.host.UnityHost._attach_with_retry',
+                new=mock.Mock(side_effect=UnityAttachExceedLimitError)):
+            assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                        raises(UnityAttachExceedLimitError))
+
+    @patch_rest
+    def test_attach_exceptions_detach(self):
+        host = UnityHost(cli=t_rest(), _id='Host_25')
+        lun = UnityLun(_id='sv_5611', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_attach_with_retry',
+                        new=mock.Mock(side_effect=UnityHluNumberInUseError)):
+            assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                        raises(UnityHluNumberInUseError))
+        with mock.patch(
+                'storops.unity.resource.host.UnityHost._attach_with_retry',
+                new=mock.Mock(side_effect=UnityNoHluAvailableError)):
+            assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                        raises(UnityNoHluAvailableError))
+
+    @patch_rest
+    def test_attach_exceptions_detach_dummy_lun(self):
+        host = UnityHost(cli=t_rest(), _id='Host_26')
+        lun = UnityLun(_id='sv_5611', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_attach_with_retry',
+                        new=mock.Mock(side_effect=UnityHluNumberInUseError)):
+            assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                        raises(UnityHluNumberInUseError))
+        with mock.patch(
+                'storops.unity.resource.host.UnityHost._attach_with_retry',
+                new=mock.Mock(side_effect=UnityNoHluAvailableError)):
+            assert_that(calling(host.attach).with_args(lun, skip_hlu_0=True),
+                        raises(UnityNoHluAvailableError))
+
+    @patch_rest
     def test_attach_snap_skip_first_hlu(self):
         def f():
             host = UnityHost(cli=t_rest(), _id='Host_11')
@@ -434,6 +555,26 @@ class UnityHostTest(TestCase):
             wwns=["50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:11",
                   "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:12"])
         assert_that(r, equal_to(3))
+
+    @patch_rest
+    def test_modify_host_lun_not_attached(self):
+        host = UnityHost(cli=t_rest(), _id='Host_19')
+        lun = UnityLun(cli=t_rest(), _id='sv_3338')
+        assert_that(calling(host.modify_host_lun).with_args(lun, 100),
+                    raises(UnityResourceNotAttachedError))
+
+    @patch_rest
+    def test_modify_host_lun_hlu_in_use(self):
+        host = UnityHost(cli=t_rest(), _id='Host_22')
+        lun = UnityLun(cli=t_rest(), _id='sv_3338')
+        assert_that(calling(host.modify_host_lun).with_args(lun, 3),
+                    raises(UnityHluNumberInUseError))
+
+    @patch_rest
+    def test_modify_host_lun(self):
+        host = UnityHost(cli=t_rest(), _id='Host_22')
+        lun = UnityLun(cli=t_rest(), _id='sv_3338')
+        host.modify_host_lun(lun, 100)
 
 
 class UnityHostInitiatorUpdaterTest(TestCase):

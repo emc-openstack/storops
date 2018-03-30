@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 100663552,
+    "httpStatusCode": 422,
+    "messages": [
+      {
+        "en-US": "The specified host lun number conflicted with existing luns for this host. (Error Code:0x6000100)"
+      }
+    ],
+    "created": "2018-03-02T08:45:04.077Z"
+  }
+}

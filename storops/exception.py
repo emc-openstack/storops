@@ -363,6 +363,19 @@ class UnityResourceAlreadyAttachedError(UnityAttachError):
     message = 'Requested LUN or Snap has already been attached to this host'
 
 
+class UnityResourceNotAttachedError(UnityException):
+    message = 'Cannot modify the host LUN or Snap which is not attached yet'
+
+
+@rest_exception
+class UnityHluNumberInUseError(UnityException):
+    error_code = 100663552
+
+
+class UnityNoHluAvailableError(UnityException):
+    pass
+
+
 @rest_exception
 class UnityResourceNotFoundError(UnityException):
     error_code = 131149829

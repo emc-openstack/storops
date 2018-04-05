@@ -79,4 +79,5 @@ sudo yum install -y libguestfs-tools-c
 
 virt-copy-in -a overcloud-full.qcow2 newpkgs /root
 virt-customize -a overcloud-full.qcow2 --run-command "yum localinstall -y /root/newpkgs/*.rpm" --run-command "rm -rf /root/newpkgs"
-
+# It will be mandatory for all the deployment, otherwise will fail during boot time.
+virt-sysprep -a overcloud-full.qcow2 --selinux-relabel

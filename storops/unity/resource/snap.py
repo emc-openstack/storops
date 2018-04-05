@@ -97,8 +97,27 @@ class UnitySnap(UnityResource):
                 self.state != SnapStateEnum.DESTROYING)
 
     @version('>=4.1')
-    def attach_to(self, *hosts, access_mask=SnapAccessLevelEnum.READ_WRITE):
-        host_access = [{'host': host, 'allowedAccess': access_mask} for host in hosts]
+    def attach_to(self, hosts=None, append=False,
+                  access_mask=SnapAccessLevelEnum.READ_WRITE):
+        """Make the snapshot accessible to (additional) host(s).
+        Note: If any host access already defined for the snapshot, it cannot be
+              modified directly, but must be removed & re-added with the new
+              list of hosts, causing possible IO interruptions!
+
+        :param hosts: UnityHost or iterable of such to configure for access
+        :param append: maintain any existing hosts configured for access
+        :param access_mask: storops.unity.enums.SnapAccessLevelEnum.*
+        """
+        if isinstance(hosts, UnityResource):   # singular host -> iterable
+            hosts = [hosts]
+        else:
+            hosts = list(hosts)
+
+        if append and self.host_access:
+            hosts.extend([access.host for access in self.host_access])
+
+        host_access = [{'host': host, 'allowedAccess': access_mask}
+                       for host in hosts]
 
         # Snapshot access cannot be updated, must be detached then set anew
         if self.host_access:
@@ -108,13 +127,14 @@ class UnitySnap(UnityResource):
         if host_access:
             resp = self._cli.action(self.resource_class,
                                     self.get_id(), 'attach',
-                                    hostAccess=self._cli.make_body(host_access))
+                                    hostAccess=self._cli.make_body(
+                                      host_access))
             resp.raise_if_err()
 
         self.update()    # force self.host_access to be refreshed
         return resp
 
-    def detach_from(self, *hosts):
+    def detach_from(self, hosts=None):
         # No need to pass host in to detach action of snap.
         # Snap host access will all be detached.
         resp = self._cli.action(self.resource_class,

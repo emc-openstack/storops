@@ -93,6 +93,10 @@
       "response": "38654709077.json"
     },
     {
+      "url": "/api/instances/snap/38654705670?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "38654705670.json"
+    },
+    {
       "url": "/api/types/snap/instances?compact=True",
       "body": {
         "storageResource": {
@@ -238,6 +242,27 @@
       },
       "response": "snap_already_promoted.json"
     },
+    {
+      "url": "/api/instances/snap/38654705670/action/modify?compact=True",
+      "body": {
+        "hostAccess": [
+          {
+            "host": {
+              "id": "Host_19"
+            },
+            "allowedAccess": 1
+          },
+          {
+            "host": {
+              "id": "Host_12"
+            },
+            "allowedAccess": 0
+          }
+        ]
+      },
+      "response": "success.json"
+    },
+
     {
       "url": "/api/instances/snap/38654705676/action/attach?compact=True",
       "body": {

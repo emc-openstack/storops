@@ -1,0 +1,35 @@
+{
+  "content": {
+    "creatorUser": {
+      "id": "user_admin"
+    },
+    "name": "snap1",
+    "creationTime": "2016-05-20T09:46:28.244Z",
+    "isModified": false,
+    "creatorType": 2,
+    "state": 2,
+    "size": 3221225472,
+    "storageResource": {
+      "id": "res_55"
+    },
+    "isReadOnly": false,
+    "description": "",
+    "accessType": 2,
+    "isModifiable": false,
+    "operationalStatus": [
+      9
+    ],
+    "instanceId": "root/emc:EMC_UEM_FilesystemSnapLeaf%InstanceID=38654705670",
+    "id": "38654705670",
+    "isSystemSnap": false,
+    "isAutoDelete": true,
+    "hostAccess": [
+      {
+        "allowedAccess": 0,
+        "host": {
+          "id": "Host_12"
+        }
+      }
+    ]
+  }
+}

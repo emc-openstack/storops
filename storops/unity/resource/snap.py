@@ -99,17 +99,29 @@ class UnitySnap(UnityResource):
     @version('>=4.1')
     def attach_to(self, host, access_mask=SnapAccessLevelEnum.READ_WRITE):
         host_access = [{'host': host, 'allowedAccess': access_mask}]
-        # If this lun has been attached to other host, don't overwrite it.
-        if self.host_access:
+
+        # Needs a update, otherwise the existing host may be overwritten.
+        self.update()
+        # If this snap is detached, attach it to the host.
+        if not self.host_access:
+            resp = self._cli.action(self.resource_class,
+                                    self.get_id(), 'attach',
+                                    hostAccess=self._cli.make_body(
+                                        host_access))
+        # Else, if this snap has been attached to other host,
+        # don't overwrite it.
+        else:
             host_access += [{'host': item.host,
                              'allowedAccess': item.allowed_access}
-                            for item in filter(lambda x: x.host.id == host.id,
+                            for item in filter(lambda x: x.host.id != host.id,
                                                self.host_access)]
 
-        resp = self._cli.action(self.resource_class,
-                                self.get_id(), 'attach',
-                                hostAccess=self._cli.make_body(host_access))
+            resp = self._cli.action(self.resource_class,
+                                    self.get_id(), 'modify',
+                                    hostAccess=self._cli.make_body(
+                                        host_access))
         resp.raise_if_err()
+
         return resp
 
     def detach_from(self, host):

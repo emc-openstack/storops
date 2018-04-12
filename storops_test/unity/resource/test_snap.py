@@ -152,6 +152,13 @@ class UnitySnapTest(TestCase):
         assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
+    def test_attach_second_snap_success(self):
+        snap = UnitySnap(_id='38654705670', cli=t_rest())
+        host = UnityHost(_id="Host_19", cli=t_rest())
+        resp = snap.attach_to(host)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
     def test_detach_snap_success(self):
         snap = UnitySnap(_id='38654705676', cli=t_rest())
         host = UnityHost(_id="Host_12", cli=t_rest())

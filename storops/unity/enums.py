@@ -98,6 +98,8 @@ class NasServerUnixDirectoryServiceEnum(UnityEnum):
     NONE = (0, 'No Directory Service')
     NIS = (2, 'Use NIS Server')
     LDAP = (3, 'Use LDAP Server')
+    LOCAL_THEN_NIS = (4, 'Local Then NIS')
+    LOCAL_THEN_LDAP = (5, 'Local Then LDAP')
 
 
 class FilesystemTypeEnum(UnityEnum):
@@ -206,6 +208,7 @@ class SnapCreatorTypeEnum(UnityEnum):
     EXTERNAL_REPLICATION_MANAGER = (8, 'Created by Replication Manger')
     REP_V2 = (9, 'Created by Native Replication')
     INBAND = (11, 'Created by SnapCLI')
+    APP_SYNC = (12, 'Created by AppSync')
 
 
 class SnapStateEnum(UnityEnum):
@@ -220,6 +223,9 @@ class SnapStateEnum(UnityEnum):
 class SnapAccessLevelEnum(UnityEnum):
     READ_ONLY = (0, 'Read Only')
     READ_WRITE = (1, 'Read Write')
+    READ_ONLY_PARTIAL = (2, 'Read Only Partial')
+    READ_WRITE_PARTIAL = (3, 'Read Write Partial')
+    MIXED = (4, 'Mixed')
 
 
 class FilesystemSnapAccessTypeEnum(UnityEnum):
@@ -285,7 +291,7 @@ class PoolUnitTypeEnum(UnityEnum):
     VIRTUAL_DISK = (2, 'Virtual Disk')
 
 
-class PoolTypeEnum(UnityEnum):
+class StoragePoolTypeEnum(UnityEnum):
     DYNAMIC = (1, 'Dynamic')
     TRADITIONAL = (2, 'Traditional')
 
@@ -313,6 +319,7 @@ class EnclosureTypeEnum(UnityEnum):
     RAMHORN_6G_SAS_DPE = (28, '25 Drive 6G DPE')
     TABASCO_12G_SAS_DAE = (29, '25 Drive 12G DAE')
     ANCHO_12G_SAS_DAE = (30, '15 Drive 12G DAE')
+    NAGA_12G_SAS_DAE = (32, '80 Drive 12G DAE')
     MIRANDA_12G_SAS_DPE = (36, '25 Drive 12G DPE')
     RHEA_12G_SAS_DPE = (37, '12 Drive 12G DPE')
     VIRTUAL_DPE = (100, 'Virtual DPE')
@@ -356,6 +363,7 @@ class DedupStatusEnum(UnityEnum):
 class ESXFilesystemMajorVersionEnum(UnityEnum):
     VMFS_3 = (3, 'VMFS 3')
     VMFS_5 = (5, 'VMFS 5')
+    VMFS_6 = (6, 'VMFS 6')
 
 
 class ESXFilesystemBlockSizeEnum(UnityEnum):
@@ -394,6 +402,7 @@ class HostTypeEnum(UnityEnum):
     NET_GROUP = (3, 'Net Group')
     RPA = (4, 'RecoverPoint Appliance')
     HOST_AUTO = (5, 'Auto-managed Host')
+    VNX_SAN_COPY = (255, 'VNX Block Migration system')
 
 
 class HostManageEnum(UnityEnum):
@@ -450,6 +459,7 @@ class DatastoreTypeEnum(UnityEnum):
     UNKNOWN = (0, 'Unknown')
     VMFS_3 = (1, 'VMFS 3')
     VMFS_5 = (2, 'VMFS 5')
+    VMFS_6 = (3, 'VMFS 6')
 
 
 class VMDiskTypeEnum(UnityEnum):
@@ -667,6 +677,8 @@ class JobTaskStateEnum(UnityEnum):
     COMPLETED = (2, 'Completed')
     FAILED = (3, 'Failed')
     ROLLING_BACK = (5, 'Rolling Back')
+    COMPLETED_WITH_PROBLEMS = (6, 'Completed With Errors')
+    SUSPENDED = (7, 'Suspended')
 
 
 class SeverityEnum(UnityEnum):
@@ -727,6 +739,7 @@ class DiskTechnologyEnum(UnityEnum):
     SAS_FLASH_2 = (6, 'SAS_FLASH_2')
     SAS_FLASH_3 = (7, 'SAS_FLASH_3')
     SAS_FLASH_4 = (8, 'SAS_FLASH_4')
+    SAS_FLASH_5 = (9, 'SAS_FLASH_5')
     MIXED = (50, 'Mixed')
     VIRTUAL = (99, 'Virtual')
 

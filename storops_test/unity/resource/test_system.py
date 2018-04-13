@@ -28,7 +28,7 @@ from storops.lib.resource import ResourceList
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
     StorageResourceTypeEnum, DNSServerOriginEnum, TierTypeEnum, \
-    RaidTypeEnum, RaidStripeWidthEnum, PoolTypeEnum, DiskTypeEnumList, \
+    RaidTypeEnum, RaidStripeWidthEnum, StoragePoolTypeEnum, DiskTypeEnumList, \
     SpeedValuesEnum, ConnectorTypeEnum, FeatureStateEnum, \
     InterfaceConfigModeEnum, IpProtocolVersionEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
@@ -272,7 +272,7 @@ class UnitySystemTest(TestCase):
             pool_harvest_high_threshold=80, pool_harvest_low_threshold=40,
             snap_harvest_high_threshold=80, snap_harvest_low_threshold=40,
             is_fast_cache_enabled=True, is_fastvp_enabled=True,
-            pool_type=PoolTypeEnum.DYNAMIC)
+            pool_type=StoragePoolTypeEnum.DYNAMIC)
         assert_that(pool, instance_of(UnityPool))
 
     @patch_rest

@@ -25,7 +25,7 @@ from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     FastVPRelocationRateEnum, PoolDataRelocationTypeEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
     FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum, \
-    PoolTypeEnum
+    StoragePoolTypeEnum
 from storops.unity.resource.disk import UnityDiskGroup, UnityDisk
 from storops.unity.resource.pool import UnityPool, UnityPoolList, \
     RaidGroupParameter
@@ -70,7 +70,7 @@ class UnityPoolTest(TestCase):
         assert_that(pool.metadata_size_used, equal_to(36775657472))
         assert_that(pool.snap_size_used, equal_to(24452407296))
         assert_that(pool.is_all_flash, equal_to(False))
-        assert_that(pool.pool_type, equal_to(PoolTypeEnum.TRADITIONAL))
+        assert_that(pool.pool_type, equal_to(StoragePoolTypeEnum.TRADITIONAL))
         tiers = pool.tiers
 
         assert_that(len(tiers), equal_to(3))
@@ -175,9 +175,9 @@ class UnityPoolTest(TestCase):
             pool_harvest_high_threshold=80, pool_harvest_low_threshold=40,
             snap_harvest_high_threshold=80, snap_harvest_low_threshold=40,
             is_fast_cache_enabled=True, is_fastvp_enabled=True,
-            pool_type=PoolTypeEnum.DYNAMIC)
+            pool_type=StoragePoolTypeEnum.DYNAMIC)
         assert_that(pool.id, equal_to('pool_4'))
-        assert_that(pool.pool_type, equal_to(PoolTypeEnum.DYNAMIC))
+        assert_that(pool.pool_type, equal_to(StoragePoolTypeEnum.DYNAMIC))
         assert_that(pool.is_all_flash, equal_to(False))
 
     @patch_rest

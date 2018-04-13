@@ -145,8 +145,8 @@ class UnitySystem(UnitySingletonResource):
                True - Enable scheduled data relocations for the pool.
                False - Disable scheduled data relocations for the pool.
         :param pool_type:
-               PoolTypeEnum.TRADITIONAL - Create traditional pool.
-               PoolTypeEnum.DYNAMIC - Create dynamic pool. (default)
+               StoragePoolTypeEnum.TRADITIONAL - Create traditional pool.
+               StoragePoolTypeEnum.DYNAMIC - Create dynamic pool. (default)
         """
         return UnityPool.create(self._cli, name=name, description=description,
                                 raid_groups=raid_groups, **kwargs)

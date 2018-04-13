@@ -197,7 +197,7 @@ UnityPool:
     - label: rebalanceProgress
     - label: type
       key: pool_type
-      converter: PoolTypeEnum
+      converter: StoragePoolTypeEnum
     - label: isAllFlash
 
 

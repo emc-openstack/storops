@@ -262,8 +262,11 @@ class VNXHbaPort(VNXPort):
                 'host_initiator_list']
 
     def __hash__(self):
-        return hash('<VNXPort {{sp: {}, port_id: {}, vport_id: {}}}'
-                    .format(self.sp, self.port_id, self.vport_id))
+        if self.vport_id is not None:
+            return hash('<VNXPort {{sp: {}, port_id: {}, vport_id: {}}}'
+                        .format(self.sp, self.port_id, self.vport_id))
+        else:
+            return super(VNXHbaPort, self).__hash__()
 
 
 class VNXConnectionPortList(VNXCliResourceList):

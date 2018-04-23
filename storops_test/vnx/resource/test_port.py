@@ -522,6 +522,17 @@ class VNXPortTest(TestCase):
         assert_that(list(r)[0].sp, equal_to(VNXSPEnum.SP_B))
 
     @patch_cli
+    def test_hba_port_with_sp_port(self):
+        sg = VNXStorageGroup.get(cli=t_cli(), name='server7')
+        sg_ports = sg.get_ports(
+            '20:00:00:90:FA:53:4C:D0:10:00:00:90:FA:53:4C:D0')
+        sp_ports = VNXSPPort.get(cli=t_cli(), sp=VNXSPEnum.SP_A,
+                                 port_type=VNXPortType.FC)
+        r = set(sg_ports) - set(sp_ports)
+        for x in r:
+            assert_that(x.sp, equal_to(VNXSPEnum.SP_B))
+
+    @patch_cli
     def test_get_metrics_csv(self):
         ports = VNXSPPort.get(t_cli())
         csv = ports.get_metrics_csv()

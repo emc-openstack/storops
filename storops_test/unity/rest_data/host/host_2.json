@@ -1,0 +1,95 @@
+{
+  "content": {
+    "id": "Host_2",
+    "operationalStatus": [
+      2
+    ],
+    "type": 5,
+    "autoManageType": 1,
+    "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_1",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "name": "10.244.209.90",
+    "description": "",
+    "osType": "VMware ESXi 6.0.0",
+    "hostPushedUUID": "5322a3d1-2901-08c3-c39f-f80f41fafe2e",
+    "hostPolledUUID": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e",
+    "lastPollTime": "2016-03-03T04:40:13.000Z",
+    "hostContainer": {
+      "id": "mss_1"
+    },
+    "iscsiHostInitiators": [
+      {
+        "id": "HostInitiator_1",
+        "initiatorId": "50:00:14:40:47:B0:0C:44:50:00:14:42:D0:0C:44:10"
+      }
+    ],
+    "hostIPPorts": [
+      {
+        "id": "HostNetworkAddress_1"
+      }
+    ],
+    "datastores": [
+      {
+        "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/564cf41c-fc332453-32a8-f80f41fafe2e/"
+      },
+      {
+        "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/5322a4d4-728ccd94-8dc2-f80f41fafe2e/"
+      },
+      {
+        "id": "rfc4122.cd9f4de2-78a5-11e3-85bd-f80f41fafe2e_ds:///vmfs/volumes/75df1b51-9c9b37af/"
+      }
+    ],
+    "vms": [
+      {
+        "id": "503e0a21-67c3-11c6-4100-eca1a1b3dca3"
+      },
+      {
+        "id": "503e33de-3748-ef18-ce4f-5a75cf5c56fc"
+      },
+      {
+        "id": "503e37d0-aaab-05e2-5658-2b601b9ed545"
+      },
+      {
+        "id": "503e4dae-89e3-ac14-d15e-27cec81b5edd"
+      },
+      {
+        "id": "503e5625-1dcb-5a86-163c-6c44c9f7a613"
+      },
+      {
+        "id": "503e729d-5fd5-307a-015d-33dcc3ddd353"
+      },
+      {
+        "id": "503e7b9e-a998-adc3-d1f2-ef7572a9282e"
+      },
+      {
+        "id": "503e9236-35e5-a29c-2484-19a6b7a591ce"
+      },
+      {
+        "id": "503e9d4b-dcd2-58e4-39cf-4952a03aba04"
+      },
+      {
+        "id": "503ee342-17e6-c873-c8b2-3855f8f12f9a"
+      },
+      {
+        "id": "503ee745-0f3e-bd7a-a07a-0a680febbdbb"
+      },
+      {
+        "id": "5271b28c-d0f7-856e-af81-77d42c88d67a"
+      },
+      {
+        "id": "503efcd0-58d0-b635-86bf-402226a30eec"
+      },
+      {
+        "id": "503e12de-cc11-2281-e225-d03a002754bc"
+      }
+    ]
+  }
+}

@@ -482,7 +482,7 @@ class UnitySystemTest(TestCase):
         lun1 = UnityLun(cli=t_rest(), _id='sv_3339')
         lun2 = UnityLun(cli=t_rest(), _id='sv_3340')
         unity = t_unity()
-        cg = unity.create_cg('Muse', lun_list=[lun1, lun2])
+        cg = unity.create_cg('Muse', lun_add=[lun1, lun2])
         assert_that(cg.name, equal_to('Muse'))
         assert_that(len(cg.luns), equal_to(2))
 

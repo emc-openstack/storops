@@ -23,7 +23,7 @@ from storops.exception import UnityBaseHasThinCloneError, \
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
-    HostLUNAccessEnum, ThinCloneActionEnum
+    HostLUNAccessEnum, ThinCloneActionEnum, StorageResourceTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.host import UnityHostList
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
@@ -37,12 +37,16 @@ log = logging.getLogger(__name__)
 
 
 class UnityLun(UnityResource):
+
+    _is_cg_member = None
+
     @classmethod
     def get_nested_properties(cls):
         return (
             'pool.raid_type',
             'pool.isFASTCacheEnabled',
             'host_access.host.name',
+            'storage_resource.type'  # To avoid query parent type
         )
 
     @classmethod
@@ -78,6 +82,19 @@ class UnityLun(UnityResource):
     @name.setter
     def name(self, new_name):
         self.modify(name=new_name)
+
+    @property
+    def is_cg_member(self):
+        """Allows setting storage resource as a member LUN."""
+        if self._is_cg_member is None:  # None means unknown, requires a query
+            return (self.storage_resource.type ==
+                    StorageResourceTypeEnum.CONSISTENCY_GROUP)
+        else:
+            return self._is_cg_member
+
+    @is_cg_member.setter
+    def is_cg_member(self, is_cg_member):
+        self._is_cg_member = is_cg_member
 
     @property
     def io_limit_rule(self):
@@ -117,6 +134,9 @@ class UnityLun(UnityResource):
         :param new_size: new size in bytes.
         :return: the old size
         """
+        if self.is_cg_member is True:
+            return _CGLunProxy(lun=self).expand(new_size)
+
         ret = self.size_total
         resp = self.modify(size=new_size)
         resp.raise_if_err()
@@ -170,6 +190,17 @@ class UnityLun(UnityResource):
                description=None, sp=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,
                is_compression=None):
+        if self.is_cg_member is True:
+            return _CGLunProxy(lun=self).modify(
+                name=name, size=size,
+                host_access=host_access,
+                description=description,
+                sp=sp,
+                io_limit_policy=io_limit_policy,
+                # is_repl_dst=is_repl_dst,
+                tiering_policy=tiering_policy,
+                # snap_schedule=snap_schedule,
+                is_compression=is_compression)
 
         req_body = self._compose_lun_parameter(
             self._cli, name=name, pool=None, size=size, sp=sp,
@@ -205,6 +236,9 @@ class UnityLun(UnityResource):
         return resp
 
     def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
+        if self.is_cg_member is True:
+            return _CGLunProxy(lun=self).attach_to(host, access_mask)
+
         host_access = [{'host': host, 'accessMask': access_mask}]
         # If this lun has been attached to other host, don't overwrite it.
         if self.host_access:
@@ -220,6 +254,9 @@ class UnityLun(UnityResource):
         return resp
 
     def detach_from(self, host):
+        if self.is_cg_member is True:
+            return _CGLunProxy(lun=self).detach_from(host)
+
         if self.host_access is None:
             return None
 
@@ -287,6 +324,55 @@ class UnityLun(UnityResource):
     def snapshots(self):
         return UnitySnapList(cli=self._cli,
                              storage_resource=self.storage_resource)
+
+
+class _CGLunProxy(object):
+    """Proxy any modify request of member LUN to the UnityConsistencyGroup"""
+
+    def __init__(self, lun=None):
+        super(_CGLunProxy, self).__init__()
+        self.lun = lun
+        from storops.unity.resource.cg import UnityConsistencyGroup
+        self._cg = UnityConsistencyGroup(cli=lun._cli,
+                                         _id=lun.storage_resource.id)
+
+    def modify(self, **kwargs):
+        lun_modify = {"lun": self.lun}
+        req_body = UnityLun._compose_lun_parameter(cli=self.lun._cli, **kwargs)
+        if req_body:
+            lun_modify.update(req_body)
+        return self._cg.modify(lun_modify=[lun_modify])
+
+    def expand(self, new_size):
+        return self.modify(size=new_size)
+
+    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
+
+        host_access = [{'host': host, 'accessMask': access_mask}]
+        # If this lun has been attached to other host, don't overwrite it.
+        if self.lun.host_access:
+            host_access += [{'host': access.host,
+                             'accessMask': access.access_mask} for access
+                            in self.lun.host_access if
+                            host.id != access.host.id]
+        return self.modify(host_access=host_access)
+
+    def detach_from(self, host):
+        if self.lun.host_access is None:
+            log.info(
+                "Lun '{}' is not attached to any host, nothing to do.".format(
+                    self.lun.get_id()))
+            return None
+
+        if host is None:
+            # Detach the lun from all hosts if `host` is None
+            log.info("Detach lun - '%s'from all hosts.", self.lun.get_id())
+            new_access = []
+        else:
+            new_access = [{'host': item.host,
+                           'accessMask': item.access_mask} for item
+                          in self.lun.host_access if host.id != item.host.id]
+        return self.modify(host_access=new_access)
 
 
 class UnityLunList(UnityResourceList):

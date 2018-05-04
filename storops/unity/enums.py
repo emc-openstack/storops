@@ -392,6 +392,7 @@ class HostLUNAccessEnum(UnityEnum):
     PRODUCTION = (1, 'Production LUNs only')
     SNAPSHOT = (2, 'LUN Snapshots only')
     BOTH = (3, 'Production LUNs and Snapshots')
+    # Applies to consistency groups only
     MIXED = (0xffff, 'Mixed')
 
 

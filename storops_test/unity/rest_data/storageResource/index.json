@@ -17,12 +17,20 @@
       "response": "sv_2.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_4?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_4.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_3?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "res_3.json"
     },
     {
       "url": "/api/instances/storageResource/res_4?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "res_4.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_6?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_6.json"
     },
     {
       "url": "/api/instances/storageResource/res_13?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
@@ -1079,6 +1087,36 @@
         "forceSnapDeletion": false,
         "forceVvolDeletion": false
       },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunModify": [{"lunParameters": {"hostAccess": [{"host": {"id": "Host_22"}, "accessMask": 1}, {"host": {"id": "Host_2"}, "accessMask": 1}]}, "lun": {"id": "sv_15"}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"hostAccess": []}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"size": 107374182400}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"size": 16106127360}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_6/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunRemove": [{"lun": {"id": "sv_14"}}, {"lun": {"id": "sv_15"}}], "lunAdd": [{"lun": {"id": "sv_3342"}}, {"lun": {"id": "sv_3341"}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_6/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunRemove": [{"lun": {"id": "sv_15"}}], "lunAdd": [{"lun": {"id": "sv_3341"}}]},
       "response": "empty.json"
     }
   ]

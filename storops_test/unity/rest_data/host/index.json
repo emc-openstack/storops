@@ -120,12 +120,20 @@
       "response": "empty.json"
     },
     {
+      "url": "/api/instances/host/Host_2?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.hlu,hostLUNs.lun.id,hostLUNs.lun.name,hostLUNs.snap.id,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_2.json"
+    },
+    {
       "url": "/api/instances/host/Host_12?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.hlu,hostLUNs.lun.id,hostLUNs.lun.name,hostLUNs.snap.id,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "host_12.json"
     },
     {
       "url": "/api/instances/host/Host_13?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.hlu,hostLUNs.lun.id,hostLUNs.lun.name,hostLUNs.snap.id,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
       "response": "host_13.json"
+    },
+        {
+      "url": "/api/instances/host/Host_14?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.hlu,hostLUNs.lun.id,hostLUNs.lun.name,hostLUNs.snap.id,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",
+      "response": "host_14.json"
     },
     {
       "url": "/api/instances/host/Host_15?compact=True&fields=autoManageType,datastores,description,fcHostInitiators,fcHostInitiators.initiatorId,fcHostInitiators.paths.fcPort.wwn,fcHostInitiators.paths.initiator.type,fcHostInitiators.paths.isLoggedIn,health,hostContainer,hostIPPorts,hostIPPorts.address,hostLUNs,hostLUNs.hlu,hostLUNs.lun.id,hostLUNs.lun.name,hostLUNs.snap.id,hostPolledUUID,hostPushedUUID,hostUUID,hostVVolDatastore,id,instanceId,isInitializationComplete,iscsiHostInitiators,iscsiHostInitiators.initiatorId,lastPollTime,name,nfsShareAccesses,operationalStatus,osType,registrationType,storageResources,type,vms",

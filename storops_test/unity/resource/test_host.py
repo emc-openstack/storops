@@ -410,6 +410,7 @@ class UnityHostTest(TestCase):
     def test_attach_with_retry_skip_hlu_0(self):
         host = UnityHost(cli=t_rest(), _id='Host_23')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
         with mock.patch('storops.unity.resource.host.UnityHost.'
                         '_random_hlu_number', new=lambda _: 12781):
             hlu = host._attach_with_retry(lun, True)
@@ -420,18 +421,21 @@ class UnityHostTest(TestCase):
     def test_attach_with_retry_no_skip_hlu_0(self):
         host = UnityHost(cli=t_rest(), _id='Host_23')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
         assert_that(host._attach_with_retry(lun, False), equal_to(0))
 
     @patch_rest
     def test_attach_with_retry_no_retry(self):
         host = UnityHost(cli=t_rest(), _id='Host_24')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
         assert_that(host._attach_with_retry(lun, True), equal_to(1))
 
     @patch_rest
     def test_attach_with_retry_hlu_in_use(self):
         host = UnityHost(cli=t_rest(), _id='Host_23')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
         with mock.patch('storops.unity.resource.host.UnityHost.'
                         '_modify_hlu',
                         new=mock.Mock(side_effect=UnityHluNumberInUseError)):
@@ -442,6 +446,7 @@ class UnityHostTest(TestCase):
     def test_attach_with_retry_hlu_in_use_but_no_retry(self):
         host = UnityHost(cli=t_rest(), _id='Host_24')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
         with mock.patch('storops.unity.resource.host.UnityHost.'
                         '_modify_hlu',
                         new=mock.Mock(side_effect=UnityHluNumberInUseError)):
@@ -451,6 +456,7 @@ class UnityHostTest(TestCase):
     def test_attach_with_retry_no_hlu_available(self):
         host = UnityHost(cli=t_rest(), _id='Host_23')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
         with mock.patch('storops.unity.resource.host.UnityHost.'
                         '_random_hlu_number',
                         new=mock.Mock(side_effect=UnityNoHluAvailableError)):
@@ -476,6 +482,7 @@ class UnityHostTest(TestCase):
     def test_attach_exceptions_detach(self):
         host = UnityHost(cli=t_rest(), _id='Host_25')
         lun = UnityLun(_id='sv_5611', cli=t_rest())
+        lun.is_cg_member = False
         with mock.patch('storops.unity.resource.host.UnityHost.'
                         '_attach_with_retry',
                         new=mock.Mock(side_effect=UnityHluNumberInUseError)):
@@ -491,6 +498,7 @@ class UnityHostTest(TestCase):
     def test_attach_exceptions_detach_dummy_lun(self):
         host = UnityHost(cli=t_rest(), _id='Host_26')
         lun = UnityLun(_id='sv_5611', cli=t_rest())
+        lun.is_cg_member = False
         with mock.patch('storops.unity.resource.host.UnityHost.'
                         '_attach_with_retry',
                         new=mock.Mock(side_effect=UnityHluNumberInUseError)):

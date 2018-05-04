@@ -174,6 +174,7 @@ class UnityLunTest(TestCase):
     @patch_rest
     def test_lun_detach_from_all_hosts(self):
         lun = UnityLun(_id='sv_5', cli=t_rest())
+        lun.is_cg_member = False
         resp = lun.detach_from(host=None)
         assert_that(resp.is_ok(), equal_to(True))
 

@@ -1,0 +1,74 @@
+{
+    "@base": "https://10.245.101.39/api/instances/storageResource",
+    "updated": "2018-05-07T09:48:57.880Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/res_6"
+        }
+    ],
+    "content": {
+        "id": "res_6",
+        "type": 2,
+        "replicationType": 0,
+        "thinStatus": 1,
+        "relocationPolicy": 0,
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ]
+        },
+        "name": "cg-2",
+        "description": "",
+        "isReplicationDestination": false,
+        "sizeTotal": 85899345920,
+        "sizeAllocated": 0,
+        "perTierSizeUsed": [
+            0,
+            6442450944,
+            0
+        ],
+        "blockHostAccess": [
+            {
+                "accessMask": 65535,
+                "productionAccess": 2,
+                "snapshotAccess": 0,
+                "instanceId": "root/emc:EMC_UIS_UEM_BlockHostAccessLeaf%InstanceID=1",
+                "host": {
+                    "id": "Host_5"
+                }
+            },
+            {
+                "accessMask": 1,
+                "productionAccess": 1,
+                "snapshotAccess": 0,
+                "instanceId": "root/emc:EMC_UIS_UEM_BlockHostAccessLeaf%InstanceID=2",
+                "host": {
+                    "id": "Host_2"
+                }
+            }
+        ],
+        "metadataSize": 7516192768,
+        "metadataSizeAllocated": 5368709120,
+        "snapsSizeTotal": 0,
+        "snapsSizeAllocated": 0,
+        "snapCount": 0,
+        "pools": [
+            {
+                "id": "pool_2"
+            }
+        ],
+        "luns": [
+            {
+                "id": "sv_15"
+            },
+            {
+                "id": "sv_14"
+            }
+        ]
+    }
+}

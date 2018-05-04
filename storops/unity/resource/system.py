@@ -47,7 +47,7 @@ from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
     UnitySasPortList, UnityIscsiNodeList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
-from storops.unity.resource.storage_resource import UnityConsistencyGroup, \
+from storops.unity.resource.cg import UnityConsistencyGroup, \
     UnityConsistencyGroupList
 from storops.unity.resource.tenant import UnityTenant, UnityTenantList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
@@ -271,9 +271,9 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityConsistencyGroupList, _id=_id,
                                    name=name, **filters)
 
-    def create_cg(self, name, description=None, lun_list=None, hosts=None):
+    def create_cg(self, name, description=None, lun_add=None, hosts=None):
         return UnityConsistencyGroup.create(
-            self._cli, name, description=description, lun_list=lun_list,
+            self._cli, name, description=description, lun_add=lun_add,
             hosts=hosts)
 
     def get_doc(self, resource):

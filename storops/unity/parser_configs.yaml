@@ -855,7 +855,9 @@ UnityIoLimitRuleSetting:
     - label: maxKBPSDensity
     - label: burstRate
     - label: burstTime
+      converter: to_minute
     - label: burstFrequency
+      converter: to_hour
 
 
 UnityFileDnsServer:

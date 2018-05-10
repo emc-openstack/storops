@@ -329,8 +329,8 @@ class UnityIoLimitPolicyTest(TestCase):
         assert_that(len(settings), equal_to(1))
 
         setting = settings[0]
-        assert_that(setting.burst_frequency, equal_to('01:00:00.000'))
-        assert_that(setting.burst_time, equal_to('00:05:00.000'))
+        assert_that(setting.burst_frequency, equal_to(1))
+        assert_that(setting.burst_time, equal_to(5))
         assert_that(setting.get_id(), equal_to('qr_2'))
         assert_that(setting.max_kbps, equal_to(2048))
         assert_that(setting.name, equal_to('Limit_2_MBPS_rule'))

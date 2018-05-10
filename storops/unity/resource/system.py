@@ -259,13 +259,17 @@ class UnitySystem(UnitySingletonResource):
     def create_io_limit_policy(self, name, max_iops=None, max_kbps=None,
                                policy_type=None, is_shared=None,
                                description=None, max_iops_density=None,
-                               max_kbps_density=None):
+                               max_kbps_density=None, burst_rate=None,
+                               burst_time=None, burst_frequency=None):
         return UnityIoLimitPolicy.create(
             self._cli, name, max_iops=max_iops, max_kbps=max_kbps,
             policy_type=policy_type, is_shared=is_shared,
             description=description,
             max_iops_density=max_iops_density,
-            max_kbps_density=max_kbps_density)
+            max_kbps_density=max_kbps_density,
+            burst_rate=burst_rate,
+            burst_time=burst_time,
+            burst_frequency=burst_frequency)
 
     def get_cg(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityConsistencyGroupList, _id=_id,

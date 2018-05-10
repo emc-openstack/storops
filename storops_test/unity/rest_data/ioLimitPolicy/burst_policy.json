@@ -1,0 +1,41 @@
+{
+  "@base": "https://10.245.101.39/api/types/ioLimitPolicy/instances?filter=name eq \"puppet_policy\"&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type&per_page=2000&compact=true",
+  "updated": "2018-05-10T02:50:37.250Z",
+  "links": [
+    {
+      "href": "&page=1",
+      "rel": "self"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "description": "Created by puppet 12",
+        "ioLimitRuleSettings": [
+          {
+            "maxKBPS": 20480,
+            "burstRate": 50,
+            "burstFrequency": "02:00:00.000",
+            "instanceId": "qr_1",
+            "burstTime": "00:10:00.000",
+            "id": "qr_1",
+            "maxIOPS": 1000,
+            "name": "puppet_policy_rule"
+          }
+        ],
+        "instanceId": "qp_1",
+        "ioLimitRules": [
+          {
+            "id": "qr_1"
+          }
+        ],
+        "state": 3,
+        "isPaused": false,
+        "isShared": false,
+        "type": 1,
+        "id": "qp_1",
+        "name": "burst_policy"
+      }
+    }
+  ]
+}

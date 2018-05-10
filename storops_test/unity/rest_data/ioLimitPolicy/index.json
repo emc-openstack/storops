@@ -5,6 +5,10 @@
       "response": "type.json"
     },
     {
+      "url": "/api/instances/ioLimitPolicy/qp_1?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
+      "response": "burst_policy.json"
+    },
+    {
       "url": "/api/instances/ioLimitPolicy/qp_2?compact=True&fields=description,effectiveIoLimitMaxIOPS,effectiveIoLimitMaxKBPS,id,instanceId,ioLimitRuleSettings,ioLimitRules,isPaused,isShared,luns,name,snaps,state,type",
       "response": "qp_2.json"
     },
@@ -74,6 +78,27 @@
         "isShared": false
       },
       "response": "policy_name_used.json"
+    },
+    {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True",
+      "body": {
+        "isShared": false,
+        "type": 1,
+        "description": "storops",
+        "ioLimitRules": [
+          {
+            "maxKBPS": 20480,
+            "burstRate": 50,
+            "burstFrequency": "02:00:00.000",
+            "burstTime": "00:10:00.000",
+            "maxIOPS": 1000,
+            "name": "burst_policy_rule"
+          }
+        ],
+        "name": "burst_policy"
+},
+      "response": "burst_policy.json"
+
     },
     {
       "url": "/api/instances/ioLimitPolicy/qp_8?compact=True",

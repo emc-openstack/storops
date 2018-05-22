@@ -22,6 +22,7 @@ from storops.unity import enums
 from storops.unity.resource.storage_resource import UnityStorageResource, \
     UnityStorageResourceList
 
+from storops.unity.resource import lun as lun_mod
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 
@@ -54,7 +55,7 @@ class UnityConsistencyGroup(UnityStorageResource):
             resp.raise_if_err()
         except UnityStorageResourceNameInUseError:
             raise UnityConsistencyGroupNameInUseError()
-        except: # noqa
+        except:  # noqa
             raise
         return UnityConsistencyGroup(_id=resp.resource_id, cli=cli)
 
@@ -130,6 +131,25 @@ class UnityConsistencyGroup(UnityStorageResource):
             req_body['lunModify'] = lun_modify
 
         return req_body
+
+    def modify_lun(self, lun, name=None, size=None, host_access=None,
+                   description=None, sp=None, io_limit_policy=None,
+                   tiering_policy=None, is_compression=None):
+
+        lun_modify = self._cli.make_body(
+            lun=lun,
+            name=name,
+            description=description,
+            lunParameters=lun_mod.prepare_lun_parameters(
+                size=size,
+                host_access=host_access,
+                sp=sp,
+                io_limit_policy=io_limit_policy,
+                tiering_policy=tiering_policy,
+                is_compression=is_compression),
+            allow_empty=True)
+
+        return self.modify(lun_modify=[lun_modify])
 
     @staticmethod
     def _wrap_host_list(host_list, cli):

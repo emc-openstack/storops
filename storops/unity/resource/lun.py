@@ -22,6 +22,7 @@ from storops.exception import UnityBaseHasThinCloneError, \
     UnityResourceNotFoundError
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
+from storops.unity.client import UnityClient
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
     HostLUNAccessEnum, ThinCloneActionEnum, StorageResourceTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
@@ -36,9 +37,41 @@ __author__ = 'Jay Xu'
 log = logging.getLogger(__name__)
 
 
-class UnityLun(UnityResource):
+def prepare_lun_parameters(**kwargs):
+    sp = kwargs.get('sp')
+    if isinstance(sp, UnityStorageProcessor):
+        sp_node = sp.to_node_enum()
+    elif isinstance(sp, NodeEnum):
+        sp_node = sp
+    else:
+        sp_node = NodeEnum.parse(sp)
+    NodeEnum.verify(sp_node)
 
+    TieringPolicyEnum.verify(kwargs.get('tiering_policy'))
+
+    lun_parameters = UnityClient.make_body(
+        isThinEnabled=kwargs.get('is_thin'),
+        isCompressionEnabled=kwargs.get('is_compression'),
+        size=kwargs.get('size'),
+        pool=kwargs.get('pool'),
+        defaultNode=sp_node,
+        fastVPParameters=UnityClient.make_body(
+            tieringPolicy=kwargs.get('tiering_policy')),
+        ioLimitParameters=UnityClient.make_body(
+            ioLimitPolicy=kwargs.get('io_limit_policy')))
+
+    # Empty host access can be used to wipe the host_access
+    host_access = UnityClient.make_body(kwargs.get('host_access'),
+                                        allow_empty=True)
+
+    if host_access is not None:
+        lun_parameters['hostAccess'] = host_access
+    return lun_parameters
+
+
+class UnityLun(UnityResource):
     _is_cg_member = None
+    _cg = None
 
     @classmethod
     def get_nested_properties(cls):
@@ -97,6 +130,14 @@ class UnityLun(UnityResource):
         self._is_cg_member = is_cg_member
 
     @property
+    def cg(self):
+        if self.is_cg_member and self._cg is None:
+            from storops.unity.resource.cg import UnityConsistencyGroup
+            self._cg = UnityConsistencyGroup(cli=self._cli,
+                                             _id=self.storage_resource.id)
+        return self._cg
+
+    @property
     def io_limit_rule(self):
         rule = None
         if self.io_limit_policy:
@@ -134,9 +175,6 @@ class UnityLun(UnityResource):
         :param new_size: new size in bytes.
         :return: the old size
         """
-        if self.is_cg_member is True:
-            return _CGLunProxy(lun=self).expand(new_size)
-
         ret = self.size_total
         resp = self.modify(size=new_size)
         resp.raise_if_err()
@@ -144,74 +182,43 @@ class UnityLun(UnityResource):
 
     @staticmethod
     def _compose_lun_parameter(cli, **kwargs):
-        sp = kwargs.get('sp')
-        if isinstance(sp, UnityStorageProcessor):
-            sp_node = sp.to_node_enum()
-        elif isinstance(sp, NodeEnum):
-            sp_node = sp
-        else:
-            sp_node = NodeEnum.parse(sp)
-
-        TieringPolicyEnum.verify(kwargs.get('tiering_policy'))
-        NodeEnum.verify(sp_node)
 
         # TODO: snap_schedule
-        req_body = cli.make_body(
+        return cli.make_body(
             name=kwargs.get('name'),
             description=kwargs.get('description'),
             replicationParameters=cli.make_body(
                 isReplicationDestination=kwargs.get('is_repl_dst')
             ),
-            lunParameters=cli.make_body(
-                isThinEnabled=kwargs.get('is_thin'),
-                isCompressionEnabled=kwargs.get('is_compression'),
-                size=kwargs.get('size'),
-                pool=kwargs.get('pool'),
-                defaultNode=sp_node,
-                fastVPParameters=cli.make_body(
-                    tieringPolicy=kwargs.get('tiering_policy')),
-                ioLimitParameters=cli.make_body(
-                    ioLimitPolicy=kwargs.get('io_limit_policy'))
-            )
+            lunParameters=prepare_lun_parameters(**kwargs)
         )
-
-        # Empty host access can be used to wipe the host_access
-        host_access_value = cli.make_body(
-            kwargs.get('host_access'), allow_empty=True)
-
-        if host_access_value is not None:
-            if 'lunParameters' not in req_body:
-                req_body['lunParameters'] = {}
-            req_body['lunParameters']['hostAccess'] = host_access_value
-
-        return req_body
 
     def modify(self, name=None, size=None, host_access=None,
                description=None, sp=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,
                is_compression=None):
-        if self.is_cg_member is True:
-            return _CGLunProxy(lun=self).modify(
-                name=name, size=size,
-                host_access=host_access,
-                description=description,
-                sp=sp,
-                io_limit_policy=io_limit_policy,
-                # is_repl_dst=is_repl_dst,
-                tiering_policy=tiering_policy,
-                # snap_schedule=snap_schedule,
-                is_compression=is_compression)
+        if self.is_cg_member:
+            if is_repl_dst is not None or snap_schedule is not None:
+                log.warning('LUN in CG not support to modify `is_repl_dst` and'
+                            ' `snap_schedule`.')
+            return self.cg.modify_lun(self, name=name, size=size,
+                                      host_access=host_access,
+                                      description=description, sp=sp,
+                                      io_limit_policy=io_limit_policy,
+                                      tiering_policy=tiering_policy,
+                                      is_compression=is_compression)
 
-        req_body = self._compose_lun_parameter(
-            self._cli, name=name, pool=None, size=size, sp=sp,
-            host_access=host_access, description=description,
-            io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
-            tiering_policy=tiering_policy, snap_schedule=snap_schedule,
-            is_compression=is_compression)
-        resp = self._cli.action(UnityStorageResource().resource_class,
-                                self.get_id(), 'modifyLun', **req_body)
-        resp.raise_if_err()
-        return resp
+        else:
+            req_body = self._compose_lun_parameter(
+                self._cli, name=name, pool=None, size=size, sp=sp,
+                host_access=host_access, description=description,
+                io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
+                tiering_policy=tiering_policy, snap_schedule=snap_schedule,
+                is_compression=is_compression)
+            resp = self._cli.action(UnityStorageResource().resource_class,
+                                    self.get_id(), 'modifyLun', **req_body)
+            resp.raise_if_err()
+            return resp
 
     def delete(self, async=False, force_snap_delete=False,
                force_vvol_delete=False):
@@ -236,9 +243,6 @@ class UnityLun(UnityResource):
         return resp
 
     def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
-        if self.is_cg_member is True:
-            return _CGLunProxy(lun=self).attach_to(host, access_mask)
-
         host_access = [{'host': host, 'accessMask': access_mask}]
         # If this lun has been attached to other host, don't overwrite it.
         if self.host_access:
@@ -254,9 +258,6 @@ class UnityLun(UnityResource):
         return resp
 
     def detach_from(self, host):
-        if self.is_cg_member is True:
-            return _CGLunProxy(lun=self).detach_from(host)
-
         if self.host_access is None:
             return None
 
@@ -324,55 +325,6 @@ class UnityLun(UnityResource):
     def snapshots(self):
         return UnitySnapList(cli=self._cli,
                              storage_resource=self.storage_resource)
-
-
-class _CGLunProxy(object):
-    """Proxy any modify request of member LUN to the UnityConsistencyGroup"""
-
-    def __init__(self, lun=None):
-        super(_CGLunProxy, self).__init__()
-        self.lun = lun
-        from storops.unity.resource.cg import UnityConsistencyGroup
-        self._cg = UnityConsistencyGroup(cli=lun._cli,
-                                         _id=lun.storage_resource.id)
-
-    def modify(self, **kwargs):
-        lun_modify = {"lun": self.lun}
-        req_body = UnityLun._compose_lun_parameter(cli=self.lun._cli, **kwargs)
-        if req_body:
-            lun_modify.update(req_body)
-        return self._cg.modify(lun_modify=[lun_modify])
-
-    def expand(self, new_size):
-        return self.modify(size=new_size)
-
-    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION):
-
-        host_access = [{'host': host, 'accessMask': access_mask}]
-        # If this lun has been attached to other host, don't overwrite it.
-        if self.lun.host_access:
-            host_access += [{'host': access.host,
-                             'accessMask': access.access_mask} for access
-                            in self.lun.host_access if
-                            host.id != access.host.id]
-        return self.modify(host_access=host_access)
-
-    def detach_from(self, host):
-        if self.lun.host_access is None:
-            log.info(
-                "Lun '{}' is not attached to any host, nothing to do.".format(
-                    self.lun.get_id()))
-            return None
-
-        if host is None:
-            # Detach the lun from all hosts if `host` is None
-            log.info("Detach lun - '%s'from all hosts.", self.lun.get_id())
-            new_access = []
-        else:
-            new_access = [{'host': item.host,
-                           'accessMask': item.access_mask} for item
-                          in self.lun.host_access if host.id != item.host.id]
-        return self.modify(host_access=new_access)
 
 
 class UnityLunList(UnityResourceList):

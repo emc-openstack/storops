@@ -239,8 +239,9 @@ class UnityConsistencyGroupTest(TestCase):
     @patch_rest
     def test_expand_lun_in_cg(self):
         lun_in_cg = UnityLun.get(cli=t_rest(), _id='sv_15')
+        old_size = lun_in_cg.size_total
         resp = lun_in_cg.expand(100 * 1024 ** 3)
-        assert_that(resp.is_ok(), equal_to(True))
+        assert_that(resp, equal_to(old_size))
 
     @patch_rest
     def test_modify_lun_in_cg(self):

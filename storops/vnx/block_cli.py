@@ -784,6 +784,126 @@ class CliClient(PerfManager):
         cmd = ['mirror', '-sync', '-listgroups']
         cmd += text_var('-name', name)
         return cmd
+   
+   ## MirrorView/A     
+   @command
+    def create_mirror_view_async(self, name, lun_id):
+        cmd = 'mirror -async -create'.split()
+        cmd += text_var('-name', name)
+        cmd += int_var('-lun', lun_id)
+        cmd.append('-o')
+        return cmd
+
+    @command
+    def delete_mirror_view_async(self, name):
+        cmd = 'mirror -async -destroy'.split()
+        cmd += text_var('-name', name)
+        cmd.append('-o')
+        return cmd
+
+    @command
+    def add_mirror_view_image_async(self, name, sp_ip, lun_id,
+                              recovery_policy=VNXMirrorViewRecoveryPolicy.AUTO,
+                              sync_rate=VNXMirrorViewSyncRate.HIGH):
+        cmd = 'mirror -async -addimage'.split()
+        cmd += text_var('-name', name)
+        cmd += text_var('-arrayhost', sp_ip)
+        cmd += int_var('-lun', lun_id)
+        cmd += VNXMirrorViewRecoveryPolicy.get_opt(recovery_policy)
+        cmd += enum_var('-syncrate', sync_rate, VNXMirrorViewSyncRate)
+        return cmd
+
+    @staticmethod
+    def _mirror_view_image_async_op(op, name, image_id):
+        cmd = ['mirror', '-async', op]
+        cmd += text_var('-name', name)
+        cmd += text_var('-imageuid', image_id)
+        cmd.append('-o')
+        return cmd
+
+    @command
+    def delete_mirror_view_async_image(self, name, image_id):
+        return self._mirror_view_image_async_op(
+            '-removeimage', name, image_id)
+
+    @command
+    def mirror_view_async_fracture_image(self, name, image_id):
+        return self._mirror_view_image_async_op(
+            '-fractureimage', name, image_id)
+
+    @command
+    def mirror_view_async_sync_image(self, name, image_id):
+        return self._mirror_view_image_async_op(
+            '-syncimage', name, image_id)
+
+    @command
+    def mirror_view_async_promote_image(self, name, image_id, promote_type = None):
+		if promote_type:
+			return self._mirror_view_image_async_op(
+				'-promoteimage -type {}'.format(promote_type), name, image_id)
+		else:
+			return self._mirror_view_image_async_op(
+				'-promoteimage', name, image_id)
+
+    @command
+    def get_mirror_view_async(self, name=None):
+        cmd = 'mirror -async -list'.split()
+        cmd += text_var('-name', name)
+        return cmd
+
+    @command
+    def create_mirror_group_async(self, name,
+                            policy=VNXMirrorGroupRecoveryPolicy.AUTO,
+                            description=None):
+        cmd = ['mirror', '-async', '-creategroup', '-name', name]
+        cmd += text_var('-description', description)
+        cmd += VNXMirrorViewRecoveryPolicy.get_opt(policy)
+        cmd += ['-o']
+        return cmd
+
+    @command
+    def delete_mirror_group_async(self, name, force=True):
+        cmd = ['mirror', '-async', '-destroygroup', '-name', name]
+        cmd += ['-force'] if force else []
+        cmd += ['-o']
+        return cmd
+
+    @command
+    def add_to_mirror_group_async(self, name, mirror_name):
+        cmd = ['mirror', '-async', '-addtogroup', '-name', name,
+               '-mirrorname', mirror_name]
+        return cmd
+
+    @command
+    def remove_from_mirror_group_async(self, name, mirror_name):
+        cmd = ['mirror', '-async', '-removefromgroup', '-name', name,
+               '-mirrorname', mirror_name]
+        cmd += ['-force', '-o']
+        return cmd
+
+    @command
+    def sync_mirror_group_async(self, name):
+        cmd = ['mirror', '-async', '-syncgroup', '-name', name]
+        return cmd
+
+    @command
+    def fracture_mirror_group_async(self, name):
+        cmd = ['mirror', '-async', '-fracturegroup', '-name', name, '-o']
+        return cmd
+
+    @command
+    def promote_mirror_group_async(self, name, promote_type=None):
+        cmd = ['mirror', '-async', '-promotegroup', '-name', name]
+        if promote_type:
+			cmd += ['-type', promote_type]
+        cmd += ['-o']
+        return cmd
+
+    @command
+    def get_mirror_group_async(self, name=None):
+        cmd = ['mirror', '-async', '-listgroups']
+        cmd += text_var('-name', name)
+        return cmd
 
     @command
     def get_disk(self, bus=None, enclosure=None, disk=None):

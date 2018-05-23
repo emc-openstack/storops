@@ -37,7 +37,8 @@ from storops.vnx.resource.cifs_server import VNXCifsServer
 from storops.vnx.resource.nas_pool import VNXNasPool
 from storops.vnx.nas_client import VNXNasClient
 from storops.vnx.resource.fs import VNXFileSystem
-from storops.vnx.resource.mirror_view import VNXMirrorView, VNXMirrorGroup
+from storops.vnx.resource.mirror_view import VNXMirrorView, VNXMirrorGroup, \
+    VNXMirrorViewAsync, VNXMirrorGroupAsync
 from storops.vnx.enums import VNXPortType, VNXPoolRaidType, VNXSPEnum, \
     VNXCtrlMethod
 from storops.vnx.block_cli import CliClient
@@ -424,6 +425,19 @@ class VNXSystem(VNXCliResource):
 
     def create_mirror_group(self, name, mirror=None):
         return VNXMirrorGroup.create(self._cli, name, mirror)
+
+    def get_mirror_view_async(self, name=None):
+        return VNXMirrorViewAsync.get(self._cli, name)
+
+    def create_mirror_view_async(self, name, src_lun):
+        return VNXMirrorViewAsync.create(self._cli, name, src_lun,
+                                    use_write_intent_log)
+
+    def get_mirror_group_async(self, name=None):
+        return VNXMirrorGroupAsync.get(self._cli, name)
+
+    def create_mirror_group_async(self, name, mirror=None):
+        return VNXMirrorGroupAsync.create(self._cli, name, mirror)
 
     def get_host(self, name=None):
         return VNXHost.get(self._cli, name)

@@ -785,8 +785,8 @@ class CliClient(PerfManager):
         cmd += text_var('-name', name)
         return cmd
    
-   ## MirrorView/A     
-   @command
+    ## MirrorView/A     
+    @command
     def create_mirror_view_async(self, name, lun_id):
         cmd = 'mirror -async -create'.split()
         cmd += text_var('-name', name)

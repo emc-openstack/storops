@@ -700,6 +700,109 @@ VNXMirrorGroupMirror:
       key: "dst_lun_wwn"
 
 
+VNXMirrorViewAsync:
+  data_src: cli
+  properties:
+    - label: "MirrorView Name:"
+      is_index: True
+      key: name
+    - label: "MirrorView Description:"
+      key: description
+    - label: "MirrorView UID:"
+      key: uid
+    - label: "Logical Unit Numbers:"
+      converter: to_int
+    - label: "Remote Mirror Status:"
+    - label: "MirrorView State:"
+      key: state
+    - label: "MirrorView Faulted:"
+      key: faulted
+      converter: to_bool
+    - label: "MirrorView Transitioning:"
+      key: transitioning
+      converter: to_bool
+    - label: "Quiesce Threshold:"
+      converter: to_int
+    - label: "Minimum number of images required:"
+      converter: to_int
+    - label: "Image Size:"
+      converter: to_int
+    - label: "Image Count:"
+      converter: to_int
+    - label: "Write Intent Log Used:"
+      converter: to_bool
+    - label: "Images:"
+      converter: VNXMirrorViewImageList
+      end_pattern: "(?:Recovery Policy:|\\Z)"
+    - label: "Recovery Policy:"
+      converter: to_mirror_view_recovery_policy
+    - label: "Preferred SP:"
+      converter: to_sp_enum
+    - label: "Synchronization Rate:"
+      converter: to_mirror_view_sync_rate
+    - label: "Image Faulted:"
+      converter: to_bool
+    - label: "Image Transitioning:"
+      converter: to_bool
+    - label: "Synchronizing Progress(%):"
+      converter: to_int
+
+
+VNXMirrorViewImageAsync:
+  data_src: cli
+  properties:
+    - label: "Image UID:"
+      is_index: True
+      key: uid
+    - label: "Is Image Primary:"
+      converter: to_bool
+      key: is_primary
+    - label: "Logical Unit UID:"
+    - label: "Image State:"
+      key: state
+      converter: VNXMirrorImageState
+    - label: "Image Condition:"
+      key: condition
+    - label: "Preferred SP:"
+      converter: to_sp_enum
+
+VNXMirrorGroupAsync:
+  data_src: cli
+  properties:
+    - label: "Group Name:"
+      key: "name"
+      is_index: True
+    - label: "Group ID:"
+      key: "gid"
+    - label: "Description:"
+    - label: "State:"
+    - label: "Role:"
+    - label: "Condition:"
+    - label: "Recovery Policy:"
+      key: "policy"
+      converter: to_mirror_group_recovery_policy
+      # The group mirrors does not start with a label
+      # as a workaround use the label of previous property.
+    - label: "Recovery Policy:"
+      key: "group_mirrors"
+      converter: VNXMirrorGroupMirrorList
+      end_pattern: "Mirrors can be added to group:"
+
+VNXMirrorGroupMirrorAsync:
+  data_src: cli
+  properties:
+    - label: "Mirror Name:"
+      key: "mirror_name"
+      is_index: True
+    - label: "Mirror WWN:"
+      key: "mirror_wwn"
+    - label: "Local LUN ID:"
+      key: "src_lun_wwn"
+    - label: "Local LUN Number:"
+      key: "src_lun_id"
+      converter: to_int
+    - label: "Remote LUN ID:"
+      key: "dst_lun_wwn"
 VNXDisk:
   data_src: cli
   properties:

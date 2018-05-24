@@ -90,8 +90,7 @@ class MockRestClient(ConnectorMock):
         for index in indices.get('indices', []):
             if url.lower() != index['url'].lower():
                 continue
-            elif body and not cls.compare_json_body(
-                    body, index.get('body', None)):
+            elif not cls.compare_json_body(body, index.get('body', None)):
                 continue
             response = index['response']
             break
@@ -107,7 +106,7 @@ class MockRestClient(ConnectorMock):
         return json.loads(string_indices, encoding='utf-8')
 
     def _get_mock_output(self, url, kwargs):
-        body = kwargs.get('body', '')
+        body = kwargs.get('body', None)
         resp_body = self.get_mock_output([url, body])
         if len(resp_body) > 0:
             ret = json.loads(resp_body)
@@ -117,7 +116,11 @@ class MockRestClient(ConnectorMock):
 
     @classmethod
     def compare_json_body(cls, obj1, obj2):
-        return cls.ordered(obj1) == cls.ordered(obj2)
+        if all((not obj1, not obj2)):
+            # cover the case: obj1={}, obj2=None
+            return True
+        else:
+            return cls.ordered(obj1) == cls.ordered(obj2)
 
     @classmethod
     def ordered(cls, obj):

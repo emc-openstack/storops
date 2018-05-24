@@ -1,0 +1,71 @@
+{
+    "@base": "https://10.245.101.39/api/instances/lun",
+    "updated": "2018-05-07T02:59:46.982Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/sv_16"
+        }
+    ],
+    "content": {
+        "id": "sv_16",
+        "operationalStatus": [
+            2
+        ],
+        "type": 1,
+        "tieringPolicy": 0,
+        "defaultNode": 1,
+        "currentNode": 1,
+        "auSize": 8192,
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_16",
+        "creationTime": "2018-04-26T07:02:26.000Z",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_VOL_OK"
+            ],
+            "descriptions": [
+                "The LUN is operating normally. No action is required."
+            ]
+        },
+        "name": "lun-cg-liangr2-01",
+        "description": "",
+        "modificationTime": "2018-04-26T07:02:27.454Z",
+        "sizeTotal": 42949672960,
+        "sizeAllocated": 0,
+        "perTierSizeUsed": [
+            0,
+            3221225472,
+            0
+        ],
+        "isThinEnabled": true,
+        "wwn": "60:06:01:60:15:E0:3A:00:81:79:E1:5A:5D:80:F5:93",
+        "isReplicationDestination": false,
+        "isSnapSchedulePaused": false,
+        "objectId": 42949672989,
+        "lunGroupObjectId": 81604378635,
+        "metadataSize": 3758096384,
+        "metadataSizeAllocated": 2684354560,
+        "snapWwn": "60:06:01:60:15:E0:3A:00:63:B9:1E:2C:39:4E:44:1D",
+        "snapsSize": 0,
+        "snapsSizeAllocated": 0,
+        "snapCount": 0,
+        "hostAccess": [
+            {
+                "accessMask": 3,
+                "instanceId": "root/emc:EMC_UEM_HostAccessLunAssocLeaf%InstanceID=544",
+                "host": {
+                    "id": "Host_1"
+                }
+            }
+        ],
+        "storageResource": {
+            "id": "sv_16"
+        },
+        "pool": {
+            "id": "pool_2",
+            "raidType": 1,
+            "isFASTCacheEnabled": false
+        }
+    }
+}

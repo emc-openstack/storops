@@ -512,12 +512,10 @@ class UnityHostTest(TestCase):
 
     @patch_rest
     def test_attach_snap_skip_first_hlu(self):
-        def f():
-            host = UnityHost(cli=t_rest(), _id='Host_11')
-            snap = UnitySnap(_id='38654705676', cli=t_rest())
-            host.attach(snap, skip_hlu_0=True)
-
-        assert_that(f, raises(UnitySnapAlreadyPromotedException))
+        host = UnityHost(cli=t_rest(), _id='Host_11')
+        snap = UnitySnap(_id='38654705676', cli=t_rest())
+        assert_that(calling(host.attach).with_args(snap, skip_hlu_0=True),
+                    raises(UnitySnapAlreadyPromotedException))
 
     @patch_rest
     def test_get_attached_cg_snap_hlu(self):

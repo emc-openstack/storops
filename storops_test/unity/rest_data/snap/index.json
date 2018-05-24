@@ -279,6 +279,7 @@
     },
     {
       "url": "/api/instances/snap/38654705676/action/detach?compact=True",
+      "body": {},
       "response": "success.json"
     },
     {
@@ -321,10 +322,12 @@
     },
     {
       "url": "/api/instances/snap/85899345927/action/detach?compact=True",
+      "body": {},
       "response": "success.json"
     },
     {
       "url": "/api/instances/snap/85899345927/action/restore?compact=True",
+      "body": {},
       "response": "restore_without_backup.json"
     },
     {

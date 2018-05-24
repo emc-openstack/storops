@@ -184,14 +184,18 @@ class UnityLun(UnityResource):
     def _compose_lun_parameter(cli, **kwargs):
 
         # TODO: snap_schedule
-        return cli.make_body(
+        body = cli.make_body(
             name=kwargs.get('name'),
             description=kwargs.get('description'),
             replicationParameters=cli.make_body(
-                isReplicationDestination=kwargs.get('is_repl_dst')
-            ),
-            lunParameters=prepare_lun_parameters(**kwargs)
-        )
+                isReplicationDestination=kwargs.get('is_repl_dst')))
+
+        # `hostAccess` could be empty list which is used to remove all host
+        # access
+        lun_parameters = prepare_lun_parameters(**kwargs)
+        if lun_parameters:
+            body['lunParameters'] = lun_parameters
+        return body
 
     def modify(self, name=None, size=None, host_access=None,
                description=None, sp=None, io_limit_policy=None,

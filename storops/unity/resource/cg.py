@@ -136,18 +136,20 @@ class UnityConsistencyGroup(UnityStorageResource):
                    description=None, sp=None, io_limit_policy=None,
                    tiering_policy=None, is_compression=None):
 
-        lun_modify = self._cli.make_body(
-            lun=lun,
-            name=name,
-            description=description,
-            lunParameters=lun_mod.prepare_lun_parameters(
-                size=size,
-                host_access=host_access,
-                sp=sp,
-                io_limit_policy=io_limit_policy,
-                tiering_policy=tiering_policy,
-                is_compression=is_compression),
-            allow_empty=True)
+        lun_modify = self._cli.make_body(lun=lun,
+                                         name=name,
+                                         description=description)
+        # `hostAccess` could be empty list which is used to remove all host
+        # access
+        lun_parameters = lun_mod.prepare_lun_parameters(
+            size=size,
+            host_access=host_access,
+            sp=sp,
+            io_limit_policy=io_limit_policy,
+            tiering_policy=tiering_policy,
+            is_compression=is_compression)
+        if lun_parameters:
+            lun_modify['lunParameters'] = lun_parameters
 
         return self.modify(lun_modify=[lun_modify])
 

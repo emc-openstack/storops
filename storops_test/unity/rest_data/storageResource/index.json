@@ -1057,6 +1057,11 @@
       "response": "empty.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_16/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"hostAccess": []}},
+      "response": "empty.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_5609/action/modifyLun?compact=True",
       "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_23"}, "accessMask": 1}]}},
       "response": "empty.json"

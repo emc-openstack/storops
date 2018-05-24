@@ -349,9 +349,6 @@ class UnityHost(UnityResource):
             initiators += self.iscsi_host_initiators
         for item in initiators:
             if item.initiator_id == uid:
-                # remove from the host initiator list first,
-                # otherwise delete initiator will not work
-                item.modify(None)
                 resp = item.delete()
                 resp.raise_if_err()
                 break

@@ -76,7 +76,6 @@
     },
     {
       "url": "/api/instances/nfsShare/NFSShare_11?compact=True",
-      "body": {},
       "response": "success.json"
     },
     {

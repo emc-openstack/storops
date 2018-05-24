@@ -45,7 +45,6 @@
     },
     {
       "url": "/api/instances/cifsShare/SMBShare_15?compact=True",
-      "body": {},
       "response": "success.json"
     },
     {

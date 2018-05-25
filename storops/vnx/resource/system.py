@@ -430,8 +430,7 @@ class VNXSystem(VNXCliResource):
         return VNXMirrorViewAsync.get(self._cli, name)
 
     def create_mirror_view_async(self, name, src_lun):
-        return VNXMirrorViewAsync.create(self._cli, name, src_lun,
-                                    use_write_intent_log)
+        return VNXMirrorViewAsync.create(self._cli, name, src_lun)
 
     def get_mirror_group_async(self, name=None):
         return VNXMirrorGroupAsync.get(self._cli, name)

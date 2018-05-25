@@ -784,8 +784,7 @@ class CliClient(PerfManager):
         cmd = ['mirror', '-sync', '-listgroups']
         cmd += text_var('-name', name)
         return cmd
-   
-    ## MirrorView/A     
+
     @command
     def create_mirror_view_async(self, name, lun_id):
         cmd = 'mirror -async -create'.split()
@@ -803,8 +802,8 @@ class CliClient(PerfManager):
 
     @command
     def add_mirror_view_image_async(self, name, sp_ip, lun_id,
-                              recovery_policy=VNXMirrorViewRecoveryPolicy.AUTO,
-                              sync_rate=VNXMirrorViewSyncRate.HIGH):
+                                    recovery_policy=VNXMirrorViewRecoveryPolicy.AUTO,
+                                    sync_rate=VNXMirrorViewSyncRate.HIGH):
         cmd = 'mirror -async -addimage'.split()
         cmd += text_var('-name', name)
         cmd += text_var('-arrayhost', sp_ip)
@@ -837,13 +836,14 @@ class CliClient(PerfManager):
             '-syncimage', name, image_id)
 
     @command
-    def mirror_view_async_promote_image(self, name, image_id, promote_type = None):
-		if promote_type:
-			return self._mirror_view_image_async_op(
-				'-promoteimage -type {}'.format(promote_type), name, image_id)
-		else:
-			return self._mirror_view_image_async_op(
-				'-promoteimage', name, image_id)
+    def mirror_view_async_promote_image(self, name, image_id, promote_type=None):
+        if promote_type:
+            return self._mirror_view_image_async_op('-promoteimage -type {}'
+                                                    .format(promote_type),
+                                                    name, image_id)
+        else:
+            return self._mirror_view_image_async_op('-promoteimage', name,
+                                                    image_id)
 
     @command
     def get_mirror_view_async(self, name=None):
@@ -853,8 +853,8 @@ class CliClient(PerfManager):
 
     @command
     def create_mirror_group_async(self, name,
-                            policy=VNXMirrorGroupRecoveryPolicy.AUTO,
-                            description=None):
+                                  policy=VNXMirrorGroupRecoveryPolicy.AUTO,
+                                  description=None):
         cmd = ['mirror', '-async', '-creategroup', '-name', name]
         cmd += text_var('-description', description)
         cmd += VNXMirrorViewRecoveryPolicy.get_opt(policy)
@@ -895,7 +895,7 @@ class CliClient(PerfManager):
     def promote_mirror_group_async(self, name, promote_type=None):
         cmd = ['mirror', '-async', '-promotegroup', '-name', name]
         if promote_type:
-			cmd += ['-type', promote_type]
+            cmd += ['-type', promote_type]
         cmd += ['-o']
         return cmd
 

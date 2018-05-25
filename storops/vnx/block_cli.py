@@ -801,9 +801,11 @@ class CliClient(PerfManager):
         return cmd
 
     @command
-    def add_mirror_view_image_async(self, name, sp_ip, lun_id,
-                                    recovery_policy=VNXMirrorViewRecoveryPolicy.AUTO,
-                                    sync_rate=VNXMirrorViewSyncRate.HIGH):
+    def add_mirror_view_image_async(
+        self, name, sp_ip, lun_id,
+        recovery_policy=VNXMirrorViewRecoveryPolicy.AUTO,
+        sync_rate=VNXMirrorViewSyncRate.HIGH
+    ):
         cmd = 'mirror -async -addimage'.split()
         cmd += text_var('-name', name)
         cmd += text_var('-arrayhost', sp_ip)
@@ -836,7 +838,8 @@ class CliClient(PerfManager):
             '-syncimage', name, image_id)
 
     @command
-    def mirror_view_async_promote_image(self, name, image_id, promote_type=None):
+    def mirror_view_async_promote_image(self, name, image_id,
+                                        promote_type=None):
         if promote_type:
             return self._mirror_view_image_async_op('-promoteimage -type {}'
                                                     .format(promote_type),

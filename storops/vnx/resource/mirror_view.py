@@ -425,7 +425,8 @@ class VNXMirrorViewAsync(VNXCliResource):
             image_id = self.secondary_image_id
 
         image_id = self._get_image_id(image_id)
-        out = self._cli.mirror_view_async_sync_image(self._get_name(), image_id,
+        out = self._cli.mirror_view_async_sync_image(self._get_name(),
+                                                     image_id,
                                                      poll=self.poll)
         raise_if_err(out, default=VNXMirrorException)
 
@@ -485,7 +486,8 @@ class VNXMirrorGroupAsync(VNXCliResource):
         self._name = name
 
     def _get_raw_resource(self):
-        return self._cli.get_mirror_group_async(name=self._name, poll=self.poll)
+        return self._cli.get_mirror_group_async(name=self._name,
+                                                poll=self.poll)
 
     @classmethod
     def create(cls, cli, name, mirror=None):
@@ -536,7 +538,8 @@ class VNXMirrorGroupAsync(VNXCliResource):
         raise_if_err(out, default=VNXMirrorException)
 
     def delete(self, force=False):
-        out = self._cli.delete_mirror_group_async(self._get_name(), force=force)
+        out = self._cli.delete_mirror_group_async(self._get_name(),
+                                                  force=force)
         raise_if_err(out, default=VNXMirrorException)
 
     @property
@@ -576,4 +579,5 @@ class VNXMirrorGroupAsyncList(VNXCliResourceList):
         self._name = name
 
     def _get_raw_resource(self):
-        return self._cli.get_mirror_group_async(name=self._name, poll=self.poll)
+        return self._cli.get_mirror_group_async(name=self._name,
+                                                poll=self.poll)

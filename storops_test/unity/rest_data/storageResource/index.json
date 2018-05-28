@@ -21,6 +21,10 @@
       "response": "sv_4.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_16?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_16.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_3?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "res_3.json"
     },

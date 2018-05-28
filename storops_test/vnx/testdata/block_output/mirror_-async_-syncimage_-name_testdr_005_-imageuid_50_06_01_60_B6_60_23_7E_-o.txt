@@ -1,0 +1,1 @@
+Synchronizing async mirror image failed.   Cannot synchronize an image that is already synchronized  (0x71528360)

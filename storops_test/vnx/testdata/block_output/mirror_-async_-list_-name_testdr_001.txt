@@ -1,0 +1,34 @@
+MirrorView Name:  testdr_001
+MirrorView Description:  
+MirrorView UID:  8F:23:60:B6:60:01:06:50:08:00:00:00:00:00:00:00
+Logical Unit Numbers:  55
+Remote Mirror Status:  Mirrored
+MirrorView State:  Active
+MirrorView Faulted:  NO
+MirrorView Transitioning:  NO
+Minimum number of images required:  0
+Image Size:  104857600
+Image Count:  2
+Rollback Throttle:  Not Available
+Images:  
+Image UID:  50:06:01:60:B6:60:23:8F
+Is Image Primary:  YES
+Logical Unit UID:  60:06:01:60:64:90:38:00:99:6A:E4:A2:B9:5D:E8:11
+Image Condition:  Primary Image
+
+Image UID:  50:06:01:60:B6:60:23:7E
+Is Image Primary:  NO
+Logical Unit UID:  60:06:01:60:45:90:38:00:04:2A:82:8B:FF:5D:E8:11
+Image State:  Consistent
+Image Condition:  Normal
+Recovery Policy:  Automatic
+Synchronization Rate:  Medium
+Image Faulted:  NO
+Image Transitioning:  NO
+Synchronizing Progress(%):  100
+Update Type:  Time elapsed since end of last update
+Update Period, in minutes:  60
+Time in minutes since previous update:  0
+Time in minutes until next update:  59
+Last Image Error:  Not Available
+

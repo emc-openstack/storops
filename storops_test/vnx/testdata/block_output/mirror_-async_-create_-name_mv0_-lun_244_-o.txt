@@ -1,0 +1,3 @@
+Creating async mirror failed. Invalid LUN number
+LUN does not exist
+

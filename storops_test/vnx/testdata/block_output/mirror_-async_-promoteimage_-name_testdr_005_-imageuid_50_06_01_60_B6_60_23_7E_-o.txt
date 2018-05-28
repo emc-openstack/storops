@@ -1,0 +1,1 @@
+Promoting async mirror image failed.   The image specified for promotion wasn't local.  Reissue the command to the array where the promoted image resides.  (0x71528633)

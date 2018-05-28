@@ -1,0 +1,18 @@
+MirrorView Name:  testdr_003
+MirrorView Description:  
+MirrorView UID:  8F:23:60:B6:60:01:06:50:0A:00:00:00:00:00:00:00
+Logical Unit Numbers:  71
+Remote Mirror Status:  Mirrored/No Secondary Images
+MirrorView State:  Active
+MirrorView Faulted:  NO
+MirrorView Transitioning:  NO
+Minimum number of images required:  0
+Image Size:  104857600
+Image Count:  1
+Rollback Throttle:  Not Available
+Images:  
+Image UID:  50:06:01:60:B6:60:23:8F
+Is Image Primary:  YES
+Logical Unit UID:  60:06:01:60:64:90:38:00:47:4B:48:EF:56:62:E8:11
+Image Condition:  Primary Image
+

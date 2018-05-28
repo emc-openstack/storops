@@ -721,23 +721,18 @@ VNXMirrorViewAsync:
     - label: "MirrorView Transitioning:"
       key: transitioning
       converter: to_bool
-    - label: "Quiesce Threshold:"
-      converter: to_int
     - label: "Minimum number of images required:"
       converter: to_int
     - label: "Image Size:"
       converter: to_int
     - label: "Image Count:"
       converter: to_int
-    - label: "Write Intent Log Used:"
-      converter: to_bool
+    - label: "Rollback Throttle:"
     - label: "Images:"
       converter: VNXMirrorViewImageList
       end_pattern: "(?:Recovery Policy:|\\Z)"
     - label: "Recovery Policy:"
       converter: to_mirror_view_recovery_policy
-    - label: "Preferred SP:"
-      converter: to_sp_enum
     - label: "Synchronization Rate:"
       converter: to_mirror_view_sync_rate
     - label: "Image Faulted:"
@@ -746,7 +741,12 @@ VNXMirrorViewAsync:
       converter: to_bool
     - label: "Synchronizing Progress(%):"
       converter: to_int
-
+    - label: "Update type:"
+    - label: "Time in minutes since previous update:"
+      converter: to_int
+    - label: "Time in minutes until next update:"
+      converter: to_int
+    - label: "Last Image error:"
 
 VNXMirrorViewImageAsync:
   data_src: cli

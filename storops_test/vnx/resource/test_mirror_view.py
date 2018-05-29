@@ -573,71 +573,63 @@ class VNXMirrorGroupAsyncTest(TestCase):
 
     @patch_cli
     def test_create(self):
-        mg = VNXMirrorGroup.create(t_cli(), name='test_group')
-        assert_that(mg, instance_of(VNXMirrorGroup))
+        mg = VNXMirrorGroupAsync.create(t_cli(), name='test_group')
+        assert_that(mg, instance_of(VNXMirrorGroupAsync))
 
     @patch_cli
     def test_create_name_in_use(self):
 
         def _inner():
-            VNXMirrorGroup.create(t_cli(), name='test_group_in_use')
+            VNXMirrorGroupAsync.create(t_cli(), name='test_group_in_use')
 
-        assert_that(_inner, raises(VNXMirrorGroupNameInUseError))
+        assert_that(_inner, raises(VNXMirrorException, 'same name as'))
 
     @patch_cli
     def test_create_and_add(self):
-        mirror = VNXMirrorView.get(t_cli(), name='mv_sync_2')
-        mg = VNXMirrorGroup.create(t_cli(), name='petermg1', mirror=mirror)
-        assert_that(mg, instance_of(VNXMirrorGroup))
+        mirror = VNXMirrorViewAsync.get(t_cli(), name='testdr_004')
+        mg = VNXMirrorGroupAsync.create(t_cli(), name='petermg1',
+                                        mirror=mirror)
+        assert_that(mg, instance_of(VNXMirrorGroupAsync))
 
     @patch_cli
     def test_get_single(self):
-        mg = VNXMirrorGroup.get(t_cli(), name='petermg')
-        assert_that(mg, instance_of(VNXMirrorGroup))
+        mg = VNXMirrorGroupAsync.get(t_cli(), name='petermg')
+        assert_that(mg, instance_of(VNXMirrorGroupAsync))
         assert_that(mg.name, equal_to('petermg'))
-        assert_that(mg.gid, equal_to('50:06:01:60:B6:60:25:22:00:00:00:00'))
+        assert_that(mg.gid, equal_to('50:06:01:60:B6:60:23:8F:03:00:00:00'))
         assert_that(mg.description, equal_to(''))
         assert_that(mg.state, equal_to('Synchronized'))
         assert_that(mg.role, equal_to('Primary'))
-        assert_that(mg.condition, equal_to('Active'))
-        assert_that(mg.policy, equal_to(VNXMirrorGroupRecoveryPolicy.MANUAL))
-        assert_that(mg.mirrors, has_length(2))
-        assert_that(mg.group_mirrors, has_length(2))
-        for m in mg.mirrors:
-            assert_that(m, instance_of(VNXMirrorView))
-
-        for mg in mg.group_mirrors:
-            assert_that(
-                mg.mirror_name,
-                not_none())
-            assert_that(mg.src_lun_id, instance_of(int))
+        assert_that(mg.condition, equal_to('Normal'))
+        assert_that(mg.policy, equal_to(VNXMirrorGroupRecoveryPolicy.AUTO))
 
     @patch_cli
     def test_get_all(self):
-        mg_list = VNXMirrorGroup.get(t_cli())
+        mg_list = VNXMirrorGroupAsync.get(t_cli())
         assert_that(len(mg_list), equal_to(2))
-        assert_that(mg_list, instance_of(VNXMirrorGroupList))
+        assert_that(mg_list, instance_of(VNXMirrorGroupAsyncList))
 
     @patch_cli
     def test_promote_group(self):
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg1')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg2')
         mg1.promote_group()
 
     @patch_cli
-    def test_fracture_group(self):
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg1')
+    def test_fracture_group(self):###
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg1')
         mg1.fracture_group()
 
     @patch_cli
     def test_add_to_group(self):
-        mirror = VNXMirrorView.get(t_cli(), name='mv_sync_2')
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg1')
+        mirror = VNXMirrorViewAsync.get(t_cli(), name='testdr_004')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg1')
         mg1.add_mirror(mirror)
 
-    @patch_cli
+    @patch_cli(output='mirror_-async_-addtogroup_-name_petermg1_'
+                      '-mirrorname_testdr_004_ALREADYMEMBER.txt')
     def test_add_to_group_existed(self):
-        mirror = VNXMirrorView.get(t_cli(), name='mv0')
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mirror = VNXMirrorViewAsync.get(t_cli(), name='testdr_004')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg1')
 
         def _inner():
             mg1.add_mirror(mirror)
@@ -646,14 +638,14 @@ class VNXMirrorGroupAsyncTest(TestCase):
 
     @patch_cli
     def test_remove_from_group(self):
-        mirror = VNXMirrorGroup.get(t_cli(), name='mv_sync_2')
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mirror = VNXMirrorGroupAsync.get(t_cli(), name='testdr_004')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg1')
         mg1.remove_mirror(mirror)
 
     @patch_cli
     def test_remove_from_group_already_removed(self):
-        mirror = VNXMirrorGroup.get(t_cli(), name='not_in_group')
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mirror = VNXMirrorGroupAsync.get(t_cli(), name='testdr_003')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg1')
 
         def _inner():
             mg1.remove_mirror(mirror)
@@ -662,15 +654,17 @@ class VNXMirrorGroupAsyncTest(TestCase):
 
     @patch_cli
     def test_sync_group(self):
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg')
         mg1.sync_group()
 
     @patch_cli
-    def test_sync_group_already_promoted(self):
-        mg1 = VNXMirrorGroup.get(t_cli(), name='mg_promote_on_primary')
-        assert_that(mg1.sync_group, raises(VNXMirrorGroupAlreadyPromotedError))
-
+    def test_delete_non_empty_group(self):
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg')
+        def _inner():
+            mg1.delete()
+        assert_that(_inner, raises(VNXMirrorException, 'still has members'))
+        
     @patch_cli
     def test_delete_group(self):
-        mg1 = VNXMirrorGroup.get(t_cli(), name='petermg')
+        mg1 = VNXMirrorGroupAsync.get(t_cli(), name='test_group')
         mg1.delete()

@@ -491,9 +491,9 @@ class VNXMirrorGroupAsync(VNXCliResource):
 
     @classmethod
     def create(cls, cli, name, mirror=None):
-        out = cli.create_mirror_group(name)
+        out = cli.create_mirror_group_async(name)
         raise_if_err(out, default=VNXMirrorException)
-        group = VNXMirrorGroup(cli=cli, name=name)
+        group = VNXMirrorGroupAsync(cli=cli, name=name)
         if mirror is not None:
             # Add to mirror group as well
             group.add_mirror(mirror)

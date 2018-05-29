@@ -1,0 +1,34 @@
+Maximum Number of Groups Allowed:  64
+Maximum Number of Mirrors per Group:  64
+
+Group Name:  test_group
+Group ID:  50:06:01:60:B6:60:23:8F:01:00:00:00
+Description:  
+Update Type:  Time elapsed since end of last update
+Update Period, in minutes:  60
+Time in minutes until next update:  0
+State:  Empty
+Role:  Primary
+Condition:  Unknown Image Condition
+Sync Rate:  Medium
+Recovery Policy:  Automatic
+
+Group Name:  petermg
+Group ID:  50:06:01:60:B6:60:23:8F:03:00:00:00
+Description:  
+Update Type:  Time elapsed since end of last update
+Update Period, in minutes:  60
+Time in minutes until next update:  0
+State:  Synchronized
+Role:  Primary
+Condition:  Normal
+Sync Rate:  Medium
+Recovery Policy:  Automatic
+Mirror Name:  testdr_004
+Mirror WWN:  8F:23:60:B6:60:01:06:50:0F:00:00:00:00:00:00:00
+Primary WWN:  50:06:01:60:B6:60:23:8F
+Secondary WWN:  50:06:01:60:B6:60:23:7E
+Array hosting remote image:  50:06:01:60:B6:60:23:7E
+Local LUN ID:  60:06:01:60:64:90:38:00:47:4B:48:EF:56:62:E8:11
+Local LUN Number:  71
+

@@ -785,8 +785,7 @@ VNXMirrorGroupAsync:
       # as a workaround use the label of previous property.
     - label: "Recovery Policy:"
       key: "group_mirrors"
-      converter: VNXMirrorGroupMirrorList
-      end_pattern: "Mirrors can be added to group:"
+      converter: VNXMirrorGroupMirrorAsyncList
 
 VNXMirrorGroupMirrorAsync:
   data_src: cli
@@ -796,13 +795,18 @@ VNXMirrorGroupMirrorAsync:
       is_index: True
     - label: "Mirror WWN:"
       key: "mirror_wwn"
+    - label: "Primary WWN:"
+      key: "primary_wwn"
+    - label: "Secondary WWN:"
+      key: "secondary_wwn"
+    - label: "Array hosting remote image:"
+      key: "remote_array"
     - label: "Local LUN ID:"
-      key: "src_lun_wwn"
+      key: "local_lun_id"
     - label: "Local LUN Number:"
-      key: "src_lun_id"
-      converter: to_int
-    - label: "Remote LUN ID:"
-      key: "dst_lun_wwn"
+      key: "local_lun_number"
+      converter: to_int   
+         
 VNXDisk:
   data_src: cli
   properties:

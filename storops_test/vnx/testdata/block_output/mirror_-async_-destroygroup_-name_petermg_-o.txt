@@ -1,0 +1,1 @@
+The destroy group operation failed since the group still has members.  (0x71528096)

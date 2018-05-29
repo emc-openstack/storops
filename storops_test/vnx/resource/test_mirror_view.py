@@ -615,7 +615,7 @@ class VNXMirrorGroupAsyncTest(TestCase):
         mg1.promote_group()
 
     @patch_cli
-    def test_fracture_group(self):###
+    def test_fracture_group(self):
         mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg1')
         mg1.fracture_group()
 
@@ -660,10 +660,11 @@ class VNXMirrorGroupAsyncTest(TestCase):
     @patch_cli
     def test_delete_non_empty_group(self):
         mg1 = VNXMirrorGroupAsync.get(t_cli(), name='petermg')
+
         def _inner():
             mg1.delete()
         assert_that(_inner, raises(VNXMirrorException, 'still has members'))
-        
+
     @patch_cli
     def test_delete_group(self):
         mg1 = VNXMirrorGroupAsync.get(t_cli(), name='test_group')

@@ -17,7 +17,7 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import assert_that, only_contains, instance_of, \
+from hamcrest import assert_that, calling, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
 
@@ -25,7 +25,7 @@ from storops import UnitySystem
 from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError, \
-    UnityThinCloneLimitExceededError
+    UnityThinCloneLimitExceededError, UnityCGLunActionNotSupportError
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
@@ -374,3 +374,15 @@ class UnityLunEnablePerfStatsTest(TestCase):
         assert_that(lun.pool.is_fast_cache_enabled, equal_to(False))
         assert_that(lun.host_access[0].host.name,
                     equal_to('Virtual_Machine_12'))
+
+    @patch_rest
+    def test_create_snap_of_member_snap_not_support(self):
+        lun = UnityLun(cli=t_rest(), _id='sv_58')
+        assert_that(calling(lun.create_snap).with_args(name='not-support'),
+                    raises(UnityCGLunActionNotSupportError))
+
+    @patch_rest
+    def test_thinclone_of_member_snap_not_support(self):
+        lun = UnityLun(cli=t_rest(version='4.3'), _id='sv_58')
+        assert_that(calling(lun.thin_clone).with_args('not-support'),
+                    raises(UnityCGLunActionNotSupportError))

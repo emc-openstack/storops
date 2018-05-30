@@ -17,7 +17,7 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, has_items, raises, \
-    contains_string, none
+    contains_string, none, calling
 
 from storops.exception import UnityStorageResourceNameInUseError, \
     UnityConsistencyGroupNameInUseError, UnityResourceNotFoundError, \
@@ -271,3 +271,45 @@ class UnityConsistencyGroupTest(TestCase):
         csv = cg_list.get_metrics_csv()
         assert_that(csv, contains_string('id,name'))
         assert_that(csv, contains_string('res_3,smis-test-cg'))
+
+    @patch_rest
+    def test_attach_cg_not_implemented(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_6')
+        assert_that(calling(cg.attach_to), raises(NotImplementedError))
+
+    @patch_rest
+    def test_detach_cg_not_implemented(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_6')
+        assert_that(calling(cg.detach_from), raises(NotImplementedError))
+
+    @patch_rest
+    def test_update_lun_add(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        lun1 = UnityLun(cli=t_rest(), _id='sv_60')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_61')
+        resp = cg.update_lun(add_luns=[lun1, lun2])
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_update_lun_remove(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        lun1 = UnityLun(cli=t_rest(), _id='sv_58')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_59')
+        resp = cg.update_lun(remove_luns=[lun1, lun2])
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_update_lun_add_remove(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        lun1 = UnityLun(cli=t_rest(), _id='sv_58')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_59')
+        lun3 = UnityLun(cli=t_rest(), _id='sv_60')
+        lun4 = UnityLun(cli=t_rest(), _id='sv_61')
+        resp = cg.update_lun(add_luns=[lun1, lun3], remove_luns=[lun2, lun4])
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_update_lun_all_none(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        resp = cg.update_lun()
+        assert_that(resp.is_ok(), equal_to(True))

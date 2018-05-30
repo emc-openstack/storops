@@ -97,6 +97,14 @@
       "response": "38654705670.json"
     },
     {
+      "url": "/api/instances/snap/38654705831?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "38654705831.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345958?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
+      "response": "85899345958.json"
+    },
+    {
       "url": "/api/types/snap/instances?compact=True",
       "body": {
         "storageResource": {
@@ -375,6 +383,15 @@
     {
       "url": "/api/instances/snap/38654700002?compact=True",
       "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/snap/85899345958/action/modify?compact=True",
+      "body": {"hostAccess": [{"host": {"id": "Host_27"}, "allowedAccess": 1}, {"host": {"id": "Host_11"}, "allowedAccess": 1}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/snap/instances?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource&filter=lun eq \"sv_58\" and snapGroup eq \"85899345958\"",
+      "response": "filter_member_snap_sv_58.json"
     }
   ]
 }

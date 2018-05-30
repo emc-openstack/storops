@@ -1308,3 +1308,7 @@ class UnityBaseHasThinCloneError(UnityThinCloneException):
 @rest_exception
 class UnityTCSnapUnderDestroyError(UnityThinCloneException):
     error_code = 108008719
+
+
+class UnityCGLunActionNotSupportError(UnityException):
+    message = 'The action not support on lun in cg. Execute it on cg object.'

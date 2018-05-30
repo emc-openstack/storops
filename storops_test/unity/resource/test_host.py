@@ -418,6 +418,16 @@ class UnityHostTest(TestCase):
             assert_that(hlu, equal_to(12781))
 
     @patch_rest
+    def test_attach_with_retry_member_snap_skip_hlu_0(self):
+        host = UnityHost(cli=t_rest(), _id='Host_27')
+        snap = UnitySnap(_id='38654705831', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_random_hlu_number', new=lambda _: 12781):
+            hlu = host._attach_with_retry(snap, True)
+            assert_that(hlu, is_not(equal_to(0)))
+            assert_that(hlu, equal_to(12781))
+
+    @patch_rest
     def test_attach_with_retry_no_skip_hlu_0(self):
         host = UnityHost(cli=t_rest(), _id='Host_23')
         lun = UnityLun(_id='sv_5610', cli=t_rest())
@@ -571,6 +581,31 @@ class UnityHostTest(TestCase):
         host = UnityHost(cli=t_rest(), _id='Host_22')
         lun = UnityLun(cli=t_rest(), _id='sv_3338')
         host.modify_host_lun(lun, 100)
+
+    @patch_rest
+    def test_has_hlu(self):
+        host = UnityHost(cli=t_rest(), _id='Host_10')
+        lun = UnityLun(cli=t_rest(), _id="sv_2")
+        assert_that(True, equal_to(host.has_hlu(lun)))
+
+    @patch_rest
+    def test_has_hlu_false(self):
+        host = UnityHost(cli=t_rest(), _id='Host_11')
+        lun = UnityLun(cli=t_rest(), _id="sv_2")
+        assert_that(False, equal_to(host.has_hlu(lun)))
+
+    @patch_rest
+    def test_has_hlu_snap(self):
+        host = UnityHost(cli=t_rest(), _id='Host_27')
+        snap = UnitySnap(cli=t_rest(), _id="38654705831")
+        assert_that(True, equal_to(host.has_hlu(snap)))
+
+    @patch_rest
+    def test_has_hlu_snap_cg_member(self):
+        host = UnityHost(cli=t_rest(), _id='Host_27')
+        cg_snap = UnitySnap(cli=t_rest(), _id="85899345958")
+        lun_in_cg = UnityLun(cli=t_rest(), _id='sv_58')
+        assert_that(True, equal_to(host.has_hlu(cg_snap, cg_member=lun_in_cg)))
 
 
 class UnityHostInitiatorUpdaterTest(TestCase):

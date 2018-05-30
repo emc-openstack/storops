@@ -1,0 +1,64 @@
+{
+    "content": {
+        "id": "Host_27",
+        "operationalStatus": [
+            2
+        ],
+        "type": 1,
+        "autoManageType": 0,
+        "instanceId": "root/emc:EMC_UEM_HostLeaf%InstanceID=Host_27",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ]
+        },
+        "name": "overcloud-controller-0",
+        "description": "",
+        "osType": "",
+        "iscsiHostInitiators": [
+            {
+                "id": "HostInitiator_47",
+                "initiatorId": "iqn.1994-05.com.redhat:1943a1af495a"
+            }
+        ],
+        "hostLUNs": [
+            {
+                "id": "Host_27_sv_53_snap_60:06:01:60:15:E0:3A:00:7F:38:E3:F6:39:F6:40:C7",
+                "hlu": 2,
+                "lun": {
+                    "id": "sv_53",
+                    "name": "volume-6964023e-ab86-4ace-b812-a2d524252461"
+                },
+                "snap": {
+                    "id": "38654705826"
+                }
+            },
+            {
+                "id": "Host_27_sv_58_snap_60:06:01:60:15:E0:3A:00:A5:1F:F5:90:90:7C:40:2C",
+                "hlu": 0,
+                "lun": {
+                    "id": "sv_58",
+                    "name": "vol-cg-liangr-00"
+                },
+                "snap": {
+                    "id": "38654705831"
+                }
+            },
+            {
+                "id": "Host_27_sv_59_snap_60:06:01:60:15:E0:3A:00:CF:E6:30:3D:5C:78:4B:44",
+                "hlu": 1,
+                "lun": {
+                    "id": "sv_59",
+                    "name": "vol-cg-liangr-01"
+                },
+                "snap": {
+                    "id": "38654705832"
+                }
+            }
+        ]
+    }
+}

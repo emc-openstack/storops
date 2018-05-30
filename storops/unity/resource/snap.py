@@ -96,8 +96,22 @@ class UnitySnap(UnityResource):
         return (super(UnitySnap, self).existed and
                 self.state != SnapStateEnum.DESTROYING)
 
+    def _get_group_snap_id(self):
+        if self.is_member_snap():
+            # Member snap of cg snap isn't allowed to attach directly,
+            # use its group snap to attach.
+            cg_snap_id = self.snap_group.get_id()
+            log.info('Snap %s is a member snap of cg snap. Use cg '
+                     'snap %s to attach/detach.', self.get_id(), cg_snap_id)
+            return cg_snap_id
+        return self.get_id()
+
     @version('>=4.1')
     def attach_to(self, host, access_mask=SnapAccessLevelEnum.READ_WRITE):
+
+        # Use group snap id if it is a member snap.
+        snap_id = self._get_group_snap_id()
+
         host_access = [{'host': host, 'allowedAccess': access_mask}]
 
         # Needs a update, otherwise the existing host may be overwritten.
@@ -105,7 +119,7 @@ class UnitySnap(UnityResource):
         # If this snap is detached, attach it to the host.
         if not self.host_access:
             resp = self._cli.action(self.resource_class,
-                                    self.get_id(), 'attach',
+                                    snap_id, 'attach',
                                     hostAccess=self._cli.make_body(
                                         host_access))
         # Else, if this snap has been attached to other host,
@@ -117,7 +131,7 @@ class UnitySnap(UnityResource):
                                                self.host_access)]
 
             resp = self._cli.action(self.resource_class,
-                                    self.get_id(), 'modify',
+                                    snap_id, 'modify',
                                     hostAccess=self._cli.make_body(
                                         host_access))
         resp.raise_if_err()
@@ -127,8 +141,11 @@ class UnitySnap(UnityResource):
     def detach_from(self, host):
         # No need to pass host in to detach action of snap.
         # Snap host access will all be detached.
+
+        # Use group snap id if it is a member snap.
+        snap_id = self._get_group_snap_id()
         resp = self._cli.action(self.resource_class,
-                                self.get_id(), 'detach')
+                                snap_id, 'detach')
         resp.raise_if_err()
         return resp
 
@@ -154,7 +171,8 @@ class UnitySnap(UnityResource):
 
     def is_cg_snap(self):
         cg_type = enums.StorageResourceTypeEnum.CONSISTENCY_GROUP
-        return self.storage_resource.type == cg_type
+        return (self.storage_resource.type == cg_type and
+                not self.is_member_snap())
 
     def get_member_snap(self, lun):
         members = UnitySnapList(cli=self._cli, snap_group=self, lun=lun)
@@ -167,6 +185,10 @@ class UnitySnap(UnityResource):
         """
         return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
                                    description)
+
+    def is_member_snap(self):
+        """Returns True if it is a member snap of cg snap."""
+        return self.snap_group is not None
 
 
 class UnitySnapList(UnityResourceList):

@@ -25,6 +25,7 @@ from storops.unity.resource.storage_resource import UnityStorageResource, \
 from storops.unity.resource import lun as lun_mod
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
+from storops.unity.resp import RESP_OK
 
 __author__ = 'Peter Wang'
 
@@ -179,17 +180,45 @@ class UnityConsistencyGroup(UnityStorageResource):
     def remove_lun(self, *lun_list):
         return self.modify(lun_remove=lun_list)
 
-    def replace_lun(self, *lun_list):
-        """Replaces the exiting LUNs to lun_list."""
-        existing_ids = {lun.get_id() for lun in self.luns}
-        new_ids = {lun.get_id() for lun in lun_list}
-        add_ids = new_ids - existing_ids
+    @property
+    def existing_lun_ids(self):
+        luns = self.luns if self.luns else []
+        return {lun.get_id() for lun in luns}
+
+    def _prepare_luns_add(self, lun_list):
+        if not lun_list:
+            return None
+        add_ids = {lun.get_id() for lun in lun_list} - self.existing_lun_ids
         log.debug("Adding LUN(s) '{}' to cg {}".format(add_ids, self.get_id()))
-        lun_add = [UnityLun(_id=_id, cli=self._cli) for _id in add_ids]
-        remove_ids = existing_ids - new_ids
+        return [UnityLun(_id=_id, cli=self._cli) for _id in add_ids]
+
+    def _prepare_luns_remove(self, lun_list, is_delta):
+        if not lun_list:
+            return None
+        lun_ids = {lun.get_id() for lun in lun_list}
+        if is_delta:
+            remove_ids = self.existing_lun_ids & lun_ids
+        else:
+            remove_ids = self.existing_lun_ids - lun_ids
         log.debug("Removing LUN(s) '{}' from cg '{}'".format(remove_ids,
                                                              self.get_id()))
-        lun_remove = [UnityLun(_id=_id, cli=self._cli) for _id in remove_ids]
+        return [UnityLun(_id=_id, cli=self._cli) for _id in remove_ids]
+
+    def replace_lun(self, *lun_list):
+        """Replaces the exiting LUNs to lun_list."""
+        lun_add = self._prepare_luns_add(lun_list)
+        lun_remove = self._prepare_luns_remove(lun_list, False)
+        return self.modify(lun_add=lun_add, lun_remove=lun_remove)
+
+    def update_lun(self, add_luns=None, remove_luns=None):
+        """Updates the LUNs in CG, adding the ones in `add_luns` and removing
+        the ones in `remove_luns`"""
+        if not add_luns and not remove_luns:
+            log.debug("Empty add_luns and remove_luns passed in, "
+                      "skip update_lun.")
+            return RESP_OK
+        lun_add = self._prepare_luns_add(add_luns)
+        lun_remove = self._prepare_luns_remove(remove_luns, True)
         return self.modify(lun_add=lun_add, lun_remove=lun_remove)
 
     def attach_to(self, host=None, access_mask=HostLUNAccessEnum.BOTH):

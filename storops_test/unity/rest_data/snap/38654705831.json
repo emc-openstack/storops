@@ -1,0 +1,52 @@
+{
+    "@base": "https://10.245.101.39/api/instances/snap",
+    "updated": "2018-06-06T05:56:33.758Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/38654705831"
+        }
+    ],
+    "content": {
+        "id": "38654705831",
+        "creatorType": 2,
+        "accessType": 1,
+        "state": 2,
+        "operationalStatus": [
+            2
+        ],
+        "instanceId": "root/emc:EMC_UEM_VolumeSnapLeaf%InstanceID=38654705831",
+        "name": "20180604072922.129+00-001",
+        "description": "",
+        "creationTime": "2018-06-04T07:29:22.129Z",
+        "isSystemSnap": false,
+        "isModifiable": true,
+        "attachedWWN": "60:06:01:60:15:E0:3A:00:A5:1F:F5:90:90:7C:40:2C",
+        "isReadOnly": false,
+        "lastWritableTime": "2018-06-05T05:16:49.548Z",
+        "isModified": true,
+        "isAutoDelete": false,
+        "size": 10737418240,
+        "hostAccess": [
+            {
+                "allowedAccess": 1,
+                "instanceId": "94",
+                "host": {
+                    "id": "Host_11"
+                }
+            }
+        ],
+        "storageResource": {
+            "id": "res_21"
+        },
+        "lun": {
+            "id": "sv_58"
+        },
+        "snapGroup": {
+            "id": "85899345958"
+        },
+        "creatorUser": {
+            "id": "user_admin"
+        }
+    }
+}

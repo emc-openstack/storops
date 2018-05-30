@@ -21,6 +21,14 @@
       "response": "sv_4.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_8?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_8.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_9?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_9.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_16?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "sv_16.json"
     },
@@ -53,6 +61,10 @@
       "response": "res_19.json"
     },
     {
+      "url": "/api/instances/storageResource/res_21?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_21.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_27?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "res_27.json"
     },
@@ -63,6 +75,10 @@
     {
       "url": "/api/instances/storageResource/sv_2026?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "sv_2026.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_5605?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_5605.json"
     },
     {
       "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
@@ -1032,7 +1048,7 @@
         "forceSnapDeletion": true,
         "forceVvolDeletion": true
       },
-      "response": "sv_5605.json"
+      "response": "delete_sv_5605_with_thin_clone.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5607?compact=True",
@@ -1126,6 +1142,21 @@
     {
       "url": "/api/instances/storageResource/res_6/action/modifyConsistencyGroup?compact=True",
       "body": {"lunRemove": [{"lun": {"id": "sv_15"}}], "lunAdd": [{"lun": {"id": "sv_3341"}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_21/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunAdd": [{"lun": {"id": "sv_60"}}, {"lun": {"id": "sv_61"}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_21/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunRemove": [{"lun": {"id": "sv_58"}}, {"lun": {"id": "sv_59"}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_21/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunRemove": [{"lun": {"id": "sv_59"}}], "lunAdd": [{"lun": {"id": "sv_60"}}]},
       "response": "empty.json"
     }
   ]

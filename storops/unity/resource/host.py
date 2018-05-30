@@ -239,6 +239,14 @@ class UnityHost(UnityResource):
             return host_lun.hlu
 
     def attach(self, lun_or_snap, skip_hlu_0=False):
+        """ Attaches lun, snap or member snap of cg snap to host.
+
+        Don't pass cg snapshot in as `lun_or_snap`.
+
+        :param lun_or_snap: the lun, snap, or a member snap of cg snap
+        :param skip_hlu_0: whether to skip hlu 0
+        :return: the hlu number
+        """
 
         # `UnityResourceAlreadyAttachedError` check was removed due to there
         # is a host cache existing in Cinder driver. If the lun was attached to
@@ -281,8 +289,15 @@ class UnityHost(UnityResource):
 
         return hlu
 
-    def has_hlu(self, lun_or_snap):
-        hlu = self.get_hlu(lun_or_snap)
+    def has_hlu(self, lun_or_snap, cg_member=None):
+        """Returns True if `lun_or_snap` is attached to the host.
+
+        :param lun_or_snap: can be lun, lun snap, cg snap or a member snap of
+            cg snap.
+        :param cg_member: the member lun of cg if `lun_or_snap` is cg snap.
+        :return: True - if `lun_or_snap` is attached, otherwise False.
+        """
+        hlu = self.get_hlu(lun_or_snap, cg_member=cg_member)
         return hlu is not None
 
     def has_alu(self, lun):
@@ -294,13 +309,26 @@ class UnityHost(UnityResource):
             return True
 
     def get_host_lun(self, lun_or_snap, cg_member=None):
+        """Gets the host lun of a lun, lun snap, cg snap or a member snap of cg
+        snap.
+
+        :param lun_or_snap: can be lun, lun snap, cg snap or a member snap of
+            cg snap.
+        :param cg_member: the member lun of cg if `lun_or_snap` is cg snap.
+        :return: the host lun object.
+        """
         import storops.unity.resource.lun as lun_module
         import storops.unity.resource.snap as snap_module
         which = None
         if isinstance(lun_or_snap, lun_module.UnityLun):
             which = self._get_host_luns(lun=lun_or_snap)
         elif isinstance(lun_or_snap, snap_module.UnitySnap):
-            if cg_member is not None:
+            if lun_or_snap.is_cg_snap():
+                if cg_member is None:
+                    log.debug('None host lun for CG snap {}. '
+                              'Use its member snap instead or pass in '
+                              'cg_member.'.format(lun_or_snap.id))
+                    return None
                 lun_or_snap = lun_or_snap.get_member_snap(cg_member)
                 which = self._get_host_luns(lun=cg_member, snap=lun_or_snap)
             else:
@@ -312,6 +340,14 @@ class UnityHost(UnityResource):
         return which[0]
 
     def get_hlu(self, resource, cg_member=None):
+        """Gets the hlu number of a lun, lun snap, cg snap or a member snap of
+        cg snap.
+
+        :param resource: can be lun, lun snap, cg snap or a member snap of cg
+            snap.
+        :param cg_member: the member lun of cg if `lun_or_snap` is cg snap.
+        :return: the hlu number.
+        """
         host_lun = self.get_host_lun(resource, cg_member=cg_member)
         return host_lun if host_lun is None else host_lun.hlu
 

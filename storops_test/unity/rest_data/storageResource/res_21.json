@@ -1,0 +1,46 @@
+{
+    "content": {
+        "id": "res_21",
+        "type": 2,
+        "replicationType": 0,
+        "thinStatus": 1,
+        "relocationPolicy": 0,
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ]
+        },
+        "name": "cg-liangr",
+        "description": "",
+        "isReplicationDestination": false,
+        "sizeTotal": 21474836480,
+        "sizeAllocated": 0,
+        "perTierSizeUsed": [
+            0,
+            5905580032,
+            0
+        ],
+        "metadataSize": 13958643712,
+        "metadataSizeAllocated": 5368709120,
+        "snapsSizeTotal": 21474836480,
+        "snapsSizeAllocated": 0,
+        "snapCount": 1,
+        "pools": [
+            {
+                "id": "pool_2"
+            }
+        ],
+        "luns": [
+            {
+                "id": "sv_59"
+            },
+            {
+                "id": "sv_58"
+            }
+        ]
+    }
+}

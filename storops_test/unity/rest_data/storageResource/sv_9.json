@@ -1,6 +1,6 @@
 {
   "content": {
-    "id": "sv_5605",
+    "id": "sv_9",
     "type": 8,
     "replicationType": 0,
     "thinStatus": 1,
@@ -37,7 +37,7 @@
     ],
     "luns": [
       {
-        "id": "sv_5605"
+        "id": "sv_9"
       }
     ]
   }

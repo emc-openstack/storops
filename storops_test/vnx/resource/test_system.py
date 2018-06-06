@@ -358,7 +358,7 @@ class VNXSystemTest(TestCase):
     def test_create_mirror_group_async(self):
         mg = self.vnx.create_mirror_group_async('petermg')
         assert_that(mg.state, equal_to('Synchronized'))
-        assert_that(mg.condition, equal_to('Active'))
+        assert_that(mg.condition, equal_to('Normal'))
         assert_that(mg, instance_of(VNXMirrorGroupAsync))
 
     @patch_cli(output='credential_error.txt')

@@ -32,7 +32,8 @@ from storops.vnx.resource.cifs_server import CifsDomain
 from storops.vnx.resource.disk import VNXDisk
 from storops.vnx.resource.lun import VNXLun
 from storops.vnx.resource.mirror_view import VNXMirrorViewList, \
-    VNXMirrorGroup, VNXMirrorGroupList
+    VNXMirrorGroup, VNXMirrorGroupList, VNXMirrorViewAsyncList, \
+    VNXMirrorGroupAsync, VNXMirrorGroupAsyncList
 from storops.vnx.resource.mover import VNXMoverList
 from storops.vnx.resource.nqm import VNXIOClass, VNXIOClassList, VNXIOPolicy, \
     VNXIOPolicyList
@@ -334,7 +335,7 @@ class VNXSystemTest(TestCase):
         assert_that(mg.state, equal_to('Synchronized'))
         assert_that(mg.condition, equal_to('Active'))
         assert_that(mg, instance_of(VNXMirrorGroup))
-        
+
     @patch_cli
     def test_get_mirror_view_async(self):
         mv_list = self.vnx.get_mirror_view_async()

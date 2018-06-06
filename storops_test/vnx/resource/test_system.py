@@ -334,6 +334,31 @@ class VNXSystemTest(TestCase):
         assert_that(mg.state, equal_to('Synchronized'))
         assert_that(mg.condition, equal_to('Active'))
         assert_that(mg, instance_of(VNXMirrorGroup))
+        
+    @patch_cli
+    def test_get_mirror_view_async(self):
+        mv_list = self.vnx.get_mirror_view_async()
+        assert_that(mv_list, instance_of(VNXMirrorViewAsyncList))
+        assert_that(len(mv_list), equal_to(2))
+
+    @patch_cli
+    def test_create_mirror_view_async(self):
+        lun = VNXLun(71)
+        mv = self.vnx.create_mirror_view_async('testdr_003', lun)
+        assert_that(mv.state, equal_to('Active'))
+
+    @patch_cli
+    def test_get_mirror_group_async(self):
+        mg_list = self.vnx.get_mirror_group_async()
+        assert_that(mg_list, instance_of(VNXMirrorGroupAsyncList))
+        assert_that(len(mg_list), equal_to(2))
+
+    @patch_cli
+    def test_create_mirror_group_async(self):
+        mg = self.vnx.create_mirror_group_async('test_group')
+        assert_that(mg.state, equal_to('Synchronized'))
+        assert_that(mg.condition, equal_to('Active'))
+        assert_that(mg, instance_of(VNXMirrorGroupAsync))
 
     @patch_cli(output='credential_error.txt')
     def test_credential_error(self):

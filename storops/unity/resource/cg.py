@@ -15,16 +15,16 @@
 
 
 from __future__ import unicode_literals
+
 from storops import HostLUNAccessEnum
 from storops.exception import UnityStorageResourceNameInUseError, \
     UnityConsistencyGroupNameInUseError
 from storops.unity import enums
-from storops.unity.resource.storage_resource import UnityStorageResource, \
-    UnityStorageResourceList
-
 from storops.unity.resource import lun as lun_mod
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
+from storops.unity.resource.storage_resource import UnityStorageResource, \
+    UnityStorageResourceList
 from storops.unity.resp import RESP_OK
 
 __author__ = 'Peter Wang'
@@ -42,12 +42,12 @@ class UnityConsistencyGroup(UnityStorageResource):
     @classmethod
     def create(cls, cli, name, description=None, is_repl_dst=None,
                snap_schedule=None, tiering_policy=None,
-               is_data_deduction_enabled=None,
+               is_compression=None,
                hosts=None, lun_add=None):
         req_body = cls._compose_cg_parameters(cli, name, description,
                                               is_repl_dst,
                                               snap_schedule, tiering_policy,
-                                              is_data_deduction_enabled,
+                                              is_compression,
                                               hosts,
                                               lun_add)
         resp = cli.type_action(UnityStorageResource().resource_class,
@@ -76,13 +76,13 @@ class UnityConsistencyGroup(UnityStorageResource):
 
     def modify(self, name=None, description=None, is_repl_dst=None,
                snap_schedule=None, tiering_policy=None,
-               is_data_deduction_enabled=None, hosts=None,
+               is_compression=None, hosts=None,
                lun_add=None, lun_remove=None, host_add=None,
                host_remove=None, lun_modify=None):
         req_body = self._compose_cg_parameters(
             self._cli, name, description,
             is_repl_dst, snap_schedule, tiering_policy,
-            is_data_deduction_enabled, hosts,
+            is_compression, hosts,
             lun_add, lun_remove, host_add, host_remove, lun_modify)
         resp = self._cli.action(UnityStorageResource().resource_class,
                                 self.get_id(), 'modifyConsistencyGroup',
@@ -94,7 +94,7 @@ class UnityConsistencyGroup(UnityStorageResource):
     def _compose_cg_parameters(cli, name=None, description=None,
                                is_repl_dst=None,
                                snap_schedule=None, tiering_policy=None,
-                               is_data_deduction_enabled=None,
+                               is_compression=None,
                                hosts=None,
                                lun_add=None,
                                lun_remove=None,
@@ -115,7 +115,7 @@ class UnityConsistencyGroup(UnityStorageResource):
             fastVPParameters=cli.make_body(
                 tieringPolicy=tiering_policy),
             dataReductionParameters=cli.make_body(
-                isDataReductionEnabled=is_data_deduction_enabled
+                isDataReductionEnabled=is_compression
             ),
             snapScheduleParameters=cli.make_body(
                 snapSchedule=snap_schedule
@@ -143,6 +143,7 @@ class UnityConsistencyGroup(UnityStorageResource):
         # `hostAccess` could be empty list which is used to remove all host
         # access
         lun_parameters = lun_mod.prepare_lun_parameters(
+            cli=self._cli,
             size=size,
             host_access=host_access,
             sp=sp,

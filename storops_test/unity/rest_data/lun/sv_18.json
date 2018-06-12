@@ -1,16 +1,24 @@
 {
+    "@base": "https://10.245.101.39/api/instances/lun",
+    "updated": "2018-05-07T02:59:46.982Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/sv_18"
+        }
+    ],
     "content": {
-        "id": "sv_4",
+        "id": "sv_18",
         "operationalStatus": [
             2
         ],
-        "type": 2,
-        "tieringPolicy": 1,
+        "type": 1,
+        "tieringPolicy": 0,
         "defaultNode": 1,
         "currentNode": 1,
         "auSize": 8192,
-        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_4",
-        "creationTime": "2016-05-24T05:24:55.000Z",
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_18",
+        "creationTime": "2018-04-26T07:02:26.000Z",
         "health": {
             "value": 5,
             "descriptionIds": [
@@ -20,26 +28,28 @@
                 "The LUN is operating normally. No action is required."
             ]
         },
-        "name": "RestLun100",
-        "description": "Lun description",
-        "modificationTime": "2016-05-24T05:25:02.086Z",
-        "sizeTotal": 1073741824,
+        "name": "lun-cg-liangr2-01",
+        "description": "",
+        "modificationTime": "2018-04-26T07:02:27.454Z",
+        "sizeTotal": 42949672960,
         "sizeAllocated": 0,
         "perTierSizeUsed": [
             0,
-            0,
-            2952790016
+            3221225472,
+            0
         ],
         "isThinEnabled": true,
-        "wwn": "60:06:01:60:24:10:3E:00:A7:E5:43:57:C0:CE:10:18",
+        "wwn": "60:06:01:60:15:E0:3A:00:81:79:E1:5A:5D:80:F5:93",
         "isReplicationDestination": false,
         "isSnapSchedulePaused": false,
-        "objectId": 42949674123,
-        "metadataSize": 3489660928,
+        "objectId": 42949672989,
+        "lunGroupObjectId": 81604378635,
+        "metadataSize": 3758096384,
         "metadataSizeAllocated": 2684354560,
-        "snapWwn": "60:06:01:60:24:10:3E:00:AB:E5:43:57:AE:C6:38:02",
+        "snapWwn": "60:06:01:60:15:E0:3A:00:63:B9:1E:2C:39:4E:44:1D",
         "snapsSize": 0,
         "snapsSizeAllocated": 0,
+        "snapCount": 0,
         "hostAccess": [
             {
                 "accessMask": 3,
@@ -49,13 +59,14 @@
                 }
             }
         ],
-        "snapCount": 0,
         "storageResource": {
-            "id": "sv_4"
+            "id": "sv_18"
         },
         "pool": {
-            "id": "pool_1"
+            "id": "pool_2",
+            "raidType": 1,
+            "isFASTCacheEnabled": false
         },
-        "isThinClone": false
+        "isDataReductionEnabled": true
     }
 }

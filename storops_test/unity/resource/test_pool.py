@@ -267,6 +267,20 @@ class UnityPoolTest(TestCase):
         assert_that(lun, instance_of(UnityLun))
 
     @patch_rest
+    def test_create_lun_with_compression_enabled_v4_2(self):
+        pool = UnityPool(_id='pool_1', cli=t_rest(version='4.2'))
+        lun = pool.create_lun("LunName", 100,
+                              is_compression=True)
+        assert_that(lun, instance_of(UnityLun))
+
+    @patch_rest
+    def test_create_lun_with_compression_enabled(self):
+        pool = UnityPool(_id='pool_1', cli=t_rest(version='4.3'))
+        lun = pool.create_lun("LunName", 100,
+                              is_compression=True)
+        assert_that(lun, instance_of(UnityLun))
+
+    @patch_rest
     def test_create_nfs_share_success(self):
         pool = UnityPool(_id='pool_5', cli=t_rest())
         nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')

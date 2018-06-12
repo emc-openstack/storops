@@ -32,6 +32,7 @@
     ],
     "isThinEnabled": true,
     "isCompressionEnabled": false,
+    "isDataReductionEnabled": false,
     "wwn": "60:06:01:60:17:50:3C:00:C2:0A:D5:56:92:D1:BA:12",
     "isReplicationDestination": false,
     "isSnapSchedulePaused": false,

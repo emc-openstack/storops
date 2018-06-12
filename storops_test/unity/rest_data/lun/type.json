@@ -219,6 +219,18 @@
         "type": "AUSizeEnum",
         "description": "Allocation Unit size ",
         "displayValue": "auSize"
+      },
+      {
+        "name": "isCompressionEnabled",
+        "type": "Boolean",
+        "description": "True if compression is enabled. This attribute is obsolete and will be removed in a future release. Please use lun.isDataReductionEnabled instead.",
+        "displayValue": "isCompressionEnabled"
+      },
+      {
+        "name": "isDataReductionEnabled",
+        "type": "Boolean",
+        "description": "True if data reduction is enabled.",
+        "displayValue": "isDataReductionEnabled"
       }
     ]
   }

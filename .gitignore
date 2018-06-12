@@ -25,3 +25,4 @@ htmlcov/
 .coverage.*
 logs/
 *_names.json
+.pytest_cache/

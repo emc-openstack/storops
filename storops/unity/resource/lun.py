@@ -37,7 +37,17 @@ __author__ = 'Jay Xu'
 log = logging.getLogger(__name__)
 
 
-def prepare_lun_parameters(**kwargs):
+def prepare_lun_parameters(cli=None, **kwargs):
+    @version('<4.3')
+    def make_compression_body(cli=None,
+                              is_compression=None):
+        return UnityClient.make_body(isCompressionEnabled=is_compression)
+
+    @version('>=4.3')  # noqa
+    def make_compression_body(cli=None,
+                              is_compression=None):
+        return UnityClient.make_body(isDataReductionEnabled=is_compression)
+
     sp = kwargs.get('sp')
     if isinstance(sp, UnityStorageProcessor):
         sp_node = sp.to_node_enum()
@@ -51,7 +61,6 @@ def prepare_lun_parameters(**kwargs):
 
     lun_parameters = UnityClient.make_body(
         isThinEnabled=kwargs.get('is_thin'),
-        isCompressionEnabled=kwargs.get('is_compression'),
         size=kwargs.get('size'),
         pool=kwargs.get('pool'),
         defaultNode=sp_node,
@@ -59,6 +68,12 @@ def prepare_lun_parameters(**kwargs):
             tieringPolicy=kwargs.get('tiering_policy')),
         ioLimitParameters=UnityClient.make_body(
             ioLimitPolicy=kwargs.get('io_limit_policy')))
+
+    compression_body = make_compression_body(
+        cli,
+        kwargs.get('is_compression'))
+
+    lun_parameters.update(compression_body)
 
     # Empty host access can be used to wipe the host_access
     host_access = UnityClient.make_body(kwargs.get('host_access'),
@@ -76,6 +91,7 @@ class UnityLun(UnityResource):
     @classmethod
     def get_nested_properties(cls):
         return (
+            'pool.name',
             'pool.raid_type',
             'pool.isFASTCacheEnabled',
             'host_access.host.name',
@@ -191,7 +207,7 @@ class UnityLun(UnityResource):
 
         # `hostAccess` could be empty list which is used to remove all host
         # access
-        lun_parameters = prepare_lun_parameters(**kwargs)
+        lun_parameters = prepare_lun_parameters(cli, **kwargs)
         if lun_parameters:
             body['lunParameters'] = lun_parameters
         return body

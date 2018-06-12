@@ -1,5 +1,5 @@
 {
-  "@base": "https://10.245.101.39/api/types/systemCapacity/instances?fields=compressionPercent,compressionRatio,compressionSizeSaved,id,instanceId,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,tiers&per_page=2000&compact=true",
+  "@base": "https://10.245.101.39/api/types/systemCapacity/instances?fields=compressionPercent,compressionRatio,compressionSizeSaved,dataReductionSizeSaved,dataReductionPercent,dataReductionRatio,id,instanceId,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,tiers&per_page=2000&compact=true",
   "updated": "2017-08-16T07:40:51.563Z",
   "links": [
     {
@@ -18,6 +18,9 @@
         "compressionSizeSaved": 0,
         "compressionPercent": 0,
         "compressionRatio": 1,
+        "dataReductionSizeSaved": 0,
+        "dataReductionPercent": 0,
+        "dataReductionRatio": 1,
         "sizeSubscribed": 1018980990976,
         "tiers": [
           {

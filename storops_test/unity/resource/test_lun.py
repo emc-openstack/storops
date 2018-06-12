@@ -71,6 +71,7 @@ class UnityLunTest(TestCase):
         assert_that(lun.pool, instance_of(UnityPool))
         assert_that(lun.io_limit_rule, none())
         assert_that(lun.is_compression_enabled, equal_to(False))
+        assert_that(lun.is_data_reduction_enabled, equal_to(False))
 
     @patch_rest
     def test_lun_modify_host_access(self):
@@ -125,6 +126,20 @@ class UnityLunTest(TestCase):
         lun.update()
         assert_that(lun.name, equal_to('RestLun100'))
         assert_that(lun.description, equal_to('Lun description'))
+
+    @patch_rest
+    def test_lun_modify_compression_enabled_v4_2(self):
+        lun = UnityLun(_id='sv_17', cli=t_rest(version='4.2'))
+        lun.modify(is_compression=True)
+        lun.update()
+        assert_that(lun.is_compression_enabled, equal_to(True))
+
+    @patch_rest
+    def test_lun_modify_compression_enabled(self):
+        lun = UnityLun(_id='sv_18', cli=t_rest(version='4.3'))
+        lun.modify(is_compression=True)
+        lun.update()
+        assert_that(lun.is_data_reduction_enabled, equal_to(True))
 
     @patch_rest
     def test_lun_delete(self):

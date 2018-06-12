@@ -1113,5 +1113,8 @@ class UnitySystemCapacity(TestCase):
         assert_that(capacity.compression_size_saved, equal_to(0))
         assert_that(capacity.compression_percent, equal_to(0))
         assert_that(capacity.compression_ratio, equal_to(1))
+        assert_that(capacity.data_reduction_size_saved, equal_to(0))
+        assert_that(capacity.data_reduction_percent, equal_to(0))
+        assert_that(capacity.data_reduction_ratio, equal_to(1))
         assert_that(capacity.size_subscribed, equal_to(1018980990976))
         assert_that(capacity.tiers[0], instance_of(UnitySystemTierCapacity))

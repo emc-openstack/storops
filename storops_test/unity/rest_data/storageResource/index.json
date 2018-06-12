@@ -33,6 +33,14 @@
       "response": "sv_16.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_17?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_17.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_18?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_18.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_3?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "res_3.json"
     },
@@ -712,6 +720,34 @@
       "response": "create_lun_sv_2026.json"
     },
     {
+      "url": "/api/types/storageResource/action/createLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "isCompressionEnabled": true,
+          "pool": {
+            "id": "pool_1"
+          },
+          "size": 107374182400
+        },
+        "name": "LunName"
+      },
+      "response": "create_lun_sv2.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createLun?compact=True",
+      "body": {
+        "lunParameters": {
+          "isDataReductionEnabled": true,
+          "pool": {
+            "id": "pool_1"
+          },
+          "size": 107374182400
+        },
+        "name": "LunName"
+      },
+      "response": "create_lun_sv2.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_2/action/modifyLun?compact=True",
       "body": {
         "lunParameters": {
@@ -1082,6 +1118,16 @@
       "response": "empty.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_17/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"isCompressionEnabled": true}},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_18/action/modifyLun?compact=True",
+      "body": {"lunParameters": {"isDataReductionEnabled": true}},
+      "response": "empty.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_5609/action/modifyLun?compact=True",
       "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_23"}, "accessMask": 1}]}},
       "response": "empty.json"
@@ -1132,6 +1178,11 @@
     {
       "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
       "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"size": 16106127360}}]},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
+      "body": {"lunModify": [{"lun": {"id": "sv_17"}, "lunParameters": {"isDataReductionEnabled": true}}]},
       "response": "empty.json"
     },
     {

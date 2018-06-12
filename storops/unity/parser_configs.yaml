@@ -41,6 +41,7 @@ UnityLun:
     - label: perTierSizeUsed
     - label: isThinEnabled
     - label: isCompressionEnabled
+    - label: isDataReductionEnabled
     - label: storageResource
       converter: UnityStorageResource
     - label: pool
@@ -1865,6 +1866,9 @@ UnitySystemCapacity:
     - label: compressionSizeSaved
     - label: compressionPercent
     - label: compressionRatio
+    - label: dataReductionSizeSaved
+    - label: dataReductionPercent
+    - label: dataReductionRatio
     - label: sizeSubscribed
     - label: tiers
       converter: UnitySystemTierCapacityList

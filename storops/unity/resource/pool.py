@@ -17,11 +17,12 @@
 from __future__ import unicode_literals
 
 import logging
+
 import bitmath
 
+import storops.unity.resource.filesystem
 from storops.unity.resource import UnityResource, \
     UnityAttributeResource, UnityResourceList
-import storops.unity.resource.filesystem
 from storops.unity.resource.disk import UnityDiskGroup, UnityDiskList
 from storops.unity.resource.lun import UnityLun
 

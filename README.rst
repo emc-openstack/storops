@@ -171,6 +171,7 @@ Feature List
         - Remote hosts access
         - Persist historical metric data to csv files
         - Upload license
+        - enable/disable LUN data reduction
     - supported metrics
         - system
             - read/write/total IOPS

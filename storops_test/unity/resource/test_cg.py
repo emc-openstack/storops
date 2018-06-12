@@ -250,6 +250,18 @@ class UnityConsistencyGroupTest(TestCase):
         assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
+    def test_modify_lun_compression_enabled_in_cg_v4_2(self):
+        lun_in_cg = UnityLun.get(cli=t_rest(version='4.2'), _id='sv_17')
+        resp = lun_in_cg.modify(is_compression=True)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_modify_lun_compression_enabled_in_cg(self):
+        lun_in_cg = UnityLun.get(cli=t_rest(version='4.3'), _id='sv_18')
+        resp = lun_in_cg.modify(is_compression=True)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
     def test_replace_lun_in_cg(self):
         cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_6')
         lun1 = UnityLun(cli=t_rest(), _id='sv_3341')

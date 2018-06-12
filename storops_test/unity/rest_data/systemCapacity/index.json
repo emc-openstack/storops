@@ -5,7 +5,7 @@
       "response": "type.json"
     },
     {
-      "url": "/api/types/systemCapacity/instances?compact=True&fields=compressionPercent,compressionRatio,compressionSizeSaved,id,instanceId,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,tiers",
+      "url": "/api/types/systemCapacity/instances?compact=True&fields=compressionPercent,compressionRatio,compressionSizeSaved,dataReductionPercent,dataReductionRatio,dataReductionSizeSaved,id,instanceId,sizeFree,sizeSubscribed,sizeTotal,sizeUsed,tiers",
       "response": "all.json"
     }
   ]

@@ -1,10 +1,10 @@
 {
   "error": {
-    "errorCode": 108009078,
+    "errorCode": 108009075,
     "httpStatusCode": 409,
     "messages": [
       {
-        "en-US": "The specified LUN cannot be deleted because it has one or more dependent thin clones. (Error Code:0x6701676)"
+        "en-US": "The specified LUN cannot be deleted because it has one or more dependent thin clones. (Error Code:0x6701673)"
       }
     ],
     "created": "2017-09-30T07:07:10.495Z"

@@ -1302,7 +1302,7 @@ class UnityThinCloneLimitExceededError(UnityThinCloneException):
 
 @rest_exception
 class UnityBaseHasThinCloneError(UnityThinCloneException):
-    error_code = 108009078
+    error_code = 108009075
 
 
 @rest_exception

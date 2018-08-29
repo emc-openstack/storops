@@ -82,6 +82,21 @@
     {
       "url": "/api/types/ioLimitPolicy/instances?compact=True",
       "body": {
+        "type": 1,
+        "name": "float_type_kbps",
+        "ioLimitRules": [
+          {
+            "maxKBPS": 1.0,
+            "name": "float_type_kbps_rule"
+          }
+        ],
+        "isShared": false
+      },
+      "response": "incorrect_request_body.json"
+    },
+    {
+      "url": "/api/types/ioLimitPolicy/instances?compact=True",
+      "body": {
         "isShared": false,
         "type": 1,
         "description": "storops",

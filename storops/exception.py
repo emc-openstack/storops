@@ -497,6 +497,11 @@ class UnityPolicyNameInUseError(UnityQosException):
     error_code = 151032071
 
 
+@rest_exception
+class UnityPolicyIncorrectRequestBodyError(UnityQosException):
+    error_code = 131149877
+
+
 class UnityEthernetPortMtuSizeNotSupportError(UnityException):
     message = "Specified MTU size is not supported."
 

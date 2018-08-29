@@ -24,8 +24,8 @@ from hamcrest import assert_that, equal_to, instance_of, only_contains, \
 from storops.exception import SystemAPINotSupported
 from storops.exception import UnityEthernetPortSpeedNotSupportError, \
     UnityEthernetPortMtuSizeNotSupportError, UnityResourceNotFoundError, \
-    UnityPolicyNameInUseError, UnityEthernetPortAlreadyAggregatedError, \
-    UnityIPInUseException
+    UnityPolicyNameInUseError, UnityPolicyIncorrectRequestBodyError, \
+    UnityEthernetPortAlreadyAggregatedError, UnityIPInUseException
 from storops.unity.enums import EPSpeedValuesEnum, \
     FcSpeedEnum, IOLimitPolicyStateEnum, IOLimitPolicyTypeEnum, \
     SpeedValuesEnum, ConnectorTypeEnum
@@ -356,6 +356,16 @@ class UnityIoLimitPolicyTest(TestCase):
             UnityIoLimitPolicy.create(t_rest(), 'test1', max_kbps=1)
 
         assert_that(f, raises(UnityPolicyNameInUseError, 'been reserved'))
+
+    @patch_rest
+    def test_create_policy_with_incorrect_parameters(self):
+        def f():
+            UnityIoLimitPolicy.create(t_rest(),
+                                      'float_type_kbps',
+                                      max_kbps=1.0)
+
+        assert_that(f, raises(UnityPolicyIncorrectRequestBodyError,
+                              'Request body is not correct'))
 
     @patch_rest
     def test_create_iops_policy(self):

@@ -1052,7 +1052,10 @@
             },
             "description": "This is description.",
             "lunParameters": {
-              "ioLimitParameters": {"id": "qp_2"}}
+              "ioLimitParameters": {
+                "ioLimitPolicy": {"id": "qp_2"}
+              }
+            }
       },
       "response": "thin_clone.json"
     },

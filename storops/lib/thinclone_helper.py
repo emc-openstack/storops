@@ -55,7 +55,8 @@ class TCHelper(object):
                             io_limit_policy=None):
         return cli.make_body(name=name, snap=snap, description=description,
                              lunParameters=cli.make_body(
-                                 ioLimitParameters=io_limit_policy))
+                                 ioLimitParameters=cli.make_body(
+                                     ioLimitPolicy=io_limit_policy)))
 
     @staticmethod
     def thin_clone(cli, lun_or_snap, name, io_limit_policy=None,

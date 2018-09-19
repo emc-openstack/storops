@@ -63,7 +63,7 @@ class UnitySnapHostAccessList(UnityResourceList):
 
 
 DUMMY_LUN_NAME = 'storops_dummy_lun'
-MAX_HLU_NUMBER = 16381
+MAX_HLU_NUMBER = 255  # Unity supports 16381 but uses 255 here due to GH-238
 
 
 class UnityHost(UnityResource):

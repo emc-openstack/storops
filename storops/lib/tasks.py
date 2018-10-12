@@ -36,7 +36,7 @@ class PQueue(object):
 
     def __init__(self, path, interval=None):
         self.path = path
-        self._q = persistqueue.Queue(self.path)
+        self._q = persistqueue.Queue(self.path, tempdir=self.path)
         self._interval = (
             self.DEFAULT_INTERVAL if interval is None else interval)
         self.started = False

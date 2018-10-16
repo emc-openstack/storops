@@ -17,6 +17,8 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
+import mock
+
 from hamcrest import assert_that, equal_to, instance_of, raises, none, calling
 
 from storops.exception import UnityShareOnCkptSnapError, \
@@ -144,6 +146,19 @@ class UnitySnapTest(TestCase):
         snap = UnitySnap(_id='38654705845', cli=t_rest())
         assert_that(lambda: snap.delete(),
                     raises(UnityDeleteAttachedSnapError))
+
+    @patch_rest
+    def test_delete_attached_snap_with_force(self):
+        snap = UnitySnap(_id='38654705845', cli=t_rest())
+
+        def fake_detach_from(host):
+            snap._id = '171798691885'
+
+        with mock.patch.object(UnitySnap, 'detach_from',
+                               side_effect=fake_detach_from):
+            resp = snap.delete(even_attached=True)
+            assert_that(snap._id, equal_to('171798691885'))
+            assert_that(resp.is_ok(), equal_to(True))
 
     @patch_rest
     def test_attach_snap_success(self):

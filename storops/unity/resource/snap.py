@@ -21,7 +21,7 @@ import storops.unity.resource.cifs_share
 import storops.unity.resource.nfs_share
 import storops.unity.resource.storage_resource
 from storops.exception import UnityCGMemberActionNotSupportError, \
-    UnityThinCloneNotAllowedError
+    UnityThinCloneNotAllowedError, UnityDeleteAttachedSnapError
 from storops.lib.common import instance_cache
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
@@ -197,6 +197,28 @@ class UnitySnap(UnityResource):
     def is_member_snap(self):
         """Returns True if it is a member snap of cg snap."""
         return self.snap_group is not None
+
+    def delete(self, async=False, even_attached=False):
+        """Deletes the snapshot.
+
+        :param async: whether to delete the snapshot in async mode.
+        :param even_attached: whether to delete the snapshot even it is
+            attached to hosts.
+        """
+        try:
+            return super(UnitySnap, self).delete(async=async)
+        except UnityDeleteAttachedSnapError:
+            if even_attached:
+                log.debug("Force delete the snapshot even if it is attached. "
+                          "First detach the snapshot from hosts, then delete "
+                          "again.")
+                # Currently `detach_from` doesn't process `host` parameter.
+                # It always detaches the snapshot from all hosts. So pass in
+                # `None` here.
+                self.detach_from(None)
+                return super(UnitySnap, self).delete(async=async)
+            else:
+                raise
 
 
 class UnitySnapList(UnityResourceList):

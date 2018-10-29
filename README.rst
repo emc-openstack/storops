@@ -166,6 +166,11 @@ Feature List
         - list management interfaces
         - list power supplies
         - list ssds
+        - list remote interfaces
+        - list/create/modify/verify/delete remote systems
+        - list/create/modify/delete replication interfaces
+        - list/create/modify/delete replication sessions
+        - failover/failback/pause/resume/sync replication sessions
     - supported feature/operations
         - CIFS share access control
         - NFS share access control
@@ -174,6 +179,7 @@ Feature List
         - Upload license
         - enable/disable LUN data reduction
         - LUN migration
+        - LUN replication
     - supported metrics
         - system
             - read/write/total IOPS

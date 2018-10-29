@@ -1,0 +1,51 @@
+{
+    "content": {
+        "name": "remoteInterface",
+        "description": "All local and remote replication interfaces from all remote system connection configurations.",
+        "documentation": "https://10.245.101.39/apidocs/classes/remoteInterface.html",
+        "attributes": [
+            {
+                "name": "capability",
+                "type": "ReplicationCapabilityEnum",
+                "description": "This property indicates the capability of the interface for replication sessions  Values are:  <ul>  <li>0 - interface is capable of participating in SYNC replication sessions  <li>1 - interface is capable of participating in ASYNC replication sessions  <li>2 - interface is capable of participating in both SYNC and ASYNC replication sessions  </ul>",
+                "displayValue": "capability"
+            },
+            {
+                "name": "node",
+                "type": "NodeEnum",
+                "description": "SP or node owning this interface.",
+                "displayValue": "node"
+            },
+            {
+                "name": "remoteId",
+                "type": "String",
+                "description": "Unique identifier of the remoteInterface instance as is from remote system.",
+                "displayValue": "remoteId"
+            },
+            {
+                "name": "address",
+                "type": "IPAddress",
+                "description": "IP address of the remote interface.",
+                "displayValue": "address"
+            },
+            {
+                "name": "remoteSystem",
+                "type": "remoteSystem",
+                "description": "Unique identifier of the remote system, as defined by the remoteSystem resource type.",
+                "displayValue": "remoteSystem"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique global identifier of the remoteInterface instance. This is combination of system serial number and the instance id as is from the remote system.",
+                "displayValue": "id"
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "description": "User-specified remote interface name.",
+                "displayValue": "name"
+            }
+        ]
+    }
+}

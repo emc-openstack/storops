@@ -1,0 +1,40 @@
+{
+    "content": {
+        "id": "RS_4",
+        "connectionType": 1,
+        "name": "FNM00152000052",
+        "model": "Unity 300",
+        "serialNumber": "FNM00152000052",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_CONN_OK"
+            ],
+            "descriptions": [
+                "Communication with the replication host is established. No action is required."
+            ]
+        },
+        "managementAddress": "10.245.83.174",
+        "altManagementAddressList": [
+            "10.245.83.174"
+        ],
+        "syncFcPorts": [
+            "spa_fc4",
+            "spb_fc4"
+        ],
+        "username": "admin",
+        "localSPAInterfaces": [
+            "10.245.47.99"
+        ],
+        "localSPBInterfaces": [
+            "10.245.47.98"
+        ],
+        "remoteSPAInterfaces": [
+            "10.245.197.61"
+        ],
+        "remoteSPBInterfaces": [
+            "10.245.197.62"
+        ]
+    }
+}
+

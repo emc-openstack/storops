@@ -1,0 +1,59 @@
+{
+    "@base": "https://10.245.101.39/api/types/replicationInterface/instances?fields=gateway,health,id,ipAddress,ipPort,ipProtocolVersion,macAddress,name,netmask,v6PrefixLength,vlanId&per_page=2000&compact=true",
+    "updated": "2018-11-05T07:01:05.421Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "id": "if_10",
+                "ipProtocolVersion": 4,
+                "health": {
+                    "value": 5,
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ]
+                },
+                "ipAddress": "10.245.47.99",
+                "netmask": "255.255.255.0",
+                "gateway": "10.245.47.1",
+                "macAddress": "00:60:16:5C:07:0B",
+                "name": "4_FNM00150600267",
+                "ipPort": {
+                    "id": "spa_eth2"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "if_11",
+                "ipProtocolVersion": 4,
+                "health": {
+                    "value": 5,
+                    "descriptionIds": [
+                        "ALRT_COMPONENT_OK"
+                    ],
+                    "descriptions": [
+                        "The component is operating normally. No action is required."
+                    ]
+                },
+                "ipAddress": "10.245.47.98",
+                "netmask": "255.255.255.0",
+                "gateway": "10.245.47.1",
+                "macAddress": "00:60:16:5C:05:FF",
+                "name": "5_FNM00150600267",
+                "ipPort": {
+                    "id": "spb_eth2"
+                }
+            }
+        }
+    ]
+}
+

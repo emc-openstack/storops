@@ -1,0 +1,153 @@
+{
+    "content": {
+        "name": "replicationSession",
+        "description": "Information about replication sessions.  <br/>  <br/>  Replication is a process in which storage data is duplicated either  locally or to a remote network device.  Replication produces a read-only, point-in-time copy of source data  and periodically updates the copy, keeping it consistent with the source  data. Replication provides an enhanced level of redundancy in case  the main storage backup system fails. As a result, the:  <ul>  <li>Downtime associated cost of a system failure is minimized.  <li>Recovery process from a natural or human-caused disaster is facilitated.  </ul>  A replication session establishes an end-to-end path for a replication   operation between a source and a destination. The replication source and   destination may be local or remote. The session establishes the path that  the data follows as it moves from source to destination.",
+        "documentation": "https://10.245.101.39/apidocs/classes/replicationSession.html",
+        "attributes": [
+            {
+                "name": "srcResourceId",
+                "type": "String",
+                "description": "Identifier of the source resource in the replication session.",
+                "displayValue": "srcResourceId"
+            },
+            {
+                "name": "dstStatus",
+                "type": "ReplicationSessionStatusEnum",
+                "description": "Status of the destination end of the replication session.",
+                "displayValue": "dstStatus"
+            },
+            {
+                "name": "localRole",
+                "type": "ReplicationSessionReplicationRoleEnum",
+                "description": "Role of the local system in the replication session.",
+                "displayValue": "localRole"
+            },
+            {
+                "name": "dstResourceId",
+                "type": "String",
+                "description": "Identifier of the destination resource.",
+                "displayValue": "dstResourceId"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique identifier of the replicationSession instance.",
+                "displayValue": "id"
+            },
+            {
+                "name": "dailySnapReplicationPolicy",
+                "type": "snapReplicationPolicy",
+                "description": "Daily Snap Replication Policy",
+                "displayValue": "dailySnapReplicationPolicy"
+            },
+            {
+                "name": "currentTransferEstRemainTime",
+                "type": "Integer",
+                "description": "Estimated time left for the replication synchronization to complete.",
+                "displayValue": "currentTransferEstRemainTime"
+            },
+            {
+                "name": "hourlySnapReplicationPolicy",
+                "type": "snapReplicationPolicy",
+                "description": "Hourly Snap Replication Policy",
+                "displayValue": "hourlySnapReplicationPolicy"
+            },
+            {
+                "name": "remoteSystem",
+                "type": "remoteSystem",
+                "description": "The remote system to which this replication session is connected, as defined by the remoteSystem resource type.",
+                "displayValue": "remoteSystem"
+            },
+            {
+                "name": "syncState",
+                "type": "ReplicationSessionSyncStateEnum",
+                "description": "Synchronization state between source and destination resource of the replication session.",
+                "displayValue": "syncState"
+            },
+            {
+                "name": "maxTimeOutOfSync",
+                "type": "Integer",
+                "description": "Maximum time to wait before the system syncs the source and destination  resources. Value of -1 specifies that automatic sync is not performed.",
+                "displayValue": "maxTimeOutOfSync"
+            },
+            {
+                "name": "dstSPBInterface",
+                "type": "remoteInterface",
+                "description": "SP B interface used on the destination system for the replication, if the  replication session is a remote session.",
+                "displayValue": "dstSPBInterface"
+            },
+            {
+                "name": "syncProgress",
+                "type": "Integer",
+                "description": "Synchronization completion percentage between source and destination        resources of the replication session.",
+                "displayValue": "syncProgress"
+            },
+            {
+                "name": "srcStatus",
+                "type": "ReplicationSessionStatusEnum",
+                "description": "Status of the source end of the session.",
+                "displayValue": "srcStatus"
+            },
+            {
+                "name": "dstSPAInterface",
+                "type": "remoteInterface",
+                "description": "SP A interface used on the destination system for the replication,  if the  replication session is a remote session.",
+                "displayValue": "dstSPAInterface"
+            },
+            {
+                "name": "srcSPBInterface",
+                "type": "remoteInterface",
+                "description": "SP B interface used on the source system for the replication, if the  replication session is a remote session.",
+                "displayValue": "srcSPBInterface"
+            },
+            {
+                "name": "status",
+                "type": "ReplicationOpStatusEnum",
+                "description": "Replication status of the replication session.",
+                "displayValue": "status"
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "description": "User-specified replication session name.",
+                "displayValue": "name"
+            },
+            {
+                "name": "networkStatus",
+                "type": "ReplicationSessionNetworkStatusEnum",
+                "description": "Status of the network connection used by the replication session.",
+                "displayValue": "networkStatus"
+            },
+            {
+                "name": "health",
+                "type": "health",
+                "description": "Health information for the replication session, as defined by the health  resource type.",
+                "displayValue": "health"
+            },
+            {
+                "name": "members",
+                "type": "List<lunMemberReplication>",
+                "description": "Information about the replication of each member lun in the group.",
+                "displayValue": "members"
+            },
+            {
+                "name": "replicationResourceType",
+                "type": "ReplicationEndpointResourceTypeEnum",
+                "description": "Replication resource type of replication session endpoints.",
+                "displayValue": "replicationResourceType"
+            },
+            {
+                "name": "lastSyncTime",
+                "type": "DateTime",
+                "description": "Date and time of the last replication synchronization.",
+                "displayValue": "lastSyncTime"
+            },
+            {
+                "name": "srcSPAInterface",
+                "type": "remoteInterface",
+                "description": "SP A interface used on the source system for the replication, if the  replication session is a remote session.",
+                "displayValue": "srcSPAInterface"
+            }
+        ]
+    }
+}

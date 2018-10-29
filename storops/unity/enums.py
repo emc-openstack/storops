@@ -800,3 +800,89 @@ class MoveSessionPriorityEnum(UnityEnum):
     NORMAL = (3, "Normal")
     ABOVE_NORMAL = (4, "Above_Normal")
     HIGH = (5, "High")
+
+
+class ReplicationSessionStatusEnum(UnityEnum):
+    UNKNOWN = (0, 'Unknown')
+    OTHER = (1, 'Other')
+    OK = (2, 'OK')
+    PAUSED = (3, 'Paused')
+    FATAL_REPLICATION_ISSUE = (4, 'Fatal_Replication_Issue')
+    LOST_COMMUNICATION = (5, 'Lost_Communication')
+    FAILED_OVER = (6, 'Failed_Over')
+    FAILED_OVER_WITH_SYNC = (7, 'Failed_Over_With_Sync')
+    DESTINATION_EXTEND_NOT_SYNCING = (8, 'Destination_Extend_Not_Syncing')
+    DESTINATION_EXTEND_IN_PROGRESS = (9, 'Destination_Extend_In_Progress')
+    LOST_SYNC_COMMUNICATION = (10, 'Lost_Sync_Communication')
+    DESTINATION_POOL_OUT_OF_SPACE = (11, 'Destination_Pool_Out_Of_Space')
+
+
+class ReplicationSessionNetworkStatusEnum(UnityEnum):
+    UNKNOWN = (0, 'Unknown')
+    OTHER = (1, 'Other')
+    OK = (2, 'OK')
+    LOST_COMMUNICATION = (5, 'Lost_Communication')
+    LOST_SYNC_COMMUNICATION = (10, 'Lost_Sync_Communication')
+
+
+class ReplicationSessionSyncStateEnum(UnityEnum):
+    MANUAL_SYNCING = (0, 'Manual_Syncing')
+    AUTO_SYNCING = (1, 'Auto_Syncing')
+    IDLE = (2, 'Idle')
+    UNKNOWN = (100, 'Unknown')
+    OUT_OF_SYNC = (101, 'Out_Of_Sync')
+    IN_SYNC = (102, 'In_Sync')
+    CONSISTENT = (103, 'Consistent')
+    SYNCING = (104, 'Syncing')
+    INCONSISTENT = (105, 'Inconsistent')
+
+
+class ReplicationSessionReplicationRoleEnum(UnityEnum):
+    SOURCE = (0, 'Source')
+    DESTINATION = (1, 'Destination')
+    LOOPBACK = (2, 'Loopback')
+    LOCAL = (3, 'Local')
+    UNKNOWN = (4, 'Unknown')
+
+
+class ReplicationCapabilityEnum(UnityEnum):
+    SYNC = (0, 'Sync')
+    ASYNC = (1, 'Async')
+    BOTH = (2, 'Both')
+    NONE = (3, 'None')
+
+
+class ReplicationEndpointResourceTypeEnum(UnityEnum):
+    FILESYSTEM = (1, 'filesystem')
+    CONSISTENCYGROUP = (2, 'consistencyGroup')
+    VMWAREFS = (3, 'vmwarefs')
+    VMWAREISCSI = (4, 'vmwareiscsi')
+    LUN = (8, 'lun')
+    NASSERVER = (10, 'nasServer')
+
+
+class ReplicationOpStatusEnum(UnityEnum):
+    UNKNOWN = (0, 'Unknown')
+    OTHER = (1, 'Other')
+    OK = (2, 'OK')
+    NON_RECOVERABLE_ERROR = (7, 'Non_Recoverable_Error')
+    LOST_COMMUNICATION = (13, 'Lost_Communication')
+    FAILED_OVER_WITH_SYNC = (0x8400, 'Failed_Over_with_Sync')
+    FAILED_OVER = (0x8401, 'Failed_Over')
+    MANUAL_SYNCING = (0x8402, 'Manual_Syncing')
+    PAUSED = (0x8403, 'Paused')
+    IDLE = (0x8404, 'Idle')
+    AUTO_SYNC_CONFIGURED = (0x8405, 'Auto_Sync_Configured')
+    DESTINATION_EXTEND_FAILED_NOT_SYNCING = (
+        0x840B, 'Destination_Extend_Failed_Not_Syncing')
+    DESTINATION_EXTEND_IN_PROGRESS = (0x840C, 'Destination_Extend_In_Progress')
+    ACTIVE = (0x840D, 'Active')
+    LOST_SYNC_COMMUNICATION = (0x840E, 'Lost_Sync_Communication')
+    DESTINATION_POOL_OUT_OF_SPACE = (0x840F, 'Destination_Pool_Out_Of_Space')
+    SYNCING = (0x8411, 'Syncing')
+    FAILED_OVER_WITH_SYNC_MIXED = (0x87E8, 'Failed_Over_with_Sync_Mixed')
+    FAILED_OVER_MIXED = (0x87E9, 'Failed_Over_Mixed')
+    MANUAL_SYNCING_MIXED = (0x87EA, 'Manual_Syncing_Mixed')
+    PAUSED_MIXED = (0x87EB, 'Paused_Mixed')
+    IDLE_MIXED = (0x87EC, 'Idle_Mixed')
+    AUTO_SYNC_CONFIGURED_MIXED = (0x87ED, 'Auto_Sync_Configured_Mixed')

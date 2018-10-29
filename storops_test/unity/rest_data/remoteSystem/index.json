@@ -1,0 +1,40 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/remoteSystem?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/remoteSystem/instances?compact=True&fields=altManagementAddressList,connectionType,health,id,localSPAInterfaces,localSPBInterfaces,managementAddress,model,name,remoteSPAInterfaces,remoteSPBInterfaces,serialNumber,syncFcPorts,username",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/remoteSystem/RS_0?compact=True&fields=altManagementAddressList,connectionType,health,id,localSPAInterfaces,localSPBInterfaces,managementAddress,model,name,remoteSPAInterfaces,remoteSPBInterfaces,serialNumber,syncFcPorts,username",
+      "response": "rs_0.json"
+    },
+    {
+      "url": "/api/instances/remoteSystem/RS_4?compact=True&fields=altManagementAddressList,connectionType,health,id,localSPAInterfaces,localSPBInterfaces,managementAddress,model,name,remoteSPAInterfaces,remoteSPBInterfaces,serialNumber,syncFcPorts,username",
+      "response": "rs_4.json"
+    },
+    {
+      "url": "/api/types/remoteSystem/instances?compact=True",
+      "body": {"managementAddress": "1.1.1.1"},
+      "response": "create_rs_4.json"
+    },
+    {
+      "url": "/api/types/remoteSystem/instances?compact=True",
+      "body": {"managementAddress": "1.1.1.1", "localUsername": "admin", "connectionType": 2, "localPassword": "password", "remotePassword": "password", "remoteUsername": "admin"},
+      "response": "create_rs_4.json"
+    },
+    {
+      "url": "/api/instances/remoteSystem/RS_0/action/modify?compact=True",
+      "body": {"managementAddress": "1.1.1.1", "username": "admin", "connectionType": 2, "password": "password"},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/remoteSystem/RS_0/action/verify?compact=True",
+      "body": {"connectionType": 2},
+      "response": "empty.json"
+    }
+  ]
+}

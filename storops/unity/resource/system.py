@@ -46,6 +46,13 @@ from storops.unity.resource.port import UnityEthernetPortList, \
 from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
     UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal, \
     UnitySasPortList, UnityIscsiNodeList
+from storops.unity.resource.remote_interface import UnityRemoteInterfaceList
+from storops.unity.resource.remote_system import UnityRemoteSystemList, \
+    UnityRemoteSystem
+from storops.unity.resource.replication_interface import \
+    UnityReplicationInterfaceList, UnityReplicationInterface
+from storops.unity.resource.replication_session import \
+    UnityReplicationSessionList
 from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.sp import UnityStorageProcessorList
 from storops.unity.resource.cg import UnityConsistencyGroup, \
@@ -497,6 +504,75 @@ class UnitySystem(UnitySingletonResource):
         files = {'filename': license}
         resp = self._cli.rest_post('/upload/license', files=files)
         resp.raise_if_err()
+
+    def get_remote_system(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityRemoteSystemList, _id=_id, name=name, **filters)
+
+    def create_remote_system(self, management_address,
+                             local_username=None, local_password=None,
+                             remote_username=None, remote_password=None,
+                             connection_type=None):
+        """
+        Configures a remote system for remote replication.
+
+        :param management_address: the management IP address of the remote
+            system.
+        :param local_username: administrative username of local system.
+        :param local_password: administrative password of local system.
+        :param remote_username: administrative username of remote system.
+        :param remote_password: administrative password of remote system.
+        :param connection_type: `ReplicationCapabilityEnum`. Replication
+            connection type to the remote system.
+        :return: the newly created remote system.
+        """
+        return UnityRemoteSystem.create(self._cli, management_address,
+                                        local_username=local_username,
+                                        local_password=local_password,
+                                        remote_username=remote_username,
+                                        remote_password=remote_password,
+                                        connection_type=connection_type)
+
+    def get_remote_interface(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityRemoteInterfaceList, _id=_id, name=name, **filters)
+
+    def get_replication_interface(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityReplicationInterfaceList, _id=_id, name=name, **filters)
+
+    def create_replication_interface(self, sp, ip_port, ip_address,
+                                     netmask=None, v6_prefix_length=None,
+                                     gateway=None, vlan_id=None):
+        """
+        Creates a replication interface.
+
+        :param sp: `UnityStorageProcessor` object. Storage processor on which
+            the replication interface is running.
+        :param ip_port: `UnityIpPort` object. Physical port or link aggregation
+            on the storage processor on which the interface is running.
+        :param ip_address: IP address of the replication interface.
+        :param netmask: IPv4 netmask for the replication interface, if it uses
+            an IPv4 address.
+        :param v6_prefix_length: IPv6 prefix length for the interface, if it
+            uses an IPv6 address.
+        :param gateway: IPv4 or IPv6 gateway address for the replication
+            interface.
+        :param vlan_id: VLAN identifier for the interface.
+        :return: the newly create replication interface.
+        """
+        return UnityReplicationInterface.create(
+            self._cli, sp, ip_port, ip_address, netmask=netmask,
+            v6_prefix_length=v6_prefix_length, gateway=gateway,
+            vlan_id=vlan_id)
+
+    def get_replication_session(self, _id=None, name=None,
+                                src_resource_id=None, dst_resource_id=None,
+                                **filters):
+        return self._get_unity_rsc(
+            UnityReplicationSessionList, _id=_id, name=name,
+            src_resource_id=src_resource_id, dst_resource_id=dst_resource_id,
+            **filters)
 
 
 class UnitySystemList(UnityResourceList):

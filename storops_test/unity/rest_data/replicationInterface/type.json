@@ -1,0 +1,75 @@
+{
+    "content": {
+        "name": "replicationInterface",
+        "description": "Information about replication interfaces in the storage system. These interfaces  are used in remote replication connections and sessions for replication data transfer.",
+        "documentation": "https://10.245.101.39/apidocs/classes/replicationInterface.html",
+        "attributes": [
+            {
+                "name": "ipProtocolVersion",
+                "type": "IpProtocolVersionEnum",
+                "description": "IP protocol version of the replication interface.",
+                "displayValue": "ipProtocolVersion"
+            },
+            {
+                "name": "ipPort",
+                "type": "ipPort",
+                "description": "Physical port or link aggregation on the storage processor on which the  replication interface is running, as defined by the ipPort resource type.",
+                "displayValue": "ipPort"
+            },
+            {
+                "name": "vlanId",
+                "type": "Integer",
+                "description": "Virtual Local Area Network (VLAN) identifier for the replication interface. The  interface uses the identifier to accept packets that have matching VLAN tags.  <br/>  <br/>  Values are 0 - 4094. The default is 0, which means that the packets to accept  do not have VLAN tags.",
+                "displayValue": "vlanId"
+            },
+            {
+                "name": "macAddress",
+                "type": "String",
+                "description": "MAC address of the virtual Ethernet port used for the replication interface. A  physical Ethernet port has a different MAC address.",
+                "displayValue": "macAddress"
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "description": "Replication interface name.",
+                "displayValue": "name"
+            },
+            {
+                "name": "netmask",
+                "type": "IPAddress",
+                "description": "IPv4 netmask for the replication interface, if it uses an IPv4 address.",
+                "displayValue": "netmask"
+            },
+            {
+                "name": "ipAddress",
+                "type": "IPAddress",
+                "description": "IP address of the replication interface.",
+                "displayValue": "ipAddress"
+            },
+            {
+                "name": "health",
+                "type": "health",
+                "description": "Health of the replication interface, as defined by the health resource type.",
+                "displayValue": "health"
+            },
+            {
+                "name": "gateway",
+                "type": "IPAddress",
+                "description": "IPv4 or IPv6 gateway address for the replication interface.",
+                "displayValue": "gateway"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique identifier of the replicationInterface instance.",
+                "displayValue": "id"
+            },
+            {
+                "name": "v6PrefixLength",
+                "type": "Integer",
+                "description": "IPv6 prefix length for the replication interface, if it uses an IPv6 address.",
+                "displayValue": "v6PrefixLength"
+            }
+        ]
+    }
+}

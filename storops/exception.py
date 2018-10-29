@@ -1348,3 +1348,8 @@ class UnityMigrationSourceHasThinCloneError(UnityMigrationException):
 
 class UnityMigrationTimeoutException(UnityMigrationException):
     message = "Timeout when waiting for lun migration."
+
+
+@rest_exception
+class UnityDeleteLunInReplicationError(UnityException):
+    error_code = 105906485

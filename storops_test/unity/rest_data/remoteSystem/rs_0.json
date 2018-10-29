@@ -1,0 +1,44 @@
+{
+    "@base": "https://10.245.101.39/api/instances/remoteSystem",
+    "updated": "2018-11-01T03:05:39.252Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/RS_0"
+        }
+    ],
+    "content": {
+        "id": "RS_0",
+        "connectionType": 1,
+        "name": "FNM00150600267",
+        "model": "Unity 500",
+        "serialNumber": "FNM00150600267",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_CONN_OK"
+            ],
+            "descriptions": [
+                "Communication with the replication host is established. No action is required."
+            ]
+        },
+        "managementAddress": "10.245.101.39",
+        "syncFcPorts": [
+            "spa_fc4",
+            "spb_fc4"
+        ],
+        "username": "admin",
+        "localSPAInterfaces": [
+            "128.221.255.12"
+        ],
+        "localSPBInterfaces": [
+            "128.221.255.13"
+        ],
+        "remoteSPAInterfaces": [
+            "128.221.255.12"
+        ],
+        "remoteSPBInterfaces": [
+            "128.221.255.13"
+        ]
+    }
+}

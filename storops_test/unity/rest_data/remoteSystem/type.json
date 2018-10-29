@@ -1,0 +1,93 @@
+{
+    "content": {
+        "name": "remoteSystem",
+        "description": "Information about remote storage systems that connect to the system to which you are logged in. The system uses the configuration to access and communicate with the remote system. For example, to use remote replication, create a configuration that specifies the remote system to use as the destination for the replication session.",
+        "documentation": "https://10.245.101.39/apidocs/classes/remoteSystem.html",
+        "attributes": [
+            {
+                "name": "remoteSPBInterfaces",
+                "type": "List<IPAddress>",
+                "description": "SPB replication interface IP addresses of remote system used in remote system connection configuration.",
+                "displayValue": "remoteSPBInterfaces"
+            },
+            {
+                "name": "localSPAInterfaces",
+                "type": "List<IPAddress>",
+                "description": "SPA replication interface IP addresses of local system used in remote system connection configuration.",
+                "displayValue": "localSPAInterfaces"
+            },
+            {
+                "name": "remoteSPAInterfaces",
+                "type": "List<IPAddress>",
+                "description": "SPA replication interface IP addresses of remote system used in remote system connection configuration.",
+                "displayValue": "remoteSPAInterfaces"
+            },
+            {
+                "name": "model",
+                "type": "String",
+                "description": "Model name of the remote system.",
+                "displayValue": "model"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique identifier of the remoteSystem instance.",
+                "displayValue": "id"
+            },
+            {
+                "name": "health",
+                "type": "health",
+                "description": "Health information for the remote system, as defined by the health resource  type.",
+                "displayValue": "health"
+            },
+            {
+                "name": "connectionType",
+                "type": "ReplicationCapabilityEnum",
+                "description": "Type of the replication connection to the remote system.",
+                "displayValue": "connectionType"
+            },
+            {
+                "name": "altManagementAddressList",
+                "type": "List<String>",
+                "description": "Alternate management IP addresses of the remote system.",
+                "displayValue": "altManagementAddressList"
+            },
+            {
+                "name": "serialNumber",
+                "type": "String",
+                "description": "Serial number of the remote system.",
+                "displayValue": "serialNumber"
+            },
+            {
+                "name": "username",
+                "type": "String",
+                "description": "Username for accessing the remote system.",
+                "displayValue": "username"
+            },
+            {
+                "name": "syncFcPorts",
+                "type": "List<String>",
+                "description": "Fibre channel ports used for synchronous replication.",
+                "displayValue": "syncFcPorts"
+            },
+            {
+                "name": "managementAddress",
+                "type": "String",
+                "description": "Management IP address of the remote system.",
+                "displayValue": "managementAddress"
+            },
+            {
+                "name": "localSPBInterfaces",
+                "type": "List<IPAddress>",
+                "description": "SPB replication interface IP addresses of local system used in remote system connection configuration.",
+                "displayValue": "localSPBInterfaces"
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "description": "System name as reported by system.name on remote system.",
+                "displayValue": "name"
+            }
+        ]
+    }
+}

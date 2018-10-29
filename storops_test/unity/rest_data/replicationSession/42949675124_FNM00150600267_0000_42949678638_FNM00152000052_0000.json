@@ -1,0 +1,56 @@
+{
+    "content": {
+        "id": "42949675124_FNM00150600267_0000_42949678638_FNM00152000052_0000",
+        "replicationResourceType": 8,
+        "status": 33797,
+        "srcStatus": 2,
+        "networkStatus": 2,
+        "dstStatus": 2,
+        "syncState": 2,
+        "localRole": 0,
+        "name": "rep_sess_sv_1876_sv_3_FNM00150600267_FNM00152000052",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_OK"
+            ],
+            "descriptions": [
+                "This replication session is operating normally. No action is required."
+            ]
+        },
+        "maxTimeOutOfSync": 60,
+        "lastSyncTime": "2018-12-07T09:27:47.000Z",
+        "srcResourceId": "sv_1876",
+        "dstResourceId": "sv_3",
+        "syncProgress": 0,
+        "currentTransferEstRemainTime": 0,
+        "hourlySnapReplicationPolicy": {
+            "isReplicatingSnaps": false,
+            "isRetentionSameAsSource": false,
+            "isAutoDelete": false,
+            "retentionDuration": 0
+        },
+        "dailySnapReplicationPolicy": {
+            "isReplicatingSnaps": false,
+            "isRetentionSameAsSource": false,
+            "isAutoDelete": false,
+            "retentionDuration": 0
+        },
+        "remoteSystem": {
+            "id": "RS_4"
+        },
+        "srcSPAInterface": {
+            "id": "FNM00150600267:if_10"
+        },
+        "srcSPBInterface": {
+            "id": "FNM00150600267:if_11"
+        },
+        "dstSPAInterface": {
+            "id": "FNM00152000052:if_7"
+        },
+        "dstSPBInterface": {
+            "id": "FNM00152000052:if_6"
+        }
+    }
+}
+

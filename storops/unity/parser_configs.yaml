@@ -1909,3 +1909,118 @@ UnityMoveSession:
       converter: MoveSessionStatusEnum
     - label: priority
       converter: MoveSessionPriorityEnum
+
+
+UnityRemoteSystem:
+  data_src: rest
+  name: remoteSystem
+  properties:
+    - label: altManagementAddressList
+    - label: connectionType
+      converter: ReplicationCapabilityEnum
+    - label: health
+      converter: UnityHealth
+    - label: id
+    - label: localSPAInterfaces
+    - label: localSPBInterfaces
+    - label: managementAddress
+    - label: model
+    - label: name
+    - label: remoteSPAInterfaces
+    - label: remoteSPBInterfaces
+    - label: serialNumber
+    - label: syncFcPorts
+    - label: username
+
+
+UnityRemoteInterface:
+  data_src: rest
+  name: remoteInterface
+  properties:
+    - label: address
+    - label: capability
+      converter: ReplicationCapabilityEnum
+    - label: id
+    - label: name
+    - label: node
+      converter: NodeEnum
+    - label: remoteId
+    - label: remoteSystem
+      converter: UnityRemoteSystem
+
+
+UnityReplicationInterface:
+  data_src: rest
+  name: replicationInterface
+  properties:
+    - label: gateway
+    - label: health
+      converter: UnityHealth
+    - label: id
+    - label: ipAddress
+    - label: ipPort
+      converter: UnityIpPort
+    - label: ipProtocolVersion
+      converter: IpProtocolVersionEnum
+    - label: macAddress
+    - label: name
+    - label: netmask
+    - label: v6PrefixLength
+    - label: vlanId
+
+
+UnitySnapReplicationPolicy:
+  data_src: rest
+  name: snapReplicationPolicy
+  properties:
+    - label: isReplicatingSnaps
+    - label: isRetentionSameAsSource
+    - label: isAutoDelete
+    - label: retentionDuration
+
+
+UnityReplicationSession:
+  data_src: rest
+  name: replicationSession
+  properties:
+    - label: currentTransferEstRemainTime
+    - label: dailySnapReplicationPolicy
+      converter: UnitySnapReplicationPolicy
+    - label: dstResourceId
+    - label: dstSPAInterface
+      converter: UnityRemoteInterface
+    - label: dstSPBInterface
+      converter: UnityRemoteInterface
+    - label: dstStatus
+      converter: ReplicationSessionStatusEnum
+    - label: health
+      converter: UnityHealth
+    - label: hourlySnapReplicationPolicy
+      converter: UnitySnapReplicationPolicy
+    - label: id
+    - label: lastSyncTime
+      converter: to_datetime
+    - label: localRole
+      converter: ReplicationSessionReplicationRoleEnum
+    - label: maxTimeOutOfSync
+    - label: members
+      converter: UnityLunMemberReplication
+    - label: name
+    - label: networkStatus
+      converter: ReplicationSessionNetworkStatusEnum
+    - label: remoteSystem
+      converter: UnityRemoteSystem
+    - label: replicationResourceType
+      converter: ReplicationEndpointResourceTypeEnum
+    - label: srcResourceId
+    - label: srcSPAInterface
+      converter: UnityRemoteInterface
+    - label: srcSPBInterface
+      converter: UnityRemoteInterface
+    - label: srcStatus
+      converter: ReplicationSessionStatusEnum
+    - label: status
+      converter: ReplicationOpStatusEnum
+    - label: syncProgress
+    - label: syncState
+      converter: ReplicationSessionSyncStateEnum

@@ -1,0 +1,23 @@
+{
+    "content": {
+        "id": "if_11",
+        "ipProtocolVersion": 4,
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ]
+        },
+        "ipAddress": "10.245.47.98",
+        "netmask": "255.255.255.0",
+        "gateway": "10.245.47.1",
+        "macAddress": "00:60:16:5C:05:FF",
+        "name": "5_FNM00150600267",
+        "ipPort": {
+            "id": "spb_eth2"
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/replicationInterface?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/replicationInterface/instances?compact=True&fields=gateway,health,id,ipAddress,ipPort,ipProtocolVersion,macAddress,name,netmask,v6PrefixLength,vlanId",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/replicationInterface/if_10?compact=True&fields=gateway,health,id,ipAddress,ipPort,ipProtocolVersion,macAddress,name,netmask,v6PrefixLength,vlanId",
+      "response": "if_10.json"
+    },
+    {
+      "url": "/api/instances/replicationInterface/if_11?compact=True&fields=gateway,health,id,ipAddress,ipPort,ipProtocolVersion,macAddress,name,netmask,v6PrefixLength,vlanId",
+      "response": "if_11.json"
+    },
+    {
+      "url": "/api/types/replicationInterface/instances?compact=True",
+      "body": {
+        "ipPort": {"id": "spa_eth3"},
+        "sp": {"id": "spa"},
+        "ipAddress": "10.10.10.10"
+      },
+      "response": "create_if_10.json"
+    },
+    {
+      "url": "/api/types/replicationInterface/instances?compact=True",
+      "body": {
+        "ipPort": {"id": "spa_eth3"},
+        "sp": {"id": "spa"},
+        "vlanId": 111,
+        "netmask": "255.255.255.0",
+        "ipAddress": "10.10.10.10",
+        "gateway": "10.10.10.1"
+      },
+      "response": "create_if_10.json"
+    },
+    {
+      "url": "/api/instances/replicationInterface/if_10/action/modify?compact=True",
+      "body": {
+        "ipPort": {"id": "spb_eth3"},
+        "sp": {"id": "spb"},
+        "vlanId": 222,
+        "netmask": "255.255.255.0",
+        "ipAddress": "10.10.20.10",
+        "gateway": "10.10.20.1"
+      },
+      "response": "empty.json"
+    }
+  ]
+}

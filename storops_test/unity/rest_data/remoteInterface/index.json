@@ -1,0 +1,28 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/remoteInterface?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/remoteInterface/instances?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/remoteInterface/FNM00150600267:if_10?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
+      "response": "FNM00150600267:if_10.json"
+    },
+    {
+      "url": "/api/instances/remoteInterface/FNM00150600267:if_11?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
+      "response": "FNM00150600267:if_11.json"
+    },
+    {
+      "url": "/api/instances/remoteInterface/FNM00152000052:if_7?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
+      "response": "FNM00152000052:if_7.json"
+    },
+    {
+      "url": "/api/instances/remoteInterface/FNM00152000052:if_6?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
+      "response": "FNM00152000052:if_6.json"
+    }
+  ]
+}

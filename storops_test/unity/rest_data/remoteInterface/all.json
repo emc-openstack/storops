@@ -1,0 +1,117 @@
+{
+    "@base": "https://10.245.101.39/api/types/remoteInterface/instances?fields=address,capability,id,name,node,remoteId,remoteSystem&per_page=2000&compact=true",
+    "updated": "2018-12-11T06:28:43.844Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "id": "FNM00150600267:if_10",
+                "node": 0,
+                "capability": 1,
+                "remoteId": "if_10",
+                "name": "4_FNM00150600267",
+                "address": "10.245.47.99",
+                "remoteSystem": {
+                    "id": "RS_0"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00150600267:if_11",
+                "node": 1,
+                "capability": 1,
+                "remoteId": "if_11",
+                "name": "5_FNM00150600267",
+                "address": "10.245.47.98",
+                "remoteSystem": {
+                    "id": "RS_0"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00150600267:system_if_0",
+                "node": 0,
+                "capability": 1,
+                "remoteId": "system_if_0",
+                "name": "el30",
+                "address": "128.221.255.2",
+                "remoteSystem": {
+                    "id": "RS_0"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00150600267:system_if_1",
+                "node": 0,
+                "capability": 1,
+                "remoteId": "system_if_1",
+                "name": "rep30",
+                "address": "128.221.255.12",
+                "remoteSystem": {
+                    "id": "RS_0"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00150600267:system_if_2",
+                "node": 1,
+                "capability": 1,
+                "remoteId": "system_if_2",
+                "name": "el31",
+                "address": "128.221.255.3",
+                "remoteSystem": {
+                    "id": "RS_0"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00150600267:system_if_3",
+                "node": 1,
+                "capability": 1,
+                "remoteId": "system_if_3",
+                "name": "rep31",
+                "address": "128.221.255.13",
+                "remoteSystem": {
+                    "id": "RS_0"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00152000052:if_6",
+                "node": 1,
+                "capability": 1,
+                "remoteId": "if_6",
+                "name": "1_FNM00152000052",
+                "address": "10.245.197.62",
+                "remoteSystem": {
+                    "id": "RS_4"
+                }
+            }
+        },
+        {
+            "content": {
+                "id": "FNM00152000052:if_7",
+                "node": 0,
+                "capability": 1,
+                "remoteId": "if_7",
+                "name": "2_FNM00152000052",
+                "address": "10.245.197.61",
+                "remoteSystem": {
+                    "id": "RS_4"
+                }
+            }
+        }
+    ]
+}
+

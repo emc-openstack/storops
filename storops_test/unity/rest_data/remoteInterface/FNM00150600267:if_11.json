@@ -1,0 +1,13 @@
+{
+    "content": {
+        "id": "FNM00150600267:if_11",
+        "node": 1,
+        "capability": 1,
+        "remoteId": "if_11",
+        "name": "5_FNM00150600267",
+        "address": "10.245.47.98",
+        "remoteSystem": {
+            "id": "RS_0"
+        }
+    }
+}

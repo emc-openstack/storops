@@ -1,0 +1,230 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/replicationSession?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/replicationSession/instances?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675116_FNM00150600267_0000_42949675117_FNM00150600267_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
+      "response": "42949675116_FNM00150600267_0000_42949675117_FNM00150600267_0000.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675124_FNM00150600267_0000_42949678638_FNM00152000052_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
+      "response": "42949675124_FNM00150600267_0000_42949678638_FNM00152000052_0000.json"
+    },
+    {
+      "url": "/api/types/replicationSession/instances?compact=True",
+      "body": {
+        "remoteSystem": {"id": "RS_4"},
+        "srcSPAInterface": {"id": "FNM00152000052:if_7"},
+        "dstResourceId": "sv_5",
+        "autoInitiate": false,
+        "maxTimeOutOfSync": 60,
+        "dstSPAInterface": {"id": "FNM00150600267:if_10"},
+        "dstSPBInterface": {"id": "FNM00150600267:if_11"},
+        "dailySnapReplicationPolicy": {
+          "isAutoDelete": false,
+          "retentionDuration": 3600,
+          "isRetentionSameAsSource": false,
+          "isReplicatingSnaps": true},
+        "hourlySnapReplicationPolicy": {"isReplicatingSnaps": false},
+        "replicateExistingSnaps": false,
+        "srcSPBInterface": {"id": "FNM00152000052:if_6"},
+        "srcResourceId": "sv_2498",
+        "name": "remote-sv_2498-sv_5"
+      },
+      "response": "create-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/types/replicationSession/instances?compact=True",
+      "body": {
+        "dstResourceId": "sv_5",
+        "maxTimeOutOfSync": 60,
+        "srcResourceId": "sv_2498"
+      },
+      "response": "create-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/types/replicationSession/instances?compact=True",
+      "body": {
+        "remoteSystem": {"id": "RS_4"},
+        "dstResourceId": "sv_5",
+        "maxTimeOutOfSync": 60,
+        "replicateExistingSnaps": false,
+        "srcResourceId": "sv_2498",
+        "name": "remote-sv_2498-sv_5"
+      },
+      "response": "create-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/types/replicationSession/action/createReplicationSessionWDestResProvisioning?compact=True",
+      "body": {
+        "maxTimeOutOfSync": 60,
+        "srcResourceId": "sv_1876",
+        "remoteSystem": {"id": "RS_4"},
+        "srcSPAInterface": {"id": "FNM00152000052:if_7"},
+        "srcSPBInterface": {"id": "FNM00152000052:if_6"},
+        "dstSPAInterface": {"id": "FNM00150600267:if_10"},
+        "dstSPBInterface": {"id": "FNM00150600267:if_11"},
+        "dstResourceConfig": {
+          "requestId": "lun-rep-src3-liangr",
+          "name": "lun-rep-src3-liangr",
+          "poolId": "pool_2",
+          "isThinEnabled": true,
+          "size": 10737418240,
+          "tieringPolicy": 0,
+          "isDeduplicationEnabled": false,
+          "isCompressionEnabled": false
+        },
+        "autoInitiate": false,
+        "dailySnapReplicationPolicy": {
+          "isAutoDelete": false,
+          "retentionDuration": 3600,
+          "isRetentionSameAsSource": false,
+          "isReplicatingSnaps": true},
+        "hourlySnapReplicationPolicy": {"isReplicatingSnaps": false},
+        "replicateExistingSnaps": false,
+        "name": "remote-rep3"
+      },
+      "response": "create-provision-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/types/replicationSession/action/createReplicationSessionWDestResProvisioning?compact=True",
+      "body": {
+        "maxTimeOutOfSync": 60,
+        "srcResourceId": "sv_1876",
+        "dstResourceConfig": {
+          "requestId": "lun-rep-src3-liangr",
+          "name": "lun-rep-src3-liangr",
+          "poolId": "pool_2",
+          "isThinEnabled": true,
+          "size": 10737418240,
+          "tieringPolicy": 0,
+          "isDeduplicationEnabled": false,
+          "isCompressionEnabled": false
+        }
+      },
+      "response": "create-provision-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/types/replicationSession/action/createReplicationSessionWDestResProvisioning?compact=True",
+      "body": {
+        "maxTimeOutOfSync": 60,
+        "srcResourceId": "sv_1876",
+        "dstResourceConfig": {
+          "poolId": "pool_2",
+          "size": 10737418240
+        }
+      },
+      "response": "create-provision-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/types/replicationSession/action/createReplicationSessionWDestResProvisioning?compact=True",
+      "body": {
+        "maxTimeOutOfSync": 60,
+        "srcResourceId": "sv_1876",
+        "remoteSystem": {"id": "RS_4"},
+        "dstResourceConfig": {
+          "name": "lun-rep-src3-liangr",
+          "poolId": "pool_2",
+          "isThinEnabled": true,
+          "size": 10737418240,
+          "tieringPolicy": 0,
+          "isCompressionEnabled": false,
+          "defaultSP": 0
+        },
+        "name": "remote-rep3"
+      },
+      "response": "create-provision-remote-sv_2498-sv_5.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
+      "response": "42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/modify?compact=True",
+      "body": {
+        "maxTimeOutOfSync": 30,
+        "srcSPAInterface": {"id": "FNM00152000052:if_7"},
+        "srcSPBInterface": {"id": "FNM00152000052:if_6"},
+        "dstSPAInterface": {"id": "FNM00150600267:if_10"},
+        "dstSPBInterface": {"id": "FNM00150600267:if_11"},
+        "dailySnapReplicationPolicy": {"isReplicatingSnaps": false},
+        "hourlySnapReplicationPolicy": {
+          "isAutoDelete": false,
+          "retentionDuration": 3600,
+          "isRetentionSameAsSource": false,
+          "isReplicatingSnaps": true
+        },
+        "name": "modified-name"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/modify?compact=True",
+      "body": {
+        "maxTimeOutOfSync": 30
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/resume?compact=True",
+      "body": {
+        "forceFullCopy": true,
+        "srcSPAInterface": {"id": "FNM00152000052:if_7"},
+        "srcSPBInterface": {"id": "FNM00152000052:if_6"},
+        "dstSPAInterface": {"id": "FNM00150600267:if_10"},
+        "dstSPBInterface": {"id": "FNM00150600267:if_11"}
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/resume?compact=True",
+      "body": {
+        "forceFullCopy": true
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/pause?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/sync?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/failover?compact=True",
+      "body": {
+        "sync": true,
+        "force": false
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/failover?compact=True",
+      "body": {
+        "sync": false
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/failback?compact=True",
+      "body": {
+        "forceFullCopy": true
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000/action/failback?compact=True",
+      "body": {},
+      "response": "empty.json"
+    }
+  ]
+}

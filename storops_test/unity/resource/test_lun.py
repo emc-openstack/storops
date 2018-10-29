@@ -17,11 +17,12 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
+import ddt
 from hamcrest import assert_that, calling, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
 
-from storops import UnitySystem
+from storops import UnitySystem, TieringPolicyEnum
 from storops.exception import UnitySnapNameInUseError, \
     UnityLunNameInUseError, UnityLunShrinkNotSupportedError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError, \
@@ -35,6 +36,7 @@ from storops.unity.resource.lun import UnityLun, UnityLunList
 from storops.unity.resource.pool import UnityPool
 from storops.unity.resource.port import UnityIoLimitPolicy, \
     UnityIoLimitRuleSetting
+from storops.unity.resource.remote_system import UnityRemoteSystem
 from storops.unity.resource.snap import UnitySnap
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.storage_resource import UnityStorageResource
@@ -45,6 +47,7 @@ from storops_test.utils import is_nan
 __author__ = 'Cedric Zhuang'
 
 
+@ddt.ddt
 class UnityLunTest(TestCase):
     @patch_rest
     def test_get_lun_sv2_simple_property(self):
@@ -433,6 +436,57 @@ class UnityLunTest(TestCase):
         dest_pool = UnityPool('pool_5', cli=t_rest())
         assert_that(calling(lun.migrate).with_args(dest_pool, timeout=10),
                     raises(UnityMigrationTimeoutException))
+
+    @patch_rest
+    @ddt.data(
+        {'rep_name': None, 'rep_existing_snaps': None, 'remote_system': None},
+        {'rep_name': 'remote-sv_2498-sv_5',
+         'rep_existing_snaps': False, 'remote_system': 'RS_4'},
+    )
+    @ddt.unpack
+    def test_replicate(self, rep_name, rep_existing_snaps, remote_system):
+        if remote_system:
+            remote_system = UnityRemoteSystem(_id=remote_system, cli=t_rest())
+        lun = UnityLun.get(cli=t_rest(), _id='sv_2498')
+        rep_session = lun.replicate(
+            'sv_5', 60, replication_name=rep_name,
+            replicate_existing_snaps=rep_existing_snaps,
+            remote_system=remote_system
+        )
+        assert_that(rep_session.name, equal_to('remote-sv_2498-sv_5'))
+
+    @patch_rest
+    @ddt.data(
+        {'dst_lun_name': None, 'remote_system': None, 'rep_name': None,
+         'dst_size': None, 'dst_sp': None, 'is_dst_thin': None,
+         'dst_tiering_policy': None, 'is_dst_compression': None},
+        {'dst_lun_name': 'lun-rep-src3-liangr', 'remote_system': 'RS_4',
+         'rep_name': 'remote-rep3', 'dst_size': 10737418240,
+         'dst_sp': NodeEnum.SPA, 'is_dst_thin': True,
+         'dst_tiering_policy': TieringPolicyEnum.AUTOTIER_HIGH,
+         'is_dst_compression': False},
+    )
+    @ddt.unpack
+    def test_replicate_with_dst_resource_provisioning(self,
+                                                      dst_lun_name,
+                                                      remote_system,
+                                                      rep_name,
+                                                      dst_size,
+                                                      dst_sp,
+                                                      is_dst_thin,
+                                                      dst_tiering_policy,
+                                                      is_dst_compression):
+        lun = UnityLun.get(cli=t_rest(), _id='sv_1876')
+        if remote_system:
+            remote_system = UnityRemoteSystem(_id=remote_system, cli=t_rest())
+        rep_session = lun.replicate_with_dst_resource_provisioning(
+            60, 'pool_2', dst_lun_name=dst_lun_name,
+            remote_system=remote_system, replication_name=rep_name,
+            dst_size=dst_size, dst_sp=dst_sp, is_dst_thin=is_dst_thin,
+            dst_tiering_policy=dst_tiering_policy,
+            is_dst_compression=is_dst_compression)
+        assert_that(rep_session.id, equal_to(
+            '42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000'))
 
 
 class UnityLunEnablePerfStatsTest(TestCase):

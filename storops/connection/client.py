@@ -110,11 +110,9 @@ class HTTPClient(object):
             except ValueError:
                 pass
 
-        # The reason why not raise if `status_code` >= 400 is that we don't
-        # want to raise if code is 404 - Not Found. The upper layer will check
-        # the returned resource and raise `ResourceNotFoundError` or some thing
-        # like it.
-        if resp.status_code >= 400 and resp.status_code != 404:
+        # These errors should be raised directly, do NOT retry any more,
+        # like 401 - unauthorized, 503 - service unavailable.
+        if resp.status_code in [401, 503]:
             raise exceptions.from_response(resp, method, full_url)
 
         return resp, body

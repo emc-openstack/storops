@@ -253,7 +253,7 @@ def check_nas_cmd_error(output, default=None):
     except VNXNasCommandNoError:
         # meaning no error
         pass
-    except: # noqa
+    except:  # noqa
         # re-raise the error
         raise
 
@@ -311,6 +311,10 @@ class UnityAttachAluError(UnityException):
 
 
 class UnityAttachError(UnityException):
+    pass
+
+
+class UnityShareShrinkSizeError(StoropsException):
     pass
 
 

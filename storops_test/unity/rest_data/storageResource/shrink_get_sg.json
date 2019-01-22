@@ -1,0 +1,50 @@
+{
+  "content": {
+    "UnityStorageResource": {
+      "description": "",
+      "existed": true,
+      "filesystem": {
+        "UnityFileSystem": {
+          "hash": 8791243984405,
+          "id": "fs_225"
+        }
+      },
+      "hash": 8791243900101,
+      "health": {
+        "UnityHealth": {
+          "hash": 8791243984529
+        }
+      },
+      "id": "res_225",
+      "is_replication_destination": false,
+      "metadata_size": 3489660928,
+      "metadata_size_allocated": 3758096384,
+      "name": "21536f33-4b34-4aa4-b74d-69a2e6f6c7e1",
+      "per_tier_size_used": [
+        0,
+        0,
+        6442450944
+      ],
+      "pools": {
+        "UnityPoolList": [
+          {
+            "UnityPool": {
+              "hash": 8791243860289,
+              "id": "pool_1"
+            }
+          }
+        ]
+      },
+      "relocation_policy": "TieringPolicyEnum.AUTOTIER_HIGH",
+      "replication_type": "ReplicationTypeEnum.NONE",
+      "size_allocated": 283140096,
+      "size_total": 8053063680,
+      "size_used": 4620303872,
+      "snap_count": 0,
+      "snaps_size_allocated": 0,
+      "snaps_size_total": 0,
+      "thin_status": "ThinStatusEnum.TRUE",
+      "type": "StorageResourceTypeEnum.FILE_SYSTEM"
+    }
+  }
+}

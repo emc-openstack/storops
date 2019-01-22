@@ -230,6 +230,24 @@
       "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
       "body": {
         "fsParameters": {
+          "size": 4294967296
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
+      "body": {
+        "fsParameters": {
+          "size": 2684354560
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
+      "body": {
+        "fsParameters": {
           "size": 2147483648
         }
       },
@@ -818,6 +836,10 @@
     {
       "url": "/api/types/storageResource/instances?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID&filter=type eq 2",
       "response": "cg_list.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_23?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "shrink_get_sg.json"
     },
     {
       "url": "/api/types/storageResource/action/createConsistencyGroup?compact=True",

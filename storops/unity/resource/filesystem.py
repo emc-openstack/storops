@@ -19,7 +19,8 @@ import logging
 
 from storops.lib.common import supplement_filesystem
 from storops.exception import UnityResourceNotFoundError, \
-    UnityCifsServiceNotEnabledError, UnityShareShrinkSizeError
+    UnityCifsServiceNotEnabledError, UnityShareShrinkSizeTooLargeError,\
+    UnityShareShrinkSizeTooSmallError
 from storops.unity.enums import FSSupportedProtocolEnum, TieringPolicyEnum, \
     SnapStateEnum
 
@@ -108,12 +109,17 @@ class UnityFileSystem(UnityResource):
     def shrink(self, new_size, user_cap=False):
         sr = self.storage_resource
         new_size = supplement_filesystem(new_size, user_cap)
+        size_used = sr.size_used
+        if size_used and int(size_used) > new_size:
+            message = 'Reject shrink share request, ' \
+                      'the new size should be larger than used.'
+            raise UnityShareShrinkSizeTooSmallError(message)
         param = self._cli.make_body(size=new_size)
         size_total = sr.size_total
         if size_total and int(size_total) < new_size:
             message = 'Reject shrink share request, ' \
                       'the new size should be smaller than original.'
-            raise UnityShareShrinkSizeError(message)
+            raise UnityShareShrinkSizeTooLargeError(message)
         resp = sr.modify_fs(fsParameters=param)
         resp.raise_if_err()
         return resp

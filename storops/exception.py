@@ -314,7 +314,11 @@ class UnityAttachError(UnityException):
     pass
 
 
-class UnityShareShrinkSizeError(StoropsException):
+class UnityShareShrinkSizeTooLargeError(StoropsException):
+    pass
+
+
+class UnityShareShrinkSizeTooSmallError(StoropsException):
     pass
 
 

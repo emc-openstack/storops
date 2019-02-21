@@ -171,6 +171,9 @@ Feature List
         - list/create/modify/delete replication interfaces
         - list/create/modify/delete replication sessions
         - failover/failback/pause/resume/sync replication sessions
+        - list/create/modify/delete block import sessions
+        - pause/resume/cutover/commit/cancel block import sessions
+        - discover migration objects
     - supported feature/operations
         - CIFS share access control
         - NFS share access control

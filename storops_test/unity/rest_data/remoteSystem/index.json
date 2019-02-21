@@ -17,6 +17,10 @@
       "response": "rs_4.json"
     },
     {
+      "url": "/api/instances/remoteSystem/RS_65557?compact=True&fields=altManagementAddressList,connectionType,health,id,localSPAInterfaces,localSPBInterfaces,managementAddress,model,name,remoteSPAInterfaces,remoteSPBInterfaces,serialNumber,syncFcPorts,username",
+      "response": "r_65557.json"
+    },
+    {
       "url": "/api/types/remoteSystem/instances?compact=True",
       "body": {"managementAddress": "1.1.1.1"},
       "response": "create_rs_4.json"

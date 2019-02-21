@@ -1,0 +1,141 @@
+{
+  "content": {
+    "name": "importSession",
+    "description": "Information about import sessions.",
+    "documentation": "https://10.245.101.39/apidocs/classes/importSession.html",
+    "attributes": [
+      {
+        "name": "instanceId",
+        "type": "String",
+        "description": "Internal identifier of the importSession instance.",
+        "displayValue": "instanceId"
+      },
+      {
+        "name": "status",
+        "type": "ImportOpStatusEnum",
+        "description": "Import status of the import session.",
+        "displayValue": "status"
+      },
+      {
+        "name": "targetResourceType",
+        "type": "PoolConsumerTypeEnum",
+        "description": "Target resource type of the import session.",
+        "displayValue": "targetResourceType"
+      },
+      {
+        "name": "percentProgress",
+        "type": "Integer",
+        "description": "Overall import session progress details.",
+        "displayValue": "percentProgress"
+      },
+      {
+        "name": "hosts",
+        "type": "List<host>",
+        "description": "List of Hosts that will be granted access to import destination resources after cutover.",
+        "displayValue": "hosts"
+      },
+      {
+        "name": "elementImports",
+        "type": "List<elementImport>",
+        "description": "Information about the import of each member lun in the group.",
+        "displayValue": "elementImports"
+      },
+      {
+        "name": "estimatedCutoverWindow",
+        "type": "Integer",
+        "description": "Estimated remaining data sync time in minutes.",
+        "displayValue": "estimatedCutoverWindow"
+      },
+      {
+        "name": "targetResource",
+        "type": "resourceInfo",
+        "description": "Local target resource of the import session.",
+        "displayValue": "targetResource"
+      },
+      {
+        "name": "vdmInfo",
+        "type": "vdmInfo",
+        "description": "The source VDM information object.",
+        "displayValue": "vdmInfo"
+      },
+      {
+        "name": "srcResource",
+        "type": "resourceInfo",
+        "description": "Source resource in the import session.",
+        "displayValue": "srcResource"
+      },
+      {
+        "name": "remoteSystem",
+        "type": "remoteSystem",
+        "description": "Source system of the import session.",
+        "displayValue": "remoteSystem"
+      },
+      {
+        "name": "resourceType",
+        "type": "RemoteObjectTypeEnum",
+        "description": "Source resource type of the import session.",
+        "displayValue": "resourceType"
+      },
+      {
+        "name": "throttle",
+        "type": "Boolean",
+        "description": "'True' indicates session is throttled (throttle value 8 for the session on the VNX system) and   'False' indicates session is not throttled (throttle value 10 for the session on the VNX system).",
+        "displayValue": "throttle"
+      },
+      {
+        "name": "operationalStatus",
+        "type": "List<ImportOpStatusEnum>",
+        "description": "Operational status of the import session.",
+        "displayValue": "operationalStatus"
+      },
+      {
+        "name": "remainingDataSize",
+        "type": "Integer",
+        "description": "Size of data remaining to sync.",
+        "displayValue": "remainingDataSize"
+      },
+      {
+        "name": "type",
+        "type": "ImportTypeEnum",
+        "description": "Session type of the import session.",
+        "displayValue": "type"
+      },
+      {
+        "name": "health",
+        "type": "health",
+        "description": "Health information for the import session, as defined by the health  resource type.",
+        "displayValue": "health"
+      },
+      {
+        "name": "remainingDataPercent",
+        "type": "Integer",
+        "description": "Percentage of data remaining to sync.",
+        "displayValue": "remainingDataPercent"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the importSession instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "state",
+        "type": "ImportStateEnum",
+        "description": "Import state of the import session.",
+        "displayValue": "state"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "User-specified import session name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "cutoverThreshold",
+        "type": "Integer",
+        "description": "Cutover ready after this percent of data is imported.",
+        "displayValue": "cutoverThreshold"
+      }
+    ]
+  }
+}

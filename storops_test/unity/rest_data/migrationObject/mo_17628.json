@@ -1,0 +1,19 @@
+{
+  "content": {
+    "id": "mo_17628",
+    "type": 0,
+    "instanceId": "root/emc:EMC_UIS_MigrationResourceLeaf\"%InstanceID=mo_17628%Name=APM00152904558%SystemName=VNX\"",
+    "remoteID": "541",
+    "name": "lun-liangr",
+    "lunInfo": {
+      "isThin": false,
+      "size": 10737418240,
+      "wwn": "60:06:01:60:12:90:38:00:F7:99:07:16:BE:DF:E7:11",
+      "storagePoolName": "DAILY_1",
+      "defaultSP": "1"
+    },
+    "remoteSystem": {
+      "id": "RS_65557"
+    }
+  }
+}

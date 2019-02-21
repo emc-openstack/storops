@@ -41,6 +41,7 @@ from storops.unity.resource.filesystem import UnityFileSystemList, \
 from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.host import UnityHostInitiator, \
     UnityHostInitiatorList, UnityHost, UnityHostList
+from storops.unity.resource.import_session import UnityImportSessionList
 from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.lun import UnityLunList
@@ -708,6 +709,13 @@ class UnitySystemTest(TestCase):
         move_sessions = unity.get_move_session()
         assert_that(move_sessions, instance_of(UnityMoveSessionList))
         assert_that(len(move_sessions), equal_to(1))
+
+    @patch_rest
+    def test_get_import_session(self):
+        unity = t_unity()
+        sessions = unity.get_import_session()
+        assert_that(sessions, instance_of(UnityImportSessionList))
+        assert_that(len(sessions), equal_to(3))
 
 
 class UnityDpeTest(TestCase):

@@ -1366,3 +1366,20 @@ class UnityMigrationTimeoutException(UnityMigrationException):
 @rest_exception
 class UnityDeleteLunInReplicationError(UnityException):
     error_code = 105906485
+
+
+class UnityImportSessionException(UnityException):
+    """Unity exceptions for Import Session.
+
+    Any import session related exceptions should inherit this exception."""
+    pass
+
+
+@rest_exception
+class UnityVNXSANCopyHostNotExistsError(UnityImportSessionException):
+    error_code = 105906713
+
+
+@rest_exception
+class UnitySourceResourceInAnImportSessionError(UnityImportSessionException):
+    error_code = 105906723

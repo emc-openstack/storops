@@ -1,0 +1,183 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/importSession?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/importSession/instances?compact=True&fields=cutoverThreshold,elementImports,estimatedCutoverWindow,health,hosts,id,instanceId,name,operationalStatus,percentProgress,remainingDataPercent,remainingDataSize,remoteSystem,resourceType,srcResource,state,status,targetResource,targetResourceType,throttle,type,vdmInfo",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558?compact=True&fields=cutoverThreshold,elementImports,estimatedCutoverWindow,health,hosts,id,instanceId,name,operationalStatus,percentProgress,remainingDataPercent,remainingDataSize,remoteSystem,resourceType,srcResource,state,status,targetResource,targetResourceType,throttle,type,vdmInfo",
+      "response": "import_65558.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65564?compact=True&fields=cutoverThreshold,elementImports,estimatedCutoverWindow,health,hosts,id,instanceId,name,operationalStatus,percentProgress,remainingDataPercent,remainingDataSize,remoteSystem,resourceType,srcResource,state,status,targetResource,targetResourceType,throttle,type,vdmInfo",
+      "response": "import_65564.json"
+    },
+    {
+      "url": "/api/types/importSession/action/createBlockImport?compact=True",
+      "body": {
+        "remoteSystem": {
+          "id": "RS_65557"
+        },
+        "throttle": false,
+        "name": "test_import_session_1",
+        "dstResourceConfig": {
+          "isDeduplicationEnabled": true,
+          "defaultSP": 0,
+          "replicationResourceType": 8,
+          "tieringPolicy": 1,
+          "srcId": "src_1",
+          "isCompressionEnabled": true,
+          "requestId": "request_1",
+          "poolId": "pool_1",
+          "size": 1024,
+          "isBackupOnly": true,
+          "isThinEnabled": true,
+          "name": "resource_config_1"
+        },
+        "cutoverThreshold": 80,
+        "importAsVMwareDatastore": true,
+        "srcResource": {
+          "resId": "resource_1",
+          "name": "RESOURCE_1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "dstResourceElementConfigs": [
+          {
+            "isDeduplicationEnabled": true,
+            "defaultSP": 0,
+            "replicationResourceType": 8,
+            "tieringPolicy": 1,
+            "srcId": "src_1",
+            "isCompressionEnabled": true,
+            "requestId": "request_1",
+            "poolId": "pool_1",
+            "size": 1024,
+            "isBackupOnly": true,
+            "isThinEnabled": true,
+            "name": "resource_config_1"
+          }
+        ],
+        "hosts": [
+          {
+            "id": "Host_27"
+          }
+        ]
+      },
+      "response": "create_import_65564.json"
+    },
+    {
+      "url": "/api/types/importSession/action/createBlockImport?compact=True",
+      "body": {
+        "remoteSystem": {
+          "id": "RS_65557"
+        },
+        "dstResourceConfig": {
+          "isDeduplicationEnabled": true,
+          "defaultSP": 0,
+          "replicationResourceType": 8,
+          "tieringPolicy": 1,
+          "srcId": "src_1",
+          "isCompressionEnabled": true,
+          "requestId": "request_1",
+          "poolId": "pool_1",
+          "size": 1024,
+          "isBackupOnly": true,
+          "isThinEnabled": true,
+          "name": "resource_config_1"
+        },
+        "srcResource": {
+          "resId": "resource_1",
+          "name": "RESOURCE_1",
+          "system": {
+            "id": "RS_65557"
+          }
+        }
+      },
+      "response": "create_import_65564.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/modify?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/modify?compact=True",
+      "body": {
+        "srcLocalCifsAdminPasswd": "passwd_1",
+        "throttle": true,
+        "name": "import_session_1",
+        "srcLocalCifsAdminUsername": "user_1",
+        "cutoverThreshold": 80
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/pause?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/pause?compact=True",
+      "body": {
+        "testFacilityCode": "test_facility_code_1"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/resume?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/cutover?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/cutover?compact=True",
+      "body": {
+        "domainPassword": "ad_passwd_1",
+        "cifsServerInfo": {
+          "domain": "domain_1",
+          "workgroup": "group_1",
+          "description": "CIFS Server 1",
+          "netbiosName": "smb_server_1",
+          "isStandalone": true,
+          "cifsUsername": "cifs_user_1",
+          "name": "cifs_server_1"
+        },
+        "domainUsername": "ad_user_1"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/commit?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/cancel?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558/action/cancel?compact=True",
+      "body": {
+        "domainPassword": "ad_passwd_1",
+        "domainUsername": "ad_user_1"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/importSession/import_65558?compact=True",
+      "body": {},
+      "response": "empty.json"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "content": {
+    "name": "migrationObject",
+    "description": "Information about the storage resources that reside on a remote storage system that are either migrating to local system or are potential migration candidates.",
+    "documentation": "https://10.245.101.39/apidocs/classes/migrationObject.html",
+    "attributes": [
+      {
+        "name": "instanceId",
+        "type": "String",
+        "description": "Internal identifier of the object from source system as available on this system.",
+        "displayValue": "instanceId"
+      },
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the object from source system as available on this system. Format is:         SystemSerial:ObjectID",
+        "displayValue": "id"
+      },
+      {
+        "name": "remoteID",
+        "type": "String",
+        "description": "Unique identifier of the object as is from the source system.",
+        "displayValue": "remoteID"
+      },
+      {
+        "name": "name",
+        "type": "String",
+        "description": "Remote object name.",
+        "displayValue": "name"
+      },
+      {
+        "name": "remoteSystem",
+        "type": "remoteSystem",
+        "description": "System this resource belongs to, as defined by remoteSystem type.",
+        "displayValue": "remoteSystem"
+      },
+      {
+        "name": "members",
+        "type": "List<migrationObject>",
+        "description": "List of member objects in the resource. For a CG, list of member LUNs. For VDM, list of member File Systems.",
+        "displayValue": "members"
+      },
+      {
+        "name": "type",
+        "type": "RemoteObjectTypeEnum",
+        "description": "Migration object type.",
+        "displayValue": "type"
+      },
+      {
+        "name": "lunInfo",
+        "type": "lunInfo",
+        "description": "Details of LUN type object.",
+        "displayValue": "lunInfo"
+      },
+      {
+        "name": "filesystemInfo",
+        "type": "filesystemInfo",
+        "description": "Details of File System type object.",
+        "displayValue": "filesystemInfo"
+      },
+      {
+        "name": "vdmInfo",
+        "type": "vdmInfo",
+        "description": "Details of VDM type object.",
+        "displayValue": "vdmInfo"
+      }
+    ]
+  }
+}

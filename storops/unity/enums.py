@@ -886,3 +886,254 @@ class ReplicationOpStatusEnum(UnityEnum):
     PAUSED_MIXED = (0x87EB, 'Paused_Mixed')
     IDLE_MIXED = (0x87EC, 'Idle_Mixed')
     AUTO_SYNC_CONFIGURED_MIXED = (0x87ED, 'Auto_Sync_Configured_Mixed')
+
+
+class RemoteObjectTypeEnum(UnityEnum):
+    LUN = (0, 'lun')
+    FILESYSTEM = (1, 'filesystem')
+    CONSISTENCYGROUP = (2, 'consistencyGroup')
+    NASSERVER = (3, 'nasServer')
+
+
+class ImportUnixDirectoryServiceEnum(UnityEnum):
+    LOCAL = (0, 'Local')
+    NIS = (1, 'NIS')
+    LDAP = (2, 'LDAP')
+    LOCALTHENNIS = (3, 'LocalThenNis')
+    LOCALTHENLDAP = (4, 'LocalThenLdap')
+    NONE = (5, 'None')
+    DIRECTMATCH = (6, 'DirectMatch')
+
+
+class ImportUnixDirectoryServiceEnumList(UnityEnumList):
+    @classmethod
+    def get_enum_class(cls):
+        return ImportUnixDirectoryServiceEnum
+
+
+class ImportCapabilityEnum(UnityEnum):
+    IMPORTABLE = (0, 'Importable')
+    NON_IMPORTABLE_INTERNAL_ERROR = (1, 'Non_importable_internal_error')
+    NON_IMPORTABLE_ONLY_SUPPORT_VNX = (2, 'Non_importable_only_support_vnx')
+    NON_IMPORTABLE_SRC_VDM_NAME_IN_USE_SESS_COMPLETED = (
+        3, 'Non_importable_src_vdm_name_in_use_sess_completed')
+    NON_IMPORTABLE_SRC_VDM_NAME_IN_USE_SESS_ACTIVE = (
+        4, 'Non_importable_src_vdm_name_in_use_sess_active')
+    NON_IMPORTABLE_SRC_VDM_NAME_IN_USE = (
+        5, 'Non_importable_src_vdm_name_in_use')
+    NON_IMPORTABLE_NO_UP_SRC_CLNT_IF = (6, 'Non_importable_no_up_src_clnt_if')
+    NON_IMPORTABLE_NO_FS_ON_SRC_VDM = (7, 'Non_importable_no_fs_on_src_vdm')
+    NON_IMPORTABLE_REACH_SRC_FS_LIMIT = (
+        8, 'Non_importable_reach_src_fs_limit')
+    NON_IMPORTABLE_NFSV4_NOT_SUPPORT = (9, 'Non_importable_nfsv4_not_support')
+    NON_IMPORTABLE_SECNFS_NOT_SUPPORT = (
+        10, 'Non_importable_secnfs_not_support')
+    NON_IMPORTABLE_VDM_CANNOT_HAVE_CIFS_SERVER = (
+        11, 'Non_importable_vdm_cannot_have_cifs_server')
+    NON_IMPORTABLE_SRCMIGIF_MORE_ERROR = (
+        12, 'Non_importable_srcmigif_more_error')
+    NON_IMPORTABLE_SRCMIGIF_ERROR = (13, 'Non_importable_srcmigif_error')
+    NON_IMPORTABLE_INVALID_VDM = (14, 'Non_importable_invalid_vdm')
+    NON_IMPORTABLE_REACH_SRC_IF_LIMIT = (
+        15, 'Non_importable_reach_src_if_limit')
+    NON_IMPORTABLE_SRC_CS_NOT_PRIMARY = (
+        16, 'Non_importable_src_cs_not_primary')
+
+
+class VDMSupportedProtocolsEnum(UnityEnum):
+    NFS = (0, 'NFS')
+    CIFS = (1, 'CIFS')
+    MULTIPROTOCOL = (2, 'Multiprotocol')
+    CIFSANDNFS = (3, 'CIFSAndNFS')
+
+
+class ImportStateEnum(UnityEnum):
+    UNKNOWN = (0, 'Unknown')
+    INITIALIZED = (50000, 'Initialized')
+    INITIAL_COPY = (50001, 'Initial_Copy')
+    READY_TO_CUTOVER = (50002, 'Ready_to_Cutover')
+    PAUSED = (50003, 'Paused')
+    CUTTING_OVER = (50004, 'Cutting_Over')
+    INCREMENTAL_COPY = (50005, 'Incremental_Copy')
+    READY_TO_COMMIT = (50006, 'Ready_to_Commit')
+    COMMITTING = (50007, 'Committing')
+    COMPLETED = (50008, 'Completed')
+    CANCELLING = (50009, 'Cancelling')
+    CANCELLED = (50010, 'Cancelled')
+    PENDING = (50011, 'Pending')
+    SYNCING = (50012, 'Syncing')
+    ERROR = (50013, 'Error')
+
+
+class ImportOpStatusEnum(UnityEnum):
+    UNKNOWN = (0, 'Unknown')
+    NON_RECOVERABLE_ERROR = (7, 'Non_Recoverable_Error')
+    CONFIGURING_TARGET_RESOURCE = (32768, 'Configuring_Target_Resource')
+    ENABLING_TARGET_RESOURCE_ACCESS = (
+        32769, 'Enabling_Target_Resource_Access')
+    MIGRATOR_CANNOT_DISCOVER_TARGET_RESOURCE = (
+        32770, 'Migrator_Cannot_Discover_Target_Resource')
+    READY_TO_MIGRATE = (32771, 'Ready_To_Migrate')
+    INITIAL_TRANSFER_INPROGRESS = (32772, 'Initial_Transfer_Inprogress')
+    DELTA_TRANSFER_INPROGRESS = (32773, 'Delta_Transfer_Inprogress')
+    PAUSED = (32774, 'Paused')
+    READY_TO_CUTOVER = (32776, 'Ready_To_Cutover')
+    LOST_COMMUNICATION = (32777, 'Lost_Communication')
+    TARGET_LUNS_OFFLINE = (32779, 'Target_Luns_Offline')
+    PENDING = (32780, 'Pending')
+    CUTOVER_SYNC_COMPLETE = (32781, 'Cutover_Sync_Complete')
+    SESSION_CLEANUP_COMPLETE = (32782, 'Session_Cleanup_Complete')
+    FINAL_TRANSFER_INPROGRESS = (32783, 'Final_Transfer_Inprogress')
+    INITIALIZED = (33024, 'Initialized')
+    STARTING = (33025, 'Starting')
+    START_FAILED = (33026, 'Start_Failed')
+    MIGRATING_DATA = (33027, 'Migrating_Data')
+    MIGRATING_DATA_STOPPED = (33028, 'Migrating_Data_Stopped')
+    MIGRATING_DATA_FAILED = (33029, 'Migrating_Data_Failed')
+    MIGRATING_DATA_FAILED_STOPPED = (33030, 'Migrating_Data_Failed_Stopped')
+    MIGRATING_CONFIGURATION = (33031, 'Migrating_Configuration')
+    MIGRATING_CONFIGURATION_FAILED = (33032, 'Migrating_Configuration_Failed')
+    MIGRATING_CONFIGURATION_PAUSED = (33033, 'Migrating_Configuration_Paused')
+    CUTTING_OVER = (33280, 'Cutting_Over')
+    CUTOVER_FAILED = (33281, 'Cutover_Failed')
+    SYNCING_DATA = (33282, 'Syncing_Data')
+    SYNCING_DATA_STOPPED = (33283, 'Syncing_Data_Stopped')
+    SYNCING_DATA_FAILED = (33284, 'Syncing_Data_Failed')
+    SYNCING_DATA_FAILED_STOPPED = (33285, 'Syncing_Data_Failed_Stopped')
+    READY_TO_COMPLETE = (33536, 'Ready_To_Complete')
+    COMPLETING = (33537, 'Completing')
+    COMPLETE_FAILED = (33538, 'Complete_Failed')
+    COMPLETED = (33539, 'Completed')
+    CANCELLING = (33540, 'Cancelling')
+    CANCEL_FAILED = (33541, 'Cancel_Failed')
+    CANCELLED = (33542, 'Cancelled')
+    MIGRATING_DATA_STOPPING = (33543, 'Migrating_Data_Stopping')
+    SYNCING_DATA_STOPPING = (33544, 'Syncing_Data_Stopping')
+    PROVISIONING_TARGET_PAUSED = (33547, 'Provisioning_Target_Paused')
+    FS_OK = (34048, 'FS_OK')
+    FS_SOURCE_IO_FAILURE = (34049, 'FS_Source_IO_Failure')
+    FS_DESTINATION_IO_FAILURE = (34050, 'FS_Destination_IO_Failure')
+    FS_CONNECTION_FAILURE = (34051, 'FS_Connection_Failure')
+    FS_UNRECOVERABLE_FAILURE = (34052, 'FS_Unrecoverable_Failure')
+    VMO_FAULTED = (34304, 'VMO_Faulted')
+    VMO_OFFLINE = (34305, 'VMO_Offline')
+    ELEMENT_IMPORT_OK = (34560, 'Element_Import_OK')
+    ELEMENT_IMPORT_UNABLE_TO_LOCATE_DEVICE = (
+        34561, 'Element_Import_Unable_To_Locate_Device')
+    ELEMENT_IMPORT_BAD_BLOCK_ON_SOURCE_DEVICE = (
+        34562, 'Element_Import_Bad_Block_On_Source_Device')
+    ELEMENT_IMPORT_UNABLE_TO_ACCESS_DEVICE = (
+        34563, 'Element_Import_Unable_To_Access_Device')
+    ELEMENT_IMPORT_LU_TRESPASSED = (34564, 'Element_Import_LU_Trespassed')
+    ELEMENT_IMPORT_SOURCE_DEVICE_INACCESSIBLE = (
+        34565, 'Element_Import_Source_Device_Inaccessible')
+    ELEMENT_IMPORT_LOW_USER_LINK_BANDWIDTH = (
+        34566, 'Element_Import_Low_User_Link_Bandwidth')
+    ELEMENT_IMPORT_CONCURRENT_SANCOPY_SESSION_DESTINATIONS = (
+        34567, 'Element_Import_Concurrent_SanCopy_Session_Destinations')
+    ELEMENT_IMPORT_ERROR_COMMUNICATING_WITH_SANPVIEW = (
+        34568, 'Element_Import_Error_Communicating_With_SanpView')
+    ELEMENT_IMPORT_ERROR_COMMUNICATING_WITH_SANPVIEW_1 = (
+        34569, 'Element_Import_Error_Communicating_With_SanpView_1')
+    ELEMENT_IMPORT_SESSION_INCONSISTENT_STATE = (
+        34570, 'Element_Import_Session_Inconsistent_State')
+    ELEMENT_IMPORT_DESTINATION_INCONSISTENT_STATE = (
+        34571, 'Element_Import_Destination_Inconsistent_State')
+    ELEMENT_IMPORT_AUTO_RECOVERY_RESUME_FAILED = (
+        34572, 'Element_Import_Auto_Recovery_Resume_Failed')
+    ELEMENT_IMPORT_ALL_PATHS_FAILURE = (
+        34573, 'Element_Import_All_Paths_failure')
+    ELEMENT_IMPORT_ACCESS_DENIED_TO_DEVICE = (
+        34574, 'Element_Import_Access_Denied_To_Device')
+    ELEMENT_IMPORT_NOT_ENOUGH_MEMORY = (
+        34575, 'Element_Import_Not_Enough_Memory')
+    ELEMENT_IMPORT_SOURCE_DEVICE_FAILURE = (
+        34576, 'Element_Import_Source_Device_Failure')
+    ELEMENT_IMPORT_DESTINATION_DEVICE_FAILURE = (
+        34577, 'Element_Import_Destination_Device_Failure')
+    ELEMENT_IMPORT_DESTINATION_DEVICE_NOT_FOUND = (
+        34578, 'Element_Import_Destination_Device_Not_found')
+    ELEMENT_IMPORT_TARGET_LU_NOT_INITIALIZED = (
+        34579, 'Element_Import_Target_LU_Not_Initialized')
+    ELEMENT_IMPORT_COMMAND_TIMEDOUT = (
+        34580, 'Element_Import_Command_TimedOut')
+    ELEMENT_IMPORT_VERIFYING_FRONTEND_TIMEDOUT = (
+        34581, 'Element_Import_Verifying_Frontend_TimedOut')
+    ELEMENT_IMPORT_VERIFYING_FRONTEND_TIMEDOUT_ANOTHER_OPERATION = (
+        34582, 'Element_Import_Verifying_Frontend_TimedOut_Another_Operation')
+    ELEMENT_IMPORT_SOURCE_CONNECTIVITY_TIMEDOUT = (
+        34583, 'Element_Import_Source_Connectivity_TimedOut')
+    ELEMENT_IMPORT_DESTINATION_CONNECTIVITY_TIMEDOUT = (
+        34584, 'Element_Import_Destination_Connectivity_TimedOut')
+    ELEMENT_IMPORT_RLP_IO_FAILURE = (34585, 'Element_Import_RLP_IO_Failure')
+    ELEMENT_IMPORT_TOTAL_SESSIONS_LIMIT_REACHED = (
+        34586, 'Element_Import_Total_Sessions_Limit_Reached')
+    ELEMENT_IMPORT_INCREMENTAL_SESSIONS_LIMIT_REACHED = (
+        34587, 'Element_Import_Incremental_Sessions_Limit_Reached')
+    ELEMENT_IMPORT_INCREMENTAL_SESSIONS_TOTAL_NUMBER_REACHED = (
+        34588, 'Element_Import_Incremental_Sessions_Total_Number_Reached')
+    ELEMENT_IMPORT_LIMIT_OF_TOTAL_SESSIONS_REACHED = (
+        34589, 'Element_Import_Limit_Of_Total_Sessions_Reached')
+    ELEMENT_IMPORT_LIMIT_OF_TOTAL_INCREMENTAL_SESSIONS_REACHED = (
+        34590, 'Element_Import_Limit_Of_Total_Incremental_Sessions_Reached')
+    ELEMENT_IMPORT_COPY_COMMAND_QUEUED = (
+        34591, 'Element_Import_Copy_Command_Queued')
+    ELEMENT_IMPORT_SESSION_FAILED_ON_SOURCE_OR_DESTINATION = (
+        34592, 'Element_Import_Session_Failed_On_Source_Or_Destination')
+    ELEMENT_IMPORT_DEVICE_CANNOT_BE_LOCATED = (
+        34593, 'Element_Import_Device_Cannot_Be_Located')
+    ELEMENT_IMPORT_NO_UNUSED_RLP_LUNS = (
+        34594, 'Element_Import_No_Unused_Rlp_Luns')
+    ELEMENT_IMPORT_RESERVED_LUN_NOT_SUPPORT_INCREMENTAL_SESSIONS = (
+        34595, 'Element_Import_Reserved_Lun_Not_Support_Incremental_Sessions')
+    ELEMENT_IMPORT_SNAPVIEW_RESERVED_LUN_NOT_ENOUGH_SPACE = (
+        34596, 'Element_Import_Snapview_Reserved_Lun_Not_Enough_Space')
+    ELEMENT_IMPORT_TOO_MANY_SNAPSHOTS_ON_SOURCE_LU = (
+        34597, 'Element_Import_Too_Many_Snapshots_On_Source_Lu')
+    ELEMENT_IMPORT_CANNOT_OPEN_RESERVED_LUN = (
+        34598, 'Element_Import_Cannot_Open_Reserved_Lun')
+    ELEMENT_IMPORT_CANNOT_GET_RESERVED_LUN_INFO = (
+        34599, 'Element_Import_Cannot_Get_Reserved_Lun_info')
+    ELEMENT_IMPORT_NO_SPACE_ON_RLP = (34600, 'Element_Import_No_Space_On_Rlp')
+    ELEMENT_IMPORT_RLP_MAXIMUM_DEVICES = (
+        34601, 'Element_Import_Rlp_Maximum_Devices')
+    ELEMENT_IMPORT_SESSION_WITH_NO_CACHE_DEVICES = (
+        34602, 'Element_Import_Session_With_No_Cache_Devices')
+    ELEMENT_IMPORT_SESSION_FAILED_WRITE_TO_TARGET_INSUFFICIENT_STORAGE = (
+        34603,
+        'Element_Import_Session_Failed_Write_To_Target_Device_'
+        'Insufficient_Storage')
+    ELEMENT_IMPORT_SESSION_DEVICE_NOT_READY = (
+        34604, 'Element_Import_Session_Device_Not_Ready')
+    ELEMENT_IMPORT_SESSION_SOURCE_DEVICE_UNAVAILABLE = (
+        34605, 'Element_Import_Session_Source_Device_Unavailable')
+    ELEMENT_IMPORT_SESSION_SOURCE_IN_IMPORT_SESSION = (
+        34606, 'Element_Import_Session_Source_In_Import_Session')
+
+
+class ImportOpStatusEnumList(UnityEnumList):
+    @classmethod
+    def get_enum_class(cls):
+        return ImportOpStatusEnum
+
+
+class ImportTypeEnum(UnityEnum):
+    BLOCK = (0, 'block')
+    NAS = (1, 'nas')
+
+
+class PoolConsumerTypeEnum(UnityEnum):
+    FILESYSTEM = (1, 'FileSystem')
+    CONSISTENCYGROUP = (2, 'ConsistencyGroup')
+    VMWARENFS = (3, 'VMwareNFS')
+    VMWAREVMFS = (4, 'VMwareVMFS')
+    LUN = (8, 'LUN')
+    VVOLDATASTOREFS = (9, 'VVolDatastoreFS')
+    VVOLDATASTOREISCSI = (10, 'VVolDatastoreISCSI')
+    NASSERVER = (32768, 'NASServer')
+
+
+class ImportStageEnum(UnityEnum):
+    INITIAL = (0, 'Initial')
+    INCREMENTAL = (1, 'Incremental')
+    FINAL = (2, 'Final')

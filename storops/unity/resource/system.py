@@ -33,6 +33,7 @@ from storops.unity.resource.dns_server import UnityFileDnsServerList
 from storops.unity.resource.filesystem import UnityFileSystemList
 from storops.unity.resource.host import UnityHost, UnityHostList, \
     UnityHostIpPortList, UnityHostInitiatorList
+from storops.unity.resource.import_session import UnityImportSessionList
 from storops.unity.resource.interface import UnityFileInterfaceList
 from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.metric import UnityMetricRealTimeQuery
@@ -573,6 +574,10 @@ class UnitySystem(UnitySingletonResource):
             UnityReplicationSessionList, _id=_id, name=name,
             src_resource_id=src_resource_id, dst_resource_id=dst_resource_id,
             **filters)
+
+    def get_import_session(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(
+            UnityImportSessionList, _id=_id, name=name, **filters)
 
 
 class UnitySystemList(UnityResourceList):

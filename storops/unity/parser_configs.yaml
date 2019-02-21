@@ -2024,3 +2024,206 @@ UnityReplicationSession:
     - label: syncProgress
     - label: syncState
       converter: ReplicationSessionSyncStateEnum
+
+
+UnityLunInfo:
+  data_src: rest
+  name: lunInfo
+  properties:
+    - label: isThin
+    - label: size
+    - label: wwn
+    - label: hosts
+      converter: UnityHostList
+    - label: storagePoolName
+    - label: defaultSP
+
+
+UnityFilesystemInfo:
+  data_src: rest
+  name: filesystemInfo
+  properties:
+    - label: isThin
+    - label: isFRDEnabled
+    - label: isFLREnabled
+    - label: size
+    - label: fsMountpoint
+
+
+UnityInterfaceInfo:
+  data_src: rest
+  name: interfaceInfo
+  properties:
+    - label: ipAddress
+    - label: ipProtocolVersion
+      converter: IpProtocolVersionEnum
+    - label: netmask
+    - label: v6PrefixLength
+    - label: gateway
+    - label: vlanId
+    - label: name
+    - label: portName
+
+
+UnityCifsServerInfo:
+  data_src: rest
+  name: cifsServerInfo
+  properties:
+    - label: name
+    - label: description
+    - label: netbiosName
+    - label: domain
+    - label: workgroup
+    - label: isStandalone
+    - label: cifsUsername
+
+
+UnityVdmInfo:
+  data_src: rest
+  name: vdmInfo
+  properties:
+    - label: interfaces
+      converter: UnityInterfaceInfoList
+    - label: unixDirectoryServiceList
+      converter: ImportUnixDirectoryServiceEnumList
+    - label: importCapability
+      converter: ImportCapabilityEnum
+    - label: supportedProtocols
+      converter: VDMSupportedProtocolsEnum
+    - label: cifsServerInfo
+      converter: UnityCifsServerInfoList
+
+
+UnityMigrationObject:
+  data_src: rest
+  name: migrationObject
+  properties:
+    - label: instanceId
+    - label: id
+    - label: remoteID
+    - label: name
+    - label: remoteSystem
+      converter: UnityRemoteSystem
+    - label: members
+      converter: UnityMigrationObjectList
+    - label: type
+      converter: RemoteObjectTypeEnum
+    - label: lunInfo
+      converter: UnityLunInfo
+    - label: filesystemInfo
+      converter: UnityFilesystemInfo
+    - label: vdmInfo
+      converter: UnityVdmInfo
+
+
+UnityResourceInfo:
+  data_src: rest
+  name: resourceInfo
+  properties:
+    - label: resId
+    - label: name
+    - label: system
+      converter: UnityRemoteSystem
+
+
+UnityResourceConfig:
+  data_src: rest
+  name: resourceConfig
+  properties:
+    - label: poolId
+    - label: isThinEnabled
+    - label: isDeduplicationEnabled
+    - label: isCompressionEnabled
+    - label: isBackupOnly
+    - label: size
+    - label: tieringPolicy
+      converter: TieringPolicyEnum
+    - label: requestId
+    - label: srcId
+    - label: name
+    - label: defaultSP
+      converter: NodeEnum
+    - label: replicationResourceType
+      converter: ReplicationEndpointResourceTypeEnum
+
+
+UnityImportSyncProgress:
+  data_src: rest
+  name: importSyncProgress
+  properties:
+    - label: syncStage
+      converter: ImportStageEnum
+    - label: iteration
+    - label: percentProgress
+
+
+UnityElementImport:
+  data_src: rest
+  name: elementImport
+  properties:
+    - label: srcElement
+      converter: UnityResourceInfo
+    - label: srcId
+    - label: srcName
+    - label: targetElement
+      converter: UnityResourceInfo
+    - label: tgtId
+    - label: tgtName
+    - label: health
+      converter: UnityHealth
+    - label: syncProgress
+      converter: UnityImportSyncProgress
+    - label: syncStage
+      converter: ImportStageEnum
+    - label: iteration
+    - label: percentProgress
+    - label: remainingDataPercent
+    - label: state
+      converter: ImportStateEnum
+    - label: status
+      converter: ImportOpStatusEnum
+    - label: operationalStatus
+      converter: ImportOpStatusEnumList
+    - label: targetImportIf
+      converter: UnityReplicationInterface
+
+
+UnityImportSession:
+  data_src: rest
+  name: importSession
+  properties:
+    - label: instanceId
+    - label: id
+    - label: name
+    - label: state
+      converter: ImportStateEnum
+    - label: status
+      converter: ImportOpStatusEnum
+    - label: operationalStatus
+      converter: ImportOpStatusEnumList
+    - label: health
+      converter: UnityHealth
+    - label: remoteSystem
+      converter: UnityRemoteSystem
+    - label: type
+      converter: ImportTypeEnum
+    - label: resourceType
+      converter: RemoteObjectTypeEnum
+    - label: targetResourceType
+      converter: PoolConsumerTypeEnum
+    - label: srcResource
+      converter: UnityResourceInfo
+    - label: targetResource
+      converter: UnityResourceInfo
+    - label: elementImports
+      converter: UnityElementImportList
+    - label: throttle
+    - label: percentProgress
+    - label: vdmInfo
+      converter: UnityVdmInfo
+    - label: hosts
+      converter: UnityHostList
+    - label: remainingDataSize
+    - label: cutoverThreshold
+    - label: remainingDataPercent
+    - label: estimatedCutoverWindow

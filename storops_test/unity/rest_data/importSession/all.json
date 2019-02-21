@@ -1,0 +1,290 @@
+{
+  "@base": "https://192.168.1.58/api/types/importSession/instances?fields=instanceId,id,name,state,status,operationalStatus,health,remoteSystem,type,resourceType,targetResourceType,srcResource,targetResource,elementImports,throttle,percentProgress,vdmInfo,hosts,remainingDataSize,cutoverThreshold,remainingDataPercent,estimatedCutoverWindow&per_page=2000&compact=true",
+  "updated": "2019-03-05T06:33:54.275Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "import_65558",
+        "state": 50002,
+        "status": 32776,
+        "operationalStatus": [
+          32776
+        ],
+        "type": 0,
+        "resourceType": 0,
+        "targetResourceType": 8,
+        "instanceId": "import_65558",
+        "name": "Import_APM00152904558_541_20190305062151.415258+000",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_MIGRATION_SESSION_OK"
+          ],
+          "descriptions": [
+            "The import session is operating normally."
+          ]
+        },
+        "srcResource": {
+          "resId": "541",
+          "name": "lun-liangr",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "targetResource": {
+          "resId": "60:06:01:60:74:E0:3A:00:80:15:7E:5C:EF:22:24:08",
+          "name": "lun-liangr-1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "elementImports": [
+          {
+            "syncStage": 1,
+            "state": 50012,
+            "status": 33282,
+            "operationalStatus": [
+              33282
+            ],
+            "srcElement": {
+              "resId": "APM00152904558_60:06:01:60:12:90:38:00:F7:99:07:16:BE:DF:E7:11",
+              "name": "lun-liangr",
+              "system": {
+                "id": "RS_65557"
+              }
+            },
+            "srcId": "APM00152904558_60:06:01:60:12:90:38:00:F7:99:07:16:BE:DF:E7:11",
+            "srcName": "lun-liangr",
+            "targetElement": {
+              "resId": "sv_2564",
+              "name": "lun-liangr-1",
+              "system": {
+                "id": "RS_65557"
+              }
+            },
+            "tgtId": "sv_2564",
+            "tgtName": "lun-liangr-1",
+            "health": {
+              "value": 5,
+              "descriptionIds": [
+                "ALRT_ELEMENT_IMPORT_SESSION_OK"
+              ],
+              "descriptions": [
+                "The element import session is operating normally."
+              ]
+            },
+            "syncProgress": {
+              "syncStage": 1,
+              "iteration": 1,
+              "percentProgress": 100
+            },
+            "iteration": 1,
+            "percentProgress": 100,
+            "remainingDataPercent": 0
+          }
+        ],
+        "throttle": false,
+        "remainingDataSize": 0,
+        "cutoverThreshold": 5,
+        "remainingDataPercent": 0,
+        "estimatedCutoverWindow": 0,
+        "remoteSystem": {
+          "id": "RS_65557"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "import_65560",
+        "state": 50013,
+        "status": 7,
+        "operationalStatus": [
+          7
+        ],
+        "type": 0,
+        "resourceType": 0,
+        "targetResourceType": 8,
+        "instanceId": "import_65560",
+        "name": "Import_APM00152904558_3_20190305063217.507550+000",
+        "health": {
+          "value": 25,
+          "descriptionIds": [
+            "ALRT_MIGRATION_SESSION_FAILED_NON_RECOVERABLE"
+          ],
+          "descriptions": [
+            "The import session failed due to a non-recoverable error. Go to session properties dialog to check health details and resolution steps in GUI or use UECMCLI command import/session/element show -detail to check session health details and resolution steps."
+          ]
+        },
+        "srcResource": {
+          "resId": "3",
+          "name": "hy_test_1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "targetResource": {
+          "resId": "60:06:01:60:74:E0:3A:00:F2:17:7E:5C:90:E5:FE:F7",
+          "name": "hy_test_1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "elementImports": [
+          {
+            "syncStage": 0,
+            "state": 50013,
+            "status": 34602,
+            "operationalStatus": [
+              34602
+            ],
+            "srcElement": {
+              "resId": "APM00152904558_60:06:01:60:12:90:38:00:F4:8D:A7:3B:A7:38:E9:11",
+              "name": "hy_test_1",
+              "system": {
+                "id": "RS_65557"
+              }
+            },
+            "srcId": "APM00152904558_60:06:01:60:12:90:38:00:F4:8D:A7:3B:A7:38:E9:11",
+            "srcName": "hy_test_1",
+            "targetElement": {
+              "resId": "sv_2565",
+              "name": "hy_test_1",
+              "system": {
+                "id": "RS_65557"
+              }
+            },
+            "tgtId": "sv_2565",
+            "tgtName": "hy_test_1",
+            "health": {
+              "value": 25,
+              "descriptionIds": [
+                "ALRT_ELEMENT_IMPORT_SESSION_FAILED_NO_CACHE_DEVICES"
+              ],
+              "descriptions": [
+                "The user attempted to start a session without cache devices. A reserved LUN pool (RLP) LUN or space is unavailable to create or start a session. Add LUNs to the RLP pool, then resume the operation."
+              ]
+            },
+            "syncProgress": {
+              "syncStage": 0,
+              "iteration": 0,
+              "percentProgress": 0
+            },
+            "iteration": 0,
+            "percentProgress": 0,
+            "remainingDataPercent": 100
+          }
+        ],
+        "throttle": false,
+        "remainingDataSize": 1073741824,
+        "cutoverThreshold": 5,
+        "remainingDataPercent": 100,
+        "estimatedCutoverWindow": -1,
+        "remoteSystem": {
+          "id": "RS_65557"
+        },
+        "hosts": [
+          {
+            "id": "Host_33"
+          }
+        ]
+      }
+    },
+    {
+      "content": {
+        "id": "import_65562",
+        "state": 50013,
+        "status": 7,
+        "operationalStatus": [
+          7
+        ],
+        "type": 0,
+        "resourceType": 0,
+        "targetResourceType": 8,
+        "instanceId": "import_65562",
+        "name": "Import_APM00152904558_1_20190305063315.838011+000",
+        "health": {
+          "value": 25,
+          "descriptionIds": [
+            "ALRT_MIGRATION_SESSION_FAILED_NON_RECOVERABLE"
+          ],
+          "descriptions": [
+            "The import session failed due to a non-recoverable error. Go to session properties dialog to check health details and resolution steps in GUI or use UECMCLI command import/session/element show -detail to check session health details and resolution steps."
+          ]
+        },
+        "srcResource": {
+          "resId": "1",
+          "name": "LUN 1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "targetResource": {
+          "resId": "60:06:01:60:74:E0:3A:00:2C:18:7E:5C:D7:8C:2E:A1",
+          "name": "LUN 1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "elementImports": [
+          {
+            "syncStage": 0,
+            "state": 50013,
+            "status": 34602,
+            "operationalStatus": [
+              34602
+            ],
+            "srcElement": {
+              "resId": "APM00152904558_60:06:01:60:12:90:38:00:7F:B7:64:27:A7:38:E9:11",
+              "name": "LUN 1",
+              "system": {
+                "id": "RS_65557"
+              }
+            },
+            "srcId": "APM00152904558_60:06:01:60:12:90:38:00:7F:B7:64:27:A7:38:E9:11",
+            "srcName": "LUN 1",
+            "targetElement": {
+              "resId": "sv_2566",
+              "name": "LUN 1",
+              "system": {
+                "id": "RS_65557"
+              }
+            },
+            "tgtId": "sv_2566",
+            "tgtName": "LUN 1",
+            "health": {
+              "value": 25,
+              "descriptionIds": [
+                "ALRT_ELEMENT_IMPORT_SESSION_FAILED_NO_CACHE_DEVICES"
+              ],
+              "descriptions": [
+                "The user attempted to start a session without cache devices. A reserved LUN pool (RLP) LUN or space is unavailable to create or start a session. Add LUNs to the RLP pool, then resume the operation."
+              ]
+            },
+            "syncProgress": {
+              "syncStage": 0,
+              "iteration": 0,
+              "percentProgress": 0
+            },
+            "iteration": 0,
+            "percentProgress": 0,
+            "remainingDataPercent": 100
+          }
+        ],
+        "throttle": true,
+        "remainingDataSize": 1073741824,
+        "cutoverThreshold": 5,
+        "remainingDataPercent": 100,
+        "estimatedCutoverWindow": -1,
+        "remoteSystem": {
+          "id": "RS_65557"
+        }
+      }
+    }
+  ]
+}

@@ -88,6 +88,20 @@ class UnityResourceConfig(UnityAttributeResource):
                 'replicationResourceType': replication_resource_type}
 
 
+class UnityResourceInfo(UnityAttributeResource):
+    @staticmethod
+    def to_embedded(res_id=None, name=None, system=None):
+        """
+        Constructs an embeded object of `UnityResourceInfo`.
+
+        :param res_id: identifier of the resource.
+        :param name: name of the resource.
+        :param system: system on which the resource exists.
+        :return:
+        """
+        return {'resId': res_id, 'name': name, 'system': system}
+
+
 class UnityReplicationSession(UnityResource):
 
     @classmethod

@@ -1,0 +1,91 @@
+{
+  "content": {
+    "id": "import_65558",
+    "state": 50002,
+    "status": 32776,
+    "operationalStatus": [
+      32776
+    ],
+    "type": 0,
+    "resourceType": 0,
+    "targetResourceType": 8,
+    "instanceId": "import_65558",
+    "name": "Import_APM00152904558_541_20190305062151.415258+000",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_MIGRATION_SESSION_OK"
+      ],
+      "descriptions": [
+        "The import session is operating normally."
+      ]
+    },
+    "srcResource": {
+      "resId": "541",
+      "name": "lun-liangr",
+      "system": {
+        "id": "RS_65557"
+      }
+    },
+    "targetResource": {
+      "resId": "60:06:01:60:74:E0:3A:00:80:15:7E:5C:EF:22:24:08",
+      "name": "lun-liangr-1",
+      "system": {
+        "id": "RS_65557"
+      }
+    },
+    "elementImports": [
+      {
+        "syncStage": 1,
+        "state": 50012,
+        "status": 33282,
+        "operationalStatus": [
+          33282
+        ],
+        "srcElement": {
+          "resId": "APM00152904558_60:06:01:60:12:90:38:00:F7:99:07:16:BE:DF:E7:11",
+          "name": "lun-liangr",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "srcId": "APM00152904558_60:06:01:60:12:90:38:00:F7:99:07:16:BE:DF:E7:11",
+        "srcName": "lun-liangr",
+        "targetElement": {
+          "resId": "sv_2564",
+          "name": "lun-liangr-1",
+          "system": {
+            "id": "RS_65557"
+          }
+        },
+        "tgtId": "sv_2564",
+        "tgtName": "lun-liangr-1",
+        "health": {
+          "value": 5,
+          "descriptionIds": [
+            "ALRT_ELEMENT_IMPORT_SESSION_OK"
+          ],
+          "descriptions": [
+            "The element import session is operating normally."
+          ]
+        },
+        "syncProgress": {
+          "syncStage": 1,
+          "iteration": 1,
+          "percentProgress": 100
+        },
+        "iteration": 1,
+        "percentProgress": 100,
+        "remainingDataPercent": 0
+      }
+    ],
+    "throttle": false,
+    "remainingDataSize": 0,
+    "cutoverThreshold": 5,
+    "remainingDataPercent": 0,
+    "estimatedCutoverWindow": 0,
+    "remoteSystem": {
+      "id": "RS_65557"
+    }
+  }
+}

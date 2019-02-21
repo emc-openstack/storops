@@ -1,0 +1,28 @@
+{
+    "content": {
+        "id": "RS_65557",
+        "connectionType": 3,
+        "name": "APM00152904558",
+        "model": "VNX7600",
+        "serialNumber": "APM00152904558",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_CONN_OK"
+            ],
+            "descriptions": [
+                "Communication with the replication host is established. No action is required."
+            ]
+        },
+        "managementAddress": "192.168.1.50",
+        "altManagementAddressList": [
+            "192.168.1.51",
+            "192.168.1.50"
+        ],
+        "username": "sysadmin",
+        "localSPAInterfaces": [],
+        "localSPBInterfaces": [],
+        "remoteSPAInterfaces": [],
+        "remoteSPBInterfaces": []
+    }
+}

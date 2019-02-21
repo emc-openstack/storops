@@ -1,0 +1,25 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/migrationObject?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/migrationObject/instances?compact=True&fields=filesystemInfo,id,instanceId,lunInfo,members,name,remoteID,remoteSystem,type,vdmInfo",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/migrationObject/mo_17628?compact=True&fields=filesystemInfo,id,instanceId,lunInfo,members,name,remoteID,remoteSystem,type,vdmInfo",
+      "response": "mo_17628.json"
+    },
+    {
+      "url": "/api/types/migrationObject/action/discover?compact=True",
+      "body": {
+        "remoteSystem": {
+          "id": "RS_65557"
+        }
+      },
+      "response": "empty.json"
+    }
+  ]
+}

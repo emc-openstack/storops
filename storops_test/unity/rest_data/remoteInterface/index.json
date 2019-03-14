@@ -10,19 +10,19 @@
     },
     {
       "url": "/api/instances/remoteInterface/FNM00150600267:if_10?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
-      "response": "FNM00150600267:if_10.json"
+      "response": "FNM00150600267_if_10.json"
     },
     {
       "url": "/api/instances/remoteInterface/FNM00150600267:if_11?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
-      "response": "FNM00150600267:if_11.json"
+      "response": "FNM00150600267_if_11.json"
     },
     {
       "url": "/api/instances/remoteInterface/FNM00152000052:if_7?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
-      "response": "FNM00152000052:if_7.json"
+      "response": "FNM00152000052_if_7.json"
     },
     {
       "url": "/api/instances/remoteInterface/FNM00152000052:if_6?compact=True&fields=address,capability,id,name,node,remoteId,remoteSystem",
-      "response": "FNM00152000052:if_6.json"
+      "response": "FNM00152000052_if_6.json"
     }
   ]
 }

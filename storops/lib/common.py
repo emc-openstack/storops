@@ -215,6 +215,9 @@ class Enum(JsonPrinter, _Enum):
     def __repr__(self):
         return JsonPrinter.__repr__(self)
 
+    def __format__(self, format_spec):
+        return self._member_type_.__format__(self._value_, format_spec)
+
     def get_dict_repr(self, dec=0):
         if dec < 0:
             ret = '{}.{}'.format(self.__class__.__name__, self.name)

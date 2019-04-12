@@ -347,6 +347,11 @@ class UnityLunShrinkNotSupportedError(UnityLunException):
 
 
 @rest_exception
+class UnityLunDeleteSnapshotsAttachedError(UnityLunException):
+    error_code = 100666394
+
+
+@rest_exception
 class UnityNothingToModifyError(UnityException):
     error_code = 108007456
 

@@ -81,3 +81,23 @@ class UnityMoveSessionTest(TestCase):
         move_session = UnityMoveSession(_id='move_32', cli=t_rest())
         resp = move_session.cancel()
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_create_move_session_to_thick(self):
+        cli = t_rest()
+        lun = UnityLun.get(cli=cli, _id='sv_19')
+        dest_pool = UnityPool.get(cli=cli, _id='pool_6')
+        move_session = UnityMoveSession.create(
+            cli=cli,
+            source_storage_resource=lun,
+            destination_pool=dest_pool,
+            is_dest_thin=False,
+            is_data_reduction_applied=False,
+            priority=5)
+        assert_that(move_session.id, equal_to('move_35'))
+        assert_that(move_session.state,
+                    equal_to(MoveSessionStateEnum.COMPLETED))
+        assert_that(move_session.status,
+                    equal_to(MoveSessionStatusEnum.INITIALIZING))
+        assert_that(move_session.priority,
+                    equal_to(MoveSessionPriorityEnum.NORMAL))

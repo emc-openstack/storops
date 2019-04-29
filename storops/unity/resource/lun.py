@@ -370,7 +370,7 @@ class UnityLun(UnityResource):
             return False
         return True
 
-    def migrate(self, dest, **kwargs):
+    def migrate(self, dest, provision=None, **kwargs):
         if not self._is_move_session_supported(dest):
             return False
 
@@ -388,11 +388,17 @@ class UnityLun(UnityResource):
                 return False
 
         clz = storops.unity.resource.move_session.UnityMoveSession
-        is_compressed = self.is_data_reduction_enabled
-
+        is_compressed = True if provision == 'compressed' else \
+            self.is_data_reduction_enabled
+        is_thin = True
+        if provision == 'thick':
+            # thick needs work with uncompressed
+            is_thin = False
+            is_compressed = False
         try:
             move_session = clz.create(self._cli, self, dest,
-                                      is_data_reduction_applied=is_compressed)
+                                      is_data_reduction_applied=is_compressed,
+                                      is_dest_thin=is_thin)
             return _do_check_move_session(move_session.id)
         except UnityMigrationSourceHasThinCloneError:
             log.error('Not support move session, source lun has thin clone.')

@@ -370,12 +370,14 @@ class UnityLun(UnityResource):
             return False
         return True
 
-    def migrate(self, dest, provision=None, **kwargs):
+    def migrate(self, dest, **kwargs):
         if not self._is_move_session_supported(dest):
             return False
 
         interval = kwargs.pop('interval', 5)
         timeout = kwargs.pop('timeout', 1800)
+        is_thin = kwargs.get('is_thin')
+        is_compressed = kwargs.get('is_compressed')
 
         @retryz.retry(timeout=timeout, wait=interval,
                       on_return=lambda x: not isinstance(x, bool))
@@ -388,13 +390,8 @@ class UnityLun(UnityResource):
                 return False
 
         clz = storops.unity.resource.move_session.UnityMoveSession
-        is_compressed = True if provision == 'compressed' else \
-            self.is_data_reduction_enabled
-        is_thin = True
-        if provision == 'thick':
-            # thick needs work with uncompressed
-            is_thin = False
-            is_compressed = False
+        if is_compressed not in (True, False):
+            is_compressed = self.is_data_reduction_enabled
         try:
             move_session = clz.create(self._cli, self, dest,
                                       is_data_reduction_applied=is_compressed,

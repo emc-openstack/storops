@@ -52,7 +52,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_4"
         },
@@ -66,7 +65,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": true,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_5"
         },
@@ -80,7 +78,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_6"
         },
@@ -94,7 +91,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_does_not_exist"
         },
@@ -108,7 +104,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_5"
         },
@@ -137,7 +132,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_7"
         },
@@ -151,7 +145,6 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
-        "isDestThin": true,
         "destinationPool": {
           "id": "pool_8"
         },

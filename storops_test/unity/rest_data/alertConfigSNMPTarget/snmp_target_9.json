@@ -1,0 +1,8 @@
+{
+    "content": {
+        "id": "snmp_target_9",
+        "version": 2,
+        "address": "10.10.10.222",
+        "community": "test_community"
+    }
+}

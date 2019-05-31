@@ -1,0 +1,10 @@
+{
+    "content": {
+        "id": "snmp_target_4",
+        "version": 3,
+        "authProto": 0,
+        "privacyProto": 0,
+        "address": "10.244.166.134:162",
+        "username": "admin"
+    }
+}

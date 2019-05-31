@@ -1,0 +1,51 @@
+{
+    "content": {
+        "name": "alertConfigSNMPTarget",
+        "description": "Information about the Simple Network Management Protocol  (SNMP) destinations  used by alerts.  <br/>  The system uses SNMP to transfer system alerts as traps to an SNMP  destination host. Traps are asynchronous messages that notify the SNMP  destination when system and user events occur.",
+        "documentation": "https://10.245.101.39/apidocs/classes/alertConfigSNMPTarget.html",
+        "attributes": [
+            {
+                "name": "community",
+                "type": "String",
+                "description": "Community string used by SNMP v2c, not applicable for SNMP v3.  @engdocs  The community string is specified for SNMP v2c when creating it, it can be changed on the Alert Settings page.",
+                "displayValue": "community"
+            },
+            {
+                "name": "version",
+                "type": "SNMPVersionEnum",
+                "description": "SNMP version used to send the traps or informs.    @engdocs  The version is specified when creating each SNMP target, it can't be changed afterwards.",
+                "displayValue": "version"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique identifier of the alertConfigSNMPTarget instance.",
+                "displayValue": "id"
+            },
+            {
+                "name": "privacyProto",
+                "type": "SNMPPrivacyProtocolEnum",
+                "description": "Protocol used to enable privacy on the SNMP destination. The privacy protocol  encrypts the SNMP packets.",
+                "displayValue": "privacyProto"
+            },
+            {
+                "name": "authProto",
+                "type": "SNMPAuthProtocolEnum",
+                "description": "Protocol used to authenticate access to the SNMP destination.",
+                "displayValue": "authProto"
+            },
+            {
+                "name": "username",
+                "type": "String",
+                "description": "Username used to access the SNMP destination.  @engdocs  The SNMP username can be set on the Alert Settings page.",
+                "displayValue": "username"
+            },
+            {
+                "name": "address",
+                "type": "IPAddress",
+                "description": "Host address and port for the SNMP destination. The default UDP port number is  162.",
+                "displayValue": "address"
+            }
+        ]
+    }
+}

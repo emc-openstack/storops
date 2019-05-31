@@ -1,0 +1,86 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/alertConfigSNMPTarget?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_3?compact=True&fields=address,authProto,community,id,privacyProto,username,version",
+      "response": "snmp_target_3.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_4?compact=True&fields=address,authProto,community,id,privacyProto,username,version",
+      "response": "snmp_target_4.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_5?compact=True&fields=address,authProto,community,id,privacyProto,username,version",
+      "response": "snmp_target_5.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_8?compact=True&fields=address,authProto,community,id,privacyProto,username,version",
+      "response": "snmp_target_8.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_9?compact=True&fields=address,authProto,community,id,privacyProto,username,version",
+      "response": "snmp_target_9.json"
+    },
+    {
+      "url": "/api/types/alertConfigSNMPTarget/instances?compact=True&fields=address,authProto,community,id,privacyProto,username,version",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/types/alertConfigSNMPTarget/instances?compact=True",
+      "body": {
+        "community": "test_community",
+        "targetAddress": "10.10.10.222"
+      },
+      "response": "v2_create.json"
+    },
+    {
+      "url": "/api/types/alertConfigSNMPTarget/instances?compact=True",
+      "body": {
+        "targetAddress": "10.10.10.123"
+      },
+      "response": "create_invalid.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_8/action/modify?compact=True",
+      "body": {
+        "username": "test_username_modified"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_8/action/modify?compact=True",
+      "body": {
+        "username": "test_username_modified_2"
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/alertConfigSNMPTarget/snmp_target_8?compact=True",
+      "body": {
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/alertConfigSNMPTarget/instances?compact=True",
+      "body": {
+        "username": "test_username",
+        "authPassword": "auth_password_test",
+        "authProtocol": 1,
+        "privProtocol": 1,
+        "targetAddress": "10.10.10.111"
+      },
+      "response": "v3_create.json"
+    },
+    {
+      "url": "/api/types/alertConfigSNMPTarget/instances?compact=True",
+      "body": {
+        "username": "test_username_2",
+        "targetAddress": "10.10.10.111"
+      },
+      "response": "v3_create.json"
+    }
+  ]
+}

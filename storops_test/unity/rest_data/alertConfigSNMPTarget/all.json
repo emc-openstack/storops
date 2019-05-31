@@ -1,0 +1,45 @@
+{
+    "@base": "https://10.245.101.39/api/types/alertConfigSNMPTarget/instances?fields=address,authProto,community,id,privacyProto,username&per_page=2000&compact=true",
+    "updated": "2019-05-29T07:42:34.328Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "id": "snmp_target_3",
+                "address": "10.244.166.2:162",
+                "community": "community_pycharm_1",
+                "username": ""
+            }
+        },
+        {
+            "content": {
+                "id": "snmp_target_5",
+                "address": "10.244.166.33:162",
+                "community": "community_post_man",
+                "username": ""
+            }
+        },
+        {
+            "content": {
+                "id": "snmp_target_8",
+                "address": "10.244.166.111:162",
+                "community": "community_pi111",
+                "username": ""
+            }
+        },
+        {
+            "content": {
+                "id": "snmp_target_9",
+                "authProto": 1,
+                "privacyProto": 1,
+                "address": "16.16.16.16:162",
+                "username": "1616"
+            }
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "content": {
+        "id": "snmp_target_8",
+        "version": 3,
+        "address": "10.10.10.111",
+        "authProtocol": 1,
+        "privProtocol": 1,
+        "username": "test_username"
+    }
+}

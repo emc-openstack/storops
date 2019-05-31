@@ -331,6 +331,12 @@ class UnityLunException(UnityException):
 
 
 @rest_exception
+class UnityPolicyInvalidParametersError(UnityException):
+    error_code = 5
+    message = 'One or more specified parameters are invalid.'
+
+
+@rest_exception
 class UnityActionNotAllowedError(UnityException):
     error_code = 131149836
     message = 'Action is not allowed for the resource.'

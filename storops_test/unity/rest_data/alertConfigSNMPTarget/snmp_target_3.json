@@ -1,0 +1,9 @@
+{
+    "content": {
+        "id": "snmp_target_3",
+        "version": 2,
+        "address": "10.244.166.2:162",
+        "community": "community_pycharm_1",
+        "username": ""
+    }
+}

@@ -888,6 +888,24 @@ class ReplicationOpStatusEnum(UnityEnum):
     AUTO_SYNC_CONFIGURED_MIXED = (0x87ED, 'Auto_Sync_Configured_Mixed')
 
 
+class SNMPAuthProtocolEnum(UnityEnum):
+    NONE = (0, 'None')
+    MD5 = (1, 'MD5')
+    SHA = (2, 'SHA')
+
+
+class SNMPPrivacyProtocolEnum(UnityEnum):
+    NONE = (0, 'None')
+    AES = (1, 'AES')
+    DES = (2, 'DES')
+
+
+class SNMPVersionEnum(UnityEnum):
+    V1 = (1, 'v1')
+    V2C = (2, 'v2c')
+    V3 = (3, 'v3')
+
+
 class RemoteObjectTypeEnum(UnityEnum):
     LUN = (0, 'lun')
     FILESYSTEM = (1, 'filesystem')

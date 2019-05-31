@@ -61,22 +61,6 @@ class UnityAlertConfigSNMPTarget(UnityResource):
         resp.raise_if_err()
         return resp
 
-    @classmethod
-    def get_all_alert_ids(cls, cli, **filters):
-        alert_ids = []
-        resp = cli.get_all(cls().resource_class, **filters)
-        resp.raise_if_err()
-        if resp and resp.contents:
-            for alert in resp.contents:
-                alert_id = alert.get('id')
-                alert_ids.append(alert_id)
-        return alert_ids
-
-    # @classmethod
-    # def get(cls, cli, alert_id):
-    #     resp = cli.get(cls().resource_class, alert_id)
-    #     ret = cls.get(cli=cli, _id=alert_id)
-
 
 class UnityAlertConfigSNMPTargetList(UnityResourceList):
     @classmethod

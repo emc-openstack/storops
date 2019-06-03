@@ -733,6 +733,7 @@ class UnitySystemTest(TestCase):
             UnityAlertConfigSNMPTarget))
         assert_that(alert_snmp_config.username, equal_to('test_username'))
         assert_that(alert_snmp_config.get_id(), equal_to('snmp_target_8'))
+        assert_that(alert_snmp_config.address, equal_to('10.10.10.111'))
 
     @patch_rest
     def test_create_alert_snmp_v2_config(self):
@@ -743,6 +744,7 @@ class UnitySystemTest(TestCase):
             UnityAlertConfigSNMPTarget))
         assert_that(alert_snmp_config.get_id(), equal_to(
             'snmp_target_9'))
+        assert_that(alert_snmp_config.address, equal_to('10.10.10.222'))
 
     @patch_rest
     def test_create_invalid_snmp_config(self):
@@ -763,6 +765,15 @@ class UnitySystemTest(TestCase):
             UnityAlertConfigSNMPTarget))
         assert_that(alert_snmp_config.get_id(), equal_to(
             'snmp_target_8'))
+
+    @patch_rest
+    def test_query_by_ip(self):
+        unity = t_unity()
+        alert_snmp_configs = unity.get_alert_snmp_config(
+            address='16.16.16.16')
+        assert_that(alert_snmp_configs, instance_of(
+            UnityAlertConfigSNMPTargetList))
+        assert_that(len(alert_snmp_configs), equal_to(2))
 
     @patch_rest
     def test_query_all_alert_snmp_configs(self):

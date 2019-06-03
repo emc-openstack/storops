@@ -29,6 +29,10 @@
       "response": "all.json"
     },
     {
+      "url": "/api/types/alertConfigSNMPTarget/instances?compact=True&fields=address,authProto,community,id,privacyProto,username,version&filter=address eq \"16.16.16.16\"",
+      "response": "filter_ip.json"
+    },
+    {
       "url": "/api/types/alertConfigSNMPTarget/instances?compact=True",
       "body": {
         "community": "test_community",

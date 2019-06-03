@@ -1,0 +1,30 @@
+{
+    "@base": "https://10.245.101.39/api/types/alertConfigSNMPTarget/instances?filter=address eq \"16.16.16.16\"&fields=address,authProto,community,id,privacyProto,username&per_page=2000&compact=true",
+    "updated": "2019-06-03T02:32:10.619Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "id": "snmp_target_102",
+                "authProto": 1,
+                "privacyProto": 1,
+                "address": "16.16.16.16:162",
+                "username": "test_12"
+            }
+        },
+        {
+            "content": {
+                "id": "snmp_target_190",
+                "authProto": 0,
+                "privacyProto": 0,
+                "address": "16.16.16.16:162",
+                "username": "test_123"
+            }
+        }
+    ]
+}

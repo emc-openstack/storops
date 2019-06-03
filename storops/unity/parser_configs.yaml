@@ -2233,10 +2233,8 @@ UnityAlertConfigSNMPTarget:
   name: alertConfigSNMPTarget
   properties:
     - label: id
-    - label: targetAddress
+    - label: address
     - label: username
-    - label: authPassword
-    - label: privPassword
     - label: community
     - label: snmpAuthProtocol
       converter: SNMPAuthProtocolEnum

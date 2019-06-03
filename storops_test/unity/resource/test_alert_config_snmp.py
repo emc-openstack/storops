@@ -39,6 +39,8 @@ class UnityAlertConfigSNMPTargetTest(TestCase):
             UnityAlertConfigSNMPTarget))
         assert_that(alert_snmp_config.get_id(), equal_to(
             'snmp_target_8'))
+        assert_that(alert_snmp_config.address, equal_to(
+            '10.10.10.111'))
 
     @patch_rest
     def test_create_alert_snmp_v2_config(self):

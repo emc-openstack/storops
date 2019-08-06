@@ -33,7 +33,8 @@ install:
   - "%PYTHON%\\python.exe -m pip install tox"
   # Try to workaround the issue:
   # Expected version spec in enum34;python_version<"3.4" # BSD at ;python_version<"3.4" # BSD
-  - "%PYTHON%\\python.exe -m pip install --upgrade pip setuptools"
+  # Upgrading virtualenv makes the pip inside tox being as latest as possible
+  - "%PYTHON%\\python.exe -m pip install --upgrade pip setuptools virtualenv"
 
 build: off
 

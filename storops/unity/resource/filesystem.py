@@ -20,7 +20,7 @@ import logging
 from storops.lib.common import supplement_filesystem
 from storops.exception import UnityResourceNotFoundError, \
     UnityCifsServiceNotEnabledError, UnityShareShrinkSizeTooLargeError,\
-    UnityShareShrinkSizeTooSmallError
+    UnityShareShrinkSizeTooSmallError, UnityLocalReplicationFsNameNotSameError
 from storops.unity.enums import FSSupportedProtocolEnum, TieringPolicyEnum, \
     SnapStateEnum
 
@@ -29,6 +29,8 @@ import storops.unity.resource.pool
 import storops.unity.resource.nfs_share
 import storops.unity.resource.cifs_share
 from storops.unity.resource import UnityResource, UnityResourceList
+from storops.unity.resource.replication_session import \
+    UnityReplicationSession, UnityResourceConfig
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.storage_resource import UnityStorageResource
 
@@ -159,6 +161,59 @@ class UnityFileSystem(UnityResource):
         """
         return len(list(filter(lambda s: s.state != SnapStateEnum.DESTROYING,
                                self.snapshots))) > 0
+
+    def replicate_with_dst_resource_provisioning(self, max_time_out_of_sync,
+                                                 dst_pool_id,
+                                                 dst_fs_name=None,
+                                                 remote_system=None,
+                                                 replication_name=None,
+                                                 dst_size=None,
+                                                 is_dst_thin=None,
+                                                 dst_tiering_policy=None,
+                                                 is_dst_compression=None):
+        """
+        Creates a replication session with destination filesystem provisioning.
+
+        :param max_time_out_of_sync: maximum time to wait before syncing the
+            source and destination. Value `-1` means the automatic sync is not
+            performed. `0` means it is a sync replication.
+        :param dst_pool_id: id of pool to allocate destination filesystem.
+        :param dst_fs_name: destination filesystem name. If `remote_system` is
+            `None` (for local replication creation), `dst_fs_name` should be
+            same as the source fs name or `None`.
+        :param remote_system: `UnityRemoteSystem` object. The remote system to
+            which the replication is being configured. When not specified, it
+            defaults to local system.
+        :param replication_name: replication name.
+        :param dst_size: destination filesystem size.
+        :param is_dst_thin: indicates whether destination filesystem is thin or
+            not.
+        :param dst_tiering_policy: `TieringPolicyEnum` value. Tiering policy of
+            destination filesystem.
+        :param is_dst_compression: indicates whether destination filesystem is
+            compression enabled or not.
+        :return: created replication session.
+        """
+
+        if remote_system is None:
+            if dst_fs_name is None:
+                dst_fs_name = self.name
+            elif dst_fs_name != self.name:
+                raise UnityLocalReplicationFsNameNotSameError(
+                    'dst_fs_name passed in for creating filesystem local '
+                    'replication should be same as source filesystem name '
+                    'or None')
+
+        dst_size = self.size_total if dst_size is None else dst_size
+
+        dst_resource = UnityResourceConfig.to_embedded(
+            name=dst_fs_name, pool_id=dst_pool_id, size=dst_size,
+            tiering_policy=dst_tiering_policy, is_thin_enabled=is_dst_thin,
+            is_compression_enabled=is_dst_compression)
+        return UnityReplicationSession.create_with_dst_resource_provisioning(
+            self._cli, self.storage_resource.get_id(),
+            dst_resource, max_time_out_of_sync,
+            remote_system=remote_system, name=replication_name)
 
 
 class UnityFileSystemList(UnityResourceList):

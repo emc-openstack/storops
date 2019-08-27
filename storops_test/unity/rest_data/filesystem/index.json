@@ -13,6 +13,10 @@
       "response": "fs_2.json"
     },
     {
+      "url": "/api/instances/filesystem/fs_4?compact=True&fields=accessPolicy,backendId,cifsNotifyOnChangeDirDepth,cifsNumUsedFiles,cifsShare,creationTime,description,format,health,hostIOSize,id,instanceId,isCIFSNotifyOnAccessEnabled,isCIFSNotifyOnWriteEnabled,isCIFSOpLocksEnabled,isCIFSSyncWritesEnabled,isReadOnly,isSMBCA,isThinEnabled,lockingPolicy,metadataSize,metadataSizeAllocated,modificationTime,name,nasServer,nfsShare,oid,operationalStatus,perTierSizeUsed,pool,poolFullPolicy,renamePolicy,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapsSize,snapsSizeAllocated,storageResource,supportedProtocols,tieringPolicy,tieringPolicy,type",
+      "response": "fs_4.json"
+    },
+    {
       "url": "/api/instances/filesystem/fs_5?compact=True&fields=accessPolicy,backendId,cifsNotifyOnChangeDirDepth,cifsNumUsedFiles,cifsShare,creationTime,description,format,health,hostIOSize,id,instanceId,isCIFSNotifyOnAccessEnabled,isCIFSNotifyOnWriteEnabled,isCIFSOpLocksEnabled,isCIFSSyncWritesEnabled,isReadOnly,isSMBCA,isThinEnabled,lockingPolicy,metadataSize,metadataSizeAllocated,modificationTime,name,nasServer,nfsShare,oid,operationalStatus,perTierSizeUsed,pool,poolFullPolicy,renamePolicy,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapsSize,snapsSizeAllocated,storageResource,supportedProtocols,tieringPolicy,tieringPolicy,type",
       "response": "fs_5.json"
     },

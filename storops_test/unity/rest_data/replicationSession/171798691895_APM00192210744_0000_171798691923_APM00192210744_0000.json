@@ -1,0 +1,44 @@
+{
+    "content": {
+        "id": "171798691895_APM00192210744_0000_171798691923_APM00192210744_0000",
+        "replicationResourceType": 1,
+        "status": 33797,
+        "srcStatus": 2,
+        "networkStatus": 2,
+        "dstStatus": 2,
+        "syncState": 2,
+        "localRole": 3,
+        "name": "rep_sess_res_5_res_13_local",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_OK"
+            ],
+            "descriptions": [
+                "This replication session is operating normally. No action is required."
+            ]
+        },
+        "maxTimeOutOfSync": 60,
+        "lastSyncTime": "2019-08-27T04:01:52.000Z",
+        "srcResourceId": "res_5",
+        "dstResourceId": "res_13",
+        "syncProgress": 0,
+        "currentTransferEstRemainTime": 0,
+        "hourlySnapReplicationPolicy": {
+            "isReplicatingSnaps": false,
+            "isRetentionSameAsSource": false,
+            "isAutoDelete": false,
+            "retentionDuration": 0
+        },
+        "dailySnapReplicationPolicy": {
+            "isReplicatingSnaps": false,
+            "isRetentionSameAsSource": false,
+            "isAutoDelete": false,
+            "retentionDuration": 0
+        },
+        "remoteSystem": {
+            "id": "RS_0"
+        }
+    }
+}
+

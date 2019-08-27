@@ -25,7 +25,8 @@ from storops.exception import UnityNasServerNameUsedError, \
     UnityResourceNotFoundError, UnitySmbNameInUseError, \
     UnityCifsServiceNotEnabledError
 from storops.unity.enums import ReplicationTypeEnum, \
-    NasServerUnixDirectoryServiceEnum, FileInterfaceRoleEnum
+    NasServerUnixDirectoryServiceEnum, FileInterfaceRoleEnum, \
+    NodeEnum
 from storops.unity.resource.cifs_server import UnityCifsServerList
 from storops.unity.resource.dns_server import UnityFileDnsServer
 from storops.unity.resource.health import UnityHealth
@@ -36,6 +37,7 @@ from storops.unity.resource.nas_server import UnityNasServer, \
 from storops.unity.resource.pool import UnityPool
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.system import UnityVirusChecker
+from storops.unity.resource.remote_system import UnityRemoteSystem
 from storops_test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
@@ -207,6 +209,53 @@ class UnityNasServerTest(TestCase):
                                        local_password='Password123!')
 
         assert_that(f, raises(UnitySmbNameInUseError, 'name already exists'))
+
+    @patch_rest
+    @ddt.data(
+        {'dst_nas': 'nas_12', 'replication_name': None, 'remote_system': None,
+         'expected_rep_name': 'rep_sess_nas_6_nas_12_local'},
+        {'dst_nas': 'nas_6', 'replication_name': 'remote-nas_6-nas_6',
+         'remote_system': 'RS_6', 'expected_rep_name': 'remote-nas_6-nas_6'},
+    )
+    @ddt.unpack
+    def test_replicate(self, dst_nas, replication_name, remote_system,
+                       expected_rep_name):
+        if remote_system:
+            remote_system = UnityRemoteSystem(_id=remote_system, cli=t_rest())
+        nas = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+        rep_session = nas.replicate(dst_nas, 60,
+                                    replication_name=replication_name,
+                                    remote_system=remote_system)
+        assert_that(rep_session.name, equal_to(expected_rep_name))
+
+    @patch_rest
+    @ddt.data(
+        {'dst_nas_server_name': None, 'remote_system': None, 'rep_name': None,
+         'dst_sp': None, 'is_backup_only': None,
+         'expected_rep_session_id': '103079215112_APM00192210744_0000'
+                                    '_103079215117_APM00192210744_0000'},
+        {'dst_nas_server_name': 'nas-liangr', 'remote_system': 'RS_6',
+         'rep_name': 'nas-server-rep',
+         'dst_sp': NodeEnum.SPA, 'is_backup_only': False,
+         'expected_rep_session_id': '103079215112_APM00192210744_0000'
+                                    '_103079215110_FNM00184901113_0000'},
+    )
+    @ddt.unpack
+    def test_replicate_with_dst_resource_provisioning(self,
+                                                      dst_nas_server_name,
+                                                      remote_system,
+                                                      rep_name,
+                                                      dst_sp,
+                                                      is_backup_only,
+                                                      expected_rep_session_id):
+        nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+        if remote_system:
+            remote_system = UnityRemoteSystem(_id=remote_system, cli=t_rest())
+        rep_session = nas_server.replicate_with_dst_resource_provisioning(
+            60, 'pool_1', dst_nas_server_name=dst_nas_server_name,
+            remote_system=remote_system, replication_name=rep_name,
+            dst_sp=dst_sp, is_backup_only=is_backup_only)
+        assert_that(rep_session.id, equal_to(expected_rep_session_id))
 
 
 class UnityNasServerListTest(TestCase):

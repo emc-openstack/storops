@@ -1393,3 +1393,16 @@ class UnitySourceResourceInAnImportSessionError(UnityImportSessionException):
 
 class StoropsConnectTimeoutError(StoropsException):
     pass
+
+
+class UnityReplicationError(UnityException):
+    pass
+
+
+class UnityLocalReplicationFsNameNotSameError(UnityReplicationError):
+    pass
+
+
+@rest_exception
+class UnityFileResourceReplicationInUseError(UnityReplicationError):
+    error_code = 105906504

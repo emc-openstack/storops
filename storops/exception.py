@@ -1389,3 +1389,16 @@ class UnityVNXSANCopyHostNotExistsError(UnityImportSessionException):
 @rest_exception
 class UnitySourceResourceInAnImportSessionError(UnityImportSessionException):
     error_code = 105906723
+
+
+class UnityReplicationError(UnityException):
+    pass
+
+
+class UnityLocalReplicationFsNameNotSameError(UnityReplicationError):
+    pass
+
+
+@rest_exception
+class UnityFileResourceReplicationInUseError(UnityReplicationError):
+    error_code = 105906504

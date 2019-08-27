@@ -105,6 +105,12 @@ class UnityResourceInfo(UnityAttributeResource):
 class UnityReplicationSession(UnityResource):
 
     @classmethod
+    def get_nested_properties(cls):
+        return (
+            'remoteSystem.name',
+        )
+
+    @classmethod
     def create(cls, cli, src_resource_id, dst_resource_id,
                max_time_out_of_sync, name=None, members=None,
                auto_initiate=None, hourly_snap_replication_policy=None,
@@ -177,7 +183,9 @@ class UnityReplicationSession(UnityResource):
             dst_spa_interface=None, dst_spb_interface=None,
             dst_resource_element_configs=None, auto_initiate=None,
             hourly_snap_replication_policy=None,
-            daily_snap_replication_policy=None, replicate_existing_snaps=None):
+            daily_snap_replication_policy=None, replicate_existing_snaps=None,
+            no_async_snap_replication=None,
+    ):
         """
         Create a replication session along with destination resource
         provisioning.
@@ -218,6 +226,10 @@ class UnityReplicationSession(UnityResource):
             source resource.
         :param replicate_existing_snaps: indicates whether or not to replicate
             snapshots already existing on the resource.
+        :param no_async_snap_replication: whether or not snap replication is
+            enabled in asynchronous replication session. When enabled, snap
+            replication is controlled by snap replication policy setting or
+            user action.
         :return: the newly created replication session.
         """
 
@@ -234,7 +246,9 @@ class UnityReplicationSession(UnityResource):
             autoInitiate=auto_initiate,
             hourlySnapReplicationPolicy=hourly_snap_replication_policy,
             dailySnapReplicationPolicy=daily_snap_replication_policy,
-            replicateExistingSnaps=replicate_existing_snaps)
+            replicateExistingSnaps=replicate_existing_snaps,
+            noAsyncSnapReplication=no_async_snap_replication,
+        )
 
         resp = cli.type_action(
             cls().resource_class,

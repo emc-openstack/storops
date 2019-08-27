@@ -18,12 +18,13 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
-from hamcrest import equal_to, assert_that, instance_of, none, raises
+import ddt
+from hamcrest import equal_to, assert_that, instance_of, none, raises, calling
 
 from storops.exception import UnityResourceNotFoundError, \
     UnityFileSystemNameAlreadyExisted, UnitySnapNameInUseError, \
-    UnityFileSystemSizeTooSmallError, UnityShareShrinkSizeTooLargeError,\
-    UnityShareShrinkSizeTooSmallError
+    UnityFileSystemSizeTooSmallError, UnityShareShrinkSizeTooLargeError, \
+    UnityShareShrinkSizeTooSmallError, UnityLocalReplicationFsNameNotSameError
 from storops.unity.enums import FilesystemTypeEnum, TieringPolicyEnum, \
     FSSupportedProtocolEnum, AccessPolicyEnum, FSFormatEnum, \
     ResourcePoolFullPolicyEnum, HostIOSizeEnum, NFSShareDefaultAccessEnum, \
@@ -33,6 +34,7 @@ from storops.unity.resource.filesystem import UnityFileSystem, \
     UnityFileSystemList
 from storops.unity.resource.nas_server import UnityNasServer
 from storops.unity.resource.pool import UnityPool
+from storops.unity.resource.remote_system import UnityRemoteSystem
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resource.health import UnityHealth
 from storops_test.unity.rest_mock import t_rest, patch_rest
@@ -40,6 +42,7 @@ from storops_test.unity.rest_mock import t_rest, patch_rest
 __author__ = 'Cedric Zhuang'
 
 
+@ddt.ddt
 class UnityFileSystemTest(TestCase):
     @patch_rest
     def test_properties(self):
@@ -232,3 +235,54 @@ class UnityFileSystemTest(TestCase):
     def test_has_snap_true(self):
         fs = UnityFileSystem(_id='fs_8', cli=t_rest())
         assert_that(fs.has_snap(), equal_to(True))
+
+    @patch_rest
+    @ddt.data(
+        {'dst_fs_name': None, 'remote_system': None, 'rep_name': None,
+         'dst_size': None, 'is_dst_thin': None, 'dst_tiering_policy': None,
+         'is_dst_compression': None,
+         'expected_rep_session_id': '171798691895_APM00192210744_0000'
+                                    '_171798691923_APM00192210744_0000',
+         },
+        {'dst_fs_name': 'fs-liangr', 'remote_system': 'RS_6',
+         'rep_name': 'fs-rep', 'dst_size': 107374182400, 'is_dst_thin': True,
+         'dst_tiering_policy': TieringPolicyEnum.AUTOTIER_HIGH,
+         'is_dst_compression': False,
+         'expected_rep_session_id': '171798691895_APM00192210744_0000'
+                                    '_171798691868_FNM00184901113_0000',
+         },
+    )
+    @ddt.unpack
+    def test_replicate_with_dst_resource_provisioning(self,
+                                                      dst_fs_name,
+                                                      remote_system,
+                                                      rep_name,
+                                                      dst_size,
+                                                      is_dst_thin,
+                                                      dst_tiering_policy,
+                                                      is_dst_compression,
+                                                      expected_rep_session_id):
+        fs = UnityFileSystem.get(cli=t_rest(), _id='fs_4')
+        if remote_system:
+            remote_system = UnityRemoteSystem(_id=remote_system, cli=t_rest())
+        rep_session = fs.replicate_with_dst_resource_provisioning(
+            60, 'pool_1', dst_fs_name=dst_fs_name,
+            remote_system=remote_system, replication_name=rep_name,
+            dst_size=dst_size, is_dst_thin=is_dst_thin,
+            dst_tiering_policy=dst_tiering_policy,
+            is_dst_compression=is_dst_compression)
+        assert_that(rep_session.id, equal_to(expected_rep_session_id))
+
+    @patch_rest
+    def test_replicate_with_dst_resource_provisioning_fs_name_error(self):
+        fs = UnityFileSystem.get(cli=t_rest(), _id='fs_4')
+        assert_that(
+            calling(
+                fs.replicate_with_dst_resource_provisioning
+            ).with_args(
+                60, 'pool_1', dst_fs_name='fs-liangr-rep-dst'),
+            raises(UnityLocalReplicationFsNameNotSameError,
+                   'dst_fs_name passed in for creating filesystem local '
+                   'replication should be same as source filesystem name '
+                   'or None')
+        )

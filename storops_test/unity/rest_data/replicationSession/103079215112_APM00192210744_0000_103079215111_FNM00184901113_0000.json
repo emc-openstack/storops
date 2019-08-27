@@ -1,0 +1,43 @@
+{
+    "content": {
+        "id": "103079215112_APM00192210744_0000_103079215111_FNM00184901113_0000",
+        "replicationResourceType": 10,
+        "status": 33797,
+        "srcStatus": 2,
+        "networkStatus": 2,
+        "dstStatus": 2,
+        "syncState": 2,
+        "localRole": 0,
+        "name": "remote-nas_6-nas_6",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_OK"
+            ],
+            "descriptions": [
+                "This replication session is operating normally. No action is required."
+            ]
+        },
+        "maxTimeOutOfSync": 60,
+        "lastSyncTime": "2019-08-30T07:44:10.000Z",
+        "srcResourceId": "nas_6",
+        "dstResourceId": "nas_6",
+        "syncProgress": 0,
+        "currentTransferEstRemainTime": 0,
+        "remoteSystem": {
+            "id": "RS_6"
+        },
+        "srcSPAInterface": {
+            "id": "APM00192210744:if_7"
+        },
+        "srcSPBInterface": {
+            "id": "APM00192210744:if_8"
+        },
+        "dstSPAInterface": {
+            "id": "FNM00184901113:if_7"
+        },
+        "dstSPBInterface": {
+            "id": "FNM00184901113:if_8"
+        }
+    }
+}

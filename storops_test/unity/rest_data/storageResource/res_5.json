@@ -1,0 +1,42 @@
+{
+    "content": {
+        "id": "res_5",
+        "type": 1,
+        "replicationType": 2,
+        "thinStatus": 1,
+        "relocationPolicy": 0,
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_COMPONENT_OK"
+            ],
+            "descriptions": [
+                "The component is operating normally. No action is required."
+            ]
+        },
+        "name": "fs-liangr",
+        "description": "",
+        "isReplicationDestination": false,
+        "sizeTotal": 107374182400,
+        "sizeUsed": 1620303872,
+        "sizeAllocated": 283140096,
+        "perTierSizeUsed": [
+            6979321856,
+            0,
+            0
+        ],
+        "metadataSize": 13690208256,
+        "metadataSizeAllocated": 4294967296,
+        "snapsSizeTotal": 214748397568,
+        "snapsSizeAllocated": 32768,
+        "snapCount": 2,
+        "pools": [
+            {
+                "id": "pool_2"
+            }
+        ],
+        "filesystem": {
+            "id": "fs_4"
+        }
+    }
+}

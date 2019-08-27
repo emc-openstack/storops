@@ -23,7 +23,10 @@ import storops.unity.resource.nfs_server
 import storops.unity.resource.dns_server
 import storops.unity.resource.pool
 from storops.exception import UnityCifsServiceNotEnabledError
+from storops.unity.enums import ReplicationEndpointResourceTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
+from storops.unity.resource.replication_session import UnityResourceConfig, \
+    UnityReplicationSession
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.tenant import UnityTenant
 
@@ -139,6 +142,62 @@ class UnityNasServer(UnityResource):
             raise UnityCifsServiceNotEnabledError(
                 'CIFS is not enabled on {}.'.format(self.name))
         return ret
+
+    def replicate(self, dst_nas_server_id, max_time_out_of_sync,
+                  remote_system=None, replication_name=None):
+        """
+        Creates a replication session with an existing nas server as
+        destination.
+
+        :param dst_nas_server_id: destination nas server id.
+        :param max_time_out_of_sync: maximum time to wait before syncing the
+            source and destination. Value `-1` means the automatic sync is not
+            performed. `0` means it is a sync replication.
+        :param remote_system: `UnityRemoteSystem` object. The remote system to
+            which the replication is being configured. When not specified, it
+            defaults to local system.
+        :param replication_name: replication name.
+        :return: created replication session.
+        """
+
+        return UnityReplicationSession.create(
+            self._cli, self.get_id(), dst_nas_server_id, max_time_out_of_sync,
+            name=replication_name, remote_system=remote_system)
+
+    def replicate_with_dst_resource_provisioning(self, max_time_out_of_sync,
+                                                 dst_pool_id,
+                                                 dst_nas_server_name=None,
+                                                 remote_system=None,
+                                                 replication_name=None,
+                                                 dst_sp=None,
+                                                 is_backup_only=None):
+        """
+        Creates a replication session with destination nas server provisioning.
+
+        :param max_time_out_of_sync: maximum time to wait before syncing the
+            source and destination. Value `-1` means the automatic sync is not
+            performed. `0` means it is a sync replication.
+        :param dst_pool_id: id of pool to allocate destination nas server.
+        :param dst_nas_server_name: destination nas server name.
+        :param remote_system: `UnityRemoteSystem` object. The remote system to
+            which the replication is being configured. When not specified, it
+            defaults to local system.
+        :param replication_name: replication name.
+        :param dst_sp: `NodeEnum` value. Default storage processor of
+            destination nas server.
+        :param is_backup_only: is backup only or not.
+        :return: created replication session.
+        """
+
+        dst_resource = UnityResourceConfig.to_embedded(
+            name=dst_nas_server_name, pool_id=dst_pool_id,
+            default_sp=dst_sp, is_backup_only=is_backup_only,
+            replication_resource_type=(
+                ReplicationEndpointResourceTypeEnum.NASSERVER))
+        return UnityReplicationSession.create_with_dst_resource_provisioning(
+            self._cli, self.get_id(), dst_resource, max_time_out_of_sync,
+            remote_system=remote_system, name=replication_name,
+        )
 
 
 class UnityNasServerList(UnityResourceList):

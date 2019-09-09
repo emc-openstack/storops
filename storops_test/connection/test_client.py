@@ -24,6 +24,7 @@ import tempfile
 
 from storops.connection import client
 from storops.connection import exceptions as storops_ex
+from storops.exception import StoropsConnectTimeoutError
 
 
 class FakeOpener(dict):
@@ -180,6 +181,20 @@ class HTTPClientTest(unittest.TestCase):
             'GET', 'service_unavailable', auth=None, files=None,
             verify=True, headers={}, data='{"k_abc": "v_abc"}')
 
+    def test_request_when_connect_timeout(self):
+        self.client.session.request = mock.MagicMock(
+            side_effect=exceptions.ConnectTimeout)
+
+        def _tmp_func():
+            self.client.request('fake_url_connect_timeout', 'GET',
+                                body='{"k_abc": "v_abc"}')
+        assert_that(calling(_tmp_func),
+                    raises(exceptions.ConnectTimeout))
+
+        self.client.session.request.assert_called_with(
+            'GET', 'fake_url_connect_timeout', auth=None, files=None,
+            verify=True, headers={}, data='{"k_abc": "v_abc"}')
+
     @mock.patch(
         'storops.connection.client.HTTPClient._cs_request_with_retries')
     def test_cs_request(self, mocked_cs_request_with_retries):
@@ -189,6 +204,26 @@ class HTTPClientTest(unittest.TestCase):
         mocked_cs_request_with_retries.assert_called_with(
             'https://10.10.10.10/api/types/instance',
             'GET')
+
+    @mock.patch(
+        'storops.connection.client._wait_callback')
+    def test_cs_request_connect_timeout(self, mocked_wait_callback):
+        mocked_wait_callback.return_value = 0
+
+        self.client.session.request = mock.MagicMock(
+            side_effect=exceptions.ConnectTimeout)
+
+        self.client.base_url = 'https://10.10.10.10'
+        assert_that(calling(self.client._cs_request).with_args(
+            '/api/types/instance', 'GET'), raises(StoropsConnectTimeoutError))
+
+        calls = [
+            mock.call('GET', 'https://10.10.10.10/api/types/instance',
+                      auth=None, files=None, verify=True, headers={}),
+            mock.call('GET', 'https://10.10.10.10/api/types/instance',
+                      auth=None, files=None, verify=True, headers={}),
+        ]
+        self.client.session.request.assert_has_calls(calls)
 
     def test_get_limit(self):
         self.client.retries = 99

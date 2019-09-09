@@ -27,6 +27,7 @@ from requests.exceptions import RequestException
 from retryz import retry
 
 from storops.connection import exceptions
+from storops.exception import StoropsConnectTimeoutError
 
 log = logging.getLogger(__name__)
 
@@ -118,10 +119,13 @@ class HTTPClient(object):
         return resp, body
 
     def _cs_request(self, url, method, **kwargs):
-        return self._cs_request_with_retries(
-            self.base_url + url,
-            method,
-            **kwargs)
+        try:
+            return self._cs_request_with_retries(
+                self.base_url + url,
+                method,
+                **kwargs)
+        except requests.ConnectTimeout as ex:
+            raise StoropsConnectTimeoutError(message=str(ex))
 
     def _get_limit(self):
         return self.retries

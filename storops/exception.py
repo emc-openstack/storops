@@ -1389,3 +1389,7 @@ class UnityVNXSANCopyHostNotExistsError(UnityImportSessionException):
 @rest_exception
 class UnitySourceResourceInAnImportSessionError(UnityImportSessionException):
     error_code = 105906723
+
+
+class StoropsConnectTimeoutError(StoropsException):
+    pass

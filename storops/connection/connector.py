@@ -54,7 +54,8 @@ class UnityRESTConnector(object):
     }
 
     def __init__(self, host, port=443, user='admin', password='',
-                 verify=False, retries=None, cache_interval=0):
+                 verify=False, retries=None, cache_interval=0,
+                 connect_timeout=30):
         base_url = 'https://{host}:{port}'.format(host=host, port=port)
 
         insecure = False
@@ -69,7 +70,8 @@ class UnityRESTConnector(object):
                                              insecure=insecure,
                                              retries=retries,
                                              ca_cert_path=ca_cert_path,
-                                             cache_interval=cache_interval)
+                                             cache_interval=cache_interval,
+                                             timeout=(connect_timeout, None))
 
     def get(self, url, **kwargs):
         return self.http_client.get(url, **kwargs)

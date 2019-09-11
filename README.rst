@@ -187,43 +187,85 @@ Feature List
         - LUN migration
         - LUN replication
     - supported metrics
-        - system
-            - read/write/total IOPS
-            - read/write/total bandwidth
-        - disk
-            - read/write/total IOPS
-            - read/write/total bandwidth
+        - UnitySystem
+            - read_iops
+            - write_iops
+            - total_iops
+            - read_byte_rate
+            - write_byte_rate
+            - total_byte_rate
+        - UnityDisk
+            - read_iops
+            - write_iops
+            - total_iops
+            - read_mbps
+            - write_mbps
             - utilization
-            - response time
-            - queue length
-        - lun
-            - read/write/total IOPS
-            - read/write/total bandwidth
+            - response_time
+            - queue_length
+            - read_byte_rate
+            - write_byte_rate
+            - total_byte_rate
+        - UnityLun
+            - read_iops
+            - write_iops
+            - total_iops
+            - read_mbps
+            - write_mbps
             - utilization
-            - response time
-            - queue length
-        - filesystem
-            - read/write IOPS
-            - read/write bandwidth
-        - storage processor
-            - net in/out bandwidth
-            - block read/write/total IOPS
-            - block read/write/total bandwidth
-            - CIFS read/write IOPS
-            - CIFS read/write bandwidth
-            - NFS read/write IOPS
-            - NFS read/write bandwidth
+            - response_time
+            - queue_length
+            - read_byte_rate
+            - write_byte_rate
+            - total_byte_rate
+        - UnityFileSystem
+            - read_iops
+            - write_iops
+            - read_mbps
+            - write_mbps
+        - UnityStorageProcessor
+            - net_in_mbps
+            - net_out_mbps
+            - block_read_iops
+            - block_write_iops
+            - block_total_iops
+            - block_read_mbps
+            - block_write_mbps
+            - cifs_read_iops
+            - cifs_write_iops
+            - cifs_read_mbps
+            - cifs_write_mbps
+            - nfs_read_iops
+            - nfs_write_iops
+            - nfs_read_mbps
+            - nfs_write_mbps
             - utilization
-            - block cache read/write hit ratio
-            - block cache dirty size
-            - fast cache read/write hits
-            - fast cache read/write hit rate
-        - fc port
-            - read/write/total IOPS
-            - read/write/total bandwidth
-        - iscsi node
-            - read/write/total IOPS
-            - read/write/total bandwidth
+            - block_cache_read_hit_ratio
+            - block_cache_write_hit_ratio
+            - temperature
+            - core_count
+            - block_cache_dirty_size
+            - read_byte_rate
+            - write_byte_rate
+            - total_byte_rate
+            - fast_cache_read_hits
+            - fast_cache_write_hits
+            - fast_cache_read_hit_rate
+            - fast_cache_write_hit_rate
+        - UnityFcPort
+            - read_iops
+            - write_iops
+            - total_iops
+            - read_byte_rate
+            - write_byte_rate
+            - total_byte_rate
+        - UnityIscsiNode
+            - read_iops
+            - write_iops
+            - total_iops
+            - read_byte_rate
+            - write_byte_rate
+            - total_byte_rate
 
 Tutorial
 --------
@@ -379,6 +421,34 @@ Remove a Resource
 
     # delete a resource
     >>> lun1.delete()
+
+Getting metrics
+```````````````
+
+.. code-block:: python
+
+    >>> from storops import UnitySystem
+    >>> unity = UnitySystem('<management ip>', '<user>', '<password>')
+    # Enable metric query
+    >>> unity.enable_perf_stats()
+    # Once metric query enabled, storops will pull the realtime metric info
+    # from Unity periodically and calculate them, the default interval is
+    # 60s, so suggest to wait more than 60s for the first time calculation
+    >>> import time; time.sleep(60)
+    # Get iops, bandwidth for lun
+    >>> lun1 = unity.get_lun()[0]
+    >>> lun1.read_iops
+    0.05
+    >>> lun1.total_iops
+    0.05
+    >>> lun1.write_iops
+    0
+    >>> lun1.read_byte_rate
+    25.6
+    >>> lun1.write_byte_rate
+    0
+    >>> lun1.total_byte_rate
+    25.6
 
 Getting Help
 ````````````

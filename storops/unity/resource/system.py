@@ -246,11 +246,11 @@ class UnitySystem(UnitySingletonResource):
 
     def get_cifs_share(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityCifsShareList, _id=_id, name=name,
-                                   **filters)
+                                   allow_dup=True, **filters)
 
     def get_nfs_share(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityNfsShareList, _id=_id, name=name,
-                                   **filters)
+                                   allow_dup=True, **filters)
 
     def get_host(self, _id=None, name=None, address=None, **filters):
         ret = UnityHostList.get(self._cli, name='not found')

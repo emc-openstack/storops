@@ -187,7 +187,7 @@ class UnityResource(Resource):
     def set_preloaded_properties(self, props):
         self._preloaded_properties = props
 
-    def _get_unity_rsc(self, clz, _id=None, **filters):
+    def _get_unity_rsc(self, clz, _id=None, allow_dup=False, **filters):
         ret = clz.get(cli=self._cli, _id=_id, **filters)
         if 'name' in filters and filters['name'] is not None:
             name = filters['name']
@@ -196,10 +196,13 @@ class UnityResource(Resource):
                 raise UnityResourceNotFoundError(
                     '{}:{} not found.'.format(clz_name, name))
             elif len(ret) > 1:
-                raise UnityNameNotUniqueError(
-                    'multiple {} with name {} found.'.format(clz_name, name),
-                    # throw out the found multiple objects for later analysis
-                    objects=ret)
+                if not allow_dup:
+                    raise UnityNameNotUniqueError(
+                        'multiple {} with name {} found.'.format(clz_name,
+                                                                 name),
+                        # throw out the found multiple objects for later
+                        # analysis
+                        objects=ret)
             else:
                 ret = ret[0]
         return ret

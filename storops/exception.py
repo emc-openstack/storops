@@ -1402,3 +1402,7 @@ class UnityLocalReplicationFsNameNotSameError(UnityReplicationError):
 @rest_exception
 class UnityFileResourceReplicationInUseError(UnityReplicationError):
     error_code = 105906504
+
+
+class StoropsConnectTimeoutError(StoropsException):
+    pass

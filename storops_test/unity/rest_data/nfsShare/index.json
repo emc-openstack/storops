@@ -81,11 +81,6 @@
     {
       "url": "/api/instances/nfsShare/NFSShare_30/action/modify?compact=True",
       "body": {
-        "rootAccessHosts": [
-          {
-            "id": "Host_11"
-          }
-        ],
         "readOnlyHosts": [
           {
             "id": "Host_11"

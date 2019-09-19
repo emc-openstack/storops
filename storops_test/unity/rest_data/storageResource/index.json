@@ -407,14 +407,6 @@
                   "id": "Host_7"
                 }
               ],
-              "rootAccessHosts": [
-                {
-                  "id": "Host_1"
-                },
-                {
-                  "id": "Host_11"
-                }
-              ],
               "readOnlyHosts": [
                 {
                   "id": "Host_1"
@@ -970,11 +962,6 @@
               "id": "NFSShare_32"
             },
             "nfsShareParameters": {
-              "rootAccessHosts": [
-                {
-                  "id": "Host_16"
-                }
-              ],
               "readOnlyHosts": [
                 {
                   "id": "Host_16"

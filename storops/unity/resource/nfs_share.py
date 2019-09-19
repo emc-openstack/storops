@@ -81,7 +81,6 @@ class UnityNfsHostConfig(object):
     def allow_ro(self, *hosts):
         self.delete_access(*hosts)
         self.ro = self._add(self.ro, hosts)
-        self.root = self._add(self.root, hosts)
         return self
 
     def allow_rw(self, *hosts):

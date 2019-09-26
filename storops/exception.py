@@ -1406,3 +1406,9 @@ class UnityFileResourceReplicationInUseError(UnityReplicationError):
 
 class StoropsConnectTimeoutError(StoropsException):
     pass
+
+
+@rest_exception
+class UnityDeleteShareFromDestNasServerError(UnityReplicationError):
+    error_code = 151036197
+

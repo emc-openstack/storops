@@ -1406,3 +1406,8 @@ class UnityLocalReplicationFsNameNotSameError(UnityReplicationError):
 @rest_exception
 class UnityFileResourceReplicationInUseError(UnityReplicationError):
     error_code = 105906504
+
+
+@rest_exception
+class UnityDeleteShareFromDestNasServerError(UnityReplicationError):
+    error_code = 151036197

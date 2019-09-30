@@ -154,13 +154,17 @@ class UnityFileSystem(UnityResource):
         return UnitySnapList(cli=self._cli,
                              storage_resource=self.storage_resource)
 
-    def has_snap(self):
+    def has_snap(self, ignore_system_snap=False):
         """ This method won't count the snaps in "destroying" state!
 
+        :param ignore_system_snap: ignore the system snap if True.
         :return: false if no snaps or all snaps are destroying.
         """
-        return len(list(filter(lambda s: s.state != SnapStateEnum.DESTROYING,
-                               self.snapshots))) > 0
+        snaps = filter(lambda s: s.state != SnapStateEnum.DESTROYING,
+                       self.snapshots)
+        if ignore_system_snap:
+            snaps = filter(lambda s: not s.is_system_snap, snaps)
+        return len(list(snaps)) > 0
 
     def replicate_with_dst_resource_provisioning(self, max_time_out_of_sync,
                                                  dst_pool_id,

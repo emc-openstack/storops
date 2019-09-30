@@ -1411,3 +1411,8 @@ class UnityFileResourceReplicationInUseError(UnityReplicationError):
 @rest_exception
 class UnityDeleteShareFromDestNasServerError(UnityReplicationError):
     error_code = 151036197
+
+
+@rest_exception
+class UnityFailoverNasRepWithFsRepOutOfSyncError(UnityReplicationError):
+    error_code = 105906786

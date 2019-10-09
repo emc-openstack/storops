@@ -322,6 +322,7 @@ class EnclosureTypeEnum(UnityEnum):
     NAGA_12G_SAS_DAE = (32, '80 Drive 12G DAE')
     MIRANDA_12G_SAS_DPE = (36, '25 Drive 12G DPE')
     RHEA_12G_SAS_DPE = (37, '12 Drive 12G DPE')
+    SCORP_12G_SAS_DPE = (38, '25 Drive 12G DPE')
     VIRTUAL_DPE = (100, 'Virtual DPE')
     UNSUPPORTED = (999, 'Unsupported Enclosure')
 

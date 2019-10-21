@@ -22,6 +22,8 @@ from storops.exception import UnityStorageResourceNameInUseError, \
 from storops.unity import enums
 from storops.unity.resource import lun as lun_mod
 from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.replication_session import UnityResourceConfig, \
+    UnityReplicationSession
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.storage_resource import UnityStorageResource, \
     UnityStorageResourceList
@@ -252,6 +254,49 @@ class UnityConsistencyGroup(UnityStorageResource):
         clz = UnitySnapList
         snaps = clz(cli=self._cli, storage_resource=self)
         return list(filter(lambda snap: snap.snap_group is None, snaps))
+
+    def check_cg_is_replicated(self):
+        if not (self.replication_type is enums.ReplicationTypeEnum.NONE):
+            return True
+
+    def replicate_with_dst_resource_provisioning(self, max_time_out_of_sync,
+                                                 source_luns,
+                                                 dst_pool_id,
+                                                 dst_cg_name=None,
+                                                 remote_system=None):
+        """
+        Creates a replication session with destination luns provisioning.
+
+        :param max_time_out_of_sync: maximum time to wait before syncing the
+            source and destination. Value `-1` means the automatic sync is not
+            performed. `0` means it is a sync replication.
+        :param source_luns: local Luns, will create same named Luns in
+            destination Unity.
+        :param dst_pool_id: id of pool to allocate destination Luns.
+        :param dst_cg_name: destination cg name.
+        :param remote_system: `UnityRemoteSystem` object. The remote system to
+            which the replication is being configured. When not specified, it
+            defaults to local system.
+        :return: created replication session.
+        """
+
+        dst_resource = UnityResourceConfig.to_embedded(
+            name=dst_cg_name)
+        dst_element_configs = []
+        for source_lun in source_luns:
+            lun_resource_config = UnityResourceConfig.to_embedded(
+                pool_id=dst_pool_id,
+                is_thin_enabled=source_lun.is_thin_enabled,
+                size=source_lun.size_total, request_id=source_lun.id,
+                name=source_lun.name,
+                is_deduplication_enabled=source_lun.is_data_reduction_enabled,
+                is_compression_enabled=source_lun.is_data_reduction_enabled)
+            dst_element_configs.append(lun_resource_config)
+        result = UnityReplicationSession.create_with_dst_resource_provisioning(
+            self._cli, self.get_id(), dst_resource, max_time_out_of_sync,
+            remote_system=remote_system,
+            dst_resource_element_configs=dst_element_configs)
+        return result
 
 
 class UnityConsistencyGroupList(UnityStorageResourceList):

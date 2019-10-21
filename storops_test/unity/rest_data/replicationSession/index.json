@@ -227,6 +227,7 @@
       "response": "empty.json"
     },
     {
+<<<<<<< HEAD
       "url": "/api/types/replicationSession/instances?compact=True",
       "body": {
         "maxTimeOutOfSync": 60,
@@ -329,6 +330,40 @@
     {
       "url": "/api/instances/replicationSession/171798691895_APM00192210744_0000_171798691868_FNM00184901113_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,remoteSystem.name,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
       "response": "171798691895_APM00192210744_0000_171798691868_FNM00184901113_0000.json"
+    },
+    {
+      "url": "/api/types/replicationSession/action/createReplicationSessionWDestResProvisioning?compact=True",
+      "body": {
+        "remoteSystem": {
+          "id": "RS_0"
+        },
+        "srcResourceId": "res_21",
+        "maxTimeOutOfSync": 60,
+        "dstResourceConfig": {
+          "name": "cg-liangr"
+        },
+        "dstResourceElementConfigs": [
+          {
+            "size": 10737418240,
+            "requestId": "sv_58",
+            "isThinEnabled": true,
+            "name": "vol-cg-liangr-00",
+            "poolId": "pool_2"
+          },
+          {
+            "size": 5368709120,
+            "requestId": "sv_59",
+            "isThinEnabled": false,
+            "name": "lun-liangr-1",
+            "poolId": "pool_2"
+          }
+        ]
+      },
+      "response": "create-provision-remote-res_99.json"
+    },
+    {
+      "url": "/api/instances/replicationSession/81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
+      "response": "81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000.json"
     }
   ]
 }

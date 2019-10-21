@@ -1,0 +1,126 @@
+{
+    "content": {
+        "id": "81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000",
+        "replicationResourceType": 2,
+        "status": 33797,
+        "srcStatus": 2,
+        "networkStatus": 2,
+        "dstStatus": 2,
+        "syncState": 2,
+        "localRole": 0,
+        "name": "rep_sess_res_91_res_122_APM00192210744_FNM00184901113",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_REPL_OK"
+            ],
+            "descriptions": [
+                "This replication session is operating normally. No action is required."
+            ]
+        },
+        "maxTimeOutOfSync": 60,
+        "lastSyncTime": "2019-10-21T08:30:55.000Z",
+        "srcResourceId": "res_91",
+        "dstResourceId": "res_122",
+        "members": [
+            {
+                "srcStatus": 2,
+                "networkStatus": 2,
+                "dstStatus": 2,
+                "name": "sv_3953=>sv_363",
+                "maxTimeOutOfSync": 60,
+                "srcLunInstanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_3953",
+                "srcLunId": "sv_3953",
+                "dstLunInstanceId": "root/emc:EMC_UEM_ReplicationRemoteSystemLeaf%InstanceID=RS_6%Name=FNM00184901113%SystemName=VNXe*root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_363",
+                "dstLunId": "sv_363",
+                "currentTransferSize": 0,
+                "currentTransferRemain": 0,
+                "currentTransferEstRemainTime": 0,
+                "currentTransferRate": 0,
+                "currentReadRate": 0,
+                "currentWriteRate": 0,
+                "srcInterface": {
+                    "id": "APM00192210744:if_7"
+                },
+                "dstInterface": {
+                    "id": "FNM00184901113:if_8"
+                }
+            },
+            {
+                "srcStatus": 2,
+                "networkStatus": 2,
+                "dstStatus": 2,
+                "name": "sv_3954=>sv_364",
+                "maxTimeOutOfSync": 60,
+                "srcLunInstanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_3954",
+                "srcLunId": "sv_3954",
+                "dstLunInstanceId": "root/emc:EMC_UEM_ReplicationRemoteSystemLeaf%InstanceID=RS_6%Name=FNM00184901113%SystemName=VNXe*root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_364",
+                "dstLunId": "sv_364",
+                "currentTransferSize": 0,
+                "currentTransferRemain": 0,
+                "currentTransferEstRemainTime": 0,
+                "currentTransferRate": 0,
+                "currentReadRate": 0,
+                "currentWriteRate": 0,
+                "srcInterface": {
+                    "id": "APM00192210744:if_7"
+                },
+                "dstInterface": {
+                    "id": "FNM00184901113:if_8"
+                }
+            },
+            {
+                "srcStatus": 2,
+                "networkStatus": 2,
+                "dstStatus": 2,
+                "name": "sv_3955=>sv_362",
+                "maxTimeOutOfSync": 60,
+                "srcLunInstanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_3955",
+                "srcLunId": "sv_3955",
+                "dstLunInstanceId": "root/emc:EMC_UEM_ReplicationRemoteSystemLeaf%InstanceID=RS_6%Name=FNM00184901113%SystemName=VNXe*root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_362",
+                "dstLunId": "sv_362",
+                "currentTransferSize": 0,
+                "currentTransferRemain": 0,
+                "currentTransferEstRemainTime": 0,
+                "currentTransferRate": 0,
+                "currentReadRate": 0,
+                "currentWriteRate": 0,
+                "srcInterface": {
+                    "id": "APM00192210744:if_7"
+                },
+                "dstInterface": {
+                    "id": "FNM00184901113:if_8"
+                }
+            }
+        ],
+        "syncProgress": 0,
+        "currentTransferEstRemainTime": 0,
+        "hourlySnapReplicationPolicy": {
+            "isReplicatingSnaps": false,
+            "isRetentionSameAsSource": false,
+            "isAutoDelete": false,
+            "retentionDuration": 0
+        },
+        "dailySnapReplicationPolicy": {
+            "isReplicatingSnaps": false,
+            "isRetentionSameAsSource": false,
+            "isAutoDelete": false,
+            "retentionDuration": 0
+        },
+        "remoteSystem": {
+            "id": "RS_6"
+        },
+        "srcSPAInterface": {
+            "id": "APM00192210744:if_7"
+        },
+        "srcSPBInterface": {
+            "id": "APM00192210744:if_8"
+        },
+        "dstSPAInterface": {
+            "id": "FNM00184901113:if_7"
+        },
+        "dstSPBInterface": {
+            "id": "FNM00184901113:if_8"
+        }
+    }
+}

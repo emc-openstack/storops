@@ -10,7 +10,7 @@
     "content": {
         "id": "res_6",
         "type": 2,
-        "replicationType": 0,
+        "replicationType": 1,
         "thinStatus": 1,
         "relocationPolicy": 0,
         "health": {

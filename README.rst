@@ -186,6 +186,7 @@ Feature List
         - enable/disable LUN data reduction
         - LUN migration
         - LUN replication
+        - CG replication
     - supported metrics
         - UnitySystem
             - read_iops

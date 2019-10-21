@@ -28,6 +28,7 @@ from storops.unity.resource.cg import UnityConsistencyGroup, \
 
 from storops.unity.resource.host import UnityHost
 from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.remote_system import UnityRemoteSystem
 from storops.unity.resource.snap import UnitySnap
 
 from storops_test.unity.rest_mock import t_rest, patch_rest
@@ -325,3 +326,27 @@ class UnityConsistencyGroupTest(TestCase):
         cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
         resp = cg.update_lun()
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_cg_is_replicated(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_6')
+        result = cg.check_cg_is_replicated()
+        assert_that(result, equal_to(True))
+
+    @patch_rest
+    def test_cg_is_not_replicated(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        result = cg.check_cg_is_replicated()
+        assert_that(result, equal_to(None))
+
+    @patch_rest
+    def test_create_replicate_cg_session(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        rs = UnityRemoteSystem.get(cli=t_rest(), _id='RS_0')
+        lun1 = UnityLun(cli=t_rest(), _id='sv_58')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_59')
+        luns = [lun1, lun2]
+        rep_session = cg.replicate_with_dst_resource_provisioning(
+            60, luns, 'pool_2', dst_cg_name=cg.name, remote_system=rs)
+        assert_that(rep_session.id, equal_to(
+            '81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000'))

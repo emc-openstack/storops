@@ -2247,3 +2247,16 @@ UnityAlertConfigSNMPTarget:
       converter: SNMPPrivacyProtocolEnum
     - label: snmpVersion
       converter: SNMPVersionEnum
+
+UnityLunMemberReplication:
+  data_src: rest
+  name: lunMemberReplication
+  properties:
+    - label: srcLunId
+    - label: dstLunId
+    - label: srcStatus
+      converter: ReplicationSessionStatusEnum
+    - label: networkStatus
+      converter: ReplicationSessionNetworkStatusEnum
+    - label: dstStatus
+      converter: ReplicationSessionStatusEnum

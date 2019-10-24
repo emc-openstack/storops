@@ -259,11 +259,12 @@ class UnityConsistencyGroup(UnityStorageResource):
         if not (self.replication_type is enums.ReplicationTypeEnum.NONE):
             return True
 
-    def replicate_with_dst_resource_provisioning(self, max_time_out_of_sync,
-                                                 source_luns,
-                                                 dst_pool_id,
-                                                 dst_cg_name=None,
-                                                 remote_system=None):
+    def replicate_cg_with_dst_resource_provisioning(self,
+                                                    max_time_out_of_sync,
+                                                    source_luns,
+                                                    dst_pool_id,
+                                                    dst_cg_name=None,
+                                                    remote_system=None):
         """
         Creates a replication session with destination luns provisioning.
 

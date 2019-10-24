@@ -346,7 +346,7 @@ class UnityConsistencyGroupTest(TestCase):
         lun1 = UnityLun(cli=t_rest(), _id='sv_58')
         lun2 = UnityLun(cli=t_rest(), _id='sv_59')
         luns = [lun1, lun2]
-        rep_session = cg.replicate_with_dst_resource_provisioning(
+        rep_session = cg.replicate_cg_with_dst_resource_provisioning(
             60, luns, 'pool_2', dst_cg_name=cg.name, remote_system=rs)
         assert_that(rep_session.id, equal_to(
             '81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000'))

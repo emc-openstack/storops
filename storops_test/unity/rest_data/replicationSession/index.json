@@ -227,7 +227,6 @@
       "response": "empty.json"
     },
     {
-<<<<<<< HEAD
       "url": "/api/types/replicationSession/instances?compact=True",
       "body": {
         "maxTimeOutOfSync": 60,
@@ -362,7 +361,7 @@
       "response": "create-provision-remote-res_99.json"
     },
     {
-      "url": "/api/instances/replicationSession/81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
+      "url": "/api/instances/replicationSession/81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000?compact=True&fields=currentTransferEstRemainTime,dailySnapReplicationPolicy,dstResourceId,dstSPAInterface,dstSPBInterface,dstStatus,health,hourlySnapReplicationPolicy,id,lastSyncTime,localRole,maxTimeOutOfSync,members,name,networkStatus,remoteSystem,remoteSystem.name,replicationResourceType,srcResourceId,srcSPAInterface,srcSPBInterface,srcStatus,status,syncProgress,syncState",
       "response": "81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000.json"
     }
   ]

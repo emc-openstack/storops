@@ -526,6 +526,7 @@ class UnityLunTest(TestCase):
         assert_that(rep_session.id, equal_to(
             '42949675780_FNM00150600267_0000_42949678642_FNM00152000052_0000'))
 
+    @patch_rest
     def test_is_vmware_vmfs_false(self):
         vmfs = UnityLun.get(cli=t_rest(), _id='sv_4')
         assert_that(vmfs.is_vmware_vmfs, equal_to(False))

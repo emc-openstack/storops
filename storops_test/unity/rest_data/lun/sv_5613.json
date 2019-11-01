@@ -25,6 +25,8 @@
         ],
         "isThinEnabled": true,
         "wwn": "60:06:01:60:15:E0:3A:00:FA:62:0B:5B:83:11:83:7D",
+        "isCompressionEnabled": false,
+        "isDataReductionEnabled": false,
         "isReplicationDestination": false,
         "isSnapSchedulePaused": false,
         "metadataSize": 3489660928,

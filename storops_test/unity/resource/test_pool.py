@@ -281,6 +281,7 @@ class UnityPoolTest(TestCase):
                               is_compression=True)
         assert_that(lun, instance_of(UnityLun))
 
+    @patch_rest
     def test_create_vmfs(self):
         pool = UnityPool(_id='pool_1', cli=t_rest())
         vmfs = pool.create_vmfs(vmfs_name="VMFS datastore", size_gb=100)

@@ -17,6 +17,7 @@ from __future__ import unicode_literals
 
 import logging
 
+from storops.unity.enums import NodeEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
 
@@ -56,7 +57,7 @@ class UnityResourceConfig(UnityAttributeResource):
     def to_embedded(pool_id=None, is_thin_enabled=None,
                     is_deduplication_enabled=None, is_compression_enabled=None,
                     is_backup_only=None, size=None, tiering_policy=None,
-                    request_id=None, src_id=None, name=None, default_sp=None,
+                    request_id=None, src_id=None, name=None, default_sp=NodeEnum.SPA,
                     replication_resource_type=None):
         """
         Constructs an embeded object of `UnityResourceConfig`.

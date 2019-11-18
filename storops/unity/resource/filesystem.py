@@ -19,7 +19,7 @@ import logging
 
 from storops.lib.common import supplement_filesystem
 from storops.exception import UnityResourceNotFoundError, \
-    UnityCifsServiceNotEnabledError, UnityShareShrinkSizeTooLargeError,\
+    UnityCifsServiceNotEnabledError, UnityShareShrinkSizeTooLargeError, \
     UnityShareShrinkSizeTooSmallError, UnityLocalReplicationFsNameNotSameError
 from storops.unity.enums import FSSupportedProtocolEnum, TieringPolicyEnum, \
     SnapStateEnum
@@ -199,14 +199,13 @@ class UnityFileSystem(UnityResource):
         :return: created replication session.
         """
 
-        if remote_system is None:
-            if dst_fs_name is None:
-                dst_fs_name = self.name
-            elif dst_fs_name != self.name:
-                raise UnityLocalReplicationFsNameNotSameError(
-                    'dst_fs_name passed in for creating filesystem local '
-                    'replication should be same as source filesystem name '
-                    'or None')
+        if dst_fs_name is None:
+            dst_fs_name = self.name
+        elif dst_fs_name != self.name:
+            raise UnityLocalReplicationFsNameNotSameError(
+                'dst_fs_name passed in for creating filesystem local '
+                'replication should be same as source filesystem name '
+                'or None')
 
         dst_size = self.size_total if dst_size is None else dst_size
 

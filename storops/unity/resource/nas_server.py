@@ -17,13 +17,13 @@ from __future__ import unicode_literals
 
 import logging
 
-import storops.unity.resource.interface
 import storops.unity.resource.cifs_server
-import storops.unity.resource.nfs_server
 import storops.unity.resource.dns_server
+import storops.unity.resource.interface
+import storops.unity.resource.nfs_server
 import storops.unity.resource.pool
 from storops.exception import UnityCifsServiceNotEnabledError
-from storops.unity.enums import ReplicationEndpointResourceTypeEnum
+from storops.unity.enums import ReplicationEndpointResourceTypeEnum, NodeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.replication_session import UnityResourceConfig, \
     UnityReplicationSession
@@ -169,7 +169,7 @@ class UnityNasServer(UnityResource):
                                                  dst_nas_server_name=None,
                                                  remote_system=None,
                                                  replication_name=None,
-                                                 dst_sp=None,
+                                                 dst_sp=NodeEnum.SPA,
                                                  is_backup_only=None):
         """
         Creates a replication session with destination nas server provisioning.

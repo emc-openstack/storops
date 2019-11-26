@@ -22,8 +22,9 @@ import storops.unity.resource.dns_server
 import storops.unity.resource.interface
 import storops.unity.resource.nfs_server
 import storops.unity.resource.pool
-from storops.exception import UnityCifsServiceNotEnabledError
-from storops.unity.enums import ReplicationEndpointResourceTypeEnum, NodeEnum
+from storops.exception import UnityCifsServiceNotEnabledError, \
+    UnityPolicyInvalidParametersError
+from storops.unity.enums import ReplicationEndpointResourceTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.replication_session import UnityResourceConfig, \
     UnityReplicationSession
@@ -169,7 +170,7 @@ class UnityNasServer(UnityResource):
                                                  dst_nas_server_name=None,
                                                  remote_system=None,
                                                  replication_name=None,
-                                                 dst_sp=NodeEnum.SPA,
+                                                 dst_sp=None,
                                                  is_backup_only=None):
         """
         Creates a replication session with destination nas server provisioning.
@@ -184,11 +185,15 @@ class UnityNasServer(UnityResource):
             defaults to local system.
         :param replication_name: replication name.
         :param dst_sp: `NodeEnum` value. Default storage processor of
-            destination nas server.
+            destination nas server. It is required to create remote
+            replication.
         :param is_backup_only: is backup only or not.
         :return: created replication session.
         """
-
+        if remote_system and (dst_sp is None):
+            message = 'Default storage processor is required to create ' \
+                      'replication session with remote Unity system.'
+            raise UnityPolicyInvalidParametersError(message)
         dst_resource = UnityResourceConfig.to_embedded(
             name=dst_nas_server_name, pool_id=dst_pool_id,
             default_sp=dst_sp, is_backup_only=is_backup_only,

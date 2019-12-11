@@ -201,7 +201,7 @@ class UnityFileSystem(UnityResource):
 
         if dst_fs_name is None:
             dst_fs_name = self.name
-        elif dst_fs_name != self.name:
+        if remote_system is None and dst_fs_name != self.name:
             raise UnityLocalReplicationFsNameNotSameError(
                 'dst_fs_name passed in for creating filesystem local '
                 'replication should be same as source filesystem name '

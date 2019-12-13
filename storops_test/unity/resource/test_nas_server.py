@@ -23,7 +23,7 @@ from hamcrest import assert_that, equal_to, instance_of, none, raises, \
 
 from storops.exception import UnityNasServerNameUsedError, \
     UnityResourceNotFoundError, UnitySmbNameInUseError, \
-    UnityCifsServiceNotEnabledError
+    UnityCifsServiceNotEnabledError, UnityPolicyInvalidParametersError
 from storops.unity.enums import ReplicationTypeEnum, \
     NasServerUnixDirectoryServiceEnum, FileInterfaceRoleEnum, \
     NodeEnum
@@ -256,6 +256,19 @@ class UnityNasServerTest(TestCase):
             remote_system=remote_system, replication_name=rep_name,
             dst_sp=dst_sp, is_backup_only=is_backup_only)
         assert_that(rep_session.id, equal_to(expected_rep_session_id))
+
+    def test_replicate_with_dst_resource_provisioning_error(self):
+        def f():
+            nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+            remote_system = UnityRemoteSystem(_id='RS_6', cli=t_rest())
+            nas_server.replicate_with_dst_resource_provisioning(
+                60, 'pool_1', dst_nas_server_name='nas-liangr',
+                remote_system=remote_system, replication_name='nas-server-rep',
+                dst_sp=None, is_backup_only=False)
+        assert_that(f,
+                    raises(UnityPolicyInvalidParametersError,
+                           ('Default storage processor is required to create '
+                            'replication session with remote Unity system.')))
 
 
 class UnityNasServerListTest(TestCase):

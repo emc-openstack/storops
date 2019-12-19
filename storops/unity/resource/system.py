@@ -18,6 +18,7 @@ from __future__ import unicode_literals
 import logging
 
 import storops.exception
+from storops.lib import job_helper
 from storops.lib.common import instance_cache
 from storops.lib.resource import ResourceList
 from storops.lib.version import version
@@ -37,6 +38,7 @@ from storops.unity.resource.host import UnityHost, UnityHostList, \
     UnityHostIpPortList, UnityHostInitiatorList
 from storops.unity.resource.import_session import UnityImportSessionList
 from storops.unity.resource.interface import UnityFileInterfaceList
+from storops.unity.resource.job import UnityJobList
 from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.metric import UnityMetricRealTimeQuery
 from storops.unity.resource.move_session import UnityMoveSessionList
@@ -79,6 +81,9 @@ class UnitySystem(UnitySingletonResource):
                                     cache_interval=cache_interval)
         else:
             self._cli = cli
+
+        # Start job helper to handle async operations.
+        job_helper.get_job_helper(self._cli)
 
     @classmethod
     def get_resource_class(cls):
@@ -600,6 +605,9 @@ class UnitySystem(UnitySingletonResource):
     def get_alert_snmp_config(self, _id=None, **filters):
         return self._get_unity_rsc(UnityAlertConfigSNMPTargetList,
                                    _id=_id, **filters)
+
+    def get_job(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityJobList, _id=_id, **filters)
 
 
 class UnitySystemList(UnityResourceList):

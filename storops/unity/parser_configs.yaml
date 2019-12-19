@@ -1363,10 +1363,10 @@ UnityJob:
       converter: UnityJobTaskList
     - label: parametersOut
     - label: messageOut
-      converter: UnityMessage
     - label: isJobCancelable
     - label: isJobCancelled
     - label: clientData
+    - label: statusCodeOut
 
 
 UnityJobTask:
@@ -1378,7 +1378,10 @@ UnityJobTask:
     - label: name
     - label: description
     - label: object
-    - label: action
+    # TODO:
+    # The property name 'action' is conflict with REST keyword, it will cause
+    # the property failed to parsed, need to figure out how to fix it.
+    # - label: action
     - label: state
       converter: JobTaskStateEnum
     - label: messages
@@ -1407,7 +1410,7 @@ UnityMessage:
 
 UnityLocalizedMessage:
   data_src: rest
-  name: message
+  name: localizedMessage
   properties:
     - label: locale
     - label: message

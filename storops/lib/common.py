@@ -15,22 +15,23 @@
 #    under the License.
 from __future__ import unicode_literals
 
-import bitmath
 import errno
 import functools
 import inspect
 import json
 import logging
+import math
 import re
 import sys
 import threading
+from enum import Enum as _Enum
 from functools import partial
+from functools import wraps
 from os import path, makedirs, stat
 
+import bitmath
 import cachez
-import math
 import six
-from enum import Enum as _Enum
 from retryz import retry
 
 import storops.exception
@@ -582,3 +583,15 @@ def try_import(import_str, default=None):
         return sys.modules[import_str]
     except ImportError:
         return default
+
+
+def singleton(cls, *args, **kwargs):
+    instance = {}
+
+    @wraps(cls)
+    def wrapper(*args, **kwargs):
+        if cls not in instance:
+            instance[cls] = cls(*args, **kwargs)
+        return instance[cls]
+
+    return wrapper

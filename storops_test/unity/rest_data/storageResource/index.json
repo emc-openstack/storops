@@ -703,6 +703,30 @@
       "response": "empty.json"
     },
     {
+      "url": "/api/instances/storageResource/sv_1535?compact=True&timeout=0",
+      "body": {
+        "forceSnapDeletion": true,
+        "forceVvolDeletion": true
+      },
+      "response": "sv_1535_async.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_1536?compact=True&timeout=0",
+      "body": {
+        "forceSnapDeletion": true,
+        "forceVvolDeletion": true
+      },
+      "response": "sv_1536_async.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_1537?compact=True&timeout=0",
+      "body": {
+        "forceSnapDeletion": true,
+        "forceVvolDeletion": true
+      },
+      "response": "sv_1537_async.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_24/action/modifyFilesystem?compact=True",
       "body": {
         "nfsShareModify": [
@@ -1132,7 +1156,7 @@
       "response": "sv_5604.json"
     },
     {
-      "url": "/api/instances/storageResource/sv_5605?compact=True",
+      "url": "/api/instances/storageResource/sv_5605?compact=True&timeout=0",
       "body": {
         "forceSnapDeletion": true,
         "forceVvolDeletion": true

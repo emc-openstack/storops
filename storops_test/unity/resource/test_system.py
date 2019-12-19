@@ -47,6 +47,7 @@ from storops.unity.resource.host import UnityHostInitiator, \
     UnityHostInitiatorList, UnityHost, UnityHostList
 from storops.unity.resource.import_session import UnityImportSessionList
 from storops.unity.resource.interface import UnityFileInterfaceList
+from storops.unity.resource.job import UnityJobList
 from storops.unity.resource.lun import UnityLun
 from storops.unity.resource.lun import UnityLunList
 from storops.unity.resource.metric import UnityMetricQueryResultList, \
@@ -782,6 +783,13 @@ class UnitySystemTest(TestCase):
         assert_that(alert_snmp_configs, instance_of(
             UnityAlertConfigSNMPTargetList))
         assert_that(len(alert_snmp_configs), equal_to(4))
+
+    @patch_rest
+    def test_get_job(self):
+        unity = t_unity()
+        jobs = unity.get_job()
+        assert_that(jobs, instance_of(UnityJobList))
+        assert_that(len(jobs), equal_to(3))
 
 
 class UnityDpeTest(TestCase):

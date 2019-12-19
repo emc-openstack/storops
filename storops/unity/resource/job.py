@@ -16,15 +16,15 @@
 from __future__ import unicode_literals
 
 import retryz
+
+import storops
 from storops import exception as ex
 from storops.exception import get_rest_exception
 from storops.lib.common import instance_cache, supplement_filesystem
+from storops.unity import enums
+from storops.unity.enums import FSSupportedProtocolEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
-from storops.unity.enums import FSSupportedProtocolEnum
-
-import storops
-from storops.unity import enums
 
 __author__ = 'Cedric Zhuang'
 
@@ -187,12 +187,17 @@ class UnityLocalizedMessageList(UnityResourceList):
 def wait_job_completion(job, **kwargs):
     interval = kwargs.pop('interval', 5)
     timeout = kwargs.pop('timeout', 3600)
+    update_func = kwargs.pop('update_func', None)
 
     @retryz.retry(timeout=timeout, wait=interval, on_return=False)
-    def _do_update():
-        job.update()
+    def _do_update(job):
+        if not update_func:
+            job.update()
+        else:
+            job = update_func(job)
+
         if job.state == enums.JobStateEnum.COMPLETED:
-            return True
+            return job
         elif job.state in (enums.JobStateEnum.FAILED,
                            enums.JobStateEnum.ROLLING_BACK,
                            enums.JobStateEnum.COMPLETED_WITH_ERROR):
@@ -200,6 +205,6 @@ def wait_job_completion(job, **kwargs):
         return False
 
     try:
-        _do_update()
+        return _do_update(job)
     except retryz.RetryTimeoutError:
         raise ex.JobTimeoutException()

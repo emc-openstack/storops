@@ -1,0 +1,26 @@
+{
+  "id": "N-3080",
+  "state": 2,
+  "instanceId": "root/emc:EMC_UEM_TransactionJobLeaf%InstanceID=N-3080",
+  "description": "job.storagevolumeservice.job.Delete",
+  "stateChangeTime": "2019-12-19T07:51:08.304Z",
+  "submitTime": "2019-12-19T07:51:08.243Z",
+  "estRemainTime": "00:00:14.000",
+  "progressPct": 0,
+  "tasks": [
+    {
+      "state": 0,
+      "name": "job.blockservice.task.DeleteStorageVolumePrecondition"
+    },
+    {
+      "state": 0,
+      "name": "job.blockservice.task.DeleteStorageVolume"
+    }
+  ],
+  "owner": "System",
+  "requestId": "",
+  "methodName": "storageResource.delete",
+  "isJobCancelable": false,
+  "isJobCancelled": false,
+  "clientData": ""
+}

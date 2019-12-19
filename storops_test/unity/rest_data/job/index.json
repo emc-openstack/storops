@@ -9,6 +9,30 @@
       "response": "all.json"
     },
     {
+      "url": "/api/types/job/instances?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks&filter=id eq \"N-3074\" or id eq \"N-3075\" or id eq \"N-3076\"",
+      "response": "N-3074-3076.json"
+    },
+    {
+      "url": "/api/instances/job/N-3078?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks",
+      "response": "N-3078.json"
+    },
+    {
+      "url": "/api/types/job/instances?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks&filter=id eq \"N-3078\"",
+      "response": "N-3078.json"
+    },
+    {
+      "url": "/api/instances/job/N-3079?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks",
+      "response": "N-3079.json"
+    },
+    {
+      "url": "/api/types/job/instances?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks&filter=id eq \"N-3079\"",
+      "response": "N-3079.json"
+    },
+    {
+      "url": "/api/instances/job/N-3080?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks",
+      "response": "N-3080.json"
+    },
+    {
       "url": "/api/instances/job/N-345?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks",
       "response": "N-345.json"
     },

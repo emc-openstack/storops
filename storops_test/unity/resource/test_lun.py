@@ -18,6 +18,7 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 import ddt
+import mock
 from hamcrest import assert_that, calling, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
@@ -28,7 +29,8 @@ from storops.exception import UnitySnapNameInUseError, \
     UnityNothingToModifyError, UnityPerfMonNotEnabledError, \
     UnityThinCloneLimitExceededError, UnityCGMemberActionNotSupportError, \
     UnityThinCloneNotAllowedError, UnityMigrationTimeoutException, \
-    UnityMigrationSourceDestNotExistsError
+    UnityMigrationSourceDestNotExistsError, JobStateError, \
+    JobTimeoutException
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum
 from storops.unity.resource.disk import UnityDisk
 from storops.unity.resource.host import UnityBlockHostAccessList, UnityHost
@@ -41,7 +43,8 @@ from storops.unity.resource.snap import UnitySnap
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resp import RestResponse
-from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
+from storops_test.unity.jh_mock import MockJobHelper
+from storops_test.unity.rest_mock import t_rest, t_unity, patch_rest
 from storops_test.utils import is_nan
 
 __author__ = 'Cedric Zhuang'
@@ -146,10 +149,22 @@ class UnityLunTest(TestCase):
         lun.update()
         assert_that(lun.is_data_reduction_enabled, equal_to(True))
 
+    @mock.patch(target='storops.lib.job_helper.JobHelper',
+                new=MockJobHelper)
     @patch_rest
-    def test_lun_delete(self):
-        lun = UnityLun(_id='sv_4', cli=t_rest())
+    def test_lun_delete_async(self):
+        lun = UnityLun(_id='sv_1535', cli=t_rest())
         resp = lun.delete(force_snap_delete=True, force_vvol_delete=True)
+        lun.update()
+        assert_that(resp.is_ok(), equal_to(True))
+        assert_that(resp.job.existed, equal_to(True))
+        assert_that(resp.job.state.index, equal_to(4))
+
+    @patch_rest
+    def test_lun_delete_sync(self):
+        lun = UnityLun(_id='sv_4', cli=t_rest())
+        resp = lun.delete(async_mode=False, force_snap_delete=True,
+                          force_vvol_delete=True)
         lun.update()
         assert_that(resp.is_ok(), equal_to(True))
         assert_that(resp.job.existed, equal_to(False))
@@ -157,7 +172,8 @@ class UnityLunTest(TestCase):
     @patch_rest
     def test_lun_delete_thinclone(self):
         lun = UnityLun(_id='sv_5604', cli=t_rest())
-        resp = lun.delete(force_snap_delete=True, force_vvol_delete=True)
+        resp = lun.delete(async_mode=False, force_snap_delete=True,
+                          force_vvol_delete=True)
         lun.update()
         assert_that(resp.is_ok(), equal_to(True))
         assert_that(resp.job.existed, equal_to(False))
@@ -169,6 +185,27 @@ class UnityLunTest(TestCase):
         lun.update()
         assert_that(resp.is_ok(), equal_to(True))
         assert_that(resp.job.existed, equal_to(False))
+
+    @mock.patch(target='storops.lib.job_helper.JobHelper',
+                new=MockJobHelper)
+    @patch_rest
+    def test_lun_delete_async_job_state_error(self):
+        def f():
+            lun = UnityLun(_id='sv_1536', cli=t_rest())
+            lun.delete(force_snap_delete=True, force_vvol_delete=True)
+
+        assert_that(f, raises(JobStateError))
+
+    @mock.patch(target='storops.lib.job_helper.JobHelper',
+                new=MockJobHelper)
+    @patch_rest
+    def test_lun_delete_async_job_timeout(self):
+        def f():
+            lun = UnityLun(_id='sv_1537', cli=t_rest())
+            lun.delete(force_snap_delete=True, force_vvol_delete=True,
+                       async_timeout=3, async_interval=1)
+
+        assert_that(f, raises(JobTimeoutException))
 
     @patch_rest
     def test_lun_attach_to_new_host(self):

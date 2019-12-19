@@ -16,8 +16,8 @@
 from __future__ import unicode_literals
 
 import logging
-
 import re
+
 import six
 
 from storops.lib.ex_decorator_factory import MappedErrorCodeDecoratorFactory, \

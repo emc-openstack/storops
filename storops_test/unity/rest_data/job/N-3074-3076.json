@@ -1,0 +1,291 @@
+{
+  "@base": "https://10.245.101.39/api/types/job/instances?filter=id eq \"N-3074\" or id eq \"N-3075\" or id eq \"N-3076\"&fields=affectedResource,clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks&per_page=2000&compact=true",
+  "updated": "2019-12-18T09:33:03.995Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "N-3074",
+        "state": 4,
+        "instanceId": "root/emc:EMC_UEM_TransactionJobLeaf%InstanceID=N-3074",
+        "description": "Delete LUN",
+        "stateChangeTime": "2019-12-18T09:32:24.162Z",
+        "submitTime": "2019-12-18T09:32:20.961Z",
+        "startTime": "2019-12-18T09:32:21.053Z",
+        "endTime": "2019-12-18T09:32:24.162Z",
+        "elapsedTime": "00:00:03.109",
+        "progressPct": 100,
+        "tasks": [
+          {
+            "state": 2,
+            "name": "job.blockservice.task.DeleteStorageVolumePrecondition7692",
+            "description": "Check LUN state before deletion",
+            "messages": [
+              {
+                "errorCode": 0,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Success"
+                  }
+                ]
+              },
+              {
+                "errorCode": 4107,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Not started. (Error Code:0x100b)"
+                  }
+                ]
+              }
+            ],
+            "affectedResource": {}
+          },
+          {
+            "state": 2,
+            "name": "job.blockservice.task.DeleteStorageVolume7693",
+            "description": "Delete LUN",
+            "messages": [
+              {
+                "errorCode": 0,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Success"
+                  }
+                ]
+              },
+              {
+                "errorCode": 4107,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Not started. (Error Code:0x100b)"
+                  }
+                ]
+              }
+            ],
+            "affectedResource": {
+              "resource": "lun",
+              "id": "sv_1532",
+              "name": "testlun-0"
+            }
+          }
+        ],
+        "owner": "System",
+        "requestId": "",
+        "methodName": "storageResource.delete",
+        "statusCodeOut": 0,
+        "messageOut": {
+          "errorCode": 0,
+          "messages": [
+            {
+              "locale": "en_US",
+              "message": "Success"
+            }
+          ]
+        },
+        "isJobCancelable": false,
+        "isJobCancelled": false,
+        "clientData": "",
+        "affectedResource": {
+          "resource": "lun",
+          "id": "sv_1532",
+          "name": "testlun-0"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "N-3075",
+        "state": 4,
+        "instanceId": "root/emc:EMC_UEM_TransactionJobLeaf%InstanceID=N-3075",
+        "description": "Delete LUN",
+        "stateChangeTime": "2019-12-18T09:32:25.203Z",
+        "submitTime": "2019-12-18T09:32:21.897Z",
+        "startTime": "2019-12-18T09:32:21.979Z",
+        "endTime": "2019-12-18T09:32:25.203Z",
+        "elapsedTime": "00:00:03.224",
+        "progressPct": 100,
+        "tasks": [
+          {
+            "state": 2,
+            "name": "job.blockservice.task.DeleteStorageVolumePrecondition7694",
+            "description": "Check LUN state before deletion",
+            "messages": [
+              {
+                "errorCode": 0,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Success"
+                  }
+                ]
+              },
+              {
+                "errorCode": 4107,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Not started. (Error Code:0x100b)"
+                  }
+                ]
+              }
+            ],
+            "affectedResource": {}
+          },
+          {
+            "state": 2,
+            "name": "job.blockservice.task.DeleteStorageVolume7695",
+            "description": "Delete LUN",
+            "messages": [
+              {
+                "errorCode": 0,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Success"
+                  }
+                ]
+              },
+              {
+                "errorCode": 4107,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Not started. (Error Code:0x100b)"
+                  }
+                ]
+              }
+            ],
+            "affectedResource": {
+              "resource": "lun",
+              "id": "sv_1533",
+              "name": "testlun-1"
+            }
+          }
+        ],
+        "owner": "System",
+        "requestId": "",
+        "methodName": "storageResource.delete",
+        "statusCodeOut": 0,
+        "messageOut": {
+          "errorCode": 0,
+          "messages": [
+            {
+              "locale": "en_US",
+              "message": "Success"
+            }
+          ]
+        },
+        "isJobCancelable": false,
+        "isJobCancelled": false,
+        "clientData": "",
+        "affectedResource": {
+          "resource": "lun",
+          "id": "sv_1533",
+          "name": "testlun-1"
+        }
+      }
+    },
+    {
+      "content": {
+        "id": "N-3076",
+        "state": 4,
+        "instanceId": "root/emc:EMC_UEM_TransactionJobLeaf%InstanceID=N-3076",
+        "description": "Delete LUN",
+        "stateChangeTime": "2019-12-18T09:32:25.216Z",
+        "submitTime": "2019-12-18T09:32:21.927Z",
+        "startTime": "2019-12-18T09:32:22.028Z",
+        "endTime": "2019-12-18T09:32:25.216Z",
+        "elapsedTime": "00:00:03.187",
+        "progressPct": 100,
+        "tasks": [
+          {
+            "state": 2,
+            "name": "job.blockservice.task.DeleteStorageVolumePrecondition7696",
+            "description": "Check LUN state before deletion",
+            "messages": [
+              {
+                "errorCode": 0,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Success"
+                  }
+                ]
+              },
+              {
+                "errorCode": 4107,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Not started. (Error Code:0x100b)"
+                  }
+                ]
+              }
+            ],
+            "affectedResource": {}
+          },
+          {
+            "state": 2,
+            "name": "job.blockservice.task.DeleteStorageVolume7697",
+            "description": "Delete LUN",
+            "messages": [
+              {
+                "errorCode": 0,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Success"
+                  }
+                ]
+              },
+              {
+                "errorCode": 4107,
+                "messages": [
+                  {
+                    "locale": "en_US",
+                    "message": "Not started. (Error Code:0x100b)"
+                  }
+                ]
+              }
+            ],
+            "affectedResource": {
+              "resource": "lun",
+              "id": "sv_1534",
+              "name": "testlun-2"
+            }
+          }
+        ],
+        "owner": "System",
+        "requestId": "",
+        "methodName": "storageResource.delete",
+        "statusCodeOut": 0,
+        "messageOut": {
+          "errorCode": 0,
+          "messages": [
+            {
+              "locale": "en_US",
+              "message": "Success"
+            }
+          ]
+        },
+        "isJobCancelable": false,
+        "isJobCancelled": false,
+        "clientData": "",
+        "affectedResource": {
+          "resource": "lun",
+          "id": "sv_1534",
+          "name": "testlun-2"
+        }
+      }
+    }
+  ]
+}

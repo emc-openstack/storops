@@ -131,11 +131,15 @@ class RestResponse(object):
             raise ex_clz(self.error)
 
     @property
-    @instance_cache
     def job(self):
-        ret = job.UnityJob(cli=self._cli)
-        ret.update(self.body)
-        return ret
+        if not hasattr(self, '_job'):
+            self._job = job.UnityJob(cli=self._cli)
+            self._job.update(self.body)
+        return self._job
+
+    @job.setter
+    def job(self, value):
+        self._job = value
 
 
 RESP_OK = RestResponse({})

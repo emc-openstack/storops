@@ -15,12 +15,12 @@
 #    under the License.
 from __future__ import unicode_literals
 
-import bitmath
 import logging
 from multiprocessing.pool import ThreadPool
 from time import sleep
 from unittest import TestCase
 
+import bitmath
 from hamcrest import assert_that, equal_to, close_to, only_contains, raises, \
     contains_string, has_items, not_none, none
 
@@ -278,6 +278,7 @@ class VarTest(TestCase):
 
         def _inner():
             list_var('-a', 'asf')
+
         assert_that(_inner, raises(ValueError))
 
 
@@ -391,3 +392,15 @@ class InitiatorFormatTest(TestCase):
     def test_fc_format_invalid(self):
         assert_that(
             common.is_fc_uid('20:00:00:90:DA:73:5C:D1'), equal_to(False))
+
+
+@common.singleton
+class MockSingleton(object):
+    pass
+
+
+class SingletonTest(TestCase):
+    def test_singleton(self):
+        cls_a = MockSingleton()
+        cls_b = MockSingleton()
+        assert_that(id(cls_a), equal_to(id(cls_b)))

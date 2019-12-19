@@ -25,6 +25,7 @@ from storops.exception import UnityBaseHasThinCloneError, \
     UnityResourceNotFoundError, UnityCGMemberActionNotSupportError, \
     UnityThinCloneNotAllowedError, UnityMigrationSourceHasThinCloneError, \
     UnityMigrationTimeoutException
+from storops.lib import job_helper
 from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity import enums
@@ -247,8 +248,9 @@ class UnityLun(UnityResource):
             resp.raise_if_err()
             return resp
 
-    def delete(self, async_mode=False, force_snap_delete=False,
-               force_vvol_delete=False):
+    def delete(self, async_mode=True, force_snap_delete=False,
+               force_vvol_delete=False, async_timeout=600,
+               async_interval=1):
         sr = self.storage_resource
         if not self.existed or sr is None:
             raise UnityResourceNotFoundError(
@@ -257,8 +259,14 @@ class UnityLun(UnityResource):
                                 forceSnapDeletion=force_snap_delete,
                                 forceVvolDeletion=force_vvol_delete,
                                 async_mode=async_mode)
+
         try:
             resp.raise_if_err()
+            if async_mode and resp.job.existed:
+                jh = job_helper.get_job_helper(self._cli)
+                resp.job = jh.wait_job(resp.job, async_timeout,
+                                       async_interval)
+
         except UnityBaseHasThinCloneError:
             log.warning('cannot delete the lun: %s, because it is a base lun '
                         'of a thin-clone.', self.get_id())
@@ -267,6 +275,7 @@ class UnityLun(UnityResource):
 
         if self.is_thin_clone:
             TCHelper.notify(self, ThinCloneActionEnum.TC_DELETE)
+
         return resp
 
     def _attach_to(self, host, access_mask, hlu):

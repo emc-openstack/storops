@@ -22,9 +22,12 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
+            Test Line 0
+            '## Test line 1:'
+            "## Test line 2:"
+            Test Line 3
             ${{ '## Features:' }}
             - TODO
-            '## Test line:'
             "## Fixed bugs:"
             - TODO
 

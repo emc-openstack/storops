@@ -24,6 +24,7 @@ import re
 import six
 
 import yaml
+from yaml import loader
 
 from storops.lib.common import cache, instance_cache, Enum, \
     get_clz_from_module, EnumList
@@ -357,7 +358,7 @@ class ParserConfigFactory(object):
     def _read_configs(self):
         filename = os.path.join(self.get_folder(), self.config_filename)
         with open(filename, 'r') as stream:
-            ret = yaml.load(stream)
+            ret = yaml.load(stream, Loader=loader.SafeLoader)
         return ret
 
     @instance_cache

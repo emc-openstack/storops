@@ -18,6 +18,7 @@ from __future__ import unicode_literals
 import os
 
 import yaml
+from yaml import loader
 
 from storops.lib.common import RepeatedTimer, cache
 from storops.lib.resource import ResourceList
@@ -196,7 +197,7 @@ class MetricConfigParser(object):
     def _read_configs(cls):
         filename = os.path.join(cls.get_folder(), cls.config_filename)
         with open(filename, 'r') as stream:
-            ret = yaml.load(stream)
+            ret = yaml.load(stream, Loader=loader.SafeLoader)
         return ret
 
     @classmethod

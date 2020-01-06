@@ -22,6 +22,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: $BODY
+          body: ${{ env.BODY }}
           draft: false
           prerelease: ${{ contains(github.ref, 'dev') }}

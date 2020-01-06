@@ -18,9 +18,10 @@ jobs:
         uses: actions/create-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          BODY: $(cat $GITHUB_WORKSPACE/utility/release_body.template)
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: $(cat utility/release_body.template)
+          body: $BODY
           draft: false
           prerelease: ${{ contains(github.ref, 'dev') }}

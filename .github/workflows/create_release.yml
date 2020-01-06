@@ -21,6 +21,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: $(cat ${GITHUB_WORKSPACE}/utility/release_body.template)
+          body: test_body
           draft: false
           prerelease: ${{ contains(github.ref, 'dev') }}

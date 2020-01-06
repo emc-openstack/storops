@@ -13,9 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@master
-      - name: Define variables
-        run: |
-          if [[ "${{ github.ref }}" =~ "dev" ]]; then echo true > PRE_RELEASE; else echo false > PRE_RELEASE; fi
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -25,7 +22,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            \#\# Features:
+            ${{ ## Features: }}
             - TODO
 
             \#\# Fixed bugs:
@@ -52,4 +49,4 @@ jobs:
             - python-storops
             - `Unisphere CLI` rpm package, please contact with Dell EMC support about more detail. Or download from [here](https://github.com/emc-openstack/naviseccli).
           draft: false
-          prerelease: $(cat $PRE_RELEASE)
+          prerelease: ${{ contains(${{ github.ref }}, "dev" }}

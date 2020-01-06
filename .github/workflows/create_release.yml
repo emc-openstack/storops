@@ -49,4 +49,4 @@ jobs:
             - python-storops
             - `Unisphere CLI` rpm package, please contact with Dell EMC support about more detail. Or download from [here](https://github.com/emc-openstack/naviseccli).
           draft: false
-          prerelease: ${{ contains(${{ github.ref }}, "dev" }}
+          prerelease: ${{ contains(github.ref, 'dev' }}

@@ -1,0 +1,20 @@
+{
+  "content": {
+    "id": "alert_180",
+    "severity": 2,
+    "instanceId": "root/emc:C4CB_AlertEvent%AlertID=1577836740661/637773388",
+    "timestamp": "2019-12-31T23:59:00.661Z",
+    "messageId": "14:170002",
+    "arguments": [
+      "BASE_OE_V4_0"
+    ],
+    "catalogId": "CEM-CatalogService",
+    "message": "The BASE_OE_V4_0 license has expired, and the storage system's support for the licensed feature has been disabled. Obtain and install a new license file to ensure support for the licensed feature.",
+    "descriptionId": "ALRT_LICENSINGSERVICES_LICENSE_EXPIRED",
+    "description": "One of your system licenses has expired or will expire soon. Obtain and install the license file to ensure continued access to the relevant feature.",
+    "resolutionId": "licnse_update",
+    "resolution": "/help/webhelp/en_US/index.html?#unity_t_manage_licenses.html",
+    "componentFacility": "LicensingServices",
+    "isAcknowledged": false
+  }
+}

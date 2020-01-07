@@ -33,6 +33,7 @@ from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     SpeedValuesEnum, ConnectorTypeEnum, FeatureStateEnum, \
     InterfaceConfigModeEnum, IpProtocolVersionEnum, SNMPAuthProtocolEnum, \
     SNMPPrivacyProtocolEnum
+from storops.unity.resource.alert import UnityAlertList
 from storops.unity.resource.alert_config_snmp import \
     UnityAlertConfigSNMPTarget, UnityAlertConfigSNMPTargetList
 from storops.unity.resource.cifs_server import UnityCifsServerList
@@ -790,6 +791,13 @@ class UnitySystemTest(TestCase):
         jobs = unity.get_job()
         assert_that(jobs, instance_of(UnityJobList))
         assert_that(len(jobs), equal_to(3))
+
+    @patch_rest
+    def test_get_alert(self):
+        unity = t_unity()
+        alerts = unity.get_alert()
+        assert_that(alerts, instance_of(UnityAlertList))
+        assert_that(len(alerts), equal_to(3))
 
 
 class UnityDpeTest(TestCase):

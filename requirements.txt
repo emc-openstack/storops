@@ -1,5 +1,6 @@
 requests>=2.8.1,!=2.9.0,!=2.20.0 # Apache-2.0, cinder, manila
-PyYAML>=3.10 # MIT, cinder, manila
+PyYAML>=3.10,<5.3;python_version=='3.4' # MIT, cinder, manila
+PyYAML>=3.10;python_version!='3.4' # MIT, cinder, manila
 six>=1.9.0 # MIT, cinder, manila
 enum34;python_version<'3.4' # BSD
 

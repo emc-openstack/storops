@@ -30,7 +30,7 @@ from storops.exception import UnitySnapNameInUseError, \
     UnityThinCloneLimitExceededError, UnityCGMemberActionNotSupportError, \
     UnityThinCloneNotAllowedError, UnityMigrationTimeoutException, \
     UnityMigrationSourceDestNotExistsError, JobStateError, \
-    JobTimeoutException, UnityMigrationSourceDestNotExistsError
+    JobTimeoutException
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum, \
     ESXFilesystemBlockSizeEnum, ESXFilesystemMajorVersionEnum
 from storops.unity.resource.disk import UnityDisk

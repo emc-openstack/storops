@@ -537,12 +537,7 @@ class UnityLunTest(TestCase):
         assert_that(vmfs.is_vmware_vmfs, equal_to(True))
 
     @patch_rest
-    def test_modify_vmfs_name(self):
-        vmfs = UnityLun.get(cli=t_rest(), _id='sv_5613')
-        vmfs.name = 'vmfs_new_name'
-
-    @patch_rest
-    def test_modify_vmfs_major_version_block_size(self):
+    def test_modify_vmfs_name_major_version_block_size(self):
         vmfs = UnityLun.get(cli=t_rest(), _id='sv_5613')
         resp = vmfs.modify(name='vmfs_new_name', sp=1,
                            major_version=ESXFilesystemMajorVersionEnum.VMFS_6,

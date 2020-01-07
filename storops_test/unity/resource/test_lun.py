@@ -552,7 +552,7 @@ class UnityLunTest(TestCase):
     @patch_rest
     def test_delete_vmfs(self):
         vmfs = UnityLun.get(cli=t_rest(), _id='sv_5613')
-        resp = vmfs.delete()
+        resp = vmfs.delete(async_mode=False)
         assert_that(resp.is_ok(), equal_to(True))
 
 

@@ -1,0 +1,15 @@
+{
+    "@base": "https://10.215.111.111/api/types/replicationSession/action/createReplicationSessionWDestResProvisioning",
+    "updated": "2019-10-10T02:44:39.084Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "/81604378625_APM00192210744_0000_81604378629_APM00192210744_0000"
+        }
+    ],
+    "content": {
+        "id": {
+            "id": "81604378625_APM00192210744_0000_81604378629_APM00192210744_0000"
+        }
+    }
+}

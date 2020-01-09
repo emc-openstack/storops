@@ -350,3 +350,27 @@ class UnityConsistencyGroupTest(TestCase):
             60, luns, 'pool_2', dst_cg_name=cg.name, remote_system=rs)
         assert_that(rep_session.id, equal_to(
             '81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000'))
+
+    @patch_rest
+    def test_create_local_replicate_cg_session(self):
+        # Create the session in local when the remote system is empty
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        lun1 = UnityLun(cli=t_rest(), _id='sv_58')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_59')
+        luns = [lun1, lun2]
+        rep_session = cg.replicate_cg_with_dst_resource_provisioning(
+            60, luns, 'pool_2', dst_cg_name=cg.name, remote_system=None)
+        assert_that(rep_session.id, equal_to(
+            '81604378625_APM00192210744_0000_81604378629_APM00192210744_0000'))
+
+    @patch_rest
+    def test_create_replicate_cg_session_without_dst_cg(self):
+        cg = UnityConsistencyGroup.get(cli=t_rest(), _id='res_21')
+        rs = UnityRemoteSystem.get(cli=t_rest(), _id='RS_0')
+        lun1 = UnityLun(cli=t_rest(), _id='sv_58')
+        lun2 = UnityLun(cli=t_rest(), _id='sv_59')
+        luns = [lun1, lun2]
+        rep_session = cg.replicate_cg_with_dst_resource_provisioning(
+            60, luns, 'pool_2', dst_cg_name=None, remote_system=rs)
+        assert_that(rep_session.id, equal_to(
+            '81866043753_A9221PM0010744_0604000_81378689_FNM84900101113_0000'))

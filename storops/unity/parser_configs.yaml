@@ -2233,6 +2233,7 @@ UnityImportSession:
     - label: remainingDataPercent
     - label: estimatedCutoverWindow
 
+
 UnityAlertConfigSNMPTarget:
   data_src: rest
   name: alertConfigSNMPTarget
@@ -2260,3 +2261,33 @@ UnityLunMemberReplication:
       converter: ReplicationSessionNetworkStatusEnum
     - label: dstStatus
       converter: ReplicationSessionStatusEnum
+
+UnityResourceRef:
+  data_src: rest
+  name: resourceRef
+  properties:
+    - label: id
+    - label: resource
+
+
+UnityAlert:
+  data_src: rest
+  name: alert
+  properties:
+    - label: id
+    - label: instanceId
+    - label: timestamp
+    - label: severity
+      converter: SeverityEnum
+    - label: component
+      converter: UnityResourceRef
+    - label: messageId
+    - label: message
+    - label: arguments
+    - label: catalogId
+    - label: componentFacility
+    - label: descriptionId
+    - label: description
+    - label: resolutionId
+    - label: resolution
+    - label: isAcknowledged

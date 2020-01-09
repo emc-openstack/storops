@@ -27,6 +27,7 @@ from storops.unity.client import UnityClient
 from storops.unity.enums import UnityEnum, DNSServerOriginEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnitySingletonResource, UnityAttributeResource
+from storops.unity.resource.alert import UnityAlertList
 from storops.unity.resource.alert_config_snmp import \
     UnityAlertConfigSNMPTarget, UnityAlertConfigSNMPTargetList
 from storops.unity.resource.cifs_server import UnityCifsServerList
@@ -608,6 +609,9 @@ class UnitySystem(UnitySingletonResource):
 
     def get_job(self, _id=None, **filters):
         return self._get_unity_rsc(UnityJobList, _id=_id, **filters)
+
+    def get_alert(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityAlertList, _id=_id, **filters)
 
 
 class UnitySystemList(UnityResourceList):

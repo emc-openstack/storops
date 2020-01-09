@@ -1,0 +1,32 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/alert?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/instances/alert/alert_180?compact=True&fields=arguments,catalogId,component,componentFacility,description,descriptionId,id,instanceId,isAcknowledged,message,messageId,resolution,resolutionId,severity,timestamp",
+      "response": "alert_180.json"
+    },
+    {
+      "url": "/api/instances/alert/alert_181?compact=True&fields=arguments,catalogId,component,componentFacility,description,descriptionId,id,instanceId,isAcknowledged,message,messageId,resolution,resolutionId,severity,timestamp",
+      "response": "alert_181.json"
+    },
+    {
+      "url": "/api/types/alert/instances?compact=True&fields=arguments,catalogId,component,componentFacility,description,descriptionId,id,instanceId,isAcknowledged,message,messageId,resolution,resolutionId,severity,timestamp",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/alert/alert_181/action/modify?compact=True",
+      "body": {
+        "isAcknowledged": true
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/alert/alert_182?compact=True",
+      "body": {},
+      "response": "empty.json"
+    }
+  ]
+}

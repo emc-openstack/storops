@@ -25,7 +25,8 @@ from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     FastVPRelocationRateEnum, PoolDataRelocationTypeEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
     FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum, \
-    StoragePoolTypeEnum
+    StoragePoolTypeEnum, ESXFilesystemMajorVersionEnum, \
+    ESXFilesystemBlockSizeEnum
 from storops.unity.resource.disk import UnityDiskGroup, UnityDisk
 from storops.unity.resource.pool import UnityPool, UnityPoolList, \
     RaidGroupParameter
@@ -279,6 +280,21 @@ class UnityPoolTest(TestCase):
         lun = pool.create_lun("LunName", 100,
                               is_compression=True)
         assert_that(lun, instance_of(UnityLun))
+
+    @patch_rest
+    def test_create_vmfs(self):
+        pool = UnityPool(_id='pool_1', cli=t_rest())
+        vmfs = pool.create_vmfs(vmfs_name="VMFS datastore", size_gb=100)
+        assert_that(vmfs, instance_of(UnityLun))
+
+    @patch_rest
+    def test_create_vmfs_vmware_iscsi_paramters(self):
+        pool = UnityPool(_id='pool_1', cli=t_rest())
+        vmfs = pool.create_vmfs(
+            vmfs_name="VMFS datastore 2", size_gb=100,
+            major_version=ESXFilesystemMajorVersionEnum.VMFS_5,
+            block_size=ESXFilesystemBlockSizeEnum._2MB)
+        assert_that(vmfs, instance_of(UnityLun))
 
     @patch_rest
     def test_create_nfs_share_success(self):

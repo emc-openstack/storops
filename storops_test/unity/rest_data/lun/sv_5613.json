@@ -1,0 +1,48 @@
+{
+    "content": {
+        "id": "sv_5613",
+        "type": 3,
+        "tieringPolicy": 0,
+        "defaultNode": 0,
+        "currentNode": 0,
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_VOL_OK"
+            ],
+            "descriptions": [
+                "The LUN is operating normally. No action is required."
+            ]
+        },
+        "name": "VMFS datastore",
+        "description": "",
+        "sizeTotal": 10737418240,
+        "sizeAllocated": 0,
+        "perTierSizeUsed": [
+            0,
+            2952790016,
+            0
+        ],
+        "isThinEnabled": true,
+        "wwn": "60:06:01:60:15:E0:3A:00:FA:62:0B:5B:83:11:83:7D",
+        "isCompressionEnabled": false,
+        "isDataReductionEnabled": false,
+        "isReplicationDestination": false,
+        "isSnapSchedulePaused": false,
+        "metadataSize": 3489660928,
+        "metadataSizeAllocated": 2684354560,
+        "snapWwn": "60:06:01:60:15:E0:3A:00:D8:C8:E2:0A:3D:77:48:CD",
+        "snapsSize": 0,
+        "snapsSizeAllocated": 0,
+        "snapCount": 0,
+        "storageResource": {
+            "id": "res_5613",
+            "type": 4
+        },
+        "pool": {
+            "id": "pool_2",
+            "raidType": 1,
+            "isFASTCacheEnabled": false
+        }
+    }
+}

@@ -13,7 +13,7 @@ Summary:        Library for managing Unity/VNX systems.
 
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/storops/
-Source0:        https://github.com/emc-openstack/%{pypi_name}/archive/r%{version}/%{pypi_name}-r%{version}.tar.gz
+Source0:        https://github.com/emc-openstack/%{pypi_name}/archive/v%{version}/%{pypi_name}-v%{version}.tar.gz
 
 %description
 Library for managing Unity/VNX systems. Please refer to https://github.com/emc-openstack/storops for more details.
@@ -55,7 +55,7 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 
 
 %prep
-%setup -q -n %{pypi_name}-r%{upstream_version}
+%setup -q -n %{pypi_name}-v%{upstream_version}
 
 
 %files -n python2-%{pypi_name}-vnx

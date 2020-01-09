@@ -1,0 +1,51 @@
+{
+  "content": {
+    "id": "res_5613",
+    "operationalStatus": [
+      2
+    ],
+    "type": 4,
+    "replicationType": 0,
+    "thinStatus": 1,
+    "relocationPolicy": 0,
+    "instanceId": "root/emc:EMC_UEM_ApplicationLeaf%InstanceID=res_5613",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "name": "esa_cifs1",
+    "description": "",
+    "creationTime": "2016-03-02T02:42:15.090Z",
+    "modificationTime": "2016-03-02T02:42:15.090Z",
+    "isReplicationDestination": false,
+    "sizeTotal": 5368709120,
+    "sizeUsed": 1642971136,
+    "sizeAllocated": 3221225472,
+    "perTierSizeUsed": [
+      6442450944,
+      0,
+      0
+    ],
+    "objectId": 8589934602,
+    "metadataSize": 3489660928,
+    "metadataSizeAllocated": 3221225472,
+    "snapsSizeTotal": 0,
+    "snapsSizeAllocated": 0,
+    "snapCount": 0,
+    "pools": [
+      {
+        "id": "pool_1"
+      }
+    ],
+    "luns": [
+      {
+        "id": "sv_5613"
+      }
+    ]
+  }
+}

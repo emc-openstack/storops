@@ -85,6 +85,16 @@
     {
       "url": "/api/types/nasServer/instances?compact=True&fields=allowUnmappedUser,cifsServer,credentialsCacheTTL,currentSP,currentUnixDirectoryService,defaultUnixUser,defaultWindowsUser,fileDNSServer,fileInterface,health,homeSP,id,instanceId,isExtendedUnixCredentialEnabled,isMultiProtocolEnabled,isReplicationDestination,isReplicationEnabled,isSystem,isWindowsToUnixUsernameMappingEnabled,name,objectId,pool,preferredInterfaceSettings,replicationType,sizeAllocated,type,virusChecker&filter=tenant eq \"tenant_1\"",
       "response": "nas_server_in_tenant2.json"
+    },
+    {
+      "url": "/api/instances/nasServer/nas_1/action/modify?compact=True",
+      "body": {
+        "homeSP": {
+          "id": "spa"
+        },
+        "name": "esa_nasserver"
+      },
+      "response": "modify_nas_server.json"
     }
   ]
 }

@@ -204,6 +204,67 @@ class UnityNasServer(UnityResource):
             remote_system=remote_system, name=replication_name,
         )
 
+    def modify(self, name=None, sp=None, is_replication_destination=None,
+               is_backup_only=None, current_unix_directory_service=None,
+               is_multi_protocol_enabled=None, allow_unmapped_user=None,
+               default_unix_user=None, default_windows_user=None,
+               enable_windows_to_unix_username=None,
+               is_packet_reflect_enabled=None, is_ignore_warnings=None):
+        """
+        Modify a NAS server.
+
+        :param name: specify a new NAS server name.
+        :param sp: specify the SP on which the VDM is to run.
+        :param is_replication_destination: specify whether the NAS server
+            is a replication destination. Values are:
+            true - Replication destination NAS server.
+            false - Normal NAS server.
+        :param is_backup_only: specify whether the NAS server is used as
+            backup only. Values are:
+            true - NAS server acts as backup only.
+            false - Normal NAS server.
+        :param current_unix_directory_service: directory Service used for
+            quering identity information for UNIX (such as UIDs, GIDs, net
+            groups).
+        :param is_multi_protocol_enabled: indicates whether multiprotocol
+            sharing mode is enabled. Values are:
+            true - Enable multiprotocol sharing.
+            false - Disable multiprotocol sharing.
+        :param allow_unmapped_user: use this flag to mandatory disable access
+            in case of any user mapping failure. Values are:
+            true - Enable access in case of any user mapping failure.
+            false - Disable access in case of any user mapping failure.
+        :param default_unix_user: default Unix user name used for granting
+            access in case of Windows to Unix user mapping failure.
+            When empty, access in such case is denied.
+        :param default_windows_user: default Windows user name used for
+            granting access in case of Unix to Windows user mapping failure.
+            When empty, access in such case is denied.
+        :param enable_windows_to_unix_username: indicates whether a
+            Unix to/from Windows user name mapping is enabled. Values are:
+            true - Unix to/from Windows user name mapping is enabled.
+            false - Unix to/from Windows user name mapping is disabled.
+        :param is_packet_reflect_enabled.
+        :param is_ignore_warnings: is backup only or not.
+        :return: created replication session.
+        """
+        req_body = self._cli.make_body(
+            name=name, homeSP=sp,
+            isReplicationDestination=is_replication_destination,
+            isBackupOnly=is_backup_only,
+            currentUnixDirectoryService=current_unix_directory_service,
+            isMultiProtocolEnabled=is_multi_protocol_enabled,
+            allowUnmappedUser=allow_unmapped_user,
+            defaultUnixUser=default_unix_user,
+            defaultWindowsUser=default_windows_user,
+            enableWindowsToUnixUsernameMapping=enable_windows_to_unix_username,
+            isPacketReflectEnabled=is_packet_reflect_enabled,
+            isIgnoreWarnings=is_ignore_warnings)
+
+        resp = self.action('modify', **req_body)
+        resp.raise_if_err()
+        return resp
+
 
 class UnityNasServerList(UnityResourceList):
     def __init__(self, cli=None, home_sp=None, current_sp=None, **filters):

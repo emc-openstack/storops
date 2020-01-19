@@ -270,6 +270,16 @@ class UnityNasServerTest(TestCase):
                            ('Default storage processor is required to create '
                             'replication session with remote Unity system.')))
 
+    @patch_rest
+    def test_modify_nas_server(self):
+        server = UnityNasServer(_id='nas_1', cli=t_rest())
+        new_sp = UnityStorageProcessor(_id='spa', cli=t_rest())
+        resp = server.modify(name='esa_nasserver', sp=new_sp)
+        assert_that(resp.is_ok(), equal_to(True))
+        server.update()
+        assert_that(server.name, equal_to('esa_nasserver'))
+        assert_that(server.home_sp.id, equal_to('spa'))
+
 
 class UnityNasServerListTest(TestCase):
     @patch_rest

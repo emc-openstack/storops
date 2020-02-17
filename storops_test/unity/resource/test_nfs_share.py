@@ -95,6 +95,14 @@ class UnityNfsShareTest(TestCase):
         assert_that(share.id, equal_to('NFSShare_4'))
 
     @patch_rest
+    def test_create_nfs_share_ro_root(self):
+        share = UnityNfsShare.create(
+            t_rest(), 'ns1', 'fs_9',
+            share_access=NFSShareDefaultAccessEnum.RO_ROOT)
+        assert_that(share.name, equal_to('ns1'))
+        assert_that(share.id, equal_to('NFSShare_4'))
+
+    @patch_rest
     def test_create_nfs_share_name_exists(self):
         def f():
             UnityNfsShare.create(

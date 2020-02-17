@@ -201,6 +201,21 @@
             "path": "/",
             "name": "ns1",
             "nfsShareParameters": {
+              "defaultAccess": 4
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_24/action/modifyFilesystem?compact=True",
+      "body": {
+        "nfsShareCreate": [
+          {
+            "path": "/",
+            "name": "ns1",
+            "nfsShareParameters": {
               "defaultAccess": 3
             }
           }

@@ -188,6 +188,7 @@ class NFSShareDefaultAccessEnum(UnityEnum):
     READ_ONLY = (1, "Read Only")
     READ_WRITE = (2, "Read Write")
     ROOT = (3, "Root")
+    RO_ROOT = (4, "Read Only Root")
 
 
 class NFSShareSecurityEnum(UnityEnum):

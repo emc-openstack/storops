@@ -226,22 +226,3 @@ class UnitySnapList(UnityResourceList):
     def get_resource_class(cls):
         return UnitySnap
 
-
-class UnitySnapSchedule(UnityResource):
-    pass
-
-
-class UnitySnapScheduleList(UnityResourceList):
-    @classmethod
-    def get_resource_class(cls):
-        return UnitySnapSchedule
-
-
-class UnitySnapScheduleRule(UnityResource):
-    pass
-
-
-class UnitySnapScheduleRuleList(UnityResourceList):
-    @classmethod
-    def get_resource_class(cls):
-        return UnitySnapScheduleRule

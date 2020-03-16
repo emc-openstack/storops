@@ -539,6 +539,7 @@ UnitySnapScheduleRule:
     - label: minute
     - label: hours
     - label: daysOfWeek
+      converter: DaysOfWeekEnum
     - label: daysOfMonth
     - label: interval
     - label: isAutoDelete

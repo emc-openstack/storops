@@ -414,7 +414,7 @@ class UnitySnapScheduleTest(TestCase):
         kwargs = {key: val for key, val in kwargs.items() if val is not None}
         schedule = UnitySnapSchedule.create(
             t_rest(), 'snap-schedule', [UnitySnapScheduleRule.every_day([12])],
-            **kwargs,
+            **kwargs
         )
         assert_that(schedule.get_id(), equal_to(expected))
 

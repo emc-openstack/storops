@@ -1169,3 +1169,9 @@ class DayOfWeekEnum(UnityEnum):
     THURSDAY = (5, 'Thursday')
     FRIDAY = (6, 'Friday')
     SATURDAY = (7, 'Saturday')
+
+
+class DayOfWeekEnumList(UnityEnumList):
+    @classmethod
+    def get_enum_class(cls):
+        return DayOfWeekEnum

@@ -1,0 +1,76 @@
+{
+    "content": {
+        "id": "sv_16455",
+        "operationalStatus": [
+            2
+        ],
+        "type": 8,
+        "replicationType": 0,
+        "syncReplicationType": 0,
+        "thinStatus": 1,
+        "advancedDedupStatus": 0,
+        "compressionStatus": 0,
+        "dataReductionStatus": 0,
+        "relocationPolicy": 0,
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_16455",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_VOL_OK"
+            ],
+            "descriptions": [
+                "The LUN is operating normally. No action is required."
+            ]
+        },
+        "name": "lun-with-snap-schedule",
+        "creationTime": "2020-03-24T05:24:45.000Z",
+        "modificationTime": "2020-03-24T05:24:47.251Z",
+        "isReplicationDestination": false,
+        "replicationUUID": "60:06:01:60:05:40:3C:00:9D:99:79:5E:FA:48:70:08",
+        "replicationOriginUUID": "0",
+        "sizeTotal": 1073741824,
+        "sizeAllocated": 0,
+        "sizePreallocated": 268435456,
+        "sizeAllocatedTotal": 2684354560,
+        "compressionSizeSaved": 0,
+        "compressionPercent": 0,
+        "compressionRatio": 1.0,
+        "dataReductionSizeSaved": 0,
+        "dataReductionPercent": 0,
+        "dataReductionRatio": 1.0,
+        "isSnapSchedulePaused": false,
+        "perTierSizeUsed": [
+            2952790016,
+            0,
+            0
+        ],
+        "objectId": 42949690114,
+        "metadataSize": 3489660928,
+        "metadataSizeAllocated": 2684354560,
+        "snapsSizeTotal": 0,
+        "snapsSizeAllocated": 0,
+        "snapCount": 0,
+        "isThinClone": false,
+        "familySnapCount": 0,
+        "familyCloneCount": 0,
+        "nonBaseSizeAllocated": 0,
+        "familySizeAllocatedTotal": 2684354560,
+        "nonBaseSize": 0,
+        "snapSchedule": {
+            "id": "snapSch_1"
+        },
+        "pools": [
+            {
+                "id": "pool_3"
+            }
+        ],
+        "familyBaseStorageResource": {
+            "id": "sv_16455"
+        },
+        "luns": [
+            {
+                "id": "sv_16455"
+            }
+        ]
+    }
+}

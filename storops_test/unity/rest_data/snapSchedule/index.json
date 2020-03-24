@@ -1,0 +1,127 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/snapSchedule?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True&fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/snapSchedule/snapSch_1?compact=True&fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version",
+      "response": "snapSch_1.json"
+    },
+    {
+      "url": "/api/instances/snapSchedule/snapSch_4?compact=True&fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version",
+      "response": "snapSch_4.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True",
+      "body": {
+        "name": "snap-schedule",
+        "rules": [
+          {
+            "type": 1,
+            "minute": 0,
+            "hours": [12],
+            "interval": 1
+          }
+        ]
+      },
+      "response": "create_snap_schedule_4.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True",
+      "body": {
+        "name": "snap-schedule",
+        "rules": [
+          {
+            "type": 1,
+            "minute": 0,
+            "hours": [12],
+            "interval": 1
+          }
+        ],
+        "isSyncReplicated": true,
+        "skipSyncToRemoteSystem": true
+      },
+      "response": "create_snap_schedule_5.json"
+    },
+    {
+      "url": "/api/instances/snapSchedule/snapSch_4?compact=True",
+      "body": {},
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/snapSchedule/snapSch_4/action/modify?compact=True",
+      "body": {
+        "addRules": [
+          {
+            "type": 4,
+            "minute": 0,
+            "hours": [0],
+            "daysOfMonth": [10]
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/snapSchedule/snapSch_4/action/modify?compact=True",
+      "body": {
+        "removeRuleIds": [
+          "SchedRule_4"
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/snapSchedule/snapSch_4/action/modify?compact=True",
+      "body": {
+        "skipSyncToRemoteSystem": true
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True",
+      "body": {
+        "name": "snap-schedule-created-by-system",
+        "rules": [
+          {
+            "type": 1,
+            "minute": 0,
+            "hours": [12],
+            "interval": 1
+          }
+        ]
+      },
+      "response": "create_snap_schedule_by_system.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True",
+      "body": {
+        "name": "snap-schedule-created-by-system",
+        "rules": [
+          {
+            "type": 1,
+            "minute": 0,
+            "hours": [0],
+            "interval": 1
+          }
+        ],
+        "isSyncReplicated": true,
+        "skipSyncToRemoteSystem": true
+      },
+      "response": "create_snap_schedule_by_system.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True&fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version&filter=name eq \"snap-schedule-created-by-system\"",
+      "response": "no_item.json"
+    },
+    {
+      "url": "/api/types/snapSchedule/instances?compact=True&fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version&filter=name eq \"snap-schedule-created-by-system-existing\"",
+      "response": "snapSch_4.json"
+    }
+  ]
+}

@@ -101,34 +101,44 @@ class UnityPool(UnityResource):
 
     def create_lun(self, lun_name=None, size_gb=1, sp=None, host_access=None,
                    is_thin=None, description=None, tiering_policy=None,
-                   is_repl_dst=None, snap_schedule=None, io_limit_policy=None,
-                   is_compression=None):
+                   is_repl_dst=None, snap_schedule=None,
+                   is_snap_schedule_paused=None,
+                   skip_sync_to_remote_system=None,
+                   io_limit_policy=None, is_compression=None):
         size = int(bitmath.GiB(size_gb).to_Byte().value)
-        return UnityLun.create(self._cli, lun_name, self, size, sp=sp,
-                               host_access=host_access, is_thin=is_thin,
-                               description=description,
-                               is_repl_dst=is_repl_dst,
-                               tiering_policy=tiering_policy,
-                               snap_schedule=snap_schedule,
-                               io_limit_policy=io_limit_policy,
-                               is_compression=is_compression)
+        return UnityLun.create(
+            self._cli, lun_name, self, size, sp=sp,
+            host_access=host_access, is_thin=is_thin,
+            description=description,
+            is_repl_dst=is_repl_dst,
+            tiering_policy=tiering_policy,
+            snap_schedule=snap_schedule,
+            is_snap_schedule_paused=is_snap_schedule_paused,
+            skip_sync_to_remote_system=skip_sync_to_remote_system,
+            io_limit_policy=io_limit_policy,
+            is_compression=is_compression)
 
     def create_vmfs(self, vmfs_name=None, size_gb=1, sp=None, host_access=None,
                     is_thin=None, description=None, tiering_policy=None,
-                    is_repl_dst=None, snap_schedule=None, io_limit_policy=None,
+                    is_repl_dst=None, snap_schedule=None,
+                    is_snap_schedule_paused=None,
+                    skip_sync_to_remote_system=None, io_limit_policy=None,
                     is_compression=None, major_version=None, block_size=None):
         size = int(bitmath.GiB(size_gb).to_Byte().value)
-        return UnityLun.create(self._cli, vmfs_name, self, size, sp=sp,
-                               host_access=host_access, is_thin=is_thin,
-                               description=description,
-                               is_repl_dst=is_repl_dst,
-                               tiering_policy=tiering_policy,
-                               snap_schedule=snap_schedule,
-                               io_limit_policy=io_limit_policy,
-                               is_compression=is_compression,
-                               create_vmfs=True,
-                               major_version=major_version,
-                               block_size=block_size)
+        return UnityLun.create(
+            self._cli, vmfs_name, self, size, sp=sp,
+            host_access=host_access, is_thin=is_thin,
+            description=description,
+            is_repl_dst=is_repl_dst,
+            tiering_policy=tiering_policy,
+            snap_schedule=snap_schedule,
+            is_snap_schedule_paused=is_snap_schedule_paused,
+            skip_sync_to_remote_system=skip_sync_to_remote_system,
+            io_limit_policy=io_limit_policy,
+            is_compression=is_compression,
+            create_vmfs=True,
+            major_version=major_version,
+            block_size=block_size)
 
     def create_nfs_share(self, nas_server, name, size, is_thin=None,
                          tiering_policy=None, user_cap=False):

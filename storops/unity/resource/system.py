@@ -60,6 +60,8 @@ from storops.unity.resource.replication_interface import \
 from storops.unity.resource.replication_session import \
     UnityReplicationSessionList
 from storops.unity.resource.snap import UnitySnapList
+from storops.unity.resource.snap_schedule import UnitySnapScheduleList, \
+    UnitySnapSchedule
 from storops.unity.resource.sp import UnityStorageProcessorList
 from storops.unity.resource.cg import UnityConsistencyGroup, \
     UnityConsistencyGroupList
@@ -612,6 +614,38 @@ class UnitySystem(UnitySingletonResource):
 
     def get_alert(self, _id=None, **filters):
         return self._get_unity_rsc(UnityAlertList, _id=_id, **filters)
+
+    def create_snap_schedule(self, name, rules,
+                             is_sync_replicated=None,
+                             skip_sync_to_remote_system=None):
+        """ Creates snapshot schedule.
+        :param name: Name of new schedule.
+        :param rules: Rules that apply to the snapshot schedule, as defined by
+            the `UnitySnapScheduleRule` resource type. Each value is a
+            `UnitySnapScheduleRule` instance.
+        :param is_sync_replicated: Indicates that all operations on the
+            snapshot schedule will be synchronously replicated to the peer
+            system.
+        :param skip_sync_to_remote_system: For internal system use only. Skip
+            the invocation of the snapshot schedule creation method with the
+            same parameters on the remote system. If the method is invoked by
+            the user, this attribute is not required. The value should be true
+            when the operation is executed from a remote system, to prevent
+            from syncing it back to the original storage.
+        :return: the created `UnitySnapSchedule` instance.
+        """
+        schedule = UnitySnapScheduleList.get(self._cli, name=name)
+        if schedule:
+            raise storops.exception.UnitySnapScheduleNameInUseError()
+        else:
+            schedule = UnitySnapSchedule.create(
+                self._cli, name, rules, is_sync_replicated=is_sync_replicated,
+                skip_sync_to_remote_system=skip_sync_to_remote_system)
+
+        return schedule
+
+    def get_snap_schedule(self, _id=None, **filters):
+        return self._get_unity_rsc(UnitySnapScheduleList, _id=_id, **filters)
 
 
 class UnitySystemList(UnityResourceList):

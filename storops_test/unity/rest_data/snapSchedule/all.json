@@ -1,0 +1,96 @@
+{
+    "@base": "https://10.245.101.39/api/types/snapSchedule/instances?fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version&per_page=2000&compact=true",
+    "updated": "2020-03-23T08:35:22.440Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": [
+        {
+            "content": {
+                "id": "snapSch_1",
+                "version": 1,
+                "instanceId": "root/emc:EMC_UEM_SnapshotScheduleLeaf%InstanceID=snapSch_1",
+                "name": "CEM_DEFAULT_SCHEDULE_DEFAULT_PROTECTION",
+                "isDefault": true,
+                "isModified": false,
+                "modificationTime": "2019-12-13T04:40:46.160Z",
+                "rules": [
+                    {
+                        "type": 1,
+                        "daysOfWeek": [],
+                        "accessType": 1,
+                        "instanceId": "root/emc:C4CB_SchedulerRule%InstanceID=SchedRule_1",
+                        "id": "SchedRule_1",
+                        "minute": 0,
+                        "hours": [
+                            8
+                        ],
+                        "interval": 1,
+                        "isAutoDelete": false,
+                        "retentionTime": 172800
+                    }
+                ],
+                "isSyncReplicated": false
+            }
+        },
+        {
+            "content": {
+                "id": "snapSch_2",
+                "version": 1,
+                "instanceId": "root/emc:EMC_UEM_SnapshotScheduleLeaf%InstanceID=snapSch_2",
+                "name": "CEM_DEFAULT_SCHEDULE_LESS_PROTECTION",
+                "isDefault": true,
+                "isModified": false,
+                "modificationTime": "2019-12-13T04:40:46.337Z",
+                "rules": [
+                    {
+                        "type": 1,
+                        "daysOfWeek": [],
+                        "accessType": 1,
+                        "instanceId": "root/emc:C4CB_SchedulerRule%InstanceID=SchedRule_5",
+                        "id": "SchedRule_5",
+                        "minute": 0,
+                        "hours": [
+                            8
+                        ],
+                        "interval": 1,
+                        "isAutoDelete": false,
+                        "retentionTime": 86400
+                    }
+                ],
+                "isSyncReplicated": false
+            }
+        },
+        {
+            "content": {
+                "id": "snapSch_3",
+                "version": 1,
+                "instanceId": "root/emc:EMC_UEM_SnapshotScheduleLeaf%InstanceID=snapSch_3",
+                "name": "CEM_DEFAULT_SCHEDULE_MORE_PROTECTION",
+                "isDefault": true,
+                "isModified": false,
+                "modificationTime": "2019-12-13T04:40:46.509Z",
+                "rules": [
+                    {
+                        "type": 1,
+                        "daysOfWeek": [],
+                        "accessType": 1,
+                        "instanceId": "root/emc:C4CB_SchedulerRule%InstanceID=SchedRule_6",
+                        "id": "SchedRule_6",
+                        "minute": 0,
+                        "hours": [
+                            8
+                        ],
+                        "interval": 1,
+                        "isAutoDelete": false,
+                        "retentionTime": 604800
+                    }
+                ],
+                "isSyncReplicated": false
+            }
+        }
+    ]
+}

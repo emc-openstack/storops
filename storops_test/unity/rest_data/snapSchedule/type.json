@@ -1,0 +1,75 @@
+{
+    "content": {
+        "name": "snapSchedule",
+        "description": "Information about snapshot schedules in the storage system.",
+        "documentation": "https://10.245.101.39/apidocs/classes/snapSchedule.html",
+        "attributes": [
+            {
+                "name": "isSyncReplicated",
+                "type": "Boolean",
+                "description": "Indicates whether the snapshot schedule is synchronously replicated to the remote system.  <ul>  <li>true - Snapshot schedule is replicated.</li>  <li>false - Snapshot schedule is not replicated.</li>  </ul>",
+                "displayValue": "isSyncReplicated"
+            },
+            {
+                "name": "storageResources",
+                "type": "List<storageResource>",
+                "description": "Storage resources associated with the snapshot schedule.",
+                "displayValue": "storageResources"
+            },
+            {
+                "name": "instanceId",
+                "type": "String",
+                "description": "Unique internal identifier of the snapSchedule instance.",
+                "displayValue": "instanceId"
+            },
+            {
+                "name": "luns",
+                "type": "List<lun>",
+                "description": "LUNs associated with the snapshot schedule.",
+                "displayValue": "luns"
+            },
+            {
+                "name": "modificationTime",
+                "type": "DateTime",
+                "description": "Date and time when the snapshot schedule was created or last modified.",
+                "displayValue": "modificationTime"
+            },
+            {
+                "name": "name",
+                "type": "String",
+                "description": "Snapshot schedule name.",
+                "displayValue": "name"
+            },
+            {
+                "name": "id",
+                "type": "String",
+                "description": "Unique identifier of the snapSchedule instance.",
+                "displayValue": "id"
+            },
+            {
+                "name": "rules",
+                "type": "List<snapScheduleRule>",
+                "description": "Rules that apply to the snapshot schedule, as defined by the snapScheduleRule resource type.",
+                "displayValue": "rules"
+            },
+            {
+                "name": "isModified",
+                "type": "Boolean",
+                "description": "Indicates whether the snapshot schedule was modified. Values are:   <ul>   <li>true - Snapshot schedule was modified.</li>   <li>false - Snapshot schedule was never modified.</li>   </ul> This attribute is obsolete and will be removed in a future release. Please use modificationTime instead.",
+                "displayValue": "isModified"
+            },
+            {
+                "name": "isDefault",
+                "type": "Boolean",
+                "description": "Indicates whether the snapshot schedule is a default or user-created schedule. Values are:   <ul>   <li>true - Snapshot schedule is one of the default schedules.</li>   <li>false - Snapshot schedule is user-created.</li>   </ul>",
+                "displayValue": "isDefault"
+            },
+            {
+                "name": "version",
+                "type": "ScheduleVersionEnum",
+                "description": "Indicates the version of the snapshot schedule.",
+                "displayValue": "version"
+            }
+        ]
+    }
+}

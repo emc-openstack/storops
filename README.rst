@@ -177,6 +177,7 @@ Feature List
         - list/create/modify/delete block import sessions
         - pause/resume/cutover/commit/cancel block import sessions
         - discover migration objects
+        - list/create/modify/delete snapshot schedule
     - supported feature/operations
         - CIFS share access control
         - NFS share access control

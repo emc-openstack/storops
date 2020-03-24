@@ -1,0 +1,11 @@
+{
+    "@base": "https://10.245.101.39/api/types/snapSchedule/instances?filter=name eq \"test-ryan-s2\"&fields=id,instanceId,isDefault,isModified,isSyncReplicated,luns,modificationTime,name,rules,storageResources,version&per_page=2000&compact=true",
+    "updated": "2020-03-24T04:01:13.258Z",
+    "links": [
+        {
+            "rel": "self",
+            "href": "&page=1"
+        }
+    ],
+    "entries": []
+}

@@ -225,4 +225,3 @@ class UnitySnapList(UnityResourceList):
     @classmethod
     def get_resource_class(cls):
         return UnitySnap
-

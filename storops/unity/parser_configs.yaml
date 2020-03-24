@@ -127,7 +127,7 @@ UnityStorageResource: &UnityStorageResource
     - label: esxFilesystemBlockSize
       converter: ESXFilesystemBlockSizeEnum
     - label: snapSchedule
-      converter: UnitySnapScheduleList
+      converter: UnitySnapSchedule
     - label: isSnapSchedulePaused
     - label: relocationPolicy
       converter: TieringPolicyEnum
@@ -520,12 +520,17 @@ UnitySnapSchedule:
     - label: name
     - label: isDefault
     - label: isModified
+    - label: modificationTime
+      converter: to_datetime
     - label: version
       converter: ScheduleVersionEnum
     - label: rules
       converter: UnitySnapScheduleRuleList
     - label: storageResources
       converter: UnityStorageResourceList
+    - label: luns
+      converter: UnityLunList
+    - label: isSyncReplicated
 
 
 UnitySnapScheduleRule:
@@ -539,7 +544,7 @@ UnitySnapScheduleRule:
     - label: minute
     - label: hours
     - label: daysOfWeek
-      converter: DaysOfWeekEnum
+      converter: DayOfWeekEnumList
     - label: daysOfMonth
     - label: interval
     - label: isAutoDelete

@@ -16,10 +16,9 @@
 from __future__ import unicode_literals
 
 import logging
-from typing import List, Dict
 
-from storops.unity.enums import FilesystemSnapAccessTypeEnum, \
-    ScheduleTypeEnum, DayOfWeekEnum
+from storops.unity.enums import ScheduleTypeEnum, DayOfWeekEnum, \
+    FilesystemSnapAccessTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 
 __author__ = 'Ryan Liang'
@@ -29,16 +28,9 @@ log = logging.getLogger(__name__)
 
 class UnitySnapScheduleRule(UnityResource):
     @staticmethod
-    def to_embedded(schedule_type: ScheduleTypeEnum,
-                    minute: int = None,
-                    hours: List[int] = None,
-                    days_of_week: List[DayOfWeekEnum] = None,
-                    days_of_month: List[int] = None,
-                    interval: int = None,
-                    is_auto_delete: bool = None,
-                    retention_time: int = None,
-                    access_type: FilesystemSnapAccessTypeEnum = None
-                    ) -> Dict:
+    def to_embedded(schedule_type, minute=None, hours=None, days_of_week=None,
+                    days_of_month=None, interval=None, is_auto_delete=None,
+                    retention_time=None, access_type=None):
         """
         Constructs a `SnapScheduleRule` embedded instance.
 
@@ -63,13 +55,14 @@ class UnitySnapScheduleRule(UnityResource):
             (optional, default 0).
         5. `UNSUPPORTED`.
 
-        :param schedule_type: Type of snapshot schedule rule.
+        :param schedule_type: Type of snapshot schedule rule. Value is
+            ScheduleTypeEnum.
         :param minute: Minute frequency for the snapshot schedule rule. Value
             should be [0, 59].
         :param hours: Hourly frequency for the snapshot schedule rule. Each
             value should be [0, 23].
         :param days_of_week: Days of the week for which the snapshot schedule
-            rule applies.
+            rule applies. Each value is DayOfWeekEnum.
         :param days_of_month: Days of the month for which the snapshot schedule
             rule applies. Each value should be [1, 31].
         :param interval: Number of days or hours between snaps, depending on
@@ -86,21 +79,42 @@ class UnitySnapScheduleRule(UnityResource):
             the snapshot.
         :param access_type: For a file system or VMware NFS datastore snapshot
             schedule, indicates whether the snapshot created by the schedule
-            has checkpoint or protocol type access.
+            has checkpoint or protocol type access. Value is
+            FilesystemSnapAccessTypeEnum.
         :return: constructed embedded instance in a dict.
         """
         ScheduleTypeEnum.verify(schedule_type, allow_none=False)
-        if minute < 0 or minute > 59:
+        if minute is not None and (minute < 0 or minute > 59):
             raise ValueError(
                 'minute in UnitySnapScheduleRule should be [0, 59].')
-        if any([(hour < 0 or hour > 23) for hour in hours]):
-            raise ValueError(
-                'each value of hours in UnitySnapScheduleRule should be '
-                '[0, 23].')
-        if any([(day < 1 or day > 31) for day in days_of_month]):
-            raise ValueError(
-                'each value of days_of_month in UnitySnapScheduleRule should '
-                'be [1, 31].')
+        if hours is not None:
+            if not isinstance(hours, list) or not hours:
+                raise ValueError(
+                    'hours in UnitySnapScheduleRule should be a list '
+                    'and not an empty list.')
+            if any([(hour < 0 or hour > 23) for hour in hours]):
+                raise ValueError(
+                    'each value of hours in UnitySnapScheduleRule should be '
+                    '[0, 23].')
+        if days_of_week is not None:
+            if not isinstance(days_of_week, list) or not days_of_week:
+                raise ValueError(
+                    'days_of_week in UnitySnapScheduleRule should be a list '
+                    'and not an empty list.')
+            for day_of_week in days_of_week:
+                DayOfWeekEnum.verify(day_of_week, allow_none=False)
+
+        if days_of_month is not None:
+            if not isinstance(days_of_month, list) or not days_of_month:
+                raise ValueError(
+                    'days_of_month in UnitySnapScheduleRule should be a list '
+                    'and not an empty list.')
+            if any([(day < 1 or day > 31) for day in days_of_month]):
+                raise ValueError(
+                    'each value of days_of_month in UnitySnapScheduleRule '
+                    'should be [1, 31].')
+
+        FilesystemSnapAccessTypeEnum.verify(access_type)
 
         return {
             'type': schedule_type,
@@ -115,11 +129,8 @@ class UnitySnapScheduleRule(UnityResource):
         }
 
     @staticmethod
-    def every_n_hours(hour_interval: int, minute: int = 0,
-                      is_auto_delete: bool = None,
-                      retention_time: int = None,
-                      access_type: FilesystemSnapAccessTypeEnum = None
-                      ) -> Dict:
+    def every_n_hours(hour_interval, minute=0, is_auto_delete=None,
+                      retention_time=None, access_type=None):
         """
         Helper function to construct `N_HOURS_AT_MM` type rule.
 
@@ -141,7 +152,8 @@ class UnitySnapScheduleRule(UnityResource):
             the snapshot.
         :param access_type: For a file system or VMware NFS datastore snapshot
             schedule, indicates whether the snapshot created by the schedule
-            has checkpoint or protocol type access.
+            has checkpoint or protocol type access. Value is
+            FilesystemSnapAccessTypeEnum.
         :return: constructed embedded instance in a dict.
         """
         return UnitySnapScheduleRule.to_embedded(
@@ -154,11 +166,8 @@ class UnitySnapScheduleRule(UnityResource):
         )
 
     @staticmethod
-    def every_day(hours: List[int], minute: int = 0,
-                  is_auto_delete: bool = None,
-                  retention_time: int = None,
-                  access_type: FilesystemSnapAccessTypeEnum = None
-                  ) -> Dict:
+    def every_day(hours, minute=0, is_auto_delete=None, retention_time=None,
+                  access_type=None):
         """
         Helper function to construct `DAY_AT_HHMM` type rule.
 
@@ -181,15 +190,21 @@ class UnitySnapScheduleRule(UnityResource):
             the snapshot.
         :param access_type: For a file system or VMware NFS datastore snapshot
             schedule, indicates whether the snapshot created by the schedule
-            has checkpoint or protocol type access.
+            has checkpoint or protocol type access. Value is
+            FilesystemSnapAccessTypeEnum.
         :return: constructed embedded instance in a dict.
         """
+        if not isinstance(hours, list):
+            raise ValueError(
+                'hours of UnitySnapScheduleRule every_day rule should be '
+                'a list.')
         if not hours:
             raise ValueError(
                 'hours of UnitySnapScheduleRule every_day rule cannot be '
                 'empty list.')
         return UnitySnapScheduleRule.to_embedded(
             ScheduleTypeEnum.DAY_AT_HHMM,
+            interval=1,  # Every day
             hours=hours,
             minute=minute,
             is_auto_delete=is_auto_delete,
@@ -198,13 +213,8 @@ class UnitySnapScheduleRule(UnityResource):
         )
 
     @staticmethod
-    def every_n_days(day_interval: int,
-                     hour: int = 0,
-                     minute: int = 0,
-                     is_auto_delete: bool = None,
-                     retention_time: int = None,
-                     access_type: FilesystemSnapAccessTypeEnum = None
-                     ) -> Dict:
+    def every_n_days(day_interval, hour=0, minute=0, is_auto_delete=None,
+                     retention_time=None, access_type=None):
         """
         Helper function to construct `N_DAYS_AT_HHMM` type rule.
 
@@ -228,7 +238,8 @@ class UnitySnapScheduleRule(UnityResource):
             the snapshot.
         :param access_type: For a file system or VMware NFS datastore snapshot
             schedule, indicates whether the snapshot created by the schedule
-            has checkpoint or protocol type access.
+            has checkpoint or protocol type access. Value is
+            FilesystemSnapAccessTypeEnum.
         :return: constructed embedded instance in a dict.
         """
         return UnitySnapScheduleRule.to_embedded(
@@ -242,13 +253,8 @@ class UnitySnapScheduleRule(UnityResource):
         )
 
     @staticmethod
-    def every_week(days_of_week: List[DayOfWeekEnum],
-                   hour: int = 0,
-                   minute: int = 0,
-                   is_auto_delete: bool = None,
-                   retention_time: int = None,
-                   access_type: FilesystemSnapAccessTypeEnum = None
-                   ) -> Dict:
+    def every_week(days_of_week, hour=0, minute=0, is_auto_delete=None,
+                   retention_time=None, access_type=None):
         """
         Helper function to construct `SELDAYS_AT_HHMM` type rule.
 
@@ -256,7 +262,7 @@ class UnitySnapScheduleRule(UnityResource):
         at the time `hour`:`minute`.
 
         :param days_of_week: days in every week the snapshot will be taken.
-            Cannot be empty list.
+            Cannot be empty list and each value is DayOfWeekEnum.
         :param hour: the hour when the snapshot will be taken. Value should be
             [0, 23], and is 0 by default.
         :param minute: minutes past the hour when the snapshot will be taken.
@@ -273,9 +279,14 @@ class UnitySnapScheduleRule(UnityResource):
             the snapshot.
         :param access_type: For a file system or VMware NFS datastore snapshot
             schedule, indicates whether the snapshot created by the schedule
-            has checkpoint or protocol type access.
+            has checkpoint or protocol type access. Value is
+            FilesystemSnapAccessTypeEnum.
         :return: constructed embedded instance in a dict.
         """
+        if not isinstance(days_of_week, list):
+            raise ValueError(
+                'days_of_week of UnitySnapScheduleRule every_week rule should '
+                'be a list.')
         if not days_of_week:
             raise ValueError(
                 'days_of_week of UnitySnapScheduleRule every_week rule cannot '
@@ -291,13 +302,8 @@ class UnitySnapScheduleRule(UnityResource):
         )
 
     @staticmethod
-    def every_month(days_of_month: List[int],
-                    hour: int = 0,
-                    minute: int = 0,
-                    is_auto_delete: bool = None,
-                    retention_time: int = None,
-                    access_type: FilesystemSnapAccessTypeEnum = None
-                    ) -> Dict:
+    def every_month(days_of_month, hour=0, minute=0, is_auto_delete=None,
+                    retention_time=None, access_type=None):
         """
         Helper function to construct `NTH_DAYOFMONTH_AT_HHMM` type rule.
 
@@ -322,9 +328,14 @@ class UnitySnapScheduleRule(UnityResource):
             the snapshot.
         :param access_type: For a file system or VMware NFS datastore snapshot
             schedule, indicates whether the snapshot created by the schedule
-            has checkpoint or protocol type access.
+            has checkpoint or protocol type access. Value is
+            FilesystemSnapAccessTypeEnum.
         :return: constructed embedded instance in a dict.
         """
+        if not isinstance(days_of_month, list):
+            raise ValueError(
+                'days_of_month of UnitySnapScheduleRule every_month rule '
+                'should be a list.')
         if not days_of_month:
             raise ValueError(
                 'days_of_month of UnitySnapScheduleRule every_month rule '
@@ -348,14 +359,14 @@ class UnitySnapScheduleRuleList(UnityResourceList):
 
 class UnitySnapSchedule(UnityResource):
     @classmethod
-    def create(cls, cli, name: str, rules: List[UnitySnapScheduleRule],
-               is_sync_replicated: bool = None,
-               skip_sync_to_remote_system: bool = None) -> 'UnitySnapSchedule':
+    def create(cls, cli, name, rules,
+               is_sync_replicated=None, skip_sync_to_remote_system=None):
         """
         :param cli:
         :param name: Name of new schedule.
         :param rules: Rules that apply to the snapshot schedule, as defined by
-            the `UnitySnapScheduleRule` resource type.
+            the `UnitySnapScheduleRule` resource type. Each value is a
+            `UnitySnapScheduleRule` instance.
         :param is_sync_replicated: Indicates that all operations on the
             snapshot schedule will be synchronously replicated to the peer
             system.
@@ -376,15 +387,13 @@ class UnitySnapSchedule(UnityResource):
         resp.raise_if_err()
         return cls(_id=resp.resource_id, cli=cli)
 
-    def modify(self,
-               add_rules: List[UnitySnapScheduleRule] = None,
-               remove_rule_ids: List[str] = None,
-               skip_sync_to_remote_system: bool = None):
+    def modify(self, add_rules=None, remove_rule_ids=None,
+               skip_sync_to_remote_system=None):
         """
         :param add_rules: Rules to add to the snapshot schedule, as defined by
             the UnitySnapScheduleRule instance. Pass the desired values for the
              additional rules instead of the unique identifiers of existing
-             rules.
+             rules. Each value is a `UnitySnapScheduleRule` instance.
         :param remove_rule_ids: Unique identifiers of the rules to remove from
             the snapshot schedule.
         :param skip_sync_to_remote_system: For internal system use only. Skip

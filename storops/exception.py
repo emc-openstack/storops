@@ -1416,3 +1416,7 @@ class UnityDeleteShareFromDestNasServerError(UnityReplicationError):
 @rest_exception
 class UnityFailoverNasRepWithFsRepOutOfSyncError(UnityReplicationError):
     error_code = 105906786
+
+
+class UnitySnapScheduleNameInUseError(UnityException):
+    pass

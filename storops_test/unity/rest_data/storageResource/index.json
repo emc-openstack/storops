@@ -1336,7 +1336,52 @@
     },
     {
       "url": "/api/instances/storageResource/res_5613?compact=True",
-      "body": {"forceVvolDeletion": false, "forceSnapDeletion": false},
+      "body": {
+        "forceVvolDeletion": false,
+        "forceSnapDeletion": false
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createLun?compact=True",
+      "body": {
+        "name": "lun-with-snap-schedule",
+        "snapScheduleParameters": {
+          "snapSchedule": {
+            "id": "snapSch_1"
+          }
+        },
+        "lunParameters": {
+          "size": 1073741824,
+          "pool": {
+            "id": "pool_1"
+          }
+        }
+      },
+      "response": "create_lun_with_snap_schedule.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_16455?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_16455.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_16455/action/modifyLun?compact=True",
+      "body": {
+        "snapScheduleParameters": {
+          "snapSchedule": {
+            "id": "snapSch_4"
+          }
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_16455/action/modifyLun?compact=True",
+      "body": {
+        "snapScheduleParameters": {
+          "isSnapSchedulePaused": false
+        }
+      },
       "response": "empty.json"
     }
   ]

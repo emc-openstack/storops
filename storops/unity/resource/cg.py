@@ -43,12 +43,16 @@ class UnityConsistencyGroup(UnityStorageResource):
 
     @classmethod
     def create(cls, cli, name, description=None, is_repl_dst=None,
-               snap_schedule=None, tiering_policy=None,
+               snap_schedule=None, is_snap_schedule_paused=None,
+               skip_sync_to_remote_system=None, tiering_policy=None,
                is_compression=None,
                hosts=None, lun_add=None):
         req_body = cls._compose_cg_parameters(cli, name, description,
                                               is_repl_dst,
-                                              snap_schedule, tiering_policy,
+                                              snap_schedule,
+                                              is_snap_schedule_paused,
+                                              skip_sync_to_remote_system,
+                                              tiering_policy,
                                               is_compression,
                                               hosts,
                                               lun_add)
@@ -77,14 +81,16 @@ class UnityConsistencyGroup(UnityStorageResource):
         self.modify(name=new_name)
 
     def modify(self, name=None, description=None, is_repl_dst=None,
-               snap_schedule=None, tiering_policy=None,
+               snap_schedule=None, is_snap_schedule_paused=None,
+               skip_sync_to_remote_system=None, tiering_policy=None,
                is_compression=None, hosts=None,
                lun_add=None, lun_remove=None, host_add=None,
                host_remove=None, lun_modify=None):
         req_body = self._compose_cg_parameters(
             self._cli, name, description,
-            is_repl_dst, snap_schedule, tiering_policy,
-            is_compression, hosts,
+            is_repl_dst, snap_schedule,
+            is_snap_schedule_paused, skip_sync_to_remote_system,
+            tiering_policy, is_compression, hosts,
             lun_add, lun_remove, host_add, host_remove, lun_modify)
         resp = self._cli.action(UnityStorageResource().resource_class,
                                 self.get_id(), 'modifyConsistencyGroup',
@@ -95,7 +101,10 @@ class UnityConsistencyGroup(UnityStorageResource):
     @staticmethod
     def _compose_cg_parameters(cli, name=None, description=None,
                                is_repl_dst=None,
-                               snap_schedule=None, tiering_policy=None,
+                               snap_schedule=None,
+                               is_snap_schedule_paused=None,
+                               skip_sync_to_remote_system=None,
+                               tiering_policy=None,
                                is_compression=None,
                                hosts=None,
                                lun_add=None,
@@ -120,7 +129,9 @@ class UnityConsistencyGroup(UnityStorageResource):
                 isDataReductionEnabled=is_compression
             ),
             snapScheduleParameters=cli.make_body(
-                snapSchedule=snap_schedule
+                snapSchedule=snap_schedule,
+                isSnapSchedulePaused=is_snap_schedule_paused,
+                skipSyncToRemoteSystem=skip_sync_to_remote_system,
             ),
             blockHostAccess=cli.make_body(host_access),
             lunAdd=cli.make_body(lun_add),

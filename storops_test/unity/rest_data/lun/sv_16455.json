@@ -1,0 +1,78 @@
+{
+    "content": {
+        "id": "sv_16455",
+        "operationalStatus": [
+            2
+        ],
+        "type": 2,
+        "tieringPolicy": 0,
+        "defaultNode": 1,
+        "currentNode": 1,
+        "auSize": 8192,
+        "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_16455",
+        "creationTime": "2020-03-24T05:24:45.000Z",
+        "health": {
+            "value": 5,
+            "descriptionIds": [
+                "ALRT_VOL_OK"
+            ],
+            "descriptions": [
+                "The LUN is operating normally. No action is required."
+            ]
+        },
+        "name": "lun-with-snap-schedule",
+        "modificationTime": "2020-03-24T05:24:47.251Z",
+        "sizeTotal": 1073741824,
+        "sizeAllocated": 0,
+        "sizePreallocated": 268435456,
+        "sizeAllocatedTotal": 2684354560,
+        "compressionSizeSaved": 0,
+        "compressionPercent": 0,
+        "compressionRatio": 1.0,
+        "dataReductionSizeSaved": 0,
+        "dataReductionPercent": 0,
+        "dataReductionRatio": 1.0,
+        "perTierSizeUsed": [
+            2952790016,
+            0,
+            0
+        ],
+        "isThinEnabled": true,
+        "isCompressionEnabled": false,
+        "isDataReductionEnabled": false,
+        "isAdvancedDedupEnabled": false,
+        "wwn": "60:06:01:60:05:40:3C:00:9D:99:79:5E:FA:48:70:08",
+        "isReplicationDestination": false,
+        "isSnapSchedulePaused": false,
+        "objectId": 42949690114,
+        "metadataSize": 3489660928,
+        "metadataSizeAllocated": 2684354560,
+        "snapWwn": "60:06:01:60:05:40:3C:00:92:CC:7D:25:D2:44:41:05",
+        "snapsSize": 0,
+        "snapsSizeAllocated": 0,
+        "snapCount": 0,
+        "lunNumber": 135,
+        "isThinClone": false,
+        "familySnapCount": 0,
+        "familyCloneCount": 0,
+        "nonBaseSizeAllocated": 0,
+        "familySizeAllocatedTotal": 2684354560,
+        "nonBaseSize": 0,
+        "storageResource": {
+            "id": "sv_16455",
+            "type": 8
+        },
+        "pool": {
+            "id": "pool_1",
+            "raidType": 1,
+            "name": "Flash_Pool",
+            "isFASTCacheEnabled": false
+        },
+        "snapSchedule": {
+            "id": "snapSch_1"
+        },
+        "familyBaseLun": {
+            "id": "sv_16455"
+        }
+    }
+}

@@ -22,6 +22,7 @@ import mock
 from hamcrest import assert_that, calling, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
+from storops.unity.resource.snap_schedule import UnitySnapSchedule
 
 from storops import UnitySystem, TieringPolicyEnum
 from storops.exception import UnitySnapNameInUseError, \
@@ -548,6 +549,30 @@ class UnityLunTest(TestCase):
     def test_delete_vmfs(self):
         vmfs = UnityLun.get(cli=t_rest(), _id='sv_5613')
         resp = vmfs.delete(async_mode=False)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_create_with_snap_schedule(self):
+        cli = t_rest()
+        schedule = UnitySnapSchedule(_id='snapSch_1', cli=cli)
+        pool = UnityPool('pool_1', cli=cli)
+        lun = pool.create_lun('lun-with-snap-schedule', snap_schedule=schedule)
+        assert_that(lun.name, equal_to('lun-with-snap-schedule'))
+        assert_that(lun.snap_schedule.get_id(), equal_to('snapSch_1'))
+
+    @patch_rest
+    def test_modify_snap_schedule(self):
+        cli = t_rest()
+        new_schedule = UnitySnapSchedule(_id='snapSch_4', cli=cli)
+        lun = UnityLun(_id='sv_16455', cli=cli)
+        resp = lun.modify(snap_schedule=new_schedule)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_remove_snap_schedule(self):
+        cli = t_rest()
+        lun = UnityLun(_id='sv_16455', cli=cli)
+        resp = lun.remove_snap_schedule()
         assert_that(resp.is_ok(), equal_to(True))
 
 

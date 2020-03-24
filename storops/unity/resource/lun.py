@@ -112,6 +112,7 @@ class UnityLun(UnityResource):
     def create(cls, cli, name, pool, size, sp=None, host_access=None,
                is_thin=None, description=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,
+               is_snap_schedule_paused=None, skip_sync_to_remote_system=None,
                is_compression=None, create_vmfs=False, major_version=None,
                block_size=None):
         pool_clz = storops.unity.resource.pool.UnityPool
@@ -122,6 +123,8 @@ class UnityLun(UnityResource):
             host_access=host_access, description=description,
             io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
             tiering_policy=tiering_policy, snap_schedule=snap_schedule,
+            is_snap_schedule_paused=is_snap_schedule_paused,
+            skip_sync_to_remote_system=skip_sync_to_remote_system,
             is_compression=is_compression, major_version=major_version,
             block_size=block_size)
 
@@ -221,7 +224,6 @@ class UnityLun(UnityResource):
     @staticmethod
     def _compose_lun_parameter(cli, **kwargs):
 
-        # TODO: snap_schedule
         body = cli.make_body(
             name=kwargs.get('name'),
             description=kwargs.get('description'),
@@ -229,7 +231,13 @@ class UnityLun(UnityResource):
                 isReplicationDestination=kwargs.get('is_repl_dst')),
             vmwareIscsiParameters=cli.make_body(
                 majorVersion=kwargs.get('major_version'),
-                blockSize=kwargs.get('block_size')))
+                blockSize=kwargs.get('block_size')),
+            snapScheduleParameters=cli.make_body(
+                snapSchedule=kwargs.get('snap_schedule'),
+                isSnapSchedulePaused=kwargs.get('is_snap_schedule_paused'),
+                skipSyncToRemoteSystem=kwargs.get('skip_sync_to_remote_system')
+            )
+        )
 
         # `hostAccess` could be empty list which is used to remove all host
         # access
@@ -241,11 +249,15 @@ class UnityLun(UnityResource):
     def modify(self, name=None, size=None, host_access=None,
                description=None, sp=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,
+               is_snap_schedule_paused=None, skip_sync_to_remote_system=None,
                is_compression=None, major_version=None, block_size=None):
         if self.is_cg_member:
-            if is_repl_dst is not None or snap_schedule is not None:
-                log.warning('LUN in CG not support to modify `is_repl_dst` and'
-                            ' `snap_schedule`.')
+            if any(each is not None for each in [is_repl_dst, snap_schedule,
+                                                 is_snap_schedule_paused,
+                                                 skip_sync_to_remote_system]):
+                log.warning('LUN in CG not support to modify `is_repl_dst`'
+                            ' `snap_schedule`, `is_snap_schedule_paused` and'
+                            ' `skip_sync_to_remote_system`.')
             return self.cg.modify_lun(self, name=name, size=size,
                                       host_access=host_access,
                                       description=description, sp=sp,
@@ -259,6 +271,8 @@ class UnityLun(UnityResource):
                 host_access=host_access, description=description,
                 io_limit_policy=io_limit_policy, is_repl_dst=is_repl_dst,
                 tiering_policy=tiering_policy, snap_schedule=snap_schedule,
+                is_snap_schedule_paused=is_snap_schedule_paused,
+                skip_sync_to_remote_system=skip_sync_to_remote_system,
                 is_compression=is_compression, major_version=major_version,
                 block_size=block_size)
 
@@ -514,6 +528,9 @@ class UnityLun(UnityResource):
         return UnityReplicationSession.create_with_dst_resource_provisioning(
             self._cli, self.get_id(), dst_resource, max_time_out_of_sync,
             remote_system=remote_system, name=replication_name)
+
+    def remove_snap_schedule(self):
+        return self.modify(is_snap_schedule_paused=False)
 
 
 class UnityLunList(UnityResourceList):

@@ -18,6 +18,7 @@ from __future__ import unicode_literals
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, instance_of, raises
+from storops.unity.resource.snap_schedule import UnitySnapSchedule
 
 from storops.exception import UnityLunNameInUseError, JobStateError, \
     UnityPoolNameInUseError
@@ -317,3 +318,12 @@ class UnityPoolTest(TestCase):
                 size=1)
 
         assert_that(f, raises(JobStateError, 'too small'))
+
+    @patch_rest
+    def test_create_lun_with_snap_schedule(self):
+        pool = UnityPool(_id='pool_1', cli=t_rest())
+        schedule = UnitySnapSchedule(_id='snapSch_1', cli=t_rest())
+        lun = pool.create_lun(
+            lun_name='lun-with-snap-schedule',
+            snap_schedule=schedule)
+        assert_that(lun.get_id(), equal_to('sv_16455'))

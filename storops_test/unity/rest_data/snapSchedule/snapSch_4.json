@@ -1,0 +1,33 @@
+{
+    "content": {
+        "id": "snapSch_4",
+        "version": 1,
+        "instanceId": "root/emc:EMC_UEM_SnapshotScheduleLeaf%InstanceID=snapSch_4",
+        "name": "Snapshot Schedule 4",
+        "isDefault": false,
+        "isModified": false,
+        "modificationTime": "2020-03-17T07:37:56.695Z",
+        "rules": [
+            {
+                "type": 1,
+                "daysOfWeek": [],
+                "accessType": 1,
+                "instanceId": "root/emc:C4CB_SchedulerRule%InstanceID=SchedRule_4",
+                "id": "SchedRule_4",
+                "minute": 0,
+                "hours": [
+                    4
+                ],
+                "interval": 1,
+                "isAutoDelete": true,
+                "retentionTime": 0
+            }
+        ],
+        "isSyncReplicated": false,
+        "luns": [
+            {
+                "id": "sv_2"
+            }
+        ]
+    }
+}

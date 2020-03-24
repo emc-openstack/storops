@@ -16,15 +16,16 @@
 from __future__ import unicode_literals
 
 import datetime
-import time
 from unittest import TestCase
 
+import ddt
+import time
 from hamcrest import assert_that, equal_to, instance_of, only_contains, \
-    raises, contains_string, is_in, has_items, none
+    raises, contains_string, is_in, has_items, none, calling
 
 from storops.exception import UnityResourceNotFoundError, \
     UnityHostNameInUseError, UnityActionNotAllowedError, \
-    UnityPolicyInvalidParametersError
+    UnityPolicyInvalidParametersError, UnitySnapScheduleNameInUseError
 from storops.lib.resource import ResourceList
 from storops.unity.enums import EnclosureTypeEnum, DiskTypeEnum, HealthEnum, \
     HostTypeEnum, ServiceLevelEnum, ServiceLevelEnumList, \
@@ -64,6 +65,7 @@ from storops.unity.resource.port import UnityFcPortList
 from storops.unity.resource.port import UnityIpPortList, \
     UnityEthernetPortList, UnityIscsiPortalList
 from storops.unity.resource.snap import UnitySnapList
+from storops.unity.resource.snap_schedule import UnitySnapScheduleRule
 from storops.unity.resource.sp import UnityStorageProcessor, \
     UnityStorageProcessorList
 from storops.unity.resource.system import UnitySystemList, UnitySystem, \
@@ -78,6 +80,7 @@ from storops_test.unity.rest_mock import t_rest, patch_rest, t_unity
 __author__ = 'Cedric Zhuang'
 
 
+@ddt.ddt
 class UnitySystemTest(TestCase):
     @patch_rest
     def test_get_properties(self):
@@ -798,6 +801,35 @@ class UnitySystemTest(TestCase):
         alerts = unity.get_alert()
         assert_that(alerts, instance_of(UnityAlertList))
         assert_that(len(alerts), equal_to(3))
+
+    @ddt.data(
+        {'rules': [UnitySnapScheduleRule.every_day([12])],
+         'is_sync_replicated': None,
+         'skip_sync_to_remote_system': None},
+        {'rules': [UnitySnapScheduleRule.every_day([0])],
+         'is_sync_replicated': True,
+         'skip_sync_to_remote_system': True},
+    )
+    @patch_rest
+    def test_create_snap_schedule(self, kwargs):
+        kwargs = {key: val for key, val in kwargs.items() if val is not None}
+        unity = t_unity()
+        schedule = unity.create_snap_schedule(
+            'snap-schedule-created-by-system',
+            **kwargs
+        )
+        assert_that(schedule.get_id(), equal_to('snapSch_6'))
+
+    @patch_rest
+    def test_create_snap_schedule_existing(self):
+        unity = t_unity()
+        assert_that(
+            calling(unity.create_snap_schedule).with_args(
+                'snap-schedule-created-by-system-existing',
+                [UnitySnapScheduleRule.every_month([15])]
+            ),
+            raises(UnitySnapScheduleNameInUseError)
+        )
 
 
 class UnityDpeTest(TestCase):

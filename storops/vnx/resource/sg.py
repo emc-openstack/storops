@@ -46,7 +46,6 @@ class VNXStorageGroup(VNXCliResource):
         self._hba_port_list = []
         self._conn = None
         self._hlu_lock = Lock()
-        self._alu_hlu_cache = {}
 
         self.shuffle_hlu = shuffle_hlu
 
@@ -232,7 +231,8 @@ class VNXStorageGroup(VNXCliResource):
     def get_alu_hlu_map(self):
         if self.alu_hlu_map is None:
             self._parsed_resource['alu_hlu_map'] = {}
-        return self._alu_hlu_cache
+        log.debug("ALU-HLU mapping is retrieved: %s", self.alu_hlu_map)
+        return self.alu_hlu_map
 
     @property
     def used_hlu_numbers(self):
@@ -259,6 +259,9 @@ class VNXStorageGroup(VNXCliResource):
     def _add_hlu(self, alu, hlu):
         with self._hlu_lock:
             self.get_alu_hlu_map()[alu] = hlu
+        log.debug("ALU-HLU mapping (alu=%(alu)s, hlu=%(hlu)s) added, "
+                  "now the full cached mapping is %(map)s.",
+                  {'alu': alu, 'hlu': hlu, 'map': self.get_alu_hlu_map()})
         return hlu
 
     def _delete_alu(self, alu):
@@ -266,14 +269,9 @@ class VNXStorageGroup(VNXCliResource):
         with self._hlu_lock:
             if self.has_alu(alu):
                 ret = self.get_alu_hlu_map().pop(alu)
-        return ret
-
-    def update(self, data=None):
-        ret = super(VNXStorageGroup, self).update(data)
-
-        # only update the _alu_hlu_cache incrementally.
-        if self.alu_hlu_map:
-            self._alu_hlu_cache.update(self.alu_hlu_map)
+                log.debug("ALU-HLU mapping (alu=%(alu)s) popped, "
+                          "now the full cached mapping is %(map)s.",
+                          {'alu': alu, 'map': self.get_alu_hlu_map()})
         return ret
 
     def attach_alu(self, lun, retry_limit=None, hlu=None):
@@ -296,14 +294,14 @@ class VNXStorageGroup(VNXCliResource):
             except ex.VNXAluAlreadyAttachedError:
                 # alu no in the alu-hlu map cache but attach failed with
                 # already attached, that means the cache is out dated
-                log.info("ALU(alu=%s) is already attached, "
-                         "updating the cache.", alu)
+                log.debug("ALU(alu=%s) is already attached, "
+                          "updating alu_hlu_map.", alu)
                 self.update()
                 raise
             except ex.VNXAttachAluError:
                 # other attach error, remove hlu id from the cache
-                log.info("ALU(alu=%s) failed to attach, "
-                         "deleting from the cache.", alu)
+                log.debug("ALU(alu=%s) failed to attach, "
+                          "deleting from alu_hlu_map.", alu)
                 self._delete_alu(alu_id)
                 raise
 
@@ -316,19 +314,29 @@ class VNXStorageGroup(VNXCliResource):
         alu = lun_clz.get_id(lun)
         if self.has_alu(alu):
             # found alu in the alu-hlu map cache, meaning already attached
-            log.info("ALU(alu=%s) is already attached, found in the cache.",
-                     alu)
+            log.debug("ALU(alu=%(alu)s) is already attached, found in the "
+                      "cache with hlu=%(hlu)s.",
+                      {'alu': alu, 'hlu': self.get_alu_hlu_map()[alu]})
             raise ex.VNXAluAlreadyAttachedError()
         else:
             ret = _do(alu, hlu)
         return ret
 
     def detach_alu(self, lun):
+        def _update():
+            self.update()
+
+        @retry(on_error=ex.VNXDetachAluNotFoundError, on_retry=_update,
+               limit=2)
+        def _get_hlu():
+            _hlu = self.get_hlu(lun)
+            if _hlu is None:
+                raise ex.VNXDetachAluNotFoundError(
+                    'specified lun {} is not attached.'.format(alu))
+            return _hlu
+
         alu = storops.vnx.resource.lun.VNXLun.get_id(lun)
-        hlu = self.get_hlu(lun)
-        if hlu is None:
-            raise ex.VNXDetachAluNotFoundError(
-                'specified lun {} is not attached.'.format(alu))
+        hlu = _get_hlu()
         out = self._cli.sg_delete_hlu(self._get_name(), hlu, poll=self.poll)
         msg = 'failed to detach hlu {}/alu {}.'.format(hlu, alu)
         ex.raise_if_err(out, msg, default=ex.VNXStorageGroupError, )

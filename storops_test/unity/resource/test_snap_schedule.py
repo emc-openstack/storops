@@ -359,7 +359,7 @@ class UnitySnapScheduleRuleTest(TestCase):
          'error_msg': 'days_of_month of UnitySnapScheduleRule every_month '
                       'rule cannot be empty list.'}
     )
-    def test_every_month_exception(self, kwargs):
+    def test_every_month_value_error(self, kwargs):
         days_of_month = kwargs.pop('days_of_month')
         error_msg = kwargs.pop('error_msg')
         kwargs = {key: val for key, val in kwargs.items() if val is not None}

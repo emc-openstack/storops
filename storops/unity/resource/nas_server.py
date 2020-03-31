@@ -246,7 +246,6 @@ class UnityNasServer(UnityResource):
             false - Unix to/from Windows user name mapping is disabled.
         :param is_packet_reflect_enabled.
         :param is_ignore_warnings: is backup only or not.
-        :return: created replication session.
         """
         req_body = self._cli.make_body(
             name=name, homeSP=sp,

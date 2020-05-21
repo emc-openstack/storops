@@ -190,6 +190,20 @@ class UnitySystemTest(TestCase):
         assert_that(len(lun_list), equal_to(5))
 
     @patch_rest
+    def test_get_lun_by_name(self):
+        unity = t_unity()
+        lun = unity.get_lun(name='openstack_lun')
+        assert_that(lun, instance_of(UnityLun))
+        assert_that(lun.id, equal_to('sv_2'))
+
+    @patch_rest
+    def test_get_lun_by_name_need_encoded(self):
+        unity = t_unity()
+        lun = unity.get_lun(name='openstack_lun_#1')
+        assert_that(lun, instance_of(UnityLun))
+        assert_that(lun.id, equal_to('sv_2'))
+
+    @patch_rest
     def test_create_host(self):
         unity = t_unity()
         host = unity.create_host("Hello")

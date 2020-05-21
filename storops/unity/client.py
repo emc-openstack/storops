@@ -19,6 +19,7 @@ import logging
 from functools import wraps
 
 import six
+from six.moves import urllib
 
 import storops.unity.resource.system
 import storops.unity.resource.type_resource
@@ -87,7 +88,13 @@ class UnityClient(PerfManager):
     def dict_to_filter_string(cls, the_filter):
         def _get_non_list_value(k, v):
             if isinstance(v, six.string_types):
-                r = '{} eq "{}"'.format(k, v)
+                # Don't encode : and space chars, they are known working with
+                # Unity, eg. hostInitiator's initiatorID is string like
+                # iqn.1993-08.org.debian:01:a4f95ed19999 and sp name is `SP A`.
+                # And they are massively used in test cases.
+                # So, not to encode : and space to avoid introducing
+                # regression failure.
+                r = '{} eq "{}"'.format(k, urllib.parse.quote(v, safe=': '))
             elif isinstance(v, UnityEnum):
                 r = '{} eq {}'.format(k, v.value[0])
             elif isinstance(v, UnityResource):

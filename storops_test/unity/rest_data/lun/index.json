@@ -48,8 +48,12 @@
       "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,hostAccess.host.name,id,instanceId,ioLimitPolicy,isCompressionEnabled,isDataReductionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,pool.isFASTCacheEnabled,pool.name,pool.raidType,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,storageResource.type,tieringPolicy,type,wwn",
       "response": "all.json"
     },
-      {
+    {
       "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,hostAccess.host.name,id,instanceId,ioLimitPolicy,isCompressionEnabled,isDataReductionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,pool.isFASTCacheEnabled,pool.name,pool.raidType,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,storageResource.type,tieringPolicy,type,wwn&filter=name eq \"openstack_lun\"",
+      "response": "sv_2.json"
+    },
+    {
+      "url": "/api/types/lun/instances?compact=True&fields=auSize,creationTime,currentNode,defaultNode,description,health,hostAccess,hostAccess.host.name,id,instanceId,ioLimitPolicy,isCompressionEnabled,isDataReductionEnabled,isReplicationDestination,isSnapSchedulePaused,isThinEnabled,lunGroupObjectId,metadataSize,metadataSizeAllocated,modificationTime,name,objectId,operationalStatus,perTierSizeUsed,pool,pool.isFASTCacheEnabled,pool.name,pool.raidType,sizeAllocated,sizeTotal,sizeUsed,smpBackendId,snapCount,snapSchedule,snapWwn,snapsSize,snapsSizeAllocated,storageResource,storageResource.type,tieringPolicy,type,wwn&filter=name eq \"openstack_lun_%231\"",
       "response": "sv_2.json"
     },
     {

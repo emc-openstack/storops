@@ -245,7 +245,8 @@ class UnityHost(UnityResource):
         # From 4.4.0 (Osprey), it supported to pass in hlu when attaching LUN,
         # but not when attaching snap.
         from storops.unity.resource.lun import UnityLun as _UnityLun
-        if skip_hlu_0 and isinstance(lun_or_snap, _UnityLun):
+        is_lun = isinstance(lun_or_snap, _UnityLun)
+        if skip_hlu_0 and is_lun:
             candidate_hlu = self._random_hlu_number()
             lun_or_snap.attach_to(self, hlu=candidate_hlu)
             self.update()
@@ -254,6 +255,13 @@ class UnityHost(UnityResource):
             lun_or_snap.attach_to(self)
             self.update()
             host_lun = self.get_host_lun(lun_or_snap)
+
+            # Use the old way to modify the hlu after attaching snap if we need
+            # to skip hlu0 for a snapshot.
+            if (not is_lun) and skip_hlu_0 and host_lun.hlu == 0:
+                candidate_hlu = self._random_hlu_number()
+                self._modify_hlu(host_lun, candidate_hlu)
+                return candidate_hlu
             return host_lun.hlu
 
     def attach(self, lun_or_snap, skip_hlu_0=False):

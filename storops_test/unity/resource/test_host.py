@@ -418,7 +418,7 @@ class UnityHostTest(TestCase):
             assert_that(hlu, equal_to(12781))
 
     @patch_rest
-    def test_attach_with_retry_member_snap_skip_hlu_0(self):
+    def test_attach_with_retry_snap_skip_hlu_0(self):
         host = UnityHost(cli=t_rest(), _id='Host_27')
         snap = UnitySnap(_id='38654705831', cli=t_rest())
         with mock.patch('storops.unity.resource.host.UnityHost.'
@@ -426,6 +426,38 @@ class UnityHostTest(TestCase):
             hlu = host._attach_with_retry(snap, True)
             assert_that(hlu, is_not(equal_to(0)))
             assert_that(hlu, equal_to(12781))
+
+    @patch_rest
+    def test_attach_with_retry_snap_not_skip_hlu_0(self):
+        host = UnityHost(cli=t_rest(), _id='Host_27')
+        snap = UnitySnap(_id='38654705831', cli=t_rest())
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_random_hlu_number', new=lambda _: 12781):
+            hlu = host._attach_with_retry(snap, False)
+            assert_that(hlu, equal_to(0))
+
+    @patch_rest
+    def test_attach_with_retry_snap_skip_hlu_0_5_0_0(self):
+        host = UnityHost(cli=t_rest(), _id='Host_27')
+        snap = UnitySnap(_id='38654705831', cli=t_rest(version='5.0.0'))
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_random_hlu_number', new=lambda _: 12782):
+            with mock.patch('storops.unity.resource.host.UnityHost.'
+                            '_modify_hlu') as mock_modify_hlu:
+                hlu = host._attach_with_retry(snap, True)
+                host_lun = host.get_host_lun(snap)
+                mock_modify_hlu.assert_called_with(host_lun, 12782)
+                assert_that(hlu, equal_to(12782))
+
+    @patch_rest
+    def test_attach_with_retry_snap_not_skip_hlu_0_5_0_0(self):
+        host = UnityHost(cli=t_rest(), _id='Host_27')
+        snap = UnitySnap(_id='38654705831', cli=t_rest(version='5.0.0'))
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_modify_hlu') as mock_modify_hlu:
+            hlu = host._attach_with_retry(snap, False)
+            assert_that(mock_modify_hlu.called, equal_to(False))
+            assert_that(hlu, equal_to(0))
 
     @patch_rest
     def test_attach_with_retry_no_skip_hlu_0(self):

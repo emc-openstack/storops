@@ -23,6 +23,7 @@ import time
 
 import requests
 import six
+from requests.exceptions import ConnectTimeout
 from requests.exceptions import RequestException
 from retryz import retry
 
@@ -124,7 +125,7 @@ class HTTPClient(object):
                 self.base_url + url,
                 method,
                 **kwargs)
-        except requests.ConnectTimeout as ex:
+        except ConnectTimeout as ex:
             raise StoropsConnectTimeoutError(message=str(ex))
 
     def _get_limit(self):

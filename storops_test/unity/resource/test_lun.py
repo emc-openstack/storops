@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import pickle
 from unittest import TestCase
 
 import ddt
@@ -574,6 +575,14 @@ class UnityLunTest(TestCase):
         lun = UnityLun(_id='sv_16455', cli=cli)
         resp = lun.remove_snap_schedule()
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_picklable(self):
+        cli = t_rest()
+        lun = UnityLun(_id='sv_16455', cli=cli)
+        lun.update()
+        lun_new = pickle.loads(pickle.dumps(lun))
+        assert_that(lun_new.name, equal_to(lun.name))
 
 
 class UnityLunEnablePerfStatsTest(TestCase):

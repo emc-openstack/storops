@@ -306,3 +306,16 @@ class NodeHeartBeat(NaviCommand):
 
     def __str__(self):
         return self.__repr__()
+
+    # `__getstate__` and `__setstate__` are used by Pickle.
+    # Because `_heartbeat_thread` is unpicklable, need to construct it
+    # manually.
+    def __getstate__(self):
+        state = vars(self).copy()
+        del state['_heartbeat_thread']
+        return state
+
+    def __setstate__(self, state):
+        vars(self).update(state)
+        if self.interval > 0:
+            self._heartbeat_thread = daemon(self._run)

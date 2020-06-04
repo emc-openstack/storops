@@ -378,6 +378,21 @@ class VNXStorageGroup(VNXCliResource):
     def set_system_lun_list(self, system_lun_list):
         self._system_lun_list = system_lun_list
 
+    # `__getstate__` and `__setstate__` are used by Pickle.
+    # Because `_hlu_lock` is unpicklable, need to construct it manually.
+    # `_self_cache_lock_` is used by `cachez` and will be constructed
+    # automatically in `cachez`.
+    def __getstate__(self):
+        state = vars(self).copy()
+        for key in ('_hlu_lock', '_self_cache_lock_', '_self_cache_'):
+            if key in state:
+                del state[key]
+        return state
+
+    def __setstate__(self, state):
+        vars(self).update(state)
+        self._hlu_lock = Lock()
+
 
 class VNXStorageGroupList(VNXCliResourceList):
     @classmethod

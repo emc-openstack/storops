@@ -24,6 +24,7 @@ from storops.unity.resource.system import UnitySystem  # noqa
 from storops.unity.resource.snap_schedule import UnitySnapScheduleRule  # noqa
 from storops.vnx.enums import *  # noqa
 from storops.vnx.resource.system import VNXSystem  # noqa
+from storops.vnx.sg_cache import SGCache  # noqa
 
 __author__ = 'Cedric Zhuang'
 

@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import pickle
 from unittest import TestCase
 
 import time
@@ -201,6 +202,22 @@ class NodeHeartBeatTest(TestCase):
         assert_that(hb.command_count, less_than_or_equal_to(2))
         hb.stop()
         time.sleep(0.1)
+
+    def test_picklable(self):
+        hb = NodeHeartBeat(interval=0.1)
+        hb.add('spa', '1.1.1.1')
+        hb.add('spb', '1.1.1.2')
+        time.sleep(0.1)
+        hb_new = pickle.loads(pickle.dumps(hb))
+        time.sleep(0.3)
+        assert_that(hb_new._heartbeat_thread is not None, equal_to(True))
+        assert_that(len(hb_new.nodes), equal_to(len(hb.nodes)))
+        assert_that(hb_new.interval, equal_to(hb.interval))
+        assert_that(hb_new.timeout, equal_to(hb.timeout))
+        assert_that([n.ip for n in hb_new.nodes],
+                    equal_to([n.ip for n in hb.nodes]))
+        hb.stop()
+        hb_new.stop()
 
 
 class NodeInfoTest(TestCase):

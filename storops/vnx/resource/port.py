@@ -521,3 +521,10 @@ class VNXStorageGroupHBAList(VNXCliResourceList):
     @classmethod
     def get_resource_class(cls):
         return VNXStorageGroupHBA
+
+    # `__getstate__` and `__setstate__` are used by Pickle.
+    def __getstate__(self):
+        return vars(self)
+
+    def __setstate__(self, state):
+        vars(self).update(state)

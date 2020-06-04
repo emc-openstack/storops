@@ -87,6 +87,10 @@ class VNXSPEnum(VNXEnum):
     def display_name(self):
         return self.index.upper()
 
+    # `__reduce_ex__` makes `VNXSPEnum` pickable by value.
+    def __reduce_ex__(self, protocol):
+        return self.__class__, (self.value,)
+
 
 class VNXProvisionEnum(VNXEnum):
     # value of spec "provisioning:type"

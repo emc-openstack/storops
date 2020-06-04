@@ -162,6 +162,16 @@ def t_cli(version=None):
 
 
 @cache
+@patch_cli
+def t_cli_simple():
+    """get the test cli client with stats
+
+    :return: test cli client
+    """
+    return CliClient('10.244.212.182', heartbeat_interval=0)
+
+
+@cache
 def t_vnx():
     """ get the test vnx instance
 

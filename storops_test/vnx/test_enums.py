@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import pickle
 from unittest import TestCase
 
 import six
@@ -191,6 +192,9 @@ class VNXSPEnumTest(TestCase):
 
         for k, v in six.iteritems(data):
             assert_that(VNXSPEnum.parse(k), equal_to(v),
+                        'input: {}'.format(k))
+            assert_that(pickle.loads(pickle.dumps(VNXSPEnum.parse(k))) is v,
+                        equal_to(True),
                         'input: {}'.format(k))
 
     def test_get_sp_index_err(self):

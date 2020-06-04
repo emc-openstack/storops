@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import pickle
 from unittest import TestCase
 
 from hamcrest import assert_that, equal_to, has_item, raises, instance_of, \
@@ -29,7 +30,7 @@ from storops.vnx.enums import VNXSPEnum
 from storops.vnx.resource.lun import VNXLun
 from storops.vnx.resource.port import VNXStorageGroupHBAList
 from storops.vnx.resource.sg import VNXStorageGroupList, VNXStorageGroup
-from storops_test.vnx.cli_mock import patch_cli, t_cli
+from storops_test.vnx.cli_mock import patch_cli, t_cli, t_cli_simple
 from storops_test.vnx.resource.test_lun import get_lun_list
 
 __author__ = 'Cedric Zhuang'
@@ -459,3 +460,13 @@ class VNXStorageGroupTest(TestCase):
     @patch_cli
     def test_sg_write_size_kb(self):
         assert_that(self.sg.write_size_kb, close_to(921, 1))
+
+    @patch_cli
+    def test_picklable(self):
+        sg = VNXStorageGroup.get(t_cli_simple(), 'server7')
+        assert_that(len(sg.get_alu_hlu_map()), equal_to(2))
+        expected = sg.get_alu_hlu_map()
+        sg_str = pickle.dumps(sg)
+        sg_new = pickle.loads(sg_str)
+        assert_that(len(sg_new.get_alu_hlu_map()), equal_to(2))
+        assert_that(sg_new.get_alu_hlu_map(), equal_to(expected))

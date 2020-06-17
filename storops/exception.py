@@ -1418,5 +1418,10 @@ class UnityFailoverNasRepWithFsRepOutOfSyncError(UnityReplicationError):
     error_code = 105906786
 
 
+@rest_exception
+class UnityQoSMaxKBPSOutOfRangeError(UnityReplicationError):
+    error_code = 151032069
+
+
 class UnitySnapScheduleNameInUseError(UnityException):
     pass

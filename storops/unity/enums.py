@@ -282,6 +282,7 @@ class UsageHarvestStateEnum(UnityEnum):
 
 class TierTypeEnum(UnityEnum):
     NONE = (0, 'None')
+    NVME_EXTREME_PERFORMANCE = (5, 'NVMe Extreme Performance')
     EXTREME_PERFORMANCE = (10, 'Extreme Performance')
     PERFORMANCE = (20, 'Performance')
     CAPACITY = (30, 'Capacity')

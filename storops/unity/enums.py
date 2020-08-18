@@ -92,6 +92,8 @@ class ReplicationTypeEnum(UnityEnum):
     NONE = (0, 'No Replication')
     LOCAL = (1, 'Local Replication')
     REMOTE = (2, 'Remote Replication')
+    MIXED = (3, 'More than one async replication session involved resources '
+                'on local system')
 
 
 class NasServerUnixDirectoryServiceEnum(UnityEnum):
@@ -315,6 +317,7 @@ class ReplicationPolicyEnum(UnityEnum):
 
 
 class EnclosureTypeEnum(UnityEnum):
+    UNKNOWN_ENCLOSURE = (0, 'Unknown Enclosure')
     DERRINGER_6G_SAS_DAE = (20, '25 Drive 6G DAE')
     PINECONE_6G_SAS_DAE = (26, '12 Drive 6G DAE')
     STEELJAW_6G_SAS_DPE = (27, '12 Drive 6G DPE')
@@ -337,6 +340,14 @@ class DiskTypeEnum(UnityEnum):
     SAS_FLASH_2 = (11, 'SAS Medium Endurance Flash')
     SAS_FLASH_3 = (12, 'SAS Low Endurance Flash')
     SAS_FLASH_4 = (13, 'SAS Low Endurance Flash')
+    NVME_FLASH = (16, 'The NVMe Flash drive can be used for the NVMe Extreme '
+                      'Performance storage pool tier.')
+    NVME_FLASH_1 = (18, 'The low Endurance NVMe Flash drive can be used for '
+                        'the NVMe Extreme Performance storage pool tier but '
+                        'not for the FAST Cache.')
+    NVME_FLASH_2 = (19, 'The Read Intensive NVMe FLASH drive can only be used '
+                        'for NVMe Extreme Performance storage pool but not '
+                        'for the FAST Cache.')
 
 
 class DiskTypeEnumList(UnityEnumList):
@@ -606,6 +617,8 @@ class DiskTierEnum(UnityEnum):
     CAPACITY = (2, 'Capacity')
     EXTREME_MULTI = (3, 'Multi-tier with Flash')
     MULTI = (4, 'Multi-tier without Flash')
+    NVME_EXTREME_PERFORMANCE_TIER = (5, 'Tier that maps to NVMe drives.')
+    NVME_EXTREME_MULTI_TIER = (6, 'Multi-tiered pool that includes NVMe tier.')
 
 
 class DiskTierEnumList(UnityEnumList):
@@ -747,6 +760,12 @@ class DiskTechnologyEnum(UnityEnum):
     SAS_FLASH_3 = (7, 'SAS_FLASH_3')
     SAS_FLASH_4 = (8, 'SAS_FLASH_4')
     SAS_FLASH_5 = (9, 'SAS_FLASH_5')
+    NVME_FLASH_1 = (10, 'The Low Endurance NVMe Flash drive can be used for '
+                        'the NVMe Extreme Performance storage pool tier but '
+                        'not for the FAST Cache.')
+    NVME_FLASH_2 = (11, 'The Read Intensive NVMe Flash drive can only be used '
+                        'for the NVMe Extreme Performance Pool and cannot be '
+                        'used for FAST Cache.')
     MIXED = (50, 'Mixed')
     VIRTUAL = (99, 'Virtual')
 
@@ -829,6 +848,8 @@ class ReplicationSessionNetworkStatusEnum(UnityEnum):
     OK = (2, 'OK')
     LOST_COMMUNICATION = (5, 'Lost_Communication')
     LOST_SYNC_COMMUNICATION = (10, 'Lost_Sync_Communication')
+    ZERO_BANDWIDTH_CONFIGURED = (18, 'Data transfer is suspended because '
+                                     'bandwidth is set to 0')
 
 
 class ReplicationSessionSyncStateEnum(UnityEnum):
@@ -892,6 +913,11 @@ class ReplicationOpStatusEnum(UnityEnum):
     PAUSED_MIXED = (0x87EB, 'Paused_Mixed')
     IDLE_MIXED = (0x87EC, 'Idle_Mixed')
     AUTO_SYNC_CONFIGURED_MIXED = (0x87ED, 'Auto_Sync_Configured_Mixed')
+    HIBERNATED = (0x87EE, 'Source or destination is in hibernated state.')
+    ZERO_BANDWIDTH_CONFIGURED = (0x87EF, 'Data transfer suspended due to zero '
+                                         'bandwidth configured.')
+    SOURCE_VDM_PERFORMANCE_DEGRADED = (0x87F0, 'Performance of source VDM is '
+                                               'degraded.')
 
 
 class SNMPAuthProtocolEnum(UnityEnum):
@@ -1024,6 +1050,7 @@ class ImportOpStatusEnum(UnityEnum):
     SYNCING_DATA_STOPPED = (33283, 'Syncing_Data_Stopped')
     SYNCING_DATA_FAILED = (33284, 'Syncing_Data_Failed')
     SYNCING_DATA_FAILED_STOPPED = (33285, 'Syncing_Data_Failed_Stopped')
+    SESSION_EXCEED_LIMIT = (33532, 'Session_Exceed_Limit')
     READY_TO_COMPLETE = (33536, 'Ready_To_Complete')
     COMPLETING = (33537, 'Completing')
     COMPLETE_FAILED = (33538, 'Complete_Failed')

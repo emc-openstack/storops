@@ -1055,6 +1055,8 @@ UnityHostInitiator:
     - label: isBound
     - label: sourceType
       converter: HostInitiatorSourceTypeEnum
+    - label: initiatorSourceType
+      converter: HostInitiatorSourceTypeEnum
 
 
 UnityHostInitiatorPath:
@@ -1479,6 +1481,8 @@ UnityLinkAggregation:
     - label: macAddress
     - label: isLinkUp
     - label: parentStorageProcessor
+      converter: UnityStorageProcessor
+    - label: storageProcessor
       converter: UnityStorageProcessor
 
 

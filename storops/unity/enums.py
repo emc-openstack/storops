@@ -98,6 +98,7 @@ class ReplicationTypeEnum(UnityEnum):
 
 class NasServerUnixDirectoryServiceEnum(UnityEnum):
     NONE = (0, 'No Directory Service')
+    LOCAL = (1, 'Use local files for looking up identity information.')
     NIS = (2, 'Use NIS Server')
     LDAP = (3, 'Use LDAP Server')
     LOCAL_THEN_NIS = (4, 'Local Then NIS')

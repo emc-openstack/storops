@@ -20,7 +20,8 @@ from unittest import TestCase
 from hamcrest import assert_that, equal_to, instance_of
 
 from storops.unity.enums import StorageResourceTypeEnum, ReplicationTypeEnum, \
-    ThinStatusEnum, TieringPolicyEnum
+    ThinStatusEnum, TieringPolicyEnum, DataReductionStatusEnum, \
+    DedupStatusEnum
 from storops.unity.resource.filesystem import UnityFileSystem
 from storops.unity.resource.health import UnityHealth
 from storops.unity.resource.pool import UnityPoolList
@@ -56,6 +57,13 @@ class UnityStorageResourceTest(TestCase):
         assert_that(sr.snap_count, equal_to(0))
         assert_that(sr.pools, instance_of(UnityPoolList))
         assert_that(sr.filesystem, instance_of(UnityFileSystem))
+        assert_that(sr.advanced_dedup_status,
+                    equal_to(DedupStatusEnum.DISABLED))
+        assert_that(sr.data_reduction_status,
+                    equal_to(DataReductionStatusEnum.DISABLED))
+        assert_that(sr.data_reduction_size_saved, equal_to(0))
+        assert_that(sr.data_reduction_percent, equal_to(0))
+        assert_that(sr.data_reduction_ratio, equal_to(1.0))
 
     @patch_rest
     def test_get_all(self):

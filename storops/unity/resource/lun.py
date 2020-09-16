@@ -76,7 +76,8 @@ def prepare_lun_parameters(cli=None, **kwargs):
         fastVPParameters=UnityClient.make_body(
             tieringPolicy=kwargs.get('tiering_policy')),
         ioLimitParameters=UnityClient.make_body(
-            ioLimitPolicy=kwargs.get('io_limit_policy')))
+            ioLimitPolicy=kwargs.get('io_limit_policy')),
+        isAdvancedDedupEnabled=kwargs.get('is_advanced_dedup_enabled'))
 
     compression_body = make_compression_body(
         cli,
@@ -114,7 +115,7 @@ class UnityLun(UnityResource):
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,
                is_snap_schedule_paused=None, skip_sync_to_remote_system=None,
                is_compression=None, create_vmfs=False, major_version=None,
-               block_size=None):
+               block_size=None, is_advanced_dedup_enabled=None):
         pool_clz = storops.unity.resource.pool.UnityPool
         pool = pool_clz.get(cli, pool)
 
@@ -126,7 +127,8 @@ class UnityLun(UnityResource):
             is_snap_schedule_paused=is_snap_schedule_paused,
             skip_sync_to_remote_system=skip_sync_to_remote_system,
             is_compression=is_compression, major_version=major_version,
-            block_size=block_size)
+            block_size=block_size,
+            is_advanced_dedup_enabled=is_advanced_dedup_enabled)
 
         create_method = 'createVmwareLun' if create_vmfs else 'createLun'
 
@@ -250,7 +252,8 @@ class UnityLun(UnityResource):
                description=None, sp=None, io_limit_policy=None,
                is_repl_dst=None, tiering_policy=None, snap_schedule=None,
                is_snap_schedule_paused=None, skip_sync_to_remote_system=None,
-               is_compression=None, major_version=None, block_size=None):
+               is_compression=None, major_version=None, block_size=None,
+               is_advanced_dedup_enabled=None):
         if self.is_cg_member:
             if any(each is not None for each in [is_repl_dst, snap_schedule,
                                                  is_snap_schedule_paused,
@@ -274,7 +277,8 @@ class UnityLun(UnityResource):
                 is_snap_schedule_paused=is_snap_schedule_paused,
                 skip_sync_to_remote_system=skip_sync_to_remote_system,
                 is_compression=is_compression, major_version=major_version,
-                block_size=block_size)
+                block_size=block_size,
+                is_advanced_dedup_enabled=is_advanced_dedup_enabled)
 
             if self.is_vmware_vmfs:
                 resp = self._cli.action(UnityStorageResource().resource_class,
@@ -407,24 +411,43 @@ class UnityLun(UnityResource):
         return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
                                    description)
 
-    def _is_move_session_supported(self, dest):
+    def _is_move_session_supported(self, dest, is_compressed=None,
+                                   is_advanced_dedup_enabled=None):
         if self.is_thin_clone:
             log.error('Not support move session, source lun is thin clone.')
             return False
-        if self.is_data_reduction_enabled and not dest.is_all_flash:
-            log.error('Not support move session, source lun is compressed, '
-                      'but destination pool is not all flash pool.')
+        if is_compressed and not dest.is_compression_supported():
+            log.error('Not support move session, target lun is compressed, '
+                      'but destination pool is not supported compression.')
+            return False
+        if (is_advanced_dedup_enabled and
+                not dest.is_advanced_dedup_supported()):
+            log.error('Not support move session, target lun is advanced '
+                      'deduplication enabled, but destination pool is not '
+                      'supported advanced deduplication.')
             return False
         return True
 
     def migrate(self, dest, **kwargs):
-        if not self._is_move_session_supported(dest):
-            return False
-
         interval = kwargs.pop('interval', 5)
         timeout = kwargs.pop('timeout', 1800)
-        is_thin = kwargs.get('is_thin')
-        is_compressed = kwargs.get('is_compressed')
+        is_thin = kwargs.get('is_thin', self.is_thin_enabled)
+
+        if is_thin:
+            is_compressed = kwargs.get('is_compressed',
+                                       self.is_data_reduction_enabled)
+        else:
+            is_compressed = False
+
+        if is_thin and is_compressed:
+            is_advanced_dedup_enabled = kwargs.get(
+                'is_advanced_dedup_enabled', self.is_advanced_dedup_enabled)
+        else:
+            is_advanced_dedup_enabled = False
+
+        if not self._is_move_session_supported(dest, is_compressed,
+                                               is_advanced_dedup_enabled):
+            return False
 
         @retryz.retry(timeout=timeout, wait=interval,
                       on_return=lambda x: not isinstance(x, bool))
@@ -437,12 +460,12 @@ class UnityLun(UnityResource):
                 return False
 
         clz = storops.unity.resource.move_session.UnityMoveSession
-        if is_compressed not in (True, False):
-            is_compressed = self.is_data_reduction_enabled
         try:
-            move_session = clz.create(self._cli, self, dest,
-                                      is_data_reduction_applied=is_compressed,
-                                      is_dest_thin=is_thin)
+            move_session = clz.create(
+                self._cli, self, dest,
+                is_data_reduction_applied=is_compressed,
+                is_dest_thin=is_thin,
+                is_advanced_dedup_applied=is_advanced_dedup_enabled)
             return _do_check_move_session(move_session.id)
         except UnityMigrationSourceHasThinCloneError:
             log.error('Not support move session, source lun has thin clone.')

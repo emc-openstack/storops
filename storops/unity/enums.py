@@ -1207,6 +1207,12 @@ class DayOfWeekEnumList(UnityEnumList):
         return DayOfWeekEnum
 
 
+class DataReductionStatusEnum(UnityEnum):
+    DISABLED = (0, 'Disabled')
+    ENABLED = (1, 'Enabled')
+    MIXED = (65535, 'Mixed')
+
+
 class FSRenamePolicyEnum(UnityEnum):
     ALL_RENAME_ALLOWED = (0, 'All_Rename_Allowed')
     SMB_RENAME_FORBIDDEN = (1, 'SMB_Rename_Forbidden')

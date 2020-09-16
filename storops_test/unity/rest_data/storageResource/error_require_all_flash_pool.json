@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108009014,
+    "httpStatusCode": 404,
+    "messages": [
+      {
+        "en-US": "The specified LUN cannot have data reduction enabled since the storage pool the LUN is provisioned from is not an all-flash pool. (Error Code:0x6701636)"
+      }
+    ],
+    "created": "2020-09-16T06:49:20.341Z"
+  }
+}

@@ -1485,3 +1485,23 @@ class UnityQoSMaxKBPSOutOfRangeError(UnityReplicationError):
 
 class UnitySnapScheduleNameInUseError(UnityException):
     pass
+
+
+@rest_exception
+class UnityAdvancedDedupNotSupportedError(UnityException):
+    error_code = 108009040
+
+
+@rest_exception
+class UnityAdvancedDedupRequireCompressionEnabledError(UnityException):
+    error_code = 108007752
+
+
+@rest_exception
+class UnityCompressionRequireLunIsThinError(UnityException):
+    error_code = 108007750
+
+
+@rest_exception
+class UnityCompressionRequireAllFlashPoolError(UnityException):
+    error_code = 108009014

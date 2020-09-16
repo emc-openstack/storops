@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108007752,
+    "httpStatusCode": 422,
+    "messages": [
+      {
+        "en-US": "To Enable advanced deduplication for the specified LUN also requires data reduction to be enabled. (Error Code:0x6701148)"
+      }
+    ],
+    "created": "2020-09-16T06:39:27.841Z"
+  }
+}

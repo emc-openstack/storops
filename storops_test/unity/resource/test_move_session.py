@@ -60,6 +60,7 @@ class UnityMoveSessionTest(TestCase):
             destination_pool=dest_pool,
             is_dest_thin=True,
             is_data_reduction_applied=True,
+            is_advanced_dedup_applied=True,
             priority=5)
         assert_that(move_session.id, equal_to('move_32'))
         assert_that(move_session.state,
@@ -93,6 +94,7 @@ class UnityMoveSessionTest(TestCase):
             destination_pool=dest_pool,
             is_dest_thin=False,
             is_data_reduction_applied=False,
+            is_advanced_dedup_applied=False,
             priority=5)
         assert_that(move_session.id, equal_to('move_35'))
         assert_that(move_session.state,

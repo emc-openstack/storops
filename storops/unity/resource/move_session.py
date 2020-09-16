@@ -28,13 +28,15 @@ class UnityMoveSession(UnityResource):
     @classmethod
     def create(cls, cli, source_storage_resource, destination_pool,
                source_member_lun=None, is_dest_thin=None,
-               is_data_reduction_applied=None, priority=None):
+               is_data_reduction_applied=None, is_advanced_dedup_applied=None,
+               priority=None):
         req_body = cls._compose_move_session_parameter(
             cli, source_storage_resource=source_storage_resource,
             destination_pool=destination_pool,
             source_member_lun=source_member_lun,
             is_dest_thin=is_dest_thin,
             is_data_reduction_applied=is_data_reduction_applied,
+            is_advanced_dedup_applied=is_advanced_dedup_applied,
             priority=priority)
         resp = cli.post(cls().resource_class, **req_body)
         resp.raise_if_err()
@@ -59,6 +61,7 @@ class UnityMoveSession(UnityResource):
                                         source_member_lun=None,
                                         is_dest_thin=None,
                                         is_data_reduction_applied=None,
+                                        is_advanced_dedup_applied=None,
                                         priority=None):
         req_body = cli.make_body(
             sourceStorageResource=source_storage_resource,
@@ -66,6 +69,7 @@ class UnityMoveSession(UnityResource):
             sourceMemberLun=source_member_lun,
             isDestThin=is_dest_thin,
             isDataReductionApplied=is_data_reduction_applied,
+            isAdvancedDedupApplied=is_advanced_dedup_applied,
             priority=priority)
         return req_body
 

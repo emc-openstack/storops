@@ -52,6 +52,8 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
         "destinationPool": {
           "id": "pool_4"
         },
@@ -64,7 +66,9 @@
     {
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
+        "isDestThin": true,
         "isDataReductionApplied": true,
+        "isAdvancedDedupApplied": false,
         "destinationPool": {
           "id": "pool_5"
         },
@@ -78,6 +82,8 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
         "destinationPool": {
           "id": "pool_6"
         },
@@ -91,6 +97,8 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
         "destinationPool": {
           "id": "pool_does_not_exist"
         },
@@ -104,6 +112,8 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
         "destinationPool": {
           "id": "pool_5"
         },
@@ -117,6 +127,7 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": true,
+        "isAdvancedDedupApplied": true,
         "isDestThin": true,
         "priority": 5,
         "destinationPool": {
@@ -132,6 +143,8 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
         "destinationPool": {
           "id": "pool_7"
         },
@@ -145,6 +158,8 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
         "destinationPool": {
           "id": "pool_8"
         },
@@ -158,6 +173,7 @@
       "url": "/api/types/moveSession/instances?compact=True",
       "body": {
         "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
         "isDestThin": false,
         "priority": 5,
         "destinationPool": {
@@ -179,6 +195,66 @@
     {
       "url": "/api/instances/moveSession/move_32/action/cancel?compact=True",
       "response": "empty.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": false,
+        "destinationPool": {
+          "id": "pool_5"
+        },
+        "sourceStorageResource": {
+          "id": "sv_5608"
+        }
+      },
+      "response": "create_move_35.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": true,
+        "isAdvancedDedupApplied": true,
+        "isDestThin": true,
+        "destinationPool": {
+          "id": "pool_5"
+        },
+        "sourceStorageResource": {
+          "id": "sv_5620"
+        }
+      },
+      "response": "create_move_35.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": true,
+        "destinationPool": {
+          "id": "pool_5"
+        },
+        "sourceStorageResource": {
+          "id": "sv_5621"
+        }
+      },
+      "response": "create_move_35.json"
+    },
+    {
+      "url": "/api/types/moveSession/instances?compact=True",
+      "body": {
+        "isDataReductionApplied": false,
+        "isAdvancedDedupApplied": false,
+        "isDestThin": false,
+        "destinationPool": {
+          "id": "pool_4"
+        },
+        "sourceStorageResource": {
+          "id": "sv_2"
+        }
+      },
+      "response": "create_move_35.json"
     }
   ]
 }

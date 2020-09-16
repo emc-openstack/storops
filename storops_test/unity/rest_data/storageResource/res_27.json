@@ -4,6 +4,8 @@
     "type": 1,
     "replicationType": 0,
     "thinStatus": 1,
+    "advancedDedupStatus": 0,
+    "dataReductionStatus": 0,
     "relocationPolicy": 0,
     "health": {
       "value": 5,
@@ -20,6 +22,9 @@
     "sizeTotal": 3221225472,
     "sizeUsed": 1620303872,
     "sizeAllocated": 3221225472,
+    "dataReductionSizeSaved": 0,
+    "dataReductionPercent": 0,
+    "dataReductionRatio": 1.0,
     "perTierSizeUsed": [
       6442450944,
       0,

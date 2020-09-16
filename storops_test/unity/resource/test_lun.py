@@ -23,7 +23,6 @@ import mock
 from hamcrest import assert_that, calling, only_contains, instance_of, \
     contains_string, raises, none, has_item, is_not
 from hamcrest import equal_to
-from storops.unity.resource.snap_schedule import UnitySnapSchedule
 
 from storops import UnitySystem, TieringPolicyEnum
 from storops.exception import UnitySnapNameInUseError, \
@@ -32,7 +31,9 @@ from storops.exception import UnitySnapNameInUseError, \
     UnityThinCloneLimitExceededError, UnityCGMemberActionNotSupportError, \
     UnityThinCloneNotAllowedError, UnityMigrationTimeoutException, \
     UnityMigrationSourceDestNotExistsError, JobStateError, \
-    JobTimeoutException
+    JobTimeoutException, UnityAdvancedDedupRequireCompressionEnabledError, \
+    UnityCompressionRequireAllFlashPoolError, \
+    UnityCompressionRequireLunIsThinError
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum, \
     ESXFilesystemBlockSizeEnum, ESXFilesystemMajorVersionEnum
 from storops.unity.resource.disk import UnityDisk
@@ -43,6 +44,7 @@ from storops.unity.resource.port import UnityIoLimitPolicy, \
     UnityIoLimitRuleSetting
 from storops.unity.resource.remote_system import UnityRemoteSystem
 from storops.unity.resource.snap import UnitySnap
+from storops.unity.resource.snap_schedule import UnitySnapSchedule
 from storops.unity.resource.sp import UnityStorageProcessor
 from storops.unity.resource.storage_resource import UnityStorageResource
 from storops.unity.resp import RestResponse
@@ -83,6 +85,10 @@ class UnityLunTest(TestCase):
         assert_that(lun.io_limit_rule, none())
         assert_that(lun.is_compression_enabled, equal_to(False))
         assert_that(lun.is_data_reduction_enabled, equal_to(False))
+        assert_that(lun.is_advanced_dedup_enabled, equal_to(False))
+        assert_that(lun.data_reduction_size_saved, equal_to(0))
+        assert_that(lun.data_reduction_percent, equal_to(0))
+        assert_that(lun.data_reduction_ratio, equal_to(1.0))
 
     @patch_rest
     def test_lun_modify_host_access(self):
@@ -151,6 +157,13 @@ class UnityLunTest(TestCase):
         lun.modify(is_compression=True)
         lun.update()
         assert_that(lun.is_data_reduction_enabled, equal_to(True))
+
+    @patch_rest
+    def test_lun_modify_dedup_enabled(self):
+        lun = UnityLun(_id='sv_19', cli=t_rest(version='5.0.0'))
+        lun.modify(is_advanced_dedup_enabled=True)
+        lun.update()
+        assert_that(lun.is_advanced_dedup_enabled, equal_to(True))
 
     @mock.patch(target='storops.lib.job_helper.JobHelper',
                 new=MockJobHelper)
@@ -342,6 +355,55 @@ class UnityLunTest(TestCase):
         assert_that(rule.name, equal_to('Density_1100_KBPS_rule'))
 
     @patch_rest
+    def test_create_with_dedup_enabled_compression_enabled(self):
+        cli = t_rest(version='5.0.0')
+        pool = UnityPool('pool_1', cli=cli)
+        lun = pool.create_lun('lun_1',
+                              is_compression=True,
+                              is_advanced_dedup_enabled=True)
+        assert_that(lun.name, equal_to('lun_1'))
+        assert_that(lun.is_data_reduction_enabled, equal_to(True))
+        assert_that(lun.is_advanced_dedup_enabled, equal_to(True))
+
+    @patch_rest
+    def test_create_with_dedup_enabled_compression_disabled(self):
+        def f():
+            cli = t_rest(version='5.0.0')
+            pool = UnityPool('pool_1', cli=cli)
+            pool.create_lun('lun_2',
+                            is_compression=False,
+                            is_advanced_dedup_enabled=True)
+
+        assert_that(f,
+                    raises(UnityAdvancedDedupRequireCompressionEnabledError))
+
+    @patch_rest
+    def test_create_with_dedup_enabled_in_non_all_flash_pool(self):
+        def f():
+            cli = t_rest(version='5.0.0')
+            pool = UnityPool('pool_1', cli=cli)
+            pool.is_all_flash = False
+            pool.create_lun('lun_3',
+                            is_compression=True,
+                            is_advanced_dedup_enabled=True)
+
+        assert_that(f,
+                    raises(UnityCompressionRequireAllFlashPoolError))
+
+    @patch_rest
+    def test_create_with_compressed_enabled_thin_disabled(self):
+        def f():
+            cli = t_rest(version='5.0.0')
+            pool = UnityPool('pool_1', cli=cli)
+            pool.is_all_flash = False
+            pool.create_lun('lun_3',
+                            is_thin=False,
+                            is_compression=True)
+
+        assert_that(f,
+                    raises(UnityCompressionRequireLunIsThinError))
+
+    @patch_rest
     def test_expand_lun_success(self):
         lun = UnityLun('sv_2', cli=t_rest())
         original_size = lun.expand(101 * 1024 ** 3)
@@ -422,10 +484,49 @@ class UnityLunTest(TestCase):
         assert_that(r, equal_to(True))
 
     @patch_rest
+    def test_migrate_thick_lun_success(self):
+        lun = UnityLun('sv_5608', cli=t_rest())
+        dest_pool = UnityPool('pool_5', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(True))
+
+    @patch_rest
     def test_migrate_compressed_lun_success(self):
         lun = UnityLun('sv_18', cli=t_rest())
         dest_pool = UnityPool('pool_5', cli=t_rest())
         r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(True))
+
+    @patch_rest
+    def test_migrate_deduplicated_lun_success(self):
+        with mock.patch.object(UnitySystem, 'model', create=True,
+                               return_value='Unity 650F',
+                               new_callable=mock.PropertyMock):
+            lun = UnityLun('sv_5620', cli=t_rest('4.5'))
+            dest_pool = UnityPool('pool_5', cli=t_rest('4.5'))
+            r = lun.migrate(dest_pool)
+            assert_that(r, equal_to(True))
+
+    @patch_rest
+    def test_migrate_lun_source_thin_dest_thick(self):
+        lun = UnityLun('sv_2', cli=t_rest())
+        dest_pool = UnityPool('pool_4', cli=t_rest())
+        # If dest LUN is thick (is_thin == False), is_compressed and
+        # is_advanced_dedup_enabled parameters will be changed to
+        # False in lun.migrate()
+        r = lun.migrate(dest_pool, is_thin=False, is_compressed=True,
+                        is_advanced_dedup_enabled=True)
+        assert_that(r, equal_to(True))
+
+    @patch_rest
+    def test_migrate_lun_source_deduplicated_dest_thin(self):
+        lun = UnityLun('sv_5621', cli=t_rest('4.5'))
+        dest_pool = UnityPool('pool_5', cli=t_rest('4.5'))
+        # If dest LUN is not compressed (is_compressed == False),
+        # is_advanced_dedup_enabled parameter will be changed to
+        # False in lun.migrate()
+        r = lun.migrate(dest_pool, is_thin=True, is_compressed=False,
+                        is_advanced_dedup_enabled=True)
         assert_that(r, equal_to(True))
 
     @patch_rest
@@ -436,9 +537,16 @@ class UnityLunTest(TestCase):
         assert_that(r, equal_to(False))
 
     @patch_rest
-    def test_migrate_lun_source_compressed_dest_not_flash(self):
+    def test_migrate_lun_source_compressed_dest_not_supported(self):
         lun = UnityLun('sv_18', cli=t_rest())
         dest_pool = UnityPool('pool_4', cli=t_rest())
+        r = lun.migrate(dest_pool)
+        assert_that(r, equal_to(False))
+
+    @patch_rest
+    def test_migrate_lun_source_deduplicated_dest_not_supported(self):
+        lun = UnityLun('sv_5620', cli=t_rest())
+        dest_pool = UnityPool('pool_5', cli=t_rest())
         r = lun.migrate(dest_pool)
         assert_that(r, equal_to(False))
 

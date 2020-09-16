@@ -67,6 +67,7 @@
             "raidType": 1,
             "isFASTCacheEnabled": false
         },
-        "isDataReductionEnabled": true
+        "isDataReductionEnabled": true,
+        "isAdvancedDedupEnabled": false
     }
 }

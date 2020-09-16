@@ -17,8 +17,9 @@ from __future__ import unicode_literals
 
 from unittest import TestCase
 
+import ddt
+import mock
 from hamcrest import assert_that, equal_to, instance_of, raises
-from storops.unity.resource.snap_schedule import UnitySnapSchedule
 
 from storops.exception import UnityLunNameInUseError, JobStateError, \
     UnityPoolNameInUseError
@@ -30,17 +31,19 @@ from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     ESXFilesystemBlockSizeEnum, NFSShareDefaultAccessEnum, \
     NFSShareSecurityEnum
 from storops.unity.resource.disk import UnityDiskGroup, UnityDisk
+from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.nas_server import UnityNasServer
 from storops.unity.resource.pool import UnityPool, UnityPoolList, \
     RaidGroupParameter
-from storops.unity.resource.lun import UnityLun
+from storops.unity.resource.snap_schedule import UnitySnapSchedule
 from storops.unity.resource.sp import UnityStorageProcessor
-from storops.unity.resource.nas_server import UnityNasServer
-
+from storops.unity.resource.system import UnitySystem
 from storops_test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
 
 
+@ddt.ddt
 class UnityPoolTest(TestCase):
     @patch_rest
     def test_properties(self):
@@ -284,6 +287,14 @@ class UnityPoolTest(TestCase):
         assert_that(lun, instance_of(UnityLun))
 
     @patch_rest
+    def test_create_lun_with_dedup_enabled(self):
+        pool = UnityPool(_id='pool_1', cli=t_rest(version='5.0'))
+        lun = pool.create_lun("LunName", 100,
+                              is_compression=True,
+                              is_advanced_dedup_enabled=True)
+        assert_that(lun, instance_of(UnityLun))
+
+    @patch_rest
     def test_create_vmfs(self):
         pool = UnityPool(_id='pool_1', cli=t_rest())
         vmfs = pool.create_vmfs(vmfs_name="VMFS datastore", size_gb=100)
@@ -351,3 +362,85 @@ class UnityPoolTest(TestCase):
             lun_name='lun-with-snap-schedule',
             snap_schedule=schedule)
         assert_that(lun.get_id(), equal_to('sv_16455'))
+
+    @patch_rest
+    @ddt.data(
+        {'unity_version': '4.5.0', 'pool_id': 'pool_1', 'is_all_flash': True,
+         'expected': True},
+        {'unity_version': '4.5.1', 'pool_id': 'pool_2', 'is_all_flash': False,
+         'expected': False},
+        {'unity_version': '5.0.3', 'pool_id': 'pool_1', 'is_all_flash': True,
+         'expected': True},
+        {'unity_version': '5.0.3', 'pool_id': 'pool_2', 'is_all_flash': False,
+         'expected': False}
+    )
+    @ddt.unpack
+    def test_is_compression_supported(self, unity_version, pool_id,
+                                      is_all_flash, expected):
+        cli = t_rest(unity_version)
+        pool = UnityPool(_id=pool_id, cli=cli)
+        pool.is_all_flash = is_all_flash
+        assert_that(pool.is_compression_supported(), equal_to(expected))
+
+    @patch_rest
+    @ddt.data(
+        {'unity_support_matrix': ['550', '650F'],
+         'unity_model': 'Unity 300', 'is_all_flash': True,
+         'expected': False},
+        {'unity_support_matrix': ['550', '650F'],
+         'unity_model': 'Unity 650F', 'is_all_flash': True,
+         'expected': True},
+        {'unity_support_matrix': ['550', '650F'],
+         'unity_model': 'Unity 650F', 'is_all_flash': False,
+         'expected': False},
+    )
+    @ddt.unpack
+    def test_verify_advanced_dedup_by_unity_model(self, unity_support_matrix,
+                                                  unity_model, is_all_flash,
+                                                  expected):
+        with mock.patch.object(UnitySystem, 'model', create=True,
+                               return_value=unity_model,
+                               new_callable=mock.PropertyMock):
+            cli = t_rest()
+            pool = UnityPool(_id='pool_1', cli=cli)
+            pool.is_all_flash = is_all_flash
+            assert_that(pool.verify_advanced_dedup_by_unity_model(
+                unity_support_matrix), equal_to(expected))
+
+    @patch_rest
+    @ddt.data(
+        {'unity_version': '4.3.0', 'unity_model': 'Unity 500',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
+        {'unity_version': '4.3.1', 'unity_model': 'Unity 650F',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
+        {'unity_version': '4.5.0', 'unity_model': 'Unity 500',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
+        {'unity_version': '4.5.0', 'unity_model': 'Unity 500',
+         'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+        {'unity_version': '4.5.1', 'unity_model': 'Unity 650F',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
+        {'unity_version': '4.5.1', 'unity_model': 'Unity 650F',
+         'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+        {'unity_version': '5.0.0', 'unity_model': 'Unity 500',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
+        {'unity_version': '5.0.0', 'unity_model': 'Unity 500',
+         'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+        {'unity_version': '5.0.1', 'unity_model': 'Unity 480',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
+        {'unity_version': '5.0.1', 'unity_model': 'Unity 480',
+         'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+        {'unity_version': '5.0.3', 'unity_model': 'Unity 880F',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
+        {'unity_version': '5.0.3', 'unity_model': 'Unity 880F',
+         'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+    )
+    @ddt.unpack
+    def test_is_advanced_dedup_supported(self, unity_version, unity_model,
+                                         pool_id, is_all_flash, expected):
+        with mock.patch.object(UnitySystem, 'model', create=True,
+                               return_value=unity_model,
+                               new_callable=mock.PropertyMock):
+            cli = t_rest(unity_version)
+            pool = UnityPool(_id=pool_id, cli=cli)
+            pool.is_all_flash = is_all_flash
+            assert_that(pool.is_advanced_dedup_supported(), equal_to(expected))

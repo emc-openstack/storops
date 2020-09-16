@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108007750,
+    "httpStatusCode": 422,
+    "messages": [
+      {
+        "en-US": "To Enable data reduction for the specified LUN also requires thin to be enabled. (Error Code:0x6701146)"
+      }
+    ],
+    "created": "2020-09-25T01:56:18.655Z"
+  }
+}

@@ -42,6 +42,7 @@ UnityLun:
     - label: isThinEnabled
     - label: isCompressionEnabled
     - label: isDataReductionEnabled
+    - label: isAdvancedDedupEnabled
     - label: storageResource
       converter: UnityStorageResource
     - label: pool
@@ -73,6 +74,9 @@ UnityLun:
       converter: UnityLun
     - label: familyCloneCount
     - label: isThinClone
+    - label: dataReductionSizeSaved
+    - label: dataReductionPercent
+    - label: dataReductionRatio
 
 
 UnityHealth:
@@ -150,6 +154,13 @@ UnityStorageResource: &UnityStorageResource
       converter: UnityHostVvolDatastoreList
     - label: virtualVolumes
       converter: UnityVirtualVolumeList
+    - label: dataReductionStatus
+      converter: DataReductionStatusEnum
+    - label: advancedDedupStatus
+      converter: DedupStatusEnum
+    - label: dataReductionSizeSaved
+    - label: dataReductionPercent
+    - label: dataReductionRatio
 
 
 UnityConsistencyGroup:

@@ -1,0 +1,73 @@
+{
+  "content": {
+    "id": "sv_5621",
+    "operationalStatus": [
+      2
+    ],
+    "type": 2,
+    "tieringPolicy": 0,
+    "defaultNode": 1,
+    "currentNode": 1,
+    "auSize": 8192,
+    "migrationState": 1,
+    "instanceId": "root/emc:EMC_UEM_StorageVolumeLeaf%InstanceID=sv_5621",
+    "creationTime": "2020-09-16T02:44:30.000Z",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_VOL_OK"
+      ],
+      "descriptions": [
+        "The LUN is operating normally. No action is required."
+      ]
+    },
+    "name": "lun_1",
+    "modificationTime": "2020-09-16T02:44:31.996Z",
+    "sizeTotal": 1073741824,
+    "sizeAllocated": 0,
+    "sizePreallocated": 268435456,
+    "sizeAllocatedTotal": 3221225472,
+    "dataReductionSizeSaved": 0,
+    "dataReductionPercent": 0,
+    "dataReductionRatio": 1.0,
+    "perTierSizeUsed": [
+      0,
+      3489660928,
+      0,
+      0
+    ],
+    "isThinEnabled": true,
+    "isDataReductionEnabled": true,
+    "isAdvancedDedupEnabled": true,
+    "wwn": "60:06:01:60:6A:B0:4D:00:0D:7C:61:5F:C4:0C:EB:99",
+    "isReplicationDestination": false,
+    "isSnapSchedulePaused": false,
+    "objectId": 42949672967,
+    "metadataSize": 3758096384,
+    "metadataSizeAllocated": 3221225472,
+    "snapWwn": "60:06:01:60:6A:B0:4D:00:EA:E2:47:CF:73:4E:4A:4D",
+    "snapsSize": 0,
+    "snapsSizeAllocated": 0,
+    "snapCount": 0,
+    "lunNumber": 21,
+    "isThinClone": false,
+    "familySnapCount": 0,
+    "familyCloneCount": 0,
+    "nonBaseSizeAllocated": 0,
+    "familySizeAllocatedTotal": 3221225472,
+    "nonBaseSize": 0,
+    "storageResource": {
+      "id": "sv_5621",
+      "type": 8
+    },
+    "pool": {
+      "id": "pool_1",
+      "raidType": 1,
+      "name": "flash_pool",
+      "isFASTCacheEnabled": false
+    },
+    "familyBaseLun": {
+      "id": "sv_5621"
+    }
+  }
+}

@@ -325,8 +325,16 @@ UnityFileSystem:
     - label: sizeTotal
     - label: sizeUsed
     - label: sizeAllocated
+    - label: sizePreallocated
+    - label: sizeAllocatedTotal
+    - label: minSizeAllocated
     - label: isReadOnly
     - label: isThinEnabled
+    - label: isDataReductionEnabled
+    - label: dataReductionSizeSaved
+    - label: dataReductionPercent
+    - label: dataReductionRatio
+    - label: isAdvancedDedupEnabled
     - label: storageResource
       converter: UnityStorageResource
     - label: isCIFSSyncWritesEnabled
@@ -350,6 +358,10 @@ UnityFileSystem:
     - label: isSMBCA
     - label: accessPolicy
       converter: AccessPolicyEnum
+    - label: folderRenamePolicy
+      converter: FSRenamePolicyEnum
+    - label: lockingPolicy
+      converter: FSLockingPolicyEnum
     - label: format
       converter: FSFormatEnum
     - label: hostIOSize
@@ -457,14 +469,25 @@ UnityNfsShare:
       converter: NFSShareDefaultAccessEnum
     - label: minSecurity
       converter: NFSShareSecurityEnum
+    - label: nfsOwnerUsername
     - label: noAccessHosts
       converter: UnityHostList
     - label: readOnlyHosts
       converter: UnityHostList
     - label: readWriteHosts
       converter: UnityHostList
+    - label: readOnlyRootAccessHosts
+      converter: UnityHostList
     - label: rootAccessHosts
       converter: UnityHostList
+    - label: noAccessHostsString
+    - label: readOnlyHostsString
+    - label: readWriteHostsString
+    - label: readOnlyRootHostsString
+    - label: readWriteRootHostsString
+    - label: anonymousUID
+    - label: anonymousGID
+    - label: exportOption
     - label: hostAccesses
 
 

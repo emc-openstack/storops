@@ -1205,3 +1205,14 @@ class DayOfWeekEnumList(UnityEnumList):
     @classmethod
     def get_enum_class(cls):
         return DayOfWeekEnum
+
+
+class FSRenamePolicyEnum(UnityEnum):
+    ALL_RENAME_ALLOWED = (0, 'All_Rename_Allowed')
+    SMB_RENAME_FORBIDDEN = (1, 'SMB_Rename_Forbidden')
+    ALL_RENAME_FORBIDDEN = (2, 'All_Rename_Forbidden')
+
+
+class FSLockingPolicyEnum(UnityEnum):
+    ADVISORY = (0, 'Advisory')
+    MANDATORY = (1, 'Mandatory')

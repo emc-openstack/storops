@@ -293,6 +293,26 @@ class UnityCifsServiceNotEnabledError(UnityException):
     pass
 
 
+@rest_exception
+class UnityActiveDirectoryDomainNotSpecifiedError(UnityException):
+    error_code = 108011879
+
+
+@rest_exception
+class UnityDNSServerRequiredError(UnityException):
+    error_code = 108011895
+
+
+@rest_exception
+class UnityUnableToLocateDomainControllerInADDomainError(UnityException):
+    error_code = 108011915
+
+
+@rest_exception
+class UnitySystemTimeNotSynchronizedError(UnityException):
+    error_code = 108011924
+
+
 class UnityHostInitiatorNotFoundError(UnityException):
     pass
 
@@ -420,6 +440,11 @@ class UnitySmbNameInUseError(UnityException):
 
 
 @rest_exception
+class UnitySmbShareMaskInvalidError(UnityException):
+    error_code = 151036427
+
+
+@rest_exception
 class UnityIpAddressUsedError(UnityException):
     error_code = 108011747
 
@@ -457,6 +482,35 @@ class UnityNfsAlreadyEnabledError(UnityException):
 @rest_exception
 class UnityFileSystemNameAlreadyExisted(UnityException):
     error_code = 108008464
+
+
+@rest_exception
+class UnityFileSystemThinThickConversionNotSupportedError(UnityException):
+    error_code = 108008493
+
+
+@rest_exception
+class UnitySharePathNotExistError(UnityException):
+    error_code = 151035906
+
+
+@rest_exception
+class UnityNasServerSecureNfsNotEnableError(UnityException):
+    error_code = 151036182
+
+
+@rest_exception
+class UnitySpecifiedServerNotExistError(UnityException):
+    error_code = 131149864
+
+
+@rest_exception
+class UnityExportOptionInvalidError(UnityException):
+    error_code = 131150149
+
+
+class UnityShareTypeNotExistError(UnityException):
+    message = 'Share type does not exist.'
 
 
 class UnityCreateSnapError(UnityException):
@@ -505,6 +559,11 @@ class UnityAclUserNotFoundError(UnityException):
 @rest_exception
 class UnityFileSystemSizeTooSmallError(UnityException):
     error_code = 108008449
+
+
+@rest_exception
+class UnityModifyingAccessPolicyNotAllowedError(UnityException):
+    error_code = 108008486
 
 
 class UnityQosException(UnityException):

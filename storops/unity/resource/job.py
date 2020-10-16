@@ -25,16 +25,26 @@ from storops.unity import enums
 from storops.unity.enums import FSSupportedProtocolEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
+from storops.unity.resource.nfs_share import prepare_nfs_share_parameters
 
 __author__ = 'Cedric Zhuang'
 
 
 class UnityJob(UnityResource):
     @classmethod
-    def create_nfs_share(cls, cli, pool, nas_server, name, size,
-                         is_thin=None,
-                         tiering_policy=None, async_mode=True,
-                         user_cap=False):
+    def create_nfs_share(cls, cli, pool, nas_server, name, size, is_thin=None,
+                         tiering_policy=None, async_mode=True, user_cap=False,
+                         path=None, default_access=None, min_security=None,
+                         no_access_hosts=None, read_only_hosts=None,
+                         read_write_hosts=None, root_access_hosts=None,
+                         read_only_root_access_hosts=None,
+                         no_access_hosts_string=None,
+                         read_only_hosts_string=None,
+                         read_write_hosts_string=None,
+                         read_only_root_hosts_string=None,
+                         root_access_hosts_string=None,
+                         anonymous_uid=None, anonymous_gid=None,
+                         export_option=None):
         pool_clz = storops.unity.resource.pool.UnityPool
         nas_server_clz = storops.unity.resource.nas_server.UnityNasServer
         size = supplement_filesystem(size, user_cap)
@@ -68,10 +78,36 @@ class UnityJob(UnityResource):
                 'tieringPolicy': tiering_policy
             }
         }
+
+        clz = storops.unity.resource.host.UnityHostList
+        no_access_hosts = clz.get_list(cli, no_access_hosts)
+        read_only_hosts = clz.get_list(cli, read_only_hosts)
+        read_write_hosts = clz.get_list(cli, read_write_hosts)
+        root_access_hosts = clz.get_list(cli, root_access_hosts)
+        read_only_root_access_hosts = clz.get_list(
+            cli, read_only_root_access_hosts)
+
+        nfs_parameters = prepare_nfs_share_parameters(
+            cli=cli, default_access=default_access,
+            min_security=min_security,
+            no_access_hosts=no_access_hosts,
+            read_only_hosts=read_only_hosts,
+            read_write_hosts=read_write_hosts,
+            root_access_hosts=root_access_hosts,
+            read_only_root_access_hosts=read_only_root_access_hosts,
+            no_access_hosts_string=no_access_hosts_string,
+            read_only_hosts_string=read_only_hosts_string,
+            read_write_hosts_string=read_write_hosts_string,
+            read_only_root_hosts_string=read_only_root_hosts_string,
+            root_access_hosts_string=root_access_hosts_string,
+            anonymous_uid=anonymous_uid,
+            anonymous_gid=anonymous_gid,
+            export_option=export_option)
+        path = path if path else '/'
         nfs_share_create = {
             'name': name,
-            'path': '/',
-
+            'path': path,
+            'nfsShareParameters': nfs_parameters
         }
         task_body['parametersIn']['fsParameters'] = cli.make_body(
             fs_parameters)

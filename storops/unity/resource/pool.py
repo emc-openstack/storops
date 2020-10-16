@@ -86,9 +86,10 @@ class UnityPool(UnityResource):
         resp.raise_if_err()
         return resp
 
-    def create_filesystem(self, nas_server, name, size,
-                          proto=None, is_thin=None, tiering_policy=None,
-                          user_cap=False):
+    def create_filesystem(self, nas_server, name, size, proto=None,
+                          is_thin=None, tiering_policy=None, user_cap=False,
+                          is_compression=None, access_policy=None,
+                          locking_policy=None, description=None):
         clz = storops.unity.resource.filesystem.UnityFileSystem
         return clz.create(self._cli, self,
                           nas_server=nas_server,
@@ -97,7 +98,11 @@ class UnityPool(UnityResource):
                           proto=proto,
                           is_thin=is_thin,
                           tiering_policy=tiering_policy,
-                          user_cap=user_cap)
+                          user_cap=user_cap,
+                          is_compression=is_compression,
+                          access_policy=access_policy,
+                          locking_policy=locking_policy,
+                          description=description)
 
     def create_lun(self, lun_name=None, size_gb=1, sp=None, host_access=None,
                    is_thin=None, description=None, tiering_policy=None,
@@ -141,12 +146,38 @@ class UnityPool(UnityResource):
             block_size=block_size)
 
     def create_nfs_share(self, nas_server, name, size, is_thin=None,
-                         tiering_policy=None, user_cap=False):
+                         tiering_policy=None, user_cap=False, path=None,
+                         default_access=None, min_security=None,
+                         no_access_hosts=None, read_only_hosts=None,
+                         read_write_hosts=None, root_access_hosts=None,
+                         read_only_root_access_hosts=None,
+                         no_access_hosts_string=None,
+                         read_only_hosts_string=None,
+                         read_write_hosts_string=None,
+                         read_only_root_hosts_string=None,
+                         root_access_hosts_string=None,
+                         anonymous_uid=None, anonymous_gid=None,
+                         export_option=None):
         clz = storops.unity.resource.job.UnityJob
         return clz.create_nfs_share(
             self._cli, self, nas_server, name, size,
             is_thin, tiering_policy, False,
-            user_cap=user_cap)
+            user_cap=user_cap, path=path,
+            default_access=default_access,
+            min_security=min_security,
+            no_access_hosts=no_access_hosts,
+            read_only_hosts=read_only_hosts,
+            read_write_hosts=read_write_hosts,
+            root_access_hosts=root_access_hosts,
+            read_only_root_access_hosts=read_only_root_access_hosts,
+            no_access_hosts_string=no_access_hosts_string,
+            read_only_hosts_string=read_only_hosts_string,
+            read_write_hosts_string=read_write_hosts_string,
+            read_only_root_hosts_string=read_only_root_hosts_string,
+            root_access_hosts_string=root_access_hosts_string,
+            anonymous_uid=anonymous_uid,
+            anonymous_gid=anonymous_gid,
+            export_option=export_option)
 
     @staticmethod
     def _compose_pool_parameter(cli, **kwargs):

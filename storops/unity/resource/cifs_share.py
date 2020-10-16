@@ -23,21 +23,50 @@ import six
 import storops.unity.resource.cifs_server
 import storops.unity.resource.filesystem
 import storops.unity.resource.snap
-from storops.exception import UnityCreateSnapError
+from storops.exception import UnityCreateSnapError, \
+    UnityShareTypeNotExistError
 from storops.lib.common import instance_cache
 from storops.unity.enums import CIFSTypeEnum, ACEAccessTypeEnum, \
-    ACEAccessLevelEnum, FilesystemSnapAccessTypeEnum
+    ACEAccessLevelEnum, FilesystemSnapAccessTypeEnum, \
+    CifsShareOfflineAvailabilityEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
+from storops.unity.resp import RestResponse
 
 __author__ = 'Jay Xu'
 
 log = logging.getLogger(__name__)
 
 
+def prepare_cifs_share_parameters(cli=None, **kwargs):
+    offline_availability = kwargs.get('offline_availability')
+    CifsShareOfflineAvailabilityEnum.verify(offline_availability)
+
+    cifs_share_param = cli.make_body(
+        allow_empty=True,
+        isReadOnly=kwargs.get('is_read_only'),
+        isEncryptionEnabled=kwargs.get('is_encryption_enabled'),
+        isContinuousAvailabilityEnabled=kwargs.get(
+            'is_con_avail_enabled'),
+        isACEEnabled=kwargs.get('is_ace_enabled'),
+        addACE=kwargs.get('add_ace'),
+        deleteACE=kwargs.get('delete_ace'),
+        isABEEnabled=kwargs.get('is_abe_enabled'),
+        isBranchCacheEnabled=kwargs.get('is_branch_cache_enabled'),
+        offlineAvailability=offline_availability,
+        umask=kwargs.get('umask'),
+        description=kwargs.get('description'))
+    return cifs_share_param
+
+
 class UnityCifsShare(UnityResource):
     @classmethod
-    def create(cls, cli, name, fs, path=None, cifs_server=None):
+    def create(cls, cli, name, fs, path=None, cifs_server=None,
+               is_read_only=None, is_encryption_enabled=None,
+               is_con_avail_enabled=None, is_ace_enabled=None,
+               add_ace=None, delete_ace=None, is_abe_enabled=None,
+               is_branch_cache_enabled=None, offline_availability=None,
+               umask=None, description=None):
         fs_clz = storops.unity.resource.filesystem.UnityFileSystem
         fs = fs_clz.get(cli, fs).verify()
         sr = fs.storage_resource
@@ -51,26 +80,50 @@ class UnityCifsShare(UnityResource):
             server_clz = storops.unity.resource.cifs_server.UnityCifsServer
             cifs_server = server_clz.get(cli, cifs_server)
 
+        share_param = prepare_cifs_share_parameters(
+            cli, is_read_only=is_read_only,
+            is_encryption_enabled=is_encryption_enabled,
+            is_con_avail_enabled=is_con_avail_enabled,
+            is_ace_enabled=is_ace_enabled,
+            add_ace=add_ace, delete_ace=delete_ace,
+            is_abe_enabled=is_abe_enabled,
+            is_branch_cache_enabled=is_branch_cache_enabled,
+            offline_availability=offline_availability,
+            umask=umask, description=description)
+
         param = cli.make_body(name=name,
                               path=path,
-                              cifsServer=cifs_server)
+                              cifsServer=cifs_server,
+                              cifsShareParameters=share_param)
         resp = sr.modify_fs(cifsShareCreate=[param])
         resp.raise_if_err()
         return UnityCifsShareList(cli=cli, name=name).first_item
 
     @classmethod
-    def create_from_snap(cls, cli, snap, name, path=None, is_read_only=None):
+    def create_from_snap(cls, cli, snap, name, path=None, is_read_only=None,
+                         is_abe_enabled=None, is_branch_cache_enabled=None,
+                         is_con_avail_enabled=None,
+                         is_encryption_enabled=None,
+                         offline_availability=None,
+                         umask=None, description=None):
         snap_clz = storops.unity.resource.snap.UnitySnap
         snap = snap_clz.get(cli, snap)
 
         if path is None:
             path = '/'
 
-        resp = cli.post(cls().resource_class,
-                        snap=snap,
-                        path=path,
-                        name=name,
-                        isReadOnly=is_read_only)
+        share_param = prepare_cifs_share_parameters(
+            cli, is_read_only=is_read_only,
+            is_encryption_enabled=is_encryption_enabled,
+            is_con_avail_enabled=is_con_avail_enabled,
+            is_abe_enabled=is_abe_enabled,
+            is_branch_cache_enabled=is_branch_cache_enabled,
+            offline_availability=offline_availability,
+            umask=umask, description=description)
+
+        resp = cli.post(
+            cls().resource_class, snap=snap, path=path, name=name,
+            **share_param)
         resp.raise_if_err()
         return cls(_id=resp.resource_id, cli=cli)
 
@@ -181,22 +234,56 @@ class UnityCifsShare(UnityResource):
             accessLevel=ACEAccessLevelEnum.FULL)
 
     def modify(self, is_read_only=None, is_ace_enabled=None, add_ace=None,
-               delete_ace=None):
+               delete_ace=None, is_encryption_enabled=None,
+               is_con_avail_enabled=None, is_abe_enabled=None,
+               is_branch_cache_enabled=None, offline_availability=None,
+               umask=None, description=None):
+        if self.type == CIFSTypeEnum.CIFS_SHARE:
+            share_param = prepare_cifs_share_parameters(
+                self._cli, is_read_only=is_read_only,
+                is_encryption_enabled=is_encryption_enabled,
+                is_con_avail_enabled=is_con_avail_enabled,
+                is_ace_enabled=is_ace_enabled,
+                add_ace=add_ace, delete_ace=delete_ace,
+                is_abe_enabled=is_abe_enabled,
+                is_branch_cache_enabled=is_branch_cache_enabled,
+                offline_availability=offline_availability,
+                umask=umask, description=description)
+            if share_param:
+                resp = self._modify_fs_share(share_param)
+            else:
+                resp = RestResponse('', self._cli)
+        elif self.type == CIFSTypeEnum.CIFS_SNAPSHOT:
+            share_param = prepare_cifs_share_parameters(
+                self._cli, is_encryption_enabled=is_encryption_enabled,
+                is_con_avail_enabled=is_con_avail_enabled,
+                is_abe_enabled=is_abe_enabled,
+                is_branch_cache_enabled=is_branch_cache_enabled,
+                offline_availability=offline_availability,
+                umask=umask, description=description)
+            if share_param:
+                resp = self._modify_snap_share(share_param)
+            else:
+                resp = RestResponse('', self._cli)
+        else:
+            raise UnityShareTypeNotExistError()
+
+        resp.raise_if_err()
+        return resp
+
+    def _modify_snap_share(self, cifs_share_param):
+        return self.action('modify', **cifs_share_param)
+
+    def _modify_fs_share(self, cifs_share_param):
         sr = self.storage_resource
         if sr is None:
             raise ValueError('storage resource for share {} not found.'
                              .format(self.name))
 
-        share_param = self._cli.make_body(
-            allow_empty=True,
-            isReadOnly=is_read_only,
-            isACEEnabled=is_ace_enabled,
-            addACE=add_ace,
-            deleteAce=delete_ace)
         modify_param = self._cli.make_body(
             allow_empty=True,
             cifsShare=self,
-            cifsShareParameters=share_param)
+            cifsShareParameters=cifs_share_param)
         param = self._cli.make_body(
             allow_empty=True,
             cifsShareModify=[modify_param])

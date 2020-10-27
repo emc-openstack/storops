@@ -26,6 +26,7 @@ import storops.unity.resource.snap
 from storops.exception import UnityCreateSnapError, \
     UnityShareTypeNotExistError
 from storops.lib.common import instance_cache
+from storops.unity.client import UnityClient
 from storops.unity.enums import CIFSTypeEnum, ACEAccessTypeEnum, \
     ACEAccessLevelEnum, FilesystemSnapAccessTypeEnum, \
     CifsShareOfflineAvailabilityEnum
@@ -36,27 +37,6 @@ from storops.unity.resp import RestResponse
 __author__ = 'Jay Xu'
 
 log = logging.getLogger(__name__)
-
-
-def prepare_cifs_share_parameters(cli=None, **kwargs):
-    offline_availability = kwargs.get('offline_availability')
-    CifsShareOfflineAvailabilityEnum.verify(offline_availability)
-
-    cifs_share_param = cli.make_body(
-        allow_empty=True,
-        isReadOnly=kwargs.get('is_read_only'),
-        isEncryptionEnabled=kwargs.get('is_encryption_enabled'),
-        isContinuousAvailabilityEnabled=kwargs.get(
-            'is_con_avail_enabled'),
-        isACEEnabled=kwargs.get('is_ace_enabled'),
-        addACE=kwargs.get('add_ace'),
-        deleteACE=kwargs.get('delete_ace'),
-        isABEEnabled=kwargs.get('is_abe_enabled'),
-        isBranchCacheEnabled=kwargs.get('is_branch_cache_enabled'),
-        offlineAvailability=offline_availability,
-        umask=kwargs.get('umask'),
-        description=kwargs.get('description'))
-    return cifs_share_param
 
 
 class UnityCifsShare(UnityResource):
@@ -80,8 +60,8 @@ class UnityCifsShare(UnityResource):
             server_clz = storops.unity.resource.cifs_server.UnityCifsServer
             cifs_server = server_clz.get(cli, cifs_server)
 
-        share_param = prepare_cifs_share_parameters(
-            cli, is_read_only=is_read_only,
+        share_param = cls.prepare_cifs_share_parameters(
+            is_read_only=is_read_only,
             is_encryption_enabled=is_encryption_enabled,
             is_con_avail_enabled=is_con_avail_enabled,
             is_ace_enabled=is_ace_enabled,
@@ -112,8 +92,8 @@ class UnityCifsShare(UnityResource):
         if path is None:
             path = '/'
 
-        share_param = prepare_cifs_share_parameters(
-            cli, is_read_only=is_read_only,
+        share_param = cls.prepare_cifs_share_parameters(
+            is_read_only=is_read_only,
             is_encryption_enabled=is_encryption_enabled,
             is_con_avail_enabled=is_con_avail_enabled,
             is_abe_enabled=is_abe_enabled,
@@ -239,8 +219,8 @@ class UnityCifsShare(UnityResource):
                is_branch_cache_enabled=None, offline_availability=None,
                umask=None, description=None):
         if self.type == CIFSTypeEnum.CIFS_SHARE:
-            share_param = prepare_cifs_share_parameters(
-                self._cli, is_read_only=is_read_only,
+            share_param = self.prepare_cifs_share_parameters(
+                is_read_only=is_read_only,
                 is_encryption_enabled=is_encryption_enabled,
                 is_con_avail_enabled=is_con_avail_enabled,
                 is_ace_enabled=is_ace_enabled,
@@ -254,8 +234,8 @@ class UnityCifsShare(UnityResource):
             else:
                 resp = RestResponse('', self._cli)
         elif self.type == CIFSTypeEnum.CIFS_SNAPSHOT:
-            share_param = prepare_cifs_share_parameters(
-                self._cli, is_encryption_enabled=is_encryption_enabled,
+            share_param = self.prepare_cifs_share_parameters(
+                is_encryption_enabled=is_encryption_enabled,
                 is_con_avail_enabled=is_con_avail_enabled,
                 is_abe_enabled=is_abe_enabled,
                 is_branch_cache_enabled=is_branch_cache_enabled,
@@ -319,6 +299,27 @@ class UnityCifsShare(UnityResource):
                                        'cifs share {}, type {}.'
                                        .format(self.name, self.type))
         return ret
+
+    @staticmethod
+    def prepare_cifs_share_parameters(**kwargs):
+        offline_availability = kwargs.get('offline_availability')
+        CifsShareOfflineAvailabilityEnum.verify(offline_availability)
+
+        cifs_share_param = UnityClient.make_body(
+            allow_empty=True,
+            isReadOnly=kwargs.get('is_read_only'),
+            isEncryptionEnabled=kwargs.get('is_encryption_enabled'),
+            isContinuousAvailabilityEnabled=kwargs.get(
+                'is_con_avail_enabled'),
+            isACEEnabled=kwargs.get('is_ace_enabled'),
+            addACE=kwargs.get('add_ace'),
+            deleteACE=kwargs.get('delete_ace'),
+            isABEEnabled=kwargs.get('is_abe_enabled'),
+            isBranchCacheEnabled=kwargs.get('is_branch_cache_enabled'),
+            offlineAvailability=offline_availability,
+            umask=kwargs.get('umask'),
+            description=kwargs.get('description'))
+        return cifs_share_param
 
 
 class UnityCifsShareList(UnityResourceList):

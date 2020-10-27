@@ -17,49 +17,21 @@ from __future__ import unicode_literals
 
 import logging
 
+import storops.unity.resource.filesystem
+import storops.unity.resource.host
+import storops.unity.resource.snap
 from storops.exception import UnityShareTypeNotSupportAccessControlError, \
     UnityHostNotFoundException, UnityCreateSnapError
 from storops.lib.common import instance_cache
 from storops.unity.client import UnityClient
 from storops.unity.enums import NFSShareDefaultAccessEnum, NFSTypeEnum, \
     NFSShareSecurityEnum, FilesystemSnapAccessTypeEnum
-import storops.unity.resource.filesystem
-import storops.unity.resource.snap
 from storops.unity.resource import UnityResource, UnityResourceList
-import storops.unity.resource.host
 from storops.unity.resp import RestResponse
 
 __author__ = 'Jay Xu'
 
 LOG = logging.getLogger(__name__)
-
-
-def prepare_nfs_share_parameters(cli=None, **kwargs):
-    default_access = kwargs.get('default_access')
-    min_security = kwargs.get('min_security')
-
-    NFSShareDefaultAccessEnum.verify(default_access)
-    NFSShareSecurityEnum.verify(min_security)
-
-    nfs_share_param = cli.make_body(
-        allow_empty=True,
-        defaultAccess=default_access,
-        minSecurity=min_security,
-        noAccessHosts=kwargs.get('no_access_hosts'),
-        readOnlyHosts=kwargs.get('read_only_hosts'),
-        readWriteHosts=kwargs.get('read_write_hosts'),
-        rootAccessHosts=kwargs.get('root_access_hosts'),
-        readOnlyRootAccessHosts=kwargs.get('read_only_root_access_hosts'),
-        noAccessHostsString=kwargs.get('no_access_hosts_string'),
-        readOnlyHostsString=kwargs.get('read_only_hosts_string'),
-        readWriteHostsString=kwargs.get('read_write_hosts_string'),
-        readOnlyRootHostsString=kwargs.get('read_only_root_hosts_string'),
-        readWriteRootHostsString=kwargs.get('root_access_hosts_string'),
-        anonymousUID=kwargs.get('anonymous_uid'),
-        anonymousGID=kwargs.get('anonymous_gid'),
-        exportOption=kwargs.get('export_option'),
-        description=kwargs.get('description'))
-    return nfs_share_param
 
 
 class UnityNfsHostConfig(object):
@@ -179,8 +151,8 @@ class UnityNfsShare(UnityResource):
         read_only_root_access_hosts = clz.get_list(
             cli, read_only_root_access_hosts)
 
-        share_param = prepare_nfs_share_parameters(
-            cli, default_access=share_access,
+        share_param = cls.prepare_nfs_share_parameters(
+            default_access=share_access,
             min_security=min_security,
             no_access_hosts=no_access_hosts,
             read_only_hosts=read_only_hosts,
@@ -232,8 +204,8 @@ class UnityNfsShare(UnityResource):
         read_only_root_access_hosts = clz.get_list(
             cli, read_only_root_access_hosts)
 
-        share_param = prepare_nfs_share_parameters(
-            cli, default_access=default_access,
+        share_param = cls.prepare_nfs_share_parameters(
+            default_access=default_access,
             min_security=min_security,
             no_access_hosts=no_access_hosts,
             read_only_hosts=read_only_hosts,
@@ -352,8 +324,8 @@ class UnityNfsShare(UnityResource):
         read_only_root_access_hosts = clz.get_list(
             self._cli, read_only_root_access_hosts)
 
-        nfs_share_param = prepare_nfs_share_parameters(
-            self._cli, default_access=default_access,
+        nfs_share_param = self.prepare_nfs_share_parameters(
+            default_access=default_access,
             min_security=min_security,
             no_access_hosts=no_access_hosts,
             read_only_hosts=read_only_hosts,
@@ -435,6 +407,34 @@ class UnityNfsShare(UnityResource):
                                        'nfs share {}, type {}.'
                                        .format(self.name, self.type))
         return ret
+
+    @staticmethod
+    def prepare_nfs_share_parameters(**kwargs):
+        default_access = kwargs.get('default_access')
+        min_security = kwargs.get('min_security')
+
+        NFSShareDefaultAccessEnum.verify(default_access)
+        NFSShareSecurityEnum.verify(min_security)
+
+        nfs_share_param = UnityClient.make_body(
+            allow_empty=True,
+            defaultAccess=default_access,
+            minSecurity=min_security,
+            noAccessHosts=kwargs.get('no_access_hosts'),
+            readOnlyHosts=kwargs.get('read_only_hosts'),
+            readWriteHosts=kwargs.get('read_write_hosts'),
+            rootAccessHosts=kwargs.get('root_access_hosts'),
+            readOnlyRootAccessHosts=kwargs.get('read_only_root_access_hosts'),
+            noAccessHostsString=kwargs.get('no_access_hosts_string'),
+            readOnlyHostsString=kwargs.get('read_only_hosts_string'),
+            readWriteHostsString=kwargs.get('read_write_hosts_string'),
+            readOnlyRootHostsString=kwargs.get('read_only_root_hosts_string'),
+            readWriteRootHostsString=kwargs.get('root_access_hosts_string'),
+            anonymousUID=kwargs.get('anonymous_uid'),
+            anonymousGID=kwargs.get('anonymous_gid'),
+            exportOption=kwargs.get('export_option'),
+            description=kwargs.get('description'))
+        return nfs_share_param
 
 
 class UnityNfsShareList(UnityResourceList):

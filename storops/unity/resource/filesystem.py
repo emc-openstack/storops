@@ -33,53 +33,12 @@ from storops.unity.resource.replication_session import \
     UnityReplicationSession, UnityResourceConfig
 from storops.unity.resource.snap import UnitySnap, UnitySnapList
 from storops.unity.resource.storage_resource import UnityStorageResource
+from storops.unity.resp import RestResponse
+from storops.unity.client import UnityClient
 
 __author__ = 'Jay Xu'
 
 log = logging.getLogger(__name__)
-
-
-def prepare_fs_parameters(cli=None, **kwargs):
-    @version('<4.3')
-    def make_compression_body(cli=None,
-                              is_compression=None):
-        return cli.make_body(allow_empty=True,
-                             isCompressionEnabled=is_compression)
-
-    @version('>=4.3')  # noqa
-    def make_compression_body(cli=None,
-                              is_compression=None):
-        return cli.make_body(allow_empty=True,
-                             isDataReductionEnabled=is_compression)
-
-    access_policy = kwargs.get('access_policy')
-    locking_policy = kwargs.get('locking_policy')
-    supported_protocols = kwargs.get('supported_protocols')
-    tiering_policy = kwargs.get('tiering_policy')
-
-    AccessPolicyEnum.verify(access_policy)
-    FSSupportedProtocolEnum.verify(supported_protocols)
-    FSLockingPolicyEnum.verify(locking_policy)
-    TieringPolicyEnum.verify(tiering_policy)
-
-    fs_param = cli.make_body(
-        allow_empty=True,
-        pool=kwargs.get('pool'),
-        nasServer=kwargs.get('nas_server'),
-        supportedProtocols=supported_protocols,
-        isThinEnabled=kwargs.get('is_thin_enabled'),
-        size=kwargs.get('size'),
-        fastVPParameters=cli.make_body(
-            tieringPolicy=tiering_policy),
-        accessPolicy=access_policy,
-        lockingPolicy=locking_policy)
-
-    compression_body = make_compression_body(
-        cli,
-        kwargs.get('is_compression'))
-    fs_param.update(compression_body)
-
-    return fs_param
 
 
 class UnityFileSystem(UnityResource):
@@ -98,8 +57,8 @@ class UnityFileSystem(UnityResource):
         nas_server = nas_server_clz.get(cli, nas_server)
         size = supplement_filesystem(size, user_cap)
 
-        fs_param = prepare_fs_parameters(
-            cli, pool=pool, nas_server=nas_server,
+        fs_param = cls.prepare_fs_parameters(
+            pool=pool, nas_server=nas_server,
             supported_protocols=proto,
             is_thin_enabled=is_thin,
             size=size,
@@ -120,24 +79,35 @@ class UnityFileSystem(UnityResource):
 
     def modify(self, size=None, is_thin=None, tiering_policy=None,
                user_cap=False, is_compression=None, access_policy=None,
-               locking_policy=None, description=None):
+               locking_policy=None, description=None,
+               cifs_fs_parameters=None):
         sr = self.storage_resource
         if sr is None:
             raise ValueError('storage resource for filesystem {} not found.'
                              .format(self.name))
 
-        size = supplement_filesystem(size, user_cap)
+        if size:
+            size = supplement_filesystem(size, user_cap)
 
-        fs_param = prepare_fs_parameters(
-            self._cli, is_thin_enabled=is_thin, size=size,
+        fs_param = self.prepare_fs_parameters(
+            is_thin_enabled=is_thin, size=size,
             tiering_policy=tiering_policy,
             is_compression=is_compression,
             access_policy=access_policy,
             locking_policy=locking_policy)
 
-        req_body = self._cli.make_body(allow_empty=True,
-                                       description=description,
-                                       fsParameters=fs_param)
+        params = {}
+        if fs_param:
+            params['fsParameters'] = fs_param
+        if cifs_fs_parameters:
+            params['cifsFsParameters'] = cifs_fs_parameters
+        if description:
+            params['description'] = description
+
+        if not params:
+            return RestResponse('', self._cli)
+
+        req_body = self._cli.make_body(allow_empty=True, **params)
         resp = sr.modify_fs(**req_body)
         resp.raise_if_err()
         return resp
@@ -327,6 +297,61 @@ class UnityFileSystem(UnityResource):
             self._cli, self.storage_resource.get_id(),
             dst_resource, max_time_out_of_sync,
             remote_system=remote_system, name=replication_name)
+
+    @staticmethod
+    def prepare_fs_parameters(**kwargs):
+        @version('<4.3')
+        def make_compression_body(is_compression=None):
+            return UnityClient.make_body(
+                allow_empty=True, isCompressionEnabled=is_compression)
+
+        @version('>=4.3')  # noqa
+        def make_compression_body(is_compression=None):
+            return UnityClient.make_body(
+                allow_empty=True, isDataReductionEnabled=is_compression)
+
+        access_policy = kwargs.get('access_policy')
+        locking_policy = kwargs.get('locking_policy')
+        supported_protocols = kwargs.get('supported_protocols')
+        tiering_policy = kwargs.get('tiering_policy')
+
+        AccessPolicyEnum.verify(access_policy)
+        FSSupportedProtocolEnum.verify(supported_protocols)
+        FSLockingPolicyEnum.verify(locking_policy)
+        TieringPolicyEnum.verify(tiering_policy)
+
+        fs_param = UnityClient.make_body(
+            allow_empty=True,
+            pool=kwargs.get('pool'),
+            nasServer=kwargs.get('nas_server'),
+            supportedProtocols=supported_protocols,
+            isThinEnabled=kwargs.get('is_thin_enabled'),
+            size=kwargs.get('size'),
+            accessPolicy=access_policy,
+            lockingPolicy=locking_policy)
+
+        if tiering_policy:
+            fs_param['fastVPParameters'] = UnityClient.make_body(
+                allow_empty=True, tieringPolicy=tiering_policy)
+
+        compression_body = make_compression_body(kwargs.get('is_compression'))
+        fs_param.update(compression_body)
+        return fs_param
+
+    @staticmethod
+    def prepare_cifs_fs_parameters(
+            is_cifs_sync_writes_enabled=None,
+            is_cifs_op_locks_enabled=None,
+            is_cifs_notify_on_write_enabled=None,
+            is_cifs_notify_on_access_enabled=None,
+            cifs_notify_on_change_dir_depth=None):
+        return UnityClient.make_body(
+            allow_empty=True,
+            isCIFSSyncWritesEnabled=is_cifs_sync_writes_enabled,
+            isCIFSOpLocksEnabled=is_cifs_op_locks_enabled,
+            isCIFSNotifyOnWriteEnabled=is_cifs_notify_on_write_enabled,
+            isCIFSNotifyOnAccessEnabled=is_cifs_notify_on_access_enabled,
+            cifsNotifyOnChangeDirDepth=cifs_notify_on_change_dir_depth)
 
 
 class UnityFileSystemList(UnityResourceList):

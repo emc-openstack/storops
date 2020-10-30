@@ -284,6 +284,8 @@ UnityNasServer:
     - label: sizeAllocated
     - label: tenant
       converter: UnityTenant
+    - label: isBackupOnly
+    - label: isPacketReflectEnabled
     - label: isReplicationEnabled
     - label: isReplicationDestination
     - label: replicationType

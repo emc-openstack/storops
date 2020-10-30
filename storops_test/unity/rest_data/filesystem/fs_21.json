@@ -1,19 +1,19 @@
 {
   "content": {
-    "id": "fs_2",
+    "id": "fs_21",
     "operationalStatus": [
       2
     ],
     "type": 1,
-    "tieringPolicy": 0,
-    "supportedProtocols": 1,
-    "accessPolicy": 2,
+    "tieringPolicy": 3,
+    "supportedProtocols": 0,
+    "accessPolicy": 1,
     "folderRenamePolicy": 1,
     "lockingPolicy": 1,
     "format": 2,
     "hostIOSize": 8192,
     "poolFullPolicy": 0,
-    "instanceId": "root/emc:EMC_UEM_FileSystemLeaf%InstanceID=fs_2",
+    "instanceId": "root/emc:EMC_UEM_FileSystemLeaf%InstanceID=fs_13",
     "health": {
       "value": 5,
       "descriptionIds": [
@@ -23,8 +23,8 @@
         "This storage resource is operating normally. No action is required."
       ]
     },
-    "name": "esa_cifs1",
-    "description": "",
+    "name": "fs21",
+    "description": "Modified filesystem.",
     "creationTime": "2016-03-02T02:43:33.495Z",
     "modificationTime": "2016-03-02T02:43:33.496Z",
     "sizeTotal": 5368709120,
@@ -35,16 +35,16 @@
     "minSizeAllocated": 0,
     "isReadOnly": false,
     "isThinEnabled": true,
-    "isDataReductionEnabled": true,
+    "isDataReductionEnabled": false,
     "dataReductionSizeSaved": 0,
     "dataReductionPercent": 0,
     "dataReductionRatio": 1.0,
     "isAdvancedDedupEnabled": false,
-    "isCIFSSyncWritesEnabled": false,
+    "isCIFSSyncWritesEnabled": true,
     "isCIFSOpLocksEnabled": true,
-    "isCIFSNotifyOnWriteEnabled": false,
-    "isCIFSNotifyOnAccessEnabled": false,
-    "cifsNotifyOnChangeDirDepth": 512,
+    "isCIFSNotifyOnWriteEnabled": true,
+    "isCIFSNotifyOnAccessEnabled": true,
+    "cifsNotifyOnChangeDirDepth": 256,
     "cifsNumUsedFiles": 0,
     "oid": 8589934602,
     "backendId": "171798691846",

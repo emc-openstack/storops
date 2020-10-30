@@ -1,0 +1,42 @@
+{
+  "content": {
+    "id": "res_28",
+    "type": 1,
+    "replicationType": 0,
+    "thinStatus": 1,
+    "relocationPolicy": 0,
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "name": "fs13",
+    "description": "",
+    "isReplicationDestination": false,
+    "sizeTotal": 3221225472,
+    "sizeUsed": 1620303872,
+    "sizeAllocated": 3221225472,
+    "perTierSizeUsed": [
+      6442450944,
+      0,
+      0
+    ],
+    "metadataSize": 3489660928,
+    "metadataSizeAllocated": 3221225472,
+    "snapsSizeTotal": 0,
+    "snapsSizeAllocated": 0,
+    "snapCount": 0,
+    "pools": [
+      {
+        "id": "pool_1"
+      }
+    ],
+    "filesystem": {
+      "id": "fs_13"
+    }
+  }
+}

@@ -39,7 +39,7 @@ class UnityNfsHostConfig(object):
                  root_ro=None, nfs_share=None):
         if nfs_share is not None:
             root = nfs_share.root_access_hosts
-            root_ro = nfs_share.root_read_only_hosts
+            root_ro = nfs_share.read_only_root_access_hosts
             ro = nfs_share.read_only_hosts
             rw = nfs_share.read_write_hosts
             no_access = nfs_share.no_access_hosts
@@ -135,7 +135,7 @@ class UnityNfsShare(UnityResource):
                no_access_hosts_string=None, read_only_hosts_string=None,
                read_write_hosts_string=None, read_only_root_hosts_string=None,
                root_access_hosts_string=None, anonymous_uid=None,
-               anonymous_gid=None, description=None, export_option=None):
+               anonymous_gid=None, export_option=None, description=None):
         fs_clz = storops.unity.resource.filesystem.UnityFileSystem
         fs = fs_clz.get(cli, fs).verify()
         sr = fs.storage_resource
@@ -166,8 +166,8 @@ class UnityNfsShare(UnityResource):
             root_access_hosts_string=root_access_hosts_string,
             anonymous_uid=anonymous_uid,
             anonymous_gid=anonymous_gid,
-            description=description,
-            export_option=export_option)
+            export_option=export_option,
+            description=description)
 
         param = cli.make_body(name=name, path=path,
                               nfsShareParameters=share_param)
@@ -219,8 +219,8 @@ class UnityNfsShare(UnityResource):
             root_access_hosts_string=root_access_hosts_string,
             anonymous_uid=anonymous_uid,
             anonymous_gid=anonymous_gid,
-            description=description,
-            export_option=export_option)
+            export_option=export_option,
+            description=description)
 
         resp = cli.post(
             cls().resource_class, snap=snap, path=path, name=name,

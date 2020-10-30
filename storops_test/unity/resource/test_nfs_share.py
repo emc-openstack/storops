@@ -19,7 +19,6 @@ from unittest import TestCase
 
 from hamcrest import equal_to, assert_that, only_contains, instance_of, \
     raises, none
-from storops.unity.resource.snap import UnitySnap
 
 from storops.exception import UnityException, UnityNfsShareNameExistedError, \
     UnityHostNotFoundException, UnitySnapNameInUseError
@@ -29,6 +28,7 @@ from storops.unity.resource.filesystem import UnityFileSystem
 from storops.unity.resource.host import UnityHostList, UnityHost
 from storops.unity.resource.nfs_share import UnityNfsShare, \
     UnityNfsShareList, UnityNfsHostConfig
+from storops.unity.resource.snap import UnitySnap
 from storops_test.unity.rest_mock import patch_rest, t_rest
 
 __author__ = 'Cedric Zhuang'
@@ -57,6 +57,15 @@ class UnityNfsShareTest(TestCase):
                     equal_to('2016-03-02 02:39:22.856000+00:00'))
         assert_that(str(nfs.modification_time),
                     equal_to('2016-03-02 02:39:22.856000+00:00'))
+        assert_that(nfs.no_access_hosts_string, equal_to('Host_42'))
+        assert_that(nfs.read_only_hosts_string, equal_to('Host_41'))
+        assert_that(nfs.read_write_hosts_string, equal_to('Host_18,Host_19'))
+        assert_that(nfs.read_only_root_hosts_string, equal_to('Host_17'))
+        assert_that(nfs.read_write_root_hosts_string,
+                    equal_to('Host_13,Host_16'))
+        assert_that(nfs.anonymous_uid, equal_to(10011))
+        assert_that(nfs.anonymous_gid, equal_to(10012))
+        assert_that(nfs.export_option, equal_to(20011))
         assert_that(nfs.filesystem.get_id(), equal_to('fs_1'))
         assert_that(nfs.filesystem, instance_of(UnityFileSystem))
         assert_that(nfs.tenant, equal_to(None))
@@ -101,6 +110,144 @@ class UnityNfsShareTest(TestCase):
             share_access=NFSShareDefaultAccessEnum.RO_ROOT)
         assert_that(share.name, equal_to('ns1'))
         assert_that(share.id, equal_to('NFSShare_4'))
+
+    @patch_rest
+    def test_create_nfs_share_success_all_params(self):
+        share_access = NFSShareDefaultAccessEnum.READ_WRITE
+        min_security = NFSShareSecurityEnum.KERBEROS
+        description = 'Test nfs share.'
+
+        share = UnityNfsShare.create(
+            t_rest(), 'ns41', 'fs_41',
+            share_access=share_access,
+            min_security=min_security,
+            no_access_hosts_string='Host_42',
+            read_only_hosts_string='Host_41',
+            read_write_hosts_string='Host_19,Host_18',
+            read_only_root_hosts_string='Host_17',
+            root_access_hosts_string='Host_16,Host_13',
+            anonymous_uid=10001,
+            anonymous_gid=10002,
+            export_option=20001,
+            description=description)
+
+        assert_that(share.name, equal_to('ns41'))
+        assert_that(share.id, equal_to('NFSShare_41'))
+        assert_that(share.path, equal_to('/'))
+        assert_that(share.default_access, equal_to(share_access))
+        assert_that(share.min_security, equal_to(min_security))
+        assert_that(share.no_access_hosts_string, equal_to('Host_42'))
+        assert_that(share.read_only_hosts_string, equal_to('Host_41'))
+        assert_that(share.read_write_hosts_string,
+                    equal_to('Host_18,Host_19'))
+        assert_that(share.read_only_root_hosts_string, equal_to('Host_17'))
+        assert_that(share.read_write_root_hosts_string,
+                    equal_to('Host_13,Host_16'))
+        assert_that(share.anonymous_uid, equal_to(10001))
+        assert_that(share.anonymous_gid, equal_to(10002))
+        assert_that(share.export_option, equal_to(20001))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_create_nfs_share_from_snap_success(self):
+        snap = UnitySnap(cli=t_rest(), _id='171798692125')
+
+        default_access = NFSShareDefaultAccessEnum.READ_WRITE
+        min_security = NFSShareSecurityEnum.KERBEROS
+        description = 'Test snap nfs share.'
+
+        share = UnityNfsShare.create_from_snap(
+            t_rest(), snap, 'ns51',
+            default_access=default_access,
+            min_security=min_security,
+            no_access_hosts_string='Host_42',
+            read_only_hosts_string='Host_41',
+            read_write_hosts_string='Host_19,Host_18',
+            read_only_root_hosts_string='Host_17',
+            root_access_hosts_string='Host_16,Host_13',
+            anonymous_uid=10001,
+            anonymous_gid=10002,
+            export_option=1,
+            description=description)
+
+        assert_that(share.name, equal_to('ns51'))
+        assert_that(share.id, equal_to('NFSShare_51'))
+        assert_that(share.path, equal_to('/'))
+        assert_that(share.default_access, equal_to(default_access))
+        assert_that(share.min_security, equal_to(min_security))
+        assert_that(share.no_access_hosts_string, equal_to('Host_42'))
+        assert_that(share.read_only_hosts_string, equal_to('Host_41'))
+        assert_that(share.read_write_hosts_string,
+                    equal_to('Host_18,Host_19'))
+        assert_that(share.read_only_root_hosts_string, equal_to('Host_17'))
+        assert_that(share.read_write_root_hosts_string,
+                    equal_to('Host_13,Host_16'))
+        assert_that(share.anonymous_uid, equal_to(10001))
+        assert_that(share.anonymous_gid, equal_to(10002))
+        assert_that(share.export_option, equal_to(1))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_modify_nfs_share_success(self):
+        share = UnityNfsShare(cli=t_rest(), _id='NFSShare_42')
+
+        share_access = NFSShareDefaultAccessEnum.RO_ROOT
+        description = 'Modified nfs share.'
+
+        share.modify(
+            default_access=share_access,
+            no_access_hosts_string='Host_41',
+            read_only_hosts_string='Host_42',
+            read_write_hosts_string='Host_17,Host_16',
+            read_only_root_hosts_string='Host_19',
+            root_access_hosts_string='Host_18,Host_13',
+            anonymous_uid=10011,
+            anonymous_gid=10012,
+            export_option=20011,
+            description=description)
+
+        assert_that(share.default_access, equal_to(share_access))
+        assert_that(share.no_access_hosts_string, equal_to('Host_41'))
+        assert_that(share.read_only_hosts_string, equal_to('Host_42'))
+        assert_that(share.read_write_hosts_string,
+                    equal_to('Host_16,Host_17'))
+        assert_that(share.read_only_root_hosts_string, equal_to('Host_19'))
+        assert_that(share.read_write_root_hosts_string,
+                    equal_to('Host_13,Host_18'))
+        assert_that(share.anonymous_uid, equal_to(10011))
+        assert_that(share.anonymous_gid, equal_to(10012))
+        assert_that(share.export_option, equal_to(20011))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_modify_snap_nfs_share_success(self):
+        share = UnityNfsShare(cli=t_rest(), _id='NFSShare_52')
+
+        share_access = NFSShareDefaultAccessEnum.RO_ROOT
+        description = 'Modified snap nfs share.'
+
+        share.modify(
+            default_access=share_access,
+            anonymous_uid=10011,
+            anonymous_gid=10012,
+            export_option=20011,
+            description=description)
+
+        assert_that(share.default_access, equal_to(share_access))
+        assert_that(share.anonymous_uid, equal_to(10011))
+        assert_that(share.anonymous_gid, equal_to(10012))
+        assert_that(share.export_option, equal_to(20011))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_modify_nfs_share_no_param(self):
+        share = UnityNfsShare(cli=t_rest(), _id='SMBShare_42')
+        share.modify()
+
+    @patch_rest
+    def test_modify_snap_nfs_share_no_param(self):
+        share = UnityNfsShare(cli=t_rest(), _id='SMBShare_52')
+        share.modify()
 
     @patch_rest
     def test_create_nfs_share_name_exists(self):

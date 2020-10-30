@@ -1,0 +1,27 @@
+{
+  "content": {
+    "id": "SMBShare_62",
+    "type": 1,
+    "offlineAvailability": 2,
+    "instanceId": "root/emc:EMC_UEM_CIFSShareLeaf%InstanceID=SMBShare_62",
+    "name": "cs62",
+    "path": "/",
+    "exportPaths": [
+      "\\\\nas1130.win2012.dev\\cs62",
+      "\\\\10.244.220.120\\cs62"
+    ],
+    "description": "Modified cifs share.",
+    "creationTime": "2020-10-29T05:50:43.938Z",
+    "modifiedTime": "2020-10-29T05:50:43.938Z",
+    "isContinuousAvailabilityEnabled": false,
+    "isEncryptionEnabled": false,
+    "isACEEnabled": false,
+    "isABEEnabled": true,
+    "isBranchCacheEnabled": true,
+    "isDFSEnabled": false,
+    "umask": "202",
+    "filesystem": {
+      "id": "fs_62"
+    }
+  }
+}

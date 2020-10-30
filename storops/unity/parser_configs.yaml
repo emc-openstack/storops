@@ -164,7 +164,6 @@ UnityPool:
       is_index: True
     - label: raidType
       converter: RaidTypeEnum
-    - label: harbestState
     - label: objectId
     - label: health
       converter: UnityHealth

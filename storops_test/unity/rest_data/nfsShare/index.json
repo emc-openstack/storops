@@ -45,12 +45,28 @@
       "response": "NFSShare_32.json"
     },
     {
+      "url": "/api/instances/nfsShare/NFSShare_42?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
+      "response": "NFSShare_42.json"
+    },
+    {
+      "url": "/api/instances/nfsShare/NFSShare_51?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
+      "response": "NFSShare_51.json"
+    },
+    {
+      "url": "/api/instances/nfsShare/NFSShare_52?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
+      "response": "NFSShare_52.json"
+    },
+    {
       "url": "/api/types/nfsShare/instances?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type",
       "response": "all.json"
     },
     {
       "url": "/api/types/nfsShare/instances?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type&filter=name eq \"ns1\"",
       "response": "name_ns1.json"
+    },
+    {
+      "url": "/api/types/nfsShare/instances?compact=True&fields=creationTime,defaultAccess,description,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,noAccessHosts,path,readOnlyHosts,readWriteHosts,role,rootAccessHosts,snap,type&filter=name eq \"ns41\"",
+      "response": "name_ns41.json"
     },
     {
       "url": "/api/types/nfsShare/instances?compact=True",
@@ -73,6 +89,28 @@
         "name": "sns1"
       },
       "response": "create_NFSShare_11.json"
+    },
+    {
+      "url": "/api/types/nfsShare/instances?compact=True",
+      "body": {
+        "snap": {
+          "id": "171798692125"
+        },
+        "path": "/",
+        "name": "ns51",
+        "defaultAccess": 2,
+        "minSecurity": 1,
+        "noAccessHostsString": "Host_42",
+        "readOnlyHostsString": "Host_41",
+        "readWriteHostsString": "Host_19,Host_18",
+        "readOnlyRootHostsString": "Host_17",
+        "readWriteRootHostsString": "Host_16,Host_13",
+        "anonymousUID": 10001,
+        "anonymousGID": 10002,
+        "exportOption": 1,
+        "description": "Test snap nfs share."
+      },
+      "response": "create_NFSShare_51.json"
     },
     {
       "url": "/api/instances/nfsShare/NFSShare_11?compact=True",
@@ -110,6 +148,17 @@
       "body": {
         "readWriteHosts": [],
         "readOnlyHosts": []
+      },
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/nfsShare/NFSShare_52/action/modify?compact=True",
+      "body": {
+        "defaultAccess": 4,
+        "anonymousUID": 10011,
+        "anonymousGID": 10012,
+        "exportOption": 20011,
+        "description": "Modified snap nfs share."
       },
       "response": "success.json"
     }

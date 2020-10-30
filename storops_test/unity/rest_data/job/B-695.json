@@ -1,0 +1,97 @@
+{
+  "content": {
+    "id": "B-258",
+    "state": 4,
+    "instanceId": "",
+    "description": "Creating Filesystem and share",
+    "stateChangeTime": "2020-10-30T03:21:31.821Z",
+    "submitTime": "2020-10-30T03:21:13.479Z",
+    "startTime": "2020-10-30T03:21:13.482Z",
+    "endTime": "2020-10-30T03:21:31.816Z",
+    "elapsedTime": "00:00:18.334",
+    "progressPct": 100,
+    "tasks": [
+      {
+        "state": 2,
+        "name": "CreateNewFilesystem",
+        "description": "Create File System",
+        "object": "storageResource",
+        "action": "createFilesystem",
+        "messages": [
+          {
+            "errorCode": 0,
+            "messages": [
+              {
+                "locale": "en_US",
+                "message": "Success"
+              }
+            ]
+          }
+        ],
+        "parametersIn": {
+          "name": "513dd8b0-2c22-4da0-888e-494d320303b7",
+          "description": "",
+          "fsParameters": {
+            "fastVPParameters": {
+              "tieringPolicy": 0
+            },
+            "supportedProtocols": 0,
+            "isThinEnabled": 1,
+            "size": 3221225472,
+            "nasServer": {
+              "id": "nas_6"
+            },
+            "pool": {
+              "id": "pool_5"
+            }
+          },
+          "nfsShareCreate": [
+            {
+              "nfsShareParameters": {
+                "defaultAccess": 1,
+                "exportOption": 20001,
+                "noAccessHostsString": "Host_1",
+                "readOnlyHostsString": "Host_2",
+                "readWriteHostsString": "Host_3",
+                "readOnlyRootHostsString": "Host_5,Host_4",
+                "readWriteRootHostsString": "Host_6,",
+                "anonymousUID": 10001,
+                "anonymousGID": 10002
+              },
+              "path": "/",
+              "name": "513dd8b0-2c22-4da0-888e-494d320303b7"
+            }
+          ]
+        },
+        "parametersOut": {
+          "storageResource": {
+            "id": "res_115"
+          }
+        },
+        "submitTime": "2020-10-30T03:21:13.479Z",
+        "startTime": "2020-10-30T03:21:13.495Z",
+        "affectedResource": {
+          "resource": "filesystem",
+          "id": "fs_107",
+          "name": "513dd8b0-2c22-4da0-888e-494d320303b7"
+        }
+      }
+    ],
+    "methodName": "job.create",
+    "parametersOut": {
+      "id": "B-695"
+    },
+    "statusCodeOut": 0,
+    "messageOut": {
+      "errorCode": 0
+    },
+    "isJobCancelable": false,
+    "isJobCancelled": false,
+    "clientData": "",
+    "affectedResource": {
+      "resource": "filesystem",
+      "id": "fs_107",
+      "name": "513dd8b0-2c22-4da0-888e-494d320303b7"
+    }
+  }
+}

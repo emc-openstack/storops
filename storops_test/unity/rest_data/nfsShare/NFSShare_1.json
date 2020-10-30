@@ -14,6 +14,14 @@
     "description": "bcd",
     "creationTime": "2016-03-02T02:39:22.856Z",
     "modificationTime": "2016-03-02T02:39:22.856Z",
+    "noAccessHostsString": "Host_42",
+    "readOnlyHostsString": "Host_41",
+    "readWriteHostsString": "Host_18,Host_19",
+    "readOnlyRootHostsString": "Host_17",
+    "readWriteRootHostsString": "Host_13,Host_16",
+    "anonymousUID": 10011,
+    "anonymousGID": 10012,
+    "exportOption": 20011,
     "filesystem": {
       "id": "fs_1"
     }

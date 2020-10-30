@@ -196,9 +196,7 @@ class UnityFileSystem(UnityResource):
 
     def create_cifs_share(self, name, path=None, cifs_server=None,
                           is_read_only=None, is_encryption_enabled=None,
-                          is_con_avail_enabled=None,
-                          is_ace_enabled=None, add_ace=None,
-                          delete_ace=None, is_abe_enabled=None,
+                          is_con_avail_enabled=None, is_abe_enabled=None,
                           is_branch_cache_enabled=None,
                           offline_availability=None,
                           umask=None, description=None):
@@ -209,8 +207,6 @@ class UnityFileSystem(UnityResource):
             is_read_only=is_read_only,
             is_encryption_enabled=is_encryption_enabled,
             is_con_avail_enabled=is_con_avail_enabled,
-            is_ace_enabled=is_ace_enabled,
-            add_ace=add_ace, delete_ace=delete_ace,
             is_abe_enabled=is_abe_enabled,
             is_branch_cache_enabled=is_branch_cache_enabled,
             offline_availability=offline_availability,

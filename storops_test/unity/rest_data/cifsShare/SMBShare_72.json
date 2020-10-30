@@ -1,0 +1,30 @@
+{
+  "content": {
+    "id": "SMBShare_72",
+    "type": 2,
+    "offlineAvailability": 2,
+    "instanceId": "root/emc:EMC_UEM_CIFSShareLeaf%InstanceID=SMBShare_72",
+    "name": "cs72",
+    "path": "/",
+    "exportPaths": [
+      "\\\\test-nas-server-5.wind2.openstack\\cs72",
+      "\\\\192.168.1.237\\cs72"
+    ],
+    "description": "Modified snap cifs share.",
+    "creationTime": "2020-10-29T13:22:10.277Z",
+    "modifiedTime": "2020-10-29T13:22:10.277Z",
+    "isContinuousAvailabilityEnabled": false,
+    "isEncryptionEnabled": false,
+    "isACEEnabled": false,
+    "isABEEnabled": true,
+    "isBranchCacheEnabled": true,
+    "isDFSEnabled": false,
+    "umask": "202",
+    "filesystem": {
+      "id": "fs_72"
+    },
+    "snap": {
+      "id": "171798700366"
+    }
+  }
+}

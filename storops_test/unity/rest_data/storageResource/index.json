@@ -85,6 +85,18 @@
       "response": "res_27.json"
     },
     {
+      "url": "/api/instances/storageResource/res_28?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_28.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_41?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_41.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_51?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "res_51.json"
+    },
+    {
       "url": "/api/instances/storageResource/sv_2019?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "sv_2019.json"
     },
@@ -107,6 +119,36 @@
     {
       "url": "/api/instances/storageResource/sv_5610?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
       "response": "sv_5610.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyFilesystem?compact=True",
+      "body": {
+        "description": "Modified filesystem.",
+        "fsParameters": {
+          "isThinEnabled": false,
+          "size": 5368709120,
+          "fastVPParameters": {
+            "tieringPolicy": 3
+          },
+          "accessPolicy": 1,
+          "lockingPolicy": 1,
+          "isDataReductionEnabled": false
+        }
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_4/action/modifyFilesystem?compact=True",
+      "body": {
+        "cifsFsParameters": {
+          "isCIFSSyncWritesEnabled": true,
+          "isCIFSOpLocksEnabled": true,
+          "isCIFSNotifyOnWriteEnabled": true,
+          "isCIFSNotifyOnAccessEnabled": true,
+          "cifsNotifyOnChangeDirDepth": 256
+        }
+      },
+      "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
@@ -308,6 +350,71 @@
             "id": "nas_2"
           },
           "size": 3221225472,
+          "fastVPParameters": {
+            "tieringPolicy": 0
+          },
+          "pool": {
+            "id": "pool_1"
+          },
+          "supportedProtocols": 1
+        },
+        "name": "fs12"
+      },
+      "response": "create_res_27.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createFilesystem?compact=True",
+      "body": {
+        "name": "fs13",
+        "description": "Test filesystem.",
+        "fsParameters": {
+          "pool": {
+            "id": "pool_1"
+          },
+          "nasServer": {
+            "id": "nas_2"
+          },
+          "supportedProtocols": 0,
+          "isThinEnabled": true,
+          "size": 4831838208,
+          "fastVPParameters": {
+            "tieringPolicy": 0
+          },
+          "accessPolicy": 2,
+          "lockingPolicy": 1,
+          "isDataReductionEnabled": true
+        }
+      },
+      "response": "create_res_28.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createFilesystem?compact=True",
+      "body": {
+        "fsParameters": {
+          "nasServer": {
+            "id": "nas_2"
+          },
+          "size": 3221225472,
+          "fastVPParameters": {
+            "tieringPolicy": 0
+          },
+          "pool": {
+            "id": "pool_1"
+          },
+          "supportedProtocols": 0
+        },
+        "name": "fs51"
+      },
+      "response": "create_res_51.json"
+    },
+    {
+      "url": "/api/types/storageResource/action/createFilesystem?compact=True",
+      "body": {
+        "fsParameters": {
+          "nasServer": {
+            "id": "nas_2"
+          },
+          "size": 3221225472,
           "pool": {
             "id": "pool_1"
           },
@@ -477,7 +584,8 @@
               "readOnlyHosts": [],
               "readWriteHosts": [],
               "rootAccessHosts": [],
-              "noAccessHosts": []
+              "noAccessHosts": [],
+              "readOnlyRootAccessHosts": []
             }
           }
         ]
@@ -532,6 +640,129 @@
             },
             "cifsShare": {
               "id": "SMBShare_8"
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_41/action/modifyFilesystem?compact=True",
+      "body": {
+        "nfsShareCreate": [
+          {
+            "name": "ns41",
+            "path": "/",
+            "nfsShareParameters": {
+              "defaultAccess": 2,
+              "minSecurity": 1,
+              "noAccessHostsString": "Host_42",
+              "readOnlyHostsString": "Host_41",
+              "readWriteHostsString": "Host_19,Host_18",
+              "readOnlyRootHostsString": "Host_17",
+              "readWriteRootHostsString": "Host_16,Host_13",
+              "anonymousUID": 10001,
+              "anonymousGID": 10002,
+              "exportOption": 20001,
+              "description": "Test nfs share."
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_42/action/modifyFilesystem?compact=True",
+      "body": {
+        "nfsShareModify": [
+          {
+            "nfsShare": {
+              "id": "NFSShare_42"
+            },
+            "nfsShareParameters": {
+              "defaultAccess": 4,
+              "noAccessHostsString": "Host_41",
+              "readOnlyHostsString": "Host_42",
+              "readWriteHostsString": "Host_17,Host_16",
+              "readOnlyRootHostsString": "Host_19",
+              "readWriteRootHostsString": "Host_18,Host_13",
+              "anonymousUID": 10011,
+              "anonymousGID": 10012,
+              "exportOption": 20011,
+              "description": "Modified nfs share."
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_61/action/modifyFilesystem?compact=True",
+      "body": {
+        "cifsShareCreate": [
+          {
+            "name": "cs61",
+            "path": "/",
+            "cifsServer": {
+              "id": "cifs_2"
+            },
+            "cifsShareParameters": {
+              "isReadOnly": true,
+              "isEncryptionEnabled": true,
+              "isContinuousAvailabilityEnabled": true,
+              "isABEEnabled": true,
+              "isBranchCacheEnabled": true,
+              "offlineAvailability": 1,
+              "umask": "222",
+              "description": "Test cifs share."
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_62/action/modifyFilesystem?compact=True",
+      "body": {
+        "cifsShareCreate": [
+          {
+            "name": "cs62",
+            "path": "/",
+            "cifsServer": {
+              "id": "cifs_2"
+            },
+            "cifsShareParameters": {
+              "isReadOnly": true,
+              "isEncryptionEnabled": true,
+              "isContinuousAvailabilityEnabled": true,
+              "isABEEnabled": false,
+              "isBranchCacheEnabled": false,
+              "offlineAvailability": 1,
+              "umask": "222",
+              "description": "Test cifs share."
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_62/action/modifyFilesystem?compact=True",
+      "body": {
+        "cifsShareModify": [
+          {
+            "cifsShare": {
+              "id": "SMBShare_62"
+            },
+            "cifsShareParameters": {
+              "isReadOnly": false,
+              "isEncryptionEnabled": false,
+              "isContinuousAvailabilityEnabled": false,
+              "isABEEnabled": true,
+              "isBranchCacheEnabled": true,
+              "offlineAvailability": 2,
+              "umask": "202",
+              "description": "Modified cifs share."
             }
           }
         ]
@@ -1095,49 +1326,51 @@
     {
       "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
       "body": {
-            "name": "test_thin_clone",
-            "snap": {
-              "id": "38654705847"
-            },
-            "description": "This is description."
+        "name": "test_thin_clone",
+        "snap": {
+          "id": "38654705847"
+        },
+        "description": "This is description."
       },
       "response": "thin_clone.json"
     },
     {
       "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
       "body": {
-            "name": "test_thin_clone",
-            "snap": {
-              "id": "38654705847"
-            },
-            "description": "This is description.",
-            "lunParameters": {
-              "ioLimitParameters": {
-                "ioLimitPolicy": {"id": "qp_2"}
-              }
+        "name": "test_thin_clone",
+        "snap": {
+          "id": "38654705847"
+        },
+        "description": "This is description.",
+        "lunParameters": {
+          "ioLimitParameters": {
+            "ioLimitPolicy": {
+              "id": "qp_2"
             }
+          }
+        }
       },
       "response": "thin_clone.json"
     },
     {
       "url": "/api/instances/storageResource/sv_2/action/createLunThinClone?compact=True",
       "body": {
-            "name": "test_thin_clone_limit_exceeded",
-            "snap": {
-              "id": "38654705847"
-            },
-            "description": "This is description."
+        "name": "test_thin_clone_limit_exceeded",
+        "snap": {
+          "id": "38654705847"
+        },
+        "description": "This is description."
       },
       "response": "thin_clone_limit_exceeded.json"
     },
     {
       "url": "/api/instances/storageResource/sv_3338/action/createLunThinClone?compact=True",
       "body": {
-            "name": "test_thin_clone",
-            "snap": {
-              "id": "38654709077"
-            },
-            "description": "This is description."
+        "name": "test_thin_clone",
+        "snap": {
+          "id": "38654709077"
+        },
+        "description": "This is description."
       },
       "response": "thin_clone_auto_delete.json"
     },
@@ -1208,52 +1441,127 @@
     },
     {
       "url": "/api/instances/storageResource/sv_4/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_9"}, "accessMask": 1}]}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_9"
+              },
+              "accessMask": 1
+            }
+          ]
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": []}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": []
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_16/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": []}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": []
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_17/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"isCompressionEnabled": true}},
+      "body": {
+        "lunParameters": {
+          "isCompressionEnabled": true
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_18/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"isDataReductionEnabled": true}},
+      "body": {
+        "lunParameters": {
+          "isDataReductionEnabled": true
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5609/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_23"}, "accessMask": 1}]}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_23"
+              },
+              "accessMask": 1
+            }
+          ]
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5610/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_23"}, "accessMask": 1}]}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_23"
+              },
+              "accessMask": 1
+            }
+          ]
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5610/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_24"}, "accessMask": 1}]}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_24"
+              },
+              "accessMask": 1
+            }
+          ]
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5611/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": [{"host": {"id": "Host_25"}, "accessMask": 1}]}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": [
+            {
+              "host": {
+                "id": "Host_25"
+              },
+              "accessMask": 1
+            }
+          ]
+        }
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/sv_5611/action/modifyLun?compact=True",
-      "body": {"lunParameters": {"hostAccess": []}},
+      "body": {
+        "lunParameters": {
+          "hostAccess": []
+        }
+      },
       "response": "empty.json"
     },
     {
@@ -1266,52 +1574,201 @@
     },
     {
       "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunModify": [{"lunParameters": {"hostAccess": [{"host": {"id": "Host_22"}, "accessMask": 1}, {"host": {"id": "Host_2"}, "accessMask": 1}]}, "lun": {"id": "sv_15"}}]},
+      "body": {
+        "lunModify": [
+          {
+            "lunParameters": {
+              "hostAccess": [
+                {
+                  "host": {
+                    "id": "Host_22"
+                  },
+                  "accessMask": 1
+                },
+                {
+                  "host": {
+                    "id": "Host_2"
+                  },
+                  "accessMask": 1
+                }
+              ]
+            },
+            "lun": {
+              "id": "sv_15"
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"hostAccess": []}}]},
+      "body": {
+        "lunModify": [
+          {
+            "lun": {
+              "id": "sv_15"
+            },
+            "lunParameters": {
+              "hostAccess": []
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"size": 107374182400}}]},
+      "body": {
+        "lunModify": [
+          {
+            "lun": {
+              "id": "sv_15"
+            },
+            "lunParameters": {
+              "size": 107374182400
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunModify": [{"lun": {"id": "sv_15"}, "lunParameters": {"size": 16106127360}}]},
+      "body": {
+        "lunModify": [
+          {
+            "lun": {
+              "id": "sv_15"
+            },
+            "lunParameters": {
+              "size": 16106127360
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_4/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunModify": [{"lun": {"id": "sv_17"}, "lunParameters": {"isDataReductionEnabled": true}}]},
+      "body": {
+        "lunModify": [
+          {
+            "lun": {
+              "id": "sv_17"
+            },
+            "lunParameters": {
+              "isDataReductionEnabled": true
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_6/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunRemove": [{"lun": {"id": "sv_14"}}, {"lun": {"id": "sv_15"}}], "lunAdd": [{"lun": {"id": "sv_3342"}}, {"lun": {"id": "sv_3341"}}]},
+      "body": {
+        "lunRemove": [
+          {
+            "lun": {
+              "id": "sv_14"
+            }
+          },
+          {
+            "lun": {
+              "id": "sv_15"
+            }
+          }
+        ],
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_3342"
+            }
+          },
+          {
+            "lun": {
+              "id": "sv_3341"
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_6/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunRemove": [{"lun": {"id": "sv_15"}}], "lunAdd": [{"lun": {"id": "sv_3341"}}]},
+      "body": {
+        "lunRemove": [
+          {
+            "lun": {
+              "id": "sv_15"
+            }
+          }
+        ],
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_3341"
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_21/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunAdd": [{"lun": {"id": "sv_60"}}, {"lun": {"id": "sv_61"}}]},
+      "body": {
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_60"
+            }
+          },
+          {
+            "lun": {
+              "id": "sv_61"
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_21/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunRemove": [{"lun": {"id": "sv_58"}}, {"lun": {"id": "sv_59"}}]},
+      "body": {
+        "lunRemove": [
+          {
+            "lun": {
+              "id": "sv_58"
+            }
+          },
+          {
+            "lun": {
+              "id": "sv_59"
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
       "url": "/api/instances/storageResource/res_21/action/modifyConsistencyGroup?compact=True",
-      "body": {"lunRemove": [{"lun": {"id": "sv_59"}}], "lunAdd": [{"lun": {"id": "sv_60"}}]},
+      "body": {
+        "lunRemove": [
+          {
+            "lun": {
+              "id": "sv_59"
+            }
+          }
+        ],
+        "lunAdd": [
+          {
+            "lun": {
+              "id": "sv_60"
+            }
+          }
+        ]
+      },
       "response": "empty.json"
     },
     {
@@ -1401,4 +1858,3 @@
     }
   ]
 }
-

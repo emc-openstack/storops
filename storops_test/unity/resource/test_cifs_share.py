@@ -24,9 +24,9 @@ from storops.exception import UnityException, UnitySmbShareNameExistedError, \
     UnityAclUserNotFoundError, UnitySnapNameInUseError
 from storops.unity.enums import CIFSTypeEnum, ACEAccessTypeEnum, \
     CifsShareOfflineAvailabilityEnum
-
 from storops.unity.resource.cifs_share import UnityCifsShare, \
     UnityCifsShareList, UnityAclUser, UnityAclUserList
+from storops.unity.resource.snap import UnitySnap
 from storops_test.unity.rest_mock import t_rest, patch_rest
 
 __author__ = 'Cedric Zhuang'
@@ -88,11 +88,129 @@ class UnityCifsShareTest(TestCase):
         assert_that(share.name, equal_to('cs1'))
 
     @patch_rest
+    def test_create_success_all_params(self):
+        offline_availability = CifsShareOfflineAvailabilityEnum.DOCUMENTS
+        umask = '222'
+        description = 'Test cifs share.'
+
+        share = UnityCifsShare.create(
+            t_rest(), 'cs61', 'fs_61',
+            is_read_only=True,
+            is_encryption_enabled=True,
+            is_con_avail_enabled=True,
+            is_abe_enabled=True,
+            is_branch_cache_enabled=True,
+            offline_availability=offline_availability,
+            umask=umask, description=description)
+
+        assert_that(share.name, equal_to('cs61'))
+        assert_that(share.is_encryption_enabled, equal_to(True))
+        assert_that(share.is_continuous_availability_enabled, equal_to(True))
+        assert_that(share.is_abe_enabled, equal_to(True))
+        assert_that(share.is_branch_cache_enabled, equal_to(True))
+        assert_that(share.offline_availability,
+                    equal_to(offline_availability))
+        assert_that(share.umask, equal_to(umask))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_snap_cifs_share_create_success(self):
+        snap = UnitySnap(cli=t_rest(), _id='171798700365')
+
+        offline_availability = CifsShareOfflineAvailabilityEnum.DOCUMENTS
+        umask = '222'
+        description = 'Test snap cifs share.'
+
+        share = UnityCifsShare.create_from_snap(
+            t_rest(), snap, 'cs71',
+            is_read_only=True,
+            is_encryption_enabled=True,
+            is_con_avail_enabled=True,
+            is_abe_enabled=True,
+            is_branch_cache_enabled=True,
+            offline_availability=offline_availability,
+            umask=umask, description=description)
+
+        assert_that(share.name, equal_to('cs71'))
+        assert_that(share.is_encryption_enabled, equal_to(True))
+        assert_that(share.is_continuous_availability_enabled, equal_to(True))
+        assert_that(share.is_abe_enabled, equal_to(True))
+        assert_that(share.is_branch_cache_enabled, equal_to(True))
+        assert_that(share.offline_availability,
+                    equal_to(offline_availability))
+        assert_that(share.umask, equal_to(umask))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
     def test_create_same_name_exists(self):
         def f():
             UnityCifsShare.create(t_rest(), 'cs2', 'fs_8')
 
         assert_that(f, raises(UnitySmbShareNameExistedError, 'already exists'))
+
+    @patch_rest
+    def test_modify_success(self):
+        share = UnityCifsShare(cli=t_rest(), _id='SMBShare_62')
+
+        offline_availability = CifsShareOfflineAvailabilityEnum.PROGRAMS
+        umask = '202'
+        description = 'Modified cifs share.'
+
+        share.modify(
+            is_read_only=False,
+            is_encryption_enabled=False,
+            is_con_avail_enabled=False,
+            is_abe_enabled=True,
+            is_branch_cache_enabled=True,
+            offline_availability=offline_availability,
+            umask=umask,
+            description=description)
+
+        assert_that(share.is_encryption_enabled, equal_to(False))
+        assert_that(share.is_continuous_availability_enabled, equal_to(False))
+        assert_that(share.is_abe_enabled, equal_to(True))
+        assert_that(share.is_branch_cache_enabled, equal_to(True))
+        assert_that(share.offline_availability,
+                    equal_to(offline_availability))
+        assert_that(share.umask, equal_to(umask))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_modify_snap_nfs_share_success(self):
+        share = UnityCifsShare(cli=t_rest(), _id='SMBShare_72')
+
+        offline_availability = CifsShareOfflineAvailabilityEnum.PROGRAMS
+        umask = '202'
+        description = 'Modified snap cifs share.'
+
+        share.modify(
+            is_read_only=False,
+            is_encryption_enabled=False,
+            is_con_avail_enabled=False,
+            is_abe_enabled=True,
+            is_branch_cache_enabled=True,
+            offline_availability=offline_availability,
+            umask=umask,
+            description=description)
+
+        assert_that(share.is_encryption_enabled, equal_to(False))
+        assert_that(share.is_continuous_availability_enabled, equal_to(False))
+        assert_that(share.is_abe_enabled, equal_to(True))
+        assert_that(share.is_branch_cache_enabled, equal_to(True))
+        assert_that(share.offline_availability,
+                    equal_to(offline_availability))
+        assert_that(share.umask, equal_to(umask))
+        assert_that(share.description, equal_to(description))
+
+    @patch_rest
+    def test_modify_cifs_share_no_param(self):
+        share = UnityCifsShare(cli=t_rest(), _id='SMBShare_62')
+        share.modify()
+
+    @patch_rest
+    def test_modify_snap_cifs_share_no_param(self):
+        share = UnityCifsShare(cli=t_rest(), _id='SMBShare_72')
+        share.modify()
 
     @patch_rest
     def test_delete_share_success(self):

@@ -1,0 +1,105 @@
+{
+  "content": {
+    "id": "fs_62",
+    "operationalStatus": [
+      2
+    ],
+    "type": 1,
+    "flrVersion": 0,
+    "dedupState": 2,
+    "tieringPolicy": 1,
+    "supportedProtocols": 1,
+    "accessPolicy": 2,
+    "folderRenamePolicy": 1,
+    "lockingPolicy": 0,
+    "format": 2,
+    "hostIOSize": 8192,
+    "poolFullPolicy": 1,
+    "instanceId": "root/emc:EMC_UEM_FileSystemLeaf%InstanceID=fs_62",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_APP_FS_OK"
+      ],
+      "descriptions": [
+        "This storage resource is operating normally. No action is required."
+      ]
+    },
+    "name": "fs61",
+    "description": "Test filesystem.",
+    "creationTime": "2020-10-29T05:49:34.009Z",
+    "modificationTime": "2020-10-29T05:50:41.519Z",
+    "sizeTotal": 4831838208,
+    "sizeUsed": 1620303872,
+    "sizeAllocated": 283131904,
+    "sizePreallocated": 2401222656,
+    "sizeAllocatedTotal": 4041228288,
+    "minSizeAllocated": 0,
+    "isReadOnly": false,
+    "isThinEnabled": true,
+    "isCompressionEnabled": false,
+    "compressionSizeSaved": 0,
+    "compressionPercent": 0,
+    "compressionRatio": 1.0,
+    "isDataReductionEnabled": false,
+    "dataReductionSizeSaved": 0,
+    "dataReductionPercent": 0,
+    "dataReductionRatio": 1.0,
+    "isAdvancedDedupEnabled": false,
+    "isFlrProtected": false,
+    "flrProtectedMaxRetention": "infinite",
+    "isFlrAutoLockEnabled": false,
+    "isFlrAutoDeleteEnabled": false,
+    "flrAutoLockDelay": "00:00:00.000",
+    "isCIFSSyncWritesEnabled": true,
+    "isCIFSOpLocksEnabled": true,
+    "isCIFSNotifyOnWriteEnabled": true,
+    "isCIFSNotifyOnAccessEnabled": true,
+    "cifsNotifyOnChangeDirDepth": 256,
+    "cifsNumUsedFiles": 0,
+    "dedupExcludePaths": [
+      ""
+    ],
+    "dedupExcludeExtensions": [
+      ""
+    ],
+    "isDedupRunning": false,
+    "dedupOriginalSizeUsed": 1351819264,
+    "dedupSizeUsed": 0,
+    "dedupSizeSaved": 0,
+    "dedupPercentSaved": 0,
+    "dedupNumFilesTotal": 0,
+    "dedupNumFilesDeduped": 0,
+    "dedupNumFilesScanned": 0,
+    "dedupNumFileRecalled": 0,
+    "dedupProgress": 100,
+    "oid": 8589953497,
+    "backendId": "171798700363",
+    "metadataSize": 3489660928,
+    "metadataSizeAllocated": 3758096384,
+    "perTierSizeUsed": [
+      0,
+      0,
+      6442450944
+    ],
+    "snapsSize": 0,
+    "snapsSizeAllocated": 0,
+    "snapCount": 0,
+    "isSMBCA": false,
+    "isMigrationDestination": false,
+    "exportedFSID": "5f9a57be-0e2f-7553-050a-0060166f0644",
+    "fileEventSettings": {
+      "isCIFSEnabled": false,
+      "isNFSEnabled": false
+    },
+    "storageResource": {
+      "id": "res_62"
+    },
+    "pool": {
+      "id": "pool_1"
+    },
+    "nasServer": {
+      "id": "nas_2"
+    }
+  }
+}

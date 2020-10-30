@@ -1,0 +1,41 @@
+{
+  "@base": "https://10.245.83.44/api/types/nfsShare/instances?filter=name eq \"ns41\"&fields=anonymousGID,anonymousUID,creationTime,defaultAccess,description,exportOption,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,nfsOwnerUsername,noAccessHosts,noAccessHostsString,path,readOnlyHosts,readOnlyHostsString,readOnlyRootAccessHosts,readOnlyRootHostsString,readWriteHosts,readWriteHostsString,readWriteRootHostsString,role,rootAccessHosts,snap,type&per_page=2000&compact=true",
+  "updated": "2020-10-27T07:52:39.220Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "NFSShare_41",
+        "type": 1,
+        "role": 0,
+        "defaultAccess": 2,
+        "minSecurity": 1,
+        "instanceId": "root/emc:EMC_UEM_NFSShareLeaf%InstanceID=NFSShare_41",
+        "name": "ns41",
+        "path": "/",
+        "exportPaths": [
+          "2.2.2.2:/ns41"
+        ],
+        "description": "Test nfs share.",
+        "creationTime": "2020-10-27T07:52:37.817Z",
+        "modificationTime": "2020-10-27T07:52:37.817Z",
+        "noAccessHostsString": "Host_42",
+        "readOnlyHostsString": "Host_41",
+        "readWriteHostsString": "Host_18,Host_19",
+        "readOnlyRootHostsString": "Host_17",
+        "readWriteRootHostsString": "Host_13,Host_16",
+        "anonymousUID": 10001,
+        "anonymousGID": 10002,
+        "exportOption": 20001,
+        "filesystem": {
+          "id": "fs_41"
+        }
+      }
+    }
+  ]
+}

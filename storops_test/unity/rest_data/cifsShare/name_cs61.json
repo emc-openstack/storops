@@ -1,0 +1,39 @@
+{
+  "@base": "https://192.168.1.58/api/types/cifsShare/instances?filter=name eq \"cs61\"&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&per_page=2000&compact=true",
+  "updated": "2020-10-29T05:50:45.531Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "SMBShare_61",
+        "type": 1,
+        "offlineAvailability": 1,
+        "instanceId": "root/emc:EMC_UEM_CIFSShareLeaf%InstanceID=SMBShare_61",
+        "name": "cs61",
+        "path": "/",
+        "exportPaths": [
+          "\\\\test-nas-server-2.wind2.openstack\\cs61",
+          "\\\\192.168.1.238\\cs61"
+        ],
+        "description": "Test cifs share.",
+        "creationTime": "2020-10-29T05:50:43.938Z",
+        "modifiedTime": "2020-10-29T05:50:43.938Z",
+        "isContinuousAvailabilityEnabled": true,
+        "isEncryptionEnabled": true,
+        "isACEEnabled": false,
+        "isABEEnabled": true,
+        "isBranchCacheEnabled": true,
+        "isDFSEnabled": false,
+        "umask": "222",
+        "filesystem": {
+          "id": "fs_61"
+        }
+      }
+    }
+  ]
+}

@@ -92,6 +92,10 @@
       "response": "B-694.json"
     },
     {
+      "url": "/api/instances/job/B-695?compact=True&fields=clientData,description,elapsedTime,endTime,estRemainTime,id,instanceId,isJobCancelable,isJobCancelled,messageOut,methodName,owner,parametersOut,progressPct,requestId,startTime,state,stateChangeTime,statusCodeOut,submitTime,tasks",
+      "response": "B-695.json"
+    },
+    {
       "url": "/api/types/job/instances?compact=True",
       "response": "B-694-id.json",
       "body": {
@@ -159,6 +163,57 @@
           }
         ],
         "description": "Creating Filesystem and share"
+      }
+    },
+    {
+      "url": "/api/types/job/instances?compact=True",
+      "response": "B-695-id.json",
+      "body": {
+        "description": "Creating Filesystem and share",
+        "tasks": [
+          {
+            "action": "createFilesystem",
+            "description": "Create File System",
+            "name": "CreateNewFilesystem",
+            "object": "storageResource",
+            "parametersIn": {
+              "name": "513dd8b0-2c22-4da0-888e-494d320303b7",
+              "description": "",
+              "fsParameters": {
+                "pool": {
+                  "id": "pool_5"
+                },
+                "nasServer": {
+                  "id": "nas_6"
+                },
+                "supportedProtocols": 0,
+                "isThinEnabled": true,
+                "size": 3221225472,
+                "fastVPParameters": {
+                  "tieringPolicy": 0
+                }
+              },
+              "nfsShareCreate": [
+                {
+                  "name": "513dd8b0-2c22-4da0-888e-494d320303b7",
+                  "path": "/",
+                  "nfsShareParameters": {
+                    "defaultAccess": 2,
+                    "minSecurity": 1,
+                    "noAccessHostsString": "Host_1",
+                    "readOnlyHostsString": "Host_2",
+                    "readWriteHostsString": "Host_3",
+                    "readOnlyRootHostsString": "Host_5,Host_4",
+                    "readWriteRootHostsString": "Host_6",
+                    "anonymousUID": 10001,
+                    "anonymousGID": 10002,
+                    "exportOption": 20001
+                  }
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   ]

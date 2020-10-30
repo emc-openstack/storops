@@ -114,6 +114,16 @@
       "response": "create_171798691884.json"
     },
     {
+      "url": "/api/types/snap/instances?compact=True",
+      "body": {
+        "storageResource": {
+          "id": "res_51"
+        },
+        "name": "fssnap51"
+      },
+      "response": "create_171798692125.json"
+    },
+    {
       "url": "/api/instances/snap/171798691884/action/copy?compact=True",
       "body": {
         "copyName": "snap_over_snap"

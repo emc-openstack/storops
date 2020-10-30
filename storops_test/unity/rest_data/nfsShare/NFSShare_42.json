@@ -1,0 +1,29 @@
+{
+  "content": {
+    "id": "NFSShare_42",
+    "type": 1,
+    "role": 0,
+    "defaultAccess": 4,
+    "minSecurity": 1,
+    "instanceId": "root/emc:EMC_UEM_NFSShareLeaf%InstanceID=NFSShare_42",
+    "name": "ns42",
+    "path": "/",
+    "exportPaths": [
+      "2.2.2.2:/ns42"
+    ],
+    "description": "Modified nfs share.",
+    "creationTime": "2020-10-27T07:52:37.817Z",
+    "modificationTime": "2020-10-27T07:52:37.817Z",
+    "noAccessHostsString": "Host_41",
+    "readOnlyHostsString": "Host_42",
+    "readWriteHostsString": "Host_16,Host_17",
+    "readOnlyRootHostsString": "Host_19",
+    "readWriteRootHostsString": "Host_13,Host_18",
+    "anonymousUID": 10011,
+    "anonymousGID": 10012,
+    "exportOption": 20011,
+    "filesystem": {
+      "id": "fs_42"
+    }
+  }
+}

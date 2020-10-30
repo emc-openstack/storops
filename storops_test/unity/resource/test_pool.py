@@ -27,7 +27,8 @@ from storops.unity.enums import RaidTypeEnum, FastVPStatusEnum, \
     RaidStripeWidthEnum, TierTypeEnum, PoolUnitTypeEnum, \
     FSSupportedProtocolEnum, TieringPolicyEnum, JobStateEnum, \
     StoragePoolTypeEnum, ESXFilesystemMajorVersionEnum, \
-    ESXFilesystemBlockSizeEnum
+    ESXFilesystemBlockSizeEnum, NFSShareDefaultAccessEnum, \
+    NFSShareSecurityEnum
 from storops.unity.resource.disk import UnityDiskGroup, UnityDisk
 from storops.unity.resource.pool import UnityPool, UnityPoolList, \
     RaidGroupParameter
@@ -305,6 +306,29 @@ class UnityPoolTest(TestCase):
             nas_server,
             name='513dd8b0-2c22-4da0-888e-494d320303b6',
             size=4294967296)
+        assert_that(JobStateEnum.COMPLETED, equal_to(job.state))
+
+    @patch_rest
+    def test_create_nfs_share_success_all_params(self):
+        pool = UnityPool(_id='pool_5', cli=t_rest())
+        nas_server = UnityNasServer.get(cli=t_rest(), _id='nas_6')
+        size = 3 * 1024 ** 3
+
+        job = pool.create_nfs_share(
+            nas_server,
+            name='513dd8b0-2c22-4da0-888e-494d320303b7',
+            size=size, is_thin=True,
+            tiering_policy=TieringPolicyEnum.AUTOTIER_HIGH,
+            default_access=NFSShareDefaultAccessEnum.READ_WRITE,
+            min_security=NFSShareSecurityEnum.KERBEROS,
+            no_access_hosts_string='Host_1',
+            read_only_hosts_string='Host_2',
+            read_write_hosts_string='Host_3',
+            read_only_root_hosts_string='Host_5,Host_4',
+            root_access_hosts_string='Host_6',
+            anonymous_uid=10001,
+            anonymous_gid=10002,
+            export_option=20001)
         assert_that(JobStateEnum.COMPLETED, equal_to(job.state))
 
     @patch_rest

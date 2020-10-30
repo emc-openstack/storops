@@ -23,8 +23,7 @@ import six
 import storops.unity.resource.cifs_server
 import storops.unity.resource.filesystem
 import storops.unity.resource.snap
-from storops.exception import UnityCreateSnapError, \
-    UnityShareTypeNotExistError
+from storops.exception import UnityCreateSnapError
 from storops.lib.common import instance_cache
 from storops.unity.client import UnityClient
 from storops.unity.enums import CIFSTypeEnum, ACEAccessTypeEnum, \
@@ -43,8 +42,7 @@ class UnityCifsShare(UnityResource):
     @classmethod
     def create(cls, cli, name, fs, path=None, cifs_server=None,
                is_read_only=None, is_encryption_enabled=None,
-               is_con_avail_enabled=None, is_ace_enabled=None,
-               add_ace=None, delete_ace=None, is_abe_enabled=None,
+               is_con_avail_enabled=None, is_abe_enabled=None,
                is_branch_cache_enabled=None, offline_availability=None,
                umask=None, description=None):
         fs_clz = storops.unity.resource.filesystem.UnityFileSystem
@@ -64,8 +62,6 @@ class UnityCifsShare(UnityResource):
             is_read_only=is_read_only,
             is_encryption_enabled=is_encryption_enabled,
             is_con_avail_enabled=is_con_avail_enabled,
-            is_ace_enabled=is_ace_enabled,
-            add_ace=add_ace, delete_ace=delete_ace,
             is_abe_enabled=is_abe_enabled,
             is_branch_cache_enabled=is_branch_cache_enabled,
             offline_availability=offline_availability,
@@ -233,7 +229,7 @@ class UnityCifsShare(UnityResource):
                 resp = self._modify_fs_share(share_param)
             else:
                 resp = RestResponse('', self._cli)
-        elif self.type == CIFSTypeEnum.CIFS_SNAPSHOT:
+        if self.type == CIFSTypeEnum.CIFS_SNAPSHOT:
             share_param = self.prepare_cifs_share_parameters(
                 is_encryption_enabled=is_encryption_enabled,
                 is_con_avail_enabled=is_con_avail_enabled,
@@ -245,8 +241,6 @@ class UnityCifsShare(UnityResource):
                 resp = self._modify_snap_share(share_param)
             else:
                 resp = RestResponse('', self._cli)
-        else:
-            raise UnityShareTypeNotExistError()
 
         resp.raise_if_err()
         return resp

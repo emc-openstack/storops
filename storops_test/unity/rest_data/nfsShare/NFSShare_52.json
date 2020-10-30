@@ -1,0 +1,32 @@
+{
+  "content": {
+    "id": "NFSShare_52",
+    "type": 3,
+    "role": 0,
+    "defaultAccess": 4,
+    "minSecurity": 1,
+    "instanceId": "root/emc:EMC_UEM_NFSShareLeaf%InstanceID=NFSShare_52",
+    "name": "ns52",
+    "path": "/",
+    "exportPaths": [
+      "5.5.5.5:/ns52"
+    ],
+    "description": "Modified snap nfs share.",
+    "creationTime": "2020-10-28T06:22:41.520Z",
+    "modificationTime": "2020-10-28T06:22:41.520Z",
+    "noAccessHostsString": "",
+    "readOnlyHostsString": "",
+    "readWriteHostsString": "",
+    "readOnlyRootHostsString": "",
+    "readWriteRootHostsString": "",
+    "anonymousUID": 10011,
+    "anonymousGID": 10012,
+    "exportOption": 20011,
+    "filesystem": {
+      "id": "fs_52"
+    },
+    "snap": {
+      "id": "171798692126"
+    }
+  }
+}

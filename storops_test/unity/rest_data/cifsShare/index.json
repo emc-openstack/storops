@@ -25,12 +25,28 @@
       "response": "SMBShare_15.json"
     },
     {
+      "url": "/api/instances/cifsShare/SMBShare_62?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask",
+      "response": "SMBShare_62.json"
+    },
+    {
+      "url": "/api/instances/cifsShare/SMBShare_71?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask",
+      "response": "SMBShare_71.json"
+    },
+    {
+      "url": "/api/instances/cifsShare/SMBShare_72?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask",
+      "response": "SMBShare_72.json"
+    },
+    {
       "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask",
       "response": "all.json"
     },
     {
       "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&filter=name eq \"cs1\"",
       "response": "name_cs1.json"
+    },
+    {
+      "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&filter=name eq \"cs61\"",
+      "response": "name_cs61.json"
     },
     {
       "url": "/api/types/cifsShare/instances?compact=True",
@@ -42,6 +58,25 @@
         "name": "sns2"
       },
       "response": "create_SMBShare_15.json"
+    },
+    {
+      "url": "/api/types/cifsShare/instances?compact=True",
+      "body": {
+        "snap": {
+          "id": "171798700365"
+        },
+        "path": "/",
+        "name": "cs71",
+        "isReadOnly": true,
+        "isEncryptionEnabled": true,
+        "isContinuousAvailabilityEnabled": true,
+        "isABEEnabled": true,
+        "isBranchCacheEnabled": true,
+        "offlineAvailability": 1,
+        "umask": "222",
+        "description": "Test snap cifs share."
+      },
+      "response": "create_SMBShare_71.json"
     },
     {
       "url": "/api/instances/cifsShare/SMBShare_15?compact=True",
@@ -105,6 +140,19 @@
             "sid": "S-1-5-15-be80fa7-8ddad211-d49ba5f9-45e"
           }
         ]
+      },
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/cifsShare/SMBShare_72/action/modify?compact=True",
+      "body": {
+        "isEncryptionEnabled": false,
+        "isContinuousAvailabilityEnabled": false,
+        "isABEEnabled": true,
+        "isBranchCacheEnabled": true,
+        "offlineAvailability": 2,
+        "umask": "202",
+        "description": "Modified snap cifs share."
       },
       "response": "success.json"
     }

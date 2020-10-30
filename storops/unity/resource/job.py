@@ -25,7 +25,6 @@ from storops.unity import enums
 from storops.unity.enums import FSSupportedProtocolEnum
 from storops.unity.resource import UnityResource, UnityResourceList, \
     UnityAttributeResource
-from storops.unity.resource.nfs_share import UnityNfsShare
 
 __author__ = 'Cedric Zhuang'
 
@@ -87,7 +86,8 @@ class UnityJob(UnityResource):
         read_only_root_access_hosts = clz.get_list(
             cli, read_only_root_access_hosts)
 
-        nfs_parameters = UnityNfsShare.prepare_nfs_share_parameters(
+        nfs_share_clz = storops.unity.resource.nfs_share.UnityNfsShare
+        nfs_parameters = nfs_share_clz.prepare_nfs_share_parameters(
             default_access=default_access,
             min_security=min_security,
             no_access_hosts=no_access_hosts,

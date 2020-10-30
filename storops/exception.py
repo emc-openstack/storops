@@ -485,6 +485,11 @@ class UnityFileSystemNameAlreadyExisted(UnityException):
 
 
 @rest_exception
+class UnityNfsCannotAddHostStringError(UnityException):
+    error_code = 151036201
+
+
+@rest_exception
 class UnityFileSystemThinThickConversionNotSupportedError(UnityException):
     error_code = 108008493
 
@@ -507,10 +512,6 @@ class UnitySpecifiedServerNotExistError(UnityException):
 @rest_exception
 class UnityExportOptionInvalidError(UnityException):
     error_code = 131150149
-
-
-class UnityShareTypeNotExistError(UnityException):
-    message = 'Share type does not exist.'
 
 
 class UnityCreateSnapError(UnityException):

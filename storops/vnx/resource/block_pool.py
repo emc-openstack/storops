@@ -136,7 +136,8 @@ class VNXPool(VNXCliResource):
                    lun_id=None,
                    provision=None,
                    tier=None,
-                   ignore_thresholds=None):
+                   ignore_thresholds=None,
+                   sp_id=None):
         pool = {}
         if self._pool_id is not None:
             pool['pool_id'] = self._pool_id
@@ -150,6 +151,7 @@ class VNXPool(VNXCliResource):
             tier=tier,
             ignore_thresholds=ignore_thresholds,
             poll=self.poll,
+            sp_id=sp_id,
             **pool)
         ex.raise_if_err(ret, 'error creating lun.',
                         default=ex.VNXCreateLunError)

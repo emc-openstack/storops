@@ -309,13 +309,16 @@ class CliClient(PerfManager):
                         size_gb=1,
                         provision=None,
                         tier=None,
-                        ignore_thresholds=None):
+                        ignore_thresholds=None,
+                        sp_id=None):
 
         cmd = ['lun', '-create', '-capacity', size_gb, '-sq', 'gb']
         cmd += self._get_pool_opt(pool_id, pool_name)
         cmd += self._get_lun_opt(lun_id, lun_name)
         cmd += self._get_provision_opt(provision)
         cmd += self._get_tier_opt(tier)
+        if sp_id:
+            cmd += text_var('-sp', sp_id)
         if ignore_thresholds:
             cmd.append('-ignoreThresholds')
         return cmd

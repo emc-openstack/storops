@@ -64,6 +64,7 @@ class VNXLunTest(TestCase):
         assert_that(lun.total_capacity_gb, equal_to(500.0))
         assert_that(lun.current_owner, equal_to(VNXSPEnum.SP_A))
         assert_that(lun.default_owner, equal_to(VNXSPEnum.SP_A))
+        assert_that(lun.allocation_owner, equal_to(VNXSPEnum.SP_A))
         assert_that(lun.attached_snapshot, none())
         assert_that(lun.lun_id, equal_to(3))
         assert_that(lun.name, equal_to('File_CS0_21132_0_d7'))
@@ -252,6 +253,15 @@ class VNXLunTest(TestCase):
                             pool_id=0,
                             lun_id=2,
                             size_gb=2)
+        assert_that(lun.user_capacity_gbs, equal_to(2.0))
+
+    @patch_cli
+    def test_create_with_sp_success(self):
+        lun = VNXLun.create(t_cli(),
+                            pool_id=0,
+                            lun_id=2,
+                            size_gb=2,
+                            sp_id='A')
         assert_that(lun.user_capacity_gbs, equal_to(2.0))
 
     @patch_cli

@@ -111,11 +111,12 @@ class VNXLun(VNXCliResource):
                size_gb=1,
                provision=None,
                tier=None,
-               ignore_thresholds=None):
+               ignore_thresholds=None,
+               sp_id=None):
         cls = storops.vnx.resource.block_pool.VNXPool
         pool = cls(pool_id, pool_name, cli)
         return pool.create_lun(lun_name, size_gb, lun_id, provision,
-                               tier, ignore_thresholds)
+                               tier, ignore_thresholds, sp_id)
 
     def create_mount_point(self, _id=None, name=None):
         lun_id = self.get_id(self)

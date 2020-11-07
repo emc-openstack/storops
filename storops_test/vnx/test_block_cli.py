@@ -303,6 +303,18 @@ class CliClientTest(TestCase):
             equal_to('lun -create -capacity 12 -sq gb -poolId 1 '
                      '-l 123 -ignoreThresholds'))
 
+    @extract_command
+    def test_create_lun_with_sp(self):
+        cmd = self.client.create_pool_lun(pool_id=1,
+                                          lun_id=123,
+                                          size_gb=12,
+                                          ignore_thresholds=True,
+                                          sp_id='A')
+        assert_that(
+            cmd,
+            equal_to('lun -create -capacity 12 -sq gb -poolId 1 '
+                     '-l 123 -sp A -ignoreThresholds'))
+
     def test_create_lun_no_pool(self):
         def f():
             self.client.create_pool_lun(lun_id=29)

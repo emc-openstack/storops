@@ -185,6 +185,14 @@ class VNXPoolTest(TestCase):
         assert_that(f, raises(VNXPoolNotFoundError, 'may not exist'))
 
     @patch_cli
+    def test_create_lun_with_sp(self):
+        def f():
+            pool = VNXPool(1, cli=t_cli())
+            pool.create_lun('abc', sp_id='A')
+
+        assert_that(f, raises(VNXPoolNotFoundError, 'may not exist'))
+
+    @patch_cli
     def test_create_lun_with_pool_name(self):
         def f():
             pool = VNXPool(name='p0', cli=t_cli())

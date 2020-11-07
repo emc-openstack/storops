@@ -320,6 +320,8 @@ VNXLun:
       converter: to_sp_enum
     - label: "Default Owner:"
       converter: to_sp_enum
+    - label: "Allocation Owner:"
+      converter: to_sp_enum
     - label: "Attached Snapshot:"
       option: -attachedSnapshot
       converter: name_to_snap

@@ -151,6 +151,13 @@
       "response": "empty.json"
     },
     {
+      "url": "/api/instances/storageResource/res_22/action/modifyFilesystem?compact=True",
+      "body": {
+        "description": ""
+      },
+      "response": "empty.json"
+    },
+    {
       "url": "/api/instances/storageResource/res_23/action/modifyFilesystem?compact=True",
       "body": {
         "cifsShareCreate": [
@@ -222,6 +229,21 @@
     },
     {
       "url": "/api/instances/storageResource/res_24/action/modifyFilesystem?compact=True",
+      "body": {
+        "nfsShareCreate": [
+          {
+            "path": "/",
+            "name": "ns1",
+            "nfsShareParameters": {
+              "defaultAccess": 2
+            }
+          }
+        ]
+      },
+      "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/res_25/action/modifyFilesystem?compact=True",
       "body": {
         "nfsShareCreate": [
           {

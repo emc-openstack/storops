@@ -1,5 +1,5 @@
 {
-  "@base": "https://10.244.223.66/api/types/cifsShare/instances?filter=filesystem eq \"fs_8\" and name eq \"cs1\"&fields=creationTime,description,exportPaths,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,type,umask,filesystem.id,snap.id&per_page=2000&compact=true",
+  "@base": "https://10.244.223.66/api/types/cifsShare/instances?filter=filesystem eq \"fs_7\" and name eq \"cs1\"&fields=creationTime,description,exportPaths,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,type,umask,filesystem.id,snap.id&per_page=2000&compact=true",
   "updated": "2016-03-17T11:21:38.117Z",
   "links": [
     {
@@ -17,8 +17,8 @@
         "name": "cs1",
         "path": "/",
         "exportPaths": [
-          "\\\\nas1130.win2012.dev\\cs1",
-          "\\\\10.244.220.120\\cs1"
+          "\\\\nas1131.win2012.dev\\cs1",
+          "\\\\10.244.220.121\\cs1"
         ],
         "description": "",
         "creationTime": "2016-03-17T10:20:21.899Z",
@@ -31,7 +31,7 @@
         "isDFSEnabled": false,
         "umask": "022",
         "filesystem": {
-          "id": "fs_8"
+          "id": "fs_7"
         }
       }
     }

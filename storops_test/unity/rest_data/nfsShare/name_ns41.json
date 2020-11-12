@@ -1,5 +1,5 @@
 {
-  "@base": "https://10.245.83.44/api/types/nfsShare/instances?filter=name eq \"ns41\"&fields=anonymousGID,anonymousUID,creationTime,defaultAccess,description,exportOption,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,nfsOwnerUsername,noAccessHosts,noAccessHostsString,path,readOnlyHosts,readOnlyHostsString,readOnlyRootAccessHosts,readOnlyRootHostsString,readWriteHosts,readWriteHostsString,readWriteRootHostsString,role,rootAccessHosts,snap,type&per_page=2000&compact=true",
+  "@base": "https://10.245.83.44/api/types/nfsShare/instances?filter=filesystem eq \"fs_41\" and name eq \"ns41\"&fields=anonymousGID,anonymousUID,creationTime,defaultAccess,description,exportOption,exportPaths,filesystem,hostAccesses,id,instanceId,isReadOnly,minSecurity,modificationTime,name,nfsOwnerUsername,noAccessHosts,noAccessHostsString,path,readOnlyHosts,readOnlyHostsString,readOnlyRootAccessHosts,readOnlyRootHostsString,readWriteHosts,readWriteHostsString,readWriteRootHostsString,role,rootAccessHosts,snap,type&per_page=2000&compact=true",
   "updated": "2020-10-27T07:52:39.220Z",
   "links": [
     {

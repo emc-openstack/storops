@@ -101,7 +101,7 @@ class UnityFileSystem(UnityResource):
             params['fsParameters'] = fs_param
         if cifs_fs_parameters:
             params['cifsFsParameters'] = cifs_fs_parameters
-        if description:
+        if description is not None:
             params['description'] = description
 
         if not params:

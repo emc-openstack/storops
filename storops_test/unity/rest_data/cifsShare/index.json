@@ -45,7 +45,15 @@
       "response": "name_cs1.json"
     },
     {
-      "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&filter=name eq \"cs61\"",
+      "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&filter=filesystem eq \"fs_8\" and name eq \"cs1\"",
+      "response": "name_cs1.json"
+    },
+    {
+      "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&filter=filesystem eq \"fs_7\" and name eq \"cs1\"",
+      "response": "name_cs1_1.json"
+    },
+    {
+      "url": "/api/types/cifsShare/instances?compact=True&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&filter=filesystem eq \"fs_61\" and name eq \"cs61\"",
       "response": "name_cs61.json"
     },
     {

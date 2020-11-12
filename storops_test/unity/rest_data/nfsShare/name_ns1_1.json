@@ -1,0 +1,33 @@
+{
+  "@base": "https://10.244.223.66/api/types/nfsShare/instances?filter=filesystem eq \"fs_10\" and name eq \"ns1\"&fields=creationTime,defaultAccess,description,exportPaths,id,instanceId,isReadOnly,minSecurity,modificationTime,name,path,role,type,hostAccesses.id,readOnlyHosts.id,noAccessHosts.id,rootAccessHosts.id,filesystem.id,readWriteHosts.id,snap.id&per_page=2000&compact=true",
+  "updated": "2016-03-17T15:34:02.124Z",
+  "links": [
+    {
+      "rel": "self",
+      "href": "&page=1"
+    }
+  ],
+  "entries": [
+    {
+      "content": {
+        "id": "NFSShare_5",
+        "type": 1,
+        "role": 0,
+        "defaultAccess": 2,
+        "minSecurity": 0,
+        "instanceId": "root/emc:EMC_UEM_NFSShareLeaf%InstanceID=NFSShare_5",
+        "name": "ns1",
+        "path": "/",
+        "exportPaths": [
+          "10.244.220.121:/ns1"
+        ],
+        "description": "",
+        "creationTime": "2016-03-17T15:34:00.749Z",
+        "modificationTime": "2016-03-17T15:34:00.749Z",
+        "filesystem": {
+          "id": "fs_10"
+        }
+      }
+    }
+  ]
+}

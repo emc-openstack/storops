@@ -1,0 +1,81 @@
+{
+  "content": {
+    "id": "fs_7",
+    "operationalStatus": [
+      2
+    ],
+    "type": 1,
+    "dedupState": 2,
+    "tieringPolicy": 0,
+    "supportedProtocols": 1,
+    "accessPolicy": 2,
+    "renamePolicy": 0,
+    "lockingPolicy": 0,
+    "format": 2,
+    "hostIOSize": 8192,
+    "poolFullPolicy": 0,
+    "instanceId": "root/emc:EMC_UEM_FileSystemLeaf%InstanceID=fs_7",
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_APP_FS_OK"
+      ],
+      "descriptions": [
+        "This storage resource is operating normally. No action is required."
+      ]
+    },
+    "name": "fs7",
+    "description": "",
+    "creationTime": "2016-03-17T10:00:06.089Z",
+    "modificationTime": "2016-03-17T10:00:06.097Z",
+    "sizeTotal": 3221225472,
+    "sizeUsed": 1620303872,
+    "sizeAllocated": 3221225472,
+    "isReadOnly": false,
+    "isThinEnabled": true,
+    "isCIFSSyncWritesEnabled": false,
+    "isCIFSOpLocksEnabled": true,
+    "isCIFSNotifyOnWriteEnabled": false,
+    "isCIFSNotifyOnAccessEnabled": false,
+    "cifsNotifyOnChangeDirDepth": 512,
+    "cifsNumUsedFiles": 0,
+    "dedupExcludePaths": [
+      ""
+    ],
+    "dedupExcludeExtensions": [
+      ""
+    ],
+    "isDedupRunning": false,
+    "dedupOriginalSizeUsed": 1351819264,
+    "dedupSizeUsed": 0,
+    "dedupSizeSaved": 0,
+    "dedupPercentSaved": 0,
+    "dedupNumFilesTotal": 0,
+    "dedupNumFilesDeduped": 0,
+    "dedupNumFilesScanned": 0,
+    "dedupNumFileRecalled": 0,
+    "dedupProgress": 100,
+    "oid": 8589934637,
+    "backendId": "171798691864",
+    "metadataSize": 3489660928,
+    "metadataSizeAllocated": 3221225472,
+    "perTierSizeUsed": [
+      0,
+      6442450944,
+      0
+    ],
+    "snapsSize": 0,
+    "snapsSizeAllocated": 0,
+    "snapCount": 0,
+    "isSMBCA": false,
+    "storageResource": {
+      "id": "res_23"
+    },
+    "pool": {
+      "id": "pool_2"
+    },
+    "nasServer": {
+      "id": "nas_2"
+    }
+  }
+}

@@ -142,11 +142,18 @@ class UnityCifsShareTest(TestCase):
         assert_that(share.description, equal_to(description))
 
     @patch_rest
-    def test_create_same_name_exists(self):
+    def test_create_same_name_exists_in_fs(self):
         def f():
             UnityCifsShare.create(t_rest(), 'cs2', 'fs_8')
 
         assert_that(f, raises(UnitySmbShareNameExistedError, 'already exists'))
+
+    @patch_rest
+    def test_create_same_name_in_diff_fs(self):
+        UnityCifsShare.create(t_rest(), 'cs1', 'fs_8')
+        share = UnityCifsShare.create(t_rest(), 'cs1', 'fs_7')
+        assert_that(share.name, equal_to('cs1'))
+        assert_that(share.filesystem.name, equal_to('fs7'))
 
     @patch_rest
     def test_modify_success(self):

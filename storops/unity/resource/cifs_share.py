@@ -73,7 +73,8 @@ class UnityCifsShare(UnityResource):
                               cifsShareParameters=share_param)
         resp = sr.modify_fs(cifsShareCreate=[param])
         resp.raise_if_err()
-        return UnityCifsShareList(cli=cli, name=name).first_item
+        return UnityCifsShareList(
+            cli=cli, name=name, filesystem=fs).first_item
 
     @classmethod
     def create_from_snap(cls, cli, snap, name, path=None, is_read_only=None,

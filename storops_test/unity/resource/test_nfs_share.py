@@ -250,13 +250,24 @@ class UnityNfsShareTest(TestCase):
         share.modify()
 
     @patch_rest
-    def test_create_nfs_share_name_exists(self):
+    def test_create_nfs_share_name_exists_in_fs(self):
         def f():
             UnityNfsShare.create(
                 t_rest(), 'ns1', 'fs_9',
                 share_access=NFSShareDefaultAccessEnum.ROOT)
 
         assert_that(f, raises(UnityNfsShareNameExistedError, 'already exists'))
+
+    @patch_rest
+    def test_create_nfs_share_same_name_in_diff_fs(self):
+        UnityNfsShare.create(
+            t_rest(), 'ns1', 'fs_9',
+            share_access=NFSShareDefaultAccessEnum.READ_WRITE)
+        share = UnityNfsShare.create(
+            t_rest(), 'ns1', 'fs_10',
+            share_access=NFSShareDefaultAccessEnum.READ_WRITE)
+        assert_that(share.name, equal_to('ns1'))
+        assert_that(share.filesystem.name, equal_to('esa_nfs1'))
 
     @patch_rest
     def test_delete_nfs_share_success(self):

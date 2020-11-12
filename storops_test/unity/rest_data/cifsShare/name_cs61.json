@@ -1,5 +1,5 @@
 {
-  "@base": "https://192.168.1.58/api/types/cifsShare/instances?filter=name eq \"cs61\"&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&per_page=2000&compact=true",
+  "@base": "https://192.168.1.58/api/types/cifsShare/instances?filter=filesystem eq \"fs_61\" and name eq \"cs61\"&fields=creationTime,description,exportPaths,filesystem,id,instanceId,isABEEnabled,isACEEnabled,isBranchCacheEnabled,isContinuousAvailabilityEnabled,isDFSEnabled,isEncryptionEnabled,isReadOnly,modifiedTime,name,offlineAvailability,path,snap,type,umask&per_page=2000&compact=true",
   "updated": "2020-10-29T05:50:45.531Z",
   "links": [
     {

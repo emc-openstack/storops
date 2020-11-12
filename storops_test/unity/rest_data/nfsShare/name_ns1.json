@@ -1,5 +1,5 @@
 {
-  "@base": "https://10.244.223.66/api/types/nfsShare/instances?filter=name eq \"ns1\"&fields=creationTime,defaultAccess,description,exportPaths,id,instanceId,isReadOnly,minSecurity,modificationTime,name,path,role,type,hostAccesses.id,readOnlyHosts.id,noAccessHosts.id,rootAccessHosts.id,filesystem.id,readWriteHosts.id,snap.id&per_page=2000&compact=true",
+  "@base": "https://10.244.223.66/api/types/nfsShare/instances?filter=filesystem eq \"fs_9\" and name eq \"ns1\"&fields=creationTime,defaultAccess,description,exportPaths,id,instanceId,isReadOnly,minSecurity,modificationTime,name,path,role,type,hostAccesses.id,readOnlyHosts.id,noAccessHosts.id,rootAccessHosts.id,filesystem.id,readWriteHosts.id,snap.id&per_page=2000&compact=true",
   "updated": "2016-03-17T15:34:02.124Z",
   "links": [
     {

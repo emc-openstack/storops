@@ -240,6 +240,12 @@ class UnityFileSystemTest(TestCase):
         fs.modify()
 
     @patch_rest
+    def test_modify_success_empty_description(self):
+        fs = UnityFileSystem(cli=t_rest(), _id='fs_22')
+        fs.modify(description='')
+        assert_that(fs.description, equal_to(''))
+
+    @patch_rest
     def test_delete_filesystem_async(self):
         fs = UnityFileSystem(_id='fs_14', cli=t_rest())
         resp = fs.delete(async_mode=True)

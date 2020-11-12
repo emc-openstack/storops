@@ -173,7 +173,7 @@ class UnityNfsShare(UnityResource):
                               nfsShareParameters=share_param)
         resp = sr.modify_fs(nfsShareCreate=[param])
         resp.raise_if_err()
-        return UnityNfsShareList(cli=cli, name=name).first_item
+        return UnityNfsShareList(cli=cli, name=name, filesystem=fs).first_item
 
     @classmethod
     def create_from_snap(cls, cli, snap, name, path=None, is_read_only=None,

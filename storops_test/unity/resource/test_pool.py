@@ -384,31 +384,6 @@ class UnityPoolTest(TestCase):
 
     @patch_rest
     @ddt.data(
-        {'unity_support_matrix': ['550', '650F'],
-         'unity_model': 'Unity 300', 'is_all_flash': True,
-         'expected': False},
-        {'unity_support_matrix': ['550', '650F'],
-         'unity_model': 'Unity 650F', 'is_all_flash': True,
-         'expected': True},
-        {'unity_support_matrix': ['550', '650F'],
-         'unity_model': 'Unity 650F', 'is_all_flash': False,
-         'expected': False},
-    )
-    @ddt.unpack
-    def test_verify_advanced_dedup_by_unity_model(self, unity_support_matrix,
-                                                  unity_model, is_all_flash,
-                                                  expected):
-        with mock.patch.object(UnitySystem, 'model', create=True,
-                               return_value=unity_model,
-                               new_callable=mock.PropertyMock):
-            cli = t_rest()
-            pool = UnityPool(_id='pool_1', cli=cli)
-            pool.is_all_flash = is_all_flash
-            assert_that(pool.verify_advanced_dedup_by_unity_model(
-                unity_support_matrix), equal_to(expected))
-
-    @patch_rest
-    @ddt.data(
         {'unity_version': '4.3.0', 'unity_model': 'Unity 500',
          'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
         {'unity_version': '4.3.1', 'unity_model': 'Unity 650F',
@@ -421,6 +396,10 @@ class UnityPoolTest(TestCase):
          'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
         {'unity_version': '4.5.1', 'unity_model': 'Unity 650F',
          'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+        {'unity_version': '4.5.2', 'unity_model': 'Unity 640F',
+         'pool_id': 'pool_2', 'is_all_flash': True, 'expected': False},
+        {'unity_version': '4.5.2', 'unity_model': 'Unity 660F',
+         'pool_id': 'pool_2', 'is_all_flash': True, 'expected': True},
         {'unity_version': '5.0.0', 'unity_model': 'Unity 500',
          'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
         {'unity_version': '5.0.0', 'unity_model': 'Unity 500',
@@ -429,6 +408,10 @@ class UnityPoolTest(TestCase):
          'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
         {'unity_version': '5.0.1', 'unity_model': 'Unity 480',
          'pool_id': 'pool_2', 'is_all_flash': False, 'expected': False},
+        {'unity_version': '5.0.1', 'unity_model': 'Unity 470',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': False},
+        {'unity_version': '5.0.1', 'unity_model': 'Unity 490',
+         'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
         {'unity_version': '5.0.3', 'unity_model': 'Unity 880F',
          'pool_id': 'pool_1', 'is_all_flash': True, 'expected': True},
         {'unity_version': '5.0.3', 'unity_model': 'Unity 880F',

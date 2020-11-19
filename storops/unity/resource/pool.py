@@ -21,6 +21,7 @@ import logging
 import bitmath
 
 import storops.unity.resource.filesystem
+from storops.lib.models import UnityModel
 from storops.lib.version import version
 from storops.unity.resource import UnityResource, \
     UnityAttributeResource, UnityResourceList
@@ -240,11 +241,15 @@ class UnityPool(UnityResource):
     def is_compression_supported(self):
         return self.is_all_flash
 
-    def verify_advanced_dedup_by_unity_model(self, unity_support_matrix):
+    def _is_advanced_dedup_supported(self, support_matrix):
         from storops.unity.resource.system import UnitySystem
         unity_system = UnitySystem(cli=self._cli)
-        unity_model = unity_system.model.split()[-1]
-        return unity_model in unity_support_matrix and self.is_all_flash
+        supported = False
+        for supported_model in support_matrix:
+            if UnityModel(unity_system.model) >= UnityModel(supported_model):
+                supported = True
+                break
+        return supported and self.is_all_flash
 
     @version('<4.5')
     def is_advanced_dedup_supported(self):
@@ -252,14 +257,14 @@ class UnityPool(UnityResource):
 
     @version('>=4.5')  # noqa
     def is_advanced_dedup_supported(self):
-        unity_support_matrix = ['450F', '550F', '650F']
-        return self.verify_advanced_dedup_by_unity_model(unity_support_matrix)
+        support_matrix = ['450F', '550F', '650F']
+        return self._is_advanced_dedup_supported(support_matrix)
 
     @version('>=5.0')  # noqa
     def is_advanced_dedup_supported(self):
-        unity_support_matrix = ['450F', '550F', '650F', '380', '480', '680',
-                                '880', '380F', '480F', '680F', '880F']
-        return self.verify_advanced_dedup_by_unity_model(unity_support_matrix)
+        support_matrix = ['380', '480', '680', '880',
+                          '380F', '450F', '550F', '650F', '880F']
+        return self._is_advanced_dedup_supported(support_matrix)
 
 
 class UnityPoolList(UnityResourceList):

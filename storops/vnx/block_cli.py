@@ -370,11 +370,14 @@ class CliClient(PerfManager):
                            primary_lun_id=None,
                            primary_lun_name=None,
                            mount_point_name=None,
-                           mount_point_id=None):
+                           mount_point_id=None,
+                           sp_id=None):
         cmd = 'lun -create -type snap'.split()
         cmd += self._get_primary_lun_opt(primary_lun_id, primary_lun_name)
         cmd += self._get_lun_opt(lun_id=mount_point_id,
                                  lun_name=mount_point_name)
+        if sp_id:
+            cmd += text_var('-sp', sp_id)
         return cmd
 
     @command

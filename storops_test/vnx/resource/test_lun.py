@@ -339,6 +339,19 @@ class VNXLunTest(TestCase):
         assert_that(m2.attached_snapshot, none())
 
     @patch_cli
+    def test_create_mount_point_with_sp_success(self):
+        lun = VNXLun(name='l1', cli=t_cli())
+        m2 = lun.create_mount_point(name='m2', sp_id='A')
+        assert_that(lun.snapshot_mount_points, instance_of(VNXLunList))
+        assert_that(str(lun), contains_string('"VNXLunList": ['))
+        for smp in lun.snapshot_mount_points:
+            assert_that(smp, instance_of(VNXLun))
+            pl = smp.primary_lun
+            assert_that(pl, instance_of(VNXLun))
+            assert_that(pl._get_name(), equal_to('l1'))
+        assert_that(m2.attached_snapshot, none())
+
+    @patch_cli
     def test_mount_point_properties(self):
         lun = VNXLun(name='l1', cli=t_cli())
         m1 = lun.create_mount_point(name='m1')

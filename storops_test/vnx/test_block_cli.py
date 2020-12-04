@@ -511,6 +511,15 @@ class CliClientTest(TestCase):
                     equal_to('lun -create -type snap '
                              '-primaryLunName l1 -name m1'))
 
+    @extract_command
+    def test_create_mount_point_with_sp(self):
+        cmd = self.client.create_mount_point(primary_lun_name='l1',
+                                             mount_point_name='m1',
+                                             sp_id='B')
+        assert_that(cmd,
+                    equal_to('lun -create -type snap '
+                             '-primaryLunName l1 -name m1 -sp B'))
+
     def test_create_mount_point_missing_primary_lun(self):
         def f():
             self.client.create_mount_point(mount_point_name='m1')

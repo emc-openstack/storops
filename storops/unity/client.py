@@ -50,14 +50,15 @@ def wrap_not_supported(func):
 
 class UnityClient(PerfManager):
     def __init__(self, ip, username, password, port=443, verify=False,
-                 retries=None, cache_interval=0):
+                 retries=None, cache_interval=0, application_type=None):
         super(UnityClient, self).__init__()
         self.ip = ip
         self._rest = UnityRESTConnector(ip, port=port, user=username,
                                         password=password,
                                         verify=verify,
                                         retries=retries,
-                                        cache_interval=cache_interval)
+                                        cache_interval=cache_interval,
+                                        application_type=application_type)
         self._system_version = None
 
     @wrap_not_supported

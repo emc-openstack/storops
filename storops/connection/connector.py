@@ -55,7 +55,7 @@ class UnityRESTConnector(object):
 
     def __init__(self, host, port=443, user='admin', password='',
                  verify=False, retries=None, cache_interval=0,
-                 connect_timeout=30):
+                 connect_timeout=30, application_type=None):
         base_url = 'https://{host}:{port}'.format(host=host, port=port)
 
         insecure = False
@@ -64,6 +64,10 @@ class UnityRESTConnector(object):
             insecure = not verify
         else:
             ca_cert_path = verify
+
+        if application_type:
+            self.HEADERS['Application-Type'] = application_type
+
         self.http_client = client.HTTPClient(base_url=base_url,
                                              headers=self.HEADERS,
                                              auth=(user, password),

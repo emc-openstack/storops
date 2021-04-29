@@ -1,0 +1,46 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/treeQuota?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/treeQuota/instances?compact=True&fields=description,filesystem,gpLeft,hardLimit,id,path,sizeUsed,softLimit,state",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/treeQuota/treequota_171798692187_3?compact=True&fields=description,filesystem,gpLeft,hardLimit,id,path,sizeUsed,softLimit,state",
+      "response": "tree_quota_1.json"
+    },
+    {
+      "url": "/api/instances/treeQuota/abc?compact=True&fields=description,filesystem,gpLeft,hardLimit,id,path,sizeUsed,softLimit,state",
+      "response": "tree_quota_not_found.json"
+    },
+    {
+      "url": "/api/types/treeQuota/instances?compact=True",
+      "body": {
+        "path": "/myPath",
+        "description": "Creating Tree Quota",
+        "filesystem": {
+          "id": "fs_2"
+        },
+        "softLimit": 3221225472,
+        "hardLimit": 9663676416
+      },
+      "response": "create_tree_quota_success.json"
+    },
+    {
+      "url": "/api/instances/treeQuota/treequota_171798692187_3/action/modify?compact=True",
+      "body": {
+        "description": "modify tree Quota",
+        "softLimit": 2147483648,
+        "hardLimit": 8589934592
+      },
+      "response": "modify_tree_quota_treequota_171798692187_3.json"
+    },
+    {
+      "url": "/api/instances/treeQuota/treequota_171798692187_3?compact=True",
+      "response": "delete_tree_quota_treequota_171798692187_3.json"
+    }
+  ]
+}

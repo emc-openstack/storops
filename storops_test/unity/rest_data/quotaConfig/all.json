@@ -1,0 +1,45 @@
+{
+    "@base":"https://10.244.223.66/api/types/quotaConfig/instances?fields=quotaPolicy,isUserQuotaEnabled,defaultSoftLimit,defaultHardLimit,id,gracePeriod,filesystem,treeQuota,isAccessDenyEnabled,lastUpdateTimeOfTreeQuotas,lastUpdateTimeOfUserQuotas",
+    "updated":"2021-03-17T09:41:25.233Z",
+    "links": [
+        {
+            "rel":"self",
+            "href":"&page=1"}
+    ],
+    "entries":[
+        {
+            "content":{
+                "id":"quotaconfig_171798691845_0",
+                "quotaPolicy":0,
+                "isUserQuotaEnabled":false,
+                "isAccessDenyEnabled":true,
+                "gracePeriod":604800,
+                "defaultHardLimit":0,
+                "defaultSoftLimit":0,
+                "lastUpdateTimeOfTreeQuotas":"2021-04-21T08:16:28.000Z",
+                "lastUpdateTimeOfUserQuotas":"2021-04-21T01:06:40.000Z",
+                "filesystem":{
+                    "id":"fs_1"
+                }
+            }
+        },
+        {
+            "content":{
+                "id":"quotaconfig_171798691845_1",
+                "quotaPolicy":0,
+                "isUserQuotaEnabled":false,
+                "isAccessDenyEnabled":true,
+                "gracePeriod":604800,
+                "defaultHardLimit":0,
+                "defaultSoftLimit":0,
+                "lastUpdateTimeOfUserQuotas":"2021-04-21T01:07:15.000Z",
+                "filesystem":{
+                    "id":"fs_1"
+                },
+                "treeQuota":{
+                    "id":"treequota_171798691845_1"
+                }
+            }
+        }
+    ]
+}

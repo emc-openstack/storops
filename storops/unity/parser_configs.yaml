@@ -2336,3 +2336,61 @@ UnityAlert:
     - label: resolutionId
     - label: resolution
     - label: isAcknowledged
+
+
+UnityUserQuota:
+  data_src: rest
+  name: userQuota
+  properties:
+    - label: id
+    - label: filesystem
+      converter: UnityFileSystem
+    - label: treeQuota
+      converter: UnityTreeQuota
+    - label: gpLeft
+    - label: hardLimit
+    - label: hardRatio
+    - label: sizeUsed
+    - label: softLimit
+    - label: softRatio
+    - label: state
+    - label: uid
+    - label: unixName
+    - label: windowsNames
+    - label: windowsSIDs
+
+
+UnityTreeQuota:
+  data_src: rest
+  name: treeQuota
+  properties:
+    - label: id
+    - label: path
+    - label: description
+    - label: filesystem
+      converter: UnityFileSystem
+    - label: gpLeft
+    - label: hardLimit
+    - label: sizeUsed
+    - label: softLimit
+    - label: state
+
+
+UnityQuotaConfig:
+  data_src: rest
+  name: quotaConfig
+  properties:
+    - label: id
+    - label: filesystem
+      converter: UnityFileSystem
+    - label: treeQuota
+      converter: UnityTreeQuota
+    - label: quotaPolicy
+      converter: QuotaPolicyEnum
+    - label: isUserQuotaEnabled
+    - label: isAccessDenyEnabled
+    - label: gracePeriod
+    - label: defaultHardLimit
+    - label: defaultSoftLimit
+    - label: lastUpdateTimeOfTreeQuotas
+    - label: lastUpdateTimeOfUserQuotas

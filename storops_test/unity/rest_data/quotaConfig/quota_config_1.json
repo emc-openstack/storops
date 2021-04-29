@@ -1,0 +1,19 @@
+{
+    "content": {
+        "existed": true,
+        "id":"quotaconfig_171798691845_1",
+        "quotaPolicy":0,
+        "isUserQuotaEnabled":false,
+        "isAccessDenyEnabled":true,
+        "gracePeriod":604800,
+        "defaultHardLimit":0,
+        "defaultSoftLimit":0,
+        "lastUpdateTimeOfUserQuotas":"2021-04-21T01:07:15.000Z",
+        "filesystem":{
+            "id":"fs_1"
+        },
+        "treeQuota":{
+            "id":"treequota_171798691845_1"
+        }
+    }
+}

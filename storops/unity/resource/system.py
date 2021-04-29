@@ -52,6 +52,8 @@ from storops.unity.resource.port import UnityEthernetPortList, \
 from storops.unity.resource.port import UnityIpPortList, UnityIoLimitPolicy, \
     UnityIoLimitPolicyList, UnityLinkAggregationList, UnityIscsiPortal, \
     UnitySasPortList, UnityIscsiNodeList
+from storops.unity.resource.quota_config import UnityQuotaConfig, \
+    UnityQuotaConfigList
 from storops.unity.resource.remote_interface import UnityRemoteInterfaceList
 from storops.unity.resource.remote_system import UnityRemoteSystemList, \
     UnityRemoteSystem
@@ -63,9 +65,13 @@ from storops.unity.resource.snap import UnitySnapList
 from storops.unity.resource.snap_schedule import UnitySnapScheduleList, \
     UnitySnapSchedule
 from storops.unity.resource.sp import UnityStorageProcessorList
+from storops.unity.resource.tree_quota import UnityTreeQuota, \
+    UnityTreeQuotaList
 from storops.unity.resource.cg import UnityConsistencyGroup, \
     UnityConsistencyGroupList
 from storops.unity.resource.tenant import UnityTenant, UnityTenantList
+from storops.unity.resource.user_quota import UnityUserQuota, \
+    UnityUserQuotaList
 from storops.unity.resource.vmware import UnityCapabilityProfileList
 
 __author__ = 'Jay Xu, Cedric Zhuang'
@@ -179,6 +185,15 @@ class UnitySystem(UnitySingletonResource):
         return self._get_unity_rsc(UnityNasServerList, _id=_id, name=name,
                                    **filters)
 
+    def get_user_quota(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityUserQuotaList, _id=_id, **filters)
+
+    def get_tree_quota(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityTreeQuotaList, _id=_id, **filters)
+
+    def get_quota_config(self, _id=None, **filters):
+        return self._get_unity_rsc(UnityQuotaConfigList, _id=_id, **filters)
+
     def get_cifs_server(self, _id=None, name=None, **filters):
         return self._get_unity_rsc(UnityCifsServerList, _id=_id, name=name,
                                    **filters)
@@ -198,6 +213,63 @@ class UnitySystem(UnitySingletonResource):
         return sp.create_nas_server(name, pool,
                                     is_repl_dst=is_repl_dst,
                                     multi_proto=multi_proto, tenant=tenant)
+
+    def create_user_quota(self, filesystem_id=None, tree_quota_id=None,
+                          hard_limit=None, soft_limit=None, uid=None,
+                          unix_name=None, win_name=None):
+        return UnityUserQuota.create(cli=self._cli,
+                                     filesystem_id=filesystem_id,
+                                     tree_quota_id=tree_quota_id,
+                                     hard_limit=hard_limit,
+                                     soft_limit=soft_limit,
+                                     uid=uid,
+                                     unix_name=unix_name,
+                                     win_name=win_name)
+
+    def create_tree_quota(self, filesystem_id=None, path=None,
+                          description=None, hard_limit=None, soft_limit=None):
+        return UnityTreeQuota.create(cli=self._cli,
+                                     filesystem_id=filesystem_id,
+                                     path=path,
+                                     description=description,
+                                     hard_limit=hard_limit,
+                                     soft_limit=soft_limit)
+
+    def modify_user_quota(self, user_quota_id,
+                          hard_limit=None, soft_limit=None):
+        return UnityUserQuota.modify(self._cli,
+                                     user_quota_id=user_quota_id,
+                                     hard_limit=hard_limit,
+                                     soft_limit=soft_limit)
+
+    def modify_tree_quota(self, tree_quota_id, description=None,
+                          hard_limit=None, soft_limit=None):
+        return UnityTreeQuota.modify(self._cli,
+                                     tree_quota_id=tree_quota_id,
+                                     description=description,
+                                     hard_limit=hard_limit,
+                                     soft_limit=soft_limit)
+
+    def modify_quota_config(self, quota_config_id, quota_policy=None,
+                            is_user_quota_enabled=None,
+                            delete_user_quotas_with_disable=None,
+                            is_access_deny_enabled=None,
+                            grace_period=None,
+                            default_hard_limit=None,
+                            default_soft_limit=None):
+        return UnityQuotaConfig.modify(
+            self._cli,
+            quota_config_id,
+            quota_policy=quota_policy,
+            is_user_quota_enabled=is_user_quota_enabled,
+            delete_user_quotas_with_disable=delete_user_quotas_with_disable,
+            is_access_deny_enabled=is_access_deny_enabled,
+            grace_period=grace_period,
+            default_hard_limit=default_hard_limit,
+            default_soft_limit=default_soft_limit)
+
+    def delete_tree_quota(self, tree_quota_id):
+        return UnityTreeQuota.delete(self._cli, tree_quota_id)
 
     def _auto_balance_sp(self):
         sp_list = self.get_sp()

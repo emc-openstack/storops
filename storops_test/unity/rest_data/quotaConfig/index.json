@@ -1,0 +1,32 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/quotaConfig?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/quotaConfig/instances?compact=True&fields=defaultHardLimit,defaultSoftLimit,filesystem,gracePeriod,id,isAccessDenyEnabled,isUserQuotaEnabled,lastUpdateTimeOfTreeQuotas,lastUpdateTimeOfUserQuotas,quotaPolicy,treeQuota",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/quotaConfig/quotaconfig_171798691845_1?compact=True&fields=defaultHardLimit,defaultSoftLimit,filesystem,gracePeriod,id,isAccessDenyEnabled,isUserQuotaEnabled,lastUpdateTimeOfTreeQuotas,lastUpdateTimeOfUserQuotas,quotaPolicy,treeQuota",
+      "response": "quota_config_1.json"
+    },
+    {
+      "url": "/api/instances/quotaConfig/abc?compact=True&fields=defaultHardLimit,defaultSoftLimit,filesystem,gracePeriod,id,isAccessDenyEnabled,isUserQuotaEnabled,lastUpdateTimeOfTreeQuotas,lastUpdateTimeOfUserQuotas,quotaPolicy,treeQuota",
+      "response": "quota_config_not_found.json"
+    },
+    {
+      "url": "/api/instances/quotaConfig/quotaconfig_171798691845_1/action/modify?compact=True",
+      "body": {
+        "quotaPolicy": 1,
+        "deleteUserQuotasWithDisable": false,
+        "isAccessDenyEnabled": false,
+        "gracePeriod": 345600,
+        "defaultHardLimit": 8589934592,
+        "defaultSoftLimit": 2147483648
+      },
+      "response": "modify_quota_config.json"
+    }	
+  ]
+}

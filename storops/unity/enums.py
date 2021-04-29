@@ -1222,3 +1222,8 @@ class FSRenamePolicyEnum(UnityEnum):
 class FSLockingPolicyEnum(UnityEnum):
     ADVISORY = (0, 'Advisory')
     MANDATORY = (1, 'Mandatory')
+
+
+class QuotaPolicyEnum(UnityEnum):
+    FILE_SIZE = (0, 'File_Size')
+    BLOCKS = (1, 'Blocks')

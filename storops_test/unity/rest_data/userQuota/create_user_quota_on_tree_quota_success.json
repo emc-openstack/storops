@@ -1,0 +1,19 @@
+{
+  "content": {
+    "existed": true,
+    "filesystem": {      
+        "hash": -9223363277012287088,
+        "id": "fs_36" 
+    },
+    "hard_limit": 10737418240,
+    "hash": -9223363277012287109,
+    "id": "userquota_171798692187_3_3",
+    "size_used": 0,
+    "soft_limit": 9663676416,
+    "state": 0,
+    "tree_quota": {
+         "hash": -9223363277012287067,
+         "id": "treequota_171798692187_3"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "indices": [
+    {
+      "url": "/api/types/userQuota?compact=True&fields=attributes.description,attributes.displayValue,attributes.initialValue,attributes.name,attributes.type,description,documentation,name,type",
+      "response": "type.json"
+    },
+    {
+      "url": "/api/types/userQuota/instances?compact=True&fields=filesystem,gpLeft,hardLimit,id,sizeUsed,softLimit,state",
+      "response": "all.json"
+    },
+    {
+      "url": "/api/instances/userQuota/userquota_171798692187_3_3?compact=True&fields=filesystem,gpLeft,hardLimit,id,sizeUsed,softLimit,state",
+      "response": "user_quota_1.json"
+    },
+   {
+      "url": "/api/instances/userQuota/abc?compact=True&fields=filesystem,gpLeft,hardLimit,id,sizeUsed,softLimit,state",
+      "response": "user_quota_not_found.json"
+    },
+    {
+      "url": "/api/types/userQuota/instances?compact=True",
+      "body": {
+        "filesystem": {
+          "id": "fs_2"
+        },
+        "softLimit": 3221225472,
+        "hardLimit": 9663676416,
+        "uid": 3
+      },
+      "response": "create_user_quota_1_success.json"
+    },
+    {
+      "url": "/api/types/userQuota/instances?compact=True",
+      "body": {
+        "filesystem": {
+          "id": "fs_2"
+        },
+        "treeQuota": {
+          "id": "treequota_171798692187_3"
+        },
+        "softLimit": 3221225472,
+        "hardLimit": 9663676416,
+        "uid": 3
+      },
+      "response": "create_user_quota_on_tree_quota_success.json"
+    },
+    {
+      "url": "/api/instances/userQuota/userquota_171798692187_3_3/action/modify?compact=True",
+      "body": {
+        "softLimit": 2147483648,
+        "hardLimit": 8589934592
+      },
+      "response": "modify_user_quota.json"
+    }
+  ]
+}

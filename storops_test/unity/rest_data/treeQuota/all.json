@@ -1,0 +1,79 @@
+{
+    "@base":"https://10.244.223.66/api/types/treeQuota/instances?fields=state,path,description,sizeUsed,softLimit,softRatio,hardLimit,gpLeft,remainingGracePeriod,hardRatio,filesystem",
+    "updated":"2021-03-17T09:41:25.233Z",
+    "links": [
+        {
+            "rel":"self",
+            "href":"&page=1"}
+    ],
+    "entries":[
+        {
+            "content":{
+                "id":"treequota_171798692187_3",
+                "state":0,
+                "path":"/mypath",
+                "hardLimit":11811160064,
+                "softLimit":5368709120,
+                "sizeUsed":0,
+                "filesystem":{
+                    "id":"fs_36",
+                    "name":"Test_fs"
+                },
+                "gpLeft":0.0,
+                "hardRatio":0,
+                "softRatio":0
+            }
+        },
+        {
+            "content":{
+                "id":"treequota_171798692187_1",
+                "state": 0,
+                "path":"/test",
+                "hardLimit":10737418240,
+                "softLimit":5368709120,
+                "sizeUsed":0,
+                "filesystem":{
+                  "id":"fs_36",
+                  "name":"Test_fs"
+                },
+                "gpLeft":0,
+                "hardRatio":0,
+                "softRatio": 0
+            }
+        },
+      {
+            "content":{
+                "id":"treequota_171798692187_2",
+                "state": 0,
+                "path":"/test1",
+                "hardLimit":10737418240,
+                "softLimit":7516192768,
+                "sizeUsed":0,
+                "filesystem":{
+                  "id":"fs_36",
+                  "name":"Test_fs"
+                },
+                "gpLeft":0,
+                "hardRatio":0,
+                "softRatio": 0
+            }
+      },
+      {
+            "content":{
+                "id":"treequota_171798692187_4",
+                "state": 0,
+                "path":"/test_path2",
+                "hardLimit":7516192768,
+                "softLimit":5368709120,
+                "sizeUsed":0,
+                "filesystem":{
+                  "id":"fs_36",
+                  "name":"Test_fs"
+                },
+                "gpLeft":0,
+                "hardRatio":0,
+                "softRatio": 0
+            }
+      }
+    ]
+}

@@ -1505,3 +1505,8 @@ class UnityCompressionRequireLunIsThinError(UnityException):
 @rest_exception
 class UnityCompressionRequireAllFlashPoolError(UnityException):
     error_code = 108009014
+
+
+@rest_exception
+class UnityQuotaConfigModifyException(UnityException):
+    error_code = 0x900022a

@@ -1,0 +1,73 @@
+{
+  "content": {
+    "name": "quotaConfig",
+    "attributes": [
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the quota config instance.",
+        "displayValue": "id"
+      },
+      {
+        "name": "filesystem",
+        "type": "filesystem",
+        "description": "Associated filesystem",
+        "displayValue": "filesystem"
+      },
+      {
+        "name": "treeQuota",
+        "type": "treeQuota",
+        "description": "Associated tree quota",
+        "displayValue": "treeQuota"
+      },
+      {
+        "name": "quotaPolicy",
+        "type": "QuotaPolicyEnum",
+        "description": "Quota policy of the quota config",
+        "displayValue": "quotaPolicy"
+      },
+      {
+        "name": "isUserQuotaEnabled",
+        "type": "Boolean",
+        "description": "Enable or disable quota limits",
+        "displayValue": "isUserQuotaEnabled"
+      },
+      {
+        "name": "isAccessDenyEnabled",
+        "type": "Boolean",
+        "description": "Whether to deny access when limit is exceeded",
+        "displayValue": "isAccessDenyEnabled"
+      },
+      {
+        "name": "gracePeriod",
+        "type": "integer",
+        "description": "Grace period of soft limits",
+        "displayValue": "gracePeriod"
+      },
+      {
+        "name": "defaultHardLimit",
+        "type": "integer",
+        "description": "Default hard limit of user and tree quotas",
+        "displayValue": "defaultHardLimit"
+      },
+      {
+        "name": "defaultSoftLimit",
+        "type": "integer",
+        "description": "Default soft limit of user and tree quotas",
+        "displayValue": "defaultSoftLimit"
+      },
+      {
+        "name": "lastUpdateTimeOfTreeQuotas",
+        "type": "DateTime",
+        "description": "when tree quotas are last updated",
+        "displayValue": "lastUpdateTimeOfTreeQuotas"
+      },
+       {
+        "name": "lastUpdateTimeOfUserQuotas",
+        "type": "DateTime",
+        "description": "when user quotas are last updated",
+        "displayValue": "lastUpdateTimeOfUserQuotas"
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "content": {
+    "name": "treeQuota",
+    "attributes": [
+      {
+        "name": "id",
+        "type": "String",
+        "description": "Unique identifier of the tree quota instance. ",
+        "displayValue": "id"
+      },
+      {
+        "name": "path",
+        "type": "String",
+        "description": "path of the folder where tree quota is created ",
+        "displayValue": "path"
+      },
+      {
+        "name": "description",
+        "type": "String",
+        "description": "description of the tree quota",
+        "displayValue": "description"
+      },
+      {
+        "name": "filesystem",
+        "type": "filesystem",
+        "description": "Associated file system ",
+        "displayValue": "filesystem"
+      },
+      {
+        "name": "gpLeft",
+        "type": "integer",
+        "description": "Remaining grace period when the soft limit is exceeded.",
+        "displayValue": "gpLeft"
+      },
+      {
+        "name": "hardLimit",
+        "type": "integer",
+        "description": "Hard limit.The value 0 means no limitations",
+        "displayValue": "hardLimit"
+      },
+      {
+        "name": "softLimit",
+        "type": "integer",
+        "description": "Soft limit.The value 0 means no limitations ",
+        "displayValue": "softLimit"
+      },
+      {
+        "name": "state",
+        "type": "integer",
+        "description": "State of the user quota",
+        "displayValue": "state"
+      },
+       {
+        "name": "sizeUsed",
+        "type": "integer",
+        "description": "Size already used by the user",
+        "displayValue": "sizeUsed"
+      }
+    ]
+  }
+}

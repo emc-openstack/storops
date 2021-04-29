@@ -1,0 +1,17 @@
+  {
+            "content":{
+                "id":"treequota_171798692187_3",
+                "state":0,
+                "path":"/myPath",
+                "hardLimit":11811160064,
+                "softLimit":5368709120,
+                "sizeUsed":0,
+                "filesystem":{
+                    "id":"fs_36",
+                    "name":"Test_fs"
+                },
+                "gpLeft":0.0,
+                "hardRatio":0,
+                "softRatio":0
+            }
+  }

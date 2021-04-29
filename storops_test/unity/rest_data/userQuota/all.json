@@ -1,0 +1,45 @@
+{
+    "@base":"https://10.244.223.66/api/types/userQuota/instances?fields=state,uid,unixName,sizeUsed,softLimit,softRatio,hardLimit,gpLeft,remainingGracePeriod,hardRatio,filesystem,treeQuota",
+    "updated":"2021-03-17T09:41:25.233Z",
+    "links": [
+        {
+            "rel":"self",
+            "href":"&page=1"}
+    ],
+    "entries":[
+        {
+            "content":{
+                "id":"userquota_171798692187_0_2",
+                "state":0,
+                "uid":2,
+                "hardLimit":5368709120,
+                "softLimit":2147483648,
+                "sizeUsed":0,
+                "filesystem":{
+                    "id":"fs_36",
+                    "name":"Test_fs"
+                },
+                "gpLeft":0.0,
+                "hardRatio":0,
+                "softRatio":0
+            }
+        },
+        {
+            "content":{
+                "id":"userquota_171798692187_0_3",
+                "state":0,
+                "uid":3,
+                "hardLimit":9663676416,
+                "softLimit":3221225472,
+                "sizeUsed":0,
+                "filesystem":{
+                    "id":"fs_36",
+                    "name":"Test_fs"
+                },
+                "gpLeft":0.0,
+                "hardRatio":0,
+                "softRatio":0
+            }
+        }
+    ]
+}

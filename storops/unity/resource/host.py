@@ -191,7 +191,10 @@ class UnityHost(UnityResource):
 
             return ret
 
-    def detach(self, lun_or_snap):
+    @retry(limit=20, wait=5,
+           on_error=ex.UnityLunModifyByAnotherRequestException)
+    def _detach_with_retry(self, lun_or_snap):
+        lun_or_snap.update()
         if self.host_luns:
             # To detach the `dummy luns` which are attached via legacy storops.
             dummy_lun_ids = [lun.get_id() for lun in self.host_luns.lun
@@ -204,6 +207,14 @@ class UnityHost(UnityResource):
                 except ex.UnityException:
                     pass
         return lun_or_snap.detach_from(self)
+
+    def detach(self, lun_or_snap):
+        try:
+            return self._detach_with_retry(lun_or_snap)
+        except ex.UnityLunModifyByAnotherRequestException:
+            log.error('Failed to detach lun or snap {} from host with '
+                      '20 times retry.'.format(lun_or_snap.name))
+            raise
 
     def detach_alu(self, lun):
         log.warn('Method detach_alu is deprecated. Use detach instead.')

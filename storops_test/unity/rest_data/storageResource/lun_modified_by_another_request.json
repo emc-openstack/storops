@@ -1,0 +1,12 @@
+{
+  "error": {
+    "errorCode": 108008704,
+    "httpStatusCode": 409,
+    "messages": [
+      {
+        "en-US": "The requested operation has failed because the LUN has already been modified by another request. Please retry. (Error Code:0x6701500)"
+      }
+    ],
+    "created": "2021-05-11T03:52:56.102Z"
+  }
+}

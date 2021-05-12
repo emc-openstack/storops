@@ -28,7 +28,8 @@ from storops.exception import UnityHostIpInUseError, \
     UnityAttachAluExceedLimitError, UnitySnapAlreadyPromotedException, \
     SystemAPINotSupported, UnityHostInitiatorExistedError, \
     UnityResourceNotAttachedError, UnityNoHluAvailableError, \
-    UnityHluNumberInUseError, UnityAttachExceedLimitError
+    UnityHluNumberInUseError, UnityAttachExceedLimitError, \
+    UnityLunModifyByAnotherRequestException
 from storops.unity.enums import HostTypeEnum, HostManageEnum, \
     HostPortTypeEnum, HealthEnum, HostInitiatorTypeEnum, \
     HostInitiatorSourceTypeEnum, HostInitiatorIscsiTypeEnum
@@ -366,6 +367,16 @@ class UnityHostTest(TestCase):
         lun = UnityLun(cli=t_rest(), _id="sv_4")
         resp = host.detach_alu(lun)
         assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_detach_with_retry_lun_modified_by_another_request(self):
+        host = UnityHost(cli=t_rest(), _id='Host_10')
+        lun = UnityLun(_id='sv_5', cli=t_rest())
+
+        def f():
+            host.detach(lun)
+
+        assert_that(f, raises(UnityLunModifyByAnotherRequestException))
 
     @patch_rest
     def test_attach_attached_hlu(self):

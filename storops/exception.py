@@ -1510,3 +1510,8 @@ class UnityCompressionRequireAllFlashPoolError(UnityException):
 @rest_exception
 class UnityQuotaConfigModifyException(UnityException):
     error_code = 0x900022a
+
+
+@rest_exception
+class UnityLunModifyByAnotherRequestException(UnityException):
+    error_code = 108008704

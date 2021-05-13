@@ -354,7 +354,8 @@ class UnityFileSystemTest(TestCase):
         assert_that(share.is_continuous_availability_enabled, equal_to(True))
         assert_that(share.is_abe_enabled, equal_to(True))
         assert_that(share.is_branch_cache_enabled, equal_to(True))
-        assert_that(share.offline_availability, equal_to(offline_availability))
+        assert_that(share.offline_availability,
+                    equal_to(offline_availability))
         assert_that(share.umask, equal_to(umask))
         assert_that(share.description, equal_to(description))
 
@@ -425,9 +426,12 @@ class UnityFileSystemTest(TestCase):
         fs = UnityFileSystem.get(cli=t_rest(), _id='fs_4')
         if remote_system:
             remote_system = UnityRemoteSystem(_id=remote_system, cli=t_rest())
-        rep_session = fs.replicate_with_dst_resource_provisioning(60, 'pool_1', dst_fs_name=dst_fs_name,
-            remote_system=remote_system, replication_name=rep_name, dst_size=dst_size, is_dst_thin=is_dst_thin,
-            dst_tiering_policy=dst_tiering_policy, is_dst_compression=is_dst_compression)
+        rep_session = fs.replicate_with_dst_resource_provisioning(
+            60, 'pool_1', dst_fs_name=dst_fs_name,
+            remote_system=remote_system, replication_name=rep_name,
+            dst_size=dst_size, is_dst_thin=is_dst_thin,
+            dst_tiering_policy=dst_tiering_policy,
+            is_dst_compression=is_dst_compression)
         assert_that(rep_session.id, equal_to(expected_rep_session_id))
 
     @patch_rest

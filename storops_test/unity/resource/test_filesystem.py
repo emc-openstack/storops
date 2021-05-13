@@ -354,8 +354,7 @@ class UnityFileSystemTest(TestCase):
         assert_that(share.is_continuous_availability_enabled, equal_to(True))
         assert_that(share.is_abe_enabled, equal_to(True))
         assert_that(share.is_branch_cache_enabled, equal_to(True))
-        assert_that(share.offline_availability,
-                    equal_to(offline_availability))
+        assert_that(share.offline_availability, equal_to(offline_availability))
         assert_that(share.umask, equal_to(umask))
         assert_that(share.description, equal_to(description))
 

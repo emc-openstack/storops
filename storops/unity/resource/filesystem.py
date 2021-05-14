@@ -80,7 +80,7 @@ class UnityFileSystem(UnityResource):
     def modify(self, size=None, is_thin=None, tiering_policy=None,
                user_cap=False, is_compression=None, access_policy=None,
                locking_policy=None, description=None,
-               cifs_fs_parameters=None):
+               cifs_fs_parameters=None, snap_schedule_parameters=None):
         sr = self.storage_resource
         if sr is None:
             raise ValueError('storage resource for filesystem {} not found.'
@@ -103,6 +103,8 @@ class UnityFileSystem(UnityResource):
             params['cifsFsParameters'] = cifs_fs_parameters
         if description is not None:
             params['description'] = description
+        if snap_schedule_parameters:
+            params['snapScheduleParameters'] = snap_schedule_parameters
 
         if not params:
             return RestResponse('', self._cli)

@@ -246,6 +246,13 @@ class UnityFileSystemTest(TestCase):
         assert_that(fs.description, equal_to(''))
 
     @patch_rest
+    def test_modify_success_snap_schedule(self):
+        fs = UnityFileSystem(cli=t_rest(), _id='fs_22')
+        snap_schedule_parameters = {'snapSchedule': {'id': 'snapSch_1'}}
+        resp = fs.modify(snap_schedule_parameters=snap_schedule_parameters)
+        assert_that(resp.is_ok(), equal_to(True))
+
+    @patch_rest
     def test_delete_filesystem_async(self):
         fs = UnityFileSystem(_id='fs_14', cli=t_rest())
         resp = fs.delete(async_mode=True)

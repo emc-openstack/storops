@@ -349,6 +349,17 @@
       "response": "size_too_small.json"
     },
     {
+      "url": "/api/instances/storageResource/res_22/action/modifyFilesystem?compact=True",
+      "body": {
+        "snapScheduleParameters": {
+          "snapSchedule": {
+            "id": "snapSch_1"
+          }
+        }
+      },
+      "response": "empty.json"
+    },
+    {
       "url": "/api/types/storageResource/action/createFilesystem?compact=True",
       "body": {
         "fsParameters": {

@@ -1515,3 +1515,8 @@ class UnityQuotaConfigModifyException(UnityException):
 @rest_exception
 class UnityLunModifyByAnotherRequestException(UnityException):
     error_code = 108008704
+
+
+@rest_exception
+class UnityDeleteStorageResourceHasSnapError(UnityException):
+    error_code = 100666391

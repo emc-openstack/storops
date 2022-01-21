@@ -15,12 +15,13 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import time
 from unittest import TestCase
 
 import ddt
 import mock
 from hamcrest import equal_to, assert_that, instance_of, raises, none, \
-    only_contains, not_none, is_not, calling
+    only_contains, not_none, is_not, calling, greater_than
 
 from storops.exception import UnityHostIpInUseError, \
     UnityResourceNotFoundError, UnityHostInitiatorNotFoundError, \
@@ -376,7 +377,12 @@ class UnityHostTest(TestCase):
         def f():
             host.detach(lun)
 
+        start = time.time()
         assert_that(f, raises(UnityLunModifyByAnotherRequestException))
+        end = time.time()
+        # _detach_with_retry retry 20 times with 5s interval, it will take
+        # at least (20 - 1) * 5 = 95s to finish the retries.
+        assert_that(end - start, greater_than(95))
 
     @patch_rest
     def test_attach_attached_hlu(self):
@@ -494,6 +500,24 @@ class UnityHostTest(TestCase):
                         new=mock.Mock(side_effect=UnityHluNumberInUseError)):
             assert_that(calling(host._attach_with_retry).with_args(lun, True),
                         raises(UnityHluNumberInUseError))
+
+    @patch_rest
+    def test_attach_with_retry_lun_modify_by_another_request(self):
+        host = UnityHost(cli=t_rest(), _id='Host_23')
+        lun = UnityLun(_id='sv_5610', cli=t_rest())
+        lun.is_cg_member = False
+        mock_lun_modifying = mock.Mock(
+            side_effect=UnityLunModifyByAnotherRequestException)
+        with mock.patch('storops.unity.resource.host.UnityHost.'
+                        '_modify_hlu',
+                        new=mock_lun_modifying):
+            start = time.time()
+            assert_that(calling(host._attach_with_retry).with_args(lun, True),
+                        raises(UnityLunModifyByAnotherRequestException))
+            end = time.time()
+            # _attach_with_retry retry 6 times with 5s interval, it will take
+            # at least (6 - 1) * 5 = 25s to finish the retries.
+            assert_that(end - start, greater_than(25))
 
     @patch_rest
     def test_attach_with_retry_hlu_in_use_but_no_retry(self):

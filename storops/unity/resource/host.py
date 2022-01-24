@@ -236,6 +236,8 @@ class UnityHost(UnityResource):
                                                           max=MAX_HLU_NUMBER))
 
     @version('<4.4.0')  # noqa
+    @retry(limit=6, wait=5,
+           on_error=ex.UnityLunModifyByAnotherRequestException)
     @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
     def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
         # Before 4.4.0 (Osprey), it didn't support to pass in hlu when
@@ -251,6 +253,8 @@ class UnityHost(UnityResource):
             return host_lun.hlu
 
     @version('>=4.4.0')  # noqa
+    @retry(limit=6, wait=5,
+           on_error=ex.UnityLunModifyByAnotherRequestException)
     @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
     def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
         # From 4.4.0 (Osprey), it supported to pass in hlu when attaching LUN,

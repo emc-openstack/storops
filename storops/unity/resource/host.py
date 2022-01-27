@@ -261,6 +261,20 @@ class UnityHost(UnityResource):
         # but not when attaching snap.
         from storops.unity.resource.lun import UnityLun as _UnityLun
         is_lun = isinstance(lun_or_snap, _UnityLun)
+
+        # If the same lun/snap attach to the same host, return the existed hlu
+        self.update()
+        if is_lun:
+            host_luns = [x for x in self.host_luns if not x.snap]
+            for host_lun in host_luns:
+                if lun_or_snap.id == host_lun.lun.id:
+                    return host_lun.hlu
+        else:
+            host_snaps = [x for x in self.host_luns if x.snap]
+            for host_snap in host_snaps:
+                if lun_or_snap.id == host_snap.snap.id:
+                    return host_snap.hlu
+
         if skip_hlu_0 and is_lun:
             candidate_hlu = self._random_hlu_number()
             lun_or_snap.attach_to(self, hlu=candidate_hlu)

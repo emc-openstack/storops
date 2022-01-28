@@ -264,12 +264,12 @@ class UnityHost(UnityResource):
 
         # If the same lun/snap attach to the same host, return the existed hlu
         self.update()
-        if is_lun:
+        if self.host_luns and is_lun:
             host_luns = [x for x in self.host_luns if not x.snap]
             for host_lun in host_luns:
                 if lun_or_snap.id == host_lun.lun.id:
                     return host_lun.hlu
-        else:
+        if self.host_luns and not is_lun:
             host_snaps = [x for x in self.host_luns if x.snap]
             for host_snap in host_snaps:
                 if lun_or_snap.id == host_snap.snap.id:

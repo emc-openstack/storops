@@ -39,7 +39,7 @@
         "isHarvestEnabled": true,
         "poolSpaceHarvestHighThreshold": 80,
         "isSnapHarvestEnabled": true,
-        "type": 1,
+        "type": 2,
         "isFASTCacheEnabled": true
       },
       "response": "create_pool_4.json"

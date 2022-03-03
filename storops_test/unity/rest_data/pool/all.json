@@ -15,7 +15,7 @@
           2
         ],
         "raidType": 12,
-        "type": 2,
+        "type": 1,
         "isAllFlash": false,
         "harvestState": 0,
         "instanceId": "root/emc:EMC_UEM_MappedStoragePoolLeaf%InstanceID=pool_1",

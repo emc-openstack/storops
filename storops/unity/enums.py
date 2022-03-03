@@ -297,8 +297,8 @@ class PoolUnitTypeEnum(UnityEnum):
 
 
 class StoragePoolTypeEnum(UnityEnum):
-    DYNAMIC = (1, 'Dynamic')
-    TRADITIONAL = (2, 'Traditional')
+    TRADITIONAL = (1, 'Traditional')
+    DYNAMIC = (2, 'Dynamic')
 
 
 class IpProtocolVersionEnum(UnityEnum):

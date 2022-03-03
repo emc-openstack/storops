@@ -6,7 +6,7 @@
     ],
     "raidType": 1,
     "harvestState": 0,
-    "type": 1,
+    "type": 2,
     "instanceId": "root/emc:EMC_UEM_MappedStoragePoolLeaf%InstanceID=pool_4",
     "objectId": 12884901893,
     "health": {

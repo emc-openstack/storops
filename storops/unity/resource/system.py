@@ -72,7 +72,7 @@ from storops.unity.resource.cg import UnityConsistencyGroup, \
 from storops.unity.resource.tenant import UnityTenant, UnityTenantList
 from storops.unity.resource.user_quota import UnityUserQuota, \
     UnityUserQuotaList
-from storops.unity.resource.vmware import UnityCapabilityProfileList
+from storops.unity.resource.vmware import UnityCapabilityProfileList, UnityVmDiskList
 
 __author__ = 'Jay Xu, Cedric Zhuang'
 
@@ -719,6 +719,10 @@ class UnitySystem(UnitySingletonResource):
 
     def get_snap_schedule(self, _id=None, **filters):
         return self._get_unity_rsc(UnitySnapScheduleList, _id=_id, **filters)
+
+    def get_vm_disk(self, _id=None, name=None, **filters):
+        return self._get_unity_rsc(UnityVmDiskList, _id=_id, name=name,
+                                   **filters)
 
 
 class UnitySystemList(UnityResourceList):

@@ -8,7 +8,7 @@
 # %%global pre_release dev.1
 
 Name:           python-%{pypi_name}
-Version:        1.2.10
+Version:        1.2.11
 Release:        %{?pre_release:0.%{pre_release}}%{!?pre_release:1}%{?dist}
 Summary:        Library for managing Unity/VNX systems.
 
@@ -134,6 +134,9 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 
 
 %changelog
+* Tue Mar 8 2022 Yong Huang <yong.huang@dell.com> - 1.2.11-1
+- Release v1.2.11: https://github.com/emc-openstack/storops/releases/tag/v1.2.11
+
 * Fri May 28 2021 Yong Huang <yong.huang@dell.com> - 1.2.10-1
 - Release v1.2.10: https://github.com/emc-openstack/storops/releases/tag/v1.2.10
 

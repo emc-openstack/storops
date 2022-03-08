@@ -19,7 +19,7 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://landscape.io/github/emc-openstack/storops/master/landscape.svg?style=flat
     :target: https://landscape.io/github/emc-openstack/storops/
 
-VERSION: 1.2.10
+VERSION: 1.2.11
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
@@ -552,8 +552,8 @@ How to Contribute
 Contributors
 ------------
 
-EMC Contributors
-````````````````
+Dell EMC Contributors
+`````````````````````
 
 - Ryan Liang <ryan.liang@dell.com>
 - Yong Huang <yong.huang@dell.com>

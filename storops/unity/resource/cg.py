@@ -296,11 +296,15 @@ class UnityConsistencyGroup(UnityStorageResource):
             name=dst_cg_name)
         dst_element_configs = []
         for source_lun in source_luns:
+            if remote_system:
+                lun_name = source_lun.name
+            else:
+                lun_name = "DR_{}".format(source_lun.name)
             lun_resource_config = UnityResourceConfig.to_embedded(
                 pool_id=dst_pool_id,
                 is_thin_enabled=source_lun.is_thin_enabled,
                 size=source_lun.size_total, request_id=source_lun.id,
-                name=source_lun.name,
+                name=lun_name,
                 is_deduplication_enabled=source_lun.is_data_reduction_enabled,
                 is_compression_enabled=source_lun.is_data_reduction_enabled)
             dst_element_configs.append(lun_resource_config)

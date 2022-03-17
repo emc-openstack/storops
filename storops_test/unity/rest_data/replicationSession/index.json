@@ -369,14 +369,14 @@
         "maxTimeOutOfSync": 60,
         "dstResourceElementConfigs": [
           {
-            "name": "vol-cg-liangr-00",
+            "name": "DR_vol-cg-liangr-00",
             "isThinEnabled": true,
             "poolId": "pool_2",
             "size": 10737418240,
             "requestId": "sv_58"
           },
           {
-            "name": "lun-liangr-1",
+            "name": "DR_lun-liangr-1",
             "isThinEnabled": false,
             "poolId": "pool_2",
             "size": 5368709120,

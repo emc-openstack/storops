@@ -2054,7 +2054,7 @@ UnityReplicationSession:
       converter: ReplicationSessionReplicationRoleEnum
     - label: maxTimeOutOfSync
     - label: members
-      converter: UnityLunMemberReplication
+      converter: UnityLunMemberReplicationList
     - label: name
     - label: networkStatus
       converter: ReplicationSessionNetworkStatusEnum

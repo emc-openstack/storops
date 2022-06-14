@@ -1,0 +1,29 @@
+{
+  "content": {
+    "id": "cifs_5",
+    "instanceId": "root/emc:EMC_UEM_CIFSServerLeaf%InstanceID=cifs_5",
+    "netbiosName": "nas_5",
+    "workgroup": "test_wg_5",
+    "isStandalone": true,
+    "health": {
+      "value": 5,
+      "descriptionIds": [
+        "ALRT_COMPONENT_OK"
+      ],
+      "descriptions": [
+        "The component is operating normally. No action is required."
+      ]
+    },
+    "smbcaSupported": true,
+    "smbMultiChannelSupported": true,
+    "smbProtocolVersions": [
+      "1.0",
+      "2.0",
+      "2.1",
+      "3.0"
+    ],
+    "nasServer": {
+      "id": "nas_5"
+    }
+  }
+}

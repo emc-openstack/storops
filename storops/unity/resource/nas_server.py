@@ -35,6 +35,17 @@ __author__ = 'Jay Xu'
 
 log = logging.getLogger(__name__)
 
+FILE_TYPES = {
+    "ldap_cfg": 1,
+    "ldap_ca": 2,
+    "virus_cfg": 4,
+    "users": 5,
+    "group": 6,
+    "hosts": 7,
+    "net_groups": 8,
+    "home_dir": 11
+}
+
 
 class UnityNasServer(UnityResource):
     @classmethod
@@ -113,23 +124,28 @@ class UnityNasServer(UnityResource):
                                 local_password=local_password)
 
     def create_nfs_server(self, host_name=None, nfs_v4_enabled=True,
-                          kdc_type=None, kdc_username=None, kdc_password=None):
+                          kdc_type=None, kdc_username=None, kdc_password=None,
+                          nfs_v3_enabled=None, credentials_cache_ttl=None):
         clz = storops.unity.resource.nfs_server.UnityNfsServer
         return clz.create(self._cli, self,
                           host_name=host_name,
                           nfs_v4_enabled=nfs_v4_enabled,
                           kdc_type=kdc_type,
                           kdc_username=kdc_username,
-                          kdc_password=kdc_password)
+                          kdc_password=kdc_password,
+                          nfs_v3_enabled=nfs_v3_enabled,
+                          credentials_cache_ttl=credentials_cache_ttl)
 
     def enable_nfs_service(self, host_name=None, nfs_v4_enabled=True,
-                           kdc_type=None, kdc_username=None,
-                           kdc_password=None):
+                           kdc_type=None, kdc_username=None, kdc_password=None,
+                           nfs_v3_enabled=None, credentials_cache_ttl=None):
         self.create_nfs_server(host_name=host_name,
                                nfs_v4_enabled=nfs_v4_enabled,
                                kdc_type=kdc_type,
                                kdc_username=kdc_username,
-                               kdc_password=kdc_password)
+                               kdc_password=kdc_password,
+                               nfs_v3_enabled=nfs_v3_enabled,
+                               credentials_cache_ttl=credentials_cache_ttl)
 
     def create_dns_server(self, domain, *ip_list):
         clz = storops.unity.resource.dns_server.UnityFileDnsServer
@@ -262,6 +278,23 @@ class UnityNasServer(UnityResource):
 
         resp = self.action('modify', **req_body)
         resp.raise_if_err()
+        return resp
+
+    def upload_file(self, file_type, file_name):
+        file_type_idx = FILE_TYPES.get(file_type)
+        files = {'filename': file_name}
+        resp = self._cli.rest_post('/upload/{}/nasServer/{}'.format(
+            file_type_idx, self.get_id()), files=files)
+        resp.raise_if_err()
+        return resp
+
+    def download_file(self, file_type, file_name):
+        file_type_idx = FILE_TYPES.get(file_type)
+        resp = self._cli.rest_get('/download/{}/nasServer/{}'.format(
+            file_type_idx, self.get_id()))
+        resp.raise_if_err()
+        with open(file_name, "w", encoding="utf-8") as f:
+            f.write(resp.response.text)
         return resp
 
 

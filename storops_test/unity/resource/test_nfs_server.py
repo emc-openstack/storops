@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+import datetime
 from unittest import TestCase
 
 from hamcrest import equal_to, assert_that, instance_of, raises
@@ -60,6 +61,27 @@ class UnityNfsServerTest(TestCase):
             UnityNfsServer.create(t_rest(), 'nas_5', nfs_v4_enabled=False)
 
         assert_that(f, raises(UnityNfsAlreadyEnabledError, 'already enabled'))
+
+    @patch_rest
+    def test_modify_success(self):
+        server = UnityNfsServer(_id='nfs_4', cli=t_rest())
+        resp = server.modify(nfs_v4_enabled=False,
+                             nfs_v3_enabled=True,
+                             credentials_cache_ttl="00:12:00.000")
+        assert_that(resp.is_ok(), equal_to(True))
+        server.update()
+        assert_that(server.nfs_v4_enabled, equal_to(False))
+        assert_that(server.nfs_v3_enabled, equal_to(True))
+        assert_that(server.credentials_cache_ttl,
+                    equal_to(datetime.timedelta(minutes=12)))
+
+    @patch_rest
+    def test_modify_not_found(self):
+        def f():
+            server = UnityNfsServer(_id='nfs_5', cli=t_rest())
+            server.delete()
+
+        assert_that(f, raises(UnityResourceNotFoundError))
 
     @patch_rest
     def test_delete_success(self):

@@ -738,7 +738,11 @@ class UnityDpeList(UnityResourceList):
 
 
 class UnityVirusChecker(UnityResource):
-    pass
+    def modify(self, is_enabled):
+        req_body = self._cli.make_body(isEnabled=is_enabled)
+        resp = self.action('modify', **req_body)
+        resp.raise_if_err()
+        return resp
 
 
 class UnityVirusCheckerList(UnityResourceList):

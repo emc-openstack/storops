@@ -30,7 +30,8 @@ class UnityNfsServer(UnityResource):
     @classmethod
     def create(cls, cli, nas_server, host_name=None, nfs_v4_enabled=True,
                is_secure_enabled=None, is_extended_credentials_enabled=None,
-               kdc_type=None, kdc_username=None, kdc_password=None):
+               kdc_type=None, kdc_username=None, kdc_password=None,
+               nfs_v3_enabled=None, credentials_cache_ttl=None):
         clz = storops.unity.resource.nas_server.UnityNasServer
         nas_server = clz.get(cli, nas_server)
 
@@ -43,7 +44,9 @@ class UnityNfsServer(UnityResource):
             isExtendedCredentialsEnabled=is_extended_credentials_enabled,
             kdcType=kdc_type,
             kdcUsername=kdc_username,
-            kdcPassword=kdc_password)
+            kdcPassword=kdc_password,
+            nfsv3Enabled=nfs_v3_enabled,
+            credentialsCacheTTL=credentials_cache_ttl)
 
         resp.raise_if_err()
         return cls(_id=resp.resource_id, cli=cli)
@@ -56,6 +59,25 @@ class UnityNfsServer(UnityResource):
                                 kdcUsername=username,
                                 kdcPassword=password,
                                 async_mode=async_mode)
+        resp.raise_if_err()
+        return resp
+
+    def modify(self, host_name=None, nfs_v4_enabled=None,
+               is_secure_enabled=None, is_extended_credentials_enabled=None,
+               kdc_type=None, kdc_username=None, kdc_password=None,
+               nfs_v3_enabled=None, credentials_cache_ttl=None):
+        req_body = self._cli.make_body(
+            hostName=host_name,
+            nfsv4Enabled=nfs_v4_enabled,
+            isSecureEnabled=is_secure_enabled,
+            isExtendedCredentialsEnabled=is_extended_credentials_enabled,
+            kdcType=kdc_type,
+            kdcUsername=kdc_username,
+            kdcPassword=kdc_password,
+            nfsv3Enabled=nfs_v3_enabled,
+            credentialsCacheTTL=credentials_cache_ttl)
+
+        resp = self.action('modify', **req_body)
         resp.raise_if_err()
         return resp
 

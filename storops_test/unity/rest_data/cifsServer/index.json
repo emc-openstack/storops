@@ -13,6 +13,10 @@
       "response": "cifs_3.json"
     },
     {
+      "url": "/api/instances/cifsServer/cifs_5?compact=True&fields=description,domain,fileInterfaces,health,id,instanceId,isStandalone,lastUsedOrganizationalUnit,name,nasServer,netbiosName,smbMultiChannelSupported,smbProtocolVersions,smbcaSupported,workgroup",
+      "response": "cifs_5.json"
+    },
+    {
       "url": "/api/instances/cifsServer/cifs_7?compact=True&fields=description,domain,fileInterfaces,health,id,instanceId,isStandalone,lastUsedOrganizationalUnit,name,nasServer,netbiosName,smbMultiChannelSupported,smbProtocolVersions,smbcaSupported,workgroup",
       "response": "cifs_7.json"
     },
@@ -112,6 +116,22 @@
     },
     {
       "url": "/api/instances/cifsServer/cifs_10?compact=True",
+      "response": "not_found.json"
+    },
+    {
+      "url": "/api/instances/cifsServer/cifs_5/action/modify?compact=True",
+      "body": {
+        "netbiosName": "nas_5",
+        "workgroup": "test_wg_5"
+      },
+      "response": "success.json"
+    },
+    {
+      "url": "/api/instances/cifsServer/cifs_10/action/modify?compact=True",
+      "body": {
+        "netbiosName": "nas_10",
+        "workgroup": "test_wg_10"
+      },
       "response": "not_found.json"
     }
   ]

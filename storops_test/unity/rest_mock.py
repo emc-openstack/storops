@@ -19,13 +19,14 @@ import functools
 import json
 import logging
 import os
+import sys
 
 from mock import patch
 
+import storops.unity.resource.system
 from storops.exception import MockFileNotFoundError
 from storops.lib.common import cache, allow_omit_parentheses
 from storops.unity.client import UnityClient
-import storops.unity.resource.system
 from storops_test.utils import ConnectorMock, read_test_file
 
 __author__ = 'Cedric Zhuang'
@@ -103,6 +104,8 @@ class MockRestClient(ConnectorMock):
     @cache
     def read_index(folder):
         string_indices = read_test_file(folder, 'index.json')
+        if sys.version_info.major > 2:
+            return json.loads(string_indices)
         return json.loads(string_indices, encoding='utf-8')
 
     def _get_mock_output(self, url, kwargs):

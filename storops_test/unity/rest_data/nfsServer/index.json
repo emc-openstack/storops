@@ -13,6 +13,10 @@
       "response": "nfs_3.json"
     },
     {
+      "url": "/api/instances/nfsServer/nfs_4?compact=True&fields=credentialsCacheTTL,fileInterfaces,hostName,id,instanceId,isExtendedCredentialsEnabled,isSecureEnabled,kdcType,nasServer,nfsv4Enabled,servicePrincipalName",
+      "response": "nfs_4.json"
+    },
+    {
       "url": "/api/types/nfsServer/instances?compact=True&fields=credentialsCacheTTL,fileInterfaces,hostName,id,instanceId,isExtendedCredentialsEnabled,isSecureEnabled,kdcType,nasServer,nfsv4Enabled,servicePrincipalName",
       "response": "all.json"
     },
@@ -43,6 +47,15 @@
     {
       "url": "/api/instances/nfsServer/nfs_5?compact=True",
       "response": "not_found.json"
+    },
+    {
+      "url": "/api/instances/nfsServer/nfs_4/action/modify?compact=True",
+      "body": {
+        "nfsv4Enabled": false,
+        "nfsv3Enabled": true,
+        "credentialsCacheTTL": "00:12:00.000"
+      },
+      "response": "success.json"
     }
   ]
 }

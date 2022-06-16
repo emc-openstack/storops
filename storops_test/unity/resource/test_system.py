@@ -1166,6 +1166,14 @@ class UnityVirusCheckerTest(TestCase):
         checker_list = UnityVirusCheckerList(cli=t_rest())
         assert_that(len(checker_list), equal_to(1))
 
+    @patch_rest
+    def test_modify(self):
+        unity = t_unity()
+        resp = unity.modify_user_quota(
+                      user_quota_id='userquota_171798692187_3_3',
+                      hard_limit=8589934592, soft_limit=2147483648)
+        assert_that(resp.is_ok(), equal_to(True))
+
 
 class UnityBasicSystemInfoTest(TestCase):
     @patch_rest

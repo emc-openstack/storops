@@ -80,6 +80,21 @@ class UnityCifsServer(resource.UnityResource):
         resp.raise_if_err()
         return resp
 
+    def modify(self, netbios_name=None, name=None,
+               domain=None, domain_username=None, domain_password=None,
+               workgroup=None, local_password=None):
+        req_body = self._cli.make_body(netbiosName=netbios_name,
+                                       name=name,
+                                       domain=domain,
+                                       domainUsername=domain_username,
+                                       domainPassword=domain_password,
+                                       workgroup=workgroup,
+                                       localAdminPassword=local_password)
+
+        resp = self.action('modify', **req_body)
+        resp.raise_if_err()
+        return resp
+
 
 class UnityCifsServerList(resource.UnityResourceList):
     @classmethod

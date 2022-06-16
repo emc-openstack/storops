@@ -17,6 +17,7 @@ from __future__ import unicode_literals
 
 import logging
 from unittest import TestCase
+
 from hamcrest import assert_that, equal_to, none, instance_of, only_contains, \
     raises
 
@@ -104,6 +105,24 @@ class UnityCifsServerTest(TestCase):
                                    local_password='Password123!')
 
         assert_that(f, raises(UnityNetBiosNameExistedError, 'already exists'))
+
+    @patch_rest
+    def test_modify_success(self):
+        server = UnityCifsServer(_id='cifs_5', cli=t_rest())
+        resp = server.modify(netbios_name='nas_5',
+                             workgroup='test_wg_5')
+        assert_that(resp.is_ok(), equal_to(True))
+        server.update()
+        assert_that(server.netbios_name, equal_to('nas_5'))
+        assert_that(server.workgroup, equal_to('test_wg_5'))
+
+    @patch_rest
+    def test_modify_not_found(self):
+        def f():
+            server = UnityCifsServer(_id='cifs_10', cli=t_rest())
+            server.modify(netbios_name='nas_10', workgroup='test_wg_10')
+
+        assert_that(f, raises(UnityResourceNotFoundError))
 
     @patch_rest
     def test_delete_cifs3(self):

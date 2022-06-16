@@ -443,6 +443,8 @@ UnityNfsServer:
       converter: UnityNasServer
     - label: fileInterfaces
       converter: UnityFileInterfaceList
+    - label: nfsv3Enabled
+      key: nfs_v3_enabled
     - label: nfsv4Enabled
       key: nfs_v4_enabled
     - label: isSecureEnabled

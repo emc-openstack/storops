@@ -161,6 +161,9 @@ UnityStorageResource: &UnityStorageResource
     - label: dataReductionSizeSaved
     - label: dataReductionPercent
     - label: dataReductionRatio
+    - label: isThinClone
+    - label: parentSnap
+      converter: UnitySnap
 
 
 UnityConsistencyGroup:

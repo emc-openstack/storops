@@ -15,6 +15,7 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from storops.lib.thinclone_helper import TCHelper
 from storops.unity.resource import UnityResource, UnityResourceList
 
 __author__ = 'Cedric Zhuang'
@@ -37,6 +38,20 @@ class UnityStorageResource(UnityResource):
 
     def modify_fs(self, **kwargs):
         return self.action('modifyFilesystem', **kwargs)
+
+    def refresh(self, copy_name=None, force=False,
+                retention_duration=None):
+        """Refresh thin clone
+
+        :param copy_name: name of the backup snapshot
+        :param force: proceeed refresh even if host access is configured
+        :param retention_duration: backup snap retention duration in seconds
+        """
+        return TCHelper.refresh(cli=self._cli,
+                                sr=self,
+                                copy_name=copy_name,
+                                force=force,
+                                retention_duration=retention_duration)
 
 
 class UnityStorageResourceList(UnityResourceList):

@@ -1379,6 +1379,11 @@ class UnityThinCloneException(UnityException):
     pass
 
 
+class UnityNotAThinClone(UnityThinCloneException):
+    message = ('The action is not supported on a standard storage resource'
+               ' Execute it on a thinclone storage resource.')
+
+
 @rest_exception
 class UnityThinCloneLimitExceededError(UnityThinCloneException):
     error_code = 108008767

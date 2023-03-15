@@ -1,0 +1,48 @@
+{
+    "content": {
+      "id": "sv_1678",
+      "type": 2,
+      "tieringPolicy": 0,
+      "defaultNode": 0,
+      "currentNode": 0,
+      "health": {
+        "value": 5,
+        "descriptionIds": [
+          "ALRT_VOL_OK"
+        ],
+        "descriptions": [
+          "The LUN is operating normally. No action is required."
+        ]
+      },
+      "name": "thin-clone-lun",
+      "sizeTotal": 214748364800,
+      "sizeAllocated": 0,
+      "perTierSizeUsed": [
+        105226698752,
+        0,
+        0
+      ],
+      "isThinEnabled": true,
+      "isDataReductionEnabled": true,
+      "wwn": "60:06:01:60:5F:A0:45:00:AE:F5:9A:63:37:F2:B3:7A",
+      "isReplicationDestination": false,
+      "isSnapSchedulePaused": false,
+      "metadataSize": 0,
+      "metadataSizeAllocated": 0,
+      "snapWwn": "60:06:01:60:5F:A0:45:00:6A:0E:01:DB:F8:C9:46:4F",
+      "snapsSize": 0,
+      "snapsSizeAllocated": 0,
+      "snapCount": 0,
+      "isThinClone": true,
+      "storageResource": {
+        "id": "sv_1678",
+        "type": 8
+      },
+      "pool": {
+        "id": "pool_3",
+        "raidType": 1,
+        "name": "ALLFLASH",
+        "isFASTCacheEnabled": false
+      }
+    }
+  }

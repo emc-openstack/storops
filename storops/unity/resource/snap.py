@@ -15,6 +15,8 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 import logging
 
 import storops.unity.resource.cifs_share
@@ -29,6 +31,7 @@ from storops.unity import enums
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum, \
     SnapAccessLevelEnum
 from storops.unity.resource import UnityResource, UnityResourceList
+from storops.unity.resp import RESP_OK
 
 __author__ = 'Cedric Zhuang'
 
@@ -219,6 +222,56 @@ class UnitySnap(UnityResource):
                 return super(UnitySnap, self).delete(async_mode=async_mode)
             else:
                 raise
+
+    def refresh(self, copy_name=None, retention_duration=None):
+        """Refresh the snapshot
+
+        :param copy_name: name of the backup snapshot
+        :param retention_duration: backup snap retention duration in seconds
+        """
+        if copy_name is None:
+            copy_name = "storops-refresh-{}-{}".format(
+                self.name, datetime.now().strftime('%Y%m%d%H%M%S'))
+
+        resp = self._cli.action(self.resource_class, self.get_id(),
+                                'refresh', copyName=copy_name)
+        resp.raise_if_err()
+
+        resp.raise_if_err()
+
+        copy_id = resp.first_content['copy']['id']
+
+        tc_snap = UnitySnap.get(cli=self._cli, _id=copy_id)
+        if retention_duration is not None:
+            if retention_duration == 0:
+                log.info("Deleting the backup snapshot {} as the refresh "
+                         "succeeded.".format(copy_id))
+                tc_snap_resp = tc_snap.delete()
+            else:
+                log.info("Updating the backup snapshot {} retention duration "
+                         "as the refresh succeeded.".format(copy_id))
+                tc_snap_resp = tc_snap\
+                    .modify(retentionDuration=retention_duration)
+        else:
+            tc_snap_resp = RESP_OK
+
+        return tc_snap_resp
+
+    def refresh_thin_clone(self, sr, copy_name=None, force=False,
+                           retention_duration=None):
+        """Refresh thin clone from snapshot
+
+        :param sr: UnityStorageResource instance which is refreshed
+        :param copy_name: name of the backup snapshot
+        :param force: proceeed refresh even if host access is configured
+        :param retention_duration: Backup copy retention duration in seconds
+        """
+        return TCHelper.refresh(cli=self._cli,
+                                sr=sr,
+                                copy_name=copy_name,
+                                snapshot=self,
+                                force=force,
+                                retention_duration=retention_duration)
 
 
 class UnitySnapList(UnityResourceList):

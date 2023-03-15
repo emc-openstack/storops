@@ -15,6 +15,8 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 import pickle
 from unittest import TestCase
 
@@ -33,7 +35,7 @@ from storops.exception import UnitySnapNameInUseError, \
     UnityMigrationSourceDestNotExistsError, JobStateError, \
     JobTimeoutException, UnityAdvancedDedupRequireCompressionEnabledError, \
     UnityCompressionRequireAllFlashPoolError, \
-    UnityCompressionRequireLunIsThinError
+    UnityCompressionRequireLunIsThinError, UnityNotAThinClone
 from storops.unity.enums import HostLUNAccessEnum, NodeEnum, RaidTypeEnum, \
     ESXFilesystemBlockSizeEnum, ESXFilesystemMajorVersionEnum
 from storops.unity.resource.disk import UnityDisk
@@ -691,6 +693,54 @@ class UnityLunTest(TestCase):
         lun.update()
         lun_new = pickle.loads(pickle.dumps(lun))
         assert_that(lun_new.name, equal_to(lun.name))
+
+    @patch_rest
+    def test_refresh_thinclone_fails_on_non_thinclone(self):
+        lun = UnityLun(_id='sv_2', cli=t_rest())
+        assert_that(calling(lun.refresh)
+                    .with_args(copy_name='tc_refresh'),
+                    raises(UnityNotAThinClone))
+
+    @patch_rest
+    def test_refresh_thinclone_fails_on_cg_member(self):
+        lun = UnityLun(_id='sv_15', cli=t_rest())
+        assert_that(calling(lun.refresh)
+                    .with_args(copy_name='tc_refresh'),
+                    raises(UnityCGMemberActionNotSupportError))
+
+    @patch_rest
+    def test_refresh_thinclone_with_backup_retention(self):
+        lun = UnityLun(_id='sv_1678', cli=t_rest())
+        result = lun.refresh(copy_name='tc_refresh', force=True,
+                             retention_duration=3600)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_without_backup(self):
+        lun = UnityLun(_id='sv_1678', cli=t_rest())
+        result = lun.refresh(
+            copy_name='tc_refresh', force=True,
+            retention_duration=0)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_with_default_backup(self):
+        lun = UnityLun(_id='sv_1678', cli=t_rest())
+        result = lun.refresh(
+            copy_name='tc_refresh', force=True)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_with_generated_backup_name(self):
+        lun = UnityLun(_id='sv_1678', cli=t_rest())
+        with mock.patch('storops.lib.thinclone_helper.datetime') \
+                as mock_datetime:
+            mock_datetime.now.return_value = datetime(2023, 3, 15, 19, 50, 25)
+
+            result = lun.refresh(copy_name=None,
+                                 retention_duration=3600)
+
+            assert_that(result.is_ok(), equal_to(True))
 
 
 class UnityLunEnablePerfStatsTest(TestCase):

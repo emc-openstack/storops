@@ -178,6 +178,7 @@ Feature List
         - pause/resume/cutover/commit/cancel block import sessions
         - discover migration objects
         - list/create/modify/delete snapshot schedule
+        - refresh snapshot/ThinClone
     - supported feature/operations
         - CIFS share access control
         - NFS share access control
@@ -188,6 +189,8 @@ Feature List
         - LUN migration
         - LUN replication
         - CG replication
+        - Snapshot refresh
+        - ThinClone refresh
     - supported metrics
         - UnitySystem
             - read_iops
@@ -568,6 +571,7 @@ Community Contributors
 - Tina Tang
 - Peter Wang
 - Paulo Matias <matias@ufscar.br>
+- Laszlo Szomor
 
 Patches and Suggestions
 ```````````````````````

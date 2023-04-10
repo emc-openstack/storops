@@ -414,6 +414,25 @@
     {
       "url": "/api/instances/snap/38654707282?compact=True&fields=accessType,attachedWWN,creationTime,creatorSchedule,creatorType,creatorUser,description,expirationTime,id,instanceId,ioLimitPolicy,isAutoDelete,isModifiable,isModified,isReadOnly,isSystemSnap,lastWritableTime,lun,name,operationalStatus,parentSnap,size,snapGroup,state,storageResource",
       "response": "38654707282.json"
-    }
+    },
+    {
+      "url": "/api/instances/snap/38654705785/action/refresh?compact=True",
+      "body": {"copyName": "backup_snap"},
+      "response": "refresh_response.json"
+    },
+    {
+      "url": "/api/instances/snap/38654705785/action/refresh?compact=True",
+      "body": {"copyName": "storops-refresh-2016-03-15_10:56:08-20230315195025"},
+      "response": "refresh_response.json"
+    },    
+    { "url": "/api/instances/snap/85899345930/action/modify?compact=True", 
+      "body": {
+        "retentionDuration": 3600
+      },
+      "response": "empty.json"
+    },
+    { "url": "/api/instances/snap/85899345930?compact=True",
+      "response": "empty.json"
+    }    
   ]
 }

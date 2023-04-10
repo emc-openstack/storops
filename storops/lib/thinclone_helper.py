@@ -15,6 +15,8 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 import logging
 
 from persistqueue import PDict
@@ -22,6 +24,7 @@ from persistqueue import PDict
 from storops import exception
 from storops.lib.tasks import PQueue
 from storops.unity.enums import ThinCloneActionEnum
+from storops.unity.resp import RESP_OK
 
 log = logging.getLogger(__name__)
 
@@ -97,6 +100,52 @@ class TCHelper(object):
             snap_to_tc.delete()
         resp.raise_if_err()
         return UnityLun(cli=cli, _id=resp.resource_id)
+
+    @staticmethod
+    def refresh(cli, sr, copy_name=None, force=False, snapshot=None,
+                retention_duration=None):
+        """Refresh thin clone
+
+        :param sr: UnityStorageResource instance which is refreshed
+        :param copy_name: name of the backup snapshot
+        :param force: proceeed refresh even if host access is configured
+        :param snapshot: Snapshot used for thinclone refresh, \
+                         if not set the parent snapshot is used
+        :param retention_duration: backup snap retention duration in seconds
+        """
+        from storops.unity.resource.snap import UnitySnap
+
+        sr.update()
+        if not sr.is_thin_clone:
+            raise exception.UnityNotAThinClone()
+
+        if copy_name is None:
+            copy_name = "storops-refresh-{}-{}".format(
+                sr.name, datetime.now().strftime('%Y%m%d%H%M%S'))
+
+        if snapshot is None:
+            snapshot = sr.parent_snap
+
+        resp = sr.action('refresh', snap=snapshot, copyName=copy_name,
+                         force=force)
+        resp.raise_if_err()
+
+        copy_id = resp.first_content['copy']['id']
+
+        tc_snap = UnitySnap.get(cli=cli, _id=copy_id)
+        if retention_duration is not None:
+            if retention_duration == 0:
+                log.info("Deleting the backup snapshot {} as the refresh "
+                         "succeeded.".format(copy_id))
+                resp = tc_snap.delete()
+            else:
+                log.info("Updating the backup snapshot {} retention duration "
+                         "as the refresh succeeded.".format(copy_id))
+                resp = tc_snap.modify(retentionDuration=retention_duration)
+        else:
+            resp = RESP_OK
+
+        return resp
 
     @staticmethod
     def _gc_resources(lun_or_snap):

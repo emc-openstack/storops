@@ -411,6 +411,22 @@ class UnityLun(UnityResource):
         return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
                                    description)
 
+    def refresh(self, copy_name=None, force=False,
+                retention_duration=None):
+        """Refresh thin clone
+
+        :param copy_name: name of the backup snapshot
+        :param force: proceeed refresh even if host access is configured
+        :param retention_duration: Backup copy retention duration in seconds
+        """
+        if self.is_cg_member:
+            raise UnityCGMemberActionNotSupportError()
+
+        return self\
+            .storage_resource.refresh(copy_name=copy_name,
+                                      force=force,
+                                      retention_duration=retention_duration)
+
     def _is_move_session_supported(self, dest, is_compressed=None,
                                    is_advanced_dedup_enabled=None):
         if self.is_thin_clone:

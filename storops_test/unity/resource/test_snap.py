@@ -15,6 +15,8 @@
 #    under the License.
 from __future__ import unicode_literals
 
+from datetime import datetime
+
 from unittest import TestCase
 
 import mock
@@ -24,7 +26,8 @@ from hamcrest import assert_that, equal_to, instance_of, raises, none, calling
 from storops.exception import UnityShareOnCkptSnapError, \
     UnityDeleteAttachedSnapError, UnityResourceNotFoundError, \
     UnitySnapAlreadyPromotedException, UnityException, \
-    UnityThinCloneNotAllowedError, UnityCGMemberActionNotSupportError
+    UnityThinCloneNotAllowedError, UnityCGMemberActionNotSupportError, \
+    UnityNotAThinClone
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, \
     SnapCreatorTypeEnum, SnapStateEnum, NFSTypeEnum, CIFSTypeEnum
 from storops.unity.resource.filesystem import UnityFileSystem
@@ -255,3 +258,60 @@ class UnitySnapTest(TestCase):
         snap = UnitySnap(cli=t_rest(version='4.3'), _id='38654707273')
         assert_that(calling(snap.thin_clone).with_args('not-allowed'),
                     raises(UnityThinCloneNotAllowedError))
+
+    @patch_rest
+    def test_snap_refresh(self):
+        snap = UnitySnap(cli=t_rest(), _id='38654705785')
+        with mock.patch('storops.unity.resource.snap.datetime') \
+                as mock_datetime:
+            mock_datetime.now.return_value = datetime(2023, 3, 15, 19, 50, 25)
+            result = snap.refresh(retention_duration=0)
+            assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_snap_refresh_auto_delete_false(self):
+        snap = UnitySnap(cli=t_rest(), _id='38654705785')
+        result = snap.refresh(copy_name="backup_snap")
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_snap_refresh_retention_set(self):
+        snap = UnitySnap(cli=t_rest(), _id='38654705785')
+        result = snap.refresh(copy_name="backup_snap", retention_duration=3600)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_fails_on_non_thinclone_sr(self):
+        snap = UnitySnap(_id='38654705785', cli=t_rest())
+        sr = UnityStorageResource(_id='res_27', cli=t_rest())
+        assert_that(calling(snap.refresh_thin_clone)
+                    .with_args(sr=sr, copy_name='tc_refresh'),
+                    raises(UnityNotAThinClone))
+
+    @patch_rest
+    def test_refresh_thinclone_with_backup_retention(self):
+        snap = UnitySnap(_id='38654705785', cli=t_rest())
+        sr = UnityStorageResource(_id='sv_1678', cli=t_rest())
+        result = snap.refresh_thin_clone(sr=sr, copy_name='tc_refresh',
+                                         force=True, retention_duration=3600)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_without_backup(self):
+        snap = UnitySnap(_id='38654705785', cli=t_rest())
+        sr = UnityStorageResource(_id='sv_1678', cli=t_rest())
+        result = snap.refresh_thin_clone(sr=sr, copy_name='tc_refresh',
+                                         force=True, retention_duration=0)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_with_generated_backup_name(self):
+        snap = UnitySnap(_id='38654705785', cli=t_rest())
+        sr = UnityStorageResource(_id='sv_1678', cli=t_rest())
+        with mock.patch('storops.lib.thinclone_helper.datetime') \
+                as mock_datetime:
+            mock_datetime.now.return_value = datetime(2023, 3, 15, 19, 50, 25)
+
+            result = snap.refresh_thin_clone(sr=sr, retention_duration=3600)
+
+            assert_that(result.is_ok(), equal_to(True))

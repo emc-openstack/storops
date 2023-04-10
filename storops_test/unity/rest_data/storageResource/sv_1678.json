@@ -1,0 +1,43 @@
+{
+    "content": {
+      "id": "sv_1678",
+      "type": 8,
+      "replicationType": 0,
+      "thinStatus": 1,
+      "relocationPolicy": 0,
+      "health": {
+        "value": 5,
+        "descriptionIds": [
+          "ALRT_VOL_OK"
+        ],
+        "descriptions": [
+          "The LUN is operating normally. No action is required."
+        ]
+      },
+      "name": "thin-clone-lun",
+      "isReplicationDestination": false,
+      "sizeTotal": 214748364800,
+      "sizeAllocated": 0,
+      "perTierSizeUsed": [
+        105226698752,
+        0,
+        0
+      ],
+      "metadataSize": 0,
+      "metadataSizeAllocated": 0,
+      "snapsSizeTotal": 0,
+      "snapsSizeAllocated": 0,
+      "snapCount": 0,
+      "isThinClone": true,
+      "pools": [
+        {
+          "id": "pool_3"
+        }
+      ],
+      "luns": [
+        {
+          "id": "sv_1678"
+        }
+      ]
+    }
+  }

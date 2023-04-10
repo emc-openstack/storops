@@ -1988,6 +1988,48 @@
         }
       },
       "response": "empty.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_1678?compact=True&fields=blockHostAccess,datastores,dedupStatus,description,esxFilesystemBlockSize,esxFilesystemMajorVersion,filesystem,health,hostVVolDatastore,id,isReplicationDestination,isSnapSchedulePaused,luns,metadataSize,metadataSizeAllocated,name,perTierSizeUsed,pools,relocationPolicy,replicationType,sizeAllocated,sizeTotal,sizeUsed,snapCount,snapSchedule,snapsSizeAllocated,snapsSizeTotal,thinStatus,type,virtualVolumes,vmwareUUID",
+      "response": "sv_1678.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_1678/action/refresh?compact=True",
+      "body": {
+        "snap": {
+          "id": "38654705785"
+        }, 
+        "copyName": "tc_refresh", 
+        "force": true
+      },
+      "response": "refresh_thin_clone_lun.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_1678/action/refresh?compact=True",
+      "body": {
+        "copyName": "tc_refresh", 
+        "force": true
+      },
+      "response": "refresh_thin_clone_lun.json"
+    },    
+    {
+      "url": "/api/instances/storageResource/sv_1678/action/refresh?compact=True",
+      "body": {
+        "snap": {
+          "id": "38654705785"
+        }, 
+        "copyName": "storops-refresh-thin-clone-lun-20230315195025", 
+        "force": false
+      },
+      "response": "refresh_thin_clone_lun.json"
+    },
+    {
+      "url": "/api/instances/storageResource/sv_1678/action/refresh?compact=True",
+      "body": {
+        "copyName": "storops-refresh-thin-clone-lun-20230315195025", 
+        "force": false
+      },
+      "response": "refresh_thin_clone_lun.json"
     }
   ]
 }

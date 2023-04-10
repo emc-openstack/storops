@@ -16,9 +16,12 @@
 from __future__ import unicode_literals
 
 from unittest import TestCase
+from datetime import datetime
 
-from hamcrest import assert_that, equal_to, instance_of
+import mock
+from hamcrest import assert_that, equal_to, instance_of, calling, raises
 
+from storops.exception import UnityNotAThinClone
 from storops.unity.enums import StorageResourceTypeEnum, ReplicationTypeEnum, \
     ThinStatusEnum, TieringPolicyEnum, DataReductionStatusEnum, \
     DedupStatusEnum
@@ -69,3 +72,37 @@ class UnityStorageResourceTest(TestCase):
     def test_get_all(self):
         sr_list = UnityStorageResourceList(cli=t_rest())
         assert_that(len(sr_list), equal_to(10))
+
+    @patch_rest
+    def test_refresh_thinclone_fails_on_non_thinclone_sr(self):
+        sr = UnityStorageResource(_id='res_27', cli=t_rest())
+        assert_that(calling(sr.refresh)
+                    .with_args(copy_name='tc_refresh'),
+                    raises(UnityNotAThinClone))
+
+    @patch_rest
+    def test_refresh_thinclone_with_backup_retention(self):
+        sr = UnityStorageResource(_id='sv_1678', cli=t_rest())
+        result = sr.refresh(copy_name='tc_refresh', force=True,
+                            retention_duration=3600)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_without_backup(self):
+        sr = UnityStorageResource(_id='sv_1678', cli=t_rest())
+        result = sr.refresh(
+            copy_name='tc_refresh', force=True,
+            retention_duration=0)
+        assert_that(result.is_ok(), equal_to(True))
+
+    @patch_rest
+    def test_refresh_thinclone_with_generated_backup_name(self):
+        sr = UnityStorageResource(_id='sv_1678', cli=t_rest())
+        with mock.patch('storops.lib.thinclone_helper.datetime') \
+                as mock_datetime:
+            mock_datetime.now.return_value = datetime(2023, 3, 15, 19, 50, 25)
+
+            result = sr.refresh(copy_name=None,
+                                retention_duration=3600)
+
+            assert_that(result.is_ok(), equal_to(True))

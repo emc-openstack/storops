@@ -26,7 +26,6 @@ from storops.exception import UnityBaseHasThinCloneError, \
     UnityThinCloneNotAllowedError, UnityMigrationSourceHasThinCloneError, \
     UnityMigrationTimeoutException
 from storops.lib import job_helper
-from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity import enums
 from storops.unity.client import UnityClient
@@ -312,11 +311,7 @@ class UnityLun(UnityResource):
         except UnityBaseHasThinCloneError:
             log.warning('cannot delete the lun: %s, because it is a base lun '
                         'of a thin-clone.', self.get_id())
-            TCHelper.notify(self, ThinCloneActionEnum.BASE_LUN_DELETE)
             return RESP_OK
-
-        if self.is_thin_clone:
-            TCHelper.notify(self, ThinCloneActionEnum.TC_DELETE)
 
         return resp
 
@@ -332,9 +327,6 @@ class UnityLun(UnityResource):
 
         resp = self.modify(host_access=host_access)
         resp.raise_if_err()
-        log.debug('Notify TCHelper the attaching action of lun: %s.',
-                  self.get_id())
-        TCHelper.notify(self, ThinCloneActionEnum.LUN_ATTACH)
         return resp
 
     @version('<4.4.0')  # noqa
@@ -407,9 +399,6 @@ class UnityLun(UnityResource):
 
         if not self.is_thin_enabled:
             raise UnityThinCloneNotAllowedError()
-
-        return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
-                                   description)
 
     def _is_move_session_supported(self, dest, is_compressed=None,
                                    is_advanced_dedup_enabled=None):

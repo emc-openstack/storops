@@ -41,7 +41,6 @@ else
     wget_urls="http://cbs.centos.org/kojifiles/packages/python-bitmath/1.3.1/1.el7/noarch/python2-bitmath-1.3.1-1.el7.noarch.rpm \
                https://github.com/emc-openstack/naviseccli/raw/master/NaviCLI-Linux-64-x86-en_US-7.33.9.1.55-1.x86_64.rpm \
                https://github.com/emc-openstack/packages/raw/master/rpm/cachez/python2-cachez-0.1.2-1.el7.noarch.rpm \
-               https://github.com/emc-openstack/packages/raw/master/rpm/persist-queue/python2-persist-queue-0.2.3-1.el7.noarch.rpm \
                https://github.com/emc-openstack/packages/raw/master/rpm/retryz/python2-retryz-0.1.9-1.el7.noarch.rpm"
 
     for repo in ${git_repos}; do

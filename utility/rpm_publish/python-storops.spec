@@ -29,7 +29,6 @@ Requires:       python-bitmath >= 1.3.0
 Requires:       python-cachez >= 0.1.2
 Requires:       python-dateutil >= 2.4.2
 Requires:       python-enum34
-Requires:       python-persist-queue >= 0.2.3
 Requires:       python-requests >= 2.8.1
 Requires:       python-retryz >= 0.1.8
 Requires:       python-six >= 1.9.0
@@ -44,7 +43,6 @@ BuildRequires:  python-enum34
 BuildRequires:  python-fasteners
 BuildRequires:  python-hamcrest
 BuildRequires:  python-mock
-BuildRequires:  python-persist-queue >= 0.2.3
 BuildRequires:  python-pytest
 BuildRequires:  python-pytest-xdist
 BuildRequires:  python-requests >= 2.8.1
@@ -67,7 +65,6 @@ Summary:        %{summary}
 Requires:       python3-bitmath >= 1.3.0
 Requires:       python3-cachez >= 0.1.2
 Requires:       python3-dateutil >= 2.4.2
-Requires:       python3-persist-queue >= 0.2.3
 Requires:       python3-requests >= 2.8.1
 Requires:       python3-retryz >= 0.1.8
 Requires:       python3-six >= 1.9.0
@@ -80,8 +77,7 @@ BuildRequires:  python3-dateutil >= 2.4.2
 BuildRequires:  python3-ddt
 BuildRequires:  python3-fasteners
 BuildRequires:  python3-hamcrest
-BuildRequires:  python3-mock
-BuildRequires:  python3-persist-queue >= 0.2.3
+BuildRequires:  python3-mockue
 BuildRequires:  python3-pytest
 BuildRequires:  python3-pytest-xdist
 BuildRequires:  python3-requests >= 2.8.1

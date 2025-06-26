@@ -23,7 +23,6 @@ import storops.unity.resource.storage_resource
 from storops.exception import UnityCGMemberActionNotSupportError, \
     UnityThinCloneNotAllowedError, UnityDeleteAttachedSnapError
 from storops.lib.common import instance_cache
-from storops.lib.thinclone_helper import TCHelper
 from storops.lib.version import version
 from storops.unity import enums
 from storops.unity.enums import FilesystemSnapAccessTypeEnum, SnapStateEnum, \
@@ -190,9 +189,6 @@ class UnitySnap(UnityResource):
 
         if self.lun and not self.lun.is_thin_enabled:
             raise UnityThinCloneNotAllowedError()
-
-        return TCHelper.thin_clone(self._cli, self, name, io_limit_policy,
-                                   description)
 
     def is_member_snap(self):
         """Returns True if it is a member snap of cg snap."""

@@ -36,7 +36,6 @@ jobs:
             - [python-cachez >= 0.1.2](http://cbs.centos.org/koji/packageinfo?packageID=5235)
             - [python-dateutil >= 2.4.2](http://cbs.centos.org/koji/packageinfo?packageID=4140)
             - [python-enum34](http://cbs.centos.org/koji/packageinfo?packageID=638)
-            - [python-persist-queue >= 0.2.3](http://cbs.centos.org/koji/packageinfo?packageID=5249)
             - [python-requests >= 2.8.1](http://cbs.centos.org/koji/packageinfo?packageID=58)
             - [python-retryz >= 0.1.8](http://cbs.centos.org/koji/packageinfo?packageID=5234)
             - [python-six >= 1.9.0](http://cbs.centos.org/koji/packageinfo?packageID=175)

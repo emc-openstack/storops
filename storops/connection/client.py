@@ -94,7 +94,9 @@ class HTTPClient(object):
             headers.pop('Content-Type')
             for name, path in files.items():
                 files_opener[name] = open(path, 'rb')
-        self.log_request(full_url, method, options.get('data', None))
+        # Shouldnt log login request
+        if ("Login" not in full_url):
+            self.log_request(full_url, method, options.get('data', None))
         start = time.time()
         resp = self.session.request(method, full_url, headers=headers,
                                     files=files_opener, **options)

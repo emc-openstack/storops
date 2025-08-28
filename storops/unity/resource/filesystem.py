@@ -46,7 +46,8 @@ class UnityFileSystem(UnityResource):
     def create(cls, cli, pool, nas_server, name, size, proto=None,
                is_thin=None, tiering_policy=None, user_cap=False,
                is_compression=None, access_policy=None,
-               locking_policy=None, description=None):
+               locking_policy=None, description=None,
+               is_advanced_dedup_enabled=None):
         pool_clz = storops.unity.resource.pool.UnityPool
         nas_server_clz = storops.unity.resource.nas_server.UnityNasServer
 
@@ -65,7 +66,8 @@ class UnityFileSystem(UnityResource):
             tiering_policy=tiering_policy,
             is_compression=is_compression,
             access_policy=access_policy,
-            locking_policy=locking_policy)
+            locking_policy=locking_policy,
+            is_advanced_dedup_enabled=is_advanced_dedup_enabled)
 
         req_body = cli.make_body(allow_empty=True, name=name,
                                  description=description,
@@ -80,7 +82,8 @@ class UnityFileSystem(UnityResource):
     def modify(self, size=None, is_thin=None, tiering_policy=None,
                user_cap=False, is_compression=None, access_policy=None,
                locking_policy=None, description=None,
-               cifs_fs_parameters=None, snap_schedule_parameters=None):
+               cifs_fs_parameters=None, snap_schedule_parameters=None,
+               is_advanced_dedup_enabled=None):
         sr = self.storage_resource
         if sr is None:
             raise ValueError('storage resource for filesystem {} not found.'
@@ -94,7 +97,8 @@ class UnityFileSystem(UnityResource):
             tiering_policy=tiering_policy,
             is_compression=is_compression,
             access_policy=access_policy,
-            locking_policy=locking_policy)
+            locking_policy=locking_policy,
+            is_advanced_dedup_enabled=is_advanced_dedup_enabled)
 
         params = {}
         if fs_param:
@@ -244,15 +248,19 @@ class UnityFileSystem(UnityResource):
             snaps = filter(lambda s: not s.is_system_snap, snaps)
         return len(list(snaps)) > 0
 
-    def replicate_with_dst_resource_provisioning(self, max_time_out_of_sync,
-                                                 dst_pool_id,
-                                                 dst_fs_name=None,
-                                                 remote_system=None,
-                                                 replication_name=None,
-                                                 dst_size=None,
-                                                 is_dst_thin=None,
-                                                 dst_tiering_policy=None,
-                                                 is_dst_compression=None):
+    def replicate_with_dst_resource_provisioning(
+            self, max_time_out_of_sync,
+            dst_pool_id,
+            dst_fs_name=None,
+            remote_system=None,
+            replication_name=None,
+            dst_size=None,
+            is_dst_thin=None,
+            dst_tiering_policy=None,
+            is_dst_compression=None,
+            no_async_snap_replication=None,
+            hourly_snap_replication_policy=None,
+            daily_snap_replication_policy=None):
         """
         Creates a replication session with destination filesystem provisioning.
 
@@ -274,6 +282,16 @@ class UnityFileSystem(UnityResource):
             destination filesystem.
         :param is_dst_compression: indicates whether destination filesystem is
             compression enabled or not.
+        :param no_async_snap_replication: whether or not snap replication is
+            enabled in asynchronous replication session. When enabled, snap
+            replication is controlled by snap replication policy setting or
+            user action.
+        :param hourly_snap_replication_policy: `UnitySnapReplicationPolicy`
+            object. The policy for replicating hourly scheduled snaps of the
+            source resource.
+        :param daily_snap_replication_policy: `UnitySnapReplicationPolicy`
+            object. The policy for replicating daily scheduled snaps of the
+            source resource.
         :return: created replication session.
         """
 
@@ -294,19 +312,32 @@ class UnityFileSystem(UnityResource):
         return UnityReplicationSession.create_with_dst_resource_provisioning(
             self._cli, self.storage_resource.get_id(),
             dst_resource, max_time_out_of_sync,
-            remote_system=remote_system, name=replication_name)
+            remote_system=remote_system, name=replication_name,
+            no_async_snap_replication=no_async_snap_replication,
+            hourly_snap_replication_policy=hourly_snap_replication_policy,
+            daily_snap_replication_policy=daily_snap_replication_policy)
 
     @staticmethod
     def prepare_fs_parameters(**kwargs):
         @version('<4.3')
-        def make_compression_body(is_compression=None):
+        def make_compression_body(is_compression=None,
+                                  is_advanced_dedup_enabled=None):
             return UnityClient.make_body(
                 allow_empty=True, isCompressionEnabled=is_compression)
 
-        @version('>=4.3')  # noqa
-        def make_compression_body(is_compression=None):
+        @version('>=4.3')
+        def make_compression_body(is_compression=None,  # noqa: F811
+                                  is_advanced_dedup_enabled=None):
             return UnityClient.make_body(
                 allow_empty=True, isDataReductionEnabled=is_compression)
+
+        @version('>=4.5')
+        def make_compression_body(is_compression=None,  # noqa: F811
+                                  is_advanced_dedup_enabled=None):
+            return UnityClient.make_body(
+                allow_empty=True,
+                isDataReductionEnabled=is_compression,
+                isAdvancedDedupEnabled=is_advanced_dedup_enabled)
 
         access_policy = kwargs.get('access_policy')
         locking_policy = kwargs.get('locking_policy')
@@ -332,7 +363,9 @@ class UnityFileSystem(UnityResource):
             fs_param['fastVPParameters'] = UnityClient.make_body(
                 allow_empty=True, tieringPolicy=tiering_policy)
 
-        compression_body = make_compression_body(kwargs.get('is_compression'))
+        compression_body = make_compression_body(
+            kwargs.get('is_compression'),
+            kwargs.get('is_advanced_dedup_enabled'))
         fs_param.update(compression_body)
         return fs_param
 

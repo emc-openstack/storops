@@ -267,7 +267,8 @@ class UnityReplicationSession(UnityResource):
                hourly_snap_replication_policy=None,
                daily_snap_replication_policy=None,
                src_spa_interface=None, src_spb_interface=None,
-               dst_spa_interface=None, dst_spb_interface=None):
+               dst_spa_interface=None, dst_spb_interface=None,
+               no_async_snap_replication=None):
         """
         Modifies properties of a replication session.
 
@@ -281,6 +282,10 @@ class UnityReplicationSession(UnityResource):
         :param src_spb_interface: same as the one in `create` method.
         :param dst_spa_interface: same as the one in `create` method.
         :param dst_spb_interface: same as the one in `create` method.
+        :param no_async_snap_replication: whether or not snap replication is
+            enabled in asynchronous replication session. When enabled, snap
+            replication is controlled by snap replication policy setting or
+            user action.
         """
         req_body = self._cli.make_body(
             maxTimeOutOfSync=max_time_out_of_sync, name=name,
@@ -289,7 +294,8 @@ class UnityReplicationSession(UnityResource):
             srcSPAInterface=src_spa_interface,
             srcSPBInterface=src_spb_interface,
             dstSPAInterface=dst_spa_interface,
-            dstSPBInterface=dst_spb_interface)
+            dstSPBInterface=dst_spb_interface,
+            noAsyncSnapReplication=no_async_snap_replication)
 
         resp = self.action('modify', **req_body)
         resp.raise_if_err()

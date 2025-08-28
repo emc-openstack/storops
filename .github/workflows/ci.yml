@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  # -----------------
+  # Linux job (pytest + flake8 + coverage + codecov)
+  # -----------------
+  linux-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.10", "3.11", "3.12" ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+          pip install -r test-requirements.txt
+          pip install codecov
+
+      - name: Run flake8
+        if: matrix.python-version == '3.11'   # run lint once
+        run: flake8 storops storops_test storops_comptest
+
+      - name: Run pytest with coverage
+        run: |
+          pytest -n2 --cov=storops --cov-config coverage.ini \
+                 --cov-report=xml --cov-report=term \
+                 --junit-xml=junit-result.xml storops_test
+
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.11'   # upload once
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+
+  # -----------------
+  # Windows job (tox-based tests + pep8 once)
+  # -----------------
+  windows-tests:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.10", "3.11", "3.12" ]
+        toxenv: [ "py310", "py311", "py312", "pep8" ]
+        exclude:
+          # map toxenv to correct python versions only
+          - python-version: "3.10"
+            toxenv: py311
+          - python-version: "3.10"
+            toxenv: py312
+          - python-version: "3.11"
+            toxenv: py310
+          - python-version: "3.11"
+            toxenv: py312
+          - python-version: "3.12"
+            toxenv: py310
+          - python-version: "3.12"
+            toxenv: py311
+          # only run pep8 once (Python 3.11)
+          - python-version: "3.10"
+            toxenv: pep8
+          - python-version: "3.12"
+            toxenv: pep8
+    env:
+      TOXENV: ${{ matrix.toxenv }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools virtualenv wheel
+          python -m pip install tox
+
+      - name: Run tox
+        run: tox

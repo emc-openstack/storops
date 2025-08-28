@@ -2060,6 +2060,7 @@ UnityReplicationSession:
     - label: name
     - label: networkStatus
       converter: ReplicationSessionNetworkStatusEnum
+    - label: noAsyncSnapReplication
     - label: remoteSystem
       converter: UnityRemoteSystem
     - label: replicationResourceType

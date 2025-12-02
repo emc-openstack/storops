@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 
 import functools
 import logging
-import pipes
+import shlex
 
 import six
 from retryz import retry
@@ -157,7 +157,7 @@ class SSHConnector(object):
                 raise ex
 
     def execute(self, command, timeout=None, check_exit_code=True):
-        cmd = ' '.join(pipes.quote(cmd_arg) for cmd_arg in command)
+        cmd = ' '.join(shlex.quote(cmd_arg) for cmd_arg in command)
         channel = self.transport.open_session()
         channel.exec_command(cmd)
         channel.settimeout(timeout)

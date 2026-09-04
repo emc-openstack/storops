@@ -77,6 +77,7 @@ class UnityRESTConnectorTest(unittest.TestCase):
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_connect_timeout(self, mocked_httpclient):
         connector.UnityRESTConnector('10.10.10.10',
+                                     verify=False,
                                      connect_timeout=99)
 
         mocked_httpclient.assert_called_with(
@@ -95,6 +96,7 @@ class UnityRESTConnectorTest(unittest.TestCase):
         application_type = 'testclient/0.1.0'
 
         connector.UnityRESTConnector('10.10.10.10',
+                                     verify=False,
                                      connect_timeout=99,
                                      application_type=application_type)
 

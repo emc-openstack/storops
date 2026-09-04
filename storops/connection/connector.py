@@ -54,7 +54,7 @@ class UnityRESTConnector(object):
     }
 
     def __init__(self, host, port=443, user='admin', password='',
-                 verify=False, retries=None, cache_interval=0,
+                 verify=True, retries=None, cache_interval=0,
                  connect_timeout=30, application_type=None):
         base_url = 'https://{host}:{port}'.format(host=host, port=port)
 

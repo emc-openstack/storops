@@ -316,6 +316,11 @@ Get the Unity System Instance
     from storops import UnitySystem
     unity = UnitySystem('<management ip>', '<user>', '<password>')
 
+.. note::
+   As of version 1.2.12, TLS certificate verification is enabled by default for security.
+   If you need to connect to arrays with self-signed certificates, explicitly set verify=False:
+   unity = UnitySystem('<management ip>', '<user>', '<password>', verify=False)
+
 Get Resources from System or Other Resources
 ````````````````````````````````````````````
 
@@ -451,7 +456,7 @@ Getting metrics
 .. code-block:: python
 
     >>> from storops import UnitySystem
-    >>> unity = UnitySystem('<management ip>', '<user>', '<password>')
+    >>> unity = UnitySystem('<management ip>', '<user>', '<password>', verify=False)
     # Enable metric query
     >>> unity.enable_perf_stats()
     # Once metric query enabled, storops will pull the realtime metric info

@@ -243,7 +243,7 @@ class UnityPool(UnityResource):
 
     def _is_advanced_dedup_supported(self, support_matrix):
         from storops.unity.resource.system import UnitySystem
-        unity_system = UnitySystem(cli=self._cli)
+        unity_system = UnitySystem(cli=self._cli, verify=False)
         supported = False
         for supported_model in support_matrix:
             if UnityModel(unity_system.model) >= UnityModel(supported_model):

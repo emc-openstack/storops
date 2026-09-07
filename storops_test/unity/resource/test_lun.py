@@ -295,7 +295,7 @@ class UnityLunTest(TestCase):
 
     @patch_rest
     def test_get_lun_with_host_access(self):
-        unity = UnitySystem('10.109.22.101', 'admin', 'Password123!')
+        unity = UnitySystem('10.109.22.101', 'admin', 'Password123!', verify=False)
         lun = unity.get_lun(_id='sv_567')
         assert_that(lun.host_access, instance_of(UnityBlockHostAccessList))
         access = lun.host_access[0]
@@ -437,7 +437,7 @@ class UnityLunTest(TestCase):
 
     @patch_rest
     def test_lun_perf_disabled_exception(self):
-        unity = UnitySystem('10.244.223.61', 'a', 'a')
+        unity = UnitySystem('10.244.223.61', 'a', 'a', verify=False)
         unity.disable_perf_stats()
 
         def f():
@@ -696,7 +696,7 @@ class UnityLunTest(TestCase):
 class UnityLunEnablePerfStatsTest(TestCase):
     @patch_rest
     def setUp(self):
-        self.unity = UnitySystem('10.244.223.61', 'a', 'a')
+        self.unity = UnitySystem('10.244.223.61', 'a', 'a', verify=False)
         self.unity.enable_perf_stats(1, [UnityDisk])
 
     @patch_rest

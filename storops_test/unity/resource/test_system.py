@@ -108,7 +108,7 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_init_by_ip(self):
-        system = UnitySystem('10.244.223.66', 'admin', 'Password123!')
+        system = UnitySystem('10.244.223.66', 'admin', 'Password123!', verify=False)
         assert_that(system.model, equal_to('Unity 500'))
 
     @patch_rest
@@ -913,7 +913,7 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_enable_performance_statistics(self):
-        unity = UnitySystem('10.244.223.61')
+        unity = UnitySystem('10.244.223.61', verify=False)
         assert_that(unity.is_perf_stats_enabled(), equal_to(False))
 
         queries = unity.enable_perf_stats(1)
@@ -931,7 +931,7 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_enable_persist_perf_stats(self):
-        unity = UnitySystem('10.244.223.61')
+        unity = UnitySystem('10.244.223.61', verify=False)
         assert_that(unity.is_perf_stats_persisted(), equal_to(False))
 
         unity.enable_persist_perf_stats()

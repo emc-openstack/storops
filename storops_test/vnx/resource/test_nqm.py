@@ -49,7 +49,7 @@ class VNXIOClassTest(TestCase):
         assert_that(ioclass.control_method, equal_to('Limit'))
         assert_that(ioclass.metric_type, equal_to('Bandwidth'))
         assert_that(ioclass.goal_value, equal_to('1000.0 MB/s'))
-        map(lambda l: assert_that(l, instance_of(VNXLun)),
+        map(lambda lun: assert_that(lun, instance_of(VNXLun)),
             ioclass.luns)
         assert_that(len(ioclass.luns), equal_to(2))
         assert_that(ioclass.policy, instance_of(VNXIOPolicy))
@@ -62,7 +62,7 @@ class VNXIOClassTest(TestCase):
         assert_that(ioclass.io_type, equal_to('ReadWrite'))
         assert_that(ioclass.io_size_range, equal_to('Any'))
         assert_that(ioclass.control_method, equal_to('No Control'))
-        map(lambda l: assert_that(l, instance_of(VNXLun)),
+        map(lambda lun: assert_that(lun, instance_of(VNXLun)),
             ioclass.luns)
         assert_that(len(ioclass.luns), equal_to(3))
 

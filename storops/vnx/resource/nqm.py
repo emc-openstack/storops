@@ -108,7 +108,7 @@ class VNXIOClass(VNXCliResource):
         """Aggregator for ioclass_luns and ioclass_snapshots."""
         lun_list, smp_list = [], []
         if self.ioclass_luns:
-            lun_list = map(lambda l: VNXLun(lun_id=l.lun_id, name=l.name,
+            lun_list = map(lambda lun: VNXLun(lun_id=lun.lun_id, name=lun.name,
                                             cli=self._cli), self.ioclass_luns)
         if self.ioclass_snapshots:
             smp_list = map(lambda smp: VNXLun(name=smp.name, cli=self._cli),

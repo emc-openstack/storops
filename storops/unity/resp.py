@@ -96,7 +96,7 @@ class RestResponse(object):
         links = self.body.get('links')
         ret = None
         if links:
-            page_link = list(filter(lambda l: l.get('rel') == which_page,
+            page_link = list(filter(lambda link: link.get('rel') == which_page,
                                     links))
             if page_link:
                 href = page_link[0].get('href')

@@ -44,7 +44,7 @@ class UnityIpPort(UnityResource):
 
     @instance_cache  # noqa
     @version('<4.1')
-    def is_link_aggregation(self):
+    def is_link_aggregation(self):  # noqa: F811
         # Link aggregation is not supported before Falcon 4.1
         return False
 

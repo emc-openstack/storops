@@ -300,7 +300,7 @@ class UnitySystem(UnitySingletonResource):
         return eths + las
 
     @version("<4.1")  # noqa
-    def get_file_port(self):
+    def get_file_port(self):  # noqa: F811
         """Returns ports list can be used by File
 
         File ports includes ethernet ports and link aggregation ports.

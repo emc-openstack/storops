@@ -30,7 +30,7 @@ from storops.lib.version import version
 from storops.unity import enums
 from storops.unity.client import UnityClient
 from storops.unity.enums import TieringPolicyEnum, NodeEnum, \
-    HostLUNAccessEnum, ThinCloneActionEnum, StorageResourceTypeEnum
+    HostLUNAccessEnum, StorageResourceTypeEnum
 from storops.unity.resource import UnityResource, UnityResourceList
 from storops.unity.resource.host import UnityHostList
 from storops.unity.resource.replication_session import UnityResourceConfig, \
@@ -52,7 +52,7 @@ def prepare_lun_parameters(cli=None, **kwargs):
         return UnityClient.make_body(isCompressionEnabled=is_compression)
 
     @version('>=4.3')  # noqa
-    def make_compression_body(cli=None,
+    def make_compression_body(cli=None,  # noqa: F811
                               is_compression=None):
         return UnityClient.make_body(isDataReductionEnabled=is_compression)
 
@@ -334,7 +334,7 @@ class UnityLun(UnityResource):
         return self._attach_to(host, access_mask, None)
 
     @version('>=4.4.0')  # noqa
-    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION,
+    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION,  # noqa: F811
                   hlu=None):
         return self._attach_to(host, access_mask, hlu)
 

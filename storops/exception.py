@@ -39,7 +39,7 @@ class StoropsException(Exception):
     unknown_message = "An unknown exception occurred."
 
     # class level error message.
-    message = None
+    message = None  # noqa: F811
 
     # class level error message template.
     message_template = None

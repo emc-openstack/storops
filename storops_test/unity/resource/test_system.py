@@ -108,7 +108,7 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_init_by_ip(self):
-        system = UnitySystem('10.244.223.66', 'admin', 'Password123!', verify=False)
+        system = UnitySystem('192.168.1.1', 'test_user', 'test_password', verify=False)
         assert_that(system.model, equal_to('Unity 500'))
 
     @patch_rest
@@ -237,8 +237,8 @@ class UnitySystemTest(TestCase):
     def test_create_iscsi_portal(self):
         unity = t_unity()
         portal = unity.create_iscsi_portal(
-            ethernet_port='spa_eth3', ip="10.244.213.244",
-            netmask="255.255.255.0", vlan=133, gateway="10.244.213.1")
+            ethernet_port='spa_eth3', ip="192.168.1.100",
+            netmask="255.255.255.0", vlan=133, gateway="192.168.1.1")
         assert_that(portal.id, equal_to('if_4'))
 
     @patch_rest
@@ -825,23 +825,23 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_set_ntp_server(self):
-        ret = t_unity().add_ntp_server('10.245.54.154', '10.245.54.153')
-        assert_that(ret, has_items('10.245.54.152', '10.245.54.153'))
+        ret = t_unity().add_ntp_server('192.168.1.10', '192.168.1.11')
+        assert_that(ret, has_items('192.168.1.10', '192.168.1.11'))
 
     @patch_rest
     def test_remove_ntp_server(self):
-        ret = t_unity().remove_ntp_server('10.245.54.153')
-        assert_that(ret, has_items('10.245.54.152', '10.245.54.153'))
+        ret = t_unity().remove_ntp_server('192.168.1.11')
+        assert_that(ret, has_items('192.168.1.10'))
 
     @patch_rest
     def test_clear_ntp_server(self):
         ret = t_unity().clear_ntp_server()
-        assert_that(ret, has_items('10.245.54.152', '10.245.54.153'))
+        assert_that(ret, has_items('192.168.1.10'))
 
     @patch_rest
     def test_list_ntp_servers(self):
         assert_that(t_unity().ntp_server,
-                    has_items('10.245.54.152', '10.245.54.153'))
+                    has_items('192.168.1.10', '192.168.1.11'))
 
     @patch_rest
     def test_delete_singleton(self):
@@ -856,22 +856,22 @@ class UnitySystemTest(TestCase):
         assert_that(dns_server.id, equal_to('0'))
         assert_that(dns_server.origin, equal_to(DNSServerOriginEnum.DHCP))
         assert_that(dns_server.addresses,
-                    has_items('10.245.177.15', '10.245.177.16'))
+                    has_items('192.168.1.20', '192.168.1.21'))
 
     @patch_rest
     def test_add_dns_server(self):
         ret = t_unity().add_dns_server('8.8.8.8', '9.9.9.9')
-        assert_that(ret, has_items('10.245.177.15', '10.245.177.16'))
+        assert_that(ret, has_items('192.168.1.20', '192.168.1.21', '8.8.8.8', '9.9.9.9'))
 
     @patch_rest
     def test_remove_dns_server(self):
         ret = t_unity().remove_dns_server('8.8.8.8', '9.9.9.9')
-        assert_that(ret, has_items('10.245.177.15', '10.245.177.16'))
+        assert_that(ret, has_items('192.168.1.20', '192.168.1.21'))
 
     @patch_rest
     def test_clear_dns_server(self):
         ret = t_unity().clear_dns_server()
-        assert_that(ret, has_items('10.245.177.15', '10.245.177.16'))
+        assert_that(ret, has_items('192.168.1.20', '192.168.1.21'))
 
     @patch_rest
     def test_get_link_aggregation_list(self):
@@ -913,7 +913,7 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_enable_performance_statistics(self):
-        unity = UnitySystem('10.244.223.61', verify=False)
+        unity = UnitySystem('192.168.1.1', verify=False)
         assert_that(unity.is_perf_stats_enabled(), equal_to(False))
 
         queries = unity.enable_perf_stats(1)
@@ -931,7 +931,7 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_enable_persist_perf_stats(self):
-        unity = UnitySystem('10.244.223.61', verify=False)
+        unity = UnitySystem('192.168.1.1', verify=False)
         assert_that(unity.is_perf_stats_persisted(), equal_to(False))
 
         unity.enable_persist_perf_stats()
@@ -1015,7 +1015,7 @@ class UnitySystemTest(TestCase):
     def test_create_alert_snmp_v3_config(self):
         unity = t_unity()
         alert_snmp_config = unity.create_alert_snmp_config(
-            '10.10.10.111', username='test_username',
+            '192.168.1.50', username='test_username',
             auth_protocol=SNMPAuthProtocolEnum.MD5,
             priv_protocol=SNMPPrivacyProtocolEnum.AES,
             auth_password='auth_password_test')
@@ -1023,24 +1023,24 @@ class UnitySystemTest(TestCase):
             UnityAlertConfigSNMPTarget))
         assert_that(alert_snmp_config.username, equal_to('test_username'))
         assert_that(alert_snmp_config.get_id(), equal_to('snmp_target_8'))
-        assert_that(alert_snmp_config.address, equal_to('10.10.10.111'))
+        assert_that(alert_snmp_config.address, equal_to('192.168.1.50'))
 
     @patch_rest
     def test_create_alert_snmp_v2_config(self):
         unity = t_unity()
         alert_snmp_config = unity.create_alert_snmp_config(
-            '10.10.10.222', community='test_community')
+            '192.168.1.51', community='test_community')
         assert_that(alert_snmp_config, instance_of(
             UnityAlertConfigSNMPTarget))
         assert_that(alert_snmp_config.get_id(), equal_to(
             'snmp_target_9'))
-        assert_that(alert_snmp_config.address, equal_to('10.10.10.222'))
+        assert_that(alert_snmp_config.address, equal_to('192.168.1.51'))
 
     @patch_rest
     def test_create_invalid_snmp_config(self):
         def f():
             unity = t_unity()
-            unity.create_alert_snmp_config('10.244.166.123')
+            unity.create_alert_snmp_config('192.168.1.52')
 
         assert_that(f, raises(
             UnityPolicyInvalidParametersError,
@@ -1211,7 +1211,7 @@ class UnityNtpServerTest(TestCase):
     def test_get_properties(self):
         ntp_server = UnityNtpServer(cli=t_rest())
         assert_that(ntp_server.addresses,
-                    has_items('10.245.54.152', '10.245.54.153'))
+                    has_items('192.168.1.10', '192.168.1.11'))
 
 
 class UnityBatteryTest(TestCase):
@@ -1516,9 +1516,9 @@ class UnityMgmtInterface(TestCase):
                     equal_to(InterfaceConfigModeEnum.AUTO))
         assert_that(interface.protocol_version,
                     equal_to(IpProtocolVersionEnum.IPv4))
-        assert_that(interface.ip_address, equal_to('10.245.101.39'))
+        assert_that(interface.ip_address, equal_to('192.168.1.30'))
         assert_that(interface.netmask, equal_to('255.255.255.0'))
-        assert_that(interface.gateway, equal_to('10.245.101.1'))
+        assert_that(interface.gateway, equal_to('192.168.1.1'))
         assert_that(interface.ethernet_port.id, equal_to('spb_mgmt'))
 
 

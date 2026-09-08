@@ -40,7 +40,7 @@ def t_rest(version=None):
 
     :return: unity client singleton
     """
-    client = UnityClient('10.244.223.61', 'admin', 'Password123!',
+    client = UnityClient('192.168.1.1', 'test_user', 'test_password',
                          verify=False)  # Explicitly insecure for test environment
     client.set_system_version(version)
     return client
@@ -49,7 +49,7 @@ def t_rest(version=None):
 @cache
 def t_unity(version=None):
     clz = storops.unity.resource.system.UnitySystem
-    unity = clz('10.244.223.61', 'admin', 'Password123!', verify=False)
+    unity = clz('192.168.1.1', 'test_user', 'test_password', verify=False)
     unity.add_metric_record(unity.get_metric_query_result(17))
     unity.add_metric_record(unity.get_metric_query_result(34))
     unity._cli.set_system_version(version)

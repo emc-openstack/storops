@@ -108,7 +108,8 @@ class UnitySystemTest(TestCase):
 
     @patch_rest
     def test_init_by_ip(self):
-        system = UnitySystem('192.168.1.1', 'test_user', 'test_password', verify=False)
+        system = UnitySystem('192.168.1.1', 'test_user',
+                             'test_password', verify=False)
         assert_that(system.model, equal_to('Unity 500'))
 
     @patch_rest
@@ -861,7 +862,9 @@ class UnitySystemTest(TestCase):
     @patch_rest
     def test_add_dns_server(self):
         ret = t_unity().add_dns_server('8.8.8.8', '9.9.9.9')
-        assert_that(ret, has_items('192.168.1.20', '192.168.1.21', '8.8.8.8', '9.9.9.9'))
+        assert_that(ret, has_items(
+            '192.168.1.20', '192.168.1.21',
+            '8.8.8.8', '9.9.9.9'))
 
     @patch_rest
     def test_remove_dns_server(self):

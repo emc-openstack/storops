@@ -40,8 +40,8 @@ def t_rest(version=None):
 
     :return: unity client singleton
     """
-    client = UnityClient('192.168.1.1', 'test_user', 'test_password',
-                         verify=False)  # Explicitly insecure for test environment
+    client = UnityClient('192.168.1.1', 'test_user',
+                         'test_password', verify=False)
     client.set_system_version(version)
     return client
 

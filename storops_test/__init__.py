@@ -35,7 +35,8 @@ class StoropsTest(unittest.TestCase):
         assert_that(vnx, not_none())
 
     def test_unity_availability(self):
-        unity = storops.UnitySystem('1.1.1.1', 'admin', 'password', verify=False)
+        unity = storops.UnitySystem('1.1.1.1', 'admin',
+                                     'password', verify=False)
         assert_that(unity, not_none())
 
     def test_vnx_enum_availability(self):

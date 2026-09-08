@@ -36,7 +36,8 @@ def t_vnx():
 @inter_process_locked('t_unity.lck')
 @cache
 def t_unity():
-    unity = UnitySystem('192.168.1.1', 'test_user', 'test_password', verify=False)
+    unity = UnitySystem('192.168.1.1', 'test_user',
+                        'test_password', verify=False)
     log.debug('initialize unity system: {}'.format(unity))
     return unity
 

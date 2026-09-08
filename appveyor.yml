@@ -1,3 +1,5 @@
+image: Visual Studio 2022
+
 environment:
 
   matrix:
@@ -6,6 +8,7 @@ environment:
     # http://www.appveyor.com/docs/installed-software#python
     # Updated to use modern Python versions that satisfy current requirements
     # (PyYAML>=6.0.2 requires Python>=3.8, urllib3>=2.5.0 requires Python>=3.9)
+    # Using Visual Studio 2022 image which includes Python 3.9-3.12
   - TOXENV: "pep8"
     PYTHON: "C:\\Python39-x64"
     DISTUTILS_USE_SDK: "1"

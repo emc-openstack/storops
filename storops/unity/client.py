@@ -49,7 +49,7 @@ def wrap_not_supported(func):
 
 
 class UnityClient(PerfManager):
-    def __init__(self, ip, username, password, port=443, verify=False,
+    def __init__(self, ip, username, password, port=443, verify=True,
                  retries=None, cache_interval=0, application_type=None):
         super(UnityClient, self).__init__()
         self.ip = ip

@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 @inter_process_locked('t_vnx.lck')
 @cache
 def t_vnx():
-    vnx = VNXSystem('10.244.211.30', 'sysadmin', 'sysadmin')
+    vnx = VNXSystem('192.168.1.1', 'test_user', 'test_password')
     log.debug('initialize vnx system: {}'.format(vnx))
     return vnx
 
@@ -36,7 +36,8 @@ def t_vnx():
 @inter_process_locked('t_unity.lck')
 @cache
 def t_unity():
-    unity = UnitySystem('10.244.223.61', 'admin', 'Password123!')
+    unity = UnitySystem('192.168.1.1', 'test_user',
+                        'test_password', verify=False)
     log.debug('initialize unity system: {}'.format(unity))
     return unity
 

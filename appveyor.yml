@@ -1,22 +1,27 @@
+image: Visual Studio 2022
+
 environment:
 
   matrix:
 
     # For Python versions available on Appveyor, see
     # http://www.appveyor.com/docs/installed-software#python
-    # The list here is complete (excluding Python 2.6, which
-    # isn't covered by this document) at the time of writing.
+    # Updated to use Visual Studio 2022 image with modern Python versions
+    # (PyYAML>=6.0.2 requires Python>=3.8, urllib3>=2.5.0 requires Python>=3.9)
   - TOXENV: "pep8"
-    PYTHON: "C:\\Python37-x64"
+    PYTHON: "C:\\Python39-x64"
     DISTUTILS_USE_SDK: "1"
-  - TOXENV: "py36"
-    PYTHON: "C:\\Python36-x64"
+  - TOXENV: "py39"
+    PYTHON: "C:\\Python39-x64"
     DISTUTILS_USE_SDK: "1"
-  - TOXENV: "py37"
-    PYTHON: "C:\\Python37-x64"
+  - TOXENV: "py310"
+    PYTHON: "C:\\Python310-x64"
     DISTUTILS_USE_SDK: "1"
-  - TOXENV: "py38"
-    PYTHON: "C:\\Python38-x64"
+  - TOXENV: "py311"
+    PYTHON: "C:\\Python311-x64"
+    DISTUTILS_USE_SDK: "1"
+  - TOXENV: "py312"
+    PYTHON: "C:\\Python312-x64"
     DISTUTILS_USE_SDK: "1"
 
 install:
@@ -46,4 +51,3 @@ test_script:
 #  You can use this step to upload your artifacts to a public website.
 #  See Appveyor's documentation for more details. Or you can simply
 #  access your wheels from the Appveyor "artifacts" tab for your build.
-

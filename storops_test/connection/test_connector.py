@@ -28,11 +28,11 @@ class UnityRESTConnectorTest(unittest.TestCase):
 
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_verify_false(self, mocked_httpclient):
-        connector.UnityRESTConnector('10.10.10.10',
+        connector.UnityRESTConnector('192.168.1.1',
                                      verify=False)
 
         mocked_httpclient.assert_called_with(
-            base_url='https://10.10.10.10:443',
+            base_url='https://192.168.1.1:443',
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=True,
@@ -44,11 +44,11 @@ class UnityRESTConnectorTest(unittest.TestCase):
 
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_verify_true(self, mocked_httpclient):
-        connector.UnityRESTConnector('10.10.10.10',
+        connector.UnityRESTConnector('192.168.1.1',
                                      verify=True)
 
         mocked_httpclient.assert_called_with(
-            base_url='https://10.10.10.10:443',
+            base_url='https://192.168.1.1:443',
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=False,
@@ -60,11 +60,11 @@ class UnityRESTConnectorTest(unittest.TestCase):
 
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_verify_path(self, mocked_httpclient):
-        connector.UnityRESTConnector('10.10.10.10',
+        connector.UnityRESTConnector('192.168.1.1',
                                      verify='/tmp/ca_cert.crt')
 
         mocked_httpclient.assert_called_with(
-            base_url='https://10.10.10.10:443',
+            base_url='https://192.168.1.1:443',
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=False,
@@ -76,11 +76,12 @@ class UnityRESTConnectorTest(unittest.TestCase):
 
     @mock.patch('storops.connection.client.HTTPClient')
     def test_new_connector_connect_timeout(self, mocked_httpclient):
-        connector.UnityRESTConnector('10.10.10.10',
+        connector.UnityRESTConnector('192.168.1.1',
+                                     verify=False,
                                      connect_timeout=99)
 
         mocked_httpclient.assert_called_with(
-            base_url='https://10.10.10.10:443',
+            base_url='https://192.168.1.1:443',
             headers=connector.UnityRESTConnector.HEADERS,
             auth=('admin', ''),
             insecure=True,
@@ -94,7 +95,8 @@ class UnityRESTConnectorTest(unittest.TestCase):
     def test_connector_with_application_type(self, mocked_httpclient):
         application_type = 'testclient/0.1.0'
 
-        connector.UnityRESTConnector('10.10.10.10',
+        connector.UnityRESTConnector('192.168.1.1',
+                                     verify=False,
                                      connect_timeout=99,
                                      application_type=application_type)
 
@@ -102,7 +104,7 @@ class UnityRESTConnectorTest(unittest.TestCase):
         assert_that(application_type, equal_to(headers['Application-Type']))
 
         mocked_httpclient.assert_called_with(
-            base_url='https://10.10.10.10:443',
+            base_url='https://192.168.1.1:443',
             headers=headers,
             auth=('admin', ''),
             insecure=True,

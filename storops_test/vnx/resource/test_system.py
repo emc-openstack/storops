@@ -18,7 +18,7 @@ from __future__ import unicode_literals
 import logging
 from unittest import TestCase
 
-from hamcrest import assert_that, equal_to, none, instance_of, raises,\
+from hamcrest import assert_that, equal_to, none, instance_of, raises, \
     is_not
 
 from storops import VNXSystem

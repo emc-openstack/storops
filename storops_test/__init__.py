@@ -31,11 +31,13 @@ logging.basicConfig(
 
 class StoropsTest(unittest.TestCase):
     def test_vnx_availability(self):
-        vnx = storops.VNXSystem('10.244.211.30', heartbeat_interval=0)
+        vnx = storops.VNXSystem('192.168.1.1', heartbeat_interval=0)
         assert_that(vnx, not_none())
 
     def test_unity_availability(self):
-        unity = storops.UnitySystem('1.1.1.1', 'admin', 'password')
+        unity = storops.UnitySystem('1.1.1.1', 'admin',
+                                    'password',
+                                    verify=False)
         assert_that(unity, not_none())
 
     def test_vnx_enum_availability(self):

@@ -144,7 +144,7 @@ class DemoResource2(Resource):
         return '>2'
 
     @version('<2')  # noqa
-    def versioned_method(self):
+    def versioned_method(self):  # noqa: F811
         return '<2'
 
     @property

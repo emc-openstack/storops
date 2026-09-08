@@ -81,7 +81,7 @@ LOG = logging.getLogger(__name__)
 
 class UnitySystem(UnitySingletonResource):
     def __init__(self, host=None, username=None, password=None,
-                 port=443, cli=None, verify=False, retries=None,
+                 port=443, cli=None, verify=True, retries=None,
                  cache_interval=0, application_type=None):
         super(UnitySystem, self).__init__(cli=cli)
         if cli is None:
@@ -300,7 +300,7 @@ class UnitySystem(UnitySingletonResource):
         return eths + las
 
     @version("<4.1")  # noqa
-    def get_file_port(self):
+    def get_file_port(self):  # noqa: F811
         """Returns ports list can be used by File
 
         File ports includes ethernet ports and link aggregation ports.

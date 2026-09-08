@@ -256,7 +256,7 @@ class UnityHost(UnityResource):
     @retry(limit=6, wait=5,
            on_error=ex.UnityLunModifyByAnotherRequestException)
     @retry(limit=5, on_error=ex.UnityHluNumberInUseError)
-    def _attach_with_retry(self, lun_or_snap, skip_hlu_0):
+    def _attach_with_retry(self, lun_or_snap, skip_hlu_0):  # noqa: F811
         # From 4.4.0 (Osprey), it supported to pass in hlu when attaching LUN,
         # but not when attaching snap.
         from storops.unity.resource.lun import UnityLun as _UnityLun

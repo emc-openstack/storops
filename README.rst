@@ -293,7 +293,7 @@ Use the vnx instance to access all sorts of resource and features.
 
     # initialize the VNX system instance
     >>> from storops import VNXSystem
-    >>> vnx = VNXSystem('10.1.1.1', 'sysadmin', 'password')
+    >>> vnx = VNXSystem('192.168.1.1', 'sysadmin', 'password')
     >>> vnx
     {
         "VNXSystem": {
@@ -315,6 +315,11 @@ Get the Unity System Instance
 
     from storops import UnitySystem
     unity = UnitySystem('<management ip>', '<user>', '<password>')
+
+.. note::
+   As of version 1.2.12, TLS certificate verification is enabled by default for security.
+   If you need to connect to arrays with self-signed certificates, explicitly set verify=False:
+   unity = UnitySystem('<management ip>', '<user>', '<password>', verify=False)
 
 Get Resources from System or Other Resources
 ````````````````````````````````````````````
@@ -397,7 +402,7 @@ Explicitly call the *"update()"* function if you need a refresh.
 
 .. code-block:: python
 
-    >>> vnx = VNXSystem('10.1.1.3')     # no query to the system
+    >>> vnx = VNXSystem('192.168.1.1')     # no query to the system
     >>> vnx.model
     u'VNX5800'                          # send query, initialize all properties
     >>> vnx.name

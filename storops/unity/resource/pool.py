@@ -243,7 +243,7 @@ class UnityPool(UnityResource):
 
     def _is_advanced_dedup_supported(self, support_matrix):
         from storops.unity.resource.system import UnitySystem
-        unity_system = UnitySystem(cli=self._cli)
+        unity_system = UnitySystem(cli=self._cli, verify=False)
         supported = False
         for supported_model in support_matrix:
             if UnityModel(unity_system.model) >= UnityModel(supported_model):
@@ -256,12 +256,12 @@ class UnityPool(UnityResource):
         return False
 
     @version('>=4.5')  # noqa
-    def is_advanced_dedup_supported(self):
+    def is_advanced_dedup_supported(self):  # noqa: F811
         support_matrix = ['450F', '550F', '650F']
         return self._is_advanced_dedup_supported(support_matrix)
 
     @version('>=5.0')  # noqa
-    def is_advanced_dedup_supported(self):
+    def is_advanced_dedup_supported(self):  # noqa: F811
         support_matrix = ['380', '480', '680', '880',
                           '380F', '450F', '550F', '650F', '880F']
         return self._is_advanced_dedup_supported(support_matrix)

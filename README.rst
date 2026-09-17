@@ -19,7 +19,7 @@ StorOps: The Python Library for VNX & Unity
 .. image:: https://landscape.io/github/emc-openstack/storops/master/landscape.svg?style=flat
     :target: https://landscape.io/github/emc-openstack/storops/
 
-VERSION: 1.2.12
+VERSION: 1.2.13
 
 A minimalist Python library to manage VNX/Unity systems.
 This document lies in the source code and go with the release.
@@ -317,7 +317,7 @@ Get the Unity System Instance
     unity = UnitySystem('<management ip>', '<user>', '<password>')
 
 .. note::
-   As of version 1.2.12, TLS certificate verification is enabled by default for security.
+   As of version 1.2.13, TLS certificate verification is enabled by default for security.
    If you need to connect to arrays with self-signed certificates, explicitly set verify=False:
    unity = UnitySystem('<management ip>', '<user>', '<password>', verify=False)
 

@@ -62,7 +62,7 @@ class StoropsException(Exception):
         super(StoropsException, self).__init__()
 
     @property
-    def message(self):
+    def message(self):  # noqa: F811
         ret = self._message
         if isinstance(self._message, six.string_types):
             try:

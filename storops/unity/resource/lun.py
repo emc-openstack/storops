@@ -334,7 +334,8 @@ class UnityLun(UnityResource):
         return self._attach_to(host, access_mask, None)
 
     @version('>=4.4.0')  # noqa
-    def attach_to(self, host, access_mask=HostLUNAccessEnum.PRODUCTION,  # noqa: F811
+    def attach_to(self, host,  # noqa: F811
+                  access_mask=HostLUNAccessEnum.PRODUCTION,  # noqa: F811
                   hlu=None):
         return self._attach_to(host, access_mask, hlu)
 

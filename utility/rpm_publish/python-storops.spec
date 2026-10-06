@@ -8,7 +8,7 @@
 # %%global pre_release dev.1
 
 Name:           python-%{pypi_name}
-Version:        1.2.11
+Version:        1.2.13
 Release:        %{?pre_release:0.%{pre_release}}%{!?pre_release:1}%{?dist}
 Summary:        Library for managing Unity/VNX systems.
 
@@ -130,6 +130,15 @@ Library for managing Unity/VNX systems. Please refer to https://github.com/emc-o
 
 
 %changelog
+* Tue Oct 6 2026 Siddharth Kumar <siddharth.kumar1@dell.com> - 1.2.13-1
+- Release v1.2.13: https://github.com/emc-openstack/storops/releases/tag/v1.2.13
+- Security: TLS certificate verification enabled by default (verify=True) to address CWE-295
+- Python 3.13 compatibility: Replaced deprecated pipes module with shlex
+- Fixed enum34 version constraint for Python < 3.4 only
+- CI: Updated AppVeyor to use Python 3.9-3.12 and Visual Studio 2022 image
+- Security: Removed real credentials and IP addresses from test files
+- Code quality: Fixed pre-existing flake8 errors
+
 * Tue Mar 8 2022 Yong Huang <yong.huang@dell.com> - 1.2.11-1
 - Release v1.2.11: https://github.com/emc-openstack/storops/releases/tag/v1.2.11
 

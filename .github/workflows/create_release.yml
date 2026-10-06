@@ -23,11 +23,17 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             ## Features:
-            - TODO
+            - None
             ## Fixed bugs:
-            - TODO
+            - [ECS02C-1210]: Fix TLS verification default to True for security - Changed default verify parameter from False to True in UnityRESTConnector, UnityClient, and UnitySystem to address CWE-295 (Improper Certificate Validation) vulnerability. This ensures certificate validation is enabled by default for HTTPS connections to Unity arrays.
+            - Adding fix for storops failure in Python3.13 - Replaced deprecated `pipes` module with `shlex` to support Python 3.13 compatibility.
+            - fix: re-introduce removed version constraint - Added conditional version constraint for enum34 package (python_version<'3.4') to prevent installation on modern Python versions.
             ## Misc:
-            - TODO
+            - [CI] Fix AppVeyor build matrix to use modern Python versions (3.9-3.12)
+            - [CI] Update AppVeyor image to Visual Studio 2022
+            - [Security] Remove real credentials and IP addresses from test files
+            - [CI] Fix pre-existing flake8 errors to make AppVeyor build pass
+            - Updated README.rst with security note about new TLS verification default
             ## RPM related:
             **NOTE: If managing VNX system, install `python2-storops-vnx`. Download it from attachment.**
             ### RPM dependencies of `python2-storops`:
